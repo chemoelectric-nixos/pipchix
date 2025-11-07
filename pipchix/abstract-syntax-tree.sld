@@ -19,11 +19,41 @@
 ;;; OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 ;;; WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-(define-library (pipchix base)
-  (export )
+(define-library (pipchix abstract-syntax-tree)
+  (export make-nix-attributeset
+          make-recursive-nix-attributeset
+          nix-attributeset?
+          nix-attributeset-recursive?
+          nix-attributeset-set!
+          nix-attributeset-ref)
   (import (scheme base)
-          (pipchix abstract-syntax-tree)
-          (srfi 148)) ; Eager syntax-rules. ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; WHEN WILL THIS BE NEEDED?
+          (scheme case-lambda)
+          (scheme hash-table))          ; SRFI-125
   (begin
 
+    (define-record-type <nix-attributeset>
+      (%%make-nix-attributeset table recursive?)
+      nix-attributeset?
+      (table %%nix-attributeset-table)
+      (recursive? nix-attributeset-recursive?))
+
+    (define make-nix-attributeset
+      (let ((table (make-hash-table equal?)))
+        (case-lambda
+          ((recursive?)
+           (%%make-nix-attributeset table recursive?))
+          (()
+           (%%make-nix-attributeset table #f)))))
+
+    (define (make-recursive-nix-attributeset)
+      (make-nix-attributeset #t))
+
+    (define (nix-attributeset-set! attrset key value)
+      (let ((table (%%nix-attributeset-table attrset)))
+        (hash-table-set! table key value)))
+
+    (define (nix-attributeset-ref attrset key)
+      (let ((table (%%nix-attributeset-table attrset)))
+        (hash-table-ref table key)))
+    
     ))
