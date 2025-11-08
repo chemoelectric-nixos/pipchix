@@ -149,9 +149,8 @@
             str)
           (let* ((i (- i #x10000))      ; Make a surrogate pair.
                  (hi (+ #xDB00
-                        (arithmetic-shift
-                         (bitwise-and i #b11111111110000000000)
-                         -10)))
+                        (bitwise-and (arithmetic-shift i -10)
+                                     #b1111111111)))
                  (lo (+ #xDC00 (bitwise-and i #b1111111111))))
             (string-append (%%utf16-escape hi)
                            (%%utf16-escape lo)))))
