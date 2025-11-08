@@ -26,4 +26,16 @@
           (srfi 148)) ; Eager syntax-rules. ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; WHEN WILL THIS BE NEEDED?
   (begin
 
+    (define lst
+      (list (make-nix-data-node "${foobar}")
+            (make-nix-data-node "Emojipedia — 😃 Home of Emoji Meanings 💁👌🎍😍")
+            (make-nix-data-node #t)
+            (make-nix-data-node #f)
+            (make-nix-data-node '())
+            (make-nix-data-node 1234)
+            (make-nix-data-node -1234)
+            (make-nix-data-node 123.4)))
+    (define ast1 (list->nix-list-node lst))
+    (display-nix-abstract-syntax-tree ast1)
+
     ))
