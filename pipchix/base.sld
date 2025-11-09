@@ -36,11 +36,26 @@
             (make-nix-data-node 1234)
             (make-nix-data-node -1234)
             (make-nix-data-node 123.4)
-            ;;(list->nix-attributepath-node (list "a" "b" "💁👌🎍😍"))
+            (make-nix-embedded-node "{\n")
+            (list->nix-attributepath-node (list "a" "b" "💁👌🎍😍"))
+            (make-nix-embedded-node " = 3;}\n")
             (make-nix-path-node ".")
             (make-nix-path-node "./foo/bar")
             ))
     (define ast1 (list->nix-list-node lst))
-    (output-nix-abstract-syntax-tree ast1)
+
+    (define ast2 (make-recursive-nix-attributeset-node))
+    (nix-attributeset-node-set!
+     ast2 (list->nix-attributepath-node (list "a" "b" "💁👌🎍😍"))
+     (make-nix-data-node 1234))
+    (nix-attributeset-node-set!
+     ast2 (list->nix-attributepath-node (list "f"))
+     (make-nix-data-node "g"))
+    (nix-attributeset-node-set!
+     ast2 (list->nix-attributepath-node (list "e"))
+     (list->nix-attributepath-node (list "f")))
+
+    ;;(output-nix-abstract-syntax-tree ast1)
+    (output-nix-abstract-syntax-tree ast2)
 
     ))
