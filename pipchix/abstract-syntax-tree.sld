@@ -36,17 +36,21 @@
           nix-attributeset-node-set!
           nix-attributeset-node-ref
 
+          list->nix-attributepath-node
+          nix-attributepath-node->list
+          nix-attributepath-node?
+
           list->nix-list-node
           nix-list-node->list
           nix-list-node?
 
-          display-nix-abstract-syntax-tree)
+          output-nix-abstract-syntax-tree)
 
   (import (scheme base)
           (scheme bitwise)
           (scheme case-lambda)
           (scheme char)
-          (scheme hash-table)           ; SRFI-125
+          (scheme hash-table)
           (scheme write)
           (only (scheme list)
                 reverse!)
@@ -89,56 +93,85 @@
     (define (nix-attributeset-node-ref attrset key)
       (let ((table (%%nix-attributeset-node-table attrset)))
         (hash-table-ref table key)))
+
+    (define-record-type <nix-attributepath-node>
+      (list->nix-attributepath-node names)
+      nix-attributepath-node?
+      (names nix-attributepath-node->list))
     
     (define-record-type <nix-list-node>
       (list->nix-list-node lst)
       nix-list-node?
       (lst nix-list-node->list))
 
-    (define display-nix-abstract-syntax-tree
-      (case-lambda
-        ((ast) (display-nix-abstract-syntax-tree
-                ast (current-output-port)))
-        ((ast port)
-         (cond
-          ((nix-data-node? ast) (%%display-nix-data-node ast port))
-          ((nix-list-node? ast) (%%display-nix-list-node ast port))
-          (else (error "not an abstract syntax tree" ast))))))
+    (define output-nix-abstract-syntax-tree
+      (let ((outp-default
+             (lambda (str)
+               (write-string str (current-output-port)))))
+        (case-lambda
+          ((ast)
+           (output-nix-abstract-syntax-tree ast outp-default))
+          ((ast outp)
+           (cond
+            ((nix-data-node? ast)
+             (%%output-nix-data-node ast outp))
+            ((nix-path-node? ast)
+             (%%output-nix-path-node ast outp))
+            ((nix-attributepath-node? ast)
+             (%%output-nix-attributepath-node ast outp))
+            ((nix-list-node? ast)
+             (%%output-nix-list-node ast outp))
+            (else (error "not an abstract syntax tree" ast)))))))
 
-    (define (%%display-nix-data-node ast port)
+    (define (%%output-nix-data-node ast outp)
       (let ((data (nix-data-node-ref ast)))
-        (cond
-         ((null? data)
-          (display "null\n" port))
-         ((eq? #f data)
-          (display "false\n" port))
-         ((eq? #t data)
-          (display "true\n" port))
-         ((number? data)
-          (display "(" port)
-          (display data port)
-          (display ")\n" port))
-         ((string? data)
-          (display "(builtins.fromJSON ''\"" port)
-          (display (%%json-escape-string data) port)
-          (display "\"'')\n" port))
-         (else (error "bad <nix-data-node>" ast)))))
+        (cond ((null? data)
+               (outp "builtins.null\n"))
+              ((eq? #f data)
+               (outp "builtins.false\n"))
+              ((eq? #t data)
+               (outp "builtins.true\n"))
+              ((number? data)
+               (outp "(")
+               (outp (number->string data))
+               (outp ")\n"))
+              ((string? data)
+               (%%output-string data outp)
+               (outp "\n"))
+              (else (error "bad <nix-data-node>" ast)))))
+
+    (define (%%output-string str outp)
+      (cond ((%%string-needs-escaping str)
+             (outp "(builtins.fromJSON ''\"")
+             (outp (%%json-escape-string str))
+             (outp "\"'')"))
+            (else
+             (outp "\"")
+             (outp str)
+             (outp "\""))))
 
     (define (%%json-escape-string str)
       (let ((lst '()))
         (string-for-each
          (lambda (c)
-           (let ((i (char->integer c)))
-             (if (or (char=? c #\$)
-                     (char=? c #\\)
-                     (char=? c #\")
-                     (char=? c #\')
-                     (< i 32)
-                     (> i 126))
-                 (set! lst (cons (%%utf16-escape i) lst))
-                 (set! lst (cons (string c) lst)))))
+           (if (%%char-needs-escaping c)
+               (let ((i (char->integer c)))
+                 (set! lst (cons (%%utf16-escape i) lst)))
+               (set! lst (cons (string c) lst))))
          str)
         (string-concatenate (reverse! lst))))
+
+    (define (%%string-needs-escaping str)
+      (%%string-contains %%char-needs-escaping str))
+
+    (define (%%char-needs-escaping c)
+        (or (char=? c #\$)
+            (char=? c #\\)
+            (char=? c #\")
+            (char=? c #\')
+            (let ((i (char->integer c)))
+              (or (< i 32)
+                  (> i 126)))))
 
     (define (%%utf16-escape i)
       (if (<= i #xFFFF)
@@ -155,13 +188,47 @@
             (string-append (%%utf16-escape hi)
                            (%%utf16-escape lo)))))
 
-    (define (%%display-nix-list-node ast port)
+    (define (%%output-nix-path-node ast outp)
+      (let ((path (nix-path-node-ref ast)))
+        (outp "( ")
+        (unless (%%string-contains-slash path) (outp "./"))
+        (outp path)
+        (outp " )\n")))
+
+    (define (%%output-nix-attributepath-node ast outp)
+      (let loop ((lst (nix-attributepath-node->list ast))
+                 (needs-separator? #f))
+        (when (pair? lst)
+          (let ((name (car lst)))
+            (when needs-separator? (outp "."))
+            (cond ((%%string-needs-escaping name)
+                   (outp "\"${builtins.fromJSON ''\"")
+                   (outp (%%json-escape-string name))
+                   (outp "\"''}\""))
+                  (else
+                   (outp "\"")
+                   (outp name)
+                   (outp "\"")))
+            (loop (cdr lst) #t)))))
+
+    (define (%%output-nix-list-node ast outp)
       (let ((lst (nix-list-node->list ast))
-            (display-elem (lambda (elem)
-                            (display-nix-abstract-syntax-tree
-                             elem port))))
-        (display "[\n" port)
-        (for-each display-elem lst)
-        (display "]\n" port)))
+            (output-elem (lambda (elem)
+                           (output-nix-abstract-syntax-tree
+                            elem outp))))
+        (outp "[\n")
+        (for-each output-elem lst)
+        (outp "]\n")))
+
+    (define (%%string-contains-slash str)
+      (%%string-contains (lambda (c) (char=? c #\/))
+                         str))
+
+    (define (%%string-contains pred str)
+      (let ((n (string-length str)))
+        (let loop ((i 0))
+          (cond ((= i n) #f)
+                ((pred (string-ref str i)) #t)
+                (else (loop (+ i 1)))))))
 
     ))
