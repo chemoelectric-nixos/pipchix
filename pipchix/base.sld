@@ -20,42 +20,37 @@
 ;;; WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 (define-library (pipchix base)
-  (export )
+  (export nix-set)
   (import (scheme base)
-          (pipchix abstract-syntax-tree)
-          (srfi 148)) ; Eager syntax-rules. ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; WHEN WILL THIS BE NEEDED?
+          (srfi 148) ;; Eager syntax-rules.
+          (pipchix abstract-syntax-tree))
   (begin
 
-    (define lst
-      (list (make-nix-data-node "${foobar}")
-            (make-nix-data-node "Emojipedia — 😃 Home of Emoji Meanings 💁👌🎍😍")
-            (make-nix-data-node ";;; Permission is hereby granted, free of charge, to any person obtaining")
-            (make-nix-data-node #t)
-            (make-nix-data-node #f)
-            (make-nix-data-node '())
-            (make-nix-data-node 1234)
-            (make-nix-data-node -1234)
-            (make-nix-data-node 123.4)
-            (make-nix-embedded-node "{\n")
-            (list->nix-attributepath-node (list "a" "b" "💁👌🎍😍"))
-            (make-nix-embedded-node " = 3;}\n")
-            (make-nix-path-node ".")
-            (make-nix-path-node "./foo/bar")
-            ))
-    (define ast1 (list->nix-list-node lst))
+    (define-syntax nix-set ;; Set attributes.
+      (em-syntax-rules ( = )
+        ((nix-set (attr-name ... = attr-value) ...)
+         ((em-gensym) => 'attrset)
+         ((em-gensym) => 'path-node)
+         (em
+          `(let ((,attrset (make-nix-attributeset-node)))
+             (begin
+               (let ((,path-node (list->nix-attributepath-node
+                                  (list attr-name ...))))
+                 (if (nix-attributeset-node-contains? attrset path-node)
+                     (error "duplicate Nix attribute" path-node)
+                     (nix-attributeset-node-set!
+                      attrset path-node (%%scheme->nix attr-value))))                      
+               ...)
+             ,attrset)))))
 
-    (define ast2 (make-recursive-nix-attributeset-node))
-    (nix-attributeset-node-set!
-     ast2 (list->nix-attributepath-node (list "a" "b" "💁👌🎍😍"))
-     (make-nix-data-node 1234))
-    (nix-attributeset-node-set!
-     ast2 (list->nix-attributepath-node (list "f"))
-     (make-nix-data-node "g"))
-    (nix-attributeset-node-set!
-     ast2 (list->nix-attributepath-node (list "e"))
-     (list->nix-attributepath-node (list "f")))
-
-    ;;(output-nix-abstract-syntax-tree ast1)
-    (output-nix-abstract-syntax-tree ast2)
+    (define (%%scheme->nix value) ;; Convert Scheme values to Nix AST.
+      (cond ((or (string? value)
+                 (number? value)
+                 (boolean? value)
+                 (eq? '() value))
+             (make-nix-data-node value))
+            ((symbol? value)
+             (make-nix-data-node (symbol->string value)))
+            (else value)))
 
     ))

@@ -39,6 +39,7 @@
           nix-attributeset-node-recursive?
           nix-attributeset-node-set!
           nix-attributeset-node-ref
+          nix-attributeset-node-contains?
           nix-attributeset-node-for-each
 
           list->nix-attributepath-node
@@ -104,14 +105,25 @@
       (let ((table (%%nix-attributeset-node-table attrset)))
         (hash-table-ref table key)))
 
+    (define (nix-attributeset-node-contains? attrset key)
+      (let ((table (%%nix-attributeset-node-table attrset)))
+        (hash-table-contains? table key)))
+
     (define (nix-attributeset-node-for-each proc attrset)
       (let ((table (%%nix-attributeset-node-table attrset)))
         (hash-table-for-each proc table)))
 
     (define-record-type <nix-attributepath-node>
-      (list->nix-attributepath-node names)
+      (%%list->nix-attributepath-node names)
       nix-attributepath-node?
       (names nix-attributepath-node->list))
+
+    (define list->nix-attributepath-node
+      ;; Let symbols be used as if they were strings.
+      (let ((proc
+             (lambda (s) (if (symbol? s) (symbol->string s) s))))
+        (lambda (names)
+          (%%list->nix-attributepath-node (map proc names)))))
 
     (define-record-type <nix-list-node>
       (list->nix-list-node lst)
