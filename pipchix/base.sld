@@ -49,18 +49,18 @@
            attrset))))
 
     (define-syntax %%nix-set-insert-entry
-      (syntax-rules ( <-- --> inherit )
+      (syntax-rules ( --> <-- inherit )
         ((%%nix-set-insert-entry
-          attrset (attr-name ... <-- attr-value))
+          attrset (attr-name ... --> attr-value))
          (let* ((path-node (list->nix-attributepath-node
                             (list attr-name ...)))
                 (binding (make-nix-attributebinding-node
                           path-node (%%scheme->nix attr-value))))
            (nix-attributeset-node-set! attrset binding)))
         ((%%nix-set-insert-entry  ; Let people write it the other way!
-          attrset (attr-value --> attr-name ...))
+          attrset (attr-value <-- attr-name ...))
          (%%nix-set-insert-entry
-          attrset (attr-name ... <-- attr-value)))
+          attrset (attr-name ... --> attr-value)))
         ((%%nix-set-insert-entry
           attrset (inherit () identifier ...))
          (let ((inherit-node (list->nix-inherit-node
