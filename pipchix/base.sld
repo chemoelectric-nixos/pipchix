@@ -49,15 +49,30 @@
            attrset))))
 
     (define-syntax %%nix-set-insert-entry
-      (syntax-rules ( <--- inherit )
+      (syntax-rules ( <-- --> inherit )
         ((%%nix-set-insert-entry
-          attrset (attr-name ... <--- attr-value))
-         (let ((path-node (list->nix-attributepath-node
-                           (list attr-name ...))))
-           (if (nix-attributeset-node-contains? attrset path-node)
-               (error "duplicate Nix attribute" path-node)
-               (nix-attributeset-node-set!
-                attrset path-node (%%scheme->nix attr-value)))))))
+          attrset (attr-name ... <-- attr-value))
+         (let* ((path-node (list->nix-attributepath-node
+                            (list attr-name ...)))
+                (binding (make-nix-attributebinding-node
+                          path-node (%%scheme->nix attr-value))))
+           (nix-attributeset-node-set! attrset binding)))
+        ((%%nix-set-insert-entry  ; Let people write it the other way!
+          attrset (attr-value --> attr-name ...))
+         (%%nix-set-insert-entry
+          attrset (attr-name ... <-- attr-value)))
+        ((%%nix-set-insert-entry
+          attrset (inherit () identifier ...))
+         (let ((inherit-node (list->nix-inherit-node
+                              (list (%%scheme->nix identifier) ...))))
+           (nix-attributeset-node-set! attrset inherit-node)))
+        ((%%nix-set-insert-entry
+          attrset (inherit (attrset2) identifier ...))
+         (let* ((attrset-node (%%scheme->nix attrset2))
+                (inherit-node (list->nix-inherit-node
+                               (list (%%scheme->nix identifier) ...)
+                               attrset-node)))
+           (nix-attributeset-node-set! attrset inherit-node)))))
 
     (define (%%scheme->nix value) ;; Convert Scheme values to Nix AST.
       (cond ((or (string? value)

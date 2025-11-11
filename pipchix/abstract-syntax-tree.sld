@@ -22,48 +22,64 @@
 (define-library (pipchix abstract-syntax-tree)
 
   (export make-nix-embedded-node
-          nix-embedded-node
-          nix-embedded-node-ref
+          nix-embedded-node?
 
           make-nix-data-node
           nix-data-node?
-          nix-data-node-ref
 
           make-nix-path-node
           nix-path-node?
-          nix-path-node-ref
 
           make-nix-attributeset-node
-          make-recursive-nix-attributeset-node
           nix-attributeset-node?
           nix-attributeset-node-recursive?
           nix-attributeset-node-set!
-          nix-attributeset-node-ref
-          nix-attributeset-node-contains?
-          nix-attributeset-node-for-each
 
           list->nix-attributepath-node
-          nix-attributepath-node->list
           nix-attributepath-node?
 
+          make-nix-attributebinding-node
+          nix-attributebinding-node?
+
+          list->nix-inherit-node
+          nix-inherit-node?
+
           list->nix-list-node
-          nix-list-node->list
           nix-list-node?
 
           output-nix-abstract-syntax-tree)
 
   (import (scheme base)
-          (scheme bitwise)
           (scheme case-lambda)
           (scheme char)
-          (scheme hash-table)           ; (srfi 125)
-          (scheme write)
-          (only (scheme list)
-                reverse!)
-          (only (srfi 13)
-                string-concatenate))
+          (scheme write))
+  (cond-expand
+    ((and guile r7rs) ;; Works with ‘guile --r7rs’
+     (import (srfi 1)
+             (only (srfi 60)
+                   bitwise-and
+                   arithmetic-shift)))
+    ((and chicken r7rs) ;; Not working yet, at least with CHICKEN 6.
+     (import (srfi 1)
+             (only (chicken bitwise)
+                   bitwise-and
+                   arithmetic-shift)))
+    (else
+     (import (scheme list)          ;; (srfi 1)
+             (only (scheme bitwise) ;; (srfi 151)
+                   bitwise-and
+                   arithmetic-shift))))
 
   (begin
+
+    (define (%%string-concatenate lst)
+      ;; Concatenation without the possible limitations of using
+      ;; ‘apply’. An implementation of SRFI-13 or SRFI-152
+      ;; ‘string-concatenate’.
+      (fold %%string-reverse-append "" lst))
+
+    (define (%%string-reverse-append s t)
+      (string-append t s))
 
     (define-record-type <nix-embedded-node> ; Embedded Nix code.
       (make-nix-embedded-node code)
@@ -81,37 +97,22 @@
       (path nix-path-node-ref))
 
     (define-record-type <nix-attributeset-node>
-      (%%make-nix-attributeset-node table recursive?)
+      (%%make-nix-attributeset-node recursive? bag)
       nix-attributeset-node?
-      (table %%nix-attributeset-node-table)
-      (recursive? nix-attributeset-node-recursive?))
+      (recursive? nix-attributeset-node-recursive?)
+      (bag nix-attributeset-node-bag
+           set-nix-attributeset-node-bag!))
 
-    (define make-nix-attributeset-node
-      (let ((table (make-hash-table equal?)))
-        (case-lambda
-          ((recursive?)
-           (%%make-nix-attributeset-node table recursive?))
-          (()
-           (%%make-nix-attributeset-node table #f)))))
+    (define (make-nix-attributeset-node recursive?)
+      (%%make-nix-attributeset-node recursive? '()))
 
-    (define (make-recursive-nix-attributeset-node)
-      (make-nix-attributeset-node #t))
-
-    (define (nix-attributeset-node-set! attrset key value)
-      (let ((table (%%nix-attributeset-node-table attrset)))
-        (hash-table-set! table key value)))
-
-    (define (nix-attributeset-node-ref attrset key)
-      (let ((table (%%nix-attributeset-node-table attrset)))
-        (hash-table-ref table key)))
-
-    (define (nix-attributeset-node-contains? attrset key)
-      (let ((table (%%nix-attributeset-node-table attrset)))
-        (hash-table-contains? table key)))
+    (define (nix-attributeset-node-set! attrset elem)
+      (let ((bag (nix-attributeset-node-bag attrset)))
+        (set-nix-attributeset-node-bag! attrset (cons elem bag))))
 
     (define (nix-attributeset-node-for-each proc attrset)
-      (let ((table (%%nix-attributeset-node-table attrset)))
-        (hash-table-for-each proc table)))
+      (let ((bag (nix-attributeset-node-bag attrset)))
+        (for-each proc (reverse bag))))
 
     (define-record-type <nix-attributepath-node>
       (%%list->nix-attributepath-node names)
@@ -124,6 +125,25 @@
              (lambda (s) (if (symbol? s) (symbol->string s) s))))
         (lambda (names)
           (%%list->nix-attributepath-node (map proc names)))))
+
+    (define-record-type <nix-attributebinding-node>
+      (make-nix-attributebinding-node key value)
+      nix-attributebinding-node?
+      (key nix-attributebinding-node-key)
+      (value nix-attributebinding-node-value))
+
+    (define-record-type <nix-inherit-node>
+      (%%list->nix-inherit-node lst attrset)
+      nix-inherit-node?
+      (lst nix-inherit-node->list)
+      (attrset nix-inherit-node-attributeset))
+
+    (define list->nix-inherit-node
+      (case-lambda
+        ((lst)
+         (%%list->nix-inherit-node lst #f))
+        ((lst attrset)
+         (%%list->nix-inherit-node lst attrset))))
 
     (define-record-type <nix-list-node>
       (list->nix-list-node lst)
@@ -145,10 +165,14 @@
              (%%output-nix-data-node ast outp))
             ((nix-path-node? ast)
              (%%output-nix-path-node ast outp))
-            ((nix-attributepath-node? ast)
-             (%%output-nix-attributepath-node ast outp))
             ((nix-attributeset-node? ast)
              (%%output-nix-attributeset-node ast outp))
+            ((nix-attributepath-node? ast)
+             (%%output-nix-attributepath-node ast outp))
+            ((nix-attributebinding-node? ast)
+             (%%output-nix-attributebinding-node ast outp))
+            ((nix-inherit-node? ast)
+             (%%output-nix-inherit-node ast outp))
             ((nix-list-node? ast)
              (%%output-nix-list-node ast outp))
             (else (error "not an abstract syntax tree" ast)))))))
@@ -193,7 +217,7 @@
                  (set! lst (cons (%%utf16-escape i) lst)))
                (set! lst (cons (string c) lst))))
          str)
-        (string-concatenate (reverse! lst))))
+        (%%string-concatenate (reverse! lst))))
 
     (define (%%string-needs-escaping? str)
       (%%string-contains? %%char-needs-escaping? str))
@@ -222,12 +246,30 @@
             (string-append (%%utf16-escape hi)
                            (%%utf16-escape lo)))))
 
+
     (define (%%output-nix-path-node ast outp)
       (let ((path (nix-path-node-ref ast)))
         (outp "( ")
         (unless (%%string-contains-slash? path) (outp "./"))
         (outp path)
         (outp " )\n")))
+
+    (define (%%output-nix-attributeset-node ast outp)
+      (let ((recursive? (nix-attributeset-node-recursive? ast)))
+        (outp "(")
+        (when recursive? (outp "rec"))
+        (outp "{\n")
+        (nix-attributeset-node-for-each
+         output-nix-abstract-syntax-tree ast)
+        (outp "})\n")))
+
+    (define (%%output-nix-attributebinding-node ast outp)
+      (let ((key (nix-attributebinding-node-key ast))
+            (value (nix-attributebinding-node-value ast)))
+        (output-nix-abstract-syntax-tree key outp)
+        (outp "=\n")
+        (output-nix-abstract-syntax-tree value outp)
+        (outp ";\n")))
 
     (define (%%output-nix-attributepath-node ast outp)
       (let loop ((lst (nix-attributepath-node->list ast))
@@ -252,20 +294,33 @@
                    (outp "\"\n")))
             (loop (cdr lst) #t)))))
 
-    (define (%%output-nix-attributeset-node ast outp)
-      (let ((%%output-nix-attributebinding
-             (lambda (key value)
-               (output-nix-abstract-syntax-tree key outp)
-               (outp "=\n")
-               (output-nix-abstract-syntax-tree value outp)
-               (outp ";\n")))
-            (recursive? (nix-attributeset-node-recursive? ast)))
-        (outp "(")
-        (when recursive? (outp "rec"))
-        (outp "{\n")
-        (nix-attributeset-node-for-each
-         %%output-nix-attributebinding ast)
-        (outp "})\n")))
+    (define (%%output-nix-inherit-node ast outp)
+      (let ((attrset (nix-inherit-node-attributeset ast))
+            (lst (nix-inherit-node->list ast)))
+        (outp "inherit\n")
+        (when attrset
+          (outp "(\n")
+          (cond ((nix-attributeset-node? attrset)
+                 (output-nix-abstract-syntax-tree attrset outp))
+                (else
+                 (%%output-nix-identifier attrset outp)))
+          (outp ")\n"))
+        (let loop ((lst lst))
+          (when (pair? lst)
+            (%%output-nix-identifier (car lst) outp)
+            (loop (cdr lst))))
+        (outp ";\n")))
+
+    (define (%%output-nix-identifier ast outp)
+      (let ((data (nix-data-node-ref ast)))
+        (cond ((symbol? data)
+               (%%output-nix-identifier
+                (make-nix-data-node (symbol->string data)) outp))
+              ((not (string? data))
+               (error "not a symbol or string" data))
+              ((not (%%string-is-nix-identifier? data))
+               (error "not a Nix identifier" data))
+              (else (outp data) (outp "\n")))))
 
     (define (%%output-nix-list-node ast outp)
       (let ((lst (nix-list-node->list ast))
