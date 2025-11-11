@@ -20,25 +20,44 @@
 ;;; WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 (define-library (pipchix base)
-  (export nix-set)
+
+  (export nix-set     ;; Set attributes non-recursively.
+          nix-setrec) ;; Set attributes recursively.
+
   (import (scheme base)
-                                        ;(srfi 148) ;; Eager syntax-rules.
           (pipchix abstract-syntax-tree))
+
   (begin
 
-    (define-syntax nix-set ;; Set attributes.
-      (syntax-rules ( <--- )
-        ((nix-set (attr-name ... <--- attr-value) ...)
-         (let ((attrset (make-nix-attributeset-node)))
+    (define-syntax nix-set ;; Set attributes non-recursively.
+      (syntax-rules ()
+        ((nix-set entry ...)
+         (%%nix-set #f entry ...))))
+
+    (define-syntax nix-setrec ;; Set attributes recursively.
+      (syntax-rules ()
+        ((nix-setrec entry ...)
+         (%%nix-set #t entry ...))))
+
+    (define-syntax %%nix-set
+      (syntax-rules ()
+        ((%%nix-set recursive? entry ...)
+         (let ((attrset (make-nix-attributeset-node recursive?)))
            (begin
-             (let ((path-node (list->nix-attributepath-node
-                               (list attr-name ...))))
-               (if (nix-attributeset-node-contains? attrset path-node)
-                   (error "duplicate Nix attribute" path-node)
-                   (nix-attributeset-node-set!
-                    attrset path-node (%%scheme->nix attr-value))))
+             (%%nix-set-insert-entry attrset entry)
              ...)
            attrset))))
+
+    (define-syntax %%nix-set-insert-entry
+      (syntax-rules ( <--- inherit )
+        ((%%nix-set-insert-entry
+          attrset (attr-name ... <--- attr-value))
+         (let ((path-node (list->nix-attributepath-node
+                           (list attr-name ...))))
+           (if (nix-attributeset-node-contains? attrset path-node)
+               (error "duplicate Nix attribute" path-node)
+               (nix-attributeset-node-set!
+                attrset path-node (%%scheme->nix attr-value)))))))
 
     (define (%%scheme->nix value) ;; Convert Scheme values to Nix AST.
       (cond ((or (string? value)
