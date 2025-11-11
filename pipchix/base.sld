@@ -22,26 +22,23 @@
 (define-library (pipchix base)
   (export nix-set)
   (import (scheme base)
-          (srfi 148) ;; Eager syntax-rules.
+                                        ;(srfi 148) ;; Eager syntax-rules.
           (pipchix abstract-syntax-tree))
   (begin
 
     (define-syntax nix-set ;; Set attributes.
-      (em-syntax-rules ( = )
-        ((nix-set (attr-name ... = attr-value) ...)
-         ((em-gensym) => 'attrset)
-         ((em-gensym) => 'path-node)
-         (em
-          `(let ((,attrset (make-nix-attributeset-node)))
-             (begin
-               (let ((,path-node (list->nix-attributepath-node
-                                  (list attr-name ...))))
-                 (if (nix-attributeset-node-contains? attrset path-node)
-                     (error "duplicate Nix attribute" path-node)
-                     (nix-attributeset-node-set!
-                      attrset path-node (%%scheme->nix attr-value))))                      
-               ...)
-             ,attrset)))))
+      (syntax-rules ( <--- )
+        ((nix-set (attr-name ... <--- attr-value) ...)
+         (let ((attrset (make-nix-attributeset-node)))
+           (begin
+             (let ((path-node (list->nix-attributepath-node
+                               (list attr-name ...))))
+               (if (nix-attributeset-node-contains? attrset path-node)
+                   (error "duplicate Nix attribute" path-node)
+                   (nix-attributeset-node-set!
+                    attrset path-node (%%scheme->nix attr-value))))
+             ...)
+           attrset))))
 
     (define (%%scheme->nix value) ;; Convert Scheme values to Nix AST.
       (cond ((or (string? value)
