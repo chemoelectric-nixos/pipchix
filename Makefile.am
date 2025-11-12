@@ -20,7 +20,6 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 .DELETE_ON_ERROR:
-.NOTPARALLEL:	     # I will not worry about parallel builds for now.
 
 ACLOCAL_AMFLAGS = -I m4 --install
 AUTOMAKE_OPTIONS =
