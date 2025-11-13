@@ -42,10 +42,7 @@ DISTCLEANFILES += Makefile
 DISTCLEANFILES += GNUmakefile
 
 EXTRA_DIST += pipchix-includes.m4
-EXTRA_DIST += pipchix/base.sld.m4
-EXTRA_DIST += pipchix/nix-embed.sld.m4
-EXTRA_DIST += pipchix/nix-list.sld.m4
-EXTRA_DIST += pipchix/abstract-syntax-tree.sld.m4
+EXTRA_DIST += $(addsuffix .m4, $(nodist_r7rs_DATA))
 
 nodist_r7rs_DATA += pipchix/base.sld
 nodist_r7rs_DATA += pipchix/nix-embed.sld
@@ -53,11 +50,33 @@ nodist_r7rs_DATA += pipchix/nix-list.sld
 nodist_r7rs_DATA += pipchix/abstract-syntax-tree.sld
 
 MOSTLYCLEANFILES += $(nodist_r7rs_DATA)
+MOSTLYCLEANFILES += $(addsuffix .tmp, $(nodist_r7rs_DATA))
 
 M4_PREPROCESS = $(GNU_M4) -P -I '$(srcdir)'
 
 %.sld: %.sld.m4 pipchix-includes.m4
-	$(M4_PREPROCESS) $(<) > $(@).tmp && mv $(@){.tmp,}
+	$(MKDIR_P) $(@D) && \
+		$(M4_PREPROCESS) $(<) > $(@).tmp && \
+		mv $(@){.tmp,}
+
+# TinySCHEME is used here to manipulate s-expressions without having
+# to have any particular Scheme installed on the system.
+EXTRA_DIST += $(wildcard $(TINY_SCHEME_DIR)/*)
+TINY_SCHEME_DIR = tinyscheme-1.42
+TINY_SCHEME_C = $(addprefix $(srcdir)/$(TINY_SCHEME_DIR)/, \
+			$(addsuffix .c, scheme))
+TINY_SCHEME_H = $(addprefix $(srcdir)/$(TINY_SCHEME_DIR)/, \
+			$(addsuffix .h, dynload opdefines \
+					scheme scheme-private))
+TINY_SCHEME_CFLAGS = \
+	${CFLAGS} $(CFLAGS_FOR_STATIC) $(CFLAGS_FOR_PIC) \
+	-DUSE_DL=0 -DUSE_MATH=1 -DUSE_ASCII_NAMES=0
+tinyscheme$(EXEEXT): $(TINY_SCHEME_C) $(TINY_SCHEME_H)
+	$(CC) $(TINY_SCHEME_CFLAGS) $(TINY_SCHEME_C) -lm \
+		&& mv a.out $(@)
+
+MOSTLYCLEANFILES += tinyscheme$(EXEEXT)
+MOSTLYCLEANFILES += *.$(OBJEXT)
 
 # local variables:
 # coding: utf-8

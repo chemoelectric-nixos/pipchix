@@ -113,7 +113,8 @@ build_triplet = @build@
 host_triplet = @host@
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
-am__aclocal_m4_deps = $(top_srcdir)/m4/ax_check_gnu_make.m4 \
+am__aclocal_m4_deps = $(top_srcdir)/m4/ax_check_compile_flag.m4 \
+	$(top_srcdir)/m4/ax_check_gnu_make.m4 \
 	$(top_srcdir)/m4/stm_config_makefiles.m4 \
 	$(top_srcdir)/m4/stm_path_progs_cached_and_precious.m4 \
 	$(top_srcdir)/m4/stm_prog_gnu_make.m4 \
@@ -214,6 +215,8 @@ AWK = @AWK@
 CC = @CC@
 CCDEPMODE = @CCDEPMODE@
 CFLAGS = @CFLAGS@
+CFLAGS_FOR_PIC = @CFLAGS_FOR_PIC@
+CFLAGS_FOR_STATIC = @CFLAGS_FOR_STATIC@
 CPPFLAGS = @CPPFLAGS@
 CSCOPE = @CSCOPE@
 CTAGS = @CTAGS@
@@ -281,6 +284,7 @@ datadir = @datadir@
 datarootdir = @datarootdir@
 docdir = @docdir@
 dvidir = @dvidir@
+enable_chicken_6 = @enable_chicken_6@
 exec_prefix = @exec_prefix@
 host = @host@
 host_alias = @host_alias@
@@ -316,18 +320,33 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 ACLOCAL_AMFLAGS = -I m4 --install
 AUTOMAKE_OPTIONS = foreign
-MOSTLYCLEANFILES = $(nodist_r7rs_DATA)
+MOSTLYCLEANFILES = $(nodist_r7rs_DATA) $(addsuffix .tmp, \
+	$(nodist_r7rs_DATA)) tinyscheme$(EXEEXT) *.$(OBJEXT)
 CLEANFILES = 
 #EXTRA_DIST += INSTALL
 #EXTRA_DIST += AUTHORS
 DISTCLEANFILES = Makefile GNUmakefile
-EXTRA_DIST = COPYING README.adoc pipchix-includes.m4 \
-	pipchix/base.sld.m4 pipchix/nix-embed.sld.m4 \
-	pipchix/nix-list.sld.m4 pipchix/abstract-syntax-tree.sld.m4
+
+# TinySCHEME is used here to manipulate s-expressions without having
+# to have any particular Scheme installed on the system.
+EXTRA_DIST = COPYING README.adoc pipchix-includes.m4 $(addsuffix .m4, \
+	$(nodist_r7rs_DATA)) $(wildcard $(TINY_SCHEME_DIR)/*)
 BUILT_SOURCES = 
 nodist_r7rs_DATA = pipchix/base.sld pipchix/nix-embed.sld \
 	pipchix/nix-list.sld pipchix/abstract-syntax-tree.sld
 M4_PREPROCESS = $(GNU_M4) -P -I '$(srcdir)'
+TINY_SCHEME_DIR = tinyscheme-1.42
+TINY_SCHEME_C = $(addprefix $(srcdir)/$(TINY_SCHEME_DIR)/, \
+			$(addsuffix .c, scheme))
+
+TINY_SCHEME_H = $(addprefix $(srcdir)/$(TINY_SCHEME_DIR)/, \
+			$(addsuffix .h, dynload opdefines \
+					scheme scheme-private))
+
+TINY_SCHEME_CFLAGS = \
+	${CFLAGS} $(CFLAGS_FOR_STATIC) $(CFLAGS_FOR_PIC) \
+	-DUSE_DL=0 -DUSE_MATH=1 -DUSE_ASCII_NAMES=0
+
 all: $(BUILT_SOURCES)
 	$(MAKE) $(AM_MAKEFLAGS) all-am
 
@@ -706,7 +725,12 @@ uninstall-am: uninstall-nodist_r7rsDATA
 .DELETE_ON_ERROR:
 
 %.sld: %.sld.m4 pipchix-includes.m4
-	$(M4_PREPROCESS) $(<) > $(@).tmp && mv $(@){.tmp,}
+	$(MKDIR_P) $(@D) && \
+		$(M4_PREPROCESS) $(<) > $(@).tmp && \
+		mv $(@){.tmp,}
+tinyscheme$(EXEEXT): $(TINY_SCHEME_C) $(TINY_SCHEME_H)
+	$(CC) $(TINY_SCHEME_CFLAGS) $(TINY_SCHEME_C) -lm \
+		&& mv a.out $(@)
 
 # local variables:
 # coding: utf-8

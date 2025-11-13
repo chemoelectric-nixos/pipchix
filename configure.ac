@@ -45,6 +45,22 @@ AC_PROG_FGREP
 AC_PROG_EGREP
 StM_PROG_GNU_M4
 
+AX_CHECK_COMPILE_FLAG([-std=gnu99],
+  [CFLAGS="${CFLAGS}${CFLAGS+ }-std=gnu99"],
+  [],[],[AC_LANG_SOURCE([int main(){return 0;}])])
+
+AX_CHECK_COMPILE_FLAG([-static],
+  [CFLAGS_FOR_STATIC="-static"],
+  [CFLAGS_FOR_STATIC=""],
+  [],[AC_LANG_SOURCE([int main(){return 0;}])])
+AC_SUBST([CFLAGS_FOR_STATIC])
+
+AX_CHECK_COMPILE_FLAG([-fPIC],
+  [CFLAGS_FOR_PIC="-fPIC"],
+  [CFLAGS_FOR_PIC=""],
+  [],[AC_LANG_SOURCE([int main(){return 0;}])])
+AC_SUBST([CFLAGS_FOR_PIC])
+
 if test -z "${GNU_M4}"; then
    AC_MSG_ERROR([GNU m4 not found. Perhaps set GNU_M4 to OpenBSD m4.])
 fi
@@ -55,6 +71,13 @@ AC_ARG_WITH([r7rsdir],
   [r7rsdir="${withval}"],
   [r7rsdir='${datadir}/r7rs'])
 AC_SUBST([r7rsdir])
+
+AC_ARG_ENABLE([chicken-6],
+  [AS_HELP_STRING([--enable-chicken-6],
+        [make an egg for CHICKEN 6 [no]])],
+  [enable_chicken_6="${enableval}"],
+  [enable_chicken_6='no'])
+AC_SUBST([enable_chicken_6])
 
 # You can use ‘@GNU@’ to make GNU Make constructs unbothersome to
 # Automake. (By the way, you often can use ‘$(eval ...)’ as well, but
