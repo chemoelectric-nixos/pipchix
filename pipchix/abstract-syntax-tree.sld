@@ -55,31 +55,29 @@
           (scheme write))
   (cond-expand
     ((and guile r7rs) ;; Works with ‘guile --r7rs’
-     (import (srfi 1)
-             (only (srfi 60)
+     (import (only (srfi 60)
                    bitwise-and
                    arithmetic-shift)))
     ((and chicken r7rs) ;; Not working yet, at least with CHICKEN 6.
-     (import (srfi 1)
-             (only (chicken bitwise)
+     (import (only (chicken bitwise)
                    bitwise-and
                    arithmetic-shift)))
     (else
-     (import (scheme list)          ;; (srfi 1)
-             (only (scheme bitwise) ;; (srfi 151)
+     (import (only (scheme bitwise) ;; (srfi 151)
                    bitwise-and
                    arithmetic-shift))))
 
   (begin
 
-    (define (%%string-concatenate lst)
+    (define (%%string-reverse-concatenate lst)
       ;; Concatenation without the possible limitations of using
       ;; ‘apply’. An implementation of SRFI-13 or SRFI-152
       ;; ‘string-concatenate’.
-      (fold %%string-reverse-append "" lst))
-
-    (define (%%string-reverse-append s t)
-      (string-append t s))
+      (let loop ((lst lst)
+                 (str ""))
+        (if (pair? lst)
+            (loop (cdr lst) (string-append (car lst) str))
+            str)))
 
     (define-record-type <nix-embedded-node> ; Embedded Nix code.
       (make-nix-embedded-node code)
@@ -217,7 +215,7 @@
                  (set! lst (cons (%%utf16-escape i) lst)))
                (set! lst (cons (string c) lst))))
          str)
-        (%%string-concatenate (reverse! lst))))
+        (%%string-reverse-concatenate lst)))
 
     (define (%%string-needs-escaping? str)
       (%%string-contains? %%char-needs-escaping? str))

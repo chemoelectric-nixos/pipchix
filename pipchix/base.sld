@@ -21,9 +21,7 @@
 
 (define-library (pipchix base)
 
-  (export nix-embed      ;; Embed Nix code verbatim.
-          list->nix-list ;; Scheme list to Nix list.
-          nix-list       ;; Nix list from elements.
+  (export nix-list       ;; Nix list from elements.
           nix-set        ;; Set attributes non-recursively.
           nix-setrec)    ;; Set attributes recursively.
 
@@ -31,12 +29,6 @@
           (pipchix abstract-syntax-tree))
 
   (begin
-
-    (define (nix-embed str)
-      (cond ((string? str)
-             (make-nix-embedded-node str))
-            (else
-             (error "not a string" str))))
 
     (define (list->nix-list lst)
       (list->nix-list-node (map %%scheme->nix lst)))

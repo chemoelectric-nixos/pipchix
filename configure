@@ -5355,6 +5355,7 @@ printf "%s\n" "$as_me: WARNING: Please consider installing and using GNU Make:
 }
 
 ac_config_links="$ac_config_links pipchix/base.sld:pipchix/base.sld"
+ac_config_links="$ac_config_links pipchix/nix-embed.sld:pipchix/nix-embed.sld"
 ac_config_links="$ac_config_links pipchix/abstract-syntax-tree.sld:pipchix/abstract-syntax-tree.sld"
 
 
@@ -6123,6 +6124,7 @@ do
     "Makefile") CONFIG_FILES="$CONFIG_FILES Makefile" ;;
     "GNUmakefile") CONFIG_FILES="$CONFIG_FILES GNUmakefile:Makefile.in" ;;
     "pipchix/base.sld") CONFIG_LINKS="$CONFIG_LINKS pipchix/base.sld:pipchix/base.sld" ;;
+    "pipchix/nix-embed.sld") CONFIG_LINKS="$CONFIG_LINKS pipchix/nix-embed.sld:pipchix/nix-embed.sld" ;;
     "pipchix/abstract-syntax-tree.sld") CONFIG_LINKS="$CONFIG_LINKS pipchix/abstract-syntax-tree.sld:pipchix/abstract-syntax-tree.sld" ;;
 
   *) as_fn_error $? "invalid argument: '$ac_config_target'" "$LINENO" 5;;

@@ -70,6 +70,7 @@ StM_CONFIG_MAKEFILES
 
 m4_foreach([f],
   [[pipchix/base.sld],
+   [pipchix/nix-embed.sld],
    [pipchix/abstract-syntax-tree.sld]],
   [AC_CONFIG_LINKS(f:f)])
 

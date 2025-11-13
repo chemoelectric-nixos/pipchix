@@ -39,6 +39,7 @@ EXTRA_DIST += README.adoc
 #EXTRA_DIST += AUTHORS
 
 r7rs_DATA += pipchix/base.sld
+r7rs_DATA += pipchix/nix-embed.sld
 r7rs_DATA += pipchix/abstract-syntax-tree.sld
 
 DISTCLEANFILES += Makefile

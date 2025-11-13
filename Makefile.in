@@ -125,7 +125,7 @@ am__CONFIG_DISTCLEAN_FILES = config.status config.cache config.log \
  configure.lineno config.status.lineno
 mkinstalldirs = $(install_sh) -d
 CONFIG_CLEAN_FILES =
-CONFIG_CLEAN_VPATH_FILES = pipchix/base.sld \
+CONFIG_CLEAN_VPATH_FILES = pipchix/base.sld pipchix/nix-embed.sld \
 	pipchix/abstract-syntax-tree.sld
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
@@ -182,7 +182,8 @@ am__DIST_COMMON = $(srcdir)/Makefile.in \
 	$(top_srcdir)/build-aux/install-sh \
 	$(top_srcdir)/build-aux/missing \
 	$(top_srcdir)/pipchix/abstract-syntax-tree.sld \
-	$(top_srcdir)/pipchix/base.sld COPYING build-aux/compile \
+	$(top_srcdir)/pipchix/base.sld \
+	$(top_srcdir)/pipchix/nix-embed.sld COPYING build-aux/compile \
 	build-aux/config.guess build-aux/config.sub \
 	build-aux/install-sh build-aux/missing
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
@@ -324,7 +325,8 @@ EXTRA_DIST = COPYING README.adoc
 BUILT_SOURCES = 
 #EXTRA_DIST += INSTALL
 #EXTRA_DIST += AUTHORS
-r7rs_DATA = pipchix/base.sld pipchix/abstract-syntax-tree.sld
+r7rs_DATA = pipchix/base.sld pipchix/nix-embed.sld \
+	pipchix/abstract-syntax-tree.sld
 all: $(BUILT_SOURCES)
 	$(MAKE) $(AM_MAKEFLAGS) all-am
 
@@ -701,7 +703,6 @@ uninstall-am: uninstall-r7rsDATA
 
 
 .DELETE_ON_ERROR:
-.NOTPARALLEL:	     # I will not worry about parallel builds for now.
 
 # local variables:
 # coding: utf-8
