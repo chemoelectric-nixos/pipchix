@@ -71,8 +71,7 @@
 
     (define (%%string-reverse-concatenate lst)
       ;; Concatenation without the possible limitations of using
-      ;; ‘apply’. An implementation of SRFI-13 or SRFI-152
-      ;; ‘string-concatenate’.
+      ;; ‘apply’.
       (let loop ((lst lst)
                  (str ""))
         (if (pair? lst)
