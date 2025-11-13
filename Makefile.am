@@ -59,24 +59,76 @@ M4_PREPROCESS = $(GNU_M4) -P -I '$(srcdir)'
 		$(M4_PREPROCESS) $(<) > $(@).tmp && \
 		mv $(@){.tmp,}
 
+DEFINE_NICELY_PRINT = ' \
+  (define (nicely-print lst depth) \
+    (cond \
+      ((pair? lst) \
+        (newline) \
+        (let loop ((i depth)) \
+          (unless (zero? i) \
+            (display " ") \
+            (loop (- i 1)))) \
+        (display "(") \
+        (let loop ((lst lst) \
+                   (separator "")) \
+          (cond \
+            ((pair? lst) \
+              (unless (pair? (car lst)) \
+                (display separator)) \
+              (nicely-print (car lst) (+ depth 1)) \
+              (loop (cdr lst) " ")) \
+            (else \
+              (display ")"))))) \
+      (else \
+        (write lst))))'
+
+chicken-6/pipchix.egg: GNUmakefile $(TINYSCHEME)
+	if true; then \
+	  printf '$(TINYSCHEME_SHEBANG)\n'; \
+	  printf '%s' $(DEFINE_NICELY_PRINT); \
+	  printf '(define eggfile(quote('; \
+	  printf '(synopsis "Nix coding with Scheme")'; \
+	  printf '(author "Barry Schwartz")'; \
+	  printf '(category code-generation)'; \
+	  printf '(license "MIT")'; \
+	  printf '(components'; \
+	  printf ' (extension (pipchix abstract-syntax-tree))'; \
+	  printf ' )'; \
+	  printf '(csc-options "-O3")'; \
+	  printf ')))'; \
+	  printf '(nicely-print eggfile 0)'; \
+	fi > $(TINYSCHEME_DIR)/script.tmp
+	( \
+	  $(MKDIR_P) $(@D) && \
+	  cd $(TINYSCHEME_DIR) && \
+	  chmod +x script.tmp && \
+	  ./script.tmp > $(abs_top_builddir)/$(@) && \
+	  rm -f xscript.tmp \
+	)
+
+MOSTLYCLEANFILES += $(TINYSCHEME_DIR)/script.tmp
+
 # TinySCHEME is used here to manipulate s-expressions without having
 # to have any particular Scheme installed on the system.
-EXTRA_DIST += $(wildcard $(TINY_SCHEME_DIR)/*)
-TINY_SCHEME_DIR = tinyscheme-1.42
-TINY_SCHEME_C = $(addprefix $(srcdir)/$(TINY_SCHEME_DIR)/, \
+EXTRA_DIST += $(wildcard $(TINYSCHEME_DIR)/*)
+TINYSCHEME_DIR = tinyscheme-1.42
+TINYSCHEME_C = $(addprefix $(srcdir)/$(TINYSCHEME_DIR)/, \
 			$(addsuffix .c, scheme))
-TINY_SCHEME_H = $(addprefix $(srcdir)/$(TINY_SCHEME_DIR)/, \
+TINYSCHEME_H = $(addprefix $(srcdir)/$(TINYSCHEME_DIR)/, \
 			$(addsuffix .h, dynload opdefines \
 					scheme scheme-private))
-TINY_SCHEME_CFLAGS = \
+TINYSCHEME_CFLAGS = \
 	${CFLAGS} $(CFLAGS_FOR_STATIC) $(CFLAGS_FOR_PIC) \
 	-DUSE_DL=0 -DUSE_MATH=1 -DUSE_ASCII_NAMES=0
-tinyscheme$(EXEEXT): $(TINY_SCHEME_C) $(TINY_SCHEME_H)
-	$(CC) $(TINY_SCHEME_CFLAGS) $(TINY_SCHEME_C) -lm \
-		&& mv a.out $(@)
+$(TINYSCHEME): $(TINYSCHEME_C) $(TINYSCHEME_H)
+	$(MKDIR_P) $(@D)
+	$(CC) -o $(@) $(TINYSCHEME_CFLAGS) $(TINYSCHEME_C) -lm
 
-MOSTLYCLEANFILES += tinyscheme$(EXEEXT)
-MOSTLYCLEANFILES += *.$(OBJEXT)
+TINYSCHEME = $(TINYSCHEME_DIR)/tinyscheme$(EXEEXT)
+TINYSCHEME_SHEBANG=\#!$(abs_builddir)/$(TINYSCHEME) -1
+
+MOSTLYCLEANFILES += $(TINYSCHEME)
+MOSTLYCLEANFILES += $(TINYSCHEME_DIR)/*.$(OBJEXT)
 
 # local variables:
 # coding: utf-8

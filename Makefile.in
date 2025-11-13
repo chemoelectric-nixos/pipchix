@@ -127,7 +127,7 @@ am__CONFIG_DISTCLEAN_FILES = config.status config.cache config.log \
  configure.lineno config.status.lineno
 mkinstalldirs = $(install_sh) -d
 CONFIG_CLEAN_FILES =
-CONFIG_CLEAN_VPATH_FILES =
+CONFIG_CLEAN_VPATH_FILES = tinyscheme-1.42/init.scm
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -181,8 +181,9 @@ am__DIST_COMMON = $(srcdir)/Makefile.in \
 	$(top_srcdir)/build-aux/config.guess \
 	$(top_srcdir)/build-aux/config.sub \
 	$(top_srcdir)/build-aux/install-sh \
-	$(top_srcdir)/build-aux/missing COPYING build-aux/compile \
-	build-aux/config.guess build-aux/config.sub \
+	$(top_srcdir)/build-aux/missing \
+	$(top_srcdir)/tinyscheme-1.42/init.scm COPYING \
+	build-aux/compile build-aux/config.guess build-aux/config.sub \
 	build-aux/install-sh build-aux/missing
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 distdir = $(PACKAGE)-$(VERSION)
@@ -321,7 +322,8 @@ top_srcdir = @top_srcdir@
 ACLOCAL_AMFLAGS = -I m4 --install
 AUTOMAKE_OPTIONS = foreign
 MOSTLYCLEANFILES = $(nodist_r7rs_DATA) $(addsuffix .tmp, \
-	$(nodist_r7rs_DATA)) tinyscheme$(EXEEXT) *.$(OBJEXT)
+	$(nodist_r7rs_DATA)) $(TINYSCHEME_DIR)/script.tmp \
+	$(TINYSCHEME) $(TINYSCHEME_DIR)/*.$(OBJEXT)
 CLEANFILES = 
 #EXTRA_DIST += INSTALL
 #EXTRA_DIST += AUTHORS
@@ -330,23 +332,48 @@ DISTCLEANFILES = Makefile GNUmakefile
 # TinySCHEME is used here to manipulate s-expressions without having
 # to have any particular Scheme installed on the system.
 EXTRA_DIST = COPYING README.adoc pipchix-includes.m4 $(addsuffix .m4, \
-	$(nodist_r7rs_DATA)) $(wildcard $(TINY_SCHEME_DIR)/*)
+	$(nodist_r7rs_DATA)) $(wildcard $(TINYSCHEME_DIR)/*)
 BUILT_SOURCES = 
 nodist_r7rs_DATA = pipchix/base.sld pipchix/nix-embed.sld \
 	pipchix/nix-list.sld pipchix/abstract-syntax-tree.sld
 M4_PREPROCESS = $(GNU_M4) -P -I '$(srcdir)'
-TINY_SCHEME_DIR = tinyscheme-1.42
-TINY_SCHEME_C = $(addprefix $(srcdir)/$(TINY_SCHEME_DIR)/, \
+DEFINE_NICELY_PRINT = ' \
+  (define (nicely-print lst depth) \
+    (cond \
+      ((pair? lst) \
+        (newline) \
+        (let loop ((i depth)) \
+          (unless (zero? i) \
+            (display " ") \
+            (loop (- i 1)))) \
+        (display "(") \
+        (let loop ((lst lst) \
+                   (separator "")) \
+          (cond \
+            ((pair? lst) \
+              (unless (pair? (car lst)) \
+                (display separator)) \
+              (nicely-print (car lst) (+ depth 1)) \
+              (loop (cdr lst) " ")) \
+            (else \
+              (display ")"))))) \
+      (else \
+        (write lst))))'
+
+TINYSCHEME_DIR = tinyscheme-1.42
+TINYSCHEME_C = $(addprefix $(srcdir)/$(TINYSCHEME_DIR)/, \
 			$(addsuffix .c, scheme))
 
-TINY_SCHEME_H = $(addprefix $(srcdir)/$(TINY_SCHEME_DIR)/, \
+TINYSCHEME_H = $(addprefix $(srcdir)/$(TINYSCHEME_DIR)/, \
 			$(addsuffix .h, dynload opdefines \
 					scheme scheme-private))
 
-TINY_SCHEME_CFLAGS = \
+TINYSCHEME_CFLAGS = \
 	${CFLAGS} $(CFLAGS_FOR_STATIC) $(CFLAGS_FOR_PIC) \
 	-DUSE_DL=0 -DUSE_MATH=1 -DUSE_ASCII_NAMES=0
 
+TINYSCHEME = $(TINYSCHEME_DIR)/tinyscheme$(EXEEXT)
+TINYSCHEME_SHEBANG = \#!$(abs_builddir)/$(TINYSCHEME) -1
 all: $(BUILT_SOURCES)
 	$(MAKE) $(AM_MAKEFLAGS) all-am
 
@@ -728,9 +755,33 @@ uninstall-am: uninstall-nodist_r7rsDATA
 	$(MKDIR_P) $(@D) && \
 		$(M4_PREPROCESS) $(<) > $(@).tmp && \
 		mv $(@){.tmp,}
-tinyscheme$(EXEEXT): $(TINY_SCHEME_C) $(TINY_SCHEME_H)
-	$(CC) $(TINY_SCHEME_CFLAGS) $(TINY_SCHEME_C) -lm \
-		&& mv a.out $(@)
+
+chicken-6/pipchix.egg: GNUmakefile $(TINYSCHEME)
+	if true; then \
+	  printf '$(TINYSCHEME_SHEBANG)\n'; \
+	  printf '%s' $(DEFINE_NICELY_PRINT); \
+	  printf '(define eggfile(quote('; \
+	  printf '(synopsis "Nix coding with Scheme")'; \
+	  printf '(author "Barry Schwartz")'; \
+	  printf '(category code-generation)'; \
+	  printf '(license "MIT")'; \
+	  printf '(components'; \
+	  printf ' (extension (pipchix abstract-syntax-tree))'; \
+	  printf ' )'; \
+	  printf '(csc-options "-O3")'; \
+	  printf ')))'; \
+	  printf '(nicely-print eggfile 0)'; \
+	fi > $(TINYSCHEME_DIR)/script.tmp
+	( \
+	  $(MKDIR_P) $(@D) && \
+	  cd $(TINYSCHEME_DIR) && \
+	  chmod +x script.tmp && \
+	  ./script.tmp > $(abs_top_builddir)/$(@) && \
+	  rm -f xscript.tmp \
+	)
+$(TINYSCHEME): $(TINYSCHEME_C) $(TINYSCHEME_H)
+	$(MKDIR_P) $(@D)
+	$(CC) -o $(@) $(TINYSCHEME_CFLAGS) $(TINYSCHEME_C) -lm
 
 # local variables:
 # coding: utf-8

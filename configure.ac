@@ -87,12 +87,9 @@ AC_SUBST([GNU],[])
 StM_REQUIRE_GNU_MAKE_IN_PATH
 StM_CONFIG_MAKEFILES
 
-#m4_foreach([f],
-#  [[pipchix/base.sld],
-#   [pipchix/nix-embed.sld],
-#   [pipchix/nix-list.sld],
-#   [pipchix/abstract-syntax-tree.sld]],
-#  [AC_CONFIG_LINKS(f:f)])
+m4_foreach([f],
+  [[tinyscheme-1.42/init.scm]],
+  [AC_CONFIG_LINKS(f:f)])
 
 AC_OUTPUT
 
