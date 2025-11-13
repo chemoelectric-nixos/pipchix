@@ -31,19 +31,33 @@ DISTCLEANFILES =
 
 EXTRA_DIST =
 BUILT_SOURCES =
-r7rs_DATA =
+nodist_r7rs_DATA =
 
 EXTRA_DIST += COPYING
 EXTRA_DIST += README.adoc
 #EXTRA_DIST += INSTALL
 #EXTRA_DIST += AUTHORS
 
-r7rs_DATA += pipchix/base.sld
-r7rs_DATA += pipchix/nix-embed.sld
-r7rs_DATA += pipchix/abstract-syntax-tree.sld
-
 DISTCLEANFILES += Makefile
 DISTCLEANFILES += GNUmakefile
+
+EXTRA_DIST += pipchix-includes.m4
+EXTRA_DIST += pipchix/base.sld.m4
+EXTRA_DIST += pipchix/nix-embed.sld.m4
+EXTRA_DIST += pipchix/nix-list.sld.m4
+EXTRA_DIST += pipchix/abstract-syntax-tree.sld.m4
+
+nodist_r7rs_DATA += pipchix/base.sld
+nodist_r7rs_DATA += pipchix/nix-embed.sld
+nodist_r7rs_DATA += pipchix/nix-list.sld
+nodist_r7rs_DATA += pipchix/abstract-syntax-tree.sld
+
+MOSTLYCLEANFILES += $(nodist_r7rs_DATA)
+
+M4_PREPROCESS = $(GNU_M4) -P -I '$(srcdir)'
+
+%.sld: %.sld.m4 pipchix-includes.m4
+	$(M4_PREPROCESS) $(<) > $(@).tmp && mv $(@){.tmp,}
 
 # local variables:
 # coding: utf-8

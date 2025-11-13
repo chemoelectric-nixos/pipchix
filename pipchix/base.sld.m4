@@ -1,3 +1,4 @@
+;;;
 ;;; Copyright © 2025 Barry Schwartz
 ;;; 
 ;;; Permission is hereby granted, free of charge, to any person obtaining
@@ -18,23 +19,20 @@
 ;;; LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 ;;; OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 ;;; WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+;;;
+m4_include(pipchix-includes.m4)
 
 (define-library (pipchix base)
 
-  (export nix-list       ;; Nix list from elements.
-          nix-set        ;; Set attributes non-recursively.
-          nix-setrec)    ;; Set attributes recursively.
+  (export nix-list)   ;; Nix list from elements.
+  (export nix-set)    ;; Set attributes non-recursively.
+  (export nix-setrec) ;; Set attributes recursively.
 
-  (import (scheme base)
-          (pipchix abstract-syntax-tree))
+  (import (scheme base))
+  (import (pipchix nix-list))
+  (import (pipchix abstract-syntax-tree))
 
   (begin
-
-    (define (list->nix-list lst)
-      (list->nix-list-node (map %%scheme->nix lst)))
-
-    (define (nix-list . elem*)
-      (list->nix-list elem*))
 
     (define-syntax nix-set ;; Set attributes non-recursively.
       (syntax-rules ()
@@ -62,7 +60,7 @@
          (let* ((path-node (list->nix-attributepath-node
                             (list attr-name ...)))
                 (binding (make-nix-attributebinding-node
-                          path-node (%%scheme->nix attr-value))))
+                          path-node (scheme->nix attr-value))))
            (nix-attributeset-node-set! attrset binding)))
         ((%%nix-set-insert-entry        ; Binding by <-- arrow.
           attrset (attr-value <-- attr-name ...))
@@ -71,13 +69,13 @@
         ((%%nix-set-insert-entry        ; ‘inherit ()’
           attrset (inherit () identifier ...))
          (let ((inherit-node (list->nix-inherit-node
-                              (list (%%scheme->nix identifier) ...))))
+                              (list (scheme->nix identifier) ...))))
            (nix-attributeset-node-set! attrset inherit-node)))
         ((%%nix-set-insert-entry        ; ‘inherit (attribute-set)’
           attrset (inherit (attrset2) identifier ...))
-         (let* ((attrset-node (%%scheme->nix attrset2))
+         (let* ((attrset-node (scheme->nix attrset2))
                 (inherit-node (list->nix-inherit-node
-                               (list (%%scheme->nix identifier) ...)
+                               (list (scheme->nix identifier) ...)
                                attrset-node)))
            (nix-attributeset-node-set! attrset inherit-node)))
         ((%%nix-set-insert-entry        ; (begin ...)
@@ -89,18 +87,14 @@
            (%%nix-set-insert-entry attrset entry)
            ...))))
 
-    (define (%%scheme->nix value) ;; Convert Scheme values to Nix AST.
-      (cond ((or (string? value)
-                 (number? value)
-                 (boolean? value)
-                 (eq? '() value))
-             (make-nix-data-node value))
-            ((symbol? value)
-             (make-nix-data-node (symbol->string value)))
-            (else value)))
-
     (define (%%->string obj)
       (cond ((string? obj) obj)
             (else (nix-node-data-ref obj))))
 
     ))
+
+;;; local variables:
+;;; mode: scheme
+;;; geiser-scheme-implementation: chibi
+;;; coding: utf-8
+;;; end:

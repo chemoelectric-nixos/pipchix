@@ -22,7 +22,7 @@
 AC_PREREQ([2.72])
 AC_INIT([Pipchix],[0.0.0])
 
-AC_CONFIG_SRCDIR([pipchix/base.sld])
+AC_CONFIG_SRCDIR([pipchix-includes.m4])
 
 AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_AUX_DIR([build-aux])
@@ -32,13 +32,9 @@ AC_USE_SYSTEM_EXTENSIONS           dnl Define such macros as _GNU_SOURCE.
 
 AM_INIT_AUTOMAKE([tar-pax no-dist-gzip dist-xz])
 AM_MAINTAINER_MODE
-#LT_INIT
 
-#AC_PROG_CC
-#AC_PROG_CC_C_O
-#AX_CHECK_COMPILE_FLAG([-std=gnu23],
-#  [CFLAGS="${CFLAGS}${CFLAGS+ }-std=gnu23"],
-#  [],[],[AC_LANG_SOURCE([int main(){return 0;}])])
+AC_PROG_CC
+AC_PROG_CC_C_O
 AC_PROG_INSTALL
 AC_PROG_LN_S
 AC_PROG_MAKE_SET
@@ -47,11 +43,11 @@ AC_PROG_AWK
 AC_PROG_SED
 AC_PROG_FGREP
 AC_PROG_EGREP
-#AC_CHECK_PROGS([HELP2MAN],[help2man])
+StM_PROG_GNU_M4
 
-#if test -z "${HELP2MAN}"; then
-#   AC_MSG_ERROR([Please install help2man. It is needed to make the manpage.])
-#fi
+if test -z "${GNU_M4}"; then
+   AC_MSG_ERROR([GNU m4 not found. Perhaps set GNU_M4 to OpenBSD m4.])
+fi
 
 AC_ARG_WITH([r7rsdir],
   [AS_HELP_STRING([--with-r7rsdir=DIR],
@@ -68,12 +64,12 @@ AC_SUBST([GNU],[])
 StM_REQUIRE_GNU_MAKE_IN_PATH
 StM_CONFIG_MAKEFILES
 
-m4_foreach([f],
-  [[pipchix/base.sld],
-   [pipchix/nix-embed.sld],
-   [pipchix/abstract-syntax-tree.sld]],
-  [AC_CONFIG_LINKS(f:f)])
-
+#m4_foreach([f],
+#  [[pipchix/base.sld],
+#   [pipchix/nix-embed.sld],
+#   [pipchix/nix-list.sld],
+#   [pipchix/abstract-syntax-tree.sld]],
+#  [AC_CONFIG_LINKS(f:f)])
 
 AC_OUTPUT
 

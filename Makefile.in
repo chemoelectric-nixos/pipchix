@@ -115,8 +115,9 @@ subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/ax_check_gnu_make.m4 \
 	$(top_srcdir)/m4/stm_config_makefiles.m4 \
+	$(top_srcdir)/m4/stm_path_progs_cached_and_precious.m4 \
 	$(top_srcdir)/m4/stm_prog_gnu_make.m4 \
-	$(top_srcdir)/configure.ac
+	$(top_srcdir)/m4/stm_prog_m4.m4 $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 DIST_COMMON = $(srcdir)/Makefile.am $(top_srcdir)/configure \
@@ -125,8 +126,7 @@ am__CONFIG_DISTCLEAN_FILES = config.status config.cache config.log \
  configure.lineno config.status.lineno
 mkinstalldirs = $(install_sh) -d
 CONFIG_CLEAN_FILES =
-CONFIG_CLEAN_VPATH_FILES = pipchix/base.sld pipchix/nix-embed.sld \
-	pipchix/abstract-syntax-tree.sld
+CONFIG_CLEAN_VPATH_FILES =
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -173,17 +173,14 @@ am__uninstall_files_from_dir = { \
        $(am__cd) "$$dir" && echo $$files | $(am__xargs_n) 40 $(am__rm_f); }; \
   }
 am__installdirs = "$(DESTDIR)$(r7rsdir)"
-DATA = $(r7rs_DATA)
+DATA = $(nodist_r7rs_DATA)
 am__tagged_files = $(HEADERS) $(SOURCES) $(TAGS_FILES) $(LISP)
 am__DIST_COMMON = $(srcdir)/Makefile.in \
 	$(top_srcdir)/build-aux/compile \
 	$(top_srcdir)/build-aux/config.guess \
 	$(top_srcdir)/build-aux/config.sub \
 	$(top_srcdir)/build-aux/install-sh \
-	$(top_srcdir)/build-aux/missing \
-	$(top_srcdir)/pipchix/abstract-syntax-tree.sld \
-	$(top_srcdir)/pipchix/base.sld \
-	$(top_srcdir)/pipchix/nix-embed.sld COPYING build-aux/compile \
+	$(top_srcdir)/build-aux/missing COPYING build-aux/compile \
 	build-aux/config.guess build-aux/config.sub \
 	build-aux/install-sh build-aux/missing
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
@@ -231,6 +228,7 @@ ETAGS = @ETAGS@
 EXEEXT = @EXEEXT@
 FGREP = @FGREP@
 GNU = @GNU@
+GNU_M4 = @GNU_M4@
 GNU_MAKE = @GNU_MAKE@
 GREP = @GREP@
 INSTALL = @INSTALL@
@@ -318,15 +316,18 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 ACLOCAL_AMFLAGS = -I m4 --install
 AUTOMAKE_OPTIONS = foreign
-MOSTLYCLEANFILES = 
+MOSTLYCLEANFILES = $(nodist_r7rs_DATA)
 CLEANFILES = 
-DISTCLEANFILES = Makefile GNUmakefile
-EXTRA_DIST = COPYING README.adoc
-BUILT_SOURCES = 
 #EXTRA_DIST += INSTALL
 #EXTRA_DIST += AUTHORS
-r7rs_DATA = pipchix/base.sld pipchix/nix-embed.sld \
-	pipchix/abstract-syntax-tree.sld
+DISTCLEANFILES = Makefile GNUmakefile
+EXTRA_DIST = COPYING README.adoc pipchix-includes.m4 \
+	pipchix/base.sld.m4 pipchix/nix-embed.sld.m4 \
+	pipchix/nix-list.sld.m4 pipchix/abstract-syntax-tree.sld.m4
+BUILT_SOURCES = 
+nodist_r7rs_DATA = pipchix/base.sld pipchix/nix-embed.sld \
+	pipchix/nix-list.sld pipchix/abstract-syntax-tree.sld
+M4_PREPROCESS = $(GNU_M4) -P -I '$(srcdir)'
 all: $(BUILT_SOURCES)
 	$(MAKE) $(AM_MAKEFLAGS) all-am
 
@@ -364,9 +365,9 @@ $(top_srcdir)/configure: @MAINTAINER_MODE_TRUE@ $(am__configure_deps)
 $(ACLOCAL_M4): @MAINTAINER_MODE_TRUE@ $(am__aclocal_m4_deps)
 	$(am__cd) $(srcdir) && $(ACLOCAL) $(ACLOCAL_AMFLAGS)
 $(am__aclocal_m4_deps):
-install-r7rsDATA: $(r7rs_DATA)
+install-nodist_r7rsDATA: $(nodist_r7rs_DATA)
 	@$(NORMAL_INSTALL)
-	@list='$(r7rs_DATA)'; test -n "$(r7rsdir)" || list=; \
+	@list='$(nodist_r7rs_DATA)'; test -n "$(r7rsdir)" || list=; \
 	if test -n "$$list"; then \
 	  echo " $(MKDIR_P) '$(DESTDIR)$(r7rsdir)'"; \
 	  $(MKDIR_P) "$(DESTDIR)$(r7rsdir)" || exit 1; \
@@ -380,9 +381,9 @@ install-r7rsDATA: $(r7rs_DATA)
 	  $(INSTALL_DATA) $$files "$(DESTDIR)$(r7rsdir)" || exit $$?; \
 	done
 
-uninstall-r7rsDATA:
+uninstall-nodist_r7rsDATA:
 	@$(NORMAL_UNINSTALL)
-	@list='$(r7rs_DATA)'; test -n "$(r7rsdir)" || list=; \
+	@list='$(nodist_r7rs_DATA)'; test -n "$(r7rsdir)" || list=; \
 	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
 	dir='$(DESTDIR)$(r7rsdir)'; $(am__uninstall_files_from_dir)
 tags TAGS:
@@ -634,7 +635,7 @@ info: info-am
 
 info-am:
 
-install-data-am: install-r7rsDATA
+install-data-am: install-nodist_r7rsDATA
 
 install-dvi: install-dvi-am
 
@@ -680,7 +681,7 @@ ps: ps-am
 
 ps-am:
 
-uninstall-am: uninstall-r7rsDATA
+uninstall-am: uninstall-nodist_r7rsDATA
 
 .MAKE: all check install install-am install-exec install-strip
 
@@ -692,17 +693,20 @@ uninstall-am: uninstall-r7rsDATA
 	info-am install install-am install-data install-data-am \
 	install-dvi install-dvi-am install-exec install-exec-am \
 	install-html install-html-am install-info install-info-am \
-	install-man install-pdf install-pdf-am install-ps \
-	install-ps-am install-r7rsDATA install-strip installcheck \
+	install-man install-nodist_r7rsDATA install-pdf install-pdf-am \
+	install-ps install-ps-am install-strip installcheck \
 	installcheck-am installdirs maintainer-clean \
 	maintainer-clean-generic mostlyclean mostlyclean-generic pdf \
 	pdf-am ps ps-am tags-am uninstall uninstall-am \
-	uninstall-r7rsDATA
+	uninstall-nodist_r7rsDATA
 
 .PRECIOUS: GNUmakefile
 
 
 .DELETE_ON_ERROR:
+
+%.sld: %.sld.m4 pipchix-includes.m4
+	$(M4_PREPROCESS) $(<) > $(@).tmp && mv $(@){.tmp,}
 
 # local variables:
 # coding: utf-8

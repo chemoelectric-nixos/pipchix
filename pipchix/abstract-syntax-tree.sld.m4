@@ -1,3 +1,4 @@
+;;;
 ;;; Copyright © 2025 Barry Schwartz
 ;;; 
 ;;; Permission is hereby granted, free of charge, to any person obtaining
@@ -18,65 +19,57 @@
 ;;; LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 ;;; OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 ;;; WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+;;;
+m4_include(pipchix-includes.m4)
 
 (define-library (pipchix abstract-syntax-tree)
 
-  (export make-nix-embedded-node
-          nix-embedded-node?
+  (export make-nix-embedded-node)
+  (export nix-embedded-node?)
 
-          make-nix-data-node
-          nix-data-node?
+  (export make-nix-data-node)
+  (export nix-data-node?)
 
-          make-nix-path-node
-          nix-path-node?
+  (export make-nix-path-node)
+  (export nix-path-node?)
 
-          make-nix-attributeset-node
-          nix-attributeset-node?
-          nix-attributeset-node-recursive?
-          nix-attributeset-node-set!
+  (export make-nix-attributeset-node)
+  (export nix-attributeset-node?)
+  (export nix-attributeset-node-recursive?)
+  (export nix-attributeset-node-set!)
 
-          list->nix-attributepath-node
-          nix-attributepath-node?
+  (export list->nix-attributepath-node)
+  (export nix-attributepath-node?)
 
-          make-nix-attributebinding-node
-          nix-attributebinding-node?
+  (export make-nix-attributebinding-node)
+  (export nix-attributebinding-node?)
 
-          list->nix-inherit-node
-          nix-inherit-node?
+  (export list->nix-inherit-node)
+  (export nix-inherit-node?)
 
-          list->nix-list-node
-          nix-list-node?
+  (export list->nix-list-node)
+  (export nix-list-node?)
 
-          output-nix-abstract-syntax-tree)
+  (export scheme->nix)
 
-  (import (scheme base)
-          (scheme case-lambda)
-          (scheme char)
-          (scheme write))
+  (export output-nix-abstract-syntax-tree)
+
+  (import (scheme base))
+  (import (scheme case-lambda))
+  (import (scheme char))
+  (import (scheme write))
+
   (cond-expand
-    ((and guile r7rs) ;; Works with ‘guile --r7rs’
-     (import (only (srfi 60)
-                   bitwise-and
-                   arithmetic-shift)))
+    ((and guile r7rs) ;; ‘guile --r7rs’
+     (import (only (srfi 60) bitwise-and arithmetic-shift)))
     ((and chicken r7rs) ;; Not working yet, at least with CHICKEN 6.
-     (import (only (chicken bitwise)
-                   bitwise-and
-                   arithmetic-shift)))
-    (else
-     (import (only (scheme bitwise) ;; (srfi 151)
-                   bitwise-and
-                   arithmetic-shift))))
+     (import (only (chicken bitwise) bitwise-and arithmetic-shift)))
+    (else ;; (scheme bitwise) = (srfi 151)
+     (import (only (scheme bitwise) bitwise-and arithmetic-shift))))
 
   (begin
 
-    (define (%%string-reverse-concatenate lst)
-      ;; Concatenation without the possible limitations of using
-      ;; ‘apply’.
-      (let loop ((lst lst)
-                 (str ""))
-        (if (pair? lst)
-            (loop (cdr lst) (string-append (car lst) str))
-            str)))
+    m4_string_reverse_concatenate
 
     (define-record-type <nix-embedded-node> ; Embedded Nix code.
       (make-nix-embedded-node code)
@@ -146,6 +139,22 @@
       (list->nix-list-node lst)
       nix-list-node?
       (lst nix-list-node->list))
+
+    (define (scheme->nix value)
+      ;; Convert Scheme values to Nix AST.
+      (cond ((or (string? value)
+                 (number? value)
+                 (boolean? value)
+                 (eq? '() value))
+             (make-nix-data-node value))
+            ((symbol? value)
+             (make-nix-data-node (symbol->string value)))
+            ((list? value)
+             (list->nix-list-node (map scheme->nix value)))
+            (else
+             ;; FIXME FIXME FIXME: Recognize Nix AST nodes and let
+             ;; them through. Otherwise treat as an error.
+             value)))
 
     (define output-nix-abstract-syntax-tree
       (let ((outp-default
@@ -367,3 +376,9 @@
                    (char-numeric? c)))))
 
     ))
+
+;;; local variables:
+;;; mode: scheme
+;;; geiser-scheme-implementation: chibi
+;;; coding: utf-8
+;;; end:

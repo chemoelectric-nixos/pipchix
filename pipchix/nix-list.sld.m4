@@ -1,3 +1,4 @@
+;;;
 ;;; Copyright © 2025 Barry Schwartz
 ;;; 
 ;;; Permission is hereby granted, free of charge, to any person obtaining
@@ -18,20 +19,29 @@
 ;;; LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 ;;; OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 ;;; WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+;;;
+m4_include(pipchix-includes.m4)
 
-(define-library (pipchix nix-embed)
+(define-library (pipchix nix-list)
 
-  (export nix-embed)      ;; Embed Nix code verbatim.
+  (export nix-list)       ;; Nix list from elements.
+  (export list->nix-list) ;; Nix list from a Scheme list.
 
   (import (scheme base)
           (pipchix abstract-syntax-tree))
 
   (begin
 
-    (define (nix-embed str)
-      (cond ((string? str)
-             (make-nix-embedded-node str))
-            (else
-             (error "not a string" str))))
+    (define (list->nix-list lst)
+      (list->nix-list-node (map scheme->nix lst)))
+
+    (define (nix-list . elem*)
+      (list->nix-list elem*))
 
     ))
+
+;;; local variables:
+;;; mode: scheme
+;;; geiser-scheme-implementation: chibi
+;;; coding: utf-8
+;;; end:
