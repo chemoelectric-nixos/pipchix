@@ -322,8 +322,8 @@ top_srcdir = @top_srcdir@
 ACLOCAL_AMFLAGS = -I m4 --install
 AUTOMAKE_OPTIONS = foreign
 MOSTLYCLEANFILES = $(nodist_r7rs_DATA) $(addsuffix .tmp, \
-	$(nodist_r7rs_DATA)) $(TINYSCHEME_DIR)/script.tmp \
-	$(TINYSCHEME) $(TINYSCHEME_DIR)/*.$(OBJEXT)
+	$(nodist_r7rs_DATA)) script.tmp $(TINYSCHEME) \
+	$(TINYSCHEME_DIR)/*.$(OBJEXT)
 CLEANFILES = 
 #EXTRA_DIST += INSTALL
 #EXTRA_DIST += AUTHORS
@@ -401,7 +401,6 @@ TINYSCHEME_CFLAGS = \
 	-DUSE_DL=0 -DUSE_MATH=1 -DUSE_ASCII_NAMES=0
 
 TINYSCHEME = $(TINYSCHEME_DIR)/tinyscheme$(EXEEXT)
-TINYSCHEME_SHEBANG = \#!$(abs_builddir)/$(TINYSCHEME) -1
 all: $(BUILT_SOURCES)
 	$(MAKE) $(AM_MAKEFLAGS) all-am
 
@@ -785,20 +784,18 @@ uninstall-am: uninstall-nodist_r7rsDATA
 		mv $(@){.tmp,}
 
 chicken-6/pipchix.egg: GNUmakefile $(TINYSCHEME)
+	$(MKDIR_P) $(@D)
 	if true; then \
-	  printf '$(TINYSCHEME_SHEBANG)\n'; \
 	  printf '%s' $(DEFINE_NICELY_PRINT); \
 	  printf '(define eggfile (quote %s))' \
 	                 $(CHICKEN_6_EGGSPEC); \
 	  printf '(nicely-print eggfile)'; \
-	fi > $(TINYSCHEME_DIR)/script.tmp
-	( \
-	  $(MKDIR_P) $(@D) && \
-	  cd $(TINYSCHEME_DIR) && \
-	  chmod +x script.tmp && \
-	  ./script.tmp > $(abs_top_builddir)/$(@) && \
-	  rm -f xscript.tmp \
-	)
+	fi > script.tmp
+	(cd $(TINYSCHEME_DIR) && \
+	   $(abs_builddir)/$(TINYSCHEME) \
+		-1 ${abs_top_builddir}/script.tmp \
+			> $(abs_top_builddir)/$(@))
+	rm script.tmp
 $(TINYSCHEME): $(TINYSCHEME_C) $(TINYSCHEME_H)
 	$(MKDIR_P) $(@D)
 	$(CC) -o $(@) $(TINYSCHEME_CFLAGS) $(TINYSCHEME_C) -lm

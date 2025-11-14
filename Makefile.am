@@ -111,22 +111,20 @@ CHICKEN_6_EGGSPEC = ' \
        (pipchix nix-list))))))'
 
 chicken-6/pipchix.egg: GNUmakefile $(TINYSCHEME)
+	$(MKDIR_P) $(@D)
 	if true; then \
-	  printf '$(TINYSCHEME_SHEBANG)\n'; \
 	  printf '%s' $(DEFINE_NICELY_PRINT); \
 	  printf '(define eggfile (quote %s))' \
 	                 $(CHICKEN_6_EGGSPEC); \
 	  printf '(nicely-print eggfile)'; \
-	fi > $(TINYSCHEME_DIR)/script.tmp
-	( \
-	  $(MKDIR_P) $(@D) && \
-	  cd $(TINYSCHEME_DIR) && \
-	  chmod +x script.tmp && \
-	  ./script.tmp > $(abs_top_builddir)/$(@) && \
-	  rm script.tmp \
-	)
+	fi > script.tmp
+	(cd $(TINYSCHEME_DIR) && \
+	   $(abs_builddir)/$(TINYSCHEME) \
+		-1 ${abs_top_builddir}/script.tmp \
+			> $(abs_top_builddir)/$(@))
+	rm script.tmp
 
-MOSTLYCLEANFILES += $(TINYSCHEME_DIR)/script.tmp
+MOSTLYCLEANFILES += script.tmp
 
 # TinySCHEME is used here to manipulate s-expressions without having
 # to have any particular Scheme installed on the system.
@@ -145,7 +143,6 @@ $(TINYSCHEME): $(TINYSCHEME_C) $(TINYSCHEME_H)
 	$(CC) -o $(@) $(TINYSCHEME_CFLAGS) $(TINYSCHEME_C) -lm
 
 TINYSCHEME = $(TINYSCHEME_DIR)/tinyscheme$(EXEEXT)
-TINYSCHEME_SHEBANG=\#!$(abs_builddir)/$(TINYSCHEME) -1
 
 MOSTLYCLEANFILES += $(TINYSCHEME)
 MOSTLYCLEANFILES += $(TINYSCHEME_DIR)/*.$(OBJEXT)
