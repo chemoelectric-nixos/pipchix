@@ -65,7 +65,9 @@ DEFINE_NICELY_PRINT = ' \
       (unless (zero? i) \
         (display " ") \
         (loop (- i 1))))) \
-  (define (nicely-print obj depth newline?) \
+  (define (nicely-print obj) \
+    (%%nicely-print obj 0 \#f)) \
+  (define (%%nicely-print obj depth newline?) \
     (cond \
       ((pair? obj) \
         (when newline? \
@@ -78,8 +80,8 @@ DEFINE_NICELY_PRINT = ' \
             ((pair? lst) \
               (unless (pair? (car lst)) \
                 (display separator)) \
-              (nicely-print (car lst) (+ depth 1) \
-                            (equal? separator " ")) \
+              (%%nicely-print (car lst) (+ depth 1) \
+                              (equal? separator " ")) \
               (loop (cdr lst) " ")) \
             (else \
               (display ")"))))) \
@@ -100,7 +102,7 @@ chicken-6/pipchix.egg: GNUmakefile $(TINYSCHEME)
 	  printf ' )'; \
 	  printf '(csc-options "-O3")'; \
 	  printf ')))'; \
-	  printf '(nicely-print eggfile 0 #f)'; \
+	  printf '(nicely-print eggfile)'; \
 	fi > $(TINYSCHEME_DIR)/script.tmp
 	( \
 	  $(MKDIR_P) $(@D) && \
