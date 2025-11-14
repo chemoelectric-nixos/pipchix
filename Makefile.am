@@ -60,27 +60,31 @@ M4_PREPROCESS = $(GNU_M4) -P -I '$(srcdir)'
 		mv $(@){.tmp,}
 
 DEFINE_NICELY_PRINT = ' \
-  (define (nicely-print lst depth) \
+  (define (indent-to depth) \
+    (let loop ((i depth)) \
+      (unless (zero? i) \
+        (display " ") \
+        (loop (- i 1))))) \
+  (define (nicely-print obj depth newline?) \
     (cond \
-      ((pair? lst) \
-        (newline) \
-        (let loop ((i depth)) \
-          (unless (zero? i) \
-            (display " ") \
-            (loop (- i 1)))) \
+      ((pair? obj) \
+        (when newline? \
+          (newline) \
+          (indent-to depth)) \
         (display "(") \
-        (let loop ((lst lst) \
+        (let loop ((lst obj) \
                    (separator "")) \
           (cond \
             ((pair? lst) \
               (unless (pair? (car lst)) \
                 (display separator)) \
-              (nicely-print (car lst) (+ depth 1)) \
+              (nicely-print (car lst) (+ depth 1) \
+                            (equal? separator " ")) \
               (loop (cdr lst) " ")) \
             (else \
               (display ")"))))) \
-      (else \
-        (write lst))))'
+       (else \
+         (write obj))))'
 
 chicken-6/pipchix.egg: GNUmakefile $(TINYSCHEME)
 	if true; then \
@@ -96,7 +100,7 @@ chicken-6/pipchix.egg: GNUmakefile $(TINYSCHEME)
 	  printf ' )'; \
 	  printf '(csc-options "-O3")'; \
 	  printf ')))'; \
-	  printf '(nicely-print eggfile 0)'; \
+	  printf '(nicely-print eggfile 0 #f)'; \
 	fi > $(TINYSCHEME_DIR)/script.tmp
 	( \
 	  $(MKDIR_P) $(@D) && \
