@@ -88,20 +88,34 @@ DEFINE_NICELY_PRINT = ' \
        (else \
          (write obj))))'
 
+CHICKEN_6_EGGSPEC = ' \
+  ((synopsis "Using Scheme to write Nix code") \
+   (author "Barry Schwartz") \
+   (category code-generation) \
+   (license "MIT") \
+   (components \
+    (extension \
+     (pipchix abstract-syntax-tree)) \
+    (extension \
+     (pipchix nix-embed \
+      (component-dependencies \
+       (pipchix abstract-syntax-tree)))) \
+    (extension \
+     (pipchix nix-list \
+      (component-dependencies \
+       (pipchix abstract-syntax-tree)))) \
+    (extension \
+     (pipchix base \
+      (component-dependencies \
+       (pipchix abstract-syntax-tree) \
+       (pipchix nix-list))))))'
+
 chicken-6/pipchix.egg: GNUmakefile $(TINYSCHEME)
 	if true; then \
 	  printf '$(TINYSCHEME_SHEBANG)\n'; \
 	  printf '%s' $(DEFINE_NICELY_PRINT); \
-	  printf '(define eggfile(quote('; \
-	  printf '(synopsis "Nix coding with Scheme")'; \
-	  printf '(author "Barry Schwartz")'; \
-	  printf '(category code-generation)'; \
-	  printf '(license "MIT")'; \
-	  printf '(components'; \
-	  printf ' (extension (pipchix abstract-syntax-tree))'; \
-	  printf ' )'; \
-	  printf '(csc-options "-O3")'; \
-	  printf ')))'; \
+	  printf '(define eggfile (quote %s))' \
+	                 $(CHICKEN_6_EGGSPEC); \
 	  printf '(nicely-print eggfile)'; \
 	fi > $(TINYSCHEME_DIR)/script.tmp
 	( \
