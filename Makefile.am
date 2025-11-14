@@ -123,7 +123,7 @@ chicken-6/pipchix.egg: GNUmakefile $(TINYSCHEME)
 	  cd $(TINYSCHEME_DIR) && \
 	  chmod +x script.tmp && \
 	  ./script.tmp > $(abs_top_builddir)/$(@) && \
-	  rm -f xscript.tmp \
+	  rm script.tmp \
 	)
 
 MOSTLYCLEANFILES += $(TINYSCHEME_DIR)/script.tmp
