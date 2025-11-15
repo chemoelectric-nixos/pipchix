@@ -647,7 +647,6 @@ ifnGNUmake
 ifGNUmake
 GNU_MAKE
 GNU
-enable_chicken_6
 r7rsdir
 CFLAGS_FOR_PIC
 CFLAGS_FOR_STATIC
@@ -763,7 +762,6 @@ enable_dependency_tracking
 enable_silent_rules
 enable_maintainer_mode
 with_r7rsdir
-enable_chicken_6
 '
       ac_precious_vars='build_alias
 host_alias
@@ -1411,7 +1409,6 @@ Optional Features:
   --enable-maintainer-mode
                           enable make rules and dependencies not useful (and
                           sometimes confusing) to the casual installer
-  --enable-chicken-6      make an egg for CHICKEN 6 [no]
 
 Optional Packages:
   --with-PACKAGE[=ARG]    use PACKAGE [ARG=yes]
@@ -6358,16 +6355,12 @@ fi
 
 
 
-# Check whether --enable-chicken-6 was given.
-if test ${enable_chicken_6+y}
-then :
-  enableval=$enable_chicken_6; enable_chicken_6="${enableval}"
-else case e in #(
-  e) enable_chicken_6='no' ;;
-esac
-fi
-
-
+#AC_ARG_ENABLE([chicken-6],
+#  [AS_HELP_STRING([--enable-chicken-6],
+#        [make an egg for CHICKEN 6 [no]])],
+#  [enable_chicken_6="${enableval}"],
+#  [enable_chicken_6='no'])
+#AC_SUBST([enable_chicken_6])
 
 # You can use ‘@GNU@’ to make GNU Make constructs unbothersome to
 # Automake. (By the way, you often can use ‘$(eval ...)’ as well, but
@@ -6503,6 +6496,29 @@ printf "%s\n" "$as_me: WARNING: Please consider installing and using GNU Make:
 
    # Create `GNUmakefile' or its substitute.
    ac_config_files="$ac_config_files GNUmakefile:Makefile.in"
+
+}
+{ :;
+
+   # If no GNU Make is found, recommend it.
+   if test -z "${_cv_gnu_make_command}" \
+         -a x"${__stm_config_makefiles_consider_gnu_make_printed}" != xyes; then
+      { printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: Please consider installing and using GNU Make:
+           http://www.gnu.org/software/make/" >&5
+printf "%s\n" "$as_me: WARNING: Please consider installing and using GNU Make:
+           http://www.gnu.org/software/make/" >&2;}
+      __stm_config_makefiles_consider_gnu_make_printed=yes
+   fi
+
+   # Create `Makefile' or its substitute. If GNU Make is present,
+   # create `Makefile' (or its substitute) as a wrapper around
+   # `GNUmakefile' (or its substitute). Otherwise create the former in
+   # the usual way.
+   ac_config_files="$ac_config_files tinyscheme-1.42/Makefile"
+
+
+   # Create `GNUmakefile' or its substitute.
+   ac_config_files="$ac_config_files tinyscheme-1.42/GNUmakefile:tinyscheme-1.42/Makefile.in"
 
 }
 
@@ -7267,6 +7283,9 @@ AMDEP_TRUE="$AMDEP_TRUE" MAKE="${MAKE-make}"
       __stm_config_makefiles_make_command="${_cv_gnu_make_command}"
 
 
+      __stm_config_makefiles_make_command="${_cv_gnu_make_command}"
+
+
 _ACEOF
 
 cat >>$CONFIG_STATUS <<\_ACEOF || ac_write_fail=1
@@ -7278,6 +7297,8 @@ do
     "depfiles") CONFIG_COMMANDS="$CONFIG_COMMANDS depfiles" ;;
     "Makefile") CONFIG_FILES="$CONFIG_FILES Makefile" ;;
     "GNUmakefile") CONFIG_FILES="$CONFIG_FILES GNUmakefile:Makefile.in" ;;
+    "tinyscheme-1.42/Makefile") CONFIG_FILES="$CONFIG_FILES tinyscheme-1.42/Makefile" ;;
+    "tinyscheme-1.42/GNUmakefile") CONFIG_FILES="$CONFIG_FILES tinyscheme-1.42/GNUmakefile:tinyscheme-1.42/Makefile.in" ;;
     "tinyscheme-1.42/init.scm") CONFIG_LINKS="$CONFIG_LINKS tinyscheme-1.42/init.scm:tinyscheme-1.42/init.scm" ;;
     "tinyscheme-1.42/dynload.c") CONFIG_LINKS="$CONFIG_LINKS tinyscheme-1.42/dynload.c:tinyscheme-1.42/dynload.c" ;;
     "tinyscheme-1.42/dynload.h") CONFIG_LINKS="$CONFIG_LINKS tinyscheme-1.42/dynload.h:tinyscheme-1.42/dynload.h" ;;
@@ -7846,6 +7867,20 @@ See 'config.log' for more details" "$LINENO" 5; }
       # If GNU make is present, encourage other makes to call it instead.
       if test -n "${__stm_config_makefiles_make_command}"; then
          cat > Makefile <<EOF
+# Attempt to have common non-GNU Make programs run GNU Make.
+
+.DEFAULT:
+	${__stm_config_makefiles_make_command} \$@
+
+%:
+	${__stm_config_makefiles_make_command}
+EOF
+      fi
+    ;;
+    "tinyscheme-1.42/Makefile":F)
+      # If GNU make is present, encourage other makes to call it instead.
+      if test -n "${__stm_config_makefiles_make_command}"; then
+         cat > tinyscheme-1.42/Makefile <<EOF
 # Attempt to have common non-GNU Make programs run GNU Make.
 
 .DEFAULT:

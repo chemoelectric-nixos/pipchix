@@ -21,6 +21,8 @@
 
 .DELETE_ON_ERROR:
 
+SUBDIRS = tinyscheme-1.42 .
+
 ACLOCAL_AMFLAGS = -I m4 --install
 AUTOMAKE_OPTIONS =
 AUTOMAKE_OPTIONS += foreign
@@ -72,15 +74,13 @@ M4_PREPROCESS = $(GNU_M4) -P -I '$(srcdir)'
 # CHICKEN Scheme support.
 #
 
-CHICKEN_5_DIR = chicken-5
-CHICKEN_5_EGGDIR = $(CHICKEN_5_DIR)/$(PACKAGE_TARNAME)
-CHICKEN_5_EGG_TARBALL = \
-  $(PACKAGE_TARNAME)-$(PACKAGE_VERSION).chicken-5-egg.tar.xz
+TINYSCHEME_DIR = tinyscheme-1.42
+TINYSCHEME = $(TINYSCHEME_DIR)/tinyscheme
 
-CHICKEN_6_DIR = chicken-6
-CHICKEN_6_EGGDIR = $(CHICKEN_6_DIR)/$(PACKAGE_TARNAME)
-CHICKEN_6_EGG_TARBALL = \
-  $(PACKAGE_TARNAME)-$(PACKAGE_VERSION).chicken-6-egg.tar.xz
+CHICKEN_DIR = chicken-eggs
+
+CHICKEN_5_EGGDIR = $(CHICKEN_DIR)/chicken-5
+CHICKEN_6_EGGDIR = $(CHICKEN_DIR)/chicken-6
 
 CHICKEN_5_EGGFILES = \
   $(addprefix $(CHICKEN_5_EGGDIR)/, \
@@ -91,22 +91,27 @@ CHICKEN_5_EGGFILES = \
     pipchix.base.scm \
     COPYING README.adoc)
 
+EXTRA_DIST += $(CHICKEN_5_EGGFILES)
 CLEANFILES += $(CHICKEN_5_EGGFILES)
 
-EXTRA_DIST += $(CHICKEN_5_EGG_TARBALL)
-CLEANFILES += $(CHICKEN_5_EGG_TARBALL)
-CLEANFILES += $(CHICKEN_5_EGG_TARBALL).tmp
+$(CHICKEN_5_EGGDIR)/pipchix.egg: GNUmakefile $(TINYSCHEME)
+$(TINYSCHEME):
+	$(MAKE) -C $(TINYSCHEME_DIR) tinyscheme
 
-$(CHICKEN_5_EGG_TARBALL): egg-for-chicken-5
-	$(call v,TAR) \
-	  tar --format=posix -chf - -C $(CHICKEN_5_DIR) \
-	    $(addprefix $(PACKAGE_TARNAME)/, \
-	       $(notdir $(CHICKEN_5_EGGFILES))) \
-	  | XZ_OPT=${XZ_OPT--e} xz -c > $(@).tmp && \
-	mv $(@){.tmp,}
+# EXTRA_DIST += $(CHICKEN_5_EGG_TARBALL)
+# CLEANFILES += $(CHICKEN_5_EGG_TARBALL)
+# CLEANFILES += $(CHICKEN_5_EGG_TARBALL).tmp
+#
+# $(CHICKEN_5_EGG_TARBALL): egg-for-chicken-5
+# 	$(call v,TAR) \
+# 	  tar --format=posix -chf - -C $(CHICKEN_5_DIR) \
+# 	    $(addprefix $(PACKAGE_TARNAME)/, \
+# 	       $(notdir $(CHICKEN_5_EGGFILES))) \
+# 	  | XZ_OPT=${XZ_OPT--e} xz -c > $(@).tmp && \
+# 	mv $(@){.tmp,}
 
-.PHONY: egg-for-chicken-5 GNUmakefile $(TINYSCHEME)
-egg-for-chicken-5: $(CHICKEN_5_EGGFILES)
+.PHONY: egg-for-chicken-5
+egg-for-chicken-5: $(CHICKEN_5_EGGFILES) GNUmakefile
 
 $(CHICKEN_5_EGGDIR)/COPYING: COPYING
 	$(call copy-file, $(<), $(@))
@@ -139,7 +144,7 @@ CHICKEN_5_EGGSPEC = ' \
        pipchix.abstract-syntax-tree \
        pipchix.nix-list))))'
 
-$(CHICKEN_5_EGGDIR)/pipchix.egg: GNUmakefile $(TINYSCHEME)
+$(CHICKEN_5_EGGDIR)/pipchix.egg: GNUmakefile
 	$(call v,SEXP)$(MKDIR_P) $(@D) && \
 	if true; then \
 	  printf '%s' $(DEFINE_NICELY_PRINT); \
@@ -162,32 +167,9 @@ $(CHICKEN_5_EGGDIR)/pipchix.%.scm: pipchix/%.sld.m4 pipchix-includes.m4
 #---------------------------------------------------------------------
 
 #
-# TinySCHEME as a scripting language for the Makefile. (We do not wish
-# to assume that GNU Make was linked with libguile.)
-#
-
-EXTRA_DIST += $(wildcard $(TINYSCHEME_DIR)/*)
-TINYSCHEME_DIR = tinyscheme-1.42
-TINYSCHEME_C = $(addprefix $(TINYSCHEME_DIR)/, \
-			$(addsuffix .c, scheme))
-TINYSCHEME_H = $(addprefix $(TINYSCHEME_DIR)/, \
-			$(addsuffix .h, dynload opdefines \
-					scheme scheme-private))
-TINYSCHEME_CFLAGS = \
-	${CFLAGS} $(CFLAGS_FOR_STATIC) $(CFLAGS_FOR_PIC) \
-	-DUSE_DL=0 -DUSE_MATH=1 -DUSE_ASCII_NAMES=0
-$(TINYSCHEME): $(TINYSCHEME_C) $(TINYSCHEME_H)
-	$(call v,CC) $(MKDIR_P) $(@D) && \
-		$(CC) -o $(@) $(TINYSCHEME_CFLAGS) $(TINYSCHEME_C) -lm
-
-TINYSCHEME = $(TINYSCHEME_DIR)/tinyscheme$(EXEEXT)
-
-MOSTLYCLEANFILES += $(TINYSCHEME)
-MOSTLYCLEANFILES += $(TINYSCHEME_DIR)/*.$(OBJEXT)
-
-#
-# A pretty-printer (nicely-print obj). It uses ’write’ for anything
-# except a list. Lists it prints with newlines and indentation.
+# A pretty-printer (nicely-print obj) for TinySCHEME (or any other
+# standard Scheme). It uses ’write’ for anything except a list. Lists
+# it prints with newlines and indentation.
 #
 DEFINE_NICELY_PRINT = ' \
   \
@@ -201,25 +183,26 @@ DEFINE_NICELY_PRINT = ' \
     (%%nicely-print obj 0 \#f) \
     (newline)) \
   (define (%%nicely-print obj depth newline?) \
-    (cond \
-      ((pair? obj) \
-        (when newline? \
-          (newline) \
-          (indent-to depth)) \
-        (display "(") \
-        (let loop ((lst obj) \
-                   (separator "")) \
-          (cond \
-            ((pair? lst) \
-              (unless (pair? (car lst)) \
-                (display separator)) \
-              (%%nicely-print (car lst) (+ depth 1) \
-                              (equal? separator " ")) \
-              (loop (cdr lst) " ")) \
-            (else \
-              (display ")"))))) \
-       (else \
-         (write obj))))'
+    (let ((indentation " ")) \
+      (cond \
+	((pair? obj) \
+	  (when newline? \
+	    (newline) \
+	    (indent-to depth)) \
+	  (display "(") \
+	  (let loop ((lst obj) \
+		     (separator "")) \
+	    (cond \
+	      ((pair? lst) \
+		(unless (pair? (car lst)) \
+		  (display separator)) \
+		(%%nicely-print (car lst) (+ depth 1) \
+				(not (equal? separator ""))) \
+		(loop (cdr lst) indentation)) \
+	      (else \
+		(display ")"))))) \
+	 (else \
+	   (write obj)))))'
 
 #---------------------------------------------------------------------
 # local variables:

@@ -73,12 +73,12 @@ AC_ARG_WITH([r7rsdir],
   [r7rsdir='${datadir}/r7rs'])
 AC_SUBST([r7rsdir])
 
-AC_ARG_ENABLE([chicken-6],
-  [AS_HELP_STRING([--enable-chicken-6],
-        [make an egg for CHICKEN 6 [no]])],
-  [enable_chicken_6="${enableval}"],
-  [enable_chicken_6='no'])
-AC_SUBST([enable_chicken_6])
+#AC_ARG_ENABLE([chicken-6],
+#  [AS_HELP_STRING([--enable-chicken-6],
+#        [make an egg for CHICKEN 6 [no]])],
+#  [enable_chicken_6="${enableval}"],
+#  [enable_chicken_6='no'])
+#AC_SUBST([enable_chicken_6])
 
 # You can use ‘@GNU@’ to make GNU Make constructs unbothersome to
 # Automake. (By the way, you often can use ‘$(eval ...)’ as well, but
@@ -87,6 +87,8 @@ AC_SUBST([GNU],[])
 
 StM_REQUIRE_GNU_MAKE_IN_PATH
 StM_CONFIG_MAKEFILES
+StM_CONFIG_MAKEFILES([tinyscheme-1.42/Makefile],
+                     [tinyscheme-1.42/GNUmakefile])
 
 m4_foreach([f],
   [[tinyscheme-1.42/init.scm],
