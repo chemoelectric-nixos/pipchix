@@ -25,6 +25,8 @@ ACLOCAL_AMFLAGS = -I m4 --install
 AUTOMAKE_OPTIONS =
 AUTOMAKE_OPTIONS += foreign
 
+@GNU@ include $(top_srcdir)/silent-rules.mk
+
 MOSTLYCLEANFILES =
 CLEANFILES =
 DISTCLEANFILES =
@@ -33,6 +35,7 @@ EXTRA_DIST =
 BUILT_SOURCES =
 nodist_r7rs_DATA =
 
+EXTRA_DIST += silent-rules.mk
 EXTRA_DIST += COPYING
 EXTRA_DIST += README.adoc
 #EXTRA_DIST += INSTALL
@@ -55,18 +58,145 @@ MOSTLYCLEANFILES += $(addsuffix .tmp, $(nodist_r7rs_DATA))
 M4_PREPROCESS = $(GNU_M4) -P -I '$(srcdir)'
 
 %.sld: %.sld.m4 pipchix-includes.m4
-	$(MKDIR_P) $(@D) && \
+	$(call v,SLD.M4)$(MKDIR_P) $(@D) && \
 		$(M4_PREPROCESS) $(<) > $(@).tmp && \
 		mv $(@){.tmp,}
 
+@GNU@ define copy-file
+@GNU@ $(call v,COPY) cp -f $(1) $(2)
+@GNU@ endef
+
+#---------------------------------------------------------------------
+
+#
+# CHICKEN Scheme support.
+#
+
+CHICKEN_5_DIR = chicken-5
+CHICKEN_5_EGGDIR = $(CHICKEN_5_DIR)/$(PACKAGE_TARNAME)
+CHICKEN_5_EGG_TARBALL = \
+  $(PACKAGE_TARNAME)-$(PACKAGE_VERSION).chicken-5-egg.tar.xz
+
+CHICKEN_6_DIR = chicken-6
+CHICKEN_6_EGGDIR = $(CHICKEN_6_DIR)/$(PACKAGE_TARNAME)
+CHICKEN_6_EGG_TARBALL = \
+  $(PACKAGE_TARNAME)-$(PACKAGE_VERSION).chicken-6-egg.tar.xz
+
+CHICKEN_5_EGGFILES = \
+  $(addprefix $(CHICKEN_5_EGGDIR)/, \
+    pipchix.egg \
+    pipchix.abstract-syntax-tree.scm \
+    pipchix.nix-embed.scm \
+    pipchix.nix-list.scm \
+    pipchix.base.scm \
+    COPYING README.adoc)
+
+CLEANFILES += $(CHICKEN_5_EGGFILES)
+
+EXTRA_DIST += $(CHICKEN_5_EGG_TARBALL)
+CLEANFILES += $(CHICKEN_5_EGG_TARBALL)
+
+$(CHICKEN_5_EGG_TARBALL): egg-for-chicken-5
+	$(call v,TAR) \
+	  tar --format=posix -chf $(@) -C $(CHICKEN_5_DIR) \
+	    $(addprefix $(PACKAGE_TARNAME)/, \
+	       $(notdir $(CHICKEN_5_EGGFILES)))
+
+.PHONY: egg-for-chicken-5 GNUmakefile $(TINYSCHEME)
+egg-for-chicken-5: $(CHICKEN_5_EGGFILES)
+
+$(CHICKEN_5_EGGDIR)/COPYING: COPYING
+	$(call copy-file, $(<), $(@))
+
+$(CHICKEN_5_EGGDIR)/README.adoc: README.adoc
+	$(call copy-file, $(<), $(@))
+
+CHICKEN_5_EGGSPEC = ' \
+  ((synopsis "Use Scheme to write Nix code") \
+   (version "$(PACKAGE_VERSION)") \
+   (author "Barry Schwartz") \
+   (category code-generation) \
+   (license "MIT") \
+   (dependencies r7rs) \
+   (component-options \
+    (csc-options \
+     "-R" "r7rs" "-X" "r7rs" \
+     "-O2" "-d1" \
+     "-compile-syntax")) \
+   (components \
+    (extension pipchix.abstract-syntax-tree) \
+    (extension pipchix.nix-embed \
+      (component-dependencies \
+       pipchix.abstract-syntax-tree)) \
+    (extension pipchix.nix-list \
+      (component-dependencies \
+       pipchix.abstract-syntax-tree)) \
+    (extension pipchix.base \
+      (component-dependencies \
+       pipchix.abstract-syntax-tree \
+       pipchix.nix-list))))'
+
+$(CHICKEN_5_EGGDIR)/pipchix.egg: GNUmakefile $(TINYSCHEME)
+	$(call v,SEXP)$(MKDIR_P) $(@D) && \
+	if true; then \
+	  printf '%s' $(DEFINE_NICELY_PRINT); \
+	  printf '(define eggfile (quote %s))' \
+	                 $(CHICKEN_5_EGGSPEC); \
+	  printf '(nicely-print eggfile)'; \
+	fi > script.tmp && \
+	(cd $(TINYSCHEME_DIR) && \
+	   ./tinyscheme -1 ${abs_builddir}/script.tmp \
+			> $(abs_builddir)/$(@)) && \
+	rm script.tmp
+
+MOSTLYCLEANFILES += script.tmp
+
+$(CHICKEN_5_EGGDIR)/pipchix.%.scm: pipchix/%.sld.m4 pipchix-includes.m4
+	$(call v,SCM.M4)$(MKDIR_P) $(@D) && \
+		$(M4_PREPROCESS) $(<) > $(@).tmp && \
+		mv $(@){.tmp,}
+
+#---------------------------------------------------------------------
+
+#
+# TinySCHEME as a scripting language for the Makefile. (We do not wish
+# to assume that GNU Make was linked with libguile.)
+#
+
+EXTRA_DIST += $(wildcard $(TINYSCHEME_DIR)/*)
+TINYSCHEME_DIR = tinyscheme-1.42
+TINYSCHEME_C = $(addprefix $(TINYSCHEME_DIR)/, \
+			$(addsuffix .c, scheme))
+TINYSCHEME_H = $(addprefix $(TINYSCHEME_DIR)/, \
+			$(addsuffix .h, dynload opdefines \
+					scheme scheme-private))
+TINYSCHEME_CFLAGS = \
+	${CFLAGS} $(CFLAGS_FOR_STATIC) $(CFLAGS_FOR_PIC) \
+	-DUSE_DL=0 -DUSE_MATH=1 -DUSE_ASCII_NAMES=0
+$(TINYSCHEME): $(TINYSCHEME_C) $(TINYSCHEME_H)
+	$(call v,CC) $(MKDIR_P) $(@D) && \
+		$(CC) -o $(@) $(TINYSCHEME_CFLAGS) $(TINYSCHEME_C) -lm
+
+TINYSCHEME = $(TINYSCHEME_DIR)/tinyscheme$(EXEEXT)
+
+MOSTLYCLEANFILES += $(TINYSCHEME)
+MOSTLYCLEANFILES += $(TINYSCHEME_DIR)/*.$(OBJEXT)
+
+#
+# A pretty-printer (nicely-print obj). It uses ’write’ for anything
+# except a list. Lists it prints with newlines and indentation.
+#
 DEFINE_NICELY_PRINT = ' \
+  \
   (define (indent-to depth) \
     (let loop ((i depth)) \
       (unless (zero? i) \
         (display " ") \
         (loop (- i 1))))) \
+  \
   (define (nicely-print obj) \
-    (%%nicely-print obj 0 \#f)) \
+    (%%nicely-print obj 0 \#f) \
+    (newline)) \
   (define (%%nicely-print obj depth newline?) \
     (cond \
       ((pair? obj) \
@@ -88,65 +218,7 @@ DEFINE_NICELY_PRINT = ' \
        (else \
          (write obj))))'
 
-CHICKEN_6_EGGSPEC = ' \
-  ((synopsis "Using Scheme to write Nix code") \
-   (author "Barry Schwartz") \
-   (category code-generation) \
-   (license "MIT") \
-   (components \
-    (extension \
-     (pipchix abstract-syntax-tree)) \
-    (extension \
-     (pipchix nix-embed \
-      (component-dependencies \
-       (pipchix abstract-syntax-tree)))) \
-    (extension \
-     (pipchix nix-list \
-      (component-dependencies \
-       (pipchix abstract-syntax-tree)))) \
-    (extension \
-     (pipchix base \
-      (component-dependencies \
-       (pipchix abstract-syntax-tree) \
-       (pipchix nix-list))))))'
-
-chicken-6/pipchix.egg: GNUmakefile $(TINYSCHEME)
-	$(MKDIR_P) $(@D)
-	if true; then \
-	  printf '%s' $(DEFINE_NICELY_PRINT); \
-	  printf '(define eggfile (quote %s))' \
-	                 $(CHICKEN_6_EGGSPEC); \
-	  printf '(nicely-print eggfile)'; \
-	fi > script.tmp
-	(cd $(TINYSCHEME_DIR) && \
-	   $(abs_builddir)/$(TINYSCHEME) \
-		-1 ${abs_top_builddir}/script.tmp \
-			> $(abs_top_builddir)/$(@))
-	rm script.tmp
-
-MOSTLYCLEANFILES += script.tmp
-
-# TinySCHEME is used here to manipulate s-expressions without having
-# to have any particular Scheme installed on the system.
-EXTRA_DIST += $(wildcard $(TINYSCHEME_DIR)/*)
-TINYSCHEME_DIR = tinyscheme-1.42
-TINYSCHEME_C = $(addprefix $(srcdir)/$(TINYSCHEME_DIR)/, \
-			$(addsuffix .c, scheme))
-TINYSCHEME_H = $(addprefix $(srcdir)/$(TINYSCHEME_DIR)/, \
-			$(addsuffix .h, dynload opdefines \
-					scheme scheme-private))
-TINYSCHEME_CFLAGS = \
-	${CFLAGS} $(CFLAGS_FOR_STATIC) $(CFLAGS_FOR_PIC) \
-	-DUSE_DL=0 -DUSE_MATH=1 -DUSE_ASCII_NAMES=0
-$(TINYSCHEME): $(TINYSCHEME_C) $(TINYSCHEME_H)
-	$(MKDIR_P) $(@D)
-	$(CC) -o $(@) $(TINYSCHEME_CFLAGS) $(TINYSCHEME_C) -lm
-
-TINYSCHEME = $(TINYSCHEME_DIR)/tinyscheme$(EXEEXT)
-
-MOSTLYCLEANFILES += $(TINYSCHEME)
-MOSTLYCLEANFILES += $(TINYSCHEME_DIR)/*.$(OBJEXT)
-
+#---------------------------------------------------------------------
 # local variables:
 # coding: utf-8
 # end:

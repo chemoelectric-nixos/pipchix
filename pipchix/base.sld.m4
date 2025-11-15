@@ -24,13 +24,13 @@ m4_include(pipchix-includes.m4)
 
 (define-library (pipchix base)
 
-  (export nix-list)   ;; Nix list from elements.
-  (export nix-set)    ;; Set attributes non-recursively.
-  (export nix-setrec) ;; Set attributes recursively.
-
   (import (scheme base))
   (import (pipchix nix-list))
   (import (pipchix abstract-syntax-tree))
+
+  (export nix-list)   ;; Nix list from elements.
+  (export nix-set)    ;; Set attributes non-recursively.
+  (export nix-setrec) ;; Set attributes recursively.
 
   (begin
 
@@ -86,10 +86,6 @@ m4_include(pipchix-includes.m4)
          (begin
            (%%nix-set-insert-entry attrset entry)
            ...))))
-
-    (define (%%->string obj)
-      (cond ((string? obj) obj)
-            (else (nix-node-data-ref obj))))
 
     ))
 

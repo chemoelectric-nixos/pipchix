@@ -24,10 +24,10 @@ m4_include(pipchix-includes.m4)
 
 (define-library (pipchix nix-embed)
 
-  (export nix-embed)      ;; Embed Nix code verbatim.
+  (import (scheme base))
+  (import (pipchix abstract-syntax-tree))
 
-  (import (scheme base)
-          (pipchix abstract-syntax-tree))
+  (export nix-embed) ;; Embed Nix code verbatim.
 
   (begin
 

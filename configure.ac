@@ -31,6 +31,7 @@ AC_CANONICAL_HOST                  dnl For what platform are we compiling?
 AC_USE_SYSTEM_EXTENSIONS           dnl Define such macros as _GNU_SOURCE.
 
 AM_INIT_AUTOMAKE([tar-pax no-dist-gzip dist-xz])
+AM_SILENT_RULES([yes])
 AM_MAINTAINER_MODE
 
 AC_PROG_CC
@@ -88,7 +89,13 @@ StM_REQUIRE_GNU_MAKE_IN_PATH
 StM_CONFIG_MAKEFILES
 
 m4_foreach([f],
-  [[tinyscheme-1.42/init.scm]],
+  [[tinyscheme-1.42/init.scm],
+   [tinyscheme-1.42/dynload.c],
+   [tinyscheme-1.42/dynload.h],
+   [tinyscheme-1.42/scheme.c],
+   [tinyscheme-1.42/scheme.h],
+   [tinyscheme-1.42/scheme-private.h],
+   [tinyscheme-1.42/opdefines.h]],
   [AC_CONFIG_LINKS(f:f)])
 
 AC_OUTPUT

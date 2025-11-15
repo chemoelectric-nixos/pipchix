@@ -4782,6 +4782,10 @@ fi
 
 
 
+AM_DEFAULT_VERBOSITY=0
+
+
+
 { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking whether to enable maintainer-specific portions of Makefiles" >&5
 printf %s "checking whether to enable maintainer-specific portions of Makefiles... " >&6; }
     # Check whether --enable-maintainer-mode was given.
@@ -6503,6 +6507,12 @@ printf "%s\n" "$as_me: WARNING: Please consider installing and using GNU Make:
 }
 
 ac_config_links="$ac_config_links tinyscheme-1.42/init.scm:tinyscheme-1.42/init.scm"
+ac_config_links="$ac_config_links tinyscheme-1.42/dynload.c:tinyscheme-1.42/dynload.c"
+ac_config_links="$ac_config_links tinyscheme-1.42/dynload.h:tinyscheme-1.42/dynload.h"
+ac_config_links="$ac_config_links tinyscheme-1.42/scheme.c:tinyscheme-1.42/scheme.c"
+ac_config_links="$ac_config_links tinyscheme-1.42/scheme.h:tinyscheme-1.42/scheme.h"
+ac_config_links="$ac_config_links tinyscheme-1.42/scheme-private.h:tinyscheme-1.42/scheme-private.h"
+ac_config_links="$ac_config_links tinyscheme-1.42/opdefines.h:tinyscheme-1.42/opdefines.h"
 
 
 cat >confcache <<\_ACEOF
@@ -7269,6 +7279,12 @@ do
     "Makefile") CONFIG_FILES="$CONFIG_FILES Makefile" ;;
     "GNUmakefile") CONFIG_FILES="$CONFIG_FILES GNUmakefile:Makefile.in" ;;
     "tinyscheme-1.42/init.scm") CONFIG_LINKS="$CONFIG_LINKS tinyscheme-1.42/init.scm:tinyscheme-1.42/init.scm" ;;
+    "tinyscheme-1.42/dynload.c") CONFIG_LINKS="$CONFIG_LINKS tinyscheme-1.42/dynload.c:tinyscheme-1.42/dynload.c" ;;
+    "tinyscheme-1.42/dynload.h") CONFIG_LINKS="$CONFIG_LINKS tinyscheme-1.42/dynload.h:tinyscheme-1.42/dynload.h" ;;
+    "tinyscheme-1.42/scheme.c") CONFIG_LINKS="$CONFIG_LINKS tinyscheme-1.42/scheme.c:tinyscheme-1.42/scheme.c" ;;
+    "tinyscheme-1.42/scheme.h") CONFIG_LINKS="$CONFIG_LINKS tinyscheme-1.42/scheme.h:tinyscheme-1.42/scheme.h" ;;
+    "tinyscheme-1.42/scheme-private.h") CONFIG_LINKS="$CONFIG_LINKS tinyscheme-1.42/scheme-private.h:tinyscheme-1.42/scheme-private.h" ;;
+    "tinyscheme-1.42/opdefines.h") CONFIG_LINKS="$CONFIG_LINKS tinyscheme-1.42/opdefines.h:tinyscheme-1.42/opdefines.h" ;;
 
   *) as_fn_error $? "invalid argument: '$ac_config_target'" "$LINENO" 5;;
   esac
