@@ -95,12 +95,15 @@ CLEANFILES += $(CHICKEN_5_EGGFILES)
 
 EXTRA_DIST += $(CHICKEN_5_EGG_TARBALL)
 CLEANFILES += $(CHICKEN_5_EGG_TARBALL)
+CLEANFILES += $(CHICKEN_5_EGG_TARBALL).tmp
 
 $(CHICKEN_5_EGG_TARBALL): egg-for-chicken-5
 	$(call v,TAR) \
-	  tar --format=posix -chf $(@) -C $(CHICKEN_5_DIR) \
+	  tar --format=posix -chf - -C $(CHICKEN_5_DIR) \
 	    $(addprefix $(PACKAGE_TARNAME)/, \
-	       $(notdir $(CHICKEN_5_EGGFILES)))
+	       $(notdir $(CHICKEN_5_EGGFILES))) \
+	  | XZ_OPT=${XZ_OPT--e} xz -c > $(@).tmp && \
+	mv $(@){.tmp,}
 
 .PHONY: egg-for-chicken-5 GNUmakefile $(TINYSCHEME)
 egg-for-chicken-5: $(CHICKEN_5_EGGFILES)
