@@ -88,6 +88,16 @@ StM_PATH_PROGS_CACHED_AND_PRECIOUS([CHICKEN_INSTALL_5],
          fi
   ])
 
+StM_PATH_PROGS_CACHED_AND_PRECIOUS([CHICKEN_INSTALL_6],
+  [chicken-install version 6],[chicken-install chicken-install-6],
+  [
+    if LC_ALL=C LANG=C ${ac_path_CHICKEN_INSTALL_6} -version 2>&1 | \
+         LC_ALL=C LANG=C ${GREP} '^6\.' 2> /dev/null > /dev/null; then
+            ac_cv_path_CHICKEN_INSTALL_6="${ac_path_CHICKEN_INSTALL_6}"
+            ac_path_CHICKEN_INSTALL_6_found=:
+         fi
+  ])
+
 
 #AC_ARG_ENABLE([chicken-6],
 #  [AS_HELP_STRING([--enable-chicken-6],
