@@ -21,7 +21,7 @@
 
 .DELETE_ON_ERROR:
 
-SUBDIRS = tinyscheme-1.42 .
+SUBDIRS = tinyscheme-1.42
 
 ACLOCAL_AMFLAGS = -I m4 --install
 AUTOMAKE_OPTIONS =
@@ -40,8 +40,8 @@ nodist_r7rs_DATA =
 EXTRA_DIST += silent-rules.mk
 EXTRA_DIST += COPYING
 EXTRA_DIST += README.adoc
-#EXTRA_DIST += INSTALL
-#EXTRA_DIST += AUTHORS
+EXTRA_DIST += INSTALL
+EXTRA_DIST += AUTHORS
 
 DISTCLEANFILES += Makefile
 DISTCLEANFILES += GNUmakefile
@@ -68,20 +68,22 @@ M4_PREPROCESS = $(GNU_M4) -P -I '$(srcdir)'
 @GNU@ $(call v,COPY) cp -f $(1) $(2)
 @GNU@ endef
 
-#---------------------------------------------------------------------
+MOSTLYCLEANFILES += tmp.*
 
+#---------------------------------------------------------------------
 #
 # CHICKEN Scheme support.
 #
 
-TINYSCHEME_DIR = tinyscheme-1.42
-TINYSCHEME = $(TINYSCHEME_DIR)/tinyscheme
+#removing_egg_scripts = yes
+removing_egg_scripts = no
 
-CHICKEN_DIR = chicken-eggs
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-CHICKEN_5_EGGDIR = $(CHICKEN_DIR)/chicken-5
-CHICKEN_6_EGGDIR = $(CHICKEN_DIR)/chicken-6
+all-recursive: $(CHICKEN_5_EGGFILES)
 
+CHICKEN_5_EGGS = chicken/eggs/5
+CHICKEN_5_EGGDIR = $(CHICKEN_5_EGGS)/pipchix
 CHICKEN_5_EGGFILES = \
   $(addprefix $(CHICKEN_5_EGGDIR)/, \
     pipchix.egg \
@@ -90,34 +92,34 @@ CHICKEN_5_EGGFILES = \
     pipchix.nix-list.scm \
     pipchix.base.scm \
     COPYING README.adoc)
-
 EXTRA_DIST += $(CHICKEN_5_EGGFILES)
 CLEANFILES += $(CHICKEN_5_EGGFILES)
-
-$(CHICKEN_5_EGGDIR)/pipchix.egg: GNUmakefile $(TINYSCHEME)
-$(TINYSCHEME):
-	$(MAKE) -C $(TINYSCHEME_DIR) tinyscheme
-
-# EXTRA_DIST += $(CHICKEN_5_EGG_TARBALL)
-# CLEANFILES += $(CHICKEN_5_EGG_TARBALL)
-# CLEANFILES += $(CHICKEN_5_EGG_TARBALL).tmp
-#
-# $(CHICKEN_5_EGG_TARBALL): egg-for-chicken-5
-# 	$(call v,TAR) \
-# 	  tar --format=posix -chf - -C $(CHICKEN_5_DIR) \
-# 	    $(addprefix $(PACKAGE_TARNAME)/, \
-# 	       $(notdir $(CHICKEN_5_EGGFILES))) \
-# 	  | XZ_OPT=${XZ_OPT--e} xz -c > $(@).tmp && \
-# 	mv $(@){.tmp,}
-
-.PHONY: egg-for-chicken-5
-egg-for-chicken-5: $(CHICKEN_5_EGGFILES) GNUmakefile
 
 $(CHICKEN_5_EGGDIR)/COPYING: COPYING
 	$(call copy-file, $(<), $(@))
 
 $(CHICKEN_5_EGGDIR)/README.adoc: README.adoc
 	$(call copy-file, $(<), $(@))
+
+$(CHICKEN_5_EGGDIR)/pipchix.egg: GNUmakefile $(TINYSCHEME)
+	$(call v,SEXP) \
+	script=`$(MKTEMP)` && \
+	$(MKDIR_P) $(@D) && \
+	if true; then \
+	  printf '%s' $(DEFINE_NICELY_PRINT); \
+	  printf '(define eggfile (quote %s))' \
+	                 $(CHICKEN_5_EGGSPEC); \
+	  printf '(nicely-print eggfile)'; \
+	fi > "$${script}" && \
+	(cd $(TINYSCHEME_DIR) && \
+	   ./tinyscheme -1 ${abs_builddir}/"$${script}" \
+			> $(abs_builddir)/$(@)) && \
+	(test $(removing_egg_scripts) = yes && rm "$${script}" || true)
+
+$(CHICKEN_5_EGGDIR)/pipchix.%.scm: pipchix/%.sld.m4 pipchix-includes.m4
+	$(call v,SCM.M4)$(MKDIR_P) $(@D) && \
+		$(M4_PREPROCESS) $(<) > $(@).tmp && \
+		mv $(@){.tmp,}
 
 CHICKEN_5_EGGSPEC = ' \
   ((synopsis "Use Scheme to write Nix code") \
@@ -144,27 +146,85 @@ CHICKEN_5_EGGSPEC = ' \
        pipchix.abstract-syntax-tree \
        pipchix.nix-list))))'
 
-$(CHICKEN_5_EGGDIR)/pipchix.egg: GNUmakefile
-	$(call v,SEXP)$(MKDIR_P) $(@D) && \
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#
+# README: At the time of this writing (2025-11-15), it is not yet
+#         possible to compile the egg with CHICKEN 6.
+#
+#
+
+all-recursive: $(CHICKEN_6_EGGFILES)
+
+CHICKEN_6_EGGS = chicken/eggs/6
+CHICKEN_6_EGGDIR = $(CHICKEN_6_EGGS)/pipchix
+CHICKEN_6_EGGFILES = \
+  $(addprefix $(CHICKEN_6_EGGDIR)/, \
+    pipchix.egg \
+    pipchix.abstract-syntax-tree.scm \
+    pipchix.nix-embed.scm \
+    pipchix.nix-list.scm \
+    pipchix.base.scm \
+    COPYING README.adoc)
+EXTRA_DIST += $(CHICKEN_6_EGGFILES)
+CLEANFILES += $(CHICKEN_6_EGGFILES)
+
+$(CHICKEN_6_EGGDIR)/COPYING: COPYING
+	$(call copy-file, $(<), $(@))
+
+$(CHICKEN_6_EGGDIR)/README.adoc: README.adoc
+	$(call copy-file, $(<), $(@))
+
+$(CHICKEN_6_EGGDIR)/pipchix.egg: GNUmakefile $(TINYSCHEME)
+	$(call v,SEXP) \
+	script=`$(MKTEMP)` && \
+	$(MKDIR_P) $(@D) && \
 	if true; then \
 	  printf '%s' $(DEFINE_NICELY_PRINT); \
 	  printf '(define eggfile (quote %s))' \
-	                 $(CHICKEN_5_EGGSPEC); \
+	                 $(CHICKEN_6_EGGSPEC); \
 	  printf '(nicely-print eggfile)'; \
-	fi > script.tmp && \
+	fi > "$${script}" && \
 	(cd $(TINYSCHEME_DIR) && \
-	   ./tinyscheme -1 ${abs_builddir}/script.tmp \
+	   ./tinyscheme -1 ${abs_builddir}/"$${script}" \
 			> $(abs_builddir)/$(@)) && \
-	rm script.tmp
+	(test $(removing_egg_scripts) = yes && rm "$${script}" || true)
 
-MOSTLYCLEANFILES += script.tmp
-
-$(CHICKEN_5_EGGDIR)/pipchix.%.scm: pipchix/%.sld.m4 pipchix-includes.m4
+$(CHICKEN_6_EGGDIR)/pipchix.%.scm: pipchix/%.sld.m4 pipchix-includes.m4
 	$(call v,SCM.M4)$(MKDIR_P) $(@D) && \
 		$(M4_PREPROCESS) $(<) > $(@).tmp && \
 		mv $(@){.tmp,}
 
+CHICKEN_6_EGGSPEC = ' \
+  ((synopsis "Use Scheme to write Nix code") \
+   (version "$(PACKAGE_VERSION)") \
+   (author "Barry Schwartz") \
+   (category code-generation) \
+   (license "MIT") \
+   (component-options \
+    (csc-options \
+     "-O2" "-d1" \
+     "-compile-syntax")) \
+   (components \
+    (extension pipchix.abstract-syntax-tree) \
+    (extension pipchix.nix-embed \
+      (component-dependencies \
+       pipchix.abstract-syntax-tree)) \
+    (extension pipchix.nix-list \
+      (component-dependencies \
+       pipchix.abstract-syntax-tree)) \
+    (extension pipchix.base \
+      (component-dependencies \
+       pipchix.abstract-syntax-tree \
+       pipchix.nix-list))))'
+
 #---------------------------------------------------------------------
+
+TINYSCHEME_DIR = tinyscheme-1.42
+TINYSCHEME = $(TINYSCHEME_DIR)/tinyscheme
+
+$(TINYSCHEME):
+	$(call v,MAKE) \
+	  $(MAKE) $(AM_MAKEFLAGS) -C $(TINYSCHEME_DIR) tinyscheme
 
 #
 # A pretty-printer (nicely-print obj) for TinySCHEME (or any other

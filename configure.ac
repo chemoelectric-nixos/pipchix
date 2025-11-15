@@ -42,9 +42,14 @@ AC_PROG_MAKE_SET
 AC_PROG_MKDIR_P
 AC_PROG_AWK
 AC_PROG_SED
+AC_PROG_GREP
 AC_PROG_FGREP
 AC_PROG_EGREP
 StM_PROG_GNU_M4
+
+AC_CHECK_PROGS([MKTEMP],[mktemp],[echo tmp.\"\$\${RANDOM}\"])
+AC_ARG_VAR([MKTEMP],[mktemp command])
+MKTEMP="TMPDIR=. ${MKTEMP}"
 
 AX_CHECK_COMPILE_FLAG([-std=gnu99],
   [CFLAGS="${CFLAGS}${CFLAGS+ }-std=gnu99"],
@@ -72,6 +77,17 @@ AC_ARG_WITH([r7rsdir],
   [r7rsdir="${withval}"],
   [r7rsdir='${datadir}/r7rs'])
 AC_SUBST([r7rsdir])
+
+StM_PATH_PROGS_CACHED_AND_PRECIOUS([CHICKEN_INSTALL_5],
+  [chicken-install version 5],[chicken-install chicken-install-5],
+  [
+    if LC_ALL=C LANG=C ${ac_path_CHICKEN_INSTALL_5} -version 2>&1 | \
+         LC_ALL=C LANG=C ${GREP} '^5\.' 2> /dev/null > /dev/null; then
+            ac_cv_path_CHICKEN_INSTALL_5="${ac_path_CHICKEN_INSTALL_5}"
+            ac_path_CHICKEN_INSTALL_5_found=:
+         fi
+  ])
+
 
 #AC_ARG_ENABLE([chicken-6],
 #  [AS_HELP_STRING([--enable-chicken-6],
