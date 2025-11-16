@@ -34,6 +34,7 @@ CLEANFILES =
 DISTCLEANFILES =
 
 EXTRA_DIST =
+EXTRA_SCRIPTS =
 BUILT_SOURCES =
 nodist_r7rs_DATA =
 
@@ -244,6 +245,12 @@ endif CHICKEN_UNINSTALL_6
 
 CLEANFILES += $(CHICKEN_6_EGGDIR)/*.{$(OBJEXT),so,link,import.scm}
 CLEANFILES += $(CHICKEN_6_EGGDIR)/pipchix.{build,install}.sh
+
+#---------------------------------------------------------------------
+
+TESTS =
+TESTS += tests/check-nix-list
+
 
 #---------------------------------------------------------------------
 
