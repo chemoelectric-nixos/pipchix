@@ -121,7 +121,7 @@ $(CHICKEN_5_EGGDIR)/COPYING: COPYING
 $(CHICKEN_5_EGGDIR)/README.adoc: README.adoc
 	$(call copy-file, $(<), $(@))
 
-$(CHICKEN_5_EGGDIR)/pipchix.egg: GNUmakefile $(TINYSCHEME)
+$(CHICKEN_5_EGGDIR)/pipchix.egg: GNUmakefile $(TINYSCHEME_EXE)
 	$(call v,SEXP) \
 	script=`$(MKTEMP)` && \
 	$(MKDIR_P) $(@D) && \
@@ -131,9 +131,8 @@ $(CHICKEN_5_EGGDIR)/pipchix.egg: GNUmakefile $(TINYSCHEME)
 	                 $(CHICKEN_5_EGGSPEC); \
 	  printf '(nicely-print eggfile)'; \
 	fi > "$${script}" && \
-	(cd $(TINYSCHEME_DIR) && \
-	   ./tinyscheme -1 ${abs_builddir}/"$${script}" \
-			> $(abs_builddir)/$(@)) && \
+	$(call tinyscheme-1, ${abs_builddir}/"$${script}") \
+			> $(abs_builddir)/$(@) && \
 	(test $(removing_egg_scripts) = yes && rm "$${script}" || true)
 
 $(CHICKEN_5_EGGDIR)/pipchix.%.scm: pipchix/%.sld.m4 pipchix-includes.m4
@@ -199,7 +198,7 @@ $(CHICKEN_6_EGGDIR)/COPYING: COPYING
 $(CHICKEN_6_EGGDIR)/README.adoc: README.adoc
 	$(call copy-file, $(<), $(@))
 
-$(CHICKEN_6_EGGDIR)/pipchix.egg: GNUmakefile $(TINYSCHEME)
+$(CHICKEN_6_EGGDIR)/pipchix.egg: GNUmakefile $(TINYSCHEME_EXE)
 	$(call v,SEXP) \
 	script=`$(MKTEMP)` && \
 	$(MKDIR_P) $(@D) && \
@@ -209,8 +208,7 @@ $(CHICKEN_6_EGGDIR)/pipchix.egg: GNUmakefile $(TINYSCHEME)
 	                 $(CHICKEN_6_EGGSPEC); \
 	  printf '(nicely-print eggfile)'; \
 	fi > "$${script}" && \
-	(cd $(TINYSCHEME_DIR) && \
-	   ./tinyscheme -1 ${abs_builddir}/"$${script}" \
+        $(call tinyscheme-1, ${abs_builddir}/"$${script}") \
 			> $(abs_builddir)/$(@)) && \
 	(test $(removing_egg_scripts) = yes && rm "$${script}" || true)
 
@@ -250,11 +248,19 @@ CLEANFILES += $(CHICKEN_6_EGGDIR)/pipchix.{build,install}.sh
 #---------------------------------------------------------------------
 
 TINYSCHEME_DIR = tinyscheme-1.42
-TINYSCHEME = $(TINYSCHEME_DIR)/tinyscheme
+TINYSCHEME_EXE = $(TINYSCHEME_DIR)/tinyscheme-exe$(EXEEXT)
 
-$(TINYSCHEME):
+@GNU@ define tinyscheme-1
+@GNU@ ( \
+@GNU@   cd $(abs_top_builddir)/$(TINYSCHEME_DIR) && \
+@GNU@   ./tinyscheme-exe$(EXEEXT) -1 $(1) \
+@GNU@ )
+@GNU@ endef
+
+$(TINYSCHEME_EXE):
 	$(call v,MAKE) \
-	  $(MAKE) $(AM_MAKEFLAGS) -C $(TINYSCHEME_DIR) tinyscheme
+	  $(MAKE) $(AM_MAKEFLAGS) \
+	    -C $(TINYSCHEME_DIR) tinyscheme-exe$(EXEEXT)
 
 #
 # A pretty-printer (nicely-print obj) for TinySCHEME (or any other

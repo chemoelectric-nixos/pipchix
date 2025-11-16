@@ -68,11 +68,11 @@ TINYSCHEME_CFLAGS = \
 	${CFLAGS} $(CFLAGS_FOR_STATIC) $(CFLAGS_FOR_PIC) \
 	-DUSE_DL=0 -DUSE_MATH=1 -DUSE_ASCII_NAMES=0
 
-tinyscheme: $(TINYSCHEME_C) $(TINYSCHEME_H)
+tinyscheme-exe$(EXEEXT): $(TINYSCHEME_C) $(TINYSCHEME_H)
 	$(call v,CC) $(CC) -o $(@) \
 	  $(TINYSCHEME_CFLAGS) $(TINYSCHEME_C) -lm
 
-CLEANFILES += tinyscheme
+CLEANFILES += tinyscheme-exe$(EXEEXT)
 CLEANFILES += *.$(OBJEXT)
 
 #---------------------------------------------------------------------

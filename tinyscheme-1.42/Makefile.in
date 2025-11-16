@@ -280,7 +280,7 @@ top_srcdir = @top_srcdir@
 ACLOCAL_AMFLAGS = -I m4 --install
 AUTOMAKE_OPTIONS = foreign
 MOSTLYCLEANFILES = 
-CLEANFILES = tinyscheme *.$(OBJEXT)
+CLEANFILES = tinyscheme-exe$(EXEEXT) *.$(OBJEXT)
 DISTCLEANFILES = Makefile GNUmakefile
 
 #---------------------------------------------------------------------
@@ -502,7 +502,7 @@ uninstall-am:
 
 @GNU@ include $(top_srcdir)/silent-rules.mk
 
-tinyscheme: $(TINYSCHEME_C) $(TINYSCHEME_H)
+tinyscheme-exe$(EXEEXT): $(TINYSCHEME_C) $(TINYSCHEME_H)
 	$(call v,CC) $(CC) -o $(@) \
 	  $(TINYSCHEME_CFLAGS) $(TINYSCHEME_C) -lm
 
