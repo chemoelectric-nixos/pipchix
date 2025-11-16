@@ -82,29 +82,49 @@ StM_PATH_PROGS_CACHED_AND_PRECIOUS([CHICKEN_INSTALL_5],
   [chicken-install version 5],[chicken-install chicken-install-5],
   [
     if LC_ALL=C LANG=C ${ac_path_CHICKEN_INSTALL_5} -version 2>&1 | \
-         LC_ALL=C LANG=C ${GREP} '^5\.' 2> /dev/null > /dev/null; then
-            ac_cv_path_CHICKEN_INSTALL_5="${ac_path_CHICKEN_INSTALL_5}"
-            ac_path_CHICKEN_INSTALL_5_found=:
-         fi
+      LC_ALL=C LANG=C ${GREP} '^5\.' 2> /dev/null > /dev/null; then
+        ac_cv_path_CHICKEN_INSTALL_5="${ac_path_CHICKEN_INSTALL_5}"
+        ac_path_CHICKEN_INSTALL_5_found=:
+    fi
   ])
+AM_CONDITIONAL([CHICKEN_INSTALL_5],
+               [test "${__ac_cv_path_CHICKEN_INSTALL_5_found}" != no])
+
+StM_PATH_PROGS_CACHED_AND_PRECIOUS([CHICKEN_UNINSTALL_5],
+  [chicken-uninstall version 5],[chicken-uninstall chicken-uninstall-5],
+  [
+    if LC_ALL=C LANG=C ${ac_path_CHICKEN_UNINSTALL_5} -version 2>&1 | \
+      LC_ALL=C LANG=C ${GREP} '^5\.' 2> /dev/null > /dev/null; then
+        ac_cv_path_CHICKEN_UNINSTALL_5="${ac_path_CHICKEN_UNINSTALL_5}"
+        ac_path_CHICKEN_UNINSTALL_5_found=:
+    fi
+  ])
+AM_CONDITIONAL([CHICKEN_UNINSTALL_5],
+               [test "${__ac_cv_path_CHICKEN_UNINSTALL_5_found}" != no])
 
 StM_PATH_PROGS_CACHED_AND_PRECIOUS([CHICKEN_INSTALL_6],
   [chicken-install version 6],[chicken-install chicken-install-6],
   [
     if LC_ALL=C LANG=C ${ac_path_CHICKEN_INSTALL_6} -version 2>&1 | \
-         LC_ALL=C LANG=C ${GREP} '^6\.' 2> /dev/null > /dev/null; then
-            ac_cv_path_CHICKEN_INSTALL_6="${ac_path_CHICKEN_INSTALL_6}"
-            ac_path_CHICKEN_INSTALL_6_found=:
-         fi
+      LC_ALL=C LANG=C ${GREP} '^6\.' 2> /dev/null > /dev/null; then
+        ac_cv_path_CHICKEN_INSTALL_6="${ac_path_CHICKEN_INSTALL_6}"
+        ac_path_CHICKEN_INSTALL_6_found=:
+    fi
   ])
+AM_CONDITIONAL([CHICKEN_INSTALL_6],
+               [test "${__ac_cv_path_CHICKEN_INSTALL_6_found}" != no])
 
-
-#AC_ARG_ENABLE([chicken-6],
-#  [AS_HELP_STRING([--enable-chicken-6],
-#        [make an egg for CHICKEN 6 [no]])],
-#  [enable_chicken_6="${enableval}"],
-#  [enable_chicken_6='no'])
-#AC_SUBST([enable_chicken_6])
+StM_PATH_PROGS_CACHED_AND_PRECIOUS([CHICKEN_UNINSTALL_6],
+  [chicken-uninstall version 6],[chicken-uninstall chicken-uninstall-6],
+  [
+    if LC_ALL=C LANG=C ${ac_path_CHICKEN_UNINSTALL_6} -version 2>&1 | \
+      LC_ALL=C LANG=C ${GREP} '^6\.' 2> /dev/null > /dev/null; then
+        ac_cv_path_CHICKEN_UNINSTALL_6="${ac_path_CHICKEN_UNINSTALL_6}"
+        ac_path_CHICKEN_UNINSTALL_6_found=:
+    fi
+  ])
+AM_CONDITIONAL([CHICKEN_UNINSTALL_6],
+               [test "${__ac_cv_path_CHICKEN_UNINSTALL_6_found}" != no])
 
 # You can use ‘@GNU@’ to make GNU Make constructs unbothersome to
 # Automake. (By the way, you often can use ‘$(eval ...)’ as well, but
@@ -127,6 +147,19 @@ m4_foreach([f],
   [AC_CONFIG_LINKS(f:f)])
 
 AC_OUTPUT
+
+if test "${__ac_cv_path_CHICKEN_INSTALL_5_found}" != no; then
+  AC_MSG_NOTICE([])
+  AC_MSG_NOTICE([Support for ${CHICKEN_INSTALL_5} will be included.])
+  AC_MSG_NOTICE([Use ‘make chicken-install-5 INSTALL_AS=sudo’ to install the pipchix egg.])
+fi
+if test "${__ac_cv_path_CHICKEN_INSTALL_6_found}" != no; then
+  AC_MSG_NOTICE([])
+  AC_MSG_NOTICE([Support for ${CHICKEN_INSTALL_6} will be included.])
+  AC_MSG_NOTICE([Use ‘make chicken-install-6 INSTALL_AS=sudo’ to install the pipchix egg.])
+  AC_MSG_NOTICE([(This CHICKEN 6 support is likely not to work yet, however.)])
+fi
+AC_MSG_NOTICE([])
 
 # local variables:
 # coding: utf-8

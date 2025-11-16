@@ -78,6 +78,27 @@ MOSTLYCLEANFILES += tmp.*
 #removing_egg_scripts = yes
 removing_egg_scripts = no
 
+CHICKEN_EGGSPEC_TOP = ' \
+  ((synopsis "Use Scheme to write Nix code") \
+   (version "$(PACKAGE_VERSION)") \
+   (author "Barry Schwartz") \
+   (category code-generation) \
+   (license "MIT")'
+
+CHICKEN_EGGSPEC_BOTTOM = ' \
+   (components \
+    (extension pipchix.abstract-syntax-tree) \
+    (extension pipchix.nix-embed \
+      (component-dependencies \
+       pipchix.abstract-syntax-tree)) \
+    (extension pipchix.nix-list \
+      (component-dependencies \
+       pipchix.abstract-syntax-tree)) \
+    (extension pipchix.base \
+      (component-dependencies \
+       pipchix.abstract-syntax-tree \
+       pipchix.nix-list))))'
+
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 all-recursive: $(CHICKEN_5_EGGFILES)
@@ -122,29 +143,34 @@ $(CHICKEN_5_EGGDIR)/pipchix.%.scm: pipchix/%.sld.m4 pipchix-includes.m4
 		mv $(@){.tmp,}
 
 CHICKEN_5_EGGSPEC = ' \
-  ((synopsis "Use Scheme to write Nix code") \
-   (version "$(PACKAGE_VERSION)") \
-   (author "Barry Schwartz") \
-   (category code-generation) \
-   (license "MIT") \
+ '$(CHICKEN_EGGSPEC_TOP)' \
    (dependencies r7rs) \
    (component-options \
     (csc-options \
      "-R" "r7rs" "-X" "r7rs" \
      "-O2" "-d1" \
      "-compile-syntax")) \
-   (components \
-    (extension pipchix.abstract-syntax-tree) \
-    (extension pipchix.nix-embed \
-      (component-dependencies \
-       pipchix.abstract-syntax-tree)) \
-    (extension pipchix.nix-list \
-      (component-dependencies \
-       pipchix.abstract-syntax-tree)) \
-    (extension pipchix.base \
-      (component-dependencies \
-       pipchix.abstract-syntax-tree \
-       pipchix.nix-list))))'
+ '$(CHICKEN_EGGSPEC_BOTTOM)
+
+if CHICKEN_INSTALL_5
+.PHONY: chicken-install-5
+chicken-install-5: $(CHICKEN_5_EGGFILES)
+	( \
+	  cd $(CHICKEN_5_EGGDIR) && \
+	  $(CHICKEN_INSTALL_5) -n && \
+	  env SUDO="$${INSTALL_AS}" $(CHICKEN_INSTALL_5) -s \
+	)
+endif CHICKEN_INSTALL_5
+
+if CHICKEN_UNINSTALL_5
+.PHONY: chicken-uninstall-5
+chicken-uninstall-5:
+	env SUDO="$${INSTALL_AS}" \
+	  $(CHICKEN_UNINSTALL_5) -s -force pipchix
+endif CHICKEN_UNINSTALL_5
+
+CLEANFILES += $(CHICKEN_5_EGGDIR)/*.{$(OBJEXT),so,link,import.scm}
+CLEANFILES += $(CHICKEN_5_EGGDIR)/pipchix.{build,install}.sh
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #
@@ -195,27 +221,32 @@ $(CHICKEN_6_EGGDIR)/pipchix.%.scm: pipchix/%.sld.m4 pipchix-includes.m4
 		mv $(@){.tmp,}
 
 CHICKEN_6_EGGSPEC = ' \
-  ((synopsis "Use Scheme to write Nix code") \
-   (version "$(PACKAGE_VERSION)") \
-   (author "Barry Schwartz") \
-   (category code-generation) \
-   (license "MIT") \
+ '$(CHICKEN_EGGSPEC_TOP)' \
    (component-options \
     (csc-options \
      "-O2" "-d1" \
      "-compile-syntax")) \
-   (components \
-    (extension pipchix.abstract-syntax-tree) \
-    (extension pipchix.nix-embed \
-      (component-dependencies \
-       pipchix.abstract-syntax-tree)) \
-    (extension pipchix.nix-list \
-      (component-dependencies \
-       pipchix.abstract-syntax-tree)) \
-    (extension pipchix.base \
-      (component-dependencies \
-       pipchix.abstract-syntax-tree \
-       pipchix.nix-list))))'
+ '$(CHICKEN_EGGSPEC_BOTTOM)
+
+if CHICKEN_INSTALL_6
+.PHONY: chicken-install-6
+chicken-install-6: $(CHICKEN_6_EGGFILES)
+	( \
+	  cd $(CHICKEN_6_EGGDIR) && \
+	  $(CHICKEN_INSTALL_6) -n && \
+	  env SUDO="$${INSTALL_AS}" $(CHICKEN_INSTALL_6) -s \
+	)
+endif CHICKEN_INSTALL_6
+
+if CHICKEN_UNINSTALL_6
+.PHONY: chicken-uninstall-6
+chicken-uninstall-6:
+	env SUDO="$${INSTALL_AS}" \
+	  $(CHICKEN_UNINSTALL_6) -s -force pipchix
+endif CHICKEN_UNINSTALL_6
+
+CLEANFILES += $(CHICKEN_6_EGGDIR)/*.{$(OBJEXT),so,link,import.scm}
+CLEANFILES += $(CHICKEN_6_EGGDIR)/pipchix.{build,install}.sh
 
 #---------------------------------------------------------------------
 

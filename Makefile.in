@@ -277,6 +277,8 @@ CFLAGS_FOR_PIC = @CFLAGS_FOR_PIC@
 CFLAGS_FOR_STATIC = @CFLAGS_FOR_STATIC@
 CHICKEN_INSTALL_5 = @CHICKEN_INSTALL_5@
 CHICKEN_INSTALL_6 = @CHICKEN_INSTALL_6@
+CHICKEN_UNINSTALL_5 = @CHICKEN_UNINSTALL_5@
+CHICKEN_UNINSTALL_6 = @CHICKEN_UNINSTALL_6@
 CPPFLAGS = @CPPFLAGS@
 CSCOPE = @CSCOPE@
 CTAGS = @CTAGS@
@@ -383,7 +385,12 @@ ACLOCAL_AMFLAGS = -I m4 --install
 AUTOMAKE_OPTIONS = foreign
 MOSTLYCLEANFILES = $(nodist_r7rs_DATA) $(addsuffix .tmp, \
 	$(nodist_r7rs_DATA)) tmp.*
-CLEANFILES = $(CHICKEN_5_EGGFILES) $(CHICKEN_6_EGGFILES)
+CLEANFILES = $(CHICKEN_5_EGGFILES) \
+	$(CHICKEN_5_EGGDIR)/*.{$(OBJEXT),so,link,import.scm} \
+	$(CHICKEN_5_EGGDIR)/pipchix.{build,install}.sh \
+	$(CHICKEN_6_EGGFILES) \
+	$(CHICKEN_6_EGGDIR)/*.{$(OBJEXT),so,link,import.scm} \
+	$(CHICKEN_6_EGGDIR)/pipchix.{build,install}.sh
 DISTCLEANFILES = Makefile GNUmakefile
 EXTRA_DIST = silent-rules.mk COPYING README.adoc INSTALL AUTHORS \
 	pipchix-includes.m4 $(addsuffix .m4, $(nodist_r7rs_DATA)) \
@@ -400,29 +407,14 @@ M4_PREPROCESS = $(GNU_M4) -P -I '$(srcdir)'
 
 #removing_egg_scripts = yes
 removing_egg_scripts = no
-CHICKEN_5_EGGS = chicken/eggs/5
-CHICKEN_5_EGGDIR = $(CHICKEN_5_EGGS)/pipchix
-CHICKEN_5_EGGFILES = \
-  $(addprefix $(CHICKEN_5_EGGDIR)/, \
-    pipchix.egg \
-    pipchix.abstract-syntax-tree.scm \
-    pipchix.nix-embed.scm \
-    pipchix.nix-list.scm \
-    pipchix.base.scm \
-    COPYING README.adoc)
-
-CHICKEN_5_EGGSPEC = ' \
+CHICKEN_EGGSPEC_TOP = ' \
   ((synopsis "Use Scheme to write Nix code") \
    (version "$(PACKAGE_VERSION)") \
    (author "Barry Schwartz") \
    (category code-generation) \
-   (license "MIT") \
-   (dependencies r7rs) \
-   (component-options \
-    (csc-options \
-     "-R" "r7rs" "-X" "r7rs" \
-     "-O2" "-d1" \
-     "-compile-syntax")) \
+   (license "MIT")'
+
+CHICKEN_EGGSPEC_BOTTOM = ' \
    (components \
     (extension pipchix.abstract-syntax-tree) \
     (extension pipchix.nix-embed \
@@ -435,6 +427,27 @@ CHICKEN_5_EGGSPEC = ' \
       (component-dependencies \
        pipchix.abstract-syntax-tree \
        pipchix.nix-list))))'
+
+CHICKEN_5_EGGS = chicken/eggs/5
+CHICKEN_5_EGGDIR = $(CHICKEN_5_EGGS)/pipchix
+CHICKEN_5_EGGFILES = \
+  $(addprefix $(CHICKEN_5_EGGDIR)/, \
+    pipchix.egg \
+    pipchix.abstract-syntax-tree.scm \
+    pipchix.nix-embed.scm \
+    pipchix.nix-list.scm \
+    pipchix.base.scm \
+    COPYING README.adoc)
+
+CHICKEN_5_EGGSPEC = ' \
+ '$(CHICKEN_EGGSPEC_TOP)' \
+   (dependencies r7rs) \
+   (component-options \
+    (csc-options \
+     "-R" "r7rs" "-X" "r7rs" \
+     "-O2" "-d1" \
+     "-compile-syntax")) \
+ '$(CHICKEN_EGGSPEC_BOTTOM)
 
 CHICKEN_6_EGGS = chicken/eggs/6
 CHICKEN_6_EGGDIR = $(CHICKEN_6_EGGS)/pipchix
@@ -448,27 +461,12 @@ CHICKEN_6_EGGFILES = \
     COPYING README.adoc)
 
 CHICKEN_6_EGGSPEC = ' \
-  ((synopsis "Use Scheme to write Nix code") \
-   (version "$(PACKAGE_VERSION)") \
-   (author "Barry Schwartz") \
-   (category code-generation) \
-   (license "MIT") \
+ '$(CHICKEN_EGGSPEC_TOP)' \
    (component-options \
     (csc-options \
      "-O2" "-d1" \
      "-compile-syntax")) \
-   (components \
-    (extension pipchix.abstract-syntax-tree) \
-    (extension pipchix.nix-embed \
-      (component-dependencies \
-       pipchix.abstract-syntax-tree)) \
-    (extension pipchix.nix-list \
-      (component-dependencies \
-       pipchix.abstract-syntax-tree)) \
-    (extension pipchix.base \
-      (component-dependencies \
-       pipchix.abstract-syntax-tree \
-       pipchix.nix-list))))'
+ '$(CHICKEN_EGGSPEC_BOTTOM)
 
 
 #---------------------------------------------------------------------
@@ -1060,6 +1058,19 @@ $(CHICKEN_5_EGGDIR)/pipchix.%.scm: pipchix/%.sld.m4 pipchix-includes.m4
 		$(M4_PREPROCESS) $(<) > $(@).tmp && \
 		mv $(@){.tmp,}
 
+@CHICKEN_INSTALL_5_TRUE@.PHONY: chicken-install-5
+@CHICKEN_INSTALL_5_TRUE@chicken-install-5: $(CHICKEN_5_EGGFILES)
+@CHICKEN_INSTALL_5_TRUE@	( \
+@CHICKEN_INSTALL_5_TRUE@	  cd $(CHICKEN_5_EGGDIR) && \
+@CHICKEN_INSTALL_5_TRUE@	  $(CHICKEN_INSTALL_5) -n && \
+@CHICKEN_INSTALL_5_TRUE@	  env SUDO="$${INSTALL_AS}" $(CHICKEN_INSTALL_5) -s \
+@CHICKEN_INSTALL_5_TRUE@	)
+
+@CHICKEN_UNINSTALL_5_TRUE@.PHONY: chicken-uninstall-5
+@CHICKEN_UNINSTALL_5_TRUE@chicken-uninstall-5:
+@CHICKEN_UNINSTALL_5_TRUE@	env SUDO="$${INSTALL_AS}" \
+@CHICKEN_UNINSTALL_5_TRUE@	  $(CHICKEN_UNINSTALL_5) -s -force pipchix
+
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #
 # README: At the time of this writing (2025-11-15), it is not yet
@@ -1094,6 +1105,19 @@ $(CHICKEN_6_EGGDIR)/pipchix.%.scm: pipchix/%.sld.m4 pipchix-includes.m4
 	$(call v,SCM.M4)$(MKDIR_P) $(@D) && \
 		$(M4_PREPROCESS) $(<) > $(@).tmp && \
 		mv $(@){.tmp,}
+
+@CHICKEN_INSTALL_6_TRUE@.PHONY: chicken-install-6
+@CHICKEN_INSTALL_6_TRUE@chicken-install-6: $(CHICKEN_6_EGGFILES)
+@CHICKEN_INSTALL_6_TRUE@	( \
+@CHICKEN_INSTALL_6_TRUE@	  cd $(CHICKEN_6_EGGDIR) && \
+@CHICKEN_INSTALL_6_TRUE@	  $(CHICKEN_INSTALL_6) -n && \
+@CHICKEN_INSTALL_6_TRUE@	  env SUDO="$${INSTALL_AS}" $(CHICKEN_INSTALL_6) -s \
+@CHICKEN_INSTALL_6_TRUE@	)
+
+@CHICKEN_UNINSTALL_6_TRUE@.PHONY: chicken-uninstall-6
+@CHICKEN_UNINSTALL_6_TRUE@chicken-uninstall-6:
+@CHICKEN_UNINSTALL_6_TRUE@	env SUDO="$${INSTALL_AS}" \
+@CHICKEN_UNINSTALL_6_TRUE@	  $(CHICKEN_UNINSTALL_6) -s -force pipchix
 
 $(TINYSCHEME):
 	$(call v,MAKE) \
