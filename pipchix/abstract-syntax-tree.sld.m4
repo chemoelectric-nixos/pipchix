@@ -227,7 +227,9 @@ m4_include(pipchix-includes.m4)
       (%%string-contains? %%char-needs-escaping? str))
 
     (cond-expand
-      (chicken-5 ;; CHICKEN 5 strings are in explicit 8-bit encodings.
+      (chicken-5
+       ;; CHICKEN 5 strings are read by UTF-8 encoding rather than by
+       ;; code points.
        (define (%%char-needs-escaping? c)
          (or (char=? c #\$)
              (char=? c #\\)
