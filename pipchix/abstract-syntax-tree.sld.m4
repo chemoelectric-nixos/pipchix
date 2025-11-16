@@ -227,7 +227,7 @@ m4_include(pipchix-includes.m4)
       (%%string-contains? %%char-needs-escaping? str))
 
     (cond-expand
-      (chicken-5 ;; CHICKEN 5 strings are in 8-bit encodings.
+      (chicken-5 ;; CHICKEN 5 strings are in explicit 8-bit encodings.
        (define (%%char-needs-escaping? c)
          (or (char=? c #\$)
              (char=? c #\\)
