@@ -143,10 +143,12 @@ $(CHICKEN_5_EGGDIR)/pipchix.%.scm: pipchix/%.sld.m4 pipchix-includes.m4
 
 CHICKEN_5_EGGSPEC = ' \
  '$(CHICKEN_EGGSPEC_TOP)' \
-   (dependencies r7rs srfi-151) \
+   (dependencies r7rs srfi-151 utf8) \
    (component-options \
     (csc-options \
-     "-R" "r7rs" "-X" "r7rs" \
+     "-R" "utf8" \
+     "-R" "r7rs" \
+     "-X" "r7rs" \
      "-O2" "-d1" \
      "-compile-syntax")) \
  '$(CHICKEN_EGGSPEC_BOTTOM)
