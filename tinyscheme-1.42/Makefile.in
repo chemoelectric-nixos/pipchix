@@ -117,7 +117,13 @@ am__aclocal_m4_deps = $(top_srcdir)/m4/ax_check_compile_flag.m4 \
 	$(top_srcdir)/m4/stm_config_makefiles.m4 \
 	$(top_srcdir)/m4/stm_path_progs_cached_and_precious.m4 \
 	$(top_srcdir)/m4/stm_prog_gnu_make.m4 \
-	$(top_srcdir)/m4/stm_prog_m4.m4 $(top_srcdir)/configure.ac
+	$(top_srcdir)/m4/stm_prog_m4.m4 $(top_srcdir)/ac-tinyscheme.m4 \
+	$(top_srcdir)/ac-chicken-scheme.m4 \
+	$(top_srcdir)/ac-chibi-scheme.m4 \
+	$(top_srcdir)/ac-gauche-scheme.m4 \
+	$(top_srcdir)/ac-guile-scheme.m4 \
+	$(top_srcdir)/ac-sagittarius-scheme.m4 \
+	$(top_srcdir)/ac-what-was-found.m4 $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 DIST_COMMON = $(srcdir)/Makefile.am $(am__DIST_COMMON)
@@ -162,10 +168,13 @@ CCDEPMODE = @CCDEPMODE@
 CFLAGS = @CFLAGS@
 CFLAGS_FOR_PIC = @CFLAGS_FOR_PIC@
 CFLAGS_FOR_STATIC = @CFLAGS_FOR_STATIC@
+CHIBI_SCHEME = @CHIBI_SCHEME@
 CHICKEN_INSTALL_5 = @CHICKEN_INSTALL_5@
 CHICKEN_UNINSTALL_5 = @CHICKEN_UNINSTALL_5@
 CPPFLAGS = @CPPFLAGS@
 CSCOPE = @CSCOPE@
+CSC_5 = @CSC_5@
+CSI_5 = @CSI_5@
 CTAGS = @CTAGS@
 CYGPATH_W = @CYGPATH_W@
 DEFS = @DEFS@
@@ -177,10 +186,12 @@ EGREP = @EGREP@
 ETAGS = @ETAGS@
 EXEEXT = @EXEEXT@
 FGREP = @FGREP@
+GAUCHE = @GAUCHE@
 GNU = @GNU@
 GNU_M4 = @GNU_M4@
 GNU_MAKE = @GNU_MAKE@
 GREP = @GREP@
+GUILE = @GUILE@
 INSTALL = @INSTALL@
 INSTALL_DATA = @INSTALL_DATA@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
@@ -204,6 +215,7 @@ PACKAGE_TARNAME = @PACKAGE_TARNAME@
 PACKAGE_URL = @PACKAGE_URL@
 PACKAGE_VERSION = @PACKAGE_VERSION@
 PATH_SEPARATOR = @PATH_SEPARATOR@
+SAGITTARIUS = @SAGITTARIUS@
 SED = @SED@
 SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@

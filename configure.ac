@@ -47,29 +47,16 @@ AC_PROG_FGREP
 AC_PROG_EGREP
 StM_PROG_GNU_M4
 
-AC_CHECK_PROGS([MKTEMP],[mktemp],[echo tmp.\"\$\${RANDOM}\"])
-AC_ARG_VAR([MKTEMP],[mktemp command])
-MKTEMP="TMPDIR=. ${MKTEMP}"
-
-AX_CHECK_COMPILE_FLAG([-std=gnu99],
-  [CFLAGS="${CFLAGS}${CFLAGS+ }-std=gnu99"],
-  [],[],[AC_LANG_SOURCE([int main(){return 0;}])])
-
-AX_CHECK_COMPILE_FLAG([-static],
-  [CFLAGS_FOR_STATIC="-static"],
-  [CFLAGS_FOR_STATIC=""],
-  [],[AC_LANG_SOURCE([int main(){return 0;}])])
-AC_SUBST([CFLAGS_FOR_STATIC])
-
-AX_CHECK_COMPILE_FLAG([-fPIC],
-  [CFLAGS_FOR_PIC="-fPIC"],
-  [CFLAGS_FOR_PIC=""],
-  [],[AC_LANG_SOURCE([int main(){return 0;}])])
-AC_SUBST([CFLAGS_FOR_PIC])
-
 if test -z "${GNU_M4}"; then
    AC_MSG_ERROR([GNU m4 not found. Perhaps set GNU_M4 to OpenBSD m4.])
 fi
+
+#
+# A way to get names for temporary files.
+#
+AC_CHECK_PROGS([MKTEMP],[mktemp],[echo tmp.\"\$\${RANDOM}\"])
+AC_ARG_VAR([MKTEMP],[mktemp command])
+MKTEMP="TMPDIR=. ${MKTEMP}"
 
 AC_ARG_WITH([r7rsdir],
   [AS_HELP_STRING([--with-r7rsdir=DIR],
@@ -78,64 +65,12 @@ AC_ARG_WITH([r7rsdir],
   [r7rsdir='${datadir}/r7rs'])
 AC_SUBST([r7rsdir])
 
-StM_PATH_PROGS_CACHED_AND_PRECIOUS([CHICKEN_INSTALL_5],
-  [chicken-install version 5],[chicken-install chicken-install-5],
-  [
-    if LC_ALL=C LANG=C ${ac_path_CHICKEN_INSTALL_5} -version 2>&1 | \
-      LC_ALL=C LANG=C ${GREP} '^5\.' 2> /dev/null > /dev/null; then
-        ac_cv_path_CHICKEN_INSTALL_5="${ac_path_CHICKEN_INSTALL_5}"
-        ac_path_CHICKEN_INSTALL_5_found=:
-    fi
-  ])
-AM_CONDITIONAL([CHICKEN_INSTALL_5],
-               [test "${__ac_cv_path_CHICKEN_INSTALL_5_found}" != no])
-
-StM_PATH_PROGS_CACHED_AND_PRECIOUS([CHICKEN_UNINSTALL_5],
-  [chicken-uninstall version 5],[chicken-uninstall chicken-uninstall-5],
-  [
-    if LC_ALL=C LANG=C ${ac_path_CHICKEN_UNINSTALL_5} -version 2>&1 | \
-      LC_ALL=C LANG=C ${GREP} '^5\.' 2> /dev/null > /dev/null; then
-        ac_cv_path_CHICKEN_UNINSTALL_5="${ac_path_CHICKEN_UNINSTALL_5}"
-        ac_path_CHICKEN_UNINSTALL_5_found=:
-    fi
-  ])
-AM_CONDITIONAL([CHICKEN_UNINSTALL_5],
-               [test "${__ac_cv_path_CHICKEN_UNINSTALL_5_found}" != no])
-
-################################################################################
-#
-# FIXME: NO SUPPORT FOR CHICKEN 6 YET.
-#
-__ac_cv_path_CHICKEN_INSTALL_6_found=no
-__ac_cv_path_CHICKEN_UNINSTALL_6_found=no
-AM_CONDITIONAL([CHICKEN_INSTALL_6],[false])
-AM_CONDITIONAL([CHICKEN_UNINSTALL_6],[false])
-#
-#StM_PATH_PROGS_CACHED_AND_PRECIOUS([CHICKEN_INSTALL_6],
-#  [chicken-install version 6],[chicken-install chicken-install-6],
-#  [
-#    if LC_ALL=C LANG=C ${ac_path_CHICKEN_INSTALL_6} -version 2>&1 | \
-#      LC_ALL=C LANG=C ${GREP} '^6\.' 2> /dev/null > /dev/null; then
-#        ac_cv_path_CHICKEN_INSTALL_6="${ac_path_CHICKEN_INSTALL_6}"
-#        ac_path_CHICKEN_INSTALL_6_found=:
-#    fi
-#  ])
-#AM_CONDITIONAL([CHICKEN_INSTALL_6],
-#               [test "${__ac_cv_path_CHICKEN_INSTALL_6_found}" != no])
-#
-#StM_PATH_PROGS_CACHED_AND_PRECIOUS([CHICKEN_UNINSTALL_6],
-#  [chicken-uninstall version 6],[chicken-uninstall chicken-uninstall-6],
-#  [
-#    if LC_ALL=C LANG=C ${ac_path_CHICKEN_UNINSTALL_6} -version 2>&1 | \
-#      LC_ALL=C LANG=C ${GREP} '^6\.' 2> /dev/null > /dev/null; then
-#        ac_cv_path_CHICKEN_UNINSTALL_6="${ac_path_CHICKEN_UNINSTALL_6}"
-#        ac_path_CHICKEN_UNINSTALL_6_found=:
-#    fi
-#  ])
-#AM_CONDITIONAL([CHICKEN_UNINSTALL_6],
-#               [test "${__ac_cv_path_CHICKEN_UNINSTALL_6_found}" != no])
-#
-################################################################################
+m4_include([ac-tinyscheme.m4])
+m4_include([ac-chicken-scheme.m4])
+m4_include([ac-chibi-scheme.m4])
+m4_include([ac-gauche-scheme.m4])
+m4_include([ac-guile-scheme.m4])
+m4_include([ac-sagittarius-scheme.m4])
 
 # You can use ‘@GNU@’ to make GNU Make constructs unbothersome to
 # Automake. (By the way, you often can use ‘$(eval ...)’ as well, but
@@ -159,18 +94,7 @@ m4_foreach([f],
 
 AC_OUTPUT
 
-if test "${__ac_cv_path_CHICKEN_INSTALL_5_found}" != no; then
-  AC_MSG_NOTICE([])
-  AC_MSG_NOTICE([Support for ${CHICKEN_INSTALL_5} will be included.])
-  AC_MSG_NOTICE([Use ‘make chicken-install-5 INSTALL_AS=sudo’ to install the pipchix egg.])
-fi
-if test "${__ac_cv_path_CHICKEN_INSTALL_6_found}" != no; then
-  AC_MSG_NOTICE([])
-  AC_MSG_NOTICE([Support for ${CHICKEN_INSTALL_6} will be included.])
-  AC_MSG_NOTICE([Use ‘make chicken-install-6 INSTALL_AS=sudo’ to install the pipchix egg.])
-  AC_MSG_NOTICE([(This CHICKEN 6 support is likely not to work yet, however.)])
-fi
-AC_MSG_NOTICE([])
+m4_include([ac-what-was-found.m4])
 
 # local variables:
 # coding: utf-8
