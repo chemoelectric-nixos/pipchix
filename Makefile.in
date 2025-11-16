@@ -276,9 +276,7 @@ CFLAGS = @CFLAGS@
 CFLAGS_FOR_PIC = @CFLAGS_FOR_PIC@
 CFLAGS_FOR_STATIC = @CFLAGS_FOR_STATIC@
 CHICKEN_INSTALL_5 = @CHICKEN_INSTALL_5@
-CHICKEN_INSTALL_6 = @CHICKEN_INSTALL_6@
 CHICKEN_UNINSTALL_5 = @CHICKEN_UNINSTALL_5@
-CHICKEN_UNINSTALL_6 = @CHICKEN_UNINSTALL_6@
 CPPFLAGS = @CPPFLAGS@
 CSCOPE = @CSCOPE@
 CTAGS = @CTAGS@
@@ -393,8 +391,7 @@ CLEANFILES = $(CHICKEN_5_EGGFILES) \
 	$(CHICKEN_6_EGGDIR)/pipchix.{build,install}.sh
 DISTCLEANFILES = Makefile GNUmakefile
 EXTRA_DIST = silent-rules.mk COPYING README.adoc INSTALL AUTHORS \
-	pipchix-includes.m4 $(addsuffix .m4, $(nodist_r7rs_DATA)) \
-	$(CHICKEN_5_EGGFILES) $(CHICKEN_6_EGGFILES)
+	pipchix-includes.m4 $(addsuffix .m4, $(nodist_r7rs_DATA))
 BUILT_SOURCES = 
 nodist_r7rs_DATA = pipchix/base.sld pipchix/nix-embed.sld \
 	pipchix/nix-list.sld pipchix/abstract-syntax-tree.sld
@@ -441,7 +438,7 @@ CHICKEN_5_EGGFILES = \
 
 CHICKEN_5_EGGSPEC = ' \
  '$(CHICKEN_EGGSPEC_TOP)' \
-   (dependencies r7rs) \
+   (dependencies r7rs srfi-151) \
    (component-options \
     (csc-options \
      "-R" "r7rs" "-X" "r7rs" \
@@ -449,6 +446,15 @@ CHICKEN_5_EGGSPEC = ' \
      "-compile-syntax")) \
  '$(CHICKEN_EGGSPEC_BOTTOM)
 
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#
+# README: At the time of this writing (2025-11-15), it is not yet
+#         possible to compile the egg with CHICKEN 6.
+#
+#
+
+# all-recursive: $(CHICKEN_6_EGGFILES)
 CHICKEN_6_EGGS = chicken/eggs/6
 CHICKEN_6_EGGDIR = $(CHICKEN_6_EGGS)/pipchix
 CHICKEN_6_EGGFILES = \
@@ -1062,7 +1068,6 @@ $(CHICKEN_5_EGGDIR)/pipchix.%.scm: pipchix/%.sld.m4 pipchix-includes.m4
 @CHICKEN_INSTALL_5_TRUE@chicken-install-5: $(CHICKEN_5_EGGFILES)
 @CHICKEN_INSTALL_5_TRUE@	( \
 @CHICKEN_INSTALL_5_TRUE@	  cd $(CHICKEN_5_EGGDIR) && \
-@CHICKEN_INSTALL_5_TRUE@	  $(CHICKEN_INSTALL_5) -n && \
 @CHICKEN_INSTALL_5_TRUE@	  env SUDO="$${INSTALL_AS}" $(CHICKEN_INSTALL_5) -s \
 @CHICKEN_INSTALL_5_TRUE@	)
 
@@ -1070,15 +1075,6 @@ $(CHICKEN_5_EGGDIR)/pipchix.%.scm: pipchix/%.sld.m4 pipchix-includes.m4
 @CHICKEN_UNINSTALL_5_TRUE@chicken-uninstall-5:
 @CHICKEN_UNINSTALL_5_TRUE@	env SUDO="$${INSTALL_AS}" \
 @CHICKEN_UNINSTALL_5_TRUE@	  $(CHICKEN_UNINSTALL_5) -s -force pipchix
-
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-#
-# README: At the time of this writing (2025-11-15), it is not yet
-#         possible to compile the egg with CHICKEN 6.
-#
-#
-
-all-recursive: $(CHICKEN_6_EGGFILES)
 
 $(CHICKEN_6_EGGDIR)/COPYING: COPYING
 	$(call copy-file, $(<), $(@))

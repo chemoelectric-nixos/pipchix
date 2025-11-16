@@ -113,7 +113,6 @@ CHICKEN_5_EGGFILES = \
     pipchix.nix-list.scm \
     pipchix.base.scm \
     COPYING README.adoc)
-EXTRA_DIST += $(CHICKEN_5_EGGFILES)
 CLEANFILES += $(CHICKEN_5_EGGFILES)
 
 $(CHICKEN_5_EGGDIR)/COPYING: COPYING
@@ -144,7 +143,7 @@ $(CHICKEN_5_EGGDIR)/pipchix.%.scm: pipchix/%.sld.m4 pipchix-includes.m4
 
 CHICKEN_5_EGGSPEC = ' \
  '$(CHICKEN_EGGSPEC_TOP)' \
-   (dependencies r7rs) \
+   (dependencies r7rs srfi-151) \
    (component-options \
     (csc-options \
      "-R" "r7rs" "-X" "r7rs" \
@@ -157,7 +156,6 @@ if CHICKEN_INSTALL_5
 chicken-install-5: $(CHICKEN_5_EGGFILES)
 	( \
 	  cd $(CHICKEN_5_EGGDIR) && \
-	  $(CHICKEN_INSTALL_5) -n && \
 	  env SUDO="$${INSTALL_AS}" $(CHICKEN_INSTALL_5) -s \
 	)
 endif CHICKEN_INSTALL_5
@@ -179,7 +177,7 @@ CLEANFILES += $(CHICKEN_5_EGGDIR)/pipchix.{build,install}.sh
 #
 #
 
-all-recursive: $(CHICKEN_6_EGGFILES)
+# all-recursive: $(CHICKEN_6_EGGFILES)
 
 CHICKEN_6_EGGS = chicken/eggs/6
 CHICKEN_6_EGGDIR = $(CHICKEN_6_EGGS)/pipchix
@@ -191,7 +189,6 @@ CHICKEN_6_EGGFILES = \
     pipchix.nix-list.scm \
     pipchix.base.scm \
     COPYING README.adoc)
-EXTRA_DIST += $(CHICKEN_6_EGGFILES)
 CLEANFILES += $(CHICKEN_6_EGGFILES)
 
 $(CHICKEN_6_EGGDIR)/COPYING: COPYING

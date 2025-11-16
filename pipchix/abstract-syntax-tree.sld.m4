@@ -32,10 +32,8 @@ m4_include(pipchix-includes.m4)
   (cond-expand
     ((and guile r7rs) ;; ‘guile --r7rs’
      (import (only (srfi 60) bitwise-and arithmetic-shift)))
-    ((and chicken r7rs) ;; Not working yet, at least with CHICKEN 6.
-     (import (only (chicken bitwise) bitwise-and arithmetic-shift)))
-    (else ;; (scheme bitwise) = (srfi 151)
-     (import (only (scheme bitwise) bitwise-and arithmetic-shift))))
+    (else ;; (srfi 151) = (scheme bitwise)
+     (import (only (srfi 151) bitwise-and arithmetic-shift))))
 
   (export make-nix-embedded-node)
   (export nix-embedded-node?)

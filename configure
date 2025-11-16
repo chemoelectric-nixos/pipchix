@@ -649,10 +649,8 @@ GNU_MAKE
 GNU
 CHICKEN_UNINSTALL_6_FALSE
 CHICKEN_UNINSTALL_6_TRUE
-CHICKEN_UNINSTALL_6
 CHICKEN_INSTALL_6_FALSE
 CHICKEN_INSTALL_6_TRUE
-CHICKEN_INSTALL_6
 CHICKEN_UNINSTALL_5_FALSE
 CHICKEN_UNINSTALL_5_TRUE
 CHICKEN_UNINSTALL_5
@@ -788,8 +786,6 @@ GNU_M4
 MKTEMP
 CHICKEN_INSTALL_5
 CHICKEN_UNINSTALL_5
-CHICKEN_INSTALL_6
-CHICKEN_UNINSTALL_6
 GNU_MAKE'
 
 
@@ -1447,10 +1443,6 @@ Some influential environment variables:
               chicken-install version 5
   CHICKEN_UNINSTALL_5
               chicken-uninstall version 5
-  CHICKEN_INSTALL_6
-              chicken-install version 6
-  CHICKEN_UNINSTALL_6
-              chicken-uninstall version 6
   GNU_MAKE    GNU Make command
 
 Use these variables to override the choices made by 'configure' or to help
@@ -6600,81 +6592,13 @@ else
 fi
 
 
-{ :;
-
-# Override the cache if the precious variable CHICKEN_INSTALL_6 is set.
-test -n "${CHICKEN_INSTALL_6}" && unset ac_cv_path_CHICKEN_INSTALL_6
-__ac_cv_path_CHICKEN_INSTALL_6_found=yes
-{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for chicken-install chicken-install-6" >&5
-printf %s "checking for chicken-install chicken-install-6... " >&6; }
-if test ${ac_cv_path_CHICKEN_INSTALL_6+y}
-then :
-  printf %s "(cached) " >&6
-else case e in #(
-  e) if test -z "$CHICKEN_INSTALL_6"; then
-  ac_path_CHICKEN_INSTALL_6_found=false
-  # Loop through the user's path and test for each of PROGNAME-LIST
-  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-for as_dir in $PATH
-do
-  IFS=$as_save_IFS
-  case $as_dir in #(((
-    '') as_dir=./ ;;
-    */) ;;
-    *) as_dir=$as_dir/ ;;
-  esac
-    for ac_prog in chicken-install chicken-install-6
-   do
-    for ac_exec_ext in '' $ac_executable_extensions; do
-      ac_path_CHICKEN_INSTALL_6="$as_dir$ac_prog$ac_exec_ext"
-      as_fn_executable_p "$ac_path_CHICKEN_INSTALL_6" || continue
-
-      if test -n "${CHICKEN_INSTALL_6}"; then
-         # Bypass the test if the precious variable CHICKEN_INSTALL_6 is set.
-         ac_cv_path_CHICKEN_INSTALL_6="${CHICKEN_INSTALL_6}"
-         ac_path_CHICKEN_INSTALL_6_found=:
-      else
-         # Run the test.
-
-    if LC_ALL=C LANG=C ${ac_path_CHICKEN_INSTALL_6} -version 2>&1 | \
-      LC_ALL=C LANG=C ${GREP} '^6\.' 2> /dev/null > /dev/null; then
-        ac_cv_path_CHICKEN_INSTALL_6="${ac_path_CHICKEN_INSTALL_6}"
-        ac_path_CHICKEN_INSTALL_6_found=:
-    fi
-
-      fi
-      $ac_path_CHICKEN_INSTALL_6_found && break 3
-    done
-  done
-  done
-IFS=$as_save_IFS
-  if test -z "$ac_cv_path_CHICKEN_INSTALL_6"; then
-    :
-  fi
-else
-  ac_cv_path_CHICKEN_INSTALL_6=$CHICKEN_INSTALL_6
-fi
-
-      if test -z "${ac_cv_path_CHICKEN_INSTALL_6}"; then
-         ac_cv_path_CHICKEN_INSTALL_6="not found"
-         __ac_cv_path_CHICKEN_INSTALL_6_found=no
-      fi
-    ;;
-esac
-fi
-{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $ac_cv_path_CHICKEN_INSTALL_6" >&5
-printf "%s\n" "$ac_cv_path_CHICKEN_INSTALL_6" >&6; }
-if test x"${__ac_cv_path_CHICKEN_INSTALL_6_found}" = x"yes"; then
-   CHICKEN_INSTALL_6="${ac_cv_path_CHICKEN_INSTALL_6}"
-else
-   CHICKEN_INSTALL_6=""
-   # Do not cache the negative result. That way someone can install
-   # the program and have it be discovered, even though they did not
-   # clear a cache entry.
-   unset ac_cv_path_CHICKEN_INSTALL_6
-fi
-}
- if test "${__ac_cv_path_CHICKEN_INSTALL_6_found}" != no; then
+################################################################################
+#
+# FIXME: NO SUPPORT FOR CHICKEN 6 YET.
+#
+__ac_cv_path_CHICKEN_INSTALL_6_found=no
+__ac_cv_path_CHICKEN_UNINSTALL_6_found=no
+ if false; then
   CHICKEN_INSTALL_6_TRUE=
   CHICKEN_INSTALL_6_FALSE='#'
 else
@@ -6682,82 +6606,7 @@ else
   CHICKEN_INSTALL_6_FALSE=
 fi
 
-
-{ :;
-
-# Override the cache if the precious variable CHICKEN_UNINSTALL_6 is set.
-test -n "${CHICKEN_UNINSTALL_6}" && unset ac_cv_path_CHICKEN_UNINSTALL_6
-__ac_cv_path_CHICKEN_UNINSTALL_6_found=yes
-{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for chicken-uninstall chicken-uninstall-6" >&5
-printf %s "checking for chicken-uninstall chicken-uninstall-6... " >&6; }
-if test ${ac_cv_path_CHICKEN_UNINSTALL_6+y}
-then :
-  printf %s "(cached) " >&6
-else case e in #(
-  e) if test -z "$CHICKEN_UNINSTALL_6"; then
-  ac_path_CHICKEN_UNINSTALL_6_found=false
-  # Loop through the user's path and test for each of PROGNAME-LIST
-  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-for as_dir in $PATH
-do
-  IFS=$as_save_IFS
-  case $as_dir in #(((
-    '') as_dir=./ ;;
-    */) ;;
-    *) as_dir=$as_dir/ ;;
-  esac
-    for ac_prog in chicken-uninstall chicken-uninstall-6
-   do
-    for ac_exec_ext in '' $ac_executable_extensions; do
-      ac_path_CHICKEN_UNINSTALL_6="$as_dir$ac_prog$ac_exec_ext"
-      as_fn_executable_p "$ac_path_CHICKEN_UNINSTALL_6" || continue
-
-      if test -n "${CHICKEN_UNINSTALL_6}"; then
-         # Bypass the test if the precious variable CHICKEN_UNINSTALL_6 is set.
-         ac_cv_path_CHICKEN_UNINSTALL_6="${CHICKEN_UNINSTALL_6}"
-         ac_path_CHICKEN_UNINSTALL_6_found=:
-      else
-         # Run the test.
-
-    if LC_ALL=C LANG=C ${ac_path_CHICKEN_UNINSTALL_6} -version 2>&1 | \
-      LC_ALL=C LANG=C ${GREP} '^6\.' 2> /dev/null > /dev/null; then
-        ac_cv_path_CHICKEN_UNINSTALL_6="${ac_path_CHICKEN_UNINSTALL_6}"
-        ac_path_CHICKEN_UNINSTALL_6_found=:
-    fi
-
-      fi
-      $ac_path_CHICKEN_UNINSTALL_6_found && break 3
-    done
-  done
-  done
-IFS=$as_save_IFS
-  if test -z "$ac_cv_path_CHICKEN_UNINSTALL_6"; then
-    :
-  fi
-else
-  ac_cv_path_CHICKEN_UNINSTALL_6=$CHICKEN_UNINSTALL_6
-fi
-
-      if test -z "${ac_cv_path_CHICKEN_UNINSTALL_6}"; then
-         ac_cv_path_CHICKEN_UNINSTALL_6="not found"
-         __ac_cv_path_CHICKEN_UNINSTALL_6_found=no
-      fi
-    ;;
-esac
-fi
-{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $ac_cv_path_CHICKEN_UNINSTALL_6" >&5
-printf "%s\n" "$ac_cv_path_CHICKEN_UNINSTALL_6" >&6; }
-if test x"${__ac_cv_path_CHICKEN_UNINSTALL_6_found}" = x"yes"; then
-   CHICKEN_UNINSTALL_6="${ac_cv_path_CHICKEN_UNINSTALL_6}"
-else
-   CHICKEN_UNINSTALL_6=""
-   # Do not cache the negative result. That way someone can install
-   # the program and have it be discovered, even though they did not
-   # clear a cache entry.
-   unset ac_cv_path_CHICKEN_UNINSTALL_6
-fi
-}
- if test "${__ac_cv_path_CHICKEN_UNINSTALL_6_found}" != no; then
+ if false; then
   CHICKEN_UNINSTALL_6_TRUE=
   CHICKEN_UNINSTALL_6_FALSE='#'
 else
@@ -6765,6 +6614,32 @@ else
   CHICKEN_UNINSTALL_6_FALSE=
 fi
 
+#
+#StM_PATH_PROGS_CACHED_AND_PRECIOUS([CHICKEN_INSTALL_6],
+#  [chicken-install version 6],[chicken-install chicken-install-6],
+#  [
+#    if LC_ALL=C LANG=C ${ac_path_CHICKEN_INSTALL_6} -version 2>&1 | \
+#      LC_ALL=C LANG=C ${GREP} '^6\.' 2> /dev/null > /dev/null; then
+#        ac_cv_path_CHICKEN_INSTALL_6="${ac_path_CHICKEN_INSTALL_6}"
+#        ac_path_CHICKEN_INSTALL_6_found=:
+#    fi
+#  ])
+#AM_CONDITIONAL([CHICKEN_INSTALL_6],
+#               [test "${__ac_cv_path_CHICKEN_INSTALL_6_found}" != no])
+#
+#StM_PATH_PROGS_CACHED_AND_PRECIOUS([CHICKEN_UNINSTALL_6],
+#  [chicken-uninstall version 6],[chicken-uninstall chicken-uninstall-6],
+#  [
+#    if LC_ALL=C LANG=C ${ac_path_CHICKEN_UNINSTALL_6} -version 2>&1 | \
+#      LC_ALL=C LANG=C ${GREP} '^6\.' 2> /dev/null > /dev/null; then
+#        ac_cv_path_CHICKEN_UNINSTALL_6="${ac_path_CHICKEN_UNINSTALL_6}"
+#        ac_path_CHICKEN_UNINSTALL_6_found=:
+#    fi
+#  ])
+#AM_CONDITIONAL([CHICKEN_UNINSTALL_6],
+#               [test "${__ac_cv_path_CHICKEN_UNINSTALL_6_found}" != no])
+#
+################################################################################
 
 # You can use ‘@GNU@’ to make GNU Make constructs unbothersome to
 # Automake. (By the way, you often can use ‘$(eval ...)’ as well, but
