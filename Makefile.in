@@ -112,11 +112,9 @@ POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
 @CHIBI_SCHEME_TRUE@am__append_1 = tests/check-nix-list-chibi
-@CHIBI_SCHEME_TRUE@am__append_2 = tests/check-nix-list-chibi
-@GAUCHE_TRUE@am__append_3 = tests/check-nix-list-gauche
-@GAUCHE_TRUE@am__append_4 = tests/check-nix-list-gauche
-@SAGITTARIUS_TRUE@am__append_5 = tests/check-nix-list-sagittarius
-@SAGITTARIUS_TRUE@am__append_6 = tests/check-nix-list-sagittarius
+@GAUCHE_TRUE@am__append_2 = tests/check-nix-list-gauche
+@GUILE_TRUE@am__append_3 = tests/check-nix-list-guile
+@SAGITTARIUS_TRUE@am__append_4 = tests/check-nix-list-sagittarius
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/ax_check_compile_flag.m4 \
@@ -591,11 +589,13 @@ CLEANFILES = $(nodist_r7rs_DATA) $(addsuffix .tmp, \
 	$(CHICKEN_6_EGGFILES) \
 	$(CHICKEN_6_EGGDIR)/*.{$(OBJEXT),so,link,import.scm} \
 	$(CHICKEN_6_EGGDIR)/pipchix.{build,install}.sh tests/*.tmp \
-	$(am__append_2) $(am__append_4) $(am__append_6)
+	$(addsuffix -chibi, $(TEST_SCHEME)) $(addsuffix -gauche, \
+	$(TEST_SCHEME)) $(addsuffix -guile, $(TEST_SCHEME)) \
+	$(addsuffix -sagittarius, $(TEST_SCHEME))
 DISTCLEANFILES = Makefile GNUmakefile
 EXTRA_DIST = silent-rules.mk COPYING README.adoc INSTALL AUTHORS \
 	pipchix-includes.m4 $(addsuffix .m4, $(nodist_r7rs_DATA)) \
-	tests/check-nix-list
+	$(TEST_SCHEME)
 EXTRA_SCRIPTS = 
 BUILT_SOURCES = 
 nodist_r7rs_DATA = pipchix/base.sld pipchix/nix-embed.sld \
@@ -681,7 +681,9 @@ CHICKEN_6_EGGSPEC = ' \
      "-compile-syntax")) \
  '$(CHICKEN_EGGSPEC_BOTTOM)
 
-TESTS = $(am__append_1) $(am__append_3) $(am__append_5)
+TESTS = $(am__append_1) $(am__append_2) $(am__append_3) \
+	$(am__append_4)
+TEST_SCHEME = tests/check-nix-list
 
 #---------------------------------------------------------------------
 TINYSCHEME_DIR = tinyscheme-1.42
@@ -1067,6 +1069,13 @@ tests/check-nix-list-chibi.log: tests/check-nix-list-chibi
 tests/check-nix-list-gauche.log: tests/check-nix-list-gauche
 	@p='tests/check-nix-list-gauche'; \
 	b='tests/check-nix-list-gauche'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+tests/check-nix-list-guile.log: tests/check-nix-list-guile
+	@p='tests/check-nix-list-guile'; \
+	b='tests/check-nix-list-guile'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
@@ -1537,6 +1546,14 @@ tests/%-chibi: tests/%
 tests/%-gauche: tests/%
 	$(call v,AWK) $(MKDIR_P) $(@D) && \
 	$(AWK) 'BEGIN{print "#!$(GAUCHE)"}{print}' $(<) \
+	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
+
+tests/%-guile: tests/%
+	$(call v,AWK) $(MKDIR_P) $(@D) && \
+	$(AWK) 'BEGIN{print "#!$(GUILE) \\"; \
+	              print "--r7rs -s"; \
+	              print "!#"} \
+	        {print}' $(<) \
 	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
 tests/%-sagittarius: tests/%

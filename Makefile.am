@@ -257,6 +257,14 @@ tests/%-gauche: tests/%
 	$(AWK) 'BEGIN{print "#!$(GAUCHE)"}{print}' $(<) \
 	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
+tests/%-guile: tests/%
+	$(call v,AWK) $(MKDIR_P) $(@D) && \
+	$(AWK) 'BEGIN{print "#!$(GUILE) \\"; \
+	              print "--r7rs -s"; \
+	              print "!#"} \
+	        {print}' $(<) \
+	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
+
 tests/%-sagittarius: tests/%
 	$(call v,AWK) $(MKDIR_P) $(@D) && \
 	$(AWK) 'BEGIN{print "#!$(SAGITTARIUS)"}{print}' $(<) \
@@ -266,18 +274,26 @@ CLEANFILES += tests/*.tmp
 
 TESTS =
 
-EXTRA_DIST += tests/check-nix-list
+TEST_SCHEME =
+TEST_SCHEME += tests/check-nix-list
+
+EXTRA_DIST += $(TEST_SCHEME)
+CLEANFILES += $(addsuffix -chibi, $(TEST_SCHEME))
+CLEANFILES += $(addsuffix -gauche, $(TEST_SCHEME))
+CLEANFILES += $(addsuffix -guile, $(TEST_SCHEME))
+CLEANFILES += $(addsuffix -sagittarius, $(TEST_SCHEME))
+
 if CHIBI_SCHEME
 TESTS += tests/check-nix-list-chibi
-CLEANFILES += tests/check-nix-list-chibi
 endif CHIBI_SCHEME
 if GAUCHE
 TESTS += tests/check-nix-list-gauche
-CLEANFILES += tests/check-nix-list-gauche
 endif GAUCHE
+if GUILE
+TESTS += tests/check-nix-list-guile
+endif GUILE
 if SAGITTARIUS
 TESTS += tests/check-nix-list-sagittarius
-CLEANFILES += tests/check-nix-list-sagittarius
 endif SAGITTARIUS
 
 #---------------------------------------------------------------------
