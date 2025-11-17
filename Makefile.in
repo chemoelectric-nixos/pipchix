@@ -111,6 +111,12 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
+@CHIBI_SCHEME_TRUE@am__append_1 = tests/check-nix-list-chibi
+@CHIBI_SCHEME_TRUE@am__append_2 = tests/check-nix-list-chibi
+@GAUCHE_TRUE@am__append_3 = tests/check-nix-list-gauche
+@GAUCHE_TRUE@am__append_4 = tests/check-nix-list-gauche
+@SAGITTARIUS_TRUE@am__append_5 = tests/check-nix-list-sagittarius
+@SAGITTARIUS_TRUE@am__append_6 = tests/check-nix-list-sagittarius
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/ax_check_compile_flag.m4 \
@@ -578,17 +584,18 @@ top_srcdir = @top_srcdir@
 SUBDIRS = tinyscheme-1.42
 ACLOCAL_AMFLAGS = -I m4 --install
 AUTOMAKE_OPTIONS = foreign
-MOSTLYCLEANFILES = $(nodist_r7rs_DATA) $(addsuffix .tmp, \
-	$(nodist_r7rs_DATA)) tmp.*
-CLEANFILES = $(CHICKEN_5_EGGFILES) \
+CLEANFILES = $(nodist_r7rs_DATA) $(addsuffix .tmp, \
+	$(nodist_r7rs_DATA)) tmp.* $(CHICKEN_5_EGGFILES) \
 	$(CHICKEN_5_EGGDIR)/*.{$(OBJEXT),so,link,import.scm} \
 	$(CHICKEN_5_EGGDIR)/pipchix.{build,install}.sh \
 	$(CHICKEN_6_EGGFILES) \
 	$(CHICKEN_6_EGGDIR)/*.{$(OBJEXT),so,link,import.scm} \
-	$(CHICKEN_6_EGGDIR)/pipchix.{build,install}.sh
+	$(CHICKEN_6_EGGDIR)/pipchix.{build,install}.sh tests/*.tmp \
+	$(am__append_2) $(am__append_4) $(am__append_6)
 DISTCLEANFILES = Makefile GNUmakefile
 EXTRA_DIST = silent-rules.mk COPYING README.adoc INSTALL AUTHORS \
-	pipchix-includes.m4 $(addsuffix .m4, $(nodist_r7rs_DATA))
+	pipchix-includes.m4 $(addsuffix .m4, $(nodist_r7rs_DATA)) \
+	tests/check-nix-list
 EXTRA_SCRIPTS = 
 BUILT_SOURCES = 
 nodist_r7rs_DATA = pipchix/base.sld pipchix/nix-embed.sld \
@@ -674,9 +681,7 @@ CHICKEN_6_EGGSPEC = ' \
      "-compile-syntax")) \
  '$(CHICKEN_EGGSPEC_BOTTOM)
 
-
-#---------------------------------------------------------------------
-TESTS = tests/check-nix-list
+TESTS = $(am__append_1) $(am__append_3) $(am__append_5)
 
 #---------------------------------------------------------------------
 TINYSCHEME_DIR = tinyscheme-1.42
@@ -1052,9 +1057,23 @@ recheck: all
 	        am__force_recheck=am--force-recheck \
 	        TEST_LOGS="$$log_list"; \
 	exit $$?
-tests/check-nix-list.log: tests/check-nix-list
-	@p='tests/check-nix-list'; \
-	b='tests/check-nix-list'; \
+tests/check-nix-list-chibi.log: tests/check-nix-list-chibi
+	@p='tests/check-nix-list-chibi'; \
+	b='tests/check-nix-list-chibi'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+tests/check-nix-list-gauche.log: tests/check-nix-list-gauche
+	@p='tests/check-nix-list-gauche'; \
+	b='tests/check-nix-list-gauche'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+tests/check-nix-list-sagittarius.log: tests/check-nix-list-sagittarius
+	@p='tests/check-nix-list-sagittarius'; \
+	b='tests/check-nix-list-sagittarius'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
@@ -1308,7 +1327,6 @@ install-strip:
 	    "INSTALL_PROGRAM_ENV=STRIPPROG='$(STRIP)'" install; \
 	fi
 mostlyclean-generic:
-	-$(am__rm_f) $(MOSTLYCLEANFILES)
 	-$(am__rm_f) $(TEST_LOGS)
 	-$(am__rm_f) $(TEST_LOGS:.log=.trs)
 	-$(am__rm_f) $(TEST_SUITE_LOG)
@@ -1508,6 +1526,23 @@ $(CHICKEN_6_EGGDIR)/pipchix.%.scm: pipchix/%.sld.m4 pipchix-includes.m4
 @CHICKEN_UNINSTALL_6_TRUE@chicken-uninstall-6:
 @CHICKEN_UNINSTALL_6_TRUE@	env SUDO="$${INSTALL_AS}" \
 @CHICKEN_UNINSTALL_6_TRUE@	  $(CHICKEN_UNINSTALL_6) -s -force pipchix
+
+#---------------------------------------------------------------------
+
+tests/%-chibi: tests/%
+	$(call v,AWK) $(MKDIR_P) $(@D) && \
+	$(AWK) 'BEGIN{print "#!$(CHIBI_SCHEME)"}{print}' $(<) \
+	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
+
+tests/%-gauche: tests/%
+	$(call v,AWK) $(MKDIR_P) $(@D) && \
+	$(AWK) 'BEGIN{print "#!$(GAUCHE)"}{print}' $(<) \
+	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
+
+tests/%-sagittarius: tests/%
+	$(call v,AWK) $(MKDIR_P) $(@D) && \
+	$(AWK) 'BEGIN{print "#!$(SAGITTARIUS)"}{print}' $(<) \
+	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
 @GNU@ define tinyscheme-1
 @GNU@ ( \

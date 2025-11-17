@@ -29,7 +29,6 @@ AUTOMAKE_OPTIONS += foreign
 
 @GNU@ include $(top_srcdir)/silent-rules.mk
 
-MOSTLYCLEANFILES =
 CLEANFILES =
 DISTCLEANFILES =
 
@@ -55,8 +54,8 @@ nodist_r7rs_DATA += pipchix/nix-embed.sld
 nodist_r7rs_DATA += pipchix/nix-list.sld
 nodist_r7rs_DATA += pipchix/abstract-syntax-tree.sld
 
-MOSTLYCLEANFILES += $(nodist_r7rs_DATA)
-MOSTLYCLEANFILES += $(addsuffix .tmp, $(nodist_r7rs_DATA))
+CLEANFILES += $(nodist_r7rs_DATA)
+CLEANFILES += $(addsuffix .tmp, $(nodist_r7rs_DATA))
 
 M4_PREPROCESS = $(GNU_M4) -P -I '$(srcdir)'
 
@@ -69,7 +68,7 @@ M4_PREPROCESS = $(GNU_M4) -P -I '$(srcdir)'
 @GNU@ $(call v,COPY) cp -f $(1) $(2)
 @GNU@ endef
 
-MOSTLYCLEANFILES += tmp.*
+CLEANFILES += tmp.*
 
 #---------------------------------------------------------------------
 #
@@ -248,9 +247,38 @@ CLEANFILES += $(CHICKEN_6_EGGDIR)/pipchix.{build,install}.sh
 
 #---------------------------------------------------------------------
 
-TESTS =
-TESTS += tests/check-nix-list
+tests/%-chibi: tests/%
+	$(call v,AWK) $(MKDIR_P) $(@D) && \
+	$(AWK) 'BEGIN{print "#!$(CHIBI_SCHEME)"}{print}' $(<) \
+	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
+tests/%-gauche: tests/%
+	$(call v,AWK) $(MKDIR_P) $(@D) && \
+	$(AWK) 'BEGIN{print "#!$(GAUCHE)"}{print}' $(<) \
+	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
+
+tests/%-sagittarius: tests/%
+	$(call v,AWK) $(MKDIR_P) $(@D) && \
+	$(AWK) 'BEGIN{print "#!$(SAGITTARIUS)"}{print}' $(<) \
+	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
+
+CLEANFILES += tests/*.tmp
+
+TESTS =
+
+EXTRA_DIST += tests/check-nix-list
+if CHIBI_SCHEME
+TESTS += tests/check-nix-list-chibi
+CLEANFILES += tests/check-nix-list-chibi
+endif CHIBI_SCHEME
+if GAUCHE
+TESTS += tests/check-nix-list-gauche
+CLEANFILES += tests/check-nix-list-gauche
+endif GAUCHE
+if SAGITTARIUS
+TESTS += tests/check-nix-list-sagittarius
+CLEANFILES += tests/check-nix-list-sagittarius
+endif SAGITTARIUS
 
 #---------------------------------------------------------------------
 
