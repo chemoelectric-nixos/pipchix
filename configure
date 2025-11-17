@@ -677,7 +677,10 @@ CHICKEN_INSTALL_5_TRUE
 CHICKEN_INSTALL_5
 CFLAGS_FOR_PIC
 CFLAGS_FOR_STATIC
-install_r7rs
+chickeneggs5pipchixdir
+INSTALL_CHICKEN_5_EGG_SOURCE_FALSE
+INSTALL_CHICKEN_5_EGG_SOURCE_TRUE
+install_chicken_5_egg_source
 r7rspipchixdir
 INSTALL_R7RS_SOURCE_FALSE
 INSTALL_R7RS_SOURCE_TRUE
@@ -1455,7 +1458,8 @@ Optional Features:
   --disable-install-r7rs-source=DIR
                           install R⁷RS source code [installed by default]
   --enable-install-chicken-5-egg-source=DIR
-                          install R⁷RS source code [installed by default]
+                          install CHICKEN 5 egg source code [not installed by
+                          default]
 
 Some influential environment variables:
   CC          C compiler command
@@ -6341,7 +6345,7 @@ if test ${enable_install_r7rs_source+y}
 then :
   enableval=$enable_install_r7rs_source; install_r7rs_source="${enableval}"
 else case e in #(
-  e) install_r7rs_source='yes' ;;
+  e) install_r7rs_source=yes ;;
 esac
 fi
 
@@ -6353,21 +6357,28 @@ else
   INSTALL_R7RS_SOURCE_TRUE='#'
   INSTALL_R7RS_SOURCE_FALSE=
 fi
-
-r7rspipchixdir="${r7rspipchixdir:-${datadir}/r7rs/pipchix}"
+ r7rspipchixdir="${r7rspipchixdir:-\$(datadir)/r7rs/pipchix}"
 
 
 # Check whether --enable-install-chicken-5-egg-source was given.
 if test ${enable_install_chicken_5_egg_source+y}
 then :
-  enableval=$enable_install_chicken_5_egg_source; install_r7rs="${enableval}"
+  enableval=$enable_install_chicken_5_egg_source; install_chicken_5_egg_source="${enableval}"
 else case e in #(
-  e) install_r7rs='yes' ;;
+  e) install_chicken_5_egg_source=no ;;
 esac
 fi
 
 
-r7rspipchixdir="${r7rspipchixdir:-${datadir}/r7rs/pipchix}"
+ if test "${install_chicken_5_egg_source}" != no; then
+  INSTALL_CHICKEN_5_EGG_SOURCE_TRUE=
+  INSTALL_CHICKEN_5_EGG_SOURCE_FALSE='#'
+else
+  INSTALL_CHICKEN_5_EGG_SOURCE_TRUE='#'
+  INSTALL_CHICKEN_5_EGG_SOURCE_FALSE=
+fi
+
+chickeneggs5pipchixdir="${chickeneggs5pipchixdir:-\$(datadir)/chicken/eggs/5/pipchix}"
 
 
 # Copyright © 2025 Barry Schwartz
@@ -7359,7 +7370,7 @@ fi
 
 
 
-# You can use ‘@GNU@’ to make GNU Make constructs unbothersome to
+# You can use ‘@GNU@’ to make GNU Make co@GNU@ nstructs unbothersome to
 # Automake. (By the way, you often can use ‘$(eval ...)’ as well, but
 # @GNU@ here may be better.)
 
@@ -7713,6 +7724,10 @@ Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${INSTALL_R7RS_SOURCE_TRUE}" && test -z "${INSTALL_R7RS_SOURCE_FALSE}"; then
   as_fn_error $? "conditional \"INSTALL_R7RS_SOURCE\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${INSTALL_CHICKEN_5_EGG_SOURCE_TRUE}" && test -z "${INSTALL_CHICKEN_5_EGG_SOURCE_FALSE}"; then
+  as_fn_error $? "conditional \"INSTALL_CHICKEN_5_EGG_SOURCE\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${CHICKEN_INSTALL_5_TRUE}" && test -z "${CHICKEN_INSTALL_5_FALSE}"; then

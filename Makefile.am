@@ -36,6 +36,7 @@ EXTRA_DIST =
 EXTRA_SCRIPTS =
 BUILT_SOURCES =
 nodist_r7rspipchix_DATA =
+nodist_chickeneggs5pipchix_DATA =
 
 EXTRA_DIST += silent-rules.mk
 EXTRA_DIST += COPYING
@@ -68,6 +69,10 @@ CLEANFILES += $(addsuffix .tmp, $(R7RS_SCHEME))
 
 if INSTALL_R7RS_SOURCE
 nodist_r7rspipchix_DATA += $(R7RS_SCHEME)
+endif
+
+if INSTALL_CHICKEN_5_EGG_SOURCE
+nodist_chickeneggs5pipchix_DATA += $(CHICKEN_5_EGGFILES)
 endif
 
 $(builddir)/r7rs/pipchix/%.sld: $(srcdir)/r7rs/pipchix/%.sld.m4 \
@@ -159,7 +164,6 @@ CHICKEN_5_EGGSPEC = ' \
  '$(CHICKEN_EGGSPEC_BOTTOM)
 
 if CHICKEN_INSTALL_5
-.PHONY: chicken-install-5
 chicken-install-5: $(CHICKEN_5_EGGFILES)
 	( \
 	  cd $(CHICKEN_5_EGGDIR) && \
@@ -168,7 +172,6 @@ chicken-install-5: $(CHICKEN_5_EGGFILES)
 endif CHICKEN_INSTALL_5
 
 if CHICKEN_UNINSTALL_5
-.PHONY: chicken-uninstall-5
 chicken-uninstall-5:
 	env SUDO="$${INSTALL_AS}" \
 	  $(CHICKEN_UNINSTALL_5) -s -force pipchix
@@ -178,6 +181,44 @@ CLEANFILES += $(CHICKEN_5_EGGDIR)/*.{$(OBJEXT),so,link,import.scm}
 CLEANFILES += $(CHICKEN_5_EGGDIR)/pipchix.{build,install}.sh
 
 #---------------------------------------------------------------------
+
+#
+# make-chicken-5-egg may fail if you have not installed the
+# dependencies of pipchix.
+#
+make-chicken-5-egg: $(CHICKEN_5_EGGFILES)
+	( \
+	  $(MKDIR_P) $(CHICKEN_5_EGGDIR) && \
+	  cd $(CHICKEN_5_EGGDIR) && \
+	  $(CHICKEN_INSTALL_5) -n \
+	)
+
+if CSI_5
+@GNU@ define get-chicken-5-repository-path
+@GNU@ $(CSI_5) -n -b -R r7rs -R srfi-13 -R chicken.platform \
+@GNU@    -e '(display (string-join (cons "$(abs_builddir)/$(CHICKEN_5_EGGDIR)" (repository-path)) ":"))'
+@GNU@ endef
+else !CSI_5
+@GNU@ define get-chicken-5-repository-path
+@GNU@ true
+@GNU@ endef
+endif !CSI_5
+
+AM_TESTS_ENVIRONMENT = \
+	export CHICKEN_REPOSITORY_PATH; \
+	CHICKEN_REPOSITORY_PATH=`$(call get-chicken-5-repository-path)`; \
+	true;
+
+chicken-5-egg-stamp:  make-chicken-5-egg
+	touch $(@)
+
+CLEANFILES += chicken-5-egg-stamp
+
+tests/r7rs/%-csi-5: tests/r7rs/% $(CHICKEN_5_EGGFILES) chicken-5-egg-stamp
+	$(call v,AWK) $(MKDIR_P) $(@D) && \
+	$(AWK) 'BEGIN{print "#!/usr/bin/env -S $(CSI_5) -s"} \
+	        {print}' $(<) \
+	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
 tests/r7rs/%-chibi: tests/r7rs/% $(R7RS_SCHEME)
 	$(call v,AWK) $(MKDIR_P) $(@D) && \
@@ -194,7 +235,7 @@ tests/r7rs/%-gauche: tests/r7rs/% $(R7RS_SCHEME)
 tests/r7rs/%-guile: tests/r7rs/% $(R7RS_SCHEME)
 	$(call v,AWK) $(MKDIR_P) $(@D) && \
 	$(AWK) 'BEGIN{print "#!$(GUILE) \\"; \
-	              print "-L '$(abs_builddir)/r7rs' --r7rs -s"; \
+	              print "-L '$(abs_builddir)/r7rs' --r7rs --no-auto-compile -s"; \
 	              print "!#"} \
 	        {print}' $(<) \
 	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
@@ -213,20 +254,30 @@ TEST_SCHEME =
 TEST_SCHEME += tests/r7rs/check-nix-list
 
 EXTRA_DIST += $(TEST_SCHEME)
+CLEANFILES += $(addsuffix -csi-5, $(TEST_SCHEME))
 CLEANFILES += $(addsuffix -chibi, $(TEST_SCHEME))
 CLEANFILES += $(addsuffix -gauche, $(TEST_SCHEME))
 CLEANFILES += $(addsuffix -guile, $(TEST_SCHEME))
 CLEANFILES += $(addsuffix -sagittarius, $(TEST_SCHEME))
 
+if CHICKEN_INSTALL_5
+if CSI_5
+TESTS += tests/r7rs/check-nix-list-csi-5
+endif
+endif
+
 if CHIBI_SCHEME
 TESTS += tests/r7rs/check-nix-list-chibi
 endif CHIBI_SCHEME
+
 if GAUCHE
 TESTS += tests/r7rs/check-nix-list-gauche
 endif GAUCHE
+
 if GUILE
 TESTS += tests/r7rs/check-nix-list-guile
 endif GUILE
+
 if SAGITTARIUS
 TESTS += tests/r7rs/check-nix-list-sagittarius
 endif SAGITTARIUS

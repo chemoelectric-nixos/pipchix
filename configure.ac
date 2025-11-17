@@ -59,24 +59,26 @@ AC_ARG_VAR([MKTEMP],[mktemp command])
 MKTEMP="TMPDIR=. ${MKTEMP}"
 
 AC_ARG_ENABLE([install-r7rs-source],
-  [AS_HELP_STRING([--disable-install-r7rs-source=DIR],
+  [AS_HELP_STRING([--disable-install-r7rs-source[=DIR]],
         [install R⁷RS source code [installed by default]])],
   [install_r7rs_source="${enableval}"],
-  [install_r7rs_source='yes'])
+  [install_r7rs_source=yes])
 AC_SUBST([install_r7rs_source])
 AM_CONDITIONAL([INSTALL_R7RS_SOURCE],
-               [test "${install_r7rs_source}" != no])
-r7rspipchixdir="${r7rspipchixdir:-${datadir}/r7rs/pipchix}"
+               [test "${install_r7rs_source}" != no]) dnl FIXME: COME UP WITH A BETTER yes/no TEST.##################################
+r7rspipchixdir="${r7rspipchixdir:-\$(datadir)/r7rs/pipchix}"
 AC_SUBST([r7rspipchixdir])
 
 AC_ARG_ENABLE([install-chicken-5-egg-source],
-  [AS_HELP_STRING([--enable-install-chicken-5-egg-source=DIR],
-        [install R⁷RS source code [installed by default]])],
-  [install_r7rs="${enableval}"],
-  [install_r7rs='yes'])
-AC_SUBST([install_r7rs])
-r7rspipchixdir="${r7rspipchixdir:-${datadir}/r7rs/pipchix}"
-AC_SUBST([r7rspipchixdir])
+  [AS_HELP_STRING([--enable-install-chicken-5-egg-source[=DIR]],
+        [install CHICKEN 5 egg source code [not installed by default]])],
+  [install_chicken_5_egg_source="${enableval}"],
+  [install_chicken_5_egg_source=no])
+AC_SUBST([install_chicken_5_egg_source])
+AM_CONDITIONAL([INSTALL_CHICKEN_5_EGG_SOURCE],
+               [test "${install_chicken_5_egg_source}" != no])
+chickeneggs5pipchixdir="${chickeneggs5pipchixdir:-\$(datadir)/chicken/eggs/5/pipchix}"
+AC_SUBST([chickeneggs5pipchixdir])
 
 m4_include([ac-tinyscheme.m4])
 m4_include([ac-chicken-scheme.m4])
@@ -85,7 +87,7 @@ m4_include([ac-gauche-scheme.m4])
 m4_include([ac-guile-scheme.m4])
 m4_include([ac-sagittarius-scheme.m4])
 
-# You can use ‘@GNU@’ to make GNU Make constructs unbothersome to
+# You can use ‘@GNU@’ to make GNU Make co@GNU@ nstructs unbothersome to
 # Automake. (By the way, you often can use ‘$(eval ...)’ as well, but
 # @GNU@ here may be better.)
 AC_SUBST([GNU],[])
