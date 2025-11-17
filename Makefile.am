@@ -35,7 +35,7 @@ DISTCLEANFILES =
 EXTRA_DIST =
 EXTRA_SCRIPTS =
 BUILT_SOURCES =
-nodist_r7rs_DATA =
+nodist_r7rspipchix_DATA =
 
 EXTRA_DIST += silent-rules.mk
 EXTRA_DIST += COPYING
@@ -49,26 +49,32 @@ DISTCLEANFILES += GNUmakefile
 EXTRA_DIST += pipchix-includes.m4
 EXTRA_DIST += $(addsuffix .m4, $(nodist_r7rs_DATA))
 
-nodist_r7rs_DATA += pipchix/base.sld
-nodist_r7rs_DATA += pipchix/nix-embed.sld
-nodist_r7rs_DATA += pipchix/nix-list.sld
-nodist_r7rs_DATA += pipchix/abstract-syntax-tree.sld
-
-CLEANFILES += $(nodist_r7rs_DATA)
-CLEANFILES += $(addsuffix .tmp, $(nodist_r7rs_DATA))
-
 M4_PREPROCESS = $(GNU_M4) -P -I '$(srcdir)'
-
-%.sld: %.sld.m4 pipchix-includes.m4
-	$(call v,SLD.M4)$(MKDIR_P) $(@D) && \
-		$(M4_PREPROCESS) $(<) > $(@).tmp && \
-		mv $(@){.tmp,}
 
 @GNU@ define copy-file
 @GNU@ $(call v,COPY) cp -f $(1) $(2)
 @GNU@ endef
 
 CLEANFILES += tmp.*
+
+R7RS_SCHEME =
+R7RS_SCHEME += r7rs/pipchix/base.sld
+R7RS_SCHEME += r7rs/pipchix/nix-embed.sld
+R7RS_SCHEME += r7rs/pipchix/nix-list.sld
+R7RS_SCHEME += r7rs/pipchix/abstract-syntax-tree.sld
+
+CLEANFILES += $(R7RS_SCHEME)
+CLEANFILES += $(addsuffix .tmp, $(R7RS_SCHEME))
+
+if INSTALL_R7RS_SOURCE
+nodist_r7rspipchix_DATA += $(R7RS_SCHEME)
+endif
+
+$(builddir)/r7rs/pipchix/%.sld: $(srcdir)/r7rs/pipchix/%.sld.m4 \
+	                        $(srcdir)/pipchix-includes.m4
+	$(call v,SLD.M4)$(MKDIR_P) $(@D) && \
+		$(M4_PREPROCESS) $(<) > $(@).tmp && \
+		mv $(@){.tmp,}
 
 #---------------------------------------------------------------------
 #
@@ -101,7 +107,12 @@ CHICKEN_EGGSPEC_BOTTOM = ' \
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-all-recursive: $(CHICKEN_5_EGGFILES)
+$(builddir)/$(CHICKEN_5_EGGDIR)/pipchix.%.scm: \
+	                           $(srcdir)/r7rs/pipchix/%.sld.m4 \
+	                           $(srcdir)/pipchix-includes.m4
+	$(call v,SCM.M4) $(MKDIR_P) $(@D) && \
+		$(M4_PREPROCESS) $(<) > $(@).tmp && \
+		mv $(@){.tmp,}
 
 CHICKEN_5_EGGS = chicken/eggs/5
 CHICKEN_5_EGGDIR = $(CHICKEN_5_EGGS)/pipchix
@@ -135,11 +146,6 @@ $(CHICKEN_5_EGGDIR)/pipchix.egg: GNUmakefile $(TINYSCHEME_EXE)
 			> $(abs_builddir)/$(@) && \
 	(test $(removing_egg_scripts) = yes && rm "$${script}" || true)
 
-$(CHICKEN_5_EGGDIR)/pipchix.%.scm: pipchix/%.sld.m4 pipchix-includes.m4
-	$(call v,SCM.M4)$(MKDIR_P) $(@D) && \
-		$(M4_PREPROCESS) $(<) > $(@).tmp && \
-		mv $(@){.tmp,}
-
 CHICKEN_5_EGGSPEC = ' \
  '$(CHICKEN_EGGSPEC_TOP)' \
    (dependencies r7rs srfi-151 utf8) \
@@ -171,111 +177,40 @@ endif CHICKEN_UNINSTALL_5
 CLEANFILES += $(CHICKEN_5_EGGDIR)/*.{$(OBJEXT),so,link,import.scm}
 CLEANFILES += $(CHICKEN_5_EGGDIR)/pipchix.{build,install}.sh
 
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-#
-# README: At the time of this writing (2025-11-15), it is not yet
-#         possible to compile the egg with CHICKEN 6.
-#
-#
-
-# all-recursive: $(CHICKEN_6_EGGFILES)
-
-CHICKEN_6_EGGS = chicken/eggs/6
-CHICKEN_6_EGGDIR = $(CHICKEN_6_EGGS)/pipchix
-CHICKEN_6_EGGFILES = \
-  $(addprefix $(CHICKEN_6_EGGDIR)/, \
-    pipchix.egg \
-    pipchix.abstract-syntax-tree.scm \
-    pipchix.nix-embed.scm \
-    pipchix.nix-list.scm \
-    pipchix.base.scm \
-    COPYING README.adoc)
-CLEANFILES += $(CHICKEN_6_EGGFILES)
-
-$(CHICKEN_6_EGGDIR)/COPYING: COPYING
-	$(call copy-file, $(<), $(@))
-
-$(CHICKEN_6_EGGDIR)/README.adoc: README.adoc
-	$(call copy-file, $(<), $(@))
-
-$(CHICKEN_6_EGGDIR)/pipchix.egg: GNUmakefile $(TINYSCHEME_EXE)
-	$(call v,SEXP) \
-	script=`$(MKTEMP)` && \
-	$(MKDIR_P) $(@D) && \
-	if true; then \
-	  printf '%s' $(DEFINE_NICELY_PRINT); \
-	  printf '(define eggfile (quote %s))' \
-	                 $(CHICKEN_6_EGGSPEC); \
-	  printf '(nicely-print eggfile)'; \
-	fi > "$${script}" && \
-        $(call tinyscheme-1, ${abs_builddir}/"$${script}") \
-			> $(abs_builddir)/$(@)) && \
-	(test $(removing_egg_scripts) = yes && rm "$${script}" || true)
-
-$(CHICKEN_6_EGGDIR)/pipchix.%.scm: pipchix/%.sld.m4 pipchix-includes.m4
-	$(call v,SCM.M4)$(MKDIR_P) $(@D) && \
-		$(M4_PREPROCESS) $(<) > $(@).tmp && \
-		mv $(@){.tmp,}
-
-CHICKEN_6_EGGSPEC = ' \
- '$(CHICKEN_EGGSPEC_TOP)' \
-   (component-options \
-    (csc-options \
-     "-O2" "-d1" \
-     "-compile-syntax")) \
- '$(CHICKEN_EGGSPEC_BOTTOM)
-
-if CHICKEN_INSTALL_6
-.PHONY: chicken-install-6
-chicken-install-6: $(CHICKEN_6_EGGFILES)
-	( \
-	  cd $(CHICKEN_6_EGGDIR) && \
-	  $(CHICKEN_INSTALL_6) -n && \
-	  env SUDO="$${INSTALL_AS}" $(CHICKEN_INSTALL_6) -s \
-	)
-endif CHICKEN_INSTALL_6
-
-if CHICKEN_UNINSTALL_6
-.PHONY: chicken-uninstall-6
-chicken-uninstall-6:
-	env SUDO="$${INSTALL_AS}" \
-	  $(CHICKEN_UNINSTALL_6) -s -force pipchix
-endif CHICKEN_UNINSTALL_6
-
-CLEANFILES += $(CHICKEN_6_EGGDIR)/*.{$(OBJEXT),so,link,import.scm}
-CLEANFILES += $(CHICKEN_6_EGGDIR)/pipchix.{build,install}.sh
-
 #---------------------------------------------------------------------
 
-tests/%-chibi: tests/%
+tests/r7rs/%-chibi: tests/r7rs/% $(R7RS_SCHEME)
 	$(call v,AWK) $(MKDIR_P) $(@D) && \
-	$(AWK) 'BEGIN{print "#!$(CHIBI_SCHEME)"}{print}' $(<) \
+	$(AWK) 'BEGIN{print "#!$(CHIBI_SCHEME) -I'$(abs_builddir)/r7rs'"} \
+	        {print}' $(<) \
 	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
-tests/%-gauche: tests/%
+tests/r7rs/%-gauche: tests/r7rs/% $(R7RS_SCHEME)
 	$(call v,AWK) $(MKDIR_P) $(@D) && \
-	$(AWK) 'BEGIN{print "#!$(GAUCHE)"}{print}' $(<) \
+	$(AWK) 'BEGIN{print "#!$(GAUCHE) -I'$(abs_builddir)/r7rs'"} \
+	        {print}' $(<) \
 	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
-tests/%-guile: tests/%
+tests/r7rs/%-guile: tests/r7rs/% $(R7RS_SCHEME)
 	$(call v,AWK) $(MKDIR_P) $(@D) && \
 	$(AWK) 'BEGIN{print "#!$(GUILE) \\"; \
-	              print "--r7rs -s"; \
+	              print "-L '$(abs_builddir)/r7rs' --r7rs -s"; \
 	              print "!#"} \
 	        {print}' $(<) \
 	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
-tests/%-sagittarius: tests/%
+tests/r7rs/%-sagittarius: tests/r7rs/% $(R7RS_SCHEME)
 	$(call v,AWK) $(MKDIR_P) $(@D) && \
-	$(AWK) 'BEGIN{print "#!$(SAGITTARIUS)"}{print}' $(<) \
+	$(AWK) 'BEGIN{print "#!$(SAGITTARIUS) --loadpath='$(abs_builddir)/r7rs'"} \
+	        {print}' $(<) \
 	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
-CLEANFILES += tests/*.tmp
+CLEANFILES += tests/r7rs/*.tmp
 
 TESTS =
 
 TEST_SCHEME =
-TEST_SCHEME += tests/check-nix-list
+TEST_SCHEME += tests/r7rs/check-nix-list
 
 EXTRA_DIST += $(TEST_SCHEME)
 CLEANFILES += $(addsuffix -chibi, $(TEST_SCHEME))
@@ -284,16 +219,16 @@ CLEANFILES += $(addsuffix -guile, $(TEST_SCHEME))
 CLEANFILES += $(addsuffix -sagittarius, $(TEST_SCHEME))
 
 if CHIBI_SCHEME
-TESTS += tests/check-nix-list-chibi
+TESTS += tests/r7rs/check-nix-list-chibi
 endif CHIBI_SCHEME
 if GAUCHE
-TESTS += tests/check-nix-list-gauche
+TESTS += tests/r7rs/check-nix-list-gauche
 endif GAUCHE
 if GUILE
-TESTS += tests/check-nix-list-guile
+TESTS += tests/r7rs/check-nix-list-guile
 endif GUILE
 if SAGITTARIUS
-TESTS += tests/check-nix-list-sagittarius
+TESTS += tests/r7rs/check-nix-list-sagittarius
 endif SAGITTARIUS
 
 #---------------------------------------------------------------------

@@ -58,12 +58,25 @@ AC_CHECK_PROGS([MKTEMP],[mktemp],[echo tmp.\"\$\${RANDOM}\"])
 AC_ARG_VAR([MKTEMP],[mktemp command])
 MKTEMP="TMPDIR=. ${MKTEMP}"
 
-AC_ARG_WITH([r7rsdir],
-  [AS_HELP_STRING([--with-r7rsdir=DIR],
-        [where to put R⁷RS source code [DATAROOTDIR/r7rs]])],
-  [r7rsdir="${withval}"],
-  [r7rsdir='${datadir}/r7rs'])
-AC_SUBST([r7rsdir])
+AC_ARG_ENABLE([install-r7rs-source],
+  [AS_HELP_STRING([--disable-install-r7rs-source=DIR],
+        [install R⁷RS source code [installed by default]])],
+  [install_r7rs_source="${enableval}"],
+  [install_r7rs_source='yes'])
+AC_SUBST([install_r7rs_source])
+AM_CONDITIONAL([INSTALL_R7RS_SOURCE],
+               [test "${install_r7rs_source}" != no])
+r7rspipchixdir="${r7rspipchixdir:-${datadir}/r7rs/pipchix}"
+AC_SUBST([r7rspipchixdir])
+
+AC_ARG_ENABLE([install-chicken-5-egg-source],
+  [AS_HELP_STRING([--enable-install-chicken-5-egg-source=DIR],
+        [install R⁷RS source code [installed by default]])],
+  [install_r7rs="${enableval}"],
+  [install_r7rs='yes'])
+AC_SUBST([install_r7rs])
+r7rspipchixdir="${r7rspipchixdir:-${datadir}/r7rs/pipchix}"
+AC_SUBST([r7rspipchixdir])
 
 m4_include([ac-tinyscheme.m4])
 m4_include([ac-chicken-scheme.m4])

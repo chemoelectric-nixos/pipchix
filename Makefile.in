@@ -111,10 +111,11 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-@CHIBI_SCHEME_TRUE@am__append_1 = tests/check-nix-list-chibi
-@GAUCHE_TRUE@am__append_2 = tests/check-nix-list-gauche
-@GUILE_TRUE@am__append_3 = tests/check-nix-list-guile
-@SAGITTARIUS_TRUE@am__append_4 = tests/check-nix-list-sagittarius
+@INSTALL_R7RS_SOURCE_TRUE@am__append_1 = $(R7RS_SCHEME)
+@CHIBI_SCHEME_TRUE@am__append_2 = tests/r7rs/check-nix-list-chibi
+@GAUCHE_TRUE@am__append_3 = tests/r7rs/check-nix-list-gauche
+@GUILE_TRUE@am__append_4 = tests/r7rs/check-nix-list-guile
+@SAGITTARIUS_TRUE@am__append_5 = tests/r7rs/check-nix-list-sagittarius
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/ax_check_compile_flag.m4 \
@@ -191,8 +192,8 @@ am__uninstall_files_from_dir = { \
   || { echo " ( cd '$$dir' && rm -f" $$files ")"; \
        $(am__cd) "$$dir" && echo $$files | $(am__xargs_n) 40 $(am__rm_f); }; \
   }
-am__installdirs = "$(DESTDIR)$(r7rsdir)"
-DATA = $(nodist_r7rs_DATA)
+am__installdirs = "$(DESTDIR)$(r7rspipchixdir)"
+DATA = $(nodist_r7rspipchix_DATA)
 RECURSIVE_CLEAN_TARGETS = mostlyclean-recursive clean-recursive	\
   distclean-recursive maintainer-clean-recursive
 am__recursive_targets = \
@@ -557,6 +558,8 @@ ifGNUmake = @ifGNUmake@
 ifnGNUmake = @ifnGNUmake@
 includedir = @includedir@
 infodir = @infodir@
+install_r7rs = @install_r7rs@
+install_r7rs_source = @install_r7rs_source@
 install_sh = @install_sh@
 libdir = @libdir@
 libexecdir = @libexecdir@
@@ -569,7 +572,7 @@ pdfdir = @pdfdir@
 prefix = @prefix@
 program_transform_name = @program_transform_name@
 psdir = @psdir@
-r7rsdir = @r7rsdir@
+r7rspipchixdir = @r7rspipchixdir@
 runstatedir = @runstatedir@
 sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
@@ -582,25 +585,24 @@ top_srcdir = @top_srcdir@
 SUBDIRS = tinyscheme-1.42
 ACLOCAL_AMFLAGS = -I m4 --install
 AUTOMAKE_OPTIONS = foreign
-CLEANFILES = $(nodist_r7rs_DATA) $(addsuffix .tmp, \
-	$(nodist_r7rs_DATA)) tmp.* $(CHICKEN_5_EGGFILES) \
+CLEANFILES = tmp.* $(R7RS_SCHEME) $(addsuffix .tmp, $(R7RS_SCHEME)) \
+	$(CHICKEN_5_EGGFILES) \
 	$(CHICKEN_5_EGGDIR)/*.{$(OBJEXT),so,link,import.scm} \
 	$(CHICKEN_5_EGGDIR)/pipchix.{build,install}.sh \
-	$(CHICKEN_6_EGGFILES) \
-	$(CHICKEN_6_EGGDIR)/*.{$(OBJEXT),so,link,import.scm} \
-	$(CHICKEN_6_EGGDIR)/pipchix.{build,install}.sh tests/*.tmp \
-	$(addsuffix -chibi, $(TEST_SCHEME)) $(addsuffix -gauche, \
-	$(TEST_SCHEME)) $(addsuffix -guile, $(TEST_SCHEME)) \
-	$(addsuffix -sagittarius, $(TEST_SCHEME))
+	tests/r7rs/*.tmp $(addsuffix -chibi, $(TEST_SCHEME)) \
+	$(addsuffix -gauche, $(TEST_SCHEME)) $(addsuffix -guile, \
+	$(TEST_SCHEME)) $(addsuffix -sagittarius, $(TEST_SCHEME))
 DISTCLEANFILES = Makefile GNUmakefile
 EXTRA_DIST = silent-rules.mk COPYING README.adoc INSTALL AUTHORS \
 	pipchix-includes.m4 $(addsuffix .m4, $(nodist_r7rs_DATA)) \
 	$(TEST_SCHEME)
 EXTRA_SCRIPTS = 
 BUILT_SOURCES = 
-nodist_r7rs_DATA = pipchix/base.sld pipchix/nix-embed.sld \
-	pipchix/nix-list.sld pipchix/abstract-syntax-tree.sld
+nodist_r7rspipchix_DATA = $(am__append_1)
 M4_PREPROCESS = $(GNU_M4) -P -I '$(srcdir)'
+R7RS_SCHEME = r7rs/pipchix/base.sld r7rs/pipchix/nix-embed.sld \
+	r7rs/pipchix/nix-list.sld \
+	r7rs/pipchix/abstract-syntax-tree.sld
 
 #---------------------------------------------------------------------
 #
@@ -653,37 +655,9 @@ CHICKEN_5_EGGSPEC = ' \
      "-compile-syntax")) \
  '$(CHICKEN_EGGSPEC_BOTTOM)
 
-
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-#
-# README: At the time of this writing (2025-11-15), it is not yet
-#         possible to compile the egg with CHICKEN 6.
-#
-#
-
-# all-recursive: $(CHICKEN_6_EGGFILES)
-CHICKEN_6_EGGS = chicken/eggs/6
-CHICKEN_6_EGGDIR = $(CHICKEN_6_EGGS)/pipchix
-CHICKEN_6_EGGFILES = \
-  $(addprefix $(CHICKEN_6_EGGDIR)/, \
-    pipchix.egg \
-    pipchix.abstract-syntax-tree.scm \
-    pipchix.nix-embed.scm \
-    pipchix.nix-list.scm \
-    pipchix.base.scm \
-    COPYING README.adoc)
-
-CHICKEN_6_EGGSPEC = ' \
- '$(CHICKEN_EGGSPEC_TOP)' \
-   (component-options \
-    (csc-options \
-     "-O2" "-d1" \
-     "-compile-syntax")) \
- '$(CHICKEN_EGGSPEC_BOTTOM)
-
-TESTS = $(am__append_1) $(am__append_2) $(am__append_3) \
-	$(am__append_4)
-TEST_SCHEME = tests/check-nix-list
+TESTS = $(am__append_2) $(am__append_3) $(am__append_4) \
+	$(am__append_5)
+TEST_SCHEME = tests/r7rs/check-nix-list
 
 #---------------------------------------------------------------------
 TINYSCHEME_DIR = tinyscheme-1.42
@@ -765,27 +739,27 @@ $(top_srcdir)/configure: @MAINTAINER_MODE_TRUE@ $(am__configure_deps)
 $(ACLOCAL_M4): @MAINTAINER_MODE_TRUE@ $(am__aclocal_m4_deps)
 	$(am__cd) $(srcdir) && $(ACLOCAL) $(ACLOCAL_AMFLAGS)
 $(am__aclocal_m4_deps):
-install-nodist_r7rsDATA: $(nodist_r7rs_DATA)
+install-nodist_r7rspipchixDATA: $(nodist_r7rspipchix_DATA)
 	@$(NORMAL_INSTALL)
-	@list='$(nodist_r7rs_DATA)'; test -n "$(r7rsdir)" || list=; \
+	@list='$(nodist_r7rspipchix_DATA)'; test -n "$(r7rspipchixdir)" || list=; \
 	if test -n "$$list"; then \
-	  echo " $(MKDIR_P) '$(DESTDIR)$(r7rsdir)'"; \
-	  $(MKDIR_P) "$(DESTDIR)$(r7rsdir)" || exit 1; \
+	  echo " $(MKDIR_P) '$(DESTDIR)$(r7rspipchixdir)'"; \
+	  $(MKDIR_P) "$(DESTDIR)$(r7rspipchixdir)" || exit 1; \
 	fi; \
 	for p in $$list; do \
 	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
 	  echo "$$d$$p"; \
 	done | $(am__base_list) | \
 	while read files; do \
-	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(r7rsdir)'"; \
-	  $(INSTALL_DATA) $$files "$(DESTDIR)$(r7rsdir)" || exit $$?; \
+	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(r7rspipchixdir)'"; \
+	  $(INSTALL_DATA) $$files "$(DESTDIR)$(r7rspipchixdir)" || exit $$?; \
 	done
 
-uninstall-nodist_r7rsDATA:
+uninstall-nodist_r7rspipchixDATA:
 	@$(NORMAL_UNINSTALL)
-	@list='$(nodist_r7rs_DATA)'; test -n "$(r7rsdir)" || list=; \
+	@list='$(nodist_r7rspipchix_DATA)'; test -n "$(r7rspipchixdir)" || list=; \
 	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
-	dir='$(DESTDIR)$(r7rsdir)'; $(am__uninstall_files_from_dir)
+	dir='$(DESTDIR)$(r7rspipchixdir)'; $(am__uninstall_files_from_dir)
 
 # This directory's subdirectories are mostly independent; you can cd
 # into them and run 'make' without going through this Makefile.
@@ -1059,30 +1033,30 @@ recheck: all
 	        am__force_recheck=am--force-recheck \
 	        TEST_LOGS="$$log_list"; \
 	exit $$?
-tests/check-nix-list-chibi.log: tests/check-nix-list-chibi
-	@p='tests/check-nix-list-chibi'; \
-	b='tests/check-nix-list-chibi'; \
+tests/r7rs/check-nix-list-chibi.log: tests/r7rs/check-nix-list-chibi
+	@p='tests/r7rs/check-nix-list-chibi'; \
+	b='tests/r7rs/check-nix-list-chibi'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
 	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/check-nix-list-gauche.log: tests/check-nix-list-gauche
-	@p='tests/check-nix-list-gauche'; \
-	b='tests/check-nix-list-gauche'; \
+tests/r7rs/check-nix-list-gauche.log: tests/r7rs/check-nix-list-gauche
+	@p='tests/r7rs/check-nix-list-gauche'; \
+	b='tests/r7rs/check-nix-list-gauche'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
 	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/check-nix-list-guile.log: tests/check-nix-list-guile
-	@p='tests/check-nix-list-guile'; \
-	b='tests/check-nix-list-guile'; \
+tests/r7rs/check-nix-list-guile.log: tests/r7rs/check-nix-list-guile
+	@p='tests/r7rs/check-nix-list-guile'; \
+	b='tests/r7rs/check-nix-list-guile'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
 	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/check-nix-list-sagittarius.log: tests/check-nix-list-sagittarius
-	@p='tests/check-nix-list-sagittarius'; \
-	b='tests/check-nix-list-sagittarius'; \
+tests/r7rs/check-nix-list-sagittarius.log: tests/r7rs/check-nix-list-sagittarius
+	@p='tests/r7rs/check-nix-list-sagittarius'; \
+	b='tests/r7rs/check-nix-list-sagittarius'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
@@ -1311,7 +1285,7 @@ check: $(BUILT_SOURCES)
 all-am: GNUmakefile $(DATA)
 installdirs: installdirs-recursive
 installdirs-am:
-	for dir in "$(DESTDIR)$(r7rsdir)"; do \
+	for dir in "$(DESTDIR)$(r7rspipchixdir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: $(BUILT_SOURCES)
@@ -1373,7 +1347,7 @@ info: info-recursive
 
 info-am:
 
-install-data-am: install-nodist_r7rsDATA
+install-data-am: install-nodist_r7rspipchixDATA
 
 install-dvi: install-dvi-recursive
 
@@ -1419,7 +1393,7 @@ ps: ps-recursive
 
 ps-am:
 
-uninstall-am: uninstall-nodist_r7rsDATA
+uninstall-am: uninstall-nodist_r7rspipchixDATA
 
 .MAKE: $(am__recursive_targets) all check check-am install install-am \
 	install-exec install-strip
@@ -1434,12 +1408,12 @@ uninstall-am: uninstall-nodist_r7rsDATA
 	install install-am install-data install-data-am install-dvi \
 	install-dvi-am install-exec install-exec-am install-html \
 	install-html-am install-info install-info-am install-man \
-	install-nodist_r7rsDATA install-pdf install-pdf-am install-ps \
-	install-ps-am install-strip installcheck installcheck-am \
-	installdirs installdirs-am maintainer-clean \
+	install-nodist_r7rspipchixDATA install-pdf install-pdf-am \
+	install-ps install-ps-am install-strip installcheck \
+	installcheck-am installdirs installdirs-am maintainer-clean \
 	maintainer-clean-generic mostlyclean mostlyclean-generic pdf \
 	pdf-am ps ps-am recheck tags tags-am uninstall uninstall-am \
-	uninstall-nodist_r7rsDATA
+	uninstall-nodist_r7rspipchixDATA
 
 .PRECIOUS: GNUmakefile
 
@@ -1448,18 +1422,24 @@ uninstall-am: uninstall-nodist_r7rsDATA
 
 @GNU@ include $(top_srcdir)/silent-rules.mk
 
-%.sld: %.sld.m4 pipchix-includes.m4
-	$(call v,SLD.M4)$(MKDIR_P) $(@D) && \
-		$(M4_PREPROCESS) $(<) > $(@).tmp && \
-		mv $(@){.tmp,}
-
 @GNU@ define copy-file
 @GNU@ $(call v,COPY) cp -f $(1) $(2)
 @GNU@ endef
 
+$(builddir)/r7rs/pipchix/%.sld: $(srcdir)/r7rs/pipchix/%.sld.m4 \
+	                        $(srcdir)/pipchix-includes.m4
+	$(call v,SLD.M4)$(MKDIR_P) $(@D) && \
+		$(M4_PREPROCESS) $(<) > $(@).tmp && \
+		mv $(@){.tmp,}
+
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-all-recursive: $(CHICKEN_5_EGGFILES)
+$(builddir)/$(CHICKEN_5_EGGDIR)/pipchix.%.scm: \
+	                           $(srcdir)/r7rs/pipchix/%.sld.m4 \
+	                           $(srcdir)/pipchix-includes.m4
+	$(call v,SCM.M4) $(MKDIR_P) $(@D) && \
+		$(M4_PREPROCESS) $(<) > $(@).tmp && \
+		mv $(@){.tmp,}
 
 $(CHICKEN_5_EGGDIR)/COPYING: COPYING
 	$(call copy-file, $(<), $(@))
@@ -1481,11 +1461,6 @@ $(CHICKEN_5_EGGDIR)/pipchix.egg: GNUmakefile $(TINYSCHEME_EXE)
 			> $(abs_builddir)/$(@) && \
 	(test $(removing_egg_scripts) = yes && rm "$${script}" || true)
 
-$(CHICKEN_5_EGGDIR)/pipchix.%.scm: pipchix/%.sld.m4 pipchix-includes.m4
-	$(call v,SCM.M4)$(MKDIR_P) $(@D) && \
-		$(M4_PREPROCESS) $(<) > $(@).tmp && \
-		mv $(@){.tmp,}
-
 @CHICKEN_INSTALL_5_TRUE@.PHONY: chicken-install-5
 @CHICKEN_INSTALL_5_TRUE@chicken-install-5: $(CHICKEN_5_EGGFILES)
 @CHICKEN_INSTALL_5_TRUE@	( \
@@ -1498,67 +1473,32 @@ $(CHICKEN_5_EGGDIR)/pipchix.%.scm: pipchix/%.sld.m4 pipchix-includes.m4
 @CHICKEN_UNINSTALL_5_TRUE@	env SUDO="$${INSTALL_AS}" \
 @CHICKEN_UNINSTALL_5_TRUE@	  $(CHICKEN_UNINSTALL_5) -s -force pipchix
 
-$(CHICKEN_6_EGGDIR)/COPYING: COPYING
-	$(call copy-file, $(<), $(@))
-
-$(CHICKEN_6_EGGDIR)/README.adoc: README.adoc
-	$(call copy-file, $(<), $(@))
-
-$(CHICKEN_6_EGGDIR)/pipchix.egg: GNUmakefile $(TINYSCHEME_EXE)
-	$(call v,SEXP) \
-	script=`$(MKTEMP)` && \
-	$(MKDIR_P) $(@D) && \
-	if true; then \
-	  printf '%s' $(DEFINE_NICELY_PRINT); \
-	  printf '(define eggfile (quote %s))' \
-	                 $(CHICKEN_6_EGGSPEC); \
-	  printf '(nicely-print eggfile)'; \
-	fi > "$${script}" && \
-        $(call tinyscheme-1, ${abs_builddir}/"$${script}") \
-			> $(abs_builddir)/$(@)) && \
-	(test $(removing_egg_scripts) = yes && rm "$${script}" || true)
-
-$(CHICKEN_6_EGGDIR)/pipchix.%.scm: pipchix/%.sld.m4 pipchix-includes.m4
-	$(call v,SCM.M4)$(MKDIR_P) $(@D) && \
-		$(M4_PREPROCESS) $(<) > $(@).tmp && \
-		mv $(@){.tmp,}
-
-@CHICKEN_INSTALL_6_TRUE@.PHONY: chicken-install-6
-@CHICKEN_INSTALL_6_TRUE@chicken-install-6: $(CHICKEN_6_EGGFILES)
-@CHICKEN_INSTALL_6_TRUE@	( \
-@CHICKEN_INSTALL_6_TRUE@	  cd $(CHICKEN_6_EGGDIR) && \
-@CHICKEN_INSTALL_6_TRUE@	  $(CHICKEN_INSTALL_6) -n && \
-@CHICKEN_INSTALL_6_TRUE@	  env SUDO="$${INSTALL_AS}" $(CHICKEN_INSTALL_6) -s \
-@CHICKEN_INSTALL_6_TRUE@	)
-
-@CHICKEN_UNINSTALL_6_TRUE@.PHONY: chicken-uninstall-6
-@CHICKEN_UNINSTALL_6_TRUE@chicken-uninstall-6:
-@CHICKEN_UNINSTALL_6_TRUE@	env SUDO="$${INSTALL_AS}" \
-@CHICKEN_UNINSTALL_6_TRUE@	  $(CHICKEN_UNINSTALL_6) -s -force pipchix
-
 #---------------------------------------------------------------------
 
-tests/%-chibi: tests/%
+tests/r7rs/%-chibi: tests/r7rs/% $(R7RS_SCHEME)
 	$(call v,AWK) $(MKDIR_P) $(@D) && \
-	$(AWK) 'BEGIN{print "#!$(CHIBI_SCHEME)"}{print}' $(<) \
+	$(AWK) 'BEGIN{print "#!$(CHIBI_SCHEME) -I'$(abs_builddir)/r7rs'"} \
+	        {print}' $(<) \
 	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
-tests/%-gauche: tests/%
+tests/r7rs/%-gauche: tests/r7rs/% $(R7RS_SCHEME)
 	$(call v,AWK) $(MKDIR_P) $(@D) && \
-	$(AWK) 'BEGIN{print "#!$(GAUCHE)"}{print}' $(<) \
+	$(AWK) 'BEGIN{print "#!$(GAUCHE) -I'$(abs_builddir)/r7rs'"} \
+	        {print}' $(<) \
 	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
-tests/%-guile: tests/%
+tests/r7rs/%-guile: tests/r7rs/% $(R7RS_SCHEME)
 	$(call v,AWK) $(MKDIR_P) $(@D) && \
 	$(AWK) 'BEGIN{print "#!$(GUILE) \\"; \
-	              print "--r7rs -s"; \
+	              print "-L '$(abs_builddir)/r7rs' --r7rs -s"; \
 	              print "!#"} \
 	        {print}' $(<) \
 	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
-tests/%-sagittarius: tests/%
+tests/r7rs/%-sagittarius: tests/r7rs/% $(R7RS_SCHEME)
 	$(call v,AWK) $(MKDIR_P) $(@D) && \
-	$(AWK) 'BEGIN{print "#!$(SAGITTARIUS)"}{print}' $(<) \
+	$(AWK) 'BEGIN{print "#!$(SAGITTARIUS) --loadpath='$(abs_builddir)/r7rs'"} \
+	        {print}' $(<) \
 	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
 @GNU@ define tinyscheme-1
