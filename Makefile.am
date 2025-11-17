@@ -33,6 +33,7 @@ CLEANFILES =
 DISTCLEANFILES =
 
 EXTRA_DIST =
+EXTRA_PROGRAMS =
 EXTRA_SCRIPTS =
 BUILT_SOURCES =
 nodist_r7rspipchix_DATA =
@@ -182,6 +183,17 @@ CLEANFILES += $(CHICKEN_5_EGGDIR)/pipchix.{build,install}.sh
 
 #---------------------------------------------------------------------
 
+if CSI_5
+@GNU@ define get-chicken-5-repository-path
+@GNU@ $(CSI_5) -n -b -R r7rs -R srfi-13 -R chicken.platform \
+@GNU@    -e '(display (string-join (cons "$(abs_builddir)/$(CHICKEN_5_EGGDIR)/.." (repository-path)) ":"))'
+@GNU@ endef
+else !CSI_5
+@GNU@ define get-chicken-5-repository-path
+@GNU@ true
+@GNU@ endef
+endif !CSI_5
+
 #
 # make-chicken-5-egg may fail if you have not installed the
 # dependencies of pipchix.
@@ -193,46 +205,58 @@ make-chicken-5-egg: $(CHICKEN_5_EGGFILES)
 	  $(CHICKEN_INSTALL_5) -n \
 	)
 
-if CSI_5
-@GNU@ define get-chicken-5-repository-path
-@GNU@ $(CSI_5) -n -b -R r7rs -R srfi-13 -R chicken.platform \
-@GNU@    -e '(display (string-join (cons "$(abs_builddir)/$(CHICKEN_5_EGGDIR)" (repository-path)) ":"))'
-@GNU@ endef
-else !CSI_5
-@GNU@ define get-chicken-5-repository-path
-@GNU@ true
-@GNU@ endef
-endif !CSI_5
-
-AM_TESTS_ENVIRONMENT = \
-	export CHICKEN_REPOSITORY_PATH; \
-	CHICKEN_REPOSITORY_PATH=`$(call get-chicken-5-repository-path)`; \
-	true;
-
-chicken-5-egg-stamp:  make-chicken-5-egg
-	touch $(@)
+chicken-5-egg-stamp: make-chicken-5-egg
+	test -e $(@) || touch $(@)
 
 CLEANFILES += chicken-5-egg-stamp
 
-tests/r7rs/%-csi-5: tests/r7rs/% $(CHICKEN_5_EGGFILES) chicken-5-egg-stamp
+tests/r7rs/chicken-5/%-csi: tests/r7rs/% $(CHICKEN_5_EGGFILES) \
+	                    chicken-5-egg-stamp GNUmakefile
 	$(call v,AWK) $(MKDIR_P) $(@D) && \
-	$(AWK) 'BEGIN{print "#!/usr/bin/env -S $(CSI_5) -s"} \
+	$(AWK) 'BEGIN{print "#!/usr/bin/env -S $(CSI_5) -R r7rs -s"} \
 	        {print}' $(<) \
 	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
-tests/r7rs/%-chibi: tests/r7rs/% $(R7RS_SCHEME)
+tests/r7rs/chicken-5/%-csi.sh: tests/r7rs/% GNUmakefile
+	$(call v,PRINTF) $(MKDIR_P) $(@D) && \
+	( \
+	  scheme='$(realpath $(<))' && \
+	  printf '#!$(SHELL)\n' && \
+	  printf 'export CHICKEN_REPOSITORY_PATH\n' && \
+	  printf 'CHICKEN_REPOSITORY_PATH="%s"\n' \
+	         "$(call get-chicken-5-repository-path)" \
+	  printf 'exec $(CSI_5) -R r7rs -n -b -s %s\n' "$${scheme}" \
+	) > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
+
+tests/r7rs/chicken-5/%-csc: tests/r7rs/% $(CHICKEN_5_EGGFILES) \
+	                    chicken-5-egg-stamp GNUmakefile
+	$(call v,AWK) $(MKDIR_P) $(@D) && \
+	$(CSC_5) -R r7rs -X r7rs $(<) -o $(@)
+
+tests/r7rs/chicken-5/%-csc.sh: tests/r7rs/% GNUmakefile
+	$(call v,PRINTF) $(MKDIR_P) $(@D) && \
+	( \
+	  scheme='$(realpath $(<))' && \
+	  printf '#!$(SHELL)\n' && \
+	  printf 'export CHICKEN_REPOSITORY_PATH\n' && \
+	  printf 'CHICKEN_REPOSITORY_PATH="%s"\n' \
+	         "$(call get-chicken-5-repository-path)" \
+	  printf 'exec %s\n' "$${scheme}" \
+	) > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
+
+tests/r7rs/%-chibi: tests/r7rs/% $(R7RS_SCHEME) GNUmakefile
 	$(call v,AWK) $(MKDIR_P) $(@D) && \
 	$(AWK) 'BEGIN{print "#!$(CHIBI_SCHEME) -I'$(abs_builddir)/r7rs'"} \
 	        {print}' $(<) \
 	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
-tests/r7rs/%-gauche: tests/r7rs/% $(R7RS_SCHEME)
+tests/r7rs/%-gauche: tests/r7rs/% $(R7RS_SCHEME) GNUmakefile
 	$(call v,AWK) $(MKDIR_P) $(@D) && \
 	$(AWK) 'BEGIN{print "#!$(GAUCHE) -I'$(abs_builddir)/r7rs'"} \
 	        {print}' $(<) \
 	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
-tests/r7rs/%-guile: tests/r7rs/% $(R7RS_SCHEME)
+tests/r7rs/%-guile: tests/r7rs/% $(R7RS_SCHEME) GNUmakefile
 	$(call v,AWK) $(MKDIR_P) $(@D) && \
 	$(AWK) 'BEGIN{print "#!$(GUILE) \\"; \
 	              print "-L '$(abs_builddir)/r7rs' --r7rs --no-auto-compile -s"; \
@@ -240,29 +264,41 @@ tests/r7rs/%-guile: tests/r7rs/% $(R7RS_SCHEME)
 	        {print}' $(<) \
 	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
-tests/r7rs/%-sagittarius: tests/r7rs/% $(R7RS_SCHEME)
+tests/r7rs/%-sagittarius: tests/r7rs/% $(R7RS_SCHEME) GNUmakefile
 	$(call v,AWK) $(MKDIR_P) $(@D) && \
 	$(AWK) 'BEGIN{print "#!$(SAGITTARIUS) --loadpath='$(abs_builddir)/r7rs'"} \
 	        {print}' $(<) \
 	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
 CLEANFILES += tests/r7rs/*.tmp
+CLEANFILES += tests/r7rs/chicken-5/*.tmp
 
 TESTS =
+TESTS += $(TESTS_WE_MADE)
 
-TEST_SCHEME =
-TEST_SCHEME += tests/r7rs/check-nix-list
+CHEX_R7RS =
+CHEX_R7RS += check-nix-list
 
-EXTRA_DIST += $(TEST_SCHEME)
-CLEANFILES += $(addsuffix -csi-5, $(TEST_SCHEME))
-CLEANFILES += $(addsuffix -chibi, $(TEST_SCHEME))
-CLEANFILES += $(addsuffix -gauche, $(TEST_SCHEME))
-CLEANFILES += $(addsuffix -guile, $(TEST_SCHEME))
-CLEANFILES += $(addsuffix -sagittarius, $(TEST_SCHEME))
+EXTRA_DIST += $(CHEX_R7RS:%=tests/r7rs/%)
+
+CHEX_WE_MADE =
+CHEX_WE_MADE += $(CHEX_R7RS:%=tests/r7rs/chicken-5/%-csi.sh)
+CHEX_WE_MADE += $(CHEX_R7RS:%=tests/r7rs/chicken-5/%-csc.sh)
+CHEX_WE_MADE += $(CHEX_R7RS:%=tests/r7rs/%-chibi)
+CHEX_WE_MADE += $(CHEX_R7RS:%=tests/r7rs/%-gauche)
+CHEX_WE_MADE += $(CHEX_R7RS:%=tests/r7rs/%-guile)
+CHEX_WE_MADE += $(CHEX_R7RS:%=tests/r7rs/%-sagittarius)
+
+CLEANFILES += $(CHEX_WE_MADE)
+CLEANFILES += $(CHEX_R7RS:%=tests/r7rs/chicken-5/%-csi)
+CLEANFILES += $(CHEX_R7RS:%=tests/r7rs/chicken-5/%-csc)
 
 if CHICKEN_INSTALL_5
 if CSI_5
-TESTS += tests/r7rs/check-nix-list-csi-5
+TESTS += tests/r7rs/chicken-5/check-nix-list-csi.sh
+endif
+if CSC_5
+TESTS += tests/r7rs/chicken-5/check-nix-list-csc.sh
 endif
 endif
 

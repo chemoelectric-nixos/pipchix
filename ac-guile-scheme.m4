@@ -24,10 +24,10 @@
 #
 
 StM_PATH_PROGS_CACHED_AND_PRECIOUS([GUILE],
-  [Guile Scheme (in R⁷RS compatibility mode)],[guile],
+  [Guile Scheme version 3],[guile],
   [
     if LC_ALL=C LANG=C ${ac_path_GUILE} --r7rs --version 2>&1 | \
-      LC_ALL=C LANG=C ${FGREP} '(GNU Guile)' \
+      LC_ALL=C LANG=C ${FGREP} '(GNU Guile) 3' \
                2> /dev/null > /dev/null; then
         ac_cv_path_GUILE="${ac_path_GUILE}"
         ac_path_GUILE_found=:

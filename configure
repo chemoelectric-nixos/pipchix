@@ -1455,11 +1455,12 @@ Optional Features:
   --enable-maintainer-mode
                           enable make rules and dependencies not useful (and
                           sometimes confusing) to the casual installer
-  --disable-install-r7rs-source=DIR
+  --disable-install-r7rs-source[=DIR]
                           install R⁷RS source code [installed by default]
-  --enable-install-chicken-5-egg-source=DIR
+                          [DATAROOTDIR/r7rs/pipchix]
+  --enable-install-chicken-5-egg-source[=DIR]
                           install CHICKEN 5 egg source code [not installed by
-                          default]
+                          default] [DATAROOTDIR/chicken/eggs/5/pipchix]
 
 Some influential environment variables:
   CC          C compiler command
@@ -1480,7 +1481,7 @@ Some influential environment variables:
   CHIBI_SCHEME
               Chibi Scheme
   GAUCHE      Gauche Scheme
-  GUILE       Guile Scheme (in R⁷RS compatibility mode)
+  GUILE       Guile Scheme version 3
   SAGITTARIUS Sagittarius Scheme
   GNU_MAKE    GNU Make command
 
@@ -6340,6 +6341,8 @@ test -n "$MKTEMP" || MKTEMP="echo tmp.\"\$\${RANDOM}\""
 
 MKTEMP="TMPDIR=. ${MKTEMP}"
 
+
+
 # Check whether --enable-install-r7rs-source was given.
 if test ${enable_install_r7rs_source+y}
 then :
@@ -6360,6 +6363,12 @@ fi
  r7rspipchixdir="${r7rspipchixdir:-\$(datadir)/r7rs/pipchix}"
 
 
+
+
+chickeneggsdir="${chickeneggsdir:-\$(datadir)/chicken/eggs}"
+
+
+
 # Check whether --enable-install-chicken-5-egg-source was given.
 if test ${enable_install_chicken_5_egg_source+y}
 then :
@@ -6378,7 +6387,7 @@ else
   INSTALL_CHICKEN_5_EGG_SOURCE_FALSE=
 fi
 
-chickeneggs5pipchixdir="${chickeneggs5pipchixdir:-\$(datadir)/chicken/eggs/5/pipchix}"
+chickeneggs5pipchixdir="${chickeneggs5pipchixdir:-\$(chickeneggsdir)/5/pipchix}"
 
 
 # Copyright © 2025 Barry Schwartz
@@ -6547,6 +6556,18 @@ fi
 # CHICKEN Scheme configuration.
 #
 
+##
+##
+## FIXME: I SHOULD REWRITE StM_PATH_PROGS_CACHED_AND_PRECIOUS AS
+##        SOMETHING THAT USES STANDARD CACHE VARIABLE NAMES. I can
+##        start a new autoconf archive.
+##
+##        I SHOULD ALSO STANDARDIZE THE YES/NO TESTS! This can be done
+##        in macros.
+##
+##                             -- Barry Schwartz
+##
+##
 { :;
 
 # Override the cache if the precious variable CHICKEN_INSTALL_5 is set.
@@ -7213,7 +7234,7 @@ do
          # Run the test.
 
     if LC_ALL=C LANG=C ${ac_path_GUILE} --r7rs --version 2>&1 | \
-      LC_ALL=C LANG=C ${FGREP} '(GNU Guile)' \
+      LC_ALL=C LANG=C ${FGREP} '(GNU Guile) 3' \
                2> /dev/null > /dev/null; then
         ac_cv_path_GUILE="${ac_path_GUILE}"
         ac_path_GUILE_found=:
@@ -9034,8 +9055,8 @@ fi
 if test "${__ac_cv_path_GUILE_found}" != no; then
   { printf "%s\n" "$as_me:${as_lineno-$LINENO}: " >&5
 printf "%s\n" "$as_me: " >&6;}
-  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: The Guile interpreter/compiler ${GUILE} was found." >&5
-printf "%s\n" "$as_me: The Guile interpreter/compiler ${GUILE} was found." >&6;}
+  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: The Guile interpreter/compiler version 3 ${GUILE} was found." >&5
+printf "%s\n" "$as_me: The Guile interpreter/compiler version 3 ${GUILE} was found." >&6;}
 fi
 if test "${__ac_cv_path_SAGITTARIUS_found}" != no; then
   { printf "%s\n" "$as_me:${as_lineno-$LINENO}: " >&5

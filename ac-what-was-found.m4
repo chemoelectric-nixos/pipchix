@@ -37,7 +37,7 @@ if test "${__ac_cv_path_GAUCHE_found}" != no; then
 fi
 if test "${__ac_cv_path_GUILE_found}" != no; then
   AC_MSG_NOTICE([])
-  AC_MSG_NOTICE([The Guile interpreter/compiler ${GUILE} was found.])
+  AC_MSG_NOTICE([The Guile interpreter/compiler version 3 ${GUILE} was found.])
 fi
 if test "${__ac_cv_path_SAGITTARIUS_found}" != no; then
   AC_MSG_NOTICE([])

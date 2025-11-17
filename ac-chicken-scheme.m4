@@ -23,6 +23,18 @@
 # CHICKEN Scheme configuration.
 #
 
+##
+##
+## FIXME: I SHOULD REWRITE StM_PATH_PROGS_CACHED_AND_PRECIOUS AS
+##        SOMETHING THAT USES STANDARD CACHE VARIABLE NAMES. I can
+##        start a new autoconf archive.
+##
+##        I SHOULD ALSO STANDARDIZE THE YES/NO TESTS! This can be done
+##        in macros.
+##
+##                             -- Barry Schwartz
+##
+##
 StM_PATH_PROGS_CACHED_AND_PRECIOUS([CHICKEN_INSTALL_5],
   [chicken-install version 5],[chicken-install chicken-install-5],
   [

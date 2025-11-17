@@ -111,13 +111,17 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
+EXTRA_PROGRAMS =
 @INSTALL_R7RS_SOURCE_TRUE@am__append_1 = $(R7RS_SCHEME)
 @INSTALL_CHICKEN_5_EGG_SOURCE_TRUE@am__append_2 = $(CHICKEN_5_EGGFILES)
-@CHICKEN_INSTALL_5_TRUE@@CSI_5_TRUE@am__append_3 = tests/r7rs/check-nix-list-csi-5
-@CHIBI_SCHEME_TRUE@am__append_4 = tests/r7rs/check-nix-list-chibi
-@GAUCHE_TRUE@am__append_5 = tests/r7rs/check-nix-list-gauche
-@GUILE_TRUE@am__append_6 = tests/r7rs/check-nix-list-guile
-@SAGITTARIUS_TRUE@am__append_7 = tests/r7rs/check-nix-list-sagittarius
+TESTS = $(am__append_3) $(am__append_4) $(am__append_5) \
+	$(am__append_6) $(am__append_7) $(am__append_8)
+@CHICKEN_INSTALL_5_TRUE@@CSI_5_TRUE@am__append_3 = tests/r7rs/chicken-5/check-nix-list-csi.sh
+@CHICKEN_INSTALL_5_TRUE@@CSC_5_TRUE@am__append_4 = tests/r7rs/chicken-5/check-nix-list-csc.sh
+@CHIBI_SCHEME_TRUE@am__append_5 = tests/r7rs/check-nix-list-chibi
+@GAUCHE_TRUE@am__append_6 = tests/r7rs/check-nix-list-gauche
+@GUILE_TRUE@am__append_7 = tests/r7rs/check-nix-list-guile
+@SAGITTARIUS_TRUE@am__append_8 = tests/r7rs/check-nix-list-sagittarius
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/ax_check_compile_flag.m4 \
@@ -593,14 +597,14 @@ CLEANFILES = tmp.* $(R7RS_SCHEME) $(addsuffix .tmp, $(R7RS_SCHEME)) \
 	$(CHICKEN_5_EGGFILES) \
 	$(CHICKEN_5_EGGDIR)/*.{$(OBJEXT),so,link,import.scm} \
 	$(CHICKEN_5_EGGDIR)/pipchix.{build,install}.sh \
-	chicken-5-egg-stamp tests/r7rs/*.tmp $(addsuffix -csi-5, \
-	$(TEST_SCHEME)) $(addsuffix -chibi, $(TEST_SCHEME)) \
-	$(addsuffix -gauche, $(TEST_SCHEME)) $(addsuffix -guile, \
-	$(TEST_SCHEME)) $(addsuffix -sagittarius, $(TEST_SCHEME))
+	chicken-5-egg-stamp tests/r7rs/*.tmp \
+	tests/r7rs/chicken-5/*.tmp $(CHEX_WE_MADE) \
+	$(CHEX_R7RS:%=tests/r7rs/chicken-5/%-csi) \
+	$(CHEX_R7RS:%=tests/r7rs/chicken-5/%-csc)
 DISTCLEANFILES = Makefile GNUmakefile
 EXTRA_DIST = silent-rules.mk COPYING README.adoc INSTALL AUTHORS \
 	pipchix-includes.m4 $(addsuffix .m4, $(nodist_r7rs_DATA)) \
-	$(TEST_SCHEME)
+	$(CHEX_R7RS:%=tests/r7rs/%)
 EXTRA_SCRIPTS = 
 BUILT_SOURCES = 
 nodist_r7rspipchix_DATA = $(am__append_1)
@@ -661,14 +665,13 @@ CHICKEN_5_EGGSPEC = ' \
      "-compile-syntax")) \
  '$(CHICKEN_EGGSPEC_BOTTOM)
 
-AM_TESTS_ENVIRONMENT = \
-	export CHICKEN_REPOSITORY_PATH; \
-	CHICKEN_REPOSITORY_PATH=`$(call get-chicken-5-repository-path)`; \
-	true;
-
-TESTS = $(am__append_3) $(am__append_4) $(am__append_5) \
-	$(am__append_6) $(am__append_7)
-TEST_SCHEME = tests/r7rs/check-nix-list
+CHEX_R7RS = check-nix-list
+CHEX_WE_MADE = $(CHEX_R7RS:%=tests/r7rs/chicken-5/%-csi.sh) \
+	$(CHEX_R7RS:%=tests/r7rs/chicken-5/%-csc.sh) \
+	$(CHEX_R7RS:%=tests/r7rs/%-chibi) \
+	$(CHEX_R7RS:%=tests/r7rs/%-gauche) \
+	$(CHEX_R7RS:%=tests/r7rs/%-guile) \
+	$(CHEX_R7RS:%=tests/r7rs/%-sagittarius)
 
 #---------------------------------------------------------------------
 TINYSCHEME_DIR = tinyscheme-1.42
@@ -1065,9 +1068,16 @@ recheck: all
 	        am__force_recheck=am--force-recheck \
 	        TEST_LOGS="$$log_list"; \
 	exit $$?
-tests/r7rs/check-nix-list-csi-5.log: tests/r7rs/check-nix-list-csi-5
-	@p='tests/r7rs/check-nix-list-csi-5'; \
-	b='tests/r7rs/check-nix-list-csi-5'; \
+tests/r7rs/chicken-5/check-nix-list-csi.sh.log: tests/r7rs/chicken-5/check-nix-list-csi.sh
+	@p='tests/r7rs/chicken-5/check-nix-list-csi.sh'; \
+	b='tests/r7rs/chicken-5/check-nix-list-csi.sh'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+tests/r7rs/chicken-5/check-nix-list-csc.sh.log: tests/r7rs/chicken-5/check-nix-list-csc.sh
+	@p='tests/r7rs/chicken-5/check-nix-list-csc.sh'; \
+	b='tests/r7rs/chicken-5/check-nix-list-csc.sh'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
@@ -1516,6 +1526,14 @@ $(CHICKEN_5_EGGDIR)/pipchix.egg: GNUmakefile $(TINYSCHEME_EXE)
 
 #---------------------------------------------------------------------
 
+@CSI_5_TRUE@@GNU@ define get-chicken-5-repository-path
+@CSI_5_TRUE@@GNU@ $(CSI_5) -n -b -R r7rs -R srfi-13 -R chicken.platform \
+@CSI_5_TRUE@@GNU@    -e '(display (string-join (cons "$(abs_builddir)/$(CHICKEN_5_EGGDIR)/.." (repository-path)) ":"))'
+@CSI_5_TRUE@@GNU@ endef
+@CSI_5_FALSE@@GNU@ define get-chicken-5-repository-path
+@CSI_5_FALSE@@GNU@ true
+@CSI_5_FALSE@@GNU@ endef
+
 #
 # make-chicken-5-egg may fail if you have not installed the
 # dependencies of pipchix.
@@ -1527,36 +1545,56 @@ make-chicken-5-egg: $(CHICKEN_5_EGGFILES)
 	  $(CHICKEN_INSTALL_5) -n \
 	)
 
-@CSI_5_TRUE@@GNU@ define get-chicken-5-repository-path
-@CSI_5_TRUE@@GNU@ $(CSI_5) -n -b -R r7rs -R srfi-13 -R chicken.platform \
-@CSI_5_TRUE@@GNU@    -e '(display (string-join (cons "$(abs_builddir)/$(CHICKEN_5_EGGDIR)" (repository-path)) ":"))'
-@CSI_5_TRUE@@GNU@ endef
-@CSI_5_FALSE@@GNU@ define get-chicken-5-repository-path
-@CSI_5_FALSE@@GNU@ true
-@CSI_5_FALSE@@GNU@ endef
+chicken-5-egg-stamp: make-chicken-5-egg
+	test -e $(@) || touch $(@)
 
-chicken-5-egg-stamp:  make-chicken-5-egg
-	touch $(@)
-
-tests/r7rs/%-csi-5: tests/r7rs/% $(CHICKEN_5_EGGFILES) chicken-5-egg-stamp
+tests/r7rs/chicken-5/%-csi: tests/r7rs/% $(CHICKEN_5_EGGFILES) \
+	                    chicken-5-egg-stamp GNUmakefile
 	$(call v,AWK) $(MKDIR_P) $(@D) && \
-	$(AWK) 'BEGIN{print "#!/usr/bin/env -S $(CSI_5) -s"} \
+	$(AWK) 'BEGIN{print "#!/usr/bin/env -S $(CSI_5) -R r7rs -s"} \
 	        {print}' $(<) \
 	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
-tests/r7rs/%-chibi: tests/r7rs/% $(R7RS_SCHEME)
+tests/r7rs/chicken-5/%-csi.sh: tests/r7rs/% GNUmakefile
+	$(call v,PRINTF) $(MKDIR_P) $(@D) && \
+	( \
+	  scheme='$(realpath $(<))' && \
+	  printf '#!$(SHELL)\n' && \
+	  printf 'export CHICKEN_REPOSITORY_PATH\n' && \
+	  printf 'CHICKEN_REPOSITORY_PATH="%s"\n' \
+	         "$(call get-chicken-5-repository-path)" \
+	  printf 'exec $(CSI_5) -R r7rs -n -b -s %s\n' "$${scheme}" \
+	) > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
+
+tests/r7rs/chicken-5/%-csc: tests/r7rs/% $(CHICKEN_5_EGGFILES) \
+	                    chicken-5-egg-stamp GNUmakefile
+	$(call v,AWK) $(MKDIR_P) $(@D) && \
+	$(CSC_5) -R r7rs -X r7rs $(<) -o $(@)
+
+tests/r7rs/chicken-5/%-csc.sh: tests/r7rs/% GNUmakefile
+	$(call v,PRINTF) $(MKDIR_P) $(@D) && \
+	( \
+	  scheme='$(realpath $(<))' && \
+	  printf '#!$(SHELL)\n' && \
+	  printf 'export CHICKEN_REPOSITORY_PATH\n' && \
+	  printf 'CHICKEN_REPOSITORY_PATH="%s"\n' \
+	         "$(call get-chicken-5-repository-path)" \
+	  printf 'exec %s\n' "$${scheme}" \
+	) > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
+
+tests/r7rs/%-chibi: tests/r7rs/% $(R7RS_SCHEME) GNUmakefile
 	$(call v,AWK) $(MKDIR_P) $(@D) && \
 	$(AWK) 'BEGIN{print "#!$(CHIBI_SCHEME) -I'$(abs_builddir)/r7rs'"} \
 	        {print}' $(<) \
 	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
-tests/r7rs/%-gauche: tests/r7rs/% $(R7RS_SCHEME)
+tests/r7rs/%-gauche: tests/r7rs/% $(R7RS_SCHEME) GNUmakefile
 	$(call v,AWK) $(MKDIR_P) $(@D) && \
 	$(AWK) 'BEGIN{print "#!$(GAUCHE) -I'$(abs_builddir)/r7rs'"} \
 	        {print}' $(<) \
 	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
-tests/r7rs/%-guile: tests/r7rs/% $(R7RS_SCHEME)
+tests/r7rs/%-guile: tests/r7rs/% $(R7RS_SCHEME) GNUmakefile
 	$(call v,AWK) $(MKDIR_P) $(@D) && \
 	$(AWK) 'BEGIN{print "#!$(GUILE) \\"; \
 	              print "-L '$(abs_builddir)/r7rs' --r7rs --no-auto-compile -s"; \
@@ -1564,7 +1602,7 @@ tests/r7rs/%-guile: tests/r7rs/% $(R7RS_SCHEME)
 	        {print}' $(<) \
 	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
-tests/r7rs/%-sagittarius: tests/r7rs/% $(R7RS_SCHEME)
+tests/r7rs/%-sagittarius: tests/r7rs/% $(R7RS_SCHEME) GNUmakefile
 	$(call v,AWK) $(MKDIR_P) $(@D) && \
 	$(AWK) 'BEGIN{print "#!$(SAGITTARIUS) --loadpath='$(abs_builddir)/r7rs'"} \
 	        {print}' $(<) \

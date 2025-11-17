@@ -58,26 +58,36 @@ AC_CHECK_PROGS([MKTEMP],[mktemp],[echo tmp.\"\$\${RANDOM}\"])
 AC_ARG_VAR([MKTEMP],[mktemp command])
 MKTEMP="TMPDIR=. ${MKTEMP}"
 
+m4_define([r7rspipchixdir_reldefault],[r7rs/pipchix])
+m4_define([r7rspipchixdir_default],[\$(datadir)/r7rspipchixdir_reldefault])
 AC_ARG_ENABLE([install-r7rs-source],
-  [AS_HELP_STRING([--disable-install-r7rs-source[=DIR]],
-        [install R⁷RS source code [installed by default]])],
+  [AS_HELP_STRING([--disable-install-r7rs-source[[=DIR]]],
+        [install R⁷RS source code @<:@installed by default@:>@ @<:@DATAROOTDIR/]r7rspipchixdir_reldefault@:>@)],
   [install_r7rs_source="${enableval}"],
   [install_r7rs_source=yes])
 AC_SUBST([install_r7rs_source])
 AM_CONDITIONAL([INSTALL_R7RS_SOURCE],
                [test "${install_r7rs_source}" != no]) dnl FIXME: COME UP WITH A BETTER yes/no TEST.##################################
-r7rspipchixdir="${r7rspipchixdir:-\$(datadir)/r7rs/pipchix}"
+r7rspipchixdir="${r7rspipchixdir:-r7rspipchixdir_default}"
 AC_SUBST([r7rspipchixdir])
 
+m4_define([chickeneggsdir_reldefault],[chicken/eggs])
+m4_define([chickeneggsdir_default],[\$(datadir)/chickeneggsdir_reldefault])
+chickeneggsdir="${chickeneggsdir:-chickeneggsdir_default}"
+
+m4_define([chickeneggs5pipchixdir_reldefault],[5/pipchix])
+m4_define([chickeneggs5pipchixdir_default],[\$(chickeneggsdir)/chickeneggs5pipchixdir_reldefault])
 AC_ARG_ENABLE([install-chicken-5-egg-source],
-  [AS_HELP_STRING([--enable-install-chicken-5-egg-source[=DIR]],
-        [install CHICKEN 5 egg source code [not installed by default]])],
+  [AS_HELP_STRING([--enable-install-chicken-5-egg-source[[=DIR]]],
+        [install CHICKEN 5 egg source code
+         @<:@not installed by default@:>@
+         @<:@DATAROOTDIR/]chickeneggsdir_reldefault/chickeneggs5pipchixdir_reldefault@:>@)],
   [install_chicken_5_egg_source="${enableval}"],
   [install_chicken_5_egg_source=no])
 AC_SUBST([install_chicken_5_egg_source])
 AM_CONDITIONAL([INSTALL_CHICKEN_5_EGG_SOURCE],
                [test "${install_chicken_5_egg_source}" != no])
-chickeneggs5pipchixdir="${chickeneggs5pipchixdir:-\$(datadir)/chicken/eggs/5/pipchix}"
+chickeneggs5pipchixdir="${chickeneggs5pipchixdir:-chickeneggs5pipchixdir_default}"
 AC_SUBST([chickeneggs5pipchixdir])
 
 m4_include([ac-tinyscheme.m4])
