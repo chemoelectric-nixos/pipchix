@@ -63,6 +63,7 @@ R7RS_SCHEME =
 R7RS_SCHEME += r7rs/pipchix/base.sld
 R7RS_SCHEME += r7rs/pipchix/nix-embed.sld
 R7RS_SCHEME += r7rs/pipchix/nix-list.sld
+R7RS_SCHEME += r7rs/pipchix/nix-set.sld
 R7RS_SCHEME += r7rs/pipchix/abstract-syntax-tree.sld
 
 CLEANFILES += $(R7RS_SCHEME)
@@ -106,10 +107,14 @@ CHICKEN_EGGSPEC_BOTTOM = ' \
     (extension pipchix.nix-list \
       (component-dependencies \
        pipchix.abstract-syntax-tree)) \
+    (extension pipchix.nix-set \
+      (component-dependencies \
+       pipchix.abstract-syntax-tree)) \
     (extension pipchix.base \
       (component-dependencies \
        pipchix.abstract-syntax-tree \
-       pipchix.nix-list))))'
+       pipchix.nix-list \
+       pipchix.nix-set))))'
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -128,6 +133,7 @@ CHICKEN_5_EGGFILES = \
     pipchix.abstract-syntax-tree.scm \
     pipchix.nix-embed.scm \
     pipchix.nix-list.scm \
+    pipchix.nix-set.scm \
     pipchix.base.scm \
     COPYING README.adoc)
 CLEANFILES += $(CHICKEN_5_EGGFILES)

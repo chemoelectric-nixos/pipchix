@@ -611,7 +611,7 @@ nodist_r7rspipchix_DATA = $(am__append_1)
 nodist_chickeneggs5pipchix_DATA = $(am__append_2)
 M4_PREPROCESS = $(GNU_M4) -P -I '$(srcdir)'
 R7RS_SCHEME = r7rs/pipchix/base.sld r7rs/pipchix/nix-embed.sld \
-	r7rs/pipchix/nix-list.sld \
+	r7rs/pipchix/nix-list.sld r7rs/pipchix/nix-set.sld \
 	r7rs/pipchix/abstract-syntax-tree.sld
 
 #---------------------------------------------------------------------
@@ -637,10 +637,14 @@ CHICKEN_EGGSPEC_BOTTOM = ' \
     (extension pipchix.nix-list \
       (component-dependencies \
        pipchix.abstract-syntax-tree)) \
+    (extension pipchix.nix-set \
+      (component-dependencies \
+       pipchix.abstract-syntax-tree)) \
     (extension pipchix.base \
       (component-dependencies \
        pipchix.abstract-syntax-tree \
-       pipchix.nix-list))))'
+       pipchix.nix-list \
+       pipchix.nix-set))))'
 
 CHICKEN_5_EGGS = chicken/eggs/5
 CHICKEN_5_EGGDIR = $(CHICKEN_5_EGGS)/pipchix
@@ -650,6 +654,7 @@ CHICKEN_5_EGGFILES = \
     pipchix.abstract-syntax-tree.scm \
     pipchix.nix-embed.scm \
     pipchix.nix-list.scm \
+    pipchix.nix-set.scm \
     pipchix.base.scm \
     COPYING README.adoc)
 
