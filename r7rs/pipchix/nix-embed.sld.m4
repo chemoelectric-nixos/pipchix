@@ -20,7 +20,7 @@
 ;;; OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 ;;; WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ;;;
-m4_include(pipchix-includes.m4)
+m4_include(pipchix/pipchix-includes.m4)
 
 (define-library (pipchix nix-embed)
 
@@ -31,11 +31,7 @@ m4_include(pipchix-includes.m4)
 
   (begin
 
-    (define (nix-embed str)
-      (cond ((string? str)
-             (make-nix-embedded-node str))
-            (else
-             (error "not a string" str))))
+    m4_include(pipchix/nix-embed.m4)
 
     ))
 

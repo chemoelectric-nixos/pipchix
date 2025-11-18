@@ -606,7 +606,7 @@ PACKAGE_STRING='Pipchix 0.0.0'
 PACKAGE_BUGREPORT=''
 PACKAGE_URL=''
 
-ac_unique_file="pipchix-includes.m4"
+ac_unique_file="pipchix/pipchix-includes.m4"
 # Factoring default headers for most tests.
 ac_includes_default="\
 #include <stddef.h>

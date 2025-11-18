@@ -22,7 +22,7 @@
 AC_PREREQ([2.72])
 AC_INIT([Pipchix],[0.0.0])
 
-AC_CONFIG_SRCDIR([pipchix-includes.m4])
+AC_CONFIG_SRCDIR([pipchix/pipchix-includes.m4])
 
 AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_AUX_DIR([build-aux])

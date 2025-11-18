@@ -20,23 +20,17 @@
 ;;; OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 ;;; WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ;;;
-m4_include(pipchix/pipchix-includes.m4)
 
-(define-library (pipchix base)
+(define (list->nix-list lst)
+  (list->nix-list-node (map scheme->nix lst)))
 
-  (import (scheme base))
-  (import (pipchix nix-list))
-  (import (pipchix nix-set))
-  (import (pipchix abstract-syntax-tree))
+(define (nix-list . elem*)
+  (list->nix-list elem*))
 
-  (export nix-list)   ;; Nix list from elements.
-  (export nix-set)    ;; Set attributes non-recursively.
-  (export nix-setrec) ;; Set attributes recursively.
-
-  (begin))
-
+m4_divert(-1)
 ;;; local variables:
 ;;; mode: scheme
 ;;; geiser-scheme-implementation: chibi
 ;;; coding: utf-8
 ;;; end:
+m4_divert«»m4_dnl

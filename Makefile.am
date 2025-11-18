@@ -48,9 +48,6 @@ EXTRA_DIST += AUTHORS
 DISTCLEANFILES += Makefile
 DISTCLEANFILES += GNUmakefile
 
-EXTRA_DIST += pipchix-includes.m4
-EXTRA_DIST += $(addsuffix .m4, $(nodist_r7rs_DATA))
-
 M4_PREPROCESS = $(GNU_M4) -P -I '$(srcdir)'
 
 @GNU@ define copy-file
@@ -66,8 +63,11 @@ R7RS_SCHEME += r7rs/pipchix/nix-list.sld
 R7RS_SCHEME += r7rs/pipchix/nix-set.sld
 R7RS_SCHEME += r7rs/pipchix/abstract-syntax-tree.sld
 
+EXTRA_DIST += pipchix/pipchix-includes.m4
+EXTRA_DIST += $(R7RS_SCHEME:%=%.m4)
+EXTRA_DIST += $(R7RS_SCHEME:r7rs/pipchix/%.sld=pipchix/%.m4)
 CLEANFILES += $(R7RS_SCHEME)
-CLEANFILES += $(addsuffix .tmp, $(R7RS_SCHEME))
+CLEANFILES += $(R7RS_SCHEME:%=%.tmp)
 
 if INSTALL_R7RS_SOURCE
 nodist_r7rspipchix_DATA += $(R7RS_SCHEME)
@@ -78,7 +78,8 @@ nodist_chickeneggs5pipchix_DATA += $(CHICKEN_5_EGGFILES)
 endif
 
 $(builddir)/r7rs/pipchix/%.sld: $(srcdir)/r7rs/pipchix/%.sld.m4 \
-	                        $(srcdir)/pipchix-includes.m4
+	                        $(srcdir)/pipchix/%.m4 \
+	                        $(srcdir)/pipchix/pipchix-includes.m4
 	$(call v,SLD.M4)$(MKDIR_P) $(@D) && \
 		$(M4_PREPROCESS) $(<) > $(@).tmp && \
 		mv $(@){.tmp,}
@@ -120,7 +121,8 @@ CHICKEN_EGGSPEC_BOTTOM = ' \
 
 $(builddir)/$(CHICKEN_5_EGGDIR)/pipchix.%.scm: \
 	                           $(srcdir)/r7rs/pipchix/%.sld.m4 \
-	                           $(srcdir)/pipchix-includes.m4
+	                           $(srcdir)/pipchix/%.m4 \
+	                           $(srcdir)/pipchix/pipchix-includes.m4
 	$(call v,SCM.M4) $(MKDIR_P) $(@D) && \
 		$(M4_PREPROCESS) $(<) > $(@).tmp && \
 		mv $(@){.tmp,}

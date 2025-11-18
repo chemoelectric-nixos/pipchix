@@ -20,7 +20,7 @@
 ;;; OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 ;;; WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ;;;
-m4_include(pipchix-includes.m4)
+m4_include(pipchix/pipchix-includes.m4)
 
 (define-library (pipchix nix-list)
 
@@ -32,11 +32,7 @@ m4_include(pipchix-includes.m4)
 
   (begin
 
-    (define (list->nix-list lst)
-      (list->nix-list-node (map scheme->nix lst)))
-
-    (define (nix-list . elem*)
-      (list->nix-list elem*))
+    m4_include(pipchix/nix-list.m4)
 
     ))
 
