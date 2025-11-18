@@ -36,6 +36,7 @@ EXTRA_DIST =
 EXTRA_PROGRAMS =
 EXTRA_SCRIPTS =
 BUILT_SOURCES =
+nodist_r6rspipchix_DATA =
 nodist_r7rspipchix_DATA =
 nodist_chickeneggs5pipchix_DATA =
 
@@ -56,29 +57,53 @@ M4_PREPROCESS = $(GNU_M4) -P -I '$(srcdir)'
 
 CLEANFILES += tmp.*
 
+EXTRA_DIST += pipchix/pipchix-includes.m4
+
+if INSTALL_CHICKEN_5_EGG_SOURCE
+nodist_chickeneggs5pipchix_DATA += $(CHICKEN_5_EGGFILES)
+endif
+
+R6RS_SCHEME =
+R6RS_SCHEME += r6rs/pipchix/base.sls
+R6RS_SCHEME += r6rs/pipchix/nix-embed.sls
+R6RS_SCHEME += r6rs/pipchix/nix-list.sls
+R6RS_SCHEME += r6rs/pipchix/nix-set.sls
+R6RS_SCHEME += r6rs/pipchix/abstract-syntax-tree.sls
+EXTRA_DIST += $(R6RS_SCHEME:%=%.m4)
+EXTRA_DIST += $(R6RS_SCHEME:r6rs/pipchix/%.sld=pipchix/%.m4)
+EXTRA_DIST += $(R6RS_SCHEME:r6rs/pipchix/%.sld=pipchix/%.exports.m4)
+CLEANFILES += $(R6RS_SCHEME)
+CLEANFILES += $(R6RS_SCHEME:%=%.tmp)
+if INSTALL_R6RS_SOURCE
+nodist_r6rspipchix_DATA += $(R6RS_SCHEME)
+endif
+
 R7RS_SCHEME =
 R7RS_SCHEME += r7rs/pipchix/base.sld
 R7RS_SCHEME += r7rs/pipchix/nix-embed.sld
 R7RS_SCHEME += r7rs/pipchix/nix-list.sld
 R7RS_SCHEME += r7rs/pipchix/nix-set.sld
 R7RS_SCHEME += r7rs/pipchix/abstract-syntax-tree.sld
-
-EXTRA_DIST += pipchix/pipchix-includes.m4
 EXTRA_DIST += $(R7RS_SCHEME:%=%.m4)
 EXTRA_DIST += $(R7RS_SCHEME:r7rs/pipchix/%.sld=pipchix/%.m4)
+EXTRA_DIST += $(R7RS_SCHEME:r7rs/pipchix/%.sld=pipchix/%.exports.m4)
 CLEANFILES += $(R7RS_SCHEME)
 CLEANFILES += $(R7RS_SCHEME:%=%.tmp)
-
 if INSTALL_R7RS_SOURCE
 nodist_r7rspipchix_DATA += $(R7RS_SCHEME)
 endif
 
-if INSTALL_CHICKEN_5_EGG_SOURCE
-nodist_chickeneggs5pipchix_DATA += $(CHICKEN_5_EGGFILES)
-endif
+$(builddir)/r6rs/pipchix/%.sls: $(srcdir)/r6rs/pipchix/%.sls.m4 \
+	                        $(srcdir)/pipchix/%.m4 \
+	                        $(srcdir)/pipchix/%.exports.m4 \
+	                        $(srcdir)/pipchix/pipchix-includes.m4
+	$(call v,SLS.M4)$(MKDIR_P) $(@D) && \
+		$(M4_PREPROCESS) $(<) > $(@).tmp && \
+		mv $(@){.tmp,}
 
 $(builddir)/r7rs/pipchix/%.sld: $(srcdir)/r7rs/pipchix/%.sld.m4 \
 	                        $(srcdir)/pipchix/%.m4 \
+	                        $(srcdir)/pipchix/%.exports.m4 \
 	                        $(srcdir)/pipchix/pipchix-includes.m4
 	$(call v,SLD.M4)$(MKDIR_P) $(@D) && \
 		$(M4_PREPROCESS) $(<) > $(@).tmp && \
@@ -88,9 +113,6 @@ $(builddir)/r7rs/pipchix/%.sld: $(srcdir)/r7rs/pipchix/%.sld.m4 \
 #
 # CHICKEN Scheme support.
 #
-
-#removing_egg_scripts = yes
-removing_egg_scripts = no
 
 CHICKEN_EGGSPEC_TOP = ' \
   ((synopsis "Use Scheme to write Nix code") \
@@ -157,8 +179,7 @@ $(CHICKEN_5_EGGDIR)/pipchix.egg: GNUmakefile $(TINYSCHEME_EXE)
 	  printf '(nicely-print eggfile)'; \
 	fi > "$${script}" && \
 	$(call tinyscheme-1, ${abs_builddir}/"$${script}") \
-			> $(abs_builddir)/$(@) && \
-	(test $(removing_egg_scripts) = yes && rm "$${script}" || true)
+			> $(abs_builddir)/$(@)
 
 CHICKEN_5_EGGSPEC = ' \
  '$(CHICKEN_EGGSPEC_TOP)' \

@@ -22,21 +22,19 @@
 ;;;
 m4_include(pipchix/pipchix-includes.m4)
 
-(define-library (pipchix nix-set)
+(library (pipchix base)
 
-  (export m4_include(pipchix/nix-set.exports.m4))
+  (export
+   m4_include(pipchix/base.exports.m4))
 
-  (import (scheme base))
-  (import (pipchix abstract-syntax-tree))
-
-  (begin
-
-    m4_include(pipchix/nix-set.m4)
-
-    ))
+  (import (rnrs)
+          (pipchix nix-list)
+          (pipchix nix-set)
+          (pipchix abstract-syntax-tree))
+  )
 
 ;;; local variables:
 ;;; mode: scheme
-;;; geiser-scheme-implementation: chibi
+;;; geiser-scheme-implementation: chez
 ;;; coding: utf-8
 ;;; end:

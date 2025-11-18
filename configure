@@ -681,10 +681,15 @@ chickeneggs5pipchixdir
 INSTALL_CHICKEN_5_EGG_SOURCE_FALSE
 INSTALL_CHICKEN_5_EGG_SOURCE_TRUE
 install_chicken_5_egg_source
+chickeneggsdir
 r7rspipchixdir
 INSTALL_R7RS_SOURCE_FALSE
 INSTALL_R7RS_SOURCE_TRUE
 install_r7rs_source
+r6rspipchixdir
+INSTALL_R6RS_SOURCE_FALSE
+INSTALL_R6RS_SOURCE_TRUE
+install_r6rs_source
 MKTEMP
 GNU_M4
 EGREP
@@ -797,6 +802,7 @@ enable_option_checking
 enable_dependency_tracking
 enable_silent_rules
 enable_maintainer_mode
+enable_install_r6rs_source
 enable_install_r7rs_source
 enable_install_chicken_5_egg_source
 '
@@ -1455,6 +1461,9 @@ Optional Features:
   --enable-maintainer-mode
                           enable make rules and dependencies not useful (and
                           sometimes confusing) to the casual installer
+  --disable-install-r6rs-source[=DIR]
+                          install R⁶RS source code [installed by default]
+                          [DATAROOTDIR/r6rs/pipchix]
   --disable-install-r7rs-source[=DIR]
                           install R⁷RS source code [installed by default]
                           [DATAROOTDIR/r7rs/pipchix]
@@ -6343,6 +6352,28 @@ MKTEMP="TMPDIR=. ${MKTEMP}"
 
 
 
+# Check whether --enable-install-r6rs-source was given.
+if test ${enable_install_r6rs_source+y}
+then :
+  enableval=$enable_install_r6rs_source; install_r6rs_source="${enableval}"
+else case e in #(
+  e) install_r6rs_source=yes ;;
+esac
+fi
+
+
+ if test "${install_r6rs_source}" != no; then
+  INSTALL_R6RS_SOURCE_TRUE=
+  INSTALL_R6RS_SOURCE_FALSE='#'
+else
+  INSTALL_R6RS_SOURCE_TRUE='#'
+  INSTALL_R6RS_SOURCE_FALSE=
+fi
+ r6rspipchixdir="${r6rspipchixdir:-\$(datadir)/r6rs/pipchix}"
+
+
+
+
 # Check whether --enable-install-r7rs-source was given.
 if test ${enable_install_r7rs_source+y}
 then :
@@ -6366,6 +6397,7 @@ fi
 
 
 chickeneggsdir="${chickeneggsdir:-\$(datadir)/chicken/eggs}"
+
 
 
 
@@ -7741,6 +7773,10 @@ fi
 
 if test -z "${MAINTAINER_MODE_TRUE}" && test -z "${MAINTAINER_MODE_FALSE}"; then
   as_fn_error $? "conditional \"MAINTAINER_MODE\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${INSTALL_R6RS_SOURCE_TRUE}" && test -z "${INSTALL_R6RS_SOURCE_FALSE}"; then
+  as_fn_error $? "conditional \"INSTALL_R6RS_SOURCE\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${INSTALL_R7RS_SOURCE_TRUE}" && test -z "${INSTALL_R7RS_SOURCE_FALSE}"; then

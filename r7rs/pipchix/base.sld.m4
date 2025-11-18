@@ -24,14 +24,12 @@ m4_include(pipchix/pipchix-includes.m4)
 
 (define-library (pipchix base)
 
+  (export m4_include(pipchix/base.exports.m4))
+
   (import (scheme base))
   (import (pipchix nix-list))
   (import (pipchix nix-set))
   (import (pipchix abstract-syntax-tree))
-
-  (export nix-list)   ;; Nix list from elements.
-  (export nix-set)    ;; Set attributes non-recursively.
-  (export nix-setrec) ;; Set attributes recursively.
 
   (begin))
 

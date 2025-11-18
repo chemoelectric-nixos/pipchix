@@ -24,11 +24,10 @@ m4_include(pipchix/pipchix-includes.m4)
 
 (define-library (pipchix nix-list)
 
+  (export m4_include(pipchix/nix-list.exports.m4))
+
   (import (scheme base))
   (import (pipchix abstract-syntax-tree))
-
-  (export nix-list)       ;; Nix list from elements.
-  (export list->nix-list) ;; Nix list from a Scheme list.
 
   (begin
 

@@ -24,6 +24,8 @@ m4_include(pipchix/pipchix-includes.m4)
 
 (define-library (pipchix abstract-syntax-tree)
 
+  (export m4_include(pipchix/abstract-syntax-tree.exports.m4))
+
   (import (scheme base))
   (import (scheme case-lambda))
   (import (scheme char))
@@ -40,36 +42,6 @@ m4_include(pipchix/pipchix-includes.m4)
      (import (only (srfi 60) bitwise-and arithmetic-shift)))
     (else ;; (srfi 151) = (scheme bitwise)
      (import (only (srfi 151) bitwise-and arithmetic-shift))))
-
-  (export make-nix-embedded-node)
-  (export nix-embedded-node?)
-
-  (export make-nix-data-node)
-  (export nix-data-node?)
-
-  (export make-nix-path-node)
-  (export nix-path-node?)
-
-  (export make-nix-attributeset-node)
-  (export nix-attributeset-node?)
-  (export nix-attributeset-node-recursive?)
-  (export nix-attributeset-node-set!)
-
-  (export list->nix-attributepath-node)
-  (export nix-attributepath-node?)
-
-  (export make-nix-attributebinding-node)
-  (export nix-attributebinding-node?)
-
-  (export list->nix-inherit-node)
-  (export nix-inherit-node?)
-
-  (export list->nix-list-node)
-  (export nix-list-node?)
-
-  (export scheme->nix)
-
-  (export output-nix-abstract-syntax-tree)
 
   (begin
 

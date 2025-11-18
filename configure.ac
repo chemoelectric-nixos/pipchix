@@ -58,6 +58,19 @@ AC_CHECK_PROGS([MKTEMP],[mktemp],[echo tmp.\"\$\${RANDOM}\"])
 AC_ARG_VAR([MKTEMP],[mktemp command])
 MKTEMP="TMPDIR=. ${MKTEMP}"
 
+m4_define([r6rspipchixdir_reldefault],[r6rs/pipchix])
+m4_define([r6rspipchixdir_default],[\$(datadir)/r6rspipchixdir_reldefault])
+AC_ARG_ENABLE([install-r6rs-source],
+  [AS_HELP_STRING([--disable-install-r6rs-source[[=DIR]]],
+        [install R⁶RS source code @<:@installed by default@:>@ @<:@DATAROOTDIR/]r6rspipchixdir_reldefault@:>@)],
+  [install_r6rs_source="${enableval}"],
+  [install_r6rs_source=yes])
+AC_SUBST([install_r6rs_source])
+AM_CONDITIONAL([INSTALL_R6RS_SOURCE],
+               [test "${install_r6rs_source}" != no]) dnl FIXME: COME UP WITH A BETTER yes/no TEST.##################################
+r6rspipchixdir="${r6rspipchixdir:-r6rspipchixdir_default}"
+AC_SUBST([r6rspipchixdir])
+
 m4_define([r7rspipchixdir_reldefault],[r7rs/pipchix])
 m4_define([r7rspipchixdir_default],[\$(datadir)/r7rspipchixdir_reldefault])
 AC_ARG_ENABLE([install-r7rs-source],
@@ -74,6 +87,7 @@ AC_SUBST([r7rspipchixdir])
 m4_define([chickeneggsdir_reldefault],[chicken/eggs])
 m4_define([chickeneggsdir_default],[\$(datadir)/chickeneggsdir_reldefault])
 chickeneggsdir="${chickeneggsdir:-chickeneggsdir_default}"
+AC_SUBST([chickeneggsdir])
 
 m4_define([chickeneggs5pipchixdir_reldefault],[5/pipchix])
 m4_define([chickeneggs5pipchixdir_default],[\$(chickeneggsdir)/chickeneggs5pipchixdir_reldefault])
