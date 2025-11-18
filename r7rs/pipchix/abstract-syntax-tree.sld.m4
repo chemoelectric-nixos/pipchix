@@ -30,6 +30,12 @@ m4_include(pipchix-includes.m4)
   (import (scheme write))
 
   (cond-expand
+    (chicken-5
+     (import (utf8))
+     (import (utf8-srfi-13)))
+    (else))
+
+  (cond-expand
     ((and guile r7rs) ;; ‘guile --r7rs’
      (import (only (srfi 60) bitwise-and arithmetic-shift)))
     (else ;; (srfi 151) = (scheme bitwise)
@@ -226,26 +232,14 @@ m4_include(pipchix-includes.m4)
     (define (%%string-needs-escaping? str)
       (%%string-contains? %%char-needs-escaping? str))
 
-    (cond-expand
-      (chicken-5
-       ;; CHICKEN 5 strings are read by UTF-8 encoding rather than by
-       ;; code points.
-       (define (%%char-needs-escaping? c)
-         (or (char=? c #\$)
-             (char=? c #\\)
-             (char=? c #\")
-             (char=? c #\')
-             (let ((i (char->integer c)))
-               (< i 32)))))
-      (else
-       (define (%%char-needs-escaping? c)
-         (or (char=? c #\$)
-             (char=? c #\\)
-             (char=? c #\")
-             (char=? c #\')
-             (let ((i (char->integer c)))
-               (or (< i 32)
-                   (> i 126)))))))
+    (define (%%char-needs-escaping? c)
+      (or (char=? c #\$)
+          (char=? c #\\)
+          (char=? c #\")
+          (char=? c #\')
+          (let ((i (char->integer c)))
+            (or (< i 32)
+                (> i 126)))))
 
     (define (%%utf16-escape i)
       (if (<= i #xFFFF)
