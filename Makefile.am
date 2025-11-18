@@ -264,9 +264,14 @@ tests/r7rs/%-guile: tests/r7rs/% $(R7RS_SCHEME) GNUmakefile
 	        {print}' $(<) \
 	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
+#
+# FIXME: The following requires more than a POSIX env. GNU coreutils
+#        env will work. A workaround could be made, or shell script
+#        wrappers, or simply an autoconf test for a suitable env.
+#
 tests/r7rs/%-sagittarius: tests/r7rs/% $(R7RS_SCHEME) GNUmakefile
 	$(call v,AWK) $(MKDIR_P) $(@D) && \
-	$(AWK) 'BEGIN{print "#!$(SAGITTARIUS) --loadpath='$(abs_builddir)/r7rs'"} \
+	$(AWK) 'BEGIN{print "#!/usr/bin/env -S $(SAGITTARIUS) -r7 --loadpath='$(abs_builddir)/r7rs'"} \
 	        {print}' $(<) \
 	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
