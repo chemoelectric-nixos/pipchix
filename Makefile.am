@@ -70,8 +70,8 @@ R6RS_SCHEME += r6rs/pipchix/nix-list.sls
 R6RS_SCHEME += r6rs/pipchix/nix-set.sls
 R6RS_SCHEME += r6rs/pipchix/abstract-syntax-tree.sls
 EXTRA_DIST += $(R6RS_SCHEME:%=%.m4)
-EXTRA_DIST += $(R6RS_SCHEME:r6rs/pipchix/%.sld=pipchix/%.m4)
-EXTRA_DIST += $(R6RS_SCHEME:r6rs/pipchix/%.sld=pipchix/%.exports.m4)
+EXTRA_DIST += $(R6RS_SCHEME:r6rs/pipchix/%.sls=pipchix/%.m4)
+EXTRA_DIST += $(R6RS_SCHEME:r6rs/pipchix/%.sls=pipchix/%.exports.m4)
 CLEANFILES += $(R6RS_SCHEME)
 CLEANFILES += $(R6RS_SCHEME:%=%.tmp)
 if INSTALL_R6RS_SOURCE
@@ -285,11 +285,30 @@ tests/r7rs/%-gauche: tests/r7rs/% $(R7RS_SCHEME) GNUmakefile
 	        {print}' $(<) \
 	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
+tests/r6rs/%-guile: tests/r6rs/% $(R6RS_SCHEME) GNUmakefile
+	$(call v,AWK) $(MKDIR_P) $(@D) && \
+	$(AWK) 'BEGIN{print "#!$(GUILE) \\"; \
+	              print "-L '$(abs_builddir)/r6rs' --r6rs --no-auto-compile -s"; \
+	              print "!#"} \
+	        {print}' $(<) \
+	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
+
 tests/r7rs/%-guile: tests/r7rs/% $(R7RS_SCHEME) GNUmakefile
 	$(call v,AWK) $(MKDIR_P) $(@D) && \
 	$(AWK) 'BEGIN{print "#!$(GUILE) \\"; \
 	              print "-L '$(abs_builddir)/r7rs' --r7rs --no-auto-compile -s"; \
 	              print "!#"} \
+	        {print}' $(<) \
+	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
+
+#
+# FIXME: The following requires more than a POSIX env. GNU coreutils
+#        env will work. A workaround could be made, or shell script
+#        wrappers, or simply an autoconf test for a suitable env.
+#
+tests/r6rs/%-sagittarius: tests/r6rs/% $(R6RS_SCHEME) GNUmakefile
+	$(call v,AWK) $(MKDIR_P) $(@D) && \
+	$(AWK) 'BEGIN{print "#!/usr/bin/env -S $(SAGITTARIUS) -r6 --loadpath='$(abs_builddir)/r6rs'"} \
 	        {print}' $(<) \
 	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
@@ -304,18 +323,27 @@ tests/r7rs/%-sagittarius: tests/r7rs/% $(R7RS_SCHEME) GNUmakefile
 	        {print}' $(<) \
 	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
+CLEANFILES += tests/r6rs/*.tmp
 CLEANFILES += tests/r7rs/*.tmp
 CLEANFILES += tests/r7rs/chicken-5/*.tmp
 
 TESTS =
 TESTS += $(TESTS_WE_MADE)
 
+CHEX_R6RS =
+CHEX_R6RS += check-nix-list
+
 CHEX_R7RS =
 CHEX_R7RS += check-nix-list
 
+EXTRA_DIST += $(CHEX_R6RS:%=tests/r6rs/%)
 EXTRA_DIST += $(CHEX_R7RS:%=tests/r7rs/%)
 
 CHEX_WE_MADE =
+
+CHEX_WE_MADE += $(CHEX_R6RS:%=tests/r6rs/%-guile)
+CHEX_WE_MADE += $(CHEX_R6RS:%=tests/r6rs/%-sagittarius)
+
 CHEX_WE_MADE += $(CHEX_R7RS:%=tests/r7rs/chicken-5/%-csi.sh)
 CHEX_WE_MADE += $(CHEX_R7RS:%=tests/r7rs/chicken-5/%-csc.sh)
 CHEX_WE_MADE += $(CHEX_R7RS:%=tests/r7rs/%-chibi)
@@ -345,10 +373,12 @@ TESTS += tests/r7rs/check-nix-list-gauche
 endif GAUCHE
 
 if GUILE
+TESTS += tests/r6rs/check-nix-list-guile
 TESTS += tests/r7rs/check-nix-list-guile
 endif GUILE
 
 if SAGITTARIUS
+TESTS += tests/r6rs/check-nix-list-sagittarius
 TESTS += tests/r7rs/check-nix-list-sagittarius
 endif SAGITTARIUS
 

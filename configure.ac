@@ -61,10 +61,12 @@ MKTEMP="TMPDIR=. ${MKTEMP}"
 m4_define([r6rspipchixdir_reldefault],[r6rs/pipchix])
 m4_define([r6rspipchixdir_default],[\$(datadir)/r6rspipchixdir_reldefault])
 AC_ARG_ENABLE([install-r6rs-source],
-  [AS_HELP_STRING([--disable-install-r6rs-source[[=DIR]]],
-        [install R⁶RS source code @<:@installed by default@:>@ @<:@DATAROOTDIR/]r6rspipchixdir_reldefault@:>@)],
+  [AS_HELP_STRING([--enable-install-r6rs-source[[=DIR]]],
+        [install R⁶RS source code
+         @<:@DATAROOTDIR/]r6rspipchixdir_reldefault@:>@
+         [(not installed by default)])],
   [install_r6rs_source="${enableval}"],
-  [install_r6rs_source=yes])
+  [install_r6rs_source=no])
 AC_SUBST([install_r6rs_source])
 AM_CONDITIONAL([INSTALL_R6RS_SOURCE],
                [test "${install_r6rs_source}" != no]) dnl FIXME: COME UP WITH A BETTER yes/no TEST.##################################
@@ -74,10 +76,12 @@ AC_SUBST([r6rspipchixdir])
 m4_define([r7rspipchixdir_reldefault],[r7rs/pipchix])
 m4_define([r7rspipchixdir_default],[\$(datadir)/r7rspipchixdir_reldefault])
 AC_ARG_ENABLE([install-r7rs-source],
-  [AS_HELP_STRING([--disable-install-r7rs-source[[=DIR]]],
-        [install R⁷RS source code @<:@installed by default@:>@ @<:@DATAROOTDIR/]r7rspipchixdir_reldefault@:>@)],
+  [AS_HELP_STRING([--enable-install-r7rs-source[[=DIR]]],
+        [install R⁷RS source code
+         @<:@DATAROOTDIR/]r7rspipchixdir_reldefault@:>@
+         [(not installed by default)])],
   [install_r7rs_source="${enableval}"],
-  [install_r7rs_source=yes])
+  [install_r7rs_source=no])
 AC_SUBST([install_r7rs_source])
 AM_CONDITIONAL([INSTALL_R7RS_SOURCE],
                [test "${install_r7rs_source}" != no]) dnl FIXME: COME UP WITH A BETTER yes/no TEST.##################################
@@ -94,8 +98,8 @@ m4_define([chickeneggs5pipchixdir_default],[\$(chickeneggsdir)/chickeneggs5pipch
 AC_ARG_ENABLE([install-chicken-5-egg-source],
   [AS_HELP_STRING([--enable-install-chicken-5-egg-source[[=DIR]]],
         [install CHICKEN 5 egg source code
-         @<:@not installed by default@:>@
-         @<:@DATAROOTDIR/]chickeneggsdir_reldefault/chickeneggs5pipchixdir_reldefault@:>@)],
+         @<:@DATAROOTDIR/]chickeneggsdir_reldefault/chickeneggs5pipchixdir_reldefault@:>@
+         [(not installed by default)])],
   [install_chicken_5_egg_source="${enableval}"],
   [install_chicken_5_egg_source=no])
 AC_SUBST([install_chicken_5_egg_source])

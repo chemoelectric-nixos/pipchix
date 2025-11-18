@@ -1,0 +1,31 @@
+(import (rnrs)
+        (pipchix nix-list)
+        (pipchix abstract-syntax-tree))
+
+(define SUCCESS 0)
+(define FAILURE 1)
+(define SKIP 77)
+(define HARD-FAILURE 99)
+
+(define str "")
+(define (fill-str s)
+  (set! str (string-append str s)))
+
+(define ast100 (nix-list 1 2 3 4 5))
+(set! str "")
+(output-nix-abstract-syntax-tree ast100 fill-str)
+(unless (string=? str "[\n(1)\n(2)\n(3)\n(4)\n(5)\n]\n")
+  (exit FAILURE))
+
+(define ast200 (list->nix-list (list "1" "2" "3" "4" "5")))
+(set! str "")
+(output-nix-abstract-syntax-tree ast200 fill-str)
+(unless (string=?
+         str "[\n(\"1\")\n(\"2\")\n(\"3\")\n(\"4\")\n(\"5\")\n]\n")
+  (exit FAILURE))
+
+;;; local variables:
+;;; mode: scheme
+;;; geiser-scheme-implementation: chez
+;;; coding: utf-8
+;;; end:

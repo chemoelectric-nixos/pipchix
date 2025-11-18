@@ -121,8 +121,11 @@ TESTS = $(am__append_4) $(am__append_5) $(am__append_6) \
 @CHICKEN_INSTALL_5_TRUE@@CSC_5_TRUE@am__append_5 = tests/r7rs/chicken-5/check-nix-list-csc.sh
 @CHIBI_SCHEME_TRUE@am__append_6 = tests/r7rs/check-nix-list-chibi
 @GAUCHE_TRUE@am__append_7 = tests/r7rs/check-nix-list-gauche
-@GUILE_TRUE@am__append_8 = tests/r7rs/check-nix-list-guile
-@SAGITTARIUS_TRUE@am__append_9 = tests/r7rs/check-nix-list-sagittarius
+@GUILE_TRUE@am__append_8 = tests/r6rs/check-nix-list-guile \
+@GUILE_TRUE@	tests/r7rs/check-nix-list-guile
+@SAGITTARIUS_TRUE@am__append_9 =  \
+@SAGITTARIUS_TRUE@	tests/r6rs/check-nix-list-sagittarius \
+@SAGITTARIUS_TRUE@	tests/r7rs/check-nix-list-sagittarius
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/ax_check_compile_flag.m4 \
@@ -602,19 +605,19 @@ CLEANFILES = tmp.* $(R6RS_SCHEME) $(R6RS_SCHEME:%=%.tmp) \
 	$(R7RS_SCHEME) $(R7RS_SCHEME:%=%.tmp) $(CHICKEN_5_EGGFILES) \
 	$(CHICKEN_5_EGGDIR)/*.{$(OBJEXT),so,link,import.scm} \
 	$(CHICKEN_5_EGGDIR)/pipchix.{build,install}.sh \
-	chicken-5-egg-stamp tests/r7rs/*.tmp \
+	chicken-5-egg-stamp tests/r6rs/*.tmp tests/r7rs/*.tmp \
 	tests/r7rs/chicken-5/*.tmp $(CHEX_WE_MADE) \
 	$(CHEX_R7RS:%=tests/r7rs/chicken-5/%-csi) \
 	$(CHEX_R7RS:%=tests/r7rs/chicken-5/%-csc)
 DISTCLEANFILES = Makefile GNUmakefile
 EXTRA_DIST = silent-rules.mk COPYING README.adoc INSTALL AUTHORS \
 	pipchix/pipchix-includes.m4 $(R6RS_SCHEME:%=%.m4) \
-	$(R6RS_SCHEME:r6rs/pipchix/%.sld=pipchix/%.m4) \
-	$(R6RS_SCHEME:r6rs/pipchix/%.sld=pipchix/%.exports.m4) \
+	$(R6RS_SCHEME:r6rs/pipchix/%.sls=pipchix/%.m4) \
+	$(R6RS_SCHEME:r6rs/pipchix/%.sls=pipchix/%.exports.m4) \
 	$(R7RS_SCHEME:%=%.m4) \
 	$(R7RS_SCHEME:r7rs/pipchix/%.sld=pipchix/%.m4) \
 	$(R7RS_SCHEME:r7rs/pipchix/%.sld=pipchix/%.exports.m4) \
-	$(CHEX_R7RS:%=tests/r7rs/%)
+	$(CHEX_R6RS:%=tests/r6rs/%) $(CHEX_R7RS:%=tests/r7rs/%)
 EXTRA_SCRIPTS = 
 BUILT_SOURCES = 
 nodist_r6rspipchix_DATA = $(am__append_2)
@@ -681,8 +684,11 @@ CHICKEN_5_EGGSPEC = ' \
      "-compile-syntax")) \
  '$(CHICKEN_EGGSPEC_BOTTOM)
 
+CHEX_R6RS = check-nix-list
 CHEX_R7RS = check-nix-list
-CHEX_WE_MADE = $(CHEX_R7RS:%=tests/r7rs/chicken-5/%-csi.sh) \
+CHEX_WE_MADE = $(CHEX_R6RS:%=tests/r6rs/%-guile) \
+	$(CHEX_R6RS:%=tests/r6rs/%-sagittarius) \
+	$(CHEX_R7RS:%=tests/r7rs/chicken-5/%-csi.sh) \
 	$(CHEX_R7RS:%=tests/r7rs/chicken-5/%-csc.sh) \
 	$(CHEX_R7RS:%=tests/r7rs/%-chibi) \
 	$(CHEX_R7RS:%=tests/r7rs/%-gauche) \
@@ -1133,9 +1139,23 @@ tests/r7rs/check-nix-list-gauche.log: tests/r7rs/check-nix-list-gauche
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
 	"$$tst" $(AM_TESTS_FD_REDIRECT)
+tests/r6rs/check-nix-list-guile.log: tests/r6rs/check-nix-list-guile
+	@p='tests/r6rs/check-nix-list-guile'; \
+	b='tests/r6rs/check-nix-list-guile'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
 tests/r7rs/check-nix-list-guile.log: tests/r7rs/check-nix-list-guile
 	@p='tests/r7rs/check-nix-list-guile'; \
 	b='tests/r7rs/check-nix-list-guile'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+tests/r6rs/check-nix-list-sagittarius.log: tests/r6rs/check-nix-list-sagittarius
+	@p='tests/r6rs/check-nix-list-sagittarius'; \
+	b='tests/r6rs/check-nix-list-sagittarius'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
@@ -1644,11 +1664,30 @@ tests/r7rs/%-gauche: tests/r7rs/% $(R7RS_SCHEME) GNUmakefile
 	        {print}' $(<) \
 	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
+tests/r6rs/%-guile: tests/r6rs/% $(R6RS_SCHEME) GNUmakefile
+	$(call v,AWK) $(MKDIR_P) $(@D) && \
+	$(AWK) 'BEGIN{print "#!$(GUILE) \\"; \
+	              print "-L '$(abs_builddir)/r6rs' --r6rs --no-auto-compile -s"; \
+	              print "!#"} \
+	        {print}' $(<) \
+	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
+
 tests/r7rs/%-guile: tests/r7rs/% $(R7RS_SCHEME) GNUmakefile
 	$(call v,AWK) $(MKDIR_P) $(@D) && \
 	$(AWK) 'BEGIN{print "#!$(GUILE) \\"; \
 	              print "-L '$(abs_builddir)/r7rs' --r7rs --no-auto-compile -s"; \
 	              print "!#"} \
+	        {print}' $(<) \
+	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
+
+#
+# FIXME: The following requires more than a POSIX env. GNU coreutils
+#        env will work. A workaround could be made, or shell script
+#        wrappers, or simply an autoconf test for a suitable env.
+#
+tests/r6rs/%-sagittarius: tests/r6rs/% $(R6RS_SCHEME) GNUmakefile
+	$(call v,AWK) $(MKDIR_P) $(@D) && \
+	$(AWK) 'BEGIN{print "#!/usr/bin/env -S $(SAGITTARIUS) -r6 --loadpath='$(abs_builddir)/r6rs'"} \
 	        {print}' $(<) \
 	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 

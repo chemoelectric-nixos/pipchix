@@ -1461,15 +1461,18 @@ Optional Features:
   --enable-maintainer-mode
                           enable make rules and dependencies not useful (and
                           sometimes confusing) to the casual installer
-  --disable-install-r6rs-source[=DIR]
-                          install R⁶RS source code [installed by default]
-                          [DATAROOTDIR/r6rs/pipchix]
-  --disable-install-r7rs-source[=DIR]
-                          install R⁷RS source code [installed by default]
-                          [DATAROOTDIR/r7rs/pipchix]
+  --enable-install-r6rs-source[=DIR]
+                          install R⁶RS source code
+                          [DATAROOTDIR/r6rs/pipchix] (not installed by
+                          default)
+  --enable-install-r7rs-source[=DIR]
+                          install R⁷RS source code
+                          [DATAROOTDIR/r7rs/pipchix] (not installed by
+                          default)
   --enable-install-chicken-5-egg-source[=DIR]
-                          install CHICKEN 5 egg source code [not installed by
-                          default] [DATAROOTDIR/chicken/eggs/5/pipchix]
+                          install CHICKEN 5 egg source code
+                          [DATAROOTDIR/chicken/eggs/5/pipchix] (not installed
+                          by default)
 
 Some influential environment variables:
   CC          C compiler command
@@ -6357,7 +6360,7 @@ if test ${enable_install_r6rs_source+y}
 then :
   enableval=$enable_install_r6rs_source; install_r6rs_source="${enableval}"
 else case e in #(
-  e) install_r6rs_source=yes ;;
+  e) install_r6rs_source=no ;;
 esac
 fi
 
@@ -6379,7 +6382,7 @@ if test ${enable_install_r7rs_source+y}
 then :
   enableval=$enable_install_r7rs_source; install_r7rs_source="${enableval}"
 else case e in #(
-  e) install_r7rs_source=yes ;;
+  e) install_r7rs_source=no ;;
 esac
 fi
 
