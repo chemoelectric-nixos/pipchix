@@ -19,6 +19,14 @@
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+if test "${__ac_cv_path_CHEZ_SCHEME_found}" != no; then
+  AC_MSG_NOTICE([])
+  AC_MSG_NOTICE([Chez Scheme ${CHEZ_SCHEME} was found.])
+fi
+if test "${__ac_cv_path_CHIBI_SCHEME_found}" != no; then
+  AC_MSG_NOTICE([])
+  AC_MSG_NOTICE([Chibi Scheme ${CHIBI_SCHEME} was found.])
+fi
 if test "${__ac_cv_path_CSI_5_found}" != no; then
   AC_MSG_NOTICE([])
   AC_MSG_NOTICE([The CHICKEN 5 interpreter ${CSI_5} was found.])
@@ -27,27 +35,24 @@ if test "${__ac_cv_path_CSC_5_found}" != no; then
   test "${__ac_cv_path_CSI_5_found}" != no || AC_MSG_NOTICE([])
   AC_MSG_NOTICE([The CHICKEN 5 compiler ${CSC_5} was found.])
 fi
-if test "${__ac_cv_path_CHIBI_SCHEME_found}" != no; then
-  AC_MSG_NOTICE([])
-  AC_MSG_NOTICE([The Chibi Scheme interpreter ${CHIBI_SCHEME} was found.])
+if test "${__ac_cv_path_CHICKEN_INSTALL_5_found}" != no; then
+  AC_MSG_NOTICE([${CHICKEN_INSTALL_5} was found.])
+  AC_MSG_NOTICE([🔵 Use ‘make chicken-install-5 INSTALL_AS=sudo’ to install the ‘pipchix’ egg.])
+  if test "${__ac_cv_path_CHICKEN_UNINSTALL_5_found}" != no; then
+    AC_MSG_NOTICE([${CHICKEN_UNINSTALL_5} was found.])
+    AC_MSG_NOTICE([🔵 Use ‘make chicken-uninstall-5 INSTALL_AS=sudo’ to uninstall the ‘pipchix’ egg.])
+  fi
 fi
 if test "${__ac_cv_path_GAUCHE_found}" != no; then
   AC_MSG_NOTICE([])
-  AC_MSG_NOTICE([The Gauche interpreter ${GAUCHE} was found.])
+  AC_MSG_NOTICE([Gauche Scheme ${GAUCHE} was found.])
 fi
 if test "${__ac_cv_path_GUILE_found}" != no; then
   AC_MSG_NOTICE([])
-  AC_MSG_NOTICE([The Guile interpreter/compiler version 3 ${GUILE} was found.])
+  AC_MSG_NOTICE([Guile version 3 ${GUILE} was found.])
 fi
 if test "${__ac_cv_path_SAGITTARIUS_found}" != no; then
   AC_MSG_NOTICE([])
-  AC_MSG_NOTICE([The Sagittarius interpreter/compiler ${SAGITTARIUS} was found.])
-fi
-if test "${__ac_cv_path_CHICKEN_INSTALL_5_found}" != no; then
-  AC_MSG_NOTICE([])
-  AC_MSG_NOTICE([Use ‘make chicken-install-5 INSTALL_AS=sudo’ to install the ‘pipchix’ egg.])
-  if test "${__ac_cv_path_CHICKEN_UNINSTALL_5_found}" != no; then
-    AC_MSG_NOTICE([Use ‘make chicken-uninstall-5 INSTALL_AS=sudo’ to uninstall it.])
-  fi
+  AC_MSG_NOTICE([Sagittarius Scheme ${SAGITTARIUS} was found.])
 fi
 AC_MSG_NOTICE([])

@@ -109,6 +109,7 @@ chickeneggs5pipchixdir="${chickeneggs5pipchixdir:-chickeneggs5pipchixdir_default
 AC_SUBST([chickeneggs5pipchixdir])
 
 m4_include([ac-tinyscheme.m4])
+m4_include([ac-chez-scheme.m4])
 m4_include([ac-chicken-scheme.m4])
 m4_include([ac-chibi-scheme.m4])
 m4_include([ac-gauche-scheme.m4])

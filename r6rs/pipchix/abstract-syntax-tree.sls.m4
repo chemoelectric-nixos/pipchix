@@ -24,11 +24,12 @@ m4_include(pipchix/pipchix-includes.m4)
 
 (library (pipchix abstract-syntax-tree)
 
-  (export
-   m4_include(pipchix/abstract-syntax-tree.exports.m4))
+  (export m4_include(pipchix/abstract-syntax-tree.exports.m4))
 
-  (import (except (rnrs) define-record-type)
-          (srfi :9))
+  (import (rename (except (rnrs) define-record-type)
+                  (bitwise-arithmetic-shift arithmetic-shift))
+          (rnrs mutable-strings)
+          (pipchix srfi-9))
 
   m4_include(pipchix/abstract-syntax-tree.m4)
 

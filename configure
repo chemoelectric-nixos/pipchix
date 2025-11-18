@@ -675,6 +675,9 @@ CHICKEN_UNINSTALL_5
 CHICKEN_INSTALL_5_FALSE
 CHICKEN_INSTALL_5_TRUE
 CHICKEN_INSTALL_5
+CHEZ_SCHEME_FALSE
+CHEZ_SCHEME_TRUE
+CHEZ_SCHEME
 CFLAGS_FOR_PIC
 CFLAGS_FOR_STATIC
 chickeneggs5pipchixdir
@@ -816,6 +819,7 @@ LIBS
 CPPFLAGS
 GNU_M4
 MKTEMP
+CHEZ_SCHEME
 CHICKEN_INSTALL_5
 CHICKEN_UNINSTALL_5
 CSI_5
@@ -1484,6 +1488,7 @@ Some influential environment variables:
               you have headers in a nonstandard directory <include dir>
   GNU_M4      GNU m4 macro processor
   MKTEMP      mktemp command
+  CHEZ_SCHEME Chez Scheme
   CHICKEN_INSTALL_5
               chicken-install version 5
   CHICKEN_UNINSTALL_5
@@ -6588,6 +6593,115 @@ fi
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #
+# Chez Scheme configuration.
+#
+
+{ :;
+
+# Override the cache if the precious variable CHEZ_SCHEME is set.
+test -n "${CHEZ_SCHEME}" && unset ac_cv_path_CHEZ_SCHEME
+__ac_cv_path_CHEZ_SCHEME_found=yes
+{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for scheme chezsheme chez-scheme chez" >&5
+printf %s "checking for scheme chezsheme chez-scheme chez... " >&6; }
+if test ${ac_cv_path_CHEZ_SCHEME+y}
+then :
+  printf %s "(cached) " >&6
+else case e in #(
+  e) if test -z "$CHEZ_SCHEME"; then
+  ac_path_CHEZ_SCHEME_found=false
+  # Loop through the user's path and test for each of PROGNAME-LIST
+  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
+for as_dir in $PATH
+do
+  IFS=$as_save_IFS
+  case $as_dir in #(((
+    '') as_dir=./ ;;
+    */) ;;
+    *) as_dir=$as_dir/ ;;
+  esac
+    for ac_prog in scheme chezsheme chez-scheme chez
+   do
+    for ac_exec_ext in '' $ac_executable_extensions; do
+      ac_path_CHEZ_SCHEME="$as_dir$ac_prog$ac_exec_ext"
+      as_fn_executable_p "$ac_path_CHEZ_SCHEME" || continue
+
+      if test -n "${CHEZ_SCHEME}"; then
+         # Bypass the test if the precious variable CHEZ_SCHEME is set.
+         ac_cv_path_CHEZ_SCHEME="${CHEZ_SCHEME}"
+         ac_path_CHEZ_SCHEME_found=:
+      else
+         # Run the test.
+
+    if LC_ALL=C LANG=C ${ac_path_CHEZ_SCHEME} --help 2>&1 | \
+      LC_ALL=C LANG=C ${GREP} 'run rnrs program as shell script' \
+               2> /dev/null > /dev/null; then
+        ac_cv_path_CHEZ_SCHEME="${ac_path_CHEZ_SCHEME}"
+        ac_path_CHEZ_SCHEME_found=:
+    fi
+
+      fi
+      $ac_path_CHEZ_SCHEME_found && break 3
+    done
+  done
+  done
+IFS=$as_save_IFS
+  if test -z "$ac_cv_path_CHEZ_SCHEME"; then
+    :
+  fi
+else
+  ac_cv_path_CHEZ_SCHEME=$CHEZ_SCHEME
+fi
+
+      if test -z "${ac_cv_path_CHEZ_SCHEME}"; then
+         ac_cv_path_CHEZ_SCHEME="not found"
+         __ac_cv_path_CHEZ_SCHEME_found=no
+      fi
+    ;;
+esac
+fi
+{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $ac_cv_path_CHEZ_SCHEME" >&5
+printf "%s\n" "$ac_cv_path_CHEZ_SCHEME" >&6; }
+if test x"${__ac_cv_path_CHEZ_SCHEME_found}" = x"yes"; then
+   CHEZ_SCHEME="${ac_cv_path_CHEZ_SCHEME}"
+else
+   CHEZ_SCHEME=""
+   # Do not cache the negative result. That way someone can install
+   # the program and have it be discovered, even though they did not
+   # clear a cache entry.
+   unset ac_cv_path_CHEZ_SCHEME
+fi
+}
+ if test "${__ac_cv_path_CHEZ_SCHEME_found}" != no; then
+  CHEZ_SCHEME_TRUE=
+  CHEZ_SCHEME_FALSE='#'
+else
+  CHEZ_SCHEME_TRUE='#'
+  CHEZ_SCHEME_FALSE=
+fi
+
+
+# Copyright © 2025 Barry Schwartz
+#
+# Permission is hereby granted, free of charge, to any person obtaining
+# a copy of Pipchix and associated documentation files (the
+# "Software"), to deal in the Software without restriction, including
+# without limitation the rights to use, copy, modify, merge, publish,
+# distribute, sublicense, and/or sell copies of the Software, and to
+# permit persons to whom the Software is furnished to do so, subject to
+# the following conditions:
+#
+# The above copyright notice and this permission notice shall be
+# included in all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+# LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+# OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+# WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+#
 # CHICKEN Scheme configuration.
 #
 
@@ -7788,6 +7902,10 @@ Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${INSTALL_CHICKEN_5_EGG_SOURCE_TRUE}" && test -z "${INSTALL_CHICKEN_5_EGG_SOURCE_FALSE}"; then
   as_fn_error $? "conditional \"INSTALL_CHICKEN_5_EGG_SOURCE\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${CHEZ_SCHEME_TRUE}" && test -z "${CHEZ_SCHEME_FALSE}"; then
+  as_fn_error $? "conditional \"CHEZ_SCHEME\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${CHICKEN_INSTALL_5_TRUE}" && test -z "${CHICKEN_INSTALL_5_FALSE}"; then
@@ -9067,6 +9185,18 @@ fi
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+if test "${__ac_cv_path_CHEZ_SCHEME_found}" != no; then
+  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: " >&5
+printf "%s\n" "$as_me: " >&6;}
+  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: Chez Scheme ${CHEZ_SCHEME} was found." >&5
+printf "%s\n" "$as_me: Chez Scheme ${CHEZ_SCHEME} was found." >&6;}
+fi
+if test "${__ac_cv_path_CHIBI_SCHEME_found}" != no; then
+  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: " >&5
+printf "%s\n" "$as_me: " >&6;}
+  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: Chibi Scheme ${CHIBI_SCHEME} was found." >&5
+printf "%s\n" "$as_me: Chibi Scheme ${CHIBI_SCHEME} was found." >&6;}
+fi
 if test "${__ac_cv_path_CSI_5_found}" != no; then
   { printf "%s\n" "$as_me:${as_lineno-$LINENO}: " >&5
 printf "%s\n" "$as_me: " >&6;}
@@ -9079,39 +9209,35 @@ printf "%s\n" "$as_me: " >&6;}
   { printf "%s\n" "$as_me:${as_lineno-$LINENO}: The CHICKEN 5 compiler ${CSC_5} was found." >&5
 printf "%s\n" "$as_me: The CHICKEN 5 compiler ${CSC_5} was found." >&6;}
 fi
-if test "${__ac_cv_path_CHIBI_SCHEME_found}" != no; then
-  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: " >&5
-printf "%s\n" "$as_me: " >&6;}
-  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: The Chibi Scheme interpreter ${CHIBI_SCHEME} was found." >&5
-printf "%s\n" "$as_me: The Chibi Scheme interpreter ${CHIBI_SCHEME} was found." >&6;}
+if test "${__ac_cv_path_CHICKEN_INSTALL_5_found}" != no; then
+  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: ${CHICKEN_INSTALL_5} was found." >&5
+printf "%s\n" "$as_me: ${CHICKEN_INSTALL_5} was found." >&6;}
+  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: 🔵 Use ‘make chicken-install-5 INSTALL_AS=sudo’ to install the ‘pipchix’ egg." >&5
+printf "%s\n" "$as_me: 🔵 Use ‘make chicken-install-5 INSTALL_AS=sudo’ to install the ‘pipchix’ egg." >&6;}
+  if test "${__ac_cv_path_CHICKEN_UNINSTALL_5_found}" != no; then
+    { printf "%s\n" "$as_me:${as_lineno-$LINENO}: ${CHICKEN_UNINSTALL_5} was found." >&5
+printf "%s\n" "$as_me: ${CHICKEN_UNINSTALL_5} was found." >&6;}
+    { printf "%s\n" "$as_me:${as_lineno-$LINENO}: 🔵 Use ‘make chicken-uninstall-5 INSTALL_AS=sudo’ to uninstall the ‘pipchix’ egg." >&5
+printf "%s\n" "$as_me: 🔵 Use ‘make chicken-uninstall-5 INSTALL_AS=sudo’ to uninstall the ‘pipchix’ egg." >&6;}
+  fi
 fi
 if test "${__ac_cv_path_GAUCHE_found}" != no; then
   { printf "%s\n" "$as_me:${as_lineno-$LINENO}: " >&5
 printf "%s\n" "$as_me: " >&6;}
-  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: The Gauche interpreter ${GAUCHE} was found." >&5
-printf "%s\n" "$as_me: The Gauche interpreter ${GAUCHE} was found." >&6;}
+  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: Gauche Scheme ${GAUCHE} was found." >&5
+printf "%s\n" "$as_me: Gauche Scheme ${GAUCHE} was found." >&6;}
 fi
 if test "${__ac_cv_path_GUILE_found}" != no; then
   { printf "%s\n" "$as_me:${as_lineno-$LINENO}: " >&5
 printf "%s\n" "$as_me: " >&6;}
-  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: The Guile interpreter/compiler version 3 ${GUILE} was found." >&5
-printf "%s\n" "$as_me: The Guile interpreter/compiler version 3 ${GUILE} was found." >&6;}
+  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: Guile version 3 ${GUILE} was found." >&5
+printf "%s\n" "$as_me: Guile version 3 ${GUILE} was found." >&6;}
 fi
 if test "${__ac_cv_path_SAGITTARIUS_found}" != no; then
   { printf "%s\n" "$as_me:${as_lineno-$LINENO}: " >&5
 printf "%s\n" "$as_me: " >&6;}
-  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: The Sagittarius interpreter/compiler ${SAGITTARIUS} was found." >&5
-printf "%s\n" "$as_me: The Sagittarius interpreter/compiler ${SAGITTARIUS} was found." >&6;}
-fi
-if test "${__ac_cv_path_CHICKEN_INSTALL_5_found}" != no; then
-  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: " >&5
-printf "%s\n" "$as_me: " >&6;}
-  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: Use ‘make chicken-install-5 INSTALL_AS=sudo’ to install the ‘pipchix’ egg." >&5
-printf "%s\n" "$as_me: Use ‘make chicken-install-5 INSTALL_AS=sudo’ to install the ‘pipchix’ egg." >&6;}
-  if test "${__ac_cv_path_CHICKEN_UNINSTALL_5_found}" != no; then
-    { printf "%s\n" "$as_me:${as_lineno-$LINENO}: Use ‘make chicken-uninstall-5 INSTALL_AS=sudo’ to uninstall it." >&5
-printf "%s\n" "$as_me: Use ‘make chicken-uninstall-5 INSTALL_AS=sudo’ to uninstall it." >&6;}
-  fi
+  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: Sagittarius Scheme ${SAGITTARIUS} was found." >&5
+printf "%s\n" "$as_me: Sagittarius Scheme ${SAGITTARIUS} was found." >&6;}
 fi
 { printf "%s\n" "$as_me:${as_lineno-$LINENO}: " >&5
 printf "%s\n" "$as_me: " >&6;}

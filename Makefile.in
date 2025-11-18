@@ -116,14 +116,16 @@ EXTRA_PROGRAMS =
 @INSTALL_R6RS_SOURCE_TRUE@am__append_2 = $(R6RS_SCHEME)
 @INSTALL_R7RS_SOURCE_TRUE@am__append_3 = $(R7RS_SCHEME)
 TESTS = $(am__append_4) $(am__append_5) $(am__append_6) \
-	$(am__append_7) $(am__append_8) $(am__append_9)
+	$(am__append_7) $(am__append_8) $(am__append_9) \
+	$(am__append_10)
 @CHICKEN_INSTALL_5_TRUE@@CSI_5_TRUE@am__append_4 = tests/r7rs/chicken-5/check-nix-list-csi.sh
 @CHICKEN_INSTALL_5_TRUE@@CSC_5_TRUE@am__append_5 = tests/r7rs/chicken-5/check-nix-list-csc.sh
-@CHIBI_SCHEME_TRUE@am__append_6 = tests/r7rs/check-nix-list-chibi
-@GAUCHE_TRUE@am__append_7 = tests/r7rs/check-nix-list-gauche
-@GUILE_TRUE@am__append_8 = tests/r6rs/check-nix-list-guile \
+@CHEZ_SCHEME_TRUE@am__append_6 = tests/r6rs/check-nix-list-chez
+@CHIBI_SCHEME_TRUE@am__append_7 = tests/r7rs/check-nix-list-chibi
+@GAUCHE_TRUE@am__append_8 = tests/r7rs/check-nix-list-gauche
+@GUILE_TRUE@am__append_9 = tests/r6rs/check-nix-list-guile \
 @GUILE_TRUE@	tests/r7rs/check-nix-list-guile
-@SAGITTARIUS_TRUE@am__append_9 =  \
+@SAGITTARIUS_TRUE@am__append_10 =  \
 @SAGITTARIUS_TRUE@	tests/r6rs/check-nix-list-sagittarius \
 @SAGITTARIUS_TRUE@	tests/r7rs/check-nix-list-sagittarius
 subdir = .
@@ -134,6 +136,7 @@ am__aclocal_m4_deps = $(top_srcdir)/m4/ax_check_compile_flag.m4 \
 	$(top_srcdir)/m4/stm_path_progs_cached_and_precious.m4 \
 	$(top_srcdir)/m4/stm_prog_gnu_make.m4 \
 	$(top_srcdir)/m4/stm_prog_m4.m4 $(top_srcdir)/ac-tinyscheme.m4 \
+	$(top_srcdir)/ac-chez-scheme.m4 \
 	$(top_srcdir)/ac-chicken-scheme.m4 \
 	$(top_srcdir)/ac-chibi-scheme.m4 \
 	$(top_srcdir)/ac-gauche-scheme.m4 \
@@ -483,6 +486,7 @@ CCDEPMODE = @CCDEPMODE@
 CFLAGS = @CFLAGS@
 CFLAGS_FOR_PIC = @CFLAGS_FOR_PIC@
 CFLAGS_FOR_STATIC = @CFLAGS_FOR_STATIC@
+CHEZ_SCHEME = @CHEZ_SCHEME@
 CHIBI_SCHEME = @CHIBI_SCHEME@
 CHICKEN_INSTALL_5 = @CHICKEN_INSTALL_5@
 CHICKEN_UNINSTALL_5 = @CHICKEN_UNINSTALL_5@
@@ -624,9 +628,9 @@ nodist_r6rspipchix_DATA = $(am__append_2)
 nodist_r7rspipchix_DATA = $(am__append_3)
 nodist_chickeneggs5pipchix_DATA = $(am__append_1)
 M4_PREPROCESS = $(GNU_M4) -P -I '$(srcdir)'
-R6RS_SCHEME = r6rs/pipchix/base.sls r6rs/pipchix/nix-embed.sls \
-	r6rs/pipchix/nix-list.sls r6rs/pipchix/nix-set.sls \
-	r6rs/pipchix/abstract-syntax-tree.sls
+R6RS_SCHEME = r6rs/pipchix/srfi-9.sls r6rs/pipchix/base.sls \
+	r6rs/pipchix/nix-embed.sls r6rs/pipchix/nix-list.sls \
+	r6rs/pipchix/nix-set.sls r6rs/pipchix/abstract-syntax-tree.sls
 R7RS_SCHEME = r7rs/pipchix/base.sld r7rs/pipchix/nix-embed.sld \
 	r7rs/pipchix/nix-list.sld r7rs/pipchix/nix-set.sld \
 	r7rs/pipchix/abstract-syntax-tree.sld
@@ -686,7 +690,8 @@ CHICKEN_5_EGGSPEC = ' \
 
 CHEX_R6RS = check-nix-list
 CHEX_R7RS = check-nix-list
-CHEX_WE_MADE = $(CHEX_R6RS:%=tests/r6rs/%-guile) \
+CHEX_WE_MADE = $(CHEX_R6RS:%=tests/r6rs/%-chez) \
+	$(CHEX_R6RS:%=tests/r6rs/%-guile) \
 	$(CHEX_R6RS:%=tests/r6rs/%-sagittarius) \
 	$(CHEX_R7RS:%=tests/r7rs/chicken-5/%-csi.sh) \
 	$(CHEX_R7RS:%=tests/r7rs/chicken-5/%-csc.sh) \
@@ -1121,6 +1126,13 @@ tests/r7rs/chicken-5/check-nix-list-csi.sh.log: tests/r7rs/chicken-5/check-nix-l
 tests/r7rs/chicken-5/check-nix-list-csc.sh.log: tests/r7rs/chicken-5/check-nix-list-csc.sh
 	@p='tests/r7rs/chicken-5/check-nix-list-csc.sh'; \
 	b='tests/r7rs/chicken-5/check-nix-list-csc.sh'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+tests/r6rs/check-nix-list-chez.log: tests/r6rs/check-nix-list-chez
+	@p='tests/r6rs/check-nix-list-chez'; \
+	b='tests/r6rs/check-nix-list-chez'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
@@ -1651,6 +1663,12 @@ tests/r7rs/chicken-5/%-csc.sh: tests/r7rs/% GNUmakefile
 	         "$(call get-chicken-5-repository-path)" \
 	  printf 'exec %s\n' "$${scheme}" \
 	) > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
+
+tests/r6rs/%-chez: tests/r6rs/% $(R6RS_SCHEME) GNUmakefile
+	$(call v,AWK) $(MKDIR_P) $(@D) && \
+	$(AWK) 'BEGIN{print "#!/usr/bin/env -S $(CHEZ_SCHEME) --libdirs '$(abs_builddir)/r6rs:' --script"} \
+	        {print}' $(<) \
+	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
 tests/r7rs/%-chibi: tests/r7rs/% $(R7RS_SCHEME) GNUmakefile
 	$(call v,AWK) $(MKDIR_P) $(@D) && \

@@ -64,6 +64,7 @@ nodist_chickeneggs5pipchix_DATA += $(CHICKEN_5_EGGFILES)
 endif
 
 R6RS_SCHEME =
+R6RS_SCHEME += r6rs/pipchix/srfi-9.sls
 R6RS_SCHEME += r6rs/pipchix/base.sls
 R6RS_SCHEME += r6rs/pipchix/nix-embed.sls
 R6RS_SCHEME += r6rs/pipchix/nix-list.sls
@@ -273,6 +274,12 @@ tests/r7rs/chicken-5/%-csc.sh: tests/r7rs/% GNUmakefile
 	  printf 'exec %s\n' "$${scheme}" \
 	) > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
+tests/r6rs/%-chez: tests/r6rs/% $(R6RS_SCHEME) GNUmakefile
+	$(call v,AWK) $(MKDIR_P) $(@D) && \
+	$(AWK) 'BEGIN{print "#!/usr/bin/env -S $(CHEZ_SCHEME) --libdirs '$(abs_builddir)/r6rs:' --script"} \
+	        {print}' $(<) \
+	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
+
 tests/r7rs/%-chibi: tests/r7rs/% $(R7RS_SCHEME) GNUmakefile
 	$(call v,AWK) $(MKDIR_P) $(@D) && \
 	$(AWK) 'BEGIN{print "#!$(CHIBI_SCHEME) -I'$(abs_builddir)/r7rs'"} \
@@ -341,6 +348,7 @@ EXTRA_DIST += $(CHEX_R7RS:%=tests/r7rs/%)
 
 CHEX_WE_MADE =
 
+CHEX_WE_MADE += $(CHEX_R6RS:%=tests/r6rs/%-chez)
 CHEX_WE_MADE += $(CHEX_R6RS:%=tests/r6rs/%-guile)
 CHEX_WE_MADE += $(CHEX_R6RS:%=tests/r6rs/%-sagittarius)
 
@@ -363,6 +371,10 @@ if CSC_5
 TESTS += tests/r7rs/chicken-5/check-nix-list-csc.sh
 endif
 endif
+
+if CHEZ_SCHEME
+TESTS += tests/r6rs/check-nix-list-chez
+endif CHEZ_SCHEME
 
 if CHIBI_SCHEME
 TESTS += tests/r7rs/check-nix-list-chibi

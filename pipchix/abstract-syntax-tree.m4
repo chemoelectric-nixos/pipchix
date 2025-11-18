@@ -111,7 +111,7 @@ m4_string_reverse_concatenate
 (define output-nix-abstract-syntax-tree
   (let ((outp-default
          (lambda (str)
-           (write-string str (current-output-port)))))
+           (display str (current-output-port)))))
     (case-lambda
       ((ast)
        (output-nix-abstract-syntax-tree ast outp-default))
@@ -190,11 +190,20 @@ m4_string_reverse_concatenate
             (> i 126)))))
 
 (define (%%utf16-escape i)
+  (define (%%string-copy! s i t)
+    ;; We have this definition of string copy because R⁶RS lacks
+    ;; string-copy!
+    (let ((n (string-length t)))
+      (let loop ((i i)
+                 (j 0))
+        (unless (= j n)
+          (string-set! s i (string-ref t j))
+          (loop (+ i 1) (+ j 1))))))
   (if (<= i #xFFFF)
       (let* ((hex (string-upcase (number->string i 16)))
              (str (string-copy "\\u0000"))
              (n (string-length hex)))
-        (string-copy! str (- 6 n) hex)
+        (%%string-copy! str (- 6 n) hex)
         str)
       (let* ((i (- i #x10000))      ; Make a surrogate pair.
              (hi (+ #xDB00
@@ -203,7 +212,6 @@ m4_string_reverse_concatenate
              (lo (+ #xDC00 (bitwise-and i #b1111111111))))
         (string-append (%%utf16-escape hi)
                        (%%utf16-escape lo)))))
-
 
 (define (%%output-nix-path-node ast outp)
   (let ((path (nix-path-node-ref ast)))
