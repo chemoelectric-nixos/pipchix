@@ -185,7 +185,7 @@ CLEANFILES += $(CHICKEN_5_EGGDIR)/pipchix.{build,install}.sh
 
 if CSI_5
 @GNU@ define get-chicken-5-repository-path
-@GNU@ $(CSI_5) -n -b -R r7rs -R srfi-13 -R chicken.platform \
+@GNU@ $(CSI_5) -n -b -R r7rs -R utf8-srfi-13 -R chicken.platform \
 @GNU@    -e '(display (string-join (cons "$(abs_builddir)/$(CHICKEN_5_EGGDIR)/.." (repository-path)) ":"))'
 @GNU@ endef
 else !CSI_5

@@ -1527,7 +1527,7 @@ $(CHICKEN_5_EGGDIR)/pipchix.egg: GNUmakefile $(TINYSCHEME_EXE)
 #---------------------------------------------------------------------
 
 @CSI_5_TRUE@@GNU@ define get-chicken-5-repository-path
-@CSI_5_TRUE@@GNU@ $(CSI_5) -n -b -R r7rs -R srfi-13 -R chicken.platform \
+@CSI_5_TRUE@@GNU@ $(CSI_5) -n -b -R r7rs -R utf8-srfi-13 -R chicken.platform \
 @CSI_5_TRUE@@GNU@    -e '(display (string-join (cons "$(abs_builddir)/$(CHICKEN_5_EGGDIR)/.." (repository-path)) ":"))'
 @CSI_5_TRUE@@GNU@ endef
 @CSI_5_FALSE@@GNU@ define get-chicken-5-repository-path
