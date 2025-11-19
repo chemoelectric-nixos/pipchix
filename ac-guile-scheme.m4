@@ -24,7 +24,7 @@
 #
 
 StM_PATH_PROGS_CACHED_AND_PRECIOUS([GUILE],
-  [Guile Scheme version 3],[guile],
+  [Guile Scheme version 3],[guile guile-3 guile-3.0],
   [
     if LC_ALL=C LANG=C ${ac_path_GUILE} --version 2>&1 | \
       LC_ALL=C LANG=C ${FGREP} '(GNU Guile) 3' \

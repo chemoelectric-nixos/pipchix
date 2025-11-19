@@ -7356,8 +7356,8 @@ fi
 # Override the cache if the precious variable GUILE is set.
 test -n "${GUILE}" && unset ac_cv_path_GUILE
 __ac_cv_path_GUILE_found=yes
-{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for guile" >&5
-printf %s "checking for guile... " >&6; }
+{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for guile guile-3 guile-3.0" >&5
+printf %s "checking for guile guile-3 guile-3.0... " >&6; }
 if test ${ac_cv_path_GUILE+y}
 then :
   printf %s "(cached) " >&6
@@ -7374,7 +7374,7 @@ do
     */) ;;
     *) as_dir=$as_dir/ ;;
   esac
-    for ac_prog in guile
+    for ac_prog in guile guile-3 guile-3.0
    do
     for ac_exec_ext in '' $ac_executable_extensions; do
       ac_path_GUILE="$as_dir$ac_prog$ac_exec_ext"
@@ -7770,13 +7770,13 @@ fi
 { :;
 
    # If no GNU Make is found, recommend it.
-   if test -z "${_cv_gnu_make_command}" \
-         -a x"${__stm_config_makefiles_consider_gnu_make_printed}" != xyes; then
+   if test -z "${ax_cv_gnu_make_command}" \
+         -a x"${chem_config_makefiles_consider_gnu_make_printed}" != xyes; then
       { printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: Please consider installing and using GNU Make:
            http://www.gnu.org/software/make/" >&5
 printf "%s\n" "$as_me: WARNING: Please consider installing and using GNU Make:
            http://www.gnu.org/software/make/" >&2;}
-      __stm_config_makefiles_consider_gnu_make_printed=yes
+      chem_config_makefiles_consider_gnu_make_printed=yes
    fi
 
    # Create `Makefile' or its substitute. If GNU Make is present,
@@ -7793,13 +7793,13 @@ printf "%s\n" "$as_me: WARNING: Please consider installing and using GNU Make:
 { :;
 
    # If no GNU Make is found, recommend it.
-   if test -z "${_cv_gnu_make_command}" \
-         -a x"${__stm_config_makefiles_consider_gnu_make_printed}" != xyes; then
+   if test -z "${ax_cv_gnu_make_command}" \
+         -a x"${chem_config_makefiles_consider_gnu_make_printed}" != xyes; then
       { printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: Please consider installing and using GNU Make:
            http://www.gnu.org/software/make/" >&5
 printf "%s\n" "$as_me: WARNING: Please consider installing and using GNU Make:
            http://www.gnu.org/software/make/" >&2;}
-      __stm_config_makefiles_consider_gnu_make_printed=yes
+      chem_config_makefiles_consider_gnu_make_printed=yes
    fi
 
    # Create `Makefile' or its substitute. If GNU Make is present,
@@ -8632,10 +8632,10 @@ cat >>$CONFIG_STATUS <<_ACEOF || ac_write_fail=1
 #
 AMDEP_TRUE="$AMDEP_TRUE" MAKE="${MAKE-make}"
 
-      __stm_config_makefiles_make_command="${_cv_gnu_make_command}"
+      chem_config_makefiles_make_command="${ax_cv_gnu_make_command}"
 
 
-      __stm_config_makefiles_make_command="${_cv_gnu_make_command}"
+      chem_config_makefiles_make_command="${ax_cv_gnu_make_command}"
 
 
 _ACEOF
@@ -9217,29 +9217,29 @@ See 'config.log' for more details" "$LINENO" 5; }
  ;;
     "Makefile":F)
       # If GNU make is present, encourage other makes to call it instead.
-      if test -n "${__stm_config_makefiles_make_command}"; then
+      if test -n "${chem_config_makefiles_make_command}"; then
          cat > Makefile <<EOF
 # Attempt to have common non-GNU Make programs run GNU Make.
 
 .DEFAULT:
-	${__stm_config_makefiles_make_command} \$@
+	${chem_config_makefiles_make_command} \$@
 
 %:
-	${__stm_config_makefiles_make_command}
+	${chem_config_makefiles_make_command}
 EOF
       fi
     ;;
     "tinyscheme-1.42/Makefile":F)
       # If GNU make is present, encourage other makes to call it instead.
-      if test -n "${__stm_config_makefiles_make_command}"; then
+      if test -n "${chem_config_makefiles_make_command}"; then
          cat > tinyscheme-1.42/Makefile <<EOF
 # Attempt to have common non-GNU Make programs run GNU Make.
 
 .DEFAULT:
-	${__stm_config_makefiles_make_command} \$@
+	${chem_config_makefiles_make_command} \$@
 
 %:
-	${__stm_config_makefiles_make_command}
+	${chem_config_makefiles_make_command}
 EOF
       fi
     ;;
@@ -9303,65 +9303,49 @@ fi
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-if test "${__ac_cv_path_CHEZ_SCHEME_found}" != no; then
-  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: " >&5
+{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: " >&5
 printf "%s\n" "$as_me: " >&6;}
-  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: Chez Scheme ${CHEZ_SCHEME} was found." >&5
-printf "%s\n" "$as_me: Chez Scheme ${CHEZ_SCHEME} was found." >&6;}
+if test "${__ac_cv_path_CHEZ_SCHEME_found}" != no; then
+  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: Chez Scheme: ${CHEZ_SCHEME}" >&5
+printf "%s\n" "$as_me: Chez Scheme: ${CHEZ_SCHEME}" >&6;}
 fi
 if test "${__ac_cv_path_CHIBI_SCHEME_found}" != no; then
-  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: " >&5
-printf "%s\n" "$as_me: " >&6;}
-  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: Chibi Scheme ${CHIBI_SCHEME} was found." >&5
-printf "%s\n" "$as_me: Chibi Scheme ${CHIBI_SCHEME} was found." >&6;}
+  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: Chibi Scheme: ${CHIBI_SCHEME}" >&5
+printf "%s\n" "$as_me: Chibi Scheme: ${CHIBI_SCHEME}" >&6;}
 fi
 if test "${__ac_cv_path_CSI_5_found}" != no; then
-  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: " >&5
-printf "%s\n" "$as_me: " >&6;}
-  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: The CHICKEN 5 interpreter ${CSI_5} was found." >&5
-printf "%s\n" "$as_me: The CHICKEN 5 interpreter ${CSI_5} was found." >&6;}
+  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: CHICKEN 5 interpreter: ${CSI_5}" >&5
+printf "%s\n" "$as_me: CHICKEN 5 interpreter: ${CSI_5}" >&6;}
 fi
 if test "${__ac_cv_path_CSC_5_found}" != no; then
   test "${__ac_cv_path_CSI_5_found}" != no || { printf "%s\n" "$as_me:${as_lineno-$LINENO}: " >&5
 printf "%s\n" "$as_me: " >&6;}
-  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: The CHICKEN 5 compiler ${CSC_5} was found." >&5
-printf "%s\n" "$as_me: The CHICKEN 5 compiler ${CSC_5} was found." >&6;}
+  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: CHICKEN 5 compiler: ${CSC_5}" >&5
+printf "%s\n" "$as_me: CHICKEN 5 compiler: ${CSC_5}" >&6;}
 fi
 if test "${__ac_cv_path_CHICKEN_INSTALL_5_found}" != no; then
-  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: ${CHICKEN_INSTALL_5} was found." >&5
-printf "%s\n" "$as_me: ${CHICKEN_INSTALL_5} was found." >&6;}
   { printf "%s\n" "$as_me:${as_lineno-$LINENO}: 🔵 Use ‘make chicken-install-5 INSTALL_AS=sudo’ to install the ‘pipchix’ egg." >&5
 printf "%s\n" "$as_me: 🔵 Use ‘make chicken-install-5 INSTALL_AS=sudo’ to install the ‘pipchix’ egg." >&6;}
   if test "${__ac_cv_path_CHICKEN_UNINSTALL_5_found}" != no; then
-    { printf "%s\n" "$as_me:${as_lineno-$LINENO}: ${CHICKEN_UNINSTALL_5} was found." >&5
-printf "%s\n" "$as_me: ${CHICKEN_UNINSTALL_5} was found." >&6;}
     { printf "%s\n" "$as_me:${as_lineno-$LINENO}: 🔵 Use ‘make chicken-uninstall-5 INSTALL_AS=sudo’ to uninstall the ‘pipchix’ egg." >&5
 printf "%s\n" "$as_me: 🔵 Use ‘make chicken-uninstall-5 INSTALL_AS=sudo’ to uninstall the ‘pipchix’ egg." >&6;}
   fi
 fi
 if test "${__ac_cv_path_GAUCHE_found}" != no; then
-  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: " >&5
-printf "%s\n" "$as_me: " >&6;}
-  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: Gauche Scheme ${GAUCHE} was found." >&5
-printf "%s\n" "$as_me: Gauche Scheme ${GAUCHE} was found." >&6;}
+  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: Gauche Scheme: ${GAUCHE}" >&5
+printf "%s\n" "$as_me: Gauche Scheme: ${GAUCHE}" >&6;}
 fi
 if test "${__ac_cv_path_GUILE_found}" != no; then
-  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: " >&5
-printf "%s\n" "$as_me: " >&6;}
-  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: Guile version 3 ${GUILE} was found." >&5
-printf "%s\n" "$as_me: Guile version 3 ${GUILE} was found." >&6;}
+  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: Guile version 3: ${GUILE}" >&5
+printf "%s\n" "$as_me: Guile version 3: ${GUILE}" >&6;}
 fi
 if test "${__ac_cv_path_MOSH_found}" != no; then
-  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: " >&5
-printf "%s\n" "$as_me: " >&6;}
-  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: Mosh Scheme was found." >&5
-printf "%s\n" "$as_me: Mosh Scheme was found." >&6;}
+  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: Mosh Scheme: ${MOSH}" >&5
+printf "%s\n" "$as_me: Mosh Scheme: ${MOSH}" >&6;}
 fi
 if test "${__ac_cv_path_SAGITTARIUS_found}" != no; then
-  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: " >&5
-printf "%s\n" "$as_me: " >&6;}
-  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: Sagittarius Scheme ${SAGITTARIUS} was found." >&5
-printf "%s\n" "$as_me: Sagittarius Scheme ${SAGITTARIUS} was found." >&6;}
+  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: Sagittarius Scheme: ${SAGITTARIUS}" >&5
+printf "%s\n" "$as_me: Sagittarius Scheme: ${SAGITTARIUS}" >&6;}
 fi
 { printf "%s\n" "$as_me:${as_lineno-$LINENO}: " >&5
 printf "%s\n" "$as_me: " >&6;}

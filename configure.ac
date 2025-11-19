@@ -122,10 +122,10 @@ m4_include([ac-sagittarius-scheme.m4])
 # @GNU@ here may be better.)
 AC_SUBST([GNU],[])
 
-StM_REQUIRE_GNU_MAKE_IN_PATH
-StM_CONFIG_MAKEFILES
-StM_CONFIG_MAKEFILES([tinyscheme-1.42/Makefile],
-                     [tinyscheme-1.42/GNUmakefile])
+CHEM_REQUIRE_GNU_MAKE_IN_PATH
+CHEM_CONFIG_MAKEFILES
+CHEM_CONFIG_MAKEFILES([tinyscheme-1.42/Makefile],
+                      [tinyscheme-1.42/GNUmakefile])
 
 m4_foreach([f],
   [[tinyscheme-1.42/init.scm],
