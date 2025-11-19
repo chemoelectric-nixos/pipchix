@@ -20,17 +20,17 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #
-# Guile Scheme configuration.
+# Mosh Scheme configuration.
 #
 
-StM_PATH_PROGS_CACHED_AND_PRECIOUS([GUILE],
-  [Guile Scheme version 3],[guile],
+StM_PATH_PROGS_CACHED_AND_PRECIOUS([MOSH],
+  [Mosh Scheme],[mosh],
   [
-    if LC_ALL=C LANG=C ${ac_path_GUILE} --version 2>&1 | \
-      LC_ALL=C LANG=C ${FGREP} '(GNU Guile) 3' \
+    if LC_ALL=C LANG=C ${ac_path_MOSH} -V 2>&1 | \
+      LC_ALL=C LANG=C ${GREP} '^Mosh R7RS and R6RS Scheme interpreter' \
                2> /dev/null > /dev/null; then
-        ac_cv_path_GUILE="${ac_path_GUILE}"
-        ac_path_GUILE_found=:
+        ac_cv_path_MOSH="${ac_path_MOSH}"
+        ac_path_MOSH_found=:
     fi
   ])
-AM_CONDITIONAL([GUILE],[test "${__ac_cv_path_GUILE_found}" != no])
+AM_CONDITIONAL([MOSH],[test "${__ac_cv_path_MOSH_found}" != no])

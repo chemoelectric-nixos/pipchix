@@ -308,6 +308,18 @@ tests/r7rs/%-guile: tests/r7rs/% $(R7RS_SCHEME) GNUmakefile
 	        {print}' $(<) \
 	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
+tests/r6rs/%-mosh: tests/r6rs/% $(R6RS_SCHEME) GNUmakefile
+	$(call v,AWK) $(MKDIR_P) $(@D) && \
+	$(AWK) 'BEGIN{print "#!$(MOSH) --loadpath='$(abs_builddir)/r6rs'"} \
+	        {print}' $(<) \
+	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
+
+tests/r7rs/%-mosh: tests/r7rs/% $(R7RS_SCHEME) GNUmakefile
+	$(call v,AWK) $(MKDIR_P) $(@D) && \
+	$(AWK) 'BEGIN{print "#!$(MOSH) --loadpath='$(abs_builddir)/r7rs'"} \
+	        {print}' $(<) \
+	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
+
 #
 # FIXME: The following requires more than a POSIX env. GNU coreutils
 #        env will work. A workaround could be made, or shell script
@@ -350,6 +362,7 @@ CHEX_WE_MADE =
 
 CHEX_WE_MADE += $(CHEX_R6RS:%=tests/r6rs/%-chez)
 CHEX_WE_MADE += $(CHEX_R6RS:%=tests/r6rs/%-guile)
+CHEX_WE_MADE += $(CHEX_R6RS:%=tests/r6rs/%-mosh)
 CHEX_WE_MADE += $(CHEX_R6RS:%=tests/r6rs/%-sagittarius)
 
 CHEX_WE_MADE += $(CHEX_R7RS:%=tests/r7rs/chicken-5/%-csi.sh)
@@ -357,6 +370,7 @@ CHEX_WE_MADE += $(CHEX_R7RS:%=tests/r7rs/chicken-5/%-csc.sh)
 CHEX_WE_MADE += $(CHEX_R7RS:%=tests/r7rs/%-chibi)
 CHEX_WE_MADE += $(CHEX_R7RS:%=tests/r7rs/%-gauche)
 CHEX_WE_MADE += $(CHEX_R7RS:%=tests/r7rs/%-guile)
+CHEX_WE_MADE += $(CHEX_R7RS:%=tests/r7rs/%-mosh)
 CHEX_WE_MADE += $(CHEX_R7RS:%=tests/r7rs/%-sagittarius)
 
 CLEANFILES += $(CHEX_WE_MADE)
@@ -388,6 +402,11 @@ if GUILE
 TESTS += tests/r6rs/check-nix-list-guile
 TESTS += tests/r7rs/check-nix-list-guile
 endif GUILE
+
+if MOSH
+TESTS += tests/r6rs/check-nix-list-mosh
+TESTS += tests/r7rs/check-nix-list-mosh
+endif MOSH
 
 if SAGITTARIUS
 TESTS += tests/r6rs/check-nix-list-sagittarius

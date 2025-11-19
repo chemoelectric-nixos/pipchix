@@ -51,6 +51,10 @@ if test "${__ac_cv_path_GUILE_found}" != no; then
   AC_MSG_NOTICE([])
   AC_MSG_NOTICE([Guile version 3 ${GUILE} was found.])
 fi
+if test "${__ac_cv_path_MOSH_found}" != no; then
+  AC_MSG_NOTICE([])
+  AC_MSG_NOTICE([Mosh Scheme was found.])
+fi
 if test "${__ac_cv_path_SAGITTARIUS_found}" != no; then
   AC_MSG_NOTICE([])
   AC_MSG_NOTICE([Sagittarius Scheme ${SAGITTARIUS} was found.])

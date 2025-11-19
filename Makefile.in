@@ -117,7 +117,7 @@ EXTRA_PROGRAMS =
 @INSTALL_R7RS_SOURCE_TRUE@am__append_3 = $(R7RS_SCHEME)
 TESTS = $(am__append_4) $(am__append_5) $(am__append_6) \
 	$(am__append_7) $(am__append_8) $(am__append_9) \
-	$(am__append_10)
+	$(am__append_10) $(am__append_11)
 @CHICKEN_INSTALL_5_TRUE@@CSI_5_TRUE@am__append_4 = tests/r7rs/chicken-5/check-nix-list-csi.sh
 @CHICKEN_INSTALL_5_TRUE@@CSC_5_TRUE@am__append_5 = tests/r7rs/chicken-5/check-nix-list-csc.sh
 @CHEZ_SCHEME_TRUE@am__append_6 = tests/r6rs/check-nix-list-chez
@@ -125,7 +125,9 @@ TESTS = $(am__append_4) $(am__append_5) $(am__append_6) \
 @GAUCHE_TRUE@am__append_8 = tests/r7rs/check-nix-list-gauche
 @GUILE_TRUE@am__append_9 = tests/r6rs/check-nix-list-guile \
 @GUILE_TRUE@	tests/r7rs/check-nix-list-guile
-@SAGITTARIUS_TRUE@am__append_10 =  \
+@MOSH_TRUE@am__append_10 = tests/r6rs/check-nix-list-mosh \
+@MOSH_TRUE@	tests/r7rs/check-nix-list-mosh
+@SAGITTARIUS_TRUE@am__append_11 =  \
 @SAGITTARIUS_TRUE@	tests/r6rs/check-nix-list-sagittarius \
 @SAGITTARIUS_TRUE@	tests/r7rs/check-nix-list-sagittarius
 subdir = .
@@ -141,6 +143,7 @@ am__aclocal_m4_deps = $(top_srcdir)/m4/ax_check_compile_flag.m4 \
 	$(top_srcdir)/ac-chibi-scheme.m4 \
 	$(top_srcdir)/ac-gauche-scheme.m4 \
 	$(top_srcdir)/ac-guile-scheme.m4 \
+	$(top_srcdir)/ac-mosh-scheme.m4 \
 	$(top_srcdir)/ac-sagittarius-scheme.m4 \
 	$(top_srcdir)/ac-what-was-found.m4 $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
@@ -525,6 +528,7 @@ MAINT = @MAINT@
 MAKEINFO = @MAKEINFO@
 MKDIR_P = @MKDIR_P@
 MKTEMP = @MKTEMP@
+MOSH = @MOSH@
 OBJEXT = @OBJEXT@
 PACKAGE = @PACKAGE@
 PACKAGE_BUGREPORT = @PACKAGE_BUGREPORT@
@@ -692,12 +696,14 @@ CHEX_R6RS = check-nix-list
 CHEX_R7RS = check-nix-list
 CHEX_WE_MADE = $(CHEX_R6RS:%=tests/r6rs/%-chez) \
 	$(CHEX_R6RS:%=tests/r6rs/%-guile) \
+	$(CHEX_R6RS:%=tests/r6rs/%-mosh) \
 	$(CHEX_R6RS:%=tests/r6rs/%-sagittarius) \
 	$(CHEX_R7RS:%=tests/r7rs/chicken-5/%-csi.sh) \
 	$(CHEX_R7RS:%=tests/r7rs/chicken-5/%-csc.sh) \
 	$(CHEX_R7RS:%=tests/r7rs/%-chibi) \
 	$(CHEX_R7RS:%=tests/r7rs/%-gauche) \
 	$(CHEX_R7RS:%=tests/r7rs/%-guile) \
+	$(CHEX_R7RS:%=tests/r7rs/%-mosh) \
 	$(CHEX_R7RS:%=tests/r7rs/%-sagittarius)
 
 #---------------------------------------------------------------------
@@ -1161,6 +1167,20 @@ tests/r6rs/check-nix-list-guile.log: tests/r6rs/check-nix-list-guile
 tests/r7rs/check-nix-list-guile.log: tests/r7rs/check-nix-list-guile
 	@p='tests/r7rs/check-nix-list-guile'; \
 	b='tests/r7rs/check-nix-list-guile'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+tests/r6rs/check-nix-list-mosh.log: tests/r6rs/check-nix-list-mosh
+	@p='tests/r6rs/check-nix-list-mosh'; \
+	b='tests/r6rs/check-nix-list-mosh'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+tests/r7rs/check-nix-list-mosh.log: tests/r7rs/check-nix-list-mosh
+	@p='tests/r7rs/check-nix-list-mosh'; \
+	b='tests/r7rs/check-nix-list-mosh'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
@@ -1695,6 +1715,18 @@ tests/r7rs/%-guile: tests/r7rs/% $(R7RS_SCHEME) GNUmakefile
 	$(AWK) 'BEGIN{print "#!$(GUILE) \\"; \
 	              print "-L '$(abs_builddir)/r7rs' --r7rs --no-auto-compile -s"; \
 	              print "!#"} \
+	        {print}' $(<) \
+	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
+
+tests/r6rs/%-mosh: tests/r6rs/% $(R6RS_SCHEME) GNUmakefile
+	$(call v,AWK) $(MKDIR_P) $(@D) && \
+	$(AWK) 'BEGIN{print "#!$(MOSH) --loadpath='$(abs_builddir)/r6rs'"} \
+	        {print}' $(<) \
+	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
+
+tests/r7rs/%-mosh: tests/r7rs/% $(R7RS_SCHEME) GNUmakefile
+	$(call v,AWK) $(MKDIR_P) $(@D) && \
+	$(AWK) 'BEGIN{print "#!$(MOSH) --loadpath='$(abs_builddir)/r7rs'"} \
 	        {print}' $(<) \
 	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 

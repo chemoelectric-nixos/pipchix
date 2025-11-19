@@ -20,17 +20,18 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #
-# Guile Scheme configuration.
+# Chez Scheme configuration.
 #
 
-StM_PATH_PROGS_CACHED_AND_PRECIOUS([GUILE],
-  [Guile Scheme version 3],[guile],
+StM_PATH_PROGS_CACHED_AND_PRECIOUS([CHEZ_SCHEME],
+  [Chez Scheme],[scheme chezsheme chez-scheme chez],
   [
-    if LC_ALL=C LANG=C ${ac_path_GUILE} --version 2>&1 | \
-      LC_ALL=C LANG=C ${FGREP} '(GNU Guile) 3' \
+    if LC_ALL=C LANG=C ${ac_path_CHEZ_SCHEME} --help 2>&1 | \
+      LC_ALL=C LANG=C ${GREP} 'run rnrs program as shell script' \
                2> /dev/null > /dev/null; then
-        ac_cv_path_GUILE="${ac_path_GUILE}"
-        ac_path_GUILE_found=:
+        ac_cv_path_CHEZ_SCHEME="${ac_path_CHEZ_SCHEME}"
+        ac_path_CHEZ_SCHEME_found=:
     fi
   ])
-AM_CONDITIONAL([GUILE],[test "${__ac_cv_path_GUILE_found}" != no])
+AM_CONDITIONAL([CHEZ_SCHEME],
+               [test "${__ac_cv_path_CHEZ_SCHEME_found}" != no])

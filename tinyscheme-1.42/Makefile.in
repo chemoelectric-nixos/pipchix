@@ -123,6 +123,7 @@ am__aclocal_m4_deps = $(top_srcdir)/m4/ax_check_compile_flag.m4 \
 	$(top_srcdir)/ac-chibi-scheme.m4 \
 	$(top_srcdir)/ac-gauche-scheme.m4 \
 	$(top_srcdir)/ac-guile-scheme.m4 \
+	$(top_srcdir)/ac-mosh-scheme.m4 \
 	$(top_srcdir)/ac-sagittarius-scheme.m4 \
 	$(top_srcdir)/ac-what-was-found.m4 $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
@@ -208,6 +209,7 @@ MAINT = @MAINT@
 MAKEINFO = @MAKEINFO@
 MKDIR_P = @MKDIR_P@
 MKTEMP = @MKTEMP@
+MOSH = @MOSH@
 OBJEXT = @OBJEXT@
 PACKAGE = @PACKAGE@
 PACKAGE_BUGREPORT = @PACKAGE_BUGREPORT@
