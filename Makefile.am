@@ -224,6 +224,10 @@ else !CSI_5
 @GNU@ endef
 endif !CSI_5
 
+# FIXME: Test for or write my own ‘env -S’. POSIX does not require
+#        that env support -S.
+ENV_S = /usr/bin/env -S
+
 #
 # make-chicken-5-egg may fail if you have not installed the
 # dependencies of pipchix.
@@ -243,7 +247,7 @@ CLEANFILES += chicken-5-egg-stamp
 tests/r7rs/chicken-5/%-csi: tests/r7rs/% $(CHICKEN_5_EGGFILES) \
 	                    chicken-5-egg-stamp GNUmakefile
 	$(call v,AWK) $(MKDIR_P) $(@D) && \
-	$(AWK) 'BEGIN{print "#!/usr/bin/env -S $(CSI_5) -R r7rs -s"} \
+	$(AWK) 'BEGIN{print "#!$(ENV_S) $(CSI_5) -R r7rs -s"} \
 	        {print}' $(<) \
 	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
@@ -276,7 +280,7 @@ tests/r7rs/chicken-5/%-csc.sh: tests/r7rs/% GNUmakefile
 
 tests/r6rs/%-chez: tests/r6rs/% $(R6RS_SCHEME) GNUmakefile
 	$(call v,AWK) $(MKDIR_P) $(@D) && \
-	$(AWK) 'BEGIN{print "#!/usr/bin/env -S $(CHEZ_SCHEME) --libdirs '$(abs_builddir)/r6rs:' --script"} \
+	$(AWK) 'BEGIN{print "#!$(ENV_S) $(CHEZ_SCHEME) --libdirs '$(abs_builddir)/r6rs:' --script"} \
 	        {print}' $(<) \
 	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
@@ -310,35 +314,25 @@ tests/r7rs/%-guile: tests/r7rs/% $(R7RS_SCHEME) GNUmakefile
 
 tests/r6rs/%-mosh: tests/r6rs/% $(R6RS_SCHEME) GNUmakefile
 	$(call v,AWK) $(MKDIR_P) $(@D) && \
-	$(AWK) 'BEGIN{print "#!$(MOSH) --loadpath='$(abs_builddir)/r6rs'"} \
+	$(AWK) 'BEGIN{print "#!$(ENV_S) $(MOSH) --disable-acc --loadpath='$(abs_builddir)/r6rs'"} \
 	        {print}' $(<) \
 	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
 tests/r7rs/%-mosh: tests/r7rs/% $(R7RS_SCHEME) GNUmakefile
 	$(call v,AWK) $(MKDIR_P) $(@D) && \
-	$(AWK) 'BEGIN{print "#!$(MOSH) --loadpath='$(abs_builddir)/r7rs'"} \
+	$(AWK) 'BEGIN{print "#!$(ENV_S) $(MOSH) --disable-acc --loadpath='$(abs_builddir)/r7rs'"} \
 	        {print}' $(<) \
 	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
-#
-# FIXME: The following requires more than a POSIX env. GNU coreutils
-#        env will work. A workaround could be made, or shell script
-#        wrappers, or simply an autoconf test for a suitable env.
-#
 tests/r6rs/%-sagittarius: tests/r6rs/% $(R6RS_SCHEME) GNUmakefile
 	$(call v,AWK) $(MKDIR_P) $(@D) && \
-	$(AWK) 'BEGIN{print "#!/usr/bin/env -S $(SAGITTARIUS) -r6 --loadpath='$(abs_builddir)/r6rs'"} \
+	$(AWK) 'BEGIN{print "#!$(ENV_S) $(SAGITTARIUS) -r6 --loadpath='$(abs_builddir)/r6rs'"} \
 	        {print}' $(<) \
 	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
-#
-# FIXME: The following requires more than a POSIX env. GNU coreutils
-#        env will work. A workaround could be made, or shell script
-#        wrappers, or simply an autoconf test for a suitable env.
-#
 tests/r7rs/%-sagittarius: tests/r7rs/% $(R7RS_SCHEME) GNUmakefile
 	$(call v,AWK) $(MKDIR_P) $(@D) && \
-	$(AWK) 'BEGIN{print "#!/usr/bin/env -S $(SAGITTARIUS) -r7 --loadpath='$(abs_builddir)/r7rs'"} \
+	$(AWK) 'BEGIN{print "#!$(ENV_S) $(SAGITTARIUS) -r7 --loadpath='$(abs_builddir)/r7rs'"} \
 	        {print}' $(<) \
 	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
