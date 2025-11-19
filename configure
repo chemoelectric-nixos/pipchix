@@ -693,6 +693,8 @@ INSTALL_R6RS_SOURCE_FALSE
 INSTALL_R6RS_SOURCE_TRUE
 install_r6rs_source
 MKTEMP
+ENV_S
+ENV
 GNU_M4
 EGREP
 FGREP
@@ -817,6 +819,7 @@ LDFLAGS
 LIBS
 CPPFLAGS
 GNU_M4
+ENV
 MKTEMP
 CHEZ_SCHEME
 CHICKEN_INSTALL_5
@@ -1487,6 +1490,7 @@ Some influential environment variables:
   CPPFLAGS    (Objective) C/C++ preprocessor flags, e.g. -I<include dir> if
               you have headers in a nonstandard directory <include dir>
   GNU_M4      GNU m4 macro processor
+  ENV         env with a working -S option
   MKTEMP      mktemp command
   CHEZ_SCHEME Chez Scheme
   CHICKEN_INSTALL_5
@@ -6222,6 +6226,7 @@ printf "%s\n" "$ac_cv_path_EGREP" >&6; }
          EGREP_TRADITIONAL=$EGREP
  ac_cv_path_EGREP_TRADITIONAL=$EGREP
 
+
 { :
 
    { :;
@@ -6299,10 +6304,95 @@ else
 fi
 }
 }
-
 if test -z "${GNU_M4}"; then
    as_fn_error $? "GNU m4 not found. Perhaps set GNU_M4 to OpenBSD m4." "$LINENO" 5
 fi
+
+{ :;
+
+# Override the cache if the precious variable ENV is set.
+test -n "${ENV}" && unset ac_cv_path_ENV
+chem_cv_path_ENV_found=yes
+{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for env" >&5
+printf %s "checking for env... " >&6; }
+if test ${ac_cv_path_ENV+y}
+then :
+  printf %s "(cached) " >&6
+else case e in #(
+  e) if test -z "$ENV"; then
+  ac_path_ENV_found=false
+  # Loop through the user's path and test for each of PROGNAME-LIST
+  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
+for as_dir in $PATH
+do
+  IFS=$as_save_IFS
+  case $as_dir in #(((
+    '') as_dir=./ ;;
+    */) ;;
+    *) as_dir=$as_dir/ ;;
+  esac
+    for ac_prog in env
+   do
+    for ac_exec_ext in '' $ac_executable_extensions; do
+      ac_path_ENV="$as_dir$ac_prog$ac_exec_ext"
+      as_fn_executable_p "$ac_path_ENV" || continue
+
+      if test -n "${ENV}"; then
+         # Bypass the test if the precious variable ENV is set.
+         ac_cv_path_ENV="${ENV}"
+         ac_path_ENV_found=:
+      else
+         # Run the test.
+
+     LC_ALL=C LANG=C \
+       printf '#!%s -S %s -v DAFFYDUCK=12345 -f\nBEGIN { print DAFFYDUCK }\n' \
+              "${ac_path_ENV}" "${AWK}" > conftest.sh
+     chmod +x conftest.sh
+     LC_ALL=C LANG=C ./conftest.sh > conftest.out
+     if LC_ALL=C LANG=C ${FGREP} 12345 conftest.out 2> /dev/null > /dev/null; then
+       ac_cv_path_ENV="${ac_path_ENV}"
+       ac_path_ENV_found=:
+     fi
+     rm -f conftest.{sh,out}
+
+      fi
+      $ac_path_ENV_found && break 3
+    done
+  done
+  done
+IFS=$as_save_IFS
+  if test -z "$ac_cv_path_ENV"; then
+    :
+  fi
+else
+  ac_cv_path_ENV=$ENV
+fi
+
+      if test -z "${ac_cv_path_ENV}"; then
+         ac_cv_path_ENV="not found"
+         chem_cv_path_ENV_found=no
+      fi
+    ;;
+esac
+fi
+{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $ac_cv_path_ENV" >&5
+printf "%s\n" "$ac_cv_path_ENV" >&6; }
+if test x"${chem_cv_path_ENV_found}" = x"yes"; then
+   ENV="${ac_cv_path_ENV}"
+else
+   ENV=""
+   # Do not cache the negative result. That way someone can install
+   # the program and have it be discovered, even though they did not
+   # clear a cache entry.
+   unset ac_cv_path_ENV
+fi
+}
+if test "${chem_cv_path_ENV_found}" != no; then
+  ENV_S="${ac_cv_path_ENV} -S"
+else
+  ENV_S="return77"
+fi
+
 
 #
 # A way to get names for temporary files.
@@ -9277,6 +9367,15 @@ fi
 { printf "%s\n" "$as_me:${as_lineno-$LINENO}: " >&5
 printf "%s\n" "$as_me: " >&6;}
 
+
+if test "${chem_cv_path_ENV_found}" = no; then
+  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: ${ac_path_ENV} does not have a working -S option." >&5
+printf "%s\n" "$as_me: WARNING: ${ac_path_ENV} does not have a working -S option." >&2;}
+  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: Some tests will be skipped." >&5
+printf "%s\n" "$as_me: WARNING: Some tests will be skipped." >&2;}
+  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: Consider installing GNU coreutils." >&5
+printf "%s\n" "$as_me: WARNING: Consider installing GNU coreutils." >&2;}
+fi
 
 # local variables:
 # coding: utf-8

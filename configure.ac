@@ -45,11 +45,30 @@ AC_PROG_SED
 AC_PROG_GREP
 AC_PROG_FGREP
 AC_PROG_EGREP
-CHEM_PROG_GNU_M4
 
+CHEM_PROG_GNU_M4
 if test -z "${GNU_M4}"; then
    AC_MSG_ERROR([GNU m4 not found. Perhaps set GNU_M4 to OpenBSD m4.])
 fi
+
+CHEM_PATH_PROGS_CACHED_AND_PRECIOUS([ENV],[env with a working -S option],[env],[
+     LC_ALL=C LANG=C \
+       printf '@%:@!%s -S %s -v DAFFYDUCK=12345 -f\nBEGIN { print DAFFYDUCK }\n' \
+              "${ac_path_ENV}" "${AWK}" > conftest.sh
+     chmod +x conftest.sh
+     LC_ALL=C LANG=C ./conftest.sh > conftest.out
+     if LC_ALL=C LANG=C ${FGREP} 12345 conftest.out 2> /dev/null > /dev/null; then
+       ac_cv_path_ENV="${ac_path_ENV}"
+       ac_path_ENV_found=:
+     fi
+     rm -f conftest.{sh,out}
+   ])
+if test "${chem_cv_path_ENV_found}" != no; then
+  ENV_S="${ac_cv_path_ENV} -S"
+else
+  ENV_S="return77"
+fi
+AC_SUBST([ENV_S])
 
 #
 # A way to get names for temporary files.
@@ -140,6 +159,12 @@ m4_foreach([f],
 AC_OUTPUT
 
 m4_include([ac-what-was-found.m4])
+
+if test "${chem_cv_path_ENV_found}" = no; then
+  AC_MSG_WARN([${ac_path_ENV} does not have a working -S option.])
+  AC_MSG_WARN([Some tests will be skipped.])
+  AC_MSG_WARN([Consider installing GNU coreutils.])
+fi
 
 # local variables:
 # coding: utf-8

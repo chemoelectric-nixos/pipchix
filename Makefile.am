@@ -224,10 +224,6 @@ else !CSI_5
 @GNU@ endef
 endif !CSI_5
 
-# FIXME: Test for or write my own ‘env -S’. POSIX does not require
-#        that env support -S.
-ENV_S = /usr/bin/env -S
-
 #
 # make-chicken-5-egg may fail if you have not installed the
 # dependencies of pipchix.
@@ -461,6 +457,17 @@ DEFINE_NICELY_PRINT = ' \
 		(display ")"))))) \
 	 (else \
 	   (write obj)))))'
+
+#---------------------------------------------------------------------
+
+#
+# A program that returns exit code 77, the return code to skip a test.
+#
+
+EXTRA_PROGRAMS += return77
+BUILT_SOURCES += return77
+
+DISTCLEANFILES += return77 return77.$(OBJEXT)
 
 #---------------------------------------------------------------------
 # local variables:
