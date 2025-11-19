@@ -23,7 +23,7 @@
 # Sagittarius Scheme configuration.
 #
 
-StM_PATH_PROGS_CACHED_AND_PRECIOUS([SAGITTARIUS],
+CHEM_PATH_PROGS_CACHED_AND_PRECIOUS([SAGITTARIUS],
   [Sagittarius Scheme],[sagittarius],
   [
     if LC_ALL=C LANG=C ${ac_path_SAGITTARIUS} --version 2>&1 | \
@@ -34,4 +34,4 @@ StM_PATH_PROGS_CACHED_AND_PRECIOUS([SAGITTARIUS],
     fi
   ])
 AM_CONDITIONAL([SAGITTARIUS],
-               [test "${__ac_cv_path_SAGITTARIUS_found}" != no])
+               [test "${chem_cv_path_SAGITTARIUS_found}" != no])

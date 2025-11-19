@@ -662,10 +662,6 @@ GAUCHE
 CHIBI_SCHEME_FALSE
 CHIBI_SCHEME_TRUE
 CHIBI_SCHEME
-CHICKEN_UNINSTALL_6_FALSE
-CHICKEN_UNINSTALL_6_TRUE
-CHICKEN_INSTALL_6_FALSE
-CHICKEN_INSTALL_6_TRUE
 CSC_5_FALSE
 CSC_5_TRUE
 CSC_5
@@ -6232,7 +6228,7 @@ printf "%s\n" "$ac_cv_path_EGREP" >&6; }
 
 # Override the cache if the precious variable GNU_M4 is set.
 test -n "${GNU_M4}" && unset ac_cv_path_GNU_M4
-__ac_cv_path_GNU_M4_found=yes
+chem_cv_path_GNU_M4_found=yes
 { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for m4 gm4 gnum4" >&5
 printf %s "checking for m4 gm4 gnum4... " >&6; }
 if test ${ac_cv_path_GNU_M4+y}
@@ -6285,14 +6281,14 @@ fi
 
       if test -z "${ac_cv_path_GNU_M4}"; then
          ac_cv_path_GNU_M4="not found"
-         __ac_cv_path_GNU_M4_found=no
+         chem_cv_path_GNU_M4_found=no
       fi
     ;;
 esac
 fi
 { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $ac_cv_path_GNU_M4" >&5
 printf "%s\n" "$ac_cv_path_GNU_M4" >&6; }
-if test x"${__ac_cv_path_GNU_M4_found}" = x"yes"; then
+if test x"${chem_cv_path_GNU_M4_found}" = x"yes"; then
    GNU_M4="${ac_cv_path_GNU_M4}"
 else
    GNU_M4=""
@@ -6605,7 +6601,7 @@ fi
 
 # Override the cache if the precious variable CHEZ_SCHEME is set.
 test -n "${CHEZ_SCHEME}" && unset ac_cv_path_CHEZ_SCHEME
-__ac_cv_path_CHEZ_SCHEME_found=yes
+chem_cv_path_CHEZ_SCHEME_found=yes
 { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for scheme chezsheme chez-scheme chez" >&5
 printf %s "checking for scheme chezsheme chez-scheme chez... " >&6; }
 if test ${ac_cv_path_CHEZ_SCHEME+y}
@@ -6659,14 +6655,14 @@ fi
 
       if test -z "${ac_cv_path_CHEZ_SCHEME}"; then
          ac_cv_path_CHEZ_SCHEME="not found"
-         __ac_cv_path_CHEZ_SCHEME_found=no
+         chem_cv_path_CHEZ_SCHEME_found=no
       fi
     ;;
 esac
 fi
 { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $ac_cv_path_CHEZ_SCHEME" >&5
 printf "%s\n" "$ac_cv_path_CHEZ_SCHEME" >&6; }
-if test x"${__ac_cv_path_CHEZ_SCHEME_found}" = x"yes"; then
+if test x"${chem_cv_path_CHEZ_SCHEME_found}" = x"yes"; then
    CHEZ_SCHEME="${ac_cv_path_CHEZ_SCHEME}"
 else
    CHEZ_SCHEME=""
@@ -6676,7 +6672,7 @@ else
    unset ac_cv_path_CHEZ_SCHEME
 fi
 }
- if test "${__ac_cv_path_CHEZ_SCHEME_found}" != no; then
+ if test "${chem_cv_path_CHEZ_SCHEME_found}" != no; then
   CHEZ_SCHEME_TRUE=
   CHEZ_SCHEME_FALSE='#'
 else
@@ -6710,23 +6706,11 @@ fi
 # CHICKEN Scheme configuration.
 #
 
-##
-##
-## FIXME: I SHOULD REWRITE StM_PATH_PROGS_CACHED_AND_PRECIOUS AS
-##        SOMETHING THAT USES STANDARD CACHE VARIABLE NAMES. I can
-##        start a new autoconf archive.
-##
-##        I SHOULD ALSO STANDARDIZE THE YES/NO TESTS! This can be done
-##        in macros.
-##
-##                             -- Barry Schwartz
-##
-##
 { :;
 
 # Override the cache if the precious variable CHICKEN_INSTALL_5 is set.
 test -n "${CHICKEN_INSTALL_5}" && unset ac_cv_path_CHICKEN_INSTALL_5
-__ac_cv_path_CHICKEN_INSTALL_5_found=yes
+chem_cv_path_CHICKEN_INSTALL_5_found=yes
 { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for chicken-install chicken-install-5" >&5
 printf %s "checking for chicken-install chicken-install-5... " >&6; }
 if test ${ac_cv_path_CHICKEN_INSTALL_5+y}
@@ -6779,14 +6763,14 @@ fi
 
       if test -z "${ac_cv_path_CHICKEN_INSTALL_5}"; then
          ac_cv_path_CHICKEN_INSTALL_5="not found"
-         __ac_cv_path_CHICKEN_INSTALL_5_found=no
+         chem_cv_path_CHICKEN_INSTALL_5_found=no
       fi
     ;;
 esac
 fi
 { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $ac_cv_path_CHICKEN_INSTALL_5" >&5
 printf "%s\n" "$ac_cv_path_CHICKEN_INSTALL_5" >&6; }
-if test x"${__ac_cv_path_CHICKEN_INSTALL_5_found}" = x"yes"; then
+if test x"${chem_cv_path_CHICKEN_INSTALL_5_found}" = x"yes"; then
    CHICKEN_INSTALL_5="${ac_cv_path_CHICKEN_INSTALL_5}"
 else
    CHICKEN_INSTALL_5=""
@@ -6796,7 +6780,7 @@ else
    unset ac_cv_path_CHICKEN_INSTALL_5
 fi
 }
- if test "${__ac_cv_path_CHICKEN_INSTALL_5_found}" != no; then
+ if test "${chem_cv_path_CHICKEN_INSTALL_5_found}" != no; then
   CHICKEN_INSTALL_5_TRUE=
   CHICKEN_INSTALL_5_FALSE='#'
 else
@@ -6809,7 +6793,7 @@ fi
 
 # Override the cache if the precious variable CHICKEN_UNINSTALL_5 is set.
 test -n "${CHICKEN_UNINSTALL_5}" && unset ac_cv_path_CHICKEN_UNINSTALL_5
-__ac_cv_path_CHICKEN_UNINSTALL_5_found=yes
+chem_cv_path_CHICKEN_UNINSTALL_5_found=yes
 { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for chicken-uninstall chicken-uninstall-5" >&5
 printf %s "checking for chicken-uninstall chicken-uninstall-5... " >&6; }
 if test ${ac_cv_path_CHICKEN_UNINSTALL_5+y}
@@ -6862,14 +6846,14 @@ fi
 
       if test -z "${ac_cv_path_CHICKEN_UNINSTALL_5}"; then
          ac_cv_path_CHICKEN_UNINSTALL_5="not found"
-         __ac_cv_path_CHICKEN_UNINSTALL_5_found=no
+         chem_cv_path_CHICKEN_UNINSTALL_5_found=no
       fi
     ;;
 esac
 fi
 { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $ac_cv_path_CHICKEN_UNINSTALL_5" >&5
 printf "%s\n" "$ac_cv_path_CHICKEN_UNINSTALL_5" >&6; }
-if test x"${__ac_cv_path_CHICKEN_UNINSTALL_5_found}" = x"yes"; then
+if test x"${chem_cv_path_CHICKEN_UNINSTALL_5_found}" = x"yes"; then
    CHICKEN_UNINSTALL_5="${ac_cv_path_CHICKEN_UNINSTALL_5}"
 else
    CHICKEN_UNINSTALL_5=""
@@ -6879,7 +6863,7 @@ else
    unset ac_cv_path_CHICKEN_UNINSTALL_5
 fi
 }
- if test "${__ac_cv_path_CHICKEN_UNINSTALL_5_found}" != no; then
+ if test "${chem_cv_path_CHICKEN_UNINSTALL_5_found}" != no; then
   CHICKEN_UNINSTALL_5_TRUE=
   CHICKEN_UNINSTALL_5_FALSE='#'
 else
@@ -6892,7 +6876,7 @@ fi
 
 # Override the cache if the precious variable CSI_5 is set.
 test -n "${CSI_5}" && unset ac_cv_path_CSI_5
-__ac_cv_path_CSI_5_found=yes
+chem_cv_path_CSI_5_found=yes
 { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for csi csi-5" >&5
 printf %s "checking for csi csi-5... " >&6; }
 if test ${ac_cv_path_CSI_5+y}
@@ -6948,14 +6932,14 @@ fi
 
       if test -z "${ac_cv_path_CSI_5}"; then
          ac_cv_path_CSI_5="not found"
-         __ac_cv_path_CSI_5_found=no
+         chem_cv_path_CSI_5_found=no
       fi
     ;;
 esac
 fi
 { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $ac_cv_path_CSI_5" >&5
 printf "%s\n" "$ac_cv_path_CSI_5" >&6; }
-if test x"${__ac_cv_path_CSI_5_found}" = x"yes"; then
+if test x"${chem_cv_path_CSI_5_found}" = x"yes"; then
    CSI_5="${ac_cv_path_CSI_5}"
 else
    CSI_5=""
@@ -6965,7 +6949,7 @@ else
    unset ac_cv_path_CSI_5
 fi
 }
- if test "${__ac_cv_path_CSI_5_found}" != no; then
+ if test "${chem_cv_path_CSI_5_found}" != no; then
   CSI_5_TRUE=
   CSI_5_FALSE='#'
 else
@@ -6978,7 +6962,7 @@ fi
 
 # Override the cache if the precious variable CSC_5 is set.
 test -n "${CSC_5}" && unset ac_cv_path_CSC_5
-__ac_cv_path_CSC_5_found=yes
+chem_cv_path_CSC_5_found=yes
 { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for csc csc-5" >&5
 printf %s "checking for csc csc-5... " >&6; }
 if test ${ac_cv_path_CSC_5+y}
@@ -7034,14 +7018,14 @@ fi
 
       if test -z "${ac_cv_path_CSC_5}"; then
          ac_cv_path_CSC_5="not found"
-         __ac_cv_path_CSC_5_found=no
+         chem_cv_path_CSC_5_found=no
       fi
     ;;
 esac
 fi
 { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $ac_cv_path_CSC_5" >&5
 printf "%s\n" "$ac_cv_path_CSC_5" >&6; }
-if test x"${__ac_cv_path_CSC_5_found}" = x"yes"; then
+if test x"${chem_cv_path_CSC_5_found}" = x"yes"; then
    CSC_5="${ac_cv_path_CSC_5}"
 else
    CSC_5=""
@@ -7051,7 +7035,7 @@ else
    unset ac_cv_path_CSC_5
 fi
 }
- if test "${__ac_cv_path_CSC_5_found}" != no; then
+ if test "${chem_cv_path_CSC_5_found}" != no; then
   CSC_5_TRUE=
   CSC_5_FALSE='#'
 else
@@ -7059,55 +7043,6 @@ else
   CSC_5_FALSE=
 fi
 
-
-################################################################################
-#
-# FIXME: NO SUPPORT FOR CHICKEN 6 YET.
-#
-__ac_cv_path_CHICKEN_INSTALL_6_found=no
-__ac_cv_path_CHICKEN_UNINSTALL_6_found=no
- if false; then
-  CHICKEN_INSTALL_6_TRUE=
-  CHICKEN_INSTALL_6_FALSE='#'
-else
-  CHICKEN_INSTALL_6_TRUE='#'
-  CHICKEN_INSTALL_6_FALSE=
-fi
-
- if false; then
-  CHICKEN_UNINSTALL_6_TRUE=
-  CHICKEN_UNINSTALL_6_FALSE='#'
-else
-  CHICKEN_UNINSTALL_6_TRUE='#'
-  CHICKEN_UNINSTALL_6_FALSE=
-fi
-
-#
-#StM_PATH_PROGS_CACHED_AND_PRECIOUS([CHICKEN_INSTALL_6],
-#  [chicken-install version 6],[chicken-install chicken-install-6],
-#  [
-#    if LC_ALL=C LANG=C ${ac_path_CHICKEN_INSTALL_6} -version 2>&1 | \
-#      LC_ALL=C LANG=C ${GREP} '^6\.' 2> /dev/null > /dev/null; then
-#        ac_cv_path_CHICKEN_INSTALL_6="${ac_path_CHICKEN_INSTALL_6}"
-#        ac_path_CHICKEN_INSTALL_6_found=:
-#    fi
-#  ])
-#AM_CONDITIONAL([CHICKEN_INSTALL_6],
-#               [test "${__ac_cv_path_CHICKEN_INSTALL_6_found}" != no])
-#
-#StM_PATH_PROGS_CACHED_AND_PRECIOUS([CHICKEN_UNINSTALL_6],
-#  [chicken-uninstall version 6],[chicken-uninstall chicken-uninstall-6],
-#  [
-#    if LC_ALL=C LANG=C ${ac_path_CHICKEN_UNINSTALL_6} -version 2>&1 | \
-#      LC_ALL=C LANG=C ${GREP} '^6\.' 2> /dev/null > /dev/null; then
-#        ac_cv_path_CHICKEN_UNINSTALL_6="${ac_path_CHICKEN_UNINSTALL_6}"
-#        ac_path_CHICKEN_UNINSTALL_6_found=:
-#    fi
-#  ])
-#AM_CONDITIONAL([CHICKEN_UNINSTALL_6],
-#               [test "${__ac_cv_path_CHICKEN_UNINSTALL_6_found}" != no])
-#
-################################################################################
 
 # Copyright © 2025 Barry Schwartz
 #
@@ -7138,7 +7073,7 @@ fi
 
 # Override the cache if the precious variable CHIBI_SCHEME is set.
 test -n "${CHIBI_SCHEME}" && unset ac_cv_path_CHIBI_SCHEME
-__ac_cv_path_CHIBI_SCHEME_found=yes
+chem_cv_path_CHIBI_SCHEME_found=yes
 { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for chibi-scheme" >&5
 printf %s "checking for chibi-scheme... " >&6; }
 if test ${ac_cv_path_CHIBI_SCHEME+y}
@@ -7191,14 +7126,14 @@ fi
 
       if test -z "${ac_cv_path_CHIBI_SCHEME}"; then
          ac_cv_path_CHIBI_SCHEME="not found"
-         __ac_cv_path_CHIBI_SCHEME_found=no
+         chem_cv_path_CHIBI_SCHEME_found=no
       fi
     ;;
 esac
 fi
 { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $ac_cv_path_CHIBI_SCHEME" >&5
 printf "%s\n" "$ac_cv_path_CHIBI_SCHEME" >&6; }
-if test x"${__ac_cv_path_CHIBI_SCHEME_found}" = x"yes"; then
+if test x"${chem_cv_path_CHIBI_SCHEME_found}" = x"yes"; then
    CHIBI_SCHEME="${ac_cv_path_CHIBI_SCHEME}"
 else
    CHIBI_SCHEME=""
@@ -7208,7 +7143,7 @@ else
    unset ac_cv_path_CHIBI_SCHEME
 fi
 }
- if test "${__ac_cv_path_CHIBI_SCHEME_found}" != no; then
+ if test "${chem_cv_path_CHIBI_SCHEME_found}" != no; then
   CHIBI_SCHEME_TRUE=
   CHIBI_SCHEME_FALSE='#'
 else
@@ -7246,7 +7181,7 @@ fi
 
 # Override the cache if the precious variable GAUCHE is set.
 test -n "${GAUCHE}" && unset ac_cv_path_GAUCHE
-__ac_cv_path_GAUCHE_found=yes
+chem_cv_path_GAUCHE_found=yes
 { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for gosh" >&5
 printf %s "checking for gosh... " >&6; }
 if test ${ac_cv_path_GAUCHE+y}
@@ -7300,14 +7235,14 @@ fi
 
       if test -z "${ac_cv_path_GAUCHE}"; then
          ac_cv_path_GAUCHE="not found"
-         __ac_cv_path_GAUCHE_found=no
+         chem_cv_path_GAUCHE_found=no
       fi
     ;;
 esac
 fi
 { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $ac_cv_path_GAUCHE" >&5
 printf "%s\n" "$ac_cv_path_GAUCHE" >&6; }
-if test x"${__ac_cv_path_GAUCHE_found}" = x"yes"; then
+if test x"${chem_cv_path_GAUCHE_found}" = x"yes"; then
    GAUCHE="${ac_cv_path_GAUCHE}"
 else
    GAUCHE=""
@@ -7317,7 +7252,7 @@ else
    unset ac_cv_path_GAUCHE
 fi
 }
- if test "${__ac_cv_path_GAUCHE_found}" != no; then
+ if test "${chem_cv_path_GAUCHE_found}" != no; then
   GAUCHE_TRUE=
   GAUCHE_FALSE='#'
 else
@@ -7355,7 +7290,7 @@ fi
 
 # Override the cache if the precious variable GUILE is set.
 test -n "${GUILE}" && unset ac_cv_path_GUILE
-__ac_cv_path_GUILE_found=yes
+chem_cv_path_GUILE_found=yes
 { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for guile guile-3 guile-3.0" >&5
 printf %s "checking for guile guile-3 guile-3.0... " >&6; }
 if test ${ac_cv_path_GUILE+y}
@@ -7409,14 +7344,14 @@ fi
 
       if test -z "${ac_cv_path_GUILE}"; then
          ac_cv_path_GUILE="not found"
-         __ac_cv_path_GUILE_found=no
+         chem_cv_path_GUILE_found=no
       fi
     ;;
 esac
 fi
 { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $ac_cv_path_GUILE" >&5
 printf "%s\n" "$ac_cv_path_GUILE" >&6; }
-if test x"${__ac_cv_path_GUILE_found}" = x"yes"; then
+if test x"${chem_cv_path_GUILE_found}" = x"yes"; then
    GUILE="${ac_cv_path_GUILE}"
 else
    GUILE=""
@@ -7426,7 +7361,7 @@ else
    unset ac_cv_path_GUILE
 fi
 }
- if test "${__ac_cv_path_GUILE_found}" != no; then
+ if test "${chem_cv_path_GUILE_found}" != no; then
   GUILE_TRUE=
   GUILE_FALSE='#'
 else
@@ -7464,7 +7399,7 @@ fi
 
 # Override the cache if the precious variable MOSH is set.
 test -n "${MOSH}" && unset ac_cv_path_MOSH
-__ac_cv_path_MOSH_found=yes
+chem_cv_path_MOSH_found=yes
 { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for mosh" >&5
 printf %s "checking for mosh... " >&6; }
 if test ${ac_cv_path_MOSH+y}
@@ -7518,14 +7453,14 @@ fi
 
       if test -z "${ac_cv_path_MOSH}"; then
          ac_cv_path_MOSH="not found"
-         __ac_cv_path_MOSH_found=no
+         chem_cv_path_MOSH_found=no
       fi
     ;;
 esac
 fi
 { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $ac_cv_path_MOSH" >&5
 printf "%s\n" "$ac_cv_path_MOSH" >&6; }
-if test x"${__ac_cv_path_MOSH_found}" = x"yes"; then
+if test x"${chem_cv_path_MOSH_found}" = x"yes"; then
    MOSH="${ac_cv_path_MOSH}"
 else
    MOSH=""
@@ -7535,7 +7470,7 @@ else
    unset ac_cv_path_MOSH
 fi
 }
- if test "${__ac_cv_path_MOSH_found}" != no; then
+ if test "${chem_cv_path_MOSH_found}" != no; then
   MOSH_TRUE=
   MOSH_FALSE='#'
 else
@@ -7573,7 +7508,7 @@ fi
 
 # Override the cache if the precious variable SAGITTARIUS is set.
 test -n "${SAGITTARIUS}" && unset ac_cv_path_SAGITTARIUS
-__ac_cv_path_SAGITTARIUS_found=yes
+chem_cv_path_SAGITTARIUS_found=yes
 { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for sagittarius" >&5
 printf %s "checking for sagittarius... " >&6; }
 if test ${ac_cv_path_SAGITTARIUS+y}
@@ -7627,14 +7562,14 @@ fi
 
       if test -z "${ac_cv_path_SAGITTARIUS}"; then
          ac_cv_path_SAGITTARIUS="not found"
-         __ac_cv_path_SAGITTARIUS_found=no
+         chem_cv_path_SAGITTARIUS_found=no
       fi
     ;;
 esac
 fi
 { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $ac_cv_path_SAGITTARIUS" >&5
 printf "%s\n" "$ac_cv_path_SAGITTARIUS" >&6; }
-if test x"${__ac_cv_path_SAGITTARIUS_found}" = x"yes"; then
+if test x"${chem_cv_path_SAGITTARIUS_found}" = x"yes"; then
    SAGITTARIUS="${ac_cv_path_SAGITTARIUS}"
 else
    SAGITTARIUS=""
@@ -7644,7 +7579,7 @@ else
    unset ac_cv_path_SAGITTARIUS
 fi
 }
- if test "${__ac_cv_path_SAGITTARIUS_found}" != no; then
+ if test "${chem_cv_path_SAGITTARIUS_found}" != no; then
   SAGITTARIUS_TRUE=
   SAGITTARIUS_FALSE='#'
 else
@@ -8036,14 +7971,6 @@ Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${CSC_5_TRUE}" && test -z "${CSC_5_FALSE}"; then
   as_fn_error $? "conditional \"CSC_5\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
-if test -z "${CHICKEN_INSTALL_6_TRUE}" && test -z "${CHICKEN_INSTALL_6_FALSE}"; then
-  as_fn_error $? "conditional \"CHICKEN_INSTALL_6\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
-if test -z "${CHICKEN_UNINSTALL_6_TRUE}" && test -z "${CHICKEN_UNINSTALL_6_FALSE}"; then
-  as_fn_error $? "conditional \"CHICKEN_UNINSTALL_6\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${CHIBI_SCHEME_TRUE}" && test -z "${CHIBI_SCHEME_FALSE}"; then
@@ -9305,45 +9232,45 @@ fi
 
 { printf "%s\n" "$as_me:${as_lineno-$LINENO}: " >&5
 printf "%s\n" "$as_me: " >&6;}
-if test "${__ac_cv_path_CHEZ_SCHEME_found}" != no; then
+if test "${chem_cv_path_CHEZ_SCHEME_found}" != no; then
   { printf "%s\n" "$as_me:${as_lineno-$LINENO}: Chez Scheme: ${CHEZ_SCHEME}" >&5
 printf "%s\n" "$as_me: Chez Scheme: ${CHEZ_SCHEME}" >&6;}
 fi
-if test "${__ac_cv_path_CHIBI_SCHEME_found}" != no; then
+if test "${chem_cv_path_CHIBI_SCHEME_found}" != no; then
   { printf "%s\n" "$as_me:${as_lineno-$LINENO}: Chibi Scheme: ${CHIBI_SCHEME}" >&5
 printf "%s\n" "$as_me: Chibi Scheme: ${CHIBI_SCHEME}" >&6;}
 fi
-if test "${__ac_cv_path_CSI_5_found}" != no; then
+if test "${chem_cv_path_CSI_5_found}" != no; then
   { printf "%s\n" "$as_me:${as_lineno-$LINENO}: CHICKEN 5 interpreter: ${CSI_5}" >&5
 printf "%s\n" "$as_me: CHICKEN 5 interpreter: ${CSI_5}" >&6;}
 fi
-if test "${__ac_cv_path_CSC_5_found}" != no; then
-  test "${__ac_cv_path_CSI_5_found}" != no || { printf "%s\n" "$as_me:${as_lineno-$LINENO}: " >&5
+if test "${chem_cv_path_CSC_5_found}" != no; then
+  test "${chem_cv_path_CSI_5_found}" != no || { printf "%s\n" "$as_me:${as_lineno-$LINENO}: " >&5
 printf "%s\n" "$as_me: " >&6;}
   { printf "%s\n" "$as_me:${as_lineno-$LINENO}: CHICKEN 5 compiler: ${CSC_5}" >&5
 printf "%s\n" "$as_me: CHICKEN 5 compiler: ${CSC_5}" >&6;}
 fi
-if test "${__ac_cv_path_CHICKEN_INSTALL_5_found}" != no; then
+if test "${chem_cv_path_CHICKEN_INSTALL_5_found}" != no; then
   { printf "%s\n" "$as_me:${as_lineno-$LINENO}: 🔵 Use ‘make chicken-install-5 INSTALL_AS=sudo’ to install the ‘pipchix’ egg." >&5
 printf "%s\n" "$as_me: 🔵 Use ‘make chicken-install-5 INSTALL_AS=sudo’ to install the ‘pipchix’ egg." >&6;}
-  if test "${__ac_cv_path_CHICKEN_UNINSTALL_5_found}" != no; then
+  if test "${chem_cv_path_CHICKEN_UNINSTALL_5_found}" != no; then
     { printf "%s\n" "$as_me:${as_lineno-$LINENO}: 🔵 Use ‘make chicken-uninstall-5 INSTALL_AS=sudo’ to uninstall the ‘pipchix’ egg." >&5
 printf "%s\n" "$as_me: 🔵 Use ‘make chicken-uninstall-5 INSTALL_AS=sudo’ to uninstall the ‘pipchix’ egg." >&6;}
   fi
 fi
-if test "${__ac_cv_path_GAUCHE_found}" != no; then
+if test "${chem_cv_path_GAUCHE_found}" != no; then
   { printf "%s\n" "$as_me:${as_lineno-$LINENO}: Gauche Scheme: ${GAUCHE}" >&5
 printf "%s\n" "$as_me: Gauche Scheme: ${GAUCHE}" >&6;}
 fi
-if test "${__ac_cv_path_GUILE_found}" != no; then
+if test "${chem_cv_path_GUILE_found}" != no; then
   { printf "%s\n" "$as_me:${as_lineno-$LINENO}: Guile version 3: ${GUILE}" >&5
 printf "%s\n" "$as_me: Guile version 3: ${GUILE}" >&6;}
 fi
-if test "${__ac_cv_path_MOSH_found}" != no; then
+if test "${chem_cv_path_MOSH_found}" != no; then
   { printf "%s\n" "$as_me:${as_lineno-$LINENO}: Mosh Scheme: ${MOSH}" >&5
 printf "%s\n" "$as_me: Mosh Scheme: ${MOSH}" >&6;}
 fi
-if test "${__ac_cv_path_SAGITTARIUS_found}" != no; then
+if test "${chem_cv_path_SAGITTARIUS_found}" != no; then
   { printf "%s\n" "$as_me:${as_lineno-$LINENO}: Sagittarius Scheme: ${SAGITTARIUS}" >&5
 printf "%s\n" "$as_me: Sagittarius Scheme: ${SAGITTARIUS}" >&6;}
 fi

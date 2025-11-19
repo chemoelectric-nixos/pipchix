@@ -45,7 +45,7 @@ AC_PROG_SED
 AC_PROG_GREP
 AC_PROG_FGREP
 AC_PROG_EGREP
-StM_PROG_GNU_M4
+CHEM_PROG_GNU_M4
 
 if test -z "${GNU_M4}"; then
    AC_MSG_ERROR([GNU m4 not found. Perhaps set GNU_M4 to OpenBSD m4.])

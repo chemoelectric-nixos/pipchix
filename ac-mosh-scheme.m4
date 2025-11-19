@@ -23,7 +23,7 @@
 # Mosh Scheme configuration.
 #
 
-StM_PATH_PROGS_CACHED_AND_PRECIOUS([MOSH],
+CHEM_PATH_PROGS_CACHED_AND_PRECIOUS([MOSH],
   [Mosh Scheme],[mosh],
   [
     if LC_ALL=C LANG=C ${ac_path_MOSH} -V 2>&1 | \
@@ -33,4 +33,4 @@ StM_PATH_PROGS_CACHED_AND_PRECIOUS([MOSH],
         ac_path_MOSH_found=:
     fi
   ])
-AM_CONDITIONAL([MOSH],[test "${__ac_cv_path_MOSH_found}" != no])
+AM_CONDITIONAL([MOSH],[test "${chem_cv_path_MOSH_found}" != no])

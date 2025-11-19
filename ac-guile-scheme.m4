@@ -23,7 +23,7 @@
 # Guile Scheme configuration.
 #
 
-StM_PATH_PROGS_CACHED_AND_PRECIOUS([GUILE],
+CHEM_PATH_PROGS_CACHED_AND_PRECIOUS([GUILE],
   [Guile Scheme version 3],[guile guile-3 guile-3.0],
   [
     if LC_ALL=C LANG=C ${ac_path_GUILE} --version 2>&1 | \
@@ -33,4 +33,4 @@ StM_PATH_PROGS_CACHED_AND_PRECIOUS([GUILE],
         ac_path_GUILE_found=:
     fi
   ])
-AM_CONDITIONAL([GUILE],[test "${__ac_cv_path_GUILE_found}" != no])
+AM_CONDITIONAL([GUILE],[test "${chem_cv_path_GUILE_found}" != no])

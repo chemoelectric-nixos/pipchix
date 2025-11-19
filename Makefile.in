@@ -135,10 +135,10 @@ ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/ax_check_compile_flag.m4 \
 	$(top_srcdir)/m4/ax_check_gnu_make.m4 \
 	$(top_srcdir)/m4/chem_config_makefiles.m4 \
+	$(top_srcdir)/m4/chem_path_progs_cached_and_precious.m4 \
 	$(top_srcdir)/m4/chem_prog_gnu_make.m4 \
-	$(top_srcdir)/m4/stm_path_progs_cached_and_precious.m4 \
-	$(top_srcdir)/m4/stm_prog_m4.m4 $(top_srcdir)/ac-tinyscheme.m4 \
-	$(top_srcdir)/ac-chez-scheme.m4 \
+	$(top_srcdir)/m4/chem_prog_m4.m4 \
+	$(top_srcdir)/ac-tinyscheme.m4 $(top_srcdir)/ac-chez-scheme.m4 \
 	$(top_srcdir)/ac-chicken-scheme.m4 \
 	$(top_srcdir)/ac-chibi-scheme.m4 \
 	$(top_srcdir)/ac-gauche-scheme.m4 \

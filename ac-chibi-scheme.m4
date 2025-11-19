@@ -23,7 +23,7 @@
 # Chibi Scheme configuration.
 #
 
-StM_PATH_PROGS_CACHED_AND_PRECIOUS([CHIBI_SCHEME],
+CHEM_PATH_PROGS_CACHED_AND_PRECIOUS([CHIBI_SCHEME],
   [Chibi Scheme],[chibi-scheme],
   [
     if LC_ALL=C LANG=C ${ac_path_CHIBI_SCHEME} -V 2>&1 | \
@@ -33,4 +33,4 @@ StM_PATH_PROGS_CACHED_AND_PRECIOUS([CHIBI_SCHEME],
     fi
   ])
 AM_CONDITIONAL([CHIBI_SCHEME],
-               [test "${__ac_cv_path_CHIBI_SCHEME_found}" != no])
+               [test "${chem_cv_path_CHIBI_SCHEME_found}" != no])

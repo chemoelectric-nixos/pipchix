@@ -23,7 +23,7 @@
 # Gauche Scheme configuration.
 #
 
-StM_PATH_PROGS_CACHED_AND_PRECIOUS([GAUCHE],
+CHEM_PATH_PROGS_CACHED_AND_PRECIOUS([GAUCHE],
   [Gauche Scheme],[gosh],
   [
     if LC_ALL=C LANG=C ${ac_path_GAUCHE} -V 2>&1 | \
@@ -34,4 +34,4 @@ StM_PATH_PROGS_CACHED_AND_PRECIOUS([GAUCHE],
     fi
   ])
 AM_CONDITIONAL([GAUCHE],
-               [test "${__ac_cv_path_GAUCHE_found}" != no])
+               [test "${chem_cv_path_GAUCHE_found}" != no])
