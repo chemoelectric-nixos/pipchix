@@ -39,11 +39,15 @@ m4_include(pipchix/pipchix-includes.m4)
 
   (cond-expand
     ((and (or guile mosh) r7rs)
-     (import (rename (rnrs arithmetic bitwise)
-                     (bitwise-arithmetic-shift arithmetic-shift)
-                     (bitwise-and bitwise-and))))
+     (import (rename (only (rnrs arithmetic bitwise (6))
+                           bitwise-and
+                           bitwise-arithmetic-shift)
+                     (bitwise-and bitwise-and)
+                     (bitwise-arithmetic-shift arithmetic-shift))))
     (else ;; (srfi 151) = (scheme bitwise)
-     (import (only (srfi 151) bitwise-and arithmetic-shift))))
+     (import (only (srfi 151)
+                   bitwise-and
+                   arithmetic-shift))))
 
   (begin
 
