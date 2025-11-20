@@ -1987,7 +1987,7 @@ tests/r7rs/chicken-5/%-csc.sh: tests/%.scm GNUmakefile
 
 tests/r6rs/%-chez: tests/%.scm $(R6RS_SCHEME) GNUmakefile
 	$(call v,AWK) $(MKDIR_P) $(@D) && \
-	$(AWK) 'BEGIN{print "#!$(ENV_S) $(CHEZ_SCHEME) --libdirs '$(abs_builddir)/r6rs:' --script"; \
+	$(AWK) 'BEGIN{print "#!$(ENV_S) $(CHEZ_SCHEME) --libdirs '$(abs_builddir)/r6rs:' --program"; \
 	              print "'$(R6RS_TEST_TOP)'"} \
 	        {print}' $(<) \
 	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
