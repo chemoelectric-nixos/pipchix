@@ -199,11 +199,13 @@ CLEANFILES += $(CHEX:tests/%.scm=tests/r7rs/chicken-5/%-csc)
 
 if CHICKEN_INSTALL_5
 if CSI_5
+BUILT_SOURCES += chicken-5-egg-stamp
 TESTS += tests/r7rs/chicken-5/check-nix-embed-csi.sh
 TESTS += tests/r7rs/chicken-5/check-nix-list-csi.sh
 TESTS += tests/r7rs/chicken-5/check-nix-set-csi.sh
 endif
 if CSC_5
+BUILT_SOURCES += chicken-5-egg-stamp
 TESTS += tests/r7rs/chicken-5/check-nix-embed-csc.sh
 TESTS += tests/r7rs/chicken-5/check-nix-list-csc.sh
 TESTS += tests/r7rs/chicken-5/check-nix-set-csc.sh

@@ -140,37 +140,39 @@ EXTRA_PROGRAMS = return77$(EXEEXT)
 @INSTALL_CHICKEN_5_EGG_SOURCE_TRUE@am__append_1 = $(CHICKEN_5_EGGFILES)
 @INSTALL_R6RS_SOURCE_TRUE@am__append_2 = $(R6RS_SCHEME)
 @INSTALL_R7RS_SOURCE_TRUE@am__append_3 = $(R7RS_SCHEME)
-TESTS = $(am__append_4) $(am__append_5) $(am__append_6) \
-	$(am__append_7) $(am__append_8) $(am__append_9) \
-	$(am__append_10) $(am__append_11)
-@CHICKEN_INSTALL_5_TRUE@@CSI_5_TRUE@am__append_4 = tests/r7rs/chicken-5/check-nix-embed-csi.sh \
+TESTS = $(am__append_5) $(am__append_7) $(am__append_8) \
+	$(am__append_9) $(am__append_10) $(am__append_11) \
+	$(am__append_12) $(am__append_13)
+@CHICKEN_INSTALL_5_TRUE@@CSI_5_TRUE@am__append_4 = chicken-5-egg-stamp
+@CHICKEN_INSTALL_5_TRUE@@CSI_5_TRUE@am__append_5 = tests/r7rs/chicken-5/check-nix-embed-csi.sh \
 @CHICKEN_INSTALL_5_TRUE@@CSI_5_TRUE@	tests/r7rs/chicken-5/check-nix-list-csi.sh \
 @CHICKEN_INSTALL_5_TRUE@@CSI_5_TRUE@	tests/r7rs/chicken-5/check-nix-set-csi.sh
-@CHICKEN_INSTALL_5_TRUE@@CSC_5_TRUE@am__append_5 = tests/r7rs/chicken-5/check-nix-embed-csc.sh \
+@CHICKEN_INSTALL_5_TRUE@@CSC_5_TRUE@am__append_6 = chicken-5-egg-stamp
+@CHICKEN_INSTALL_5_TRUE@@CSC_5_TRUE@am__append_7 = tests/r7rs/chicken-5/check-nix-embed-csc.sh \
 @CHICKEN_INSTALL_5_TRUE@@CSC_5_TRUE@	tests/r7rs/chicken-5/check-nix-list-csc.sh \
 @CHICKEN_INSTALL_5_TRUE@@CSC_5_TRUE@	tests/r7rs/chicken-5/check-nix-set-csc.sh
-@CHEZ_SCHEME_TRUE@am__append_6 = tests/r6rs/check-nix-embed-chez \
+@CHEZ_SCHEME_TRUE@am__append_8 = tests/r6rs/check-nix-embed-chez \
 @CHEZ_SCHEME_TRUE@	tests/r6rs/check-nix-list-chez \
 @CHEZ_SCHEME_TRUE@	tests/r6rs/check-nix-set-chez
-@CHIBI_SCHEME_TRUE@am__append_7 = tests/r7rs/check-nix-embed-chibi \
+@CHIBI_SCHEME_TRUE@am__append_9 = tests/r7rs/check-nix-embed-chibi \
 @CHIBI_SCHEME_TRUE@	tests/r7rs/check-nix-list-chibi \
 @CHIBI_SCHEME_TRUE@	tests/r7rs/check-nix-set-chibi
-@GAUCHE_TRUE@am__append_8 = tests/r7rs/check-nix-embed-gauche \
+@GAUCHE_TRUE@am__append_10 = tests/r7rs/check-nix-embed-gauche \
 @GAUCHE_TRUE@	tests/r7rs/check-nix-list-gauche \
 @GAUCHE_TRUE@	tests/r7rs/check-nix-set-gauche
-@GUILE_TRUE@am__append_9 = tests/r6rs/check-nix-embed-guile \
+@GUILE_TRUE@am__append_11 = tests/r6rs/check-nix-embed-guile \
 @GUILE_TRUE@	tests/r6rs/check-nix-list-guile \
 @GUILE_TRUE@	tests/r6rs/check-nix-set-guile \
 @GUILE_TRUE@	tests/r7rs/check-nix-embed-guile \
 @GUILE_TRUE@	tests/r7rs/check-nix-list-guile \
 @GUILE_TRUE@	tests/r7rs/check-nix-set-guile
-@MOSH_TRUE@am__append_10 = tests/r6rs/check-nix-embed-mosh \
+@MOSH_TRUE@am__append_12 = tests/r6rs/check-nix-embed-mosh \
 @MOSH_TRUE@	tests/r6rs/check-nix-list-mosh \
 @MOSH_TRUE@	tests/r6rs/check-nix-set-mosh \
 @MOSH_TRUE@	tests/r7rs/check-nix-embed-mosh \
 @MOSH_TRUE@	tests/r7rs/check-nix-list-mosh \
 @MOSH_TRUE@	tests/r7rs/check-nix-set-mosh
-@SAGITTARIUS_TRUE@am__append_11 =  \
+@SAGITTARIUS_TRUE@am__append_13 =  \
 @SAGITTARIUS_TRUE@	tests/r6rs/check-nix-embed-sagittarius \
 @SAGITTARIUS_TRUE@	tests/r6rs/check-nix-list-sagittarius \
 @SAGITTARIUS_TRUE@	tests/r6rs/check-nix-set-sagittarius \
@@ -696,7 +698,7 @@ EXTRA_DIST = silent-rules.mk COPYING README.adoc INSTALL AUTHORS \
 	$(R7RS_SCHEME:r7rs/pipchix/%.sld=pipchix/%.m4) \
 	$(R7RS_SCHEME:r7rs/pipchix/%.sld=pipchix/%.exports.m4) $(CHEX)
 EXTRA_SCRIPTS = 
-BUILT_SOURCES = return77
+BUILT_SOURCES = $(am__append_4) $(am__append_6) return77
 nodist_r6rspipchix_DATA = $(am__append_2)
 nodist_r7rspipchix_DATA = $(am__append_3)
 nodist_chickeneggs5pipchix_DATA = $(am__append_1)
