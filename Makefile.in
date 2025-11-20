@@ -751,7 +751,7 @@ CHICKEN_5_EGGSPEC = ' \
  '$(CHICKEN_EGGSPEC_BOTTOM)
 
 R6RS_TEST_TOP = ' \
-(import (rnrs) \
+(import (except (rnrs)) \
         (pipchix nix-embed) \
         (pipchix nix-list) \
         (pipchix abstract-syntax-tree)) \
