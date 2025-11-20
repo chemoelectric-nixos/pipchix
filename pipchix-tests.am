@@ -23,14 +23,44 @@
 # Tests using the simple parallel test harness of GNU Automake.
 #
 
-tests/r7rs/chicken-5/%-csi: tests/r7rs/% $(CHICKEN_5_EGGFILES) \
+R6RS_TEST_TOP = ' \
+(import (rnrs) \
+        (pipchix nix-list) \
+        (pipchix abstract-syntax-tree)) \
+ \
+(define SUCCESS 0) \
+(define FAILURE 1) \
+(define SKIP 77) \
+(define HARD-FAILURE 99) \
+ \
+(define result (make-string 0)) \
+(define (fill-result s) \
+  (set! result (string-append result s)))'
+
+R7RS_TEST_TOP = ' \
+(import (scheme base)) \
+(import (scheme process-context)) \
+(import (pipchix nix-list)) \
+(import (pipchix abstract-syntax-tree)) \
+ \
+(define SUCCESS 0) \
+(define FAILURE 1) \
+(define SKIP 77) \
+(define HARD-FAILURE 99) \
+ \
+(define result (make-string 0)) \
+(define (fill-result s) \
+  (set! result (string-append result s)))'
+
+tests/r7rs/chicken-5/%-csi: tests/%.scm $(CHICKEN_5_EGGFILES) \
 	                    chicken-5-egg-stamp GNUmakefile
 	$(call v,AWK) $(MKDIR_P) $(@D) && \
-	$(AWK) 'BEGIN{print "#!$(ENV_S) $(CSI_5) -R r7rs -s"} \
+	$(AWK) 'BEGIN{print "#!$(ENV_S) $(CSI_5) -R r7rs -s"; \
+	              print "'$(R7RS_TEST_TOP)'"} \
 	        {print}' $(<) \
 	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
-tests/r7rs/chicken-5/%-csi.sh: tests/r7rs/% GNUmakefile
+tests/r7rs/chicken-5/%-csi.sh: tests/%.scm GNUmakefile
 	$(call v,PRINTF) $(MKDIR_P) $(@D) && \
 	( \
 	  scheme='$(realpath $(<))' && \
@@ -41,12 +71,16 @@ tests/r7rs/chicken-5/%-csi.sh: tests/r7rs/% GNUmakefile
 	  printf 'exec $(CSI_5) -R r7rs -n -b -s %s\n' "$${scheme}" \
 	) > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
-tests/r7rs/chicken-5/%-csc: tests/r7rs/% $(CHICKEN_5_EGGFILES) \
+tests/r7rs/chicken-5/%-csc: tests/%.scm $(CHICKEN_5_EGGFILES) \
 	                    chicken-5-egg-stamp GNUmakefile
 	$(call v,AWK) $(MKDIR_P) $(@D) && \
-	$(CSC_5) -R r7rs -X r7rs $(<) -o $(@)
+	$(AWK) 'BEGIN{print "'$(R7RS_TEST_TOP)'"} \
+	        {print}' $(<) \
+	  > $(@).tmp.scm.tmp && mv $(@).tmp.scm{.tmp,} && \
+	$(CSC_5) -R r7rs -X r7rs $(@).tmp.scm -o $(@) && \
+	rm -f $(@).tmp.scm
 
-tests/r7rs/chicken-5/%-csc.sh: tests/r7rs/% GNUmakefile
+tests/r7rs/chicken-5/%-csc.sh: tests/%.scm GNUmakefile
 	$(call v,PRINTF) $(MKDIR_P) $(@D) && \
 	( \
 	  scheme='$(realpath $(<))' && \
@@ -57,98 +91,104 @@ tests/r7rs/chicken-5/%-csc.sh: tests/r7rs/% GNUmakefile
 	  printf 'exec %s\n' "$${scheme}" \
 	) > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
-tests/r6rs/%-chez: tests/r6rs/% $(R6RS_SCHEME) GNUmakefile
+tests/r6rs/%-chez: tests/%.scm $(R6RS_SCHEME) GNUmakefile
 	$(call v,AWK) $(MKDIR_P) $(@D) && \
-	$(AWK) 'BEGIN{print "#!$(ENV_S) $(CHEZ_SCHEME) --libdirs '$(abs_builddir)/r6rs:' --script"} \
+	$(AWK) 'BEGIN{print "#!$(ENV_S) $(CHEZ_SCHEME) --libdirs '$(abs_builddir)/r6rs:' --script"; \
+	              print "'$(R6RS_TEST_TOP)'"} \
 	        {print}' $(<) \
 	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
-tests/r7rs/%-chibi: tests/r7rs/% $(R7RS_SCHEME) GNUmakefile
+tests/r7rs/%-chibi: tests/%.scm $(R7RS_SCHEME) GNUmakefile
 	$(call v,AWK) $(MKDIR_P) $(@D) && \
-	$(AWK) 'BEGIN{print "#!$(CHIBI_SCHEME) -I'$(abs_builddir)/r7rs'"} \
+	$(AWK) 'BEGIN{print "#!$(CHIBI_SCHEME) -I'$(abs_builddir)/r7rs'"; \
+	              print "'$(R7RS_TEST_TOP)'"} \
 	        {print}' $(<) \
 	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
-tests/r7rs/%-gauche: tests/r7rs/% $(R7RS_SCHEME) GNUmakefile
+tests/r7rs/%-gauche: tests/%.scm $(R7RS_SCHEME) GNUmakefile
 	$(call v,AWK) $(MKDIR_P) $(@D) && \
-	$(AWK) 'BEGIN{print "#!$(GAUCHE) -I'$(abs_builddir)/r7rs'"} \
+	$(AWK) 'BEGIN{print "#!$(GAUCHE) -I'$(abs_builddir)/r7rs'"; \
+	              print "'$(R7RS_TEST_TOP)'"} \
 	        {print}' $(<) \
 	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
-tests/r6rs/%-guile: tests/r6rs/% $(R6RS_SCHEME) GNUmakefile
+tests/r6rs/%-guile: tests/%.scm $(R6RS_SCHEME) GNUmakefile
 	$(call v,AWK) $(MKDIR_P) $(@D) && \
 	$(AWK) 'BEGIN{print "#!$(GUILE) \\"; \
 	              print "-L '$(abs_builddir)/r6rs' --r6rs --no-auto-compile -s"; \
-	              print "!#"} \
+	              print "!#"; \
+	              print "'$(R6RS_TEST_TOP)'"} \
 	        {print}' $(<) \
 	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
-tests/r7rs/%-guile: tests/r7rs/% $(R7RS_SCHEME) GNUmakefile
+tests/r7rs/%-guile: tests/%.scm $(R7RS_SCHEME) GNUmakefile
 	$(call v,AWK) $(MKDIR_P) $(@D) && \
 	$(AWK) 'BEGIN{print "#!$(GUILE) \\"; \
 	              print "-L '$(abs_builddir)/r7rs' --r7rs --no-auto-compile -s"; \
-	              print "!#"} \
+	              print "!#"; \
+	              print "'$(R7RS_TEST_TOP)'"} \
 	        {print}' $(<) \
 	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
-tests/r6rs/%-mosh: tests/r6rs/% $(R6RS_SCHEME) GNUmakefile
+tests/r6rs/%-mosh: tests/%.scm $(R6RS_SCHEME) GNUmakefile
 	$(call v,AWK) $(MKDIR_P) $(@D) && \
-	$(AWK) 'BEGIN{print "#!$(ENV_S) $(MOSH) --disable-acc --loadpath='$(abs_builddir)/r6rs'"} \
+	$(AWK) 'BEGIN{print "#!$(ENV_S) $(MOSH) --disable-acc --loadpath='$(abs_builddir)/r6rs'"; \
+	              print "'$(R6RS_TEST_TOP)'"} \
 	        {print}' $(<) \
 	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
-tests/r7rs/%-mosh: tests/r7rs/% $(R7RS_SCHEME) GNUmakefile
+tests/r7rs/%-mosh: tests/%.scm $(R7RS_SCHEME) GNUmakefile
 	$(call v,AWK) $(MKDIR_P) $(@D) && \
-	$(AWK) 'BEGIN{print "#!$(ENV_S) $(MOSH) --disable-acc --loadpath='$(abs_builddir)/r7rs'"} \
+	$(AWK) 'BEGIN{print "#!$(ENV_S) $(MOSH) --disable-acc --loadpath='$(abs_builddir)/r7rs'"; \
+	              print "'$(R7RS_TEST_TOP)'"} \
 	        {print}' $(<) \
 	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
-tests/r6rs/%-sagittarius: tests/r6rs/% $(R6RS_SCHEME) GNUmakefile
+tests/r6rs/%-sagittarius: tests/%.scm $(R6RS_SCHEME) GNUmakefile
 	$(call v,AWK) $(MKDIR_P) $(@D) && \
-	$(AWK) 'BEGIN{print "#!$(ENV_S) $(SAGITTARIUS) -r6 --loadpath='$(abs_builddir)/r6rs'"} \
+	$(AWK) 'BEGIN{print "#!$(ENV_S) $(SAGITTARIUS) -r6 --loadpath='$(abs_builddir)/r6rs'"; \
+	              print "'$(R6RS_TEST_TOP)'"} \
 	        {print}' $(<) \
 	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
-tests/r7rs/%-sagittarius: tests/r7rs/% $(R7RS_SCHEME) GNUmakefile
+tests/r7rs/%-sagittarius: tests/%.scm $(R7RS_SCHEME) GNUmakefile
 	$(call v,AWK) $(MKDIR_P) $(@D) && \
-	$(AWK) 'BEGIN{print "#!$(ENV_S) $(SAGITTARIUS) -r7 --loadpath='$(abs_builddir)/r7rs'"} \
+	$(AWK) 'BEGIN{print "#!$(ENV_S) $(SAGITTARIUS) -r7 --loadpath='$(abs_builddir)/r7rs'"; \
+	              print "'$(R7RS_TEST_TOP)'"} \
 	        {print}' $(<) \
 	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
 CLEANFILES += tests/r6rs/*.tmp
 CLEANFILES += tests/r7rs/*.tmp
 CLEANFILES += tests/r7rs/chicken-5/*.tmp
+CLEANFILES += tests/r7rs/chicken-5/*-csc.tmp.scm
 
 TESTS =
 TESTS += $(TESTS_WE_MADE)
 
-CHEX_R6RS =
-CHEX_R6RS += check-nix-list
+CHEX =
+CHEX += check-nix-list
 
-CHEX_R7RS =
-CHEX_R7RS += check-nix-list
-
-EXTRA_DIST += $(CHEX_R6RS:%=tests/r6rs/%)
-EXTRA_DIST += $(CHEX_R7RS:%=tests/r7rs/%)
+EXTRA_DIST += $(CHEX:%=tests/%.scm)
 
 CHEX_WE_MADE =
 
-CHEX_WE_MADE += $(CHEX_R6RS:%=tests/r6rs/%-chez)
-CHEX_WE_MADE += $(CHEX_R6RS:%=tests/r6rs/%-guile)
-CHEX_WE_MADE += $(CHEX_R6RS:%=tests/r6rs/%-mosh)
-CHEX_WE_MADE += $(CHEX_R6RS:%=tests/r6rs/%-sagittarius)
+CHEX_WE_MADE += $(CHEX:%=tests/r6rs/%-chez)
+CHEX_WE_MADE += $(CHEX:%=tests/r6rs/%-guile)
+CHEX_WE_MADE += $(CHEX:%=tests/r6rs/%-mosh)
+CHEX_WE_MADE += $(CHEX:%=tests/r6rs/%-sagittarius)
 
-CHEX_WE_MADE += $(CHEX_R7RS:%=tests/r7rs/chicken-5/%-csi.sh)
-CHEX_WE_MADE += $(CHEX_R7RS:%=tests/r7rs/chicken-5/%-csc.sh)
-CHEX_WE_MADE += $(CHEX_R7RS:%=tests/r7rs/%-chibi)
-CHEX_WE_MADE += $(CHEX_R7RS:%=tests/r7rs/%-gauche)
-CHEX_WE_MADE += $(CHEX_R7RS:%=tests/r7rs/%-guile)
-CHEX_WE_MADE += $(CHEX_R7RS:%=tests/r7rs/%-mosh)
-CHEX_WE_MADE += $(CHEX_R7RS:%=tests/r7rs/%-sagittarius)
+CHEX_WE_MADE += $(CHEX:%=tests/r7rs/chicken-5/%-csi.sh)
+CHEX_WE_MADE += $(CHEX:%=tests/r7rs/chicken-5/%-csc.sh)
+CHEX_WE_MADE += $(CHEX:%=tests/r7rs/%-chibi)
+CHEX_WE_MADE += $(CHEX:%=tests/r7rs/%-gauche)
+CHEX_WE_MADE += $(CHEX:%=tests/r7rs/%-guile)
+CHEX_WE_MADE += $(CHEX:%=tests/r7rs/%-mosh)
+CHEX_WE_MADE += $(CHEX:%=tests/r7rs/%-sagittarius)
 
 CLEANFILES += $(CHEX_WE_MADE)
-CLEANFILES += $(CHEX_R7RS:%=tests/r7rs/chicken-5/%-csi)
-CLEANFILES += $(CHEX_R7RS:%=tests/r7rs/chicken-5/%-csc)
+CLEANFILES += $(CHEX:%=tests/r7rs/chicken-5/%-csi)
+CLEANFILES += $(CHEX:%=tests/r7rs/chicken-5/%-csc)
 
 if CHICKEN_INSTALL_5
 if CSI_5
