@@ -26,7 +26,7 @@ m4_include(pipchix/pipchix-includes.m4)
 
   (export m4_include(pipchix/nix-list.exports.m4))
 
-  (import (rnrs)
+  (import (rnrs base (6))
           (pipchix abstract-syntax-tree))
 
     m4_include(pipchix/nix-list.m4)
