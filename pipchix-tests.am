@@ -23,11 +23,13 @@
 # Tests using the simple parallel test harness of GNU Automake.
 #
 
-R6RS_TEST_TOP = ' \
+R6RS_TEST_TOP = '\#!r6rs \
+ \
 (import (except (rnrs)) \
+        (pipchix abstract-syntax-tree) \
         (pipchix nix-embed) \
         (pipchix nix-list) \
-        (pipchix abstract-syntax-tree)) \
+        (pipchix nix-set)) \
  \
 (define SUCCESS 0) \
 (define FAILURE 1) \
@@ -36,14 +38,15 @@ R6RS_TEST_TOP = ' \
  \
 (define result (make-string 0)) \
 (define (fill-result s) \
-  (set! result (string-append result s)))'
+  (set! result (string-append result (utf8->string s))))'
 
 R7RS_TEST_TOP = ' \
 (import (scheme base)) \
 (import (scheme process-context)) \
+(import (pipchix abstract-syntax-tree)) \
 (import (pipchix nix-embed)) \
 (import (pipchix nix-list)) \
-(import (pipchix abstract-syntax-tree)) \
+(import (pipchix nix-set)) \
  \
 (define SUCCESS 0) \
 (define FAILURE 1) \
@@ -52,7 +55,7 @@ R7RS_TEST_TOP = ' \
  \
 (define result (make-string 0)) \
 (define (fill-result s) \
-  (set! result (string-append result s)))'
+  (set! result (string-append result (utf8->string s))))'
 
 tests/r7rs/chicken-5/%-csi: tests/%.scm $(CHICKEN_5_EGGFILES) \
 	                    chicken-5-egg-stamp GNUmakefile
@@ -171,6 +174,7 @@ TESTS += $(TESTS_WE_MADE)
 CHEX =
 CHEX += tests/check-nix-embed.scm
 CHEX += tests/check-nix-list.scm
+CHEX += tests/check-nix-set.scm
 
 EXTRA_DIST += $(CHEX)
 
@@ -197,48 +201,59 @@ if CHICKEN_INSTALL_5
 if CSI_5
 TESTS += tests/r7rs/chicken-5/check-nix-embed-csi.sh
 TESTS += tests/r7rs/chicken-5/check-nix-list-csi.sh
+TESTS += tests/r7rs/chicken-5/check-nix-set-csi.sh
 endif
 if CSC_5
 TESTS += tests/r7rs/chicken-5/check-nix-embed-csc.sh
 TESTS += tests/r7rs/chicken-5/check-nix-list-csc.sh
+TESTS += tests/r7rs/chicken-5/check-nix-set-csc.sh
 endif
 endif
 
 if CHEZ_SCHEME
 TESTS += tests/r6rs/check-nix-embed-chez
 TESTS += tests/r6rs/check-nix-list-chez
+TESTS += tests/r6rs/check-nix-set-chez
 endif CHEZ_SCHEME
 
 if CHIBI_SCHEME
 TESTS += tests/r7rs/check-nix-embed-chibi
 TESTS += tests/r7rs/check-nix-list-chibi
+TESTS += tests/r7rs/check-nix-set-chibi
 endif CHIBI_SCHEME
 
 if GAUCHE
 TESTS += tests/r7rs/check-nix-embed-gauche
 TESTS += tests/r7rs/check-nix-list-gauche
+TESTS += tests/r7rs/check-nix-set-gauche
 endif GAUCHE
 
 if GUILE
 TESTS += tests/r6rs/check-nix-embed-guile
 TESTS += tests/r6rs/check-nix-list-guile
+TESTS += tests/r6rs/check-nix-set-guile
 
 TESTS += tests/r7rs/check-nix-embed-guile
 TESTS += tests/r7rs/check-nix-list-guile
+TESTS += tests/r7rs/check-nix-set-guile
 endif GUILE
 
 if MOSH
 TESTS += tests/r6rs/check-nix-embed-mosh
 TESTS += tests/r6rs/check-nix-list-mosh
+TESTS += tests/r6rs/check-nix-set-mosh
 
 TESTS += tests/r7rs/check-nix-embed-mosh
 TESTS += tests/r7rs/check-nix-list-mosh
+TESTS += tests/r7rs/check-nix-set-mosh
 endif MOSH
 
 if SAGITTARIUS
 TESTS += tests/r6rs/check-nix-embed-sagittarius
 TESTS += tests/r6rs/check-nix-list-sagittarius
+TESTS += tests/r6rs/check-nix-set-sagittarius
 
 TESTS += tests/r7rs/check-nix-embed-sagittarius
 TESTS += tests/r7rs/check-nix-list-sagittarius
+TESTS += tests/r7rs/check-nix-set-sagittarius
 endif SAGITTARIUS

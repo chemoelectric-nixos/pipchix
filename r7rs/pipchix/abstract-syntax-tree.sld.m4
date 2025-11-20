@@ -37,18 +37,6 @@ m4_include(pipchix/pipchix-includes.m4)
      (import (utf8-srfi-13)))
     (else))
 
-  (cond-expand
-    ((and (or guile mosh) r7rs)
-     (import (rename (only (rnrs arithmetic bitwise (6))
-                           bitwise-and
-                           bitwise-arithmetic-shift)
-                     (bitwise-and bitwise-and)
-                     (bitwise-arithmetic-shift arithmetic-shift))))
-    (else ;; (srfi 151) = (scheme bitwise)
-     (import (only (srfi 151)
-                   bitwise-and
-                   arithmetic-shift))))
-
   (begin
 
     m4_include(pipchix/abstract-syntax-tree.m4)

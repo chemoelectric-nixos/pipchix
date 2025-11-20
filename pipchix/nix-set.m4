@@ -41,7 +41,7 @@
        attrset))))
 
 (define-syntax %%nix-set-insert-entry
-  (syntax-rules ( ==> <== inherit )
+  (syntax-rules ( ==> <== inherit begin )
     ((%%nix-set-insert-entry        ; Binding by ==> arrow.
       attrset (attr-name ... ==> attr-value))
      (let* ((path-node (list->nix-attributepath-node
