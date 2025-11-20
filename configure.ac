@@ -52,12 +52,12 @@ if test -z "${GNU_M4}"; then
 fi
 
 CHEM_PATH_PROGS_CACHED_AND_PRECIOUS([ENV],[env with a working -S option],[env],[
-     LC_ALL=C LANG=C \
-       printf '@%:@!%s -S %s -v DAFFYDUCK=12345 -f\nBEGIN { print DAFFYDUCK }\n' \
-              "${ac_path_ENV}" "${AWK}" > conftest.sh
-     chmod +x conftest.sh
-     LC_ALL=C LANG=C ./conftest.sh > conftest.out
-     if LC_ALL=C LANG=C ${FGREP} 12345 conftest.out 2> /dev/null > /dev/null; then
+     if LC_ALL=C LANG=C \
+            printf '@%:@!%s -S %s -v DAFFYDUCK=12345 -f\nBEGIN { print DAFFYDUCK }\n' \
+              "${ac_path_ENV}" "${AWK}" > conftest.sh 2> /dev/null &&
+          chmod +x conftest.sh &&
+          LC_ALL=C LANG=C ./conftest.sh > conftest.out 2> /dev/null &&
+          LC_ALL=C LANG=C ${FGREP} 12345 conftest.out 2> /dev/null > /dev/null; then
        ac_cv_path_ENV="${ac_path_ENV}"
        ac_path_ENV_found=:
      fi
@@ -66,7 +66,7 @@ CHEM_PATH_PROGS_CACHED_AND_PRECIOUS([ENV],[env with a working -S option],[env],[
 if test "${chem_cv_path_ENV_found}" != no; then
   ENV_S="${ac_cv_path_ENV} -S"
 else
-  ENV_S="return77"
+  ENV_S="\$(abs_builddir)/return77"
 fi
 AC_SUBST([ENV_S])
 
