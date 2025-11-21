@@ -45,9 +45,6 @@ fi
 if test "${chem_cv_path_GUILE_found}" != no; then
   AC_MSG_NOTICE([Guile version 3: ${GUILE}])
 fi
-if test "${chem_cv_path_MOSH_found}" != no; then
-  AC_MSG_NOTICE([Mosh Scheme: ${MOSH}])
-fi
 if test "${chem_cv_path_SAGITTARIUS_found}" != no; then
   AC_MSG_NOTICE([Sagittarius Scheme: ${SAGITTARIUS}])
 fi

@@ -650,9 +650,6 @@ GNU
 SAGITTARIUS_FALSE
 SAGITTARIUS_TRUE
 SAGITTARIUS
-MOSH_FALSE
-MOSH_TRUE
-MOSH
 GUILE_FALSE
 GUILE_TRUE
 GUILE
@@ -829,7 +826,6 @@ CSC_5
 CHIBI_SCHEME
 GAUCHE
 GUILE
-MOSH
 SAGITTARIUS
 GNU_MAKE'
 
@@ -1503,7 +1499,6 @@ Some influential environment variables:
               Chibi Scheme
   GAUCHE      Gauche Scheme
   GUILE       Guile Scheme version 3
-  MOSH        Mosh Scheme
   SAGITTARIUS Sagittarius Scheme
   GNU_MAKE    GNU Make command
 
@@ -7482,115 +7477,6 @@ fi
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #
-# Mosh Scheme configuration.
-#
-
-{ :;
-
-# Override the cache if the precious variable MOSH is set.
-test -n "${MOSH}" && unset ac_cv_path_MOSH
-chem_cv_path_MOSH_found=yes
-{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for mosh" >&5
-printf %s "checking for mosh... " >&6; }
-if test ${ac_cv_path_MOSH+y}
-then :
-  printf %s "(cached) " >&6
-else case e in #(
-  e) if test -z "$MOSH"; then
-  ac_path_MOSH_found=false
-  # Loop through the user's path and test for each of PROGNAME-LIST
-  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-for as_dir in $PATH
-do
-  IFS=$as_save_IFS
-  case $as_dir in #(((
-    '') as_dir=./ ;;
-    */) ;;
-    *) as_dir=$as_dir/ ;;
-  esac
-    for ac_prog in mosh
-   do
-    for ac_exec_ext in '' $ac_executable_extensions; do
-      ac_path_MOSH="$as_dir$ac_prog$ac_exec_ext"
-      as_fn_executable_p "$ac_path_MOSH" || continue
-
-      if test -n "${MOSH}"; then
-         # Bypass the test if the precious variable MOSH is set.
-         ac_cv_path_MOSH="${MOSH}"
-         ac_path_MOSH_found=:
-      else
-         # Run the test.
-
-    if LC_ALL=C LANG=C ${ac_path_MOSH} -V 2>&1 | \
-      LC_ALL=C LANG=C ${GREP} '^Mosh R7RS and R6RS Scheme interpreter' \
-               2> /dev/null > /dev/null; then
-        ac_cv_path_MOSH="${ac_path_MOSH}"
-        ac_path_MOSH_found=:
-    fi
-
-      fi
-      $ac_path_MOSH_found && break 3
-    done
-  done
-  done
-IFS=$as_save_IFS
-  if test -z "$ac_cv_path_MOSH"; then
-    :
-  fi
-else
-  ac_cv_path_MOSH=$MOSH
-fi
-
-      if test -z "${ac_cv_path_MOSH}"; then
-         ac_cv_path_MOSH="not found"
-         chem_cv_path_MOSH_found=no
-      fi
-    ;;
-esac
-fi
-{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $ac_cv_path_MOSH" >&5
-printf "%s\n" "$ac_cv_path_MOSH" >&6; }
-if test x"${chem_cv_path_MOSH_found}" = x"yes"; then
-   MOSH="${ac_cv_path_MOSH}"
-else
-   MOSH=""
-   # Do not cache the negative result. That way someone can install
-   # the program and have it be discovered, even though they did not
-   # clear a cache entry.
-   unset ac_cv_path_MOSH
-fi
-}
- if test "${chem_cv_path_MOSH_found}" != no; then
-  MOSH_TRUE=
-  MOSH_FALSE='#'
-else
-  MOSH_TRUE='#'
-  MOSH_FALSE=
-fi
-
-
-# Copyright © 2025 Barry Schwartz
-#
-# Permission is hereby granted, free of charge, to any person obtaining
-# a copy of Pipchix and associated documentation files (the
-# "Software"), to deal in the Software without restriction, including
-# without limitation the rights to use, copy, modify, merge, publish,
-# distribute, sublicense, and/or sell copies of the Software, and to
-# permit persons to whom the Software is furnished to do so, subject to
-# the following conditions:
-#
-# The above copyright notice and this permission notice shall be
-# included in all copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-# LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-# OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-# WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-#
 # Sagittarius Scheme configuration.
 #
 
@@ -8073,10 +7959,6 @@ Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${GUILE_TRUE}" && test -z "${GUILE_FALSE}"; then
   as_fn_error $? "conditional \"GUILE\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
-if test -z "${MOSH_TRUE}" && test -z "${MOSH_FALSE}"; then
-  as_fn_error $? "conditional \"MOSH\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${SAGITTARIUS_TRUE}" && test -z "${SAGITTARIUS_FALSE}"; then
@@ -9355,10 +9237,6 @@ fi
 if test "${chem_cv_path_GUILE_found}" != no; then
   { printf "%s\n" "$as_me:${as_lineno-$LINENO}: Guile version 3: ${GUILE}" >&5
 printf "%s\n" "$as_me: Guile version 3: ${GUILE}" >&6;}
-fi
-if test "${chem_cv_path_MOSH_found}" != no; then
-  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: Mosh Scheme: ${MOSH}" >&5
-printf "%s\n" "$as_me: Mosh Scheme: ${MOSH}" >&6;}
 fi
 if test "${chem_cv_path_SAGITTARIUS_found}" != no; then
   { printf "%s\n" "$as_me:${as_lineno-$LINENO}: Sagittarius Scheme: ${SAGITTARIUS}" >&5

@@ -23,23 +23,26 @@
 
 m4_string_reverse_concatenate
 
+;;;;(define (%%wrap-outp outp) ;; Decode to UTF-8.
+;;;;  (lambda (x)
+;;;;    (outp (if (string? x)
+;;;;              (string->utf8 x)
+;;;;              x))))
+
+(define-syntax %%wrap-outp ;; An identity transform.
+  (syntax-rules ()
+    ((%%wrap-outp outp)
+     outp)))
+
 (define-record-type <nix-embedded-node> ; Embedded Nix code.
   (make-nix-embedded-node code)
   nix-embedded-node?
   (code nix-embedded-node-ref))
 
 (define-record-type <nix-data-node> ; Boolean, number, string, null.
-  (%%make-nix-data-node data) ; (A null list represents a Nix null.)
+  (make-nix-data-node data)     ; (A null list represents a Nix null.)
   nix-data-node?
   (data nix-data-node-ref))
-
-(define (make-nix-data-node data)
-  (cond ((symbol? data)
-         (%%make-nix-data-node (symbol->string data)))
-        ((bytevector? data)
-         (%%make-nix-data-node (utf8->string data)))
-        (else
-         (%%make-nix-data-node data))))
 
 (define-record-type <nix-path-node>
   (make-nix-path-node path)
@@ -118,8 +121,8 @@ m4_string_reverse_concatenate
 
 (define output-nix-abstract-syntax-tree
   (let ((outp-default
-         (lambda (bv)
-           (display (utf8->string bv) (current-output-port)))))
+         (lambda (str)
+           (display str (current-output-port)))))
     (case-lambda
       ((ast)
        (output-nix-abstract-syntax-tree ast outp-default))
@@ -342,12 +345,6 @@ m4_string_reverse_concatenate
       (and (<= (char->integer c) #x7F)
            (or (char-alphabetic? c)
                (char-numeric? c)))))
-
-(define (%%wrap-outp outp)
-  (lambda (x)
-    (outp (if (string? x)
-              (string->utf8 x)
-              x))))
 
 m4_divert(-1)
 ;;; local variables:
