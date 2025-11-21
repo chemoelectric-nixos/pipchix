@@ -214,14 +214,14 @@ CLEANFILES += $(CHICKEN_5_EGGDIR)/pipchix.{build,install}.sh
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 if CSI_5
-@GNU@ define get-chicken-5-repository-path
-@GNU@ $(CSI_5) -n -b -R r7rs -R utf8-srfi-13 -R chicken.platform \
+@GNU@define get-chicken-5-repository-path
+@GNU@$(CSI_5) -n -b -R r7rs -R utf8-srfi-13 -R chicken.platform \
 @GNU@    -e '(display (string-join (cons "$(abs_builddir)/$(CHICKEN_5_EGGDIR)/.." (repository-path)) ":"))'
-@GNU@ endef
+@GNU@endef
 else !CSI_5
-@GNU@ define get-chicken-5-repository-path
-@GNU@ true
-@GNU@ endef
+@GNU@define get-chicken-5-repository-path
+@GNU@true
+@GNU@endef
 endif !CSI_5
 
 #
@@ -229,14 +229,16 @@ endif !CSI_5
 # dependencies of pipchix.
 #
 make-chicken-5-egg: $(CHICKEN_5_EGGFILES)
-	( \
-	  $(MKDIR_P) $(CHICKEN_5_EGGDIR) && \
-	  cd $(CHICKEN_5_EGGDIR) && \
-	  $(CHICKEN_INSTALL_5) -n \
-	)
+	@if ! test -e chicken-5-egg-stamp; then \
+	  ( \
+	    $(MKDIR_P) $(CHICKEN_5_EGGDIR) && \
+	    cd $(CHICKEN_5_EGGDIR) && \
+	    $(CHICKEN_INSTALL_5) -n \
+	  ) \
+	fi
 
 chicken-5-egg-stamp: make-chicken-5-egg
-	test -e $(@) || touch $(@)
+	@test -e $(@) || touch $(@)
 
 CLEANFILES += chicken-5-egg-stamp
 

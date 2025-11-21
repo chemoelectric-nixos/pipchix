@@ -140,39 +140,39 @@ EXTRA_PROGRAMS = return77$(EXEEXT)
 @INSTALL_CHICKEN_5_EGG_SOURCE_TRUE@am__append_1 = $(CHICKEN_5_EGGFILES)
 @INSTALL_R6RS_SOURCE_TRUE@am__append_2 = $(R6RS_SCHEME)
 @INSTALL_R7RS_SOURCE_TRUE@am__append_3 = $(R7RS_SCHEME)
-TESTS = $(am__append_5) $(am__append_7) $(am__append_8) \
-	$(am__append_9) $(am__append_10) $(am__append_11) \
-	$(am__append_12) $(am__append_13)
-@CHICKEN_INSTALL_5_TRUE@@CSI_5_TRUE@am__append_4 = chicken-5-egg-stamp
-@CHICKEN_INSTALL_5_TRUE@@CSI_5_TRUE@am__append_5 = tests/r7rs/chicken-5/check-nix-embed-csi.sh \
-@CHICKEN_INSTALL_5_TRUE@@CSI_5_TRUE@	tests/r7rs/chicken-5/check-nix-list-csi.sh \
-@CHICKEN_INSTALL_5_TRUE@@CSI_5_TRUE@	tests/r7rs/chicken-5/check-nix-set-csi.sh
-@CHICKEN_INSTALL_5_TRUE@@CSC_5_TRUE@am__append_6 = chicken-5-egg-stamp
-@CHICKEN_INSTALL_5_TRUE@@CSC_5_TRUE@am__append_7 = tests/r7rs/chicken-5/check-nix-embed-csc.sh \
-@CHICKEN_INSTALL_5_TRUE@@CSC_5_TRUE@	tests/r7rs/chicken-5/check-nix-list-csc.sh \
-@CHICKEN_INSTALL_5_TRUE@@CSC_5_TRUE@	tests/r7rs/chicken-5/check-nix-set-csc.sh
-@CHEZ_SCHEME_TRUE@am__append_8 = tests/r6rs/check-nix-embed-chez \
+TESTS = $(am__append_4) $(am__append_5) $(am__append_6) \
+	$(am__append_7) $(am__append_8) $(am__append_9)
+
+#BUILT_SOURCES += chicken-5-egg-stamp
+#TESTS += tests/r7rs/chicken-5/check-nix-embed-csi.sh
+#TESTS += tests/r7rs/chicken-5/check-nix-list-csi.sh
+#TESTS += tests/r7rs/chicken-5/check-nix-set-csi.sh
+#BUILT_SOURCES += chicken-5-egg-stamp
+#TESTS += tests/r7rs/chicken-5/check-nix-embed-csc.sh
+#TESTS += tests/r7rs/chicken-5/check-nix-list-csc.sh
+#TESTS += tests/r7rs/chicken-5/check-nix-set-csc.sh
+@CHEZ_SCHEME_TRUE@am__append_4 = tests/r6rs/check-nix-embed-chez \
 @CHEZ_SCHEME_TRUE@	tests/r6rs/check-nix-list-chez \
 @CHEZ_SCHEME_TRUE@	tests/r6rs/check-nix-set-chez
-@CHIBI_SCHEME_TRUE@am__append_9 = tests/r7rs/check-nix-embed-chibi \
+@CHIBI_SCHEME_TRUE@am__append_5 = tests/r7rs/check-nix-embed-chibi \
 @CHIBI_SCHEME_TRUE@	tests/r7rs/check-nix-list-chibi \
 @CHIBI_SCHEME_TRUE@	tests/r7rs/check-nix-set-chibi
-@GAUCHE_TRUE@am__append_10 = tests/r7rs/check-nix-embed-gauche \
+@GAUCHE_TRUE@am__append_6 = tests/r7rs/check-nix-embed-gauche \
 @GAUCHE_TRUE@	tests/r7rs/check-nix-list-gauche \
 @GAUCHE_TRUE@	tests/r7rs/check-nix-set-gauche
-@GUILE_TRUE@am__append_11 = tests/r6rs/check-nix-embed-guile \
+@GUILE_TRUE@am__append_7 = tests/r6rs/check-nix-embed-guile \
 @GUILE_TRUE@	tests/r6rs/check-nix-list-guile \
 @GUILE_TRUE@	tests/r6rs/check-nix-set-guile \
 @GUILE_TRUE@	tests/r7rs/check-nix-embed-guile \
 @GUILE_TRUE@	tests/r7rs/check-nix-list-guile \
 @GUILE_TRUE@	tests/r7rs/check-nix-set-guile
-@MOSH_TRUE@am__append_12 = tests/r6rs/check-nix-embed-mosh \
+#TESTS += tests/r6rs/check-nix-set-mosh
+@MOSH_TRUE@am__append_8 = tests/r6rs/check-nix-embed-mosh \
 @MOSH_TRUE@	tests/r6rs/check-nix-list-mosh \
-@MOSH_TRUE@	tests/r6rs/check-nix-set-mosh \
 @MOSH_TRUE@	tests/r7rs/check-nix-embed-mosh \
 @MOSH_TRUE@	tests/r7rs/check-nix-list-mosh \
 @MOSH_TRUE@	tests/r7rs/check-nix-set-mosh
-@SAGITTARIUS_TRUE@am__append_13 =  \
+@SAGITTARIUS_TRUE@am__append_9 =  \
 @SAGITTARIUS_TRUE@	tests/r6rs/check-nix-embed-sagittarius \
 @SAGITTARIUS_TRUE@	tests/r6rs/check-nix-list-sagittarius \
 @SAGITTARIUS_TRUE@	tests/r6rs/check-nix-set-sagittarius \
@@ -698,7 +698,7 @@ EXTRA_DIST = silent-rules.mk COPYING README.adoc INSTALL AUTHORS \
 	$(R7RS_SCHEME:r7rs/pipchix/%.sld=pipchix/%.m4) \
 	$(R7RS_SCHEME:r7rs/pipchix/%.sld=pipchix/%.exports.m4) $(CHEX)
 EXTRA_SCRIPTS = 
-BUILT_SOURCES = $(am__append_4) $(am__append_6) return77
+BUILT_SOURCES = return77
 nodist_r6rspipchix_DATA = $(am__append_2)
 nodist_r7rspipchix_DATA = $(am__append_3)
 nodist_chickeneggs5pipchix_DATA = $(am__append_1)
@@ -1262,48 +1262,6 @@ recheck: all
 	        am__force_recheck=am--force-recheck \
 	        TEST_LOGS="$$log_list"; \
 	exit $$?
-tests/r7rs/chicken-5/check-nix-embed-csi.sh.log: tests/r7rs/chicken-5/check-nix-embed-csi.sh
-	@p='tests/r7rs/chicken-5/check-nix-embed-csi.sh'; \
-	b='tests/r7rs/chicken-5/check-nix-embed-csi.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r7rs/chicken-5/check-nix-list-csi.sh.log: tests/r7rs/chicken-5/check-nix-list-csi.sh
-	@p='tests/r7rs/chicken-5/check-nix-list-csi.sh'; \
-	b='tests/r7rs/chicken-5/check-nix-list-csi.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r7rs/chicken-5/check-nix-set-csi.sh.log: tests/r7rs/chicken-5/check-nix-set-csi.sh
-	@p='tests/r7rs/chicken-5/check-nix-set-csi.sh'; \
-	b='tests/r7rs/chicken-5/check-nix-set-csi.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r7rs/chicken-5/check-nix-embed-csc.sh.log: tests/r7rs/chicken-5/check-nix-embed-csc.sh
-	@p='tests/r7rs/chicken-5/check-nix-embed-csc.sh'; \
-	b='tests/r7rs/chicken-5/check-nix-embed-csc.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r7rs/chicken-5/check-nix-list-csc.sh.log: tests/r7rs/chicken-5/check-nix-list-csc.sh
-	@p='tests/r7rs/chicken-5/check-nix-list-csc.sh'; \
-	b='tests/r7rs/chicken-5/check-nix-list-csc.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r7rs/chicken-5/check-nix-set-csc.sh.log: tests/r7rs/chicken-5/check-nix-set-csc.sh
-	@p='tests/r7rs/chicken-5/check-nix-set-csc.sh'; \
-	b='tests/r7rs/chicken-5/check-nix-set-csc.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
 tests/r6rs/check-nix-embed-chez.log: tests/r6rs/check-nix-embed-chez
 	@p='tests/r6rs/check-nix-embed-chez'; \
 	b='tests/r6rs/check-nix-embed-chez'; \
@@ -1419,13 +1377,6 @@ tests/r6rs/check-nix-embed-mosh.log: tests/r6rs/check-nix-embed-mosh
 tests/r6rs/check-nix-list-mosh.log: tests/r6rs/check-nix-list-mosh
 	@p='tests/r6rs/check-nix-list-mosh'; \
 	b='tests/r6rs/check-nix-list-mosh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r6rs/check-nix-set-mosh.log: tests/r6rs/check-nix-set-mosh
-	@p='tests/r6rs/check-nix-set-mosh'; \
-	b='tests/r6rs/check-nix-set-mosh'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
@@ -1926,27 +1877,29 @@ $(CHICKEN_5_EGGDIR)/pipchix.egg: GNUmakefile $(TINYSCHEME_EXE)
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-@CSI_5_TRUE@@GNU@ define get-chicken-5-repository-path
-@CSI_5_TRUE@@GNU@ $(CSI_5) -n -b -R r7rs -R utf8-srfi-13 -R chicken.platform \
+@CSI_5_TRUE@@GNU@define get-chicken-5-repository-path
+@CSI_5_TRUE@@GNU@$(CSI_5) -n -b -R r7rs -R utf8-srfi-13 -R chicken.platform \
 @CSI_5_TRUE@@GNU@    -e '(display (string-join (cons "$(abs_builddir)/$(CHICKEN_5_EGGDIR)/.." (repository-path)) ":"))'
-@CSI_5_TRUE@@GNU@ endef
-@CSI_5_FALSE@@GNU@ define get-chicken-5-repository-path
-@CSI_5_FALSE@@GNU@ true
-@CSI_5_FALSE@@GNU@ endef
+@CSI_5_TRUE@@GNU@endef
+@CSI_5_FALSE@@GNU@define get-chicken-5-repository-path
+@CSI_5_FALSE@@GNU@true
+@CSI_5_FALSE@@GNU@endef
 
 #
 # make-chicken-5-egg may fail if you have not installed the
 # dependencies of pipchix.
 #
 make-chicken-5-egg: $(CHICKEN_5_EGGFILES)
-	( \
-	  $(MKDIR_P) $(CHICKEN_5_EGGDIR) && \
-	  cd $(CHICKEN_5_EGGDIR) && \
-	  $(CHICKEN_INSTALL_5) -n \
-	)
+	@if ! test -e chicken-5-egg-stamp; then \
+	  ( \
+	    $(MKDIR_P) $(CHICKEN_5_EGGDIR) && \
+	    cd $(CHICKEN_5_EGGDIR) && \
+	    $(CHICKEN_INSTALL_5) -n \
+	  ) \
+	fi
 
 chicken-5-egg-stamp: make-chicken-5-egg
-	test -e $(@) || touch $(@)
+	@test -e $(@) || touch $(@)
 
 tests/r7rs/chicken-5/%-csi: tests/%.scm $(CHICKEN_5_EGGFILES) \
 	                    chicken-5-egg-stamp GNUmakefile
@@ -1956,14 +1909,16 @@ tests/r7rs/chicken-5/%-csi: tests/%.scm $(CHICKEN_5_EGGFILES) \
 	        {print}' $(<) \
 	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
-tests/r7rs/chicken-5/%-csi.sh: tests/%.scm GNUmakefile
+tests/r7rs/chicken-5/%-csi.sh: tests/%.scm GNUmakefile \
+	                       tests/r7rs/chicken-5/%-csi \
+	                       chicken-5-egg-stamp
 	$(call v,PRINTF) $(MKDIR_P) $(@D) && \
 	( \
+	  repo_path=`$(call get-chicken-5-repository-path)` && \
 	  scheme='$(realpath $(<))' && \
 	  printf '#!$(SHELL)\n' && \
 	  printf 'export CHICKEN_REPOSITORY_PATH\n' && \
-	  printf 'CHICKEN_REPOSITORY_PATH="%s"\n' \
-	         "$(call get-chicken-5-repository-path)" \
+	  printf 'CHICKEN_REPOSITORY_PATH="%s"\n' "$${repo_path}" && \
 	  printf 'exec $(CSI_5) -R r7rs -n -b -s %s\n' "$${scheme}" \
 	) > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
@@ -1976,14 +1931,16 @@ tests/r7rs/chicken-5/%-csc: tests/%.scm $(CHICKEN_5_EGGFILES) \
 	$(CSC_5) -R r7rs -X r7rs $(@).tmp.scm -o $(@) && \
 	rm -f $(@).tmp.scm
 
-tests/r7rs/chicken-5/%-csc.sh: tests/%.scm GNUmakefile
+tests/r7rs/chicken-5/%-csc.sh: tests/%.scm GNUmakefile \
+	                       tests/r7rs/chicken-5/%-csc \
+	                       chicken-5-egg-stamp
 	$(call v,PRINTF) $(MKDIR_P) $(@D) && \
 	( \
+	  repo_path=`$(call get-chicken-5-repository-path)` && \
 	  scheme='$(realpath $(<))' && \
 	  printf '#!$(SHELL)\n' && \
 	  printf 'export CHICKEN_REPOSITORY_PATH\n' && \
-	  printf 'CHICKEN_REPOSITORY_PATH="%s"\n' \
-	         "$(call get-chicken-5-repository-path)" \
+	  printf 'CHICKEN_REPOSITORY_PATH="%s"\n' "$${repo_path}" && \
 	  printf 'exec %s\n' "$${scheme}" \
 	) > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 

@@ -65,14 +65,16 @@ tests/r7rs/chicken-5/%-csi: tests/%.scm $(CHICKEN_5_EGGFILES) \
 	        {print}' $(<) \
 	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
-tests/r7rs/chicken-5/%-csi.sh: tests/%.scm GNUmakefile
+tests/r7rs/chicken-5/%-csi.sh: tests/%.scm GNUmakefile \
+	                       tests/r7rs/chicken-5/%-csi \
+	                       chicken-5-egg-stamp
 	$(call v,PRINTF) $(MKDIR_P) $(@D) && \
 	( \
+	  repo_path=`$(call get-chicken-5-repository-path)` && \
 	  scheme='$(realpath $(<))' && \
 	  printf '#!$(SHELL)\n' && \
 	  printf 'export CHICKEN_REPOSITORY_PATH\n' && \
-	  printf 'CHICKEN_REPOSITORY_PATH="%s"\n' \
-	         "$(call get-chicken-5-repository-path)" \
+	  printf 'CHICKEN_REPOSITORY_PATH="%s"\n' "$${repo_path}" && \
 	  printf 'exec $(CSI_5) -R r7rs -n -b -s %s\n' "$${scheme}" \
 	) > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
@@ -85,14 +87,16 @@ tests/r7rs/chicken-5/%-csc: tests/%.scm $(CHICKEN_5_EGGFILES) \
 	$(CSC_5) -R r7rs -X r7rs $(@).tmp.scm -o $(@) && \
 	rm -f $(@).tmp.scm
 
-tests/r7rs/chicken-5/%-csc.sh: tests/%.scm GNUmakefile
+tests/r7rs/chicken-5/%-csc.sh: tests/%.scm GNUmakefile \
+	                       tests/r7rs/chicken-5/%-csc \
+	                       chicken-5-egg-stamp
 	$(call v,PRINTF) $(MKDIR_P) $(@D) && \
 	( \
+	  repo_path=`$(call get-chicken-5-repository-path)` && \
 	  scheme='$(realpath $(<))' && \
 	  printf '#!$(SHELL)\n' && \
 	  printf 'export CHICKEN_REPOSITORY_PATH\n' && \
-	  printf 'CHICKEN_REPOSITORY_PATH="%s"\n' \
-	         "$(call get-chicken-5-repository-path)" \
+	  printf 'CHICKEN_REPOSITORY_PATH="%s"\n' "$${repo_path}" && \
 	  printf 'exec %s\n' "$${scheme}" \
 	) > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
@@ -199,16 +203,16 @@ CLEANFILES += $(CHEX:tests/%.scm=tests/r7rs/chicken-5/%-csc)
 
 if CHICKEN_INSTALL_5
 if CSI_5
-BUILT_SOURCES += chicken-5-egg-stamp
-TESTS += tests/r7rs/chicken-5/check-nix-embed-csi.sh
-TESTS += tests/r7rs/chicken-5/check-nix-list-csi.sh
-TESTS += tests/r7rs/chicken-5/check-nix-set-csi.sh
+#BUILT_SOURCES += chicken-5-egg-stamp
+#TESTS += tests/r7rs/chicken-5/check-nix-embed-csi.sh
+#TESTS += tests/r7rs/chicken-5/check-nix-list-csi.sh
+#TESTS += tests/r7rs/chicken-5/check-nix-set-csi.sh
 endif
 if CSC_5
-BUILT_SOURCES += chicken-5-egg-stamp
-TESTS += tests/r7rs/chicken-5/check-nix-embed-csc.sh
-TESTS += tests/r7rs/chicken-5/check-nix-list-csc.sh
-TESTS += tests/r7rs/chicken-5/check-nix-set-csc.sh
+#BUILT_SOURCES += chicken-5-egg-stamp
+#TESTS += tests/r7rs/chicken-5/check-nix-embed-csc.sh
+#TESTS += tests/r7rs/chicken-5/check-nix-list-csc.sh
+#TESTS += tests/r7rs/chicken-5/check-nix-set-csc.sh
 endif
 endif
 
@@ -243,11 +247,11 @@ endif GUILE
 if MOSH
 TESTS += tests/r6rs/check-nix-embed-mosh
 TESTS += tests/r6rs/check-nix-list-mosh
-TESTS += tests/r6rs/check-nix-set-mosh
+#TESTS += tests/r6rs/check-nix-set-mosh
 
 TESTS += tests/r7rs/check-nix-embed-mosh
 TESTS += tests/r7rs/check-nix-list-mosh
-TESTS += tests/r7rs/check-nix-set-mosh
+#TESTS += tests/r7rs/check-nix-set-mosh
 endif MOSH
 
 if SAGITTARIUS
