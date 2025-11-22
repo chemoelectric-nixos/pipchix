@@ -94,7 +94,7 @@ tests/r7rs/chicken-5/%-csc: tests/%.scm \
 	$(call v,AWK/CSC) $(MKDIR_P) $(@D) && \
 	$(AWK) 'BEGIN{print "'$(R7RS_TEST_TOP)'"} \
 	        {print}' $(<) \
-	  > $(@).tmp.scm.tmp && mv $(@).tmp.scm{.tmp,} && \w
+	  > $(@).tmp.scm.tmp && mv $(@).tmp.scm{.tmp,} && \
 	$(CSC_5) -I $(CHICKEN_5_EGGDIR) -R utf8 -R r7rs -X r7rs $(@).tmp.scm -o $(@)-exe$(EXEEXT) && \
 	rm -f $(@).tmp.scm && \
 	$(AWK) 'BEGIN{print "#!$(SHELL)"; \
@@ -157,7 +157,7 @@ tests/r7rs/%-loko: tests/%.scm $(R7RS_SCHEME) GNUmakefile
 	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
 #
-# FIXME: MIT Scheme does not seem able to output the actual status
+# FIXME: MIT/GNU Scheme does not seem able to output the actual status
 #        code given to (exit STATUS). Thus only PASS and FAIL may be
 #        effective.
 #

@@ -2173,7 +2173,7 @@ tests/r7rs/%-loko: tests/%.scm $(R7RS_SCHEME) GNUmakefile
 	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
 #
-# FIXME: MIT Scheme does not seem able to output the actual status
+# FIXME: MIT/GNU Scheme does not seem able to output the actual status
 #        code given to (exit STATUS). Thus only PASS and FAIL may be
 #        effective.
 #
