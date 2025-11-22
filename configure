@@ -650,6 +650,9 @@ GNU
 SAGITTARIUS_FALSE
 SAGITTARIUS_TRUE
 SAGITTARIUS
+LOKO_FALSE
+LOKO_TRUE
+LOKO
 GUILE_FALSE
 GUILE_TRUE
 GUILE
@@ -826,6 +829,7 @@ CSC_5
 CHIBI_SCHEME
 GAUCHE
 GUILE
+LOKO
 SAGITTARIUS
 GNU_MAKE'
 
@@ -1499,6 +1503,7 @@ Some influential environment variables:
               Chibi Scheme
   GAUCHE      Gauche Scheme
   GUILE       Guile Scheme version 3
+  LOKO        Loko Scheme
   SAGITTARIUS Sagittarius Scheme
   GNU_MAKE    GNU Make command
 
@@ -7477,6 +7482,115 @@ fi
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #
+# Loko Scheme configuration.
+#
+
+{ :;
+
+# Override the cache if the precious variable LOKO is set.
+test -n "${LOKO}" && unset ac_cv_path_LOKO
+chem_cv_path_LOKO_found=yes
+{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for loko" >&5
+printf %s "checking for loko... " >&6; }
+if test ${ac_cv_path_LOKO+y}
+then :
+  printf %s "(cached) " >&6
+else case e in #(
+  e) if test -z "$LOKO"; then
+  ac_path_LOKO_found=false
+  # Loop through the user's path and test for each of PROGNAME-LIST
+  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
+for as_dir in $PATH
+do
+  IFS=$as_save_IFS
+  case $as_dir in #(((
+    '') as_dir=./ ;;
+    */) ;;
+    *) as_dir=$as_dir/ ;;
+  esac
+    for ac_prog in loko
+   do
+    for ac_exec_ext in '' $ac_executable_extensions; do
+      ac_path_LOKO="$as_dir$ac_prog$ac_exec_ext"
+      as_fn_executable_p "$ac_path_LOKO" || continue
+
+      if test -n "${LOKO}"; then
+         # Bypass the test if the precious variable LOKO is set.
+         ac_cv_path_LOKO="${LOKO}"
+         ac_path_LOKO_found=:
+      else
+         # Run the test.
+
+    if LC_ALL=C LANG=C ${ac_path_LOKO} --verbose 2>&1 | \
+      LC_ALL=C LANG=C ${FGREP} 'Loko Scheme' \
+               2> /dev/null > /dev/null; then
+        ac_cv_path_LOKO="${ac_path_LOKO}"
+        ac_path_LOKO_found=:
+    fi
+
+      fi
+      $ac_path_LOKO_found && break 3
+    done
+  done
+  done
+IFS=$as_save_IFS
+  if test -z "$ac_cv_path_LOKO"; then
+    :
+  fi
+else
+  ac_cv_path_LOKO=$LOKO
+fi
+
+      if test -z "${ac_cv_path_LOKO}"; then
+         ac_cv_path_LOKO="not found"
+         chem_cv_path_LOKO_found=no
+      fi
+    ;;
+esac
+fi
+{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $ac_cv_path_LOKO" >&5
+printf "%s\n" "$ac_cv_path_LOKO" >&6; }
+if test x"${chem_cv_path_LOKO_found}" = x"yes"; then
+   LOKO="${ac_cv_path_LOKO}"
+else
+   LOKO=""
+   # Do not cache the negative result. That way someone can install
+   # the program and have it be discovered, even though they did not
+   # clear a cache entry.
+   unset ac_cv_path_LOKO
+fi
+}
+ if test "${chem_cv_path_LOKO_found}" != no; then
+  LOKO_TRUE=
+  LOKO_FALSE='#'
+else
+  LOKO_TRUE='#'
+  LOKO_FALSE=
+fi
+
+
+# Copyright © 2025 Barry Schwartz
+#
+# Permission is hereby granted, free of charge, to any person obtaining
+# a copy of Pipchix and associated documentation files (the
+# "Software"), to deal in the Software without restriction, including
+# without limitation the rights to use, copy, modify, merge, publish,
+# distribute, sublicense, and/or sell copies of the Software, and to
+# permit persons to whom the Software is furnished to do so, subject to
+# the following conditions:
+#
+# The above copyright notice and this permission notice shall be
+# included in all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+# LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+# OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+# WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+#
 # Sagittarius Scheme configuration.
 #
 
@@ -7959,6 +8073,10 @@ Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${GUILE_TRUE}" && test -z "${GUILE_FALSE}"; then
   as_fn_error $? "conditional \"GUILE\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${LOKO_TRUE}" && test -z "${LOKO_FALSE}"; then
+  as_fn_error $? "conditional \"LOKO\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${SAGITTARIUS_TRUE}" && test -z "${SAGITTARIUS_FALSE}"; then
@@ -9237,6 +9355,10 @@ fi
 if test "${chem_cv_path_GUILE_found}" != no; then
   { printf "%s\n" "$as_me:${as_lineno-$LINENO}: Guile version 3: ${GUILE}" >&5
 printf "%s\n" "$as_me: Guile version 3: ${GUILE}" >&6;}
+fi
+if test "${chem_cv_path_LOKO_found}" != no; then
+  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: Loko Scheme: ${LOKO}" >&5
+printf "%s\n" "$as_me: Loko Scheme: ${LOKO}" >&6;}
 fi
 if test "${chem_cv_path_SAGITTARIUS_found}" != no; then
   { printf "%s\n" "$as_me:${as_lineno-$LINENO}: Sagittarius Scheme: ${SAGITTARIUS}" >&5

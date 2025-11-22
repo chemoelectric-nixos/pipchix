@@ -142,6 +142,20 @@ tests/r7rs/%-guile: tests/%.scm $(R7RS_SCHEME) GNUmakefile
 	        {print}' $(<) \
 	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
+tests/r6rs/%-loko: tests/%.scm $(R6RS_SCHEME) GNUmakefile
+	$(call v,AWK) $(MKDIR_P) $(@D) && \
+	$(AWK) 'BEGIN{print "#!$(ENV_S) LOKO_LIBRARY_PATH=\"$(abs_builddir)/r6rs\" $(LOKO) --program"; \
+	              print "'$(R6RS_TEST_TOP)'"} \
+	        {print}' $(<) \
+	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
+
+tests/r7rs/%-loko: tests/%.scm $(R7RS_SCHEME) GNUmakefile
+	$(call v,AWK) $(MKDIR_P) $(@D) && \
+	$(AWK) 'BEGIN{print "#!$(ENV_S) LOKO_LIBRARY_PATH=\"$(abs_builddir)/r7rs\" $(LOKO) --script"; \
+	              print "'$(R7RS_TEST_TOP)'"} \
+	        {print}' $(<) \
+	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
+
 tests/r6rs/%-sagittarius: tests/%.scm $(R6RS_SCHEME) GNUmakefile
 	$(call v,AWK) $(MKDIR_P) $(@D) && \
 	$(AWK) 'BEGIN{print "#!$(ENV_S) $(SAGITTARIUS) -r6 --loadpath='$(abs_builddir)/r6rs'"; \
@@ -177,6 +191,7 @@ CHEX_WE_MADE =
 
 CHEX_WE_MADE += $(CHEX:tests/%.scm=tests/r6rs/%-chez)
 CHEX_WE_MADE += $(CHEX:tests/%.scm=tests/r6rs/%-guile)
+CHEX_WE_MADE += $(CHEX:tests/%.scm=tests/r6rs/%-loko)
 CHEX_WE_MADE += $(CHEX:tests/%.scm=tests/r6rs/%-sagittarius)
 
 CHEX_WE_MADE += $(CHEX:tests/%.scm=tests/r7rs/chicken-5/%-csi)
@@ -184,6 +199,7 @@ CHEX_WE_MADE += $(CHEX:tests/%.scm=tests/r7rs/chicken-5/%-csc)
 CHEX_WE_MADE += $(CHEX:tests/%.scm=tests/r7rs/%-chibi)
 CHEX_WE_MADE += $(CHEX:tests/%.scm=tests/r7rs/%-gauche)
 CHEX_WE_MADE += $(CHEX:tests/%.scm=tests/r7rs/%-guile)
+CHEX_WE_MADE += $(CHEX:tests/%.scm=tests/r7rs/%-loko)
 CHEX_WE_MADE += $(CHEX:tests/%.scm=tests/r7rs/%-sagittarius)
 
 CLEANFILES += $(CHEX_WE_MADE)
@@ -237,6 +253,18 @@ TESTS += tests/r7rs/check-nix-embed-guile
 TESTS += tests/r7rs/check-nix-list-guile
 TESTS += tests/r7rs/check-nix-set-guile
 endif GUILE
+
+if LOKO
+TESTS += tests/r6rs/check-abstract-syntax-tree-loko
+TESTS += tests/r6rs/check-nix-embed-loko
+TESTS += tests/r6rs/check-nix-list-loko
+TESTS += tests/r6rs/check-nix-set-loko
+
+TESTS += tests/r7rs/check-abstract-syntax-tree-loko
+TESTS += tests/r7rs/check-nix-embed-loko
+TESTS += tests/r7rs/check-nix-list-loko
+TESTS += tests/r7rs/check-nix-set-loko
+endif LOKO
 
 if SAGITTARIUS
 TESTS += tests/r6rs/check-abstract-syntax-tree-sagittarius

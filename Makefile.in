@@ -142,7 +142,7 @@ EXTRA_PROGRAMS = return77$(EXEEXT)
 @INSTALL_R7RS_SOURCE_TRUE@am__append_3 = $(R7RS_SCHEME)
 TESTS = $(am__append_5) $(am__append_7) $(am__append_8) \
 	$(am__append_9) $(am__append_10) $(am__append_11) \
-	$(am__append_12)
+	$(am__append_12) $(am__append_13)
 @CHICKEN_INSTALL_5_TRUE@@CSI_5_TRUE@am__append_4 = chicken-5-egg-stamp
 @CHICKEN_INSTALL_5_TRUE@@CSI_5_TRUE@am__append_5 = tests/r7rs/chicken-5/check-abstract-syntax-tree-csi \
 @CHICKEN_INSTALL_5_TRUE@@CSI_5_TRUE@	tests/r7rs/chicken-5/check-nix-embed-csi \
@@ -176,7 +176,15 @@ TESTS = $(am__append_5) $(am__append_7) $(am__append_8) \
 @GUILE_TRUE@	tests/r7rs/check-nix-embed-guile \
 @GUILE_TRUE@	tests/r7rs/check-nix-list-guile \
 @GUILE_TRUE@	tests/r7rs/check-nix-set-guile
-@SAGITTARIUS_TRUE@am__append_12 = tests/r6rs/check-abstract-syntax-tree-sagittarius \
+@LOKO_TRUE@am__append_12 = tests/r6rs/check-abstract-syntax-tree-loko \
+@LOKO_TRUE@	tests/r6rs/check-nix-embed-loko \
+@LOKO_TRUE@	tests/r6rs/check-nix-list-loko \
+@LOKO_TRUE@	tests/r6rs/check-nix-set-loko \
+@LOKO_TRUE@	tests/r7rs/check-abstract-syntax-tree-loko \
+@LOKO_TRUE@	tests/r7rs/check-nix-embed-loko \
+@LOKO_TRUE@	tests/r7rs/check-nix-list-loko \
+@LOKO_TRUE@	tests/r7rs/check-nix-set-loko
+@SAGITTARIUS_TRUE@am__append_13 = tests/r6rs/check-abstract-syntax-tree-sagittarius \
 @SAGITTARIUS_TRUE@	tests/r6rs/check-nix-embed-sagittarius \
 @SAGITTARIUS_TRUE@	tests/r6rs/check-nix-list-sagittarius \
 @SAGITTARIUS_TRUE@	tests/r6rs/check-nix-set-sagittarius \
@@ -197,6 +205,7 @@ am__aclocal_m4_deps = $(top_srcdir)/m4/ax_check_compile_flag.m4 \
 	$(top_srcdir)/ac-chibi-scheme.m4 \
 	$(top_srcdir)/ac-gauche-scheme.m4 \
 	$(top_srcdir)/ac-guile-scheme.m4 \
+	$(top_srcdir)/ac-loko-scheme.m4 \
 	$(top_srcdir)/ac-sagittarius-scheme.m4 \
 	$(top_srcdir)/ac-what-was-found.m4 $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
@@ -599,6 +608,7 @@ LDFLAGS = @LDFLAGS@
 LIBOBJS = @LIBOBJS@
 LIBS = @LIBS@
 LN_S = @LN_S@
+LOKO = @LOKO@
 LTLIBOBJS = @LTLIBOBJS@
 MAINT = @MAINT@
 MAKEINFO = @MAKEINFO@
@@ -815,12 +825,14 @@ CHEX = tests/check-abstract-syntax-tree.scm tests/check-nix-embed.scm \
 	tests/check-nix-list.scm tests/check-nix-set.scm
 CHEX_WE_MADE = $(CHEX:tests/%.scm=tests/r6rs/%-chez) \
 	$(CHEX:tests/%.scm=tests/r6rs/%-guile) \
+	$(CHEX:tests/%.scm=tests/r6rs/%-loko) \
 	$(CHEX:tests/%.scm=tests/r6rs/%-sagittarius) \
 	$(CHEX:tests/%.scm=tests/r7rs/chicken-5/%-csi) \
 	$(CHEX:tests/%.scm=tests/r7rs/chicken-5/%-csc) \
 	$(CHEX:tests/%.scm=tests/r7rs/%-chibi) \
 	$(CHEX:tests/%.scm=tests/r7rs/%-gauche) \
 	$(CHEX:tests/%.scm=tests/r7rs/%-guile) \
+	$(CHEX:tests/%.scm=tests/r7rs/%-loko) \
 	$(CHEX:tests/%.scm=tests/r7rs/%-sagittarius)
 
 #---------------------------------------------------------------------
@@ -1470,6 +1482,62 @@ tests/r7rs/check-nix-set-guile.log: tests/r7rs/check-nix-set-guile
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
 	"$$tst" $(AM_TESTS_FD_REDIRECT)
+tests/r6rs/check-abstract-syntax-tree-loko.log: tests/r6rs/check-abstract-syntax-tree-loko
+	@p='tests/r6rs/check-abstract-syntax-tree-loko'; \
+	b='tests/r6rs/check-abstract-syntax-tree-loko'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+tests/r6rs/check-nix-embed-loko.log: tests/r6rs/check-nix-embed-loko
+	@p='tests/r6rs/check-nix-embed-loko'; \
+	b='tests/r6rs/check-nix-embed-loko'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+tests/r6rs/check-nix-list-loko.log: tests/r6rs/check-nix-list-loko
+	@p='tests/r6rs/check-nix-list-loko'; \
+	b='tests/r6rs/check-nix-list-loko'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+tests/r6rs/check-nix-set-loko.log: tests/r6rs/check-nix-set-loko
+	@p='tests/r6rs/check-nix-set-loko'; \
+	b='tests/r6rs/check-nix-set-loko'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+tests/r7rs/check-abstract-syntax-tree-loko.log: tests/r7rs/check-abstract-syntax-tree-loko
+	@p='tests/r7rs/check-abstract-syntax-tree-loko'; \
+	b='tests/r7rs/check-abstract-syntax-tree-loko'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+tests/r7rs/check-nix-embed-loko.log: tests/r7rs/check-nix-embed-loko
+	@p='tests/r7rs/check-nix-embed-loko'; \
+	b='tests/r7rs/check-nix-embed-loko'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+tests/r7rs/check-nix-list-loko.log: tests/r7rs/check-nix-list-loko
+	@p='tests/r7rs/check-nix-list-loko'; \
+	b='tests/r7rs/check-nix-list-loko'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+tests/r7rs/check-nix-set-loko.log: tests/r7rs/check-nix-set-loko
+	@p='tests/r7rs/check-nix-set-loko'; \
+	b='tests/r7rs/check-nix-set-loko'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
 tests/r6rs/check-abstract-syntax-tree-sagittarius.log: tests/r6rs/check-abstract-syntax-tree-sagittarius
 	@p='tests/r6rs/check-abstract-syntax-tree-sagittarius'; \
 	b='tests/r6rs/check-abstract-syntax-tree-sagittarius'; \
@@ -2050,6 +2118,20 @@ tests/r7rs/%-guile: tests/%.scm $(R7RS_SCHEME) GNUmakefile
 	$(AWK) 'BEGIN{print "#!$(GUILE) \\"; \
 	              print "-L '$(abs_builddir)/r7rs' --r7rs --no-auto-compile -s"; \
 	              print "!#"; \
+	              print "'$(R7RS_TEST_TOP)'"} \
+	        {print}' $(<) \
+	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
+
+tests/r6rs/%-loko: tests/%.scm $(R6RS_SCHEME) GNUmakefile
+	$(call v,AWK) $(MKDIR_P) $(@D) && \
+	$(AWK) 'BEGIN{print "#!$(ENV_S) LOKO_LIBRARY_PATH=\"$(abs_builddir)/r6rs\" $(LOKO) --program"; \
+	              print "'$(R6RS_TEST_TOP)'"} \
+	        {print}' $(<) \
+	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
+
+tests/r7rs/%-loko: tests/%.scm $(R7RS_SCHEME) GNUmakefile
+	$(call v,AWK) $(MKDIR_P) $(@D) && \
+	$(AWK) 'BEGIN{print "#!$(ENV_S) LOKO_LIBRARY_PATH=\"$(abs_builddir)/r7rs\" $(LOKO) --script"; \
 	              print "'$(R7RS_TEST_TOP)'"} \
 	        {print}' $(<) \
 	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
