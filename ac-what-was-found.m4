@@ -48,6 +48,9 @@ fi
 if test "${chem_cv_path_LOKO_found}" != no; then
   AC_MSG_NOTICE([Loko Scheme: ${LOKO}])
 fi
+if test "${chem_cv_path_MIT_SCHEME_found}" != no; then
+  AC_MSG_NOTICE([MIT/GNU Scheme: ${MIT_SCHEME}])
+fi
 if test "${chem_cv_path_SAGITTARIUS_found}" != no; then
   AC_MSG_NOTICE([Sagittarius Scheme: ${SAGITTARIUS}])
 fi

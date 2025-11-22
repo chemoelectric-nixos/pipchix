@@ -94,7 +94,7 @@ tests/r7rs/chicken-5/%-csc: tests/%.scm \
 	$(call v,AWK/CSC) $(MKDIR_P) $(@D) && \
 	$(AWK) 'BEGIN{print "'$(R7RS_TEST_TOP)'"} \
 	        {print}' $(<) \
-	  > $(@).tmp.scm.tmp && mv $(@).tmp.scm{.tmp,} && \
+	  > $(@).tmp.scm.tmp && mv $(@).tmp.scm{.tmp,} && \w
 	$(CSC_5) -I $(CHICKEN_5_EGGDIR) -R utf8 -R r7rs -X r7rs $(@).tmp.scm -o $(@)-exe$(EXEEXT) && \
 	rm -f $(@).tmp.scm && \
 	$(AWK) 'BEGIN{print "#!$(SHELL)"; \
@@ -156,6 +156,22 @@ tests/r7rs/%-loko: tests/%.scm $(R7RS_SCHEME) GNUmakefile
 	        {print}' $(<) \
 	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
+#
+# FIXME: MIT Scheme does not seem able to output the actual status
+#        code given to (exit STATUS). Thus only PASS and FAIL may be
+#        effective.
+#
+tests/r7rs/%-mit: tests/%.scm $(R7RS_SCHEME) GNUmakefile
+	$(call v,AWK) $(MKDIR_P) $(@D) && \
+	$(AWK) 'BEGIN{print "'$(R7RS_TEST_TOP)'"} \
+	        {print}' $(<) \
+	  > $(@).tmp.scm.tmp && mv $(@).tmp.scm{.tmp,} && \
+	$(AWK) 'BEGIN{printf "#!$(SHELL)\n"; \
+	              printf "exec $(MIT_SCHEME) --no-init-file --batch-mode "; \
+	              printf "--eval \"(find-scheme-libraries! \\\"$(abs_builddir)/r7rs\\\")\" "; \
+	              printf "--eval \"(load \\\"$(abs_builddir)/$(@).tmp.scm\\\")\"\n"}' \
+	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
+
 tests/r6rs/%-sagittarius: tests/%.scm $(R6RS_SCHEME) GNUmakefile
 	$(call v,AWK) $(MKDIR_P) $(@D) && \
 	$(AWK) 'BEGIN{print "#!$(ENV_S) $(SAGITTARIUS) -r6 --loadpath='$(abs_builddir)/r6rs'"; \
@@ -172,6 +188,7 @@ tests/r7rs/%-sagittarius: tests/%.scm $(R7RS_SCHEME) GNUmakefile
 
 CLEANFILES += tests/r6rs/*.tmp
 CLEANFILES += tests/r7rs/*.tmp
+CLEANFILES += tests/r7rs/*-mit.tmp.scm
 CLEANFILES += tests/r7rs/chicken-5/*.tmp
 CLEANFILES += tests/r7rs/chicken-5/*-csc.tmp.scm
 CLEANFILES += tests/r7rs/chicken-5/*-csc-exe$(EXEEXT)
@@ -200,6 +217,7 @@ CHEX_WE_MADE += $(CHEX:tests/%.scm=tests/r7rs/%-chibi)
 CHEX_WE_MADE += $(CHEX:tests/%.scm=tests/r7rs/%-gauche)
 CHEX_WE_MADE += $(CHEX:tests/%.scm=tests/r7rs/%-guile)
 CHEX_WE_MADE += $(CHEX:tests/%.scm=tests/r7rs/%-loko)
+CHEX_WE_MADE += $(CHEX:tests/%.scm=tests/r7rs/%-mit)
 CHEX_WE_MADE += $(CHEX:tests/%.scm=tests/r7rs/%-sagittarius)
 
 CLEANFILES += $(CHEX_WE_MADE)
@@ -265,6 +283,13 @@ TESTS += tests/r7rs/check-nix-embed-loko
 TESTS += tests/r7rs/check-nix-list-loko
 TESTS += tests/r7rs/check-nix-set-loko
 endif LOKO
+
+if MIT_SCHEME
+TESTS += tests/r7rs/check-abstract-syntax-tree-mit
+TESTS += tests/r7rs/check-nix-embed-mit
+TESTS += tests/r7rs/check-nix-list-mit
+TESTS += tests/r7rs/check-nix-set-mit
+endif MIT_SCHEME
 
 if SAGITTARIUS
 TESTS += tests/r6rs/check-abstract-syntax-tree-sagittarius

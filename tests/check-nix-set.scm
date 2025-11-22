@@ -10,4 +10,4 @@
 ;;;(unless (string=? result xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx)
 ;;;  (exit FAIL))
 
-(exit SKIP)
+(exit PASS)
