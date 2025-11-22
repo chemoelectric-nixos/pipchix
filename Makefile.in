@@ -679,7 +679,7 @@ CLEANFILES = tmp.* $(R6RS_SCHEME) $(R6RS_SCHEME:%=%.tmp) \
 	$(CHICKEN_5_EGGDIR)/pipchix.{build,install}.sh \
 	chicken-5-egg-stamp tests/r6rs/*.tmp tests/r7rs/*.tmp \
 	tests/r7rs/chicken-5/*.tmp tests/r7rs/chicken-5/*-csc.tmp.scm \
-	$(CHEX_WE_MADE)
+	tests/r7rs/chicken-5/*-csc-exe$(EXEEXT) $(CHEX_WE_MADE)
 DISTCLEANFILES = Makefile GNUmakefile return77 return77.$(OBJEXT)
 EXTRA_DIST = silent-rules.mk COPYING README.adoc INSTALL AUTHORS \
 	pipchix/pipchix-includes.m4 $(R6RS_SCHEME:%=%.m4) \
@@ -763,9 +763,7 @@ CHICKEN_5_EGGSPEC = ' \
 #
 AM_TESTS_ENVIRONMENT = \
 	LC_ALL=C.utf8; export LC_ALL; \
-	LANG=C.utf8; export LANG; \
-	CHICKEN_REPOSITORY_PATH="$(shell $(get-chicken-5-repository-path))"; \
-	export CHICKEN_REPOSITORY_PATH;
+	LANG=C.utf8; export LANG;
 
 R6RS_TEST_TOP = '\#!r6rs \
  \
@@ -1911,22 +1909,18 @@ chicken-5-egg-stamp: make-chicken-5-egg
 	@test -e $(@) || touch $(@)
 
 @CSI_5_TRUE@@GNU@define get-chicken-5-repository-path
-@CSI_5_TRUE@@GNU@$(CSI_5) -n -b -R r7rs -R utf8-srfi-13 -R chicken.platform \
-@CSI_5_TRUE@@GNU@    -e '(display (string-join (cons "$(abs_builddir)/$(CHICKEN_5_EGGDIR)" (repository-path)) ":"))'
+@CSI_5_TRUE@@GNU@$(shell ($(CSI_5) -n -b -R r7rs -R utf8-srfi-13 -R chicken.platform \
+@CSI_5_TRUE@@GNU@    -e '(display (string-join (cons "$(abs_builddir)/$(CHICKEN_5_EGGDIR)" (repository-path)) ":"))'))
 @CSI_5_TRUE@@GNU@endef
 @CSI_5_FALSE@@GNU@define get-chicken-5-repository-path
-@CSI_5_FALSE@@GNU@true
+@CSI_5_FALSE@@GNU@$(shell true)
 @CSI_5_FALSE@@GNU@endef
-
-@GNU@ define chicken-repo-path
-@GNU@ CHICKEN_REPOSITORY_PATH=\"$(shell $(get-chicken-5-repository-path))\"
-@GNU@ endef
 
 tests/r7rs/chicken-5/%-csi: tests/%.scm \
                             chicken-5-egg-stamp \
                             GNUmakefile
 	$(call v,AWK) $(MKDIR_P) $(@D) && \
-	$(AWK) 'BEGIN{print "#!$(ENV_S) $(chicken-repo-path) $(CSI_5) -n -b -R utf8 -R r7rs -s"; \
+	$(AWK) 'BEGIN{print "#!$(ENV_S) CHICKEN_REPOSITORY_PATH=\"$(get-chicken-5-repository-path)\" $(CSI_5) -n -b -R utf8 -R r7rs -s"; \
 	              print "'$(R7RS_TEST_TOP)'"} \
 	        {print}' $(<) \
 	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
@@ -1938,8 +1932,13 @@ tests/r7rs/chicken-5/%-csc: tests/%.scm \
 	$(AWK) 'BEGIN{print "'$(R7RS_TEST_TOP)'"} \
 	        {print}' $(<) \
 	  > $(@).tmp.scm.tmp && mv $(@).tmp.scm{.tmp,} && \
-	$(CSC_5) -I $(CHICKEN_5_EGGDIR) -R utf8 -R r7rs -X r7rs $(@).tmp.scm -o $(@) && \
-	rm -f $(@).tmp.scm
+	$(CSC_5) -I $(CHICKEN_5_EGGDIR) -R utf8 -R r7rs -X r7rs $(@).tmp.scm -o $(@)-exe$(EXEEXT) && \
+	rm -f $(@).tmp.scm && \
+	$(AWK) 'BEGIN{print "#!$(SHELL)"; \
+	              print "CHICKEN_REPOSITORY_PATH=\"$(get-chicken-5-repository-path)\""; \
+	              print "export CHICKEN_REPOSITORY_PATH"; \
+	              print "exec \"$(abs_builddir)/$(@)-exe$(EXEEXT)\""}' \
+	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
 tests/r6rs/%-chez: tests/%.scm $(R6RS_SCHEME) GNUmakefile
 	$(call v,AWK) $(MKDIR_P) $(@D) && \
