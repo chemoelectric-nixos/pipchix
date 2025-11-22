@@ -83,8 +83,10 @@ tests/r7rs/chicken-5/%-csi: tests/%.scm \
                             chicken-5-egg-stamp \
                             GNUmakefile
 	$(call v,AWK) $(MKDIR_P) $(@D) && \
-	$(AWK) 'BEGIN{print "#!$(ENV_S) CHICKEN_REPOSITORY_PATH=\"$(get-chicken-5-repository-path)\" $(CSI_5) -n -b -R utf8 -R r7rs -s"; \
-	              print "'$(R7RS_TEST_TOP)'"} \
+	$(AWK) 'BEGIN{printf "#!$(ENV_S) "; \
+	              printf "CHICKEN_REPOSITORY_PATH=\"$(get-chicken-5-repository-path)\" "; \
+	              printf "$(CSI_5) -n -b -R utf8 -R r7rs -s\n"; \
+	              printf "'$(R7RS_TEST_TOP)'\n"} \
 	        {print}' $(<) \
 	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
