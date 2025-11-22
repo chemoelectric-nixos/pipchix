@@ -29,7 +29,7 @@ m4_string_reverse_concatenate
 ;;;;              (string->utf8 x)
 ;;;;              x))))
 
-(define-syntax %%wrap-outp ;; An identity transform.
+(define-syntax %%wrap-outp ;; An identity transformation.
   (syntax-rules ()
     ((%%wrap-outp outp)
      outp)))

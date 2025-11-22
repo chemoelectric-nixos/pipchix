@@ -144,32 +144,43 @@ TESTS = $(am__append_5) $(am__append_7) $(am__append_8) \
 	$(am__append_9) $(am__append_10) $(am__append_11) \
 	$(am__append_12)
 @CHICKEN_INSTALL_5_TRUE@@CSI_5_TRUE@am__append_4 = chicken-5-egg-stamp
-@CHICKEN_INSTALL_5_TRUE@@CSI_5_TRUE@am__append_5 = tests/r7rs/chicken-5/check-nix-embed-csi \
+@CHICKEN_INSTALL_5_TRUE@@CSI_5_TRUE@am__append_5 = tests/r7rs/chicken-5/check-abstract-syntax-tree-csi \
+@CHICKEN_INSTALL_5_TRUE@@CSI_5_TRUE@	tests/r7rs/chicken-5/check-nix-embed-csi \
 @CHICKEN_INSTALL_5_TRUE@@CSI_5_TRUE@	tests/r7rs/chicken-5/check-nix-list-csi \
 @CHICKEN_INSTALL_5_TRUE@@CSI_5_TRUE@	tests/r7rs/chicken-5/check-nix-set-csi
 @CHICKEN_INSTALL_5_TRUE@@CSC_5_TRUE@am__append_6 = chicken-5-egg-stamp
-@CHICKEN_INSTALL_5_TRUE@@CSC_5_TRUE@am__append_7 = tests/r7rs/chicken-5/check-nix-embed-csc \
+@CHICKEN_INSTALL_5_TRUE@@CSC_5_TRUE@am__append_7 = tests/r7rs/chicken-5/check-abstract-syntax-tree-csc \
+@CHICKEN_INSTALL_5_TRUE@@CSC_5_TRUE@	tests/r7rs/chicken-5/check-nix-embed-csc \
 @CHICKEN_INSTALL_5_TRUE@@CSC_5_TRUE@	tests/r7rs/chicken-5/check-nix-list-csc \
 @CHICKEN_INSTALL_5_TRUE@@CSC_5_TRUE@	tests/r7rs/chicken-5/check-nix-set-csc
-@CHEZ_SCHEME_TRUE@am__append_8 = tests/r6rs/check-nix-embed-chez \
+@CHEZ_SCHEME_TRUE@am__append_8 =  \
+@CHEZ_SCHEME_TRUE@	tests/r6rs/check-abstract-syntax-tree-chez \
+@CHEZ_SCHEME_TRUE@	tests/r6rs/check-nix-embed-chez \
 @CHEZ_SCHEME_TRUE@	tests/r6rs/check-nix-list-chez \
 @CHEZ_SCHEME_TRUE@	tests/r6rs/check-nix-set-chez
-@CHIBI_SCHEME_TRUE@am__append_9 = tests/r7rs/check-nix-embed-chibi \
+@CHIBI_SCHEME_TRUE@am__append_9 = tests/r7rs/check-abstract-syntax-tree-chibi \
+@CHIBI_SCHEME_TRUE@	tests/r7rs/check-nix-embed-chibi \
 @CHIBI_SCHEME_TRUE@	tests/r7rs/check-nix-list-chibi \
 @CHIBI_SCHEME_TRUE@	tests/r7rs/check-nix-set-chibi
-@GAUCHE_TRUE@am__append_10 = tests/r7rs/check-nix-embed-gauche \
+@GAUCHE_TRUE@am__append_10 =  \
+@GAUCHE_TRUE@	tests/r7rs/check-abstract-syntax-tree-gauche \
+@GAUCHE_TRUE@	tests/r7rs/check-nix-embed-gauche \
 @GAUCHE_TRUE@	tests/r7rs/check-nix-list-gauche \
 @GAUCHE_TRUE@	tests/r7rs/check-nix-set-gauche
-@GUILE_TRUE@am__append_11 = tests/r6rs/check-nix-embed-guile \
+@GUILE_TRUE@am__append_11 =  \
+@GUILE_TRUE@	tests/r6rs/check-abstract-syntax-tree-guile \
+@GUILE_TRUE@	tests/r6rs/check-nix-embed-guile \
 @GUILE_TRUE@	tests/r6rs/check-nix-list-guile \
 @GUILE_TRUE@	tests/r6rs/check-nix-set-guile \
+@GUILE_TRUE@	tests/r7rs/check-abstract-syntax-tree-guile \
 @GUILE_TRUE@	tests/r7rs/check-nix-embed-guile \
 @GUILE_TRUE@	tests/r7rs/check-nix-list-guile \
 @GUILE_TRUE@	tests/r7rs/check-nix-set-guile
-@SAGITTARIUS_TRUE@am__append_12 =  \
+@SAGITTARIUS_TRUE@am__append_12 = tests/r6rs/check-abstract-syntax-tree-sagittarius \
 @SAGITTARIUS_TRUE@	tests/r6rs/check-nix-embed-sagittarius \
 @SAGITTARIUS_TRUE@	tests/r6rs/check-nix-list-sagittarius \
 @SAGITTARIUS_TRUE@	tests/r6rs/check-nix-set-sagittarius \
+@SAGITTARIUS_TRUE@	tests/r7rs/check-abstract-syntax-tree-sagittarius \
 @SAGITTARIUS_TRUE@	tests/r7rs/check-nix-embed-sagittarius \
 @SAGITTARIUS_TRUE@	tests/r7rs/check-nix-list-sagittarius \
 @SAGITTARIUS_TRUE@	tests/r7rs/check-nix-set-sagittarius
@@ -773,10 +784,10 @@ R6RS_TEST_TOP = '\#!r6rs \
         (pipchix nix-list) \
         (pipchix nix-set)) \
  \
-(define SUCCESS 0) \
-(define FAILURE 1) \
+(define PASS 0) \
+(define FAIL 1) \
 (define SKIP 77) \
-(define HARD-FAILURE 99) \
+(define ERROR 99) \
  \
 (define result (make-string 0)) \
 (define (fill-result s) \
@@ -785,22 +796,23 @@ R6RS_TEST_TOP = '\#!r6rs \
 R7RS_TEST_TOP = ' \
 (import (scheme base)) \
 (import (scheme process-context)) \
+(import (scheme write)) \
 (import (pipchix abstract-syntax-tree)) \
 (import (pipchix nix-embed)) \
 (import (pipchix nix-list)) \
 (import (pipchix nix-set)) \
  \
-(define SUCCESS 0) \
-(define FAILURE 1) \
+(define PASS 0) \
+(define FAIL 1) \
 (define SKIP 77) \
-(define HARD-FAILURE 99) \
+(define ERROR 99) \
  \
 (define result (make-string 0)) \
 (define (fill-result s) \
   (set! result (string-append result s)))'
 
-CHEX = tests/check-nix-embed.scm tests/check-nix-list.scm \
-	tests/check-nix-set.scm
+CHEX = tests/check-abstract-syntax-tree.scm tests/check-nix-embed.scm \
+	tests/check-nix-list.scm tests/check-nix-set.scm
 CHEX_WE_MADE = $(CHEX:tests/%.scm=tests/r6rs/%-chez) \
 	$(CHEX:tests/%.scm=tests/r6rs/%-guile) \
 	$(CHEX:tests/%.scm=tests/r6rs/%-sagittarius) \
@@ -1262,6 +1274,13 @@ recheck: all
 	        am__force_recheck=am--force-recheck \
 	        TEST_LOGS="$$log_list"; \
 	exit $$?
+tests/r7rs/chicken-5/check-abstract-syntax-tree-csi.log: tests/r7rs/chicken-5/check-abstract-syntax-tree-csi
+	@p='tests/r7rs/chicken-5/check-abstract-syntax-tree-csi'; \
+	b='tests/r7rs/chicken-5/check-abstract-syntax-tree-csi'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
 tests/r7rs/chicken-5/check-nix-embed-csi.log: tests/r7rs/chicken-5/check-nix-embed-csi
 	@p='tests/r7rs/chicken-5/check-nix-embed-csi'; \
 	b='tests/r7rs/chicken-5/check-nix-embed-csi'; \
@@ -1279,6 +1298,13 @@ tests/r7rs/chicken-5/check-nix-list-csi.log: tests/r7rs/chicken-5/check-nix-list
 tests/r7rs/chicken-5/check-nix-set-csi.log: tests/r7rs/chicken-5/check-nix-set-csi
 	@p='tests/r7rs/chicken-5/check-nix-set-csi'; \
 	b='tests/r7rs/chicken-5/check-nix-set-csi'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+tests/r7rs/chicken-5/check-abstract-syntax-tree-csc.log: tests/r7rs/chicken-5/check-abstract-syntax-tree-csc
+	@p='tests/r7rs/chicken-5/check-abstract-syntax-tree-csc'; \
+	b='tests/r7rs/chicken-5/check-abstract-syntax-tree-csc'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
@@ -1304,6 +1330,13 @@ tests/r7rs/chicken-5/check-nix-set-csc.log: tests/r7rs/chicken-5/check-nix-set-c
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
 	"$$tst" $(AM_TESTS_FD_REDIRECT)
+tests/r6rs/check-abstract-syntax-tree-chez.log: tests/r6rs/check-abstract-syntax-tree-chez
+	@p='tests/r6rs/check-abstract-syntax-tree-chez'; \
+	b='tests/r6rs/check-abstract-syntax-tree-chez'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
 tests/r6rs/check-nix-embed-chez.log: tests/r6rs/check-nix-embed-chez
 	@p='tests/r6rs/check-nix-embed-chez'; \
 	b='tests/r6rs/check-nix-embed-chez'; \
@@ -1321,6 +1354,13 @@ tests/r6rs/check-nix-list-chez.log: tests/r6rs/check-nix-list-chez
 tests/r6rs/check-nix-set-chez.log: tests/r6rs/check-nix-set-chez
 	@p='tests/r6rs/check-nix-set-chez'; \
 	b='tests/r6rs/check-nix-set-chez'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+tests/r7rs/check-abstract-syntax-tree-chibi.log: tests/r7rs/check-abstract-syntax-tree-chibi
+	@p='tests/r7rs/check-abstract-syntax-tree-chibi'; \
+	b='tests/r7rs/check-abstract-syntax-tree-chibi'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
@@ -1346,6 +1386,13 @@ tests/r7rs/check-nix-set-chibi.log: tests/r7rs/check-nix-set-chibi
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
 	"$$tst" $(AM_TESTS_FD_REDIRECT)
+tests/r7rs/check-abstract-syntax-tree-gauche.log: tests/r7rs/check-abstract-syntax-tree-gauche
+	@p='tests/r7rs/check-abstract-syntax-tree-gauche'; \
+	b='tests/r7rs/check-abstract-syntax-tree-gauche'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
 tests/r7rs/check-nix-embed-gauche.log: tests/r7rs/check-nix-embed-gauche
 	@p='tests/r7rs/check-nix-embed-gauche'; \
 	b='tests/r7rs/check-nix-embed-gauche'; \
@@ -1363,6 +1410,13 @@ tests/r7rs/check-nix-list-gauche.log: tests/r7rs/check-nix-list-gauche
 tests/r7rs/check-nix-set-gauche.log: tests/r7rs/check-nix-set-gauche
 	@p='tests/r7rs/check-nix-set-gauche'; \
 	b='tests/r7rs/check-nix-set-gauche'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+tests/r6rs/check-abstract-syntax-tree-guile.log: tests/r6rs/check-abstract-syntax-tree-guile
+	@p='tests/r6rs/check-abstract-syntax-tree-guile'; \
+	b='tests/r6rs/check-abstract-syntax-tree-guile'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
@@ -1388,6 +1442,13 @@ tests/r6rs/check-nix-set-guile.log: tests/r6rs/check-nix-set-guile
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
 	"$$tst" $(AM_TESTS_FD_REDIRECT)
+tests/r7rs/check-abstract-syntax-tree-guile.log: tests/r7rs/check-abstract-syntax-tree-guile
+	@p='tests/r7rs/check-abstract-syntax-tree-guile'; \
+	b='tests/r7rs/check-abstract-syntax-tree-guile'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
 tests/r7rs/check-nix-embed-guile.log: tests/r7rs/check-nix-embed-guile
 	@p='tests/r7rs/check-nix-embed-guile'; \
 	b='tests/r7rs/check-nix-embed-guile'; \
@@ -1409,6 +1470,13 @@ tests/r7rs/check-nix-set-guile.log: tests/r7rs/check-nix-set-guile
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
 	"$$tst" $(AM_TESTS_FD_REDIRECT)
+tests/r6rs/check-abstract-syntax-tree-sagittarius.log: tests/r6rs/check-abstract-syntax-tree-sagittarius
+	@p='tests/r6rs/check-abstract-syntax-tree-sagittarius'; \
+	b='tests/r6rs/check-abstract-syntax-tree-sagittarius'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
 tests/r6rs/check-nix-embed-sagittarius.log: tests/r6rs/check-nix-embed-sagittarius
 	@p='tests/r6rs/check-nix-embed-sagittarius'; \
 	b='tests/r6rs/check-nix-embed-sagittarius'; \
@@ -1426,6 +1494,13 @@ tests/r6rs/check-nix-list-sagittarius.log: tests/r6rs/check-nix-list-sagittarius
 tests/r6rs/check-nix-set-sagittarius.log: tests/r6rs/check-nix-set-sagittarius
 	@p='tests/r6rs/check-nix-set-sagittarius'; \
 	b='tests/r6rs/check-nix-set-sagittarius'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+tests/r7rs/check-abstract-syntax-tree-sagittarius.log: tests/r7rs/check-abstract-syntax-tree-sagittarius
+	@p='tests/r7rs/check-abstract-syntax-tree-sagittarius'; \
+	b='tests/r7rs/check-abstract-syntax-tree-sagittarius'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
@@ -1928,7 +2003,7 @@ tests/r7rs/chicken-5/%-csi: tests/%.scm \
 tests/r7rs/chicken-5/%-csc: tests/%.scm \
                             chicken-5-egg-stamp \
                             GNUmakefile
-	$(call v,AWK) $(MKDIR_P) $(@D) && \
+	$(call v,AWK/CSC) $(MKDIR_P) $(@D) && \
 	$(AWK) 'BEGIN{print "'$(R7RS_TEST_TOP)'"} \
 	        {print}' $(<) \
 	  > $(@).tmp.scm.tmp && mv $(@).tmp.scm{.tmp,} && \

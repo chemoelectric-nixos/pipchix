@@ -52,10 +52,10 @@ R6RS_TEST_TOP = '\#!r6rs \
         (pipchix nix-list) \
         (pipchix nix-set)) \
  \
-(define SUCCESS 0) \
-(define FAILURE 1) \
+(define PASS 0) \
+(define FAIL 1) \
 (define SKIP 77) \
-(define HARD-FAILURE 99) \
+(define ERROR 99) \
  \
 (define result (make-string 0)) \
 (define (fill-result s) \
@@ -64,15 +64,16 @@ R6RS_TEST_TOP = '\#!r6rs \
 R7RS_TEST_TOP = ' \
 (import (scheme base)) \
 (import (scheme process-context)) \
+(import (scheme write)) \
 (import (pipchix abstract-syntax-tree)) \
 (import (pipchix nix-embed)) \
 (import (pipchix nix-list)) \
 (import (pipchix nix-set)) \
  \
-(define SUCCESS 0) \
-(define FAILURE 1) \
+(define PASS 0) \
+(define FAIL 1) \
 (define SKIP 77) \
-(define HARD-FAILURE 99) \
+(define ERROR 99) \
  \
 (define result (make-string 0)) \
 (define (fill-result s) \
@@ -90,7 +91,7 @@ tests/r7rs/chicken-5/%-csi: tests/%.scm \
 tests/r7rs/chicken-5/%-csc: tests/%.scm \
                             chicken-5-egg-stamp \
                             GNUmakefile
-	$(call v,AWK) $(MKDIR_P) $(@D) && \
+	$(call v,AWK/CSC) $(MKDIR_P) $(@D) && \
 	$(AWK) 'BEGIN{print "'$(R7RS_TEST_TOP)'"} \
 	        {print}' $(<) \
 	  > $(@).tmp.scm.tmp && mv $(@).tmp.scm{.tmp,} && \
@@ -165,6 +166,7 @@ TESTS =
 TESTS += $(TESTS_WE_MADE)
 
 CHEX =
+CHEX += tests/check-abstract-syntax-tree.scm
 CHEX += tests/check-nix-embed.scm
 CHEX += tests/check-nix-list.scm
 CHEX += tests/check-nix-set.scm
@@ -189,12 +191,14 @@ CLEANFILES += $(CHEX_WE_MADE)
 if CHICKEN_INSTALL_5
 if CSI_5
 BUILT_SOURCES += chicken-5-egg-stamp
+TESTS += tests/r7rs/chicken-5/check-abstract-syntax-tree-csi
 TESTS += tests/r7rs/chicken-5/check-nix-embed-csi
 TESTS += tests/r7rs/chicken-5/check-nix-list-csi
 TESTS += tests/r7rs/chicken-5/check-nix-set-csi
 endif
 if CSC_5
 BUILT_SOURCES += chicken-5-egg-stamp
+TESTS += tests/r7rs/chicken-5/check-abstract-syntax-tree-csc
 TESTS += tests/r7rs/chicken-5/check-nix-embed-csc
 TESTS += tests/r7rs/chicken-5/check-nix-list-csc
 TESTS += tests/r7rs/chicken-5/check-nix-set-csc
@@ -202,38 +206,45 @@ endif
 endif
 
 if CHEZ_SCHEME
+TESTS += tests/r6rs/check-abstract-syntax-tree-chez
 TESTS += tests/r6rs/check-nix-embed-chez
 TESTS += tests/r6rs/check-nix-list-chez
 TESTS += tests/r6rs/check-nix-set-chez
 endif CHEZ_SCHEME
 
 if CHIBI_SCHEME
+TESTS += tests/r7rs/check-abstract-syntax-tree-chibi
 TESTS += tests/r7rs/check-nix-embed-chibi
 TESTS += tests/r7rs/check-nix-list-chibi
 TESTS += tests/r7rs/check-nix-set-chibi
 endif CHIBI_SCHEME
 
 if GAUCHE
+TESTS += tests/r7rs/check-abstract-syntax-tree-gauche
 TESTS += tests/r7rs/check-nix-embed-gauche
 TESTS += tests/r7rs/check-nix-list-gauche
 TESTS += tests/r7rs/check-nix-set-gauche
 endif GAUCHE
 
 if GUILE
+TESTS += tests/r6rs/check-abstract-syntax-tree-guile
 TESTS += tests/r6rs/check-nix-embed-guile
 TESTS += tests/r6rs/check-nix-list-guile
 TESTS += tests/r6rs/check-nix-set-guile
 
+TESTS += tests/r7rs/check-abstract-syntax-tree-guile
 TESTS += tests/r7rs/check-nix-embed-guile
 TESTS += tests/r7rs/check-nix-list-guile
 TESTS += tests/r7rs/check-nix-set-guile
 endif GUILE
 
 if SAGITTARIUS
+TESTS += tests/r6rs/check-abstract-syntax-tree-sagittarius
 TESTS += tests/r6rs/check-nix-embed-sagittarius
 TESTS += tests/r6rs/check-nix-list-sagittarius
 TESTS += tests/r6rs/check-nix-set-sagittarius
 
+TESTS += tests/r7rs/check-abstract-syntax-tree-sagittarius
 TESTS += tests/r7rs/check-nix-embed-sagittarius
 TESTS += tests/r7rs/check-nix-list-sagittarius
 TESTS += tests/r7rs/check-nix-set-sagittarius
