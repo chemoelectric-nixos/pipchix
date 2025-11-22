@@ -1,3 +1,4 @@
+#!r6rs
 ;;;
 ;;; Copyright © 2025 Barry Schwartz
 ;;; 

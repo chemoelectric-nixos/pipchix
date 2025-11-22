@@ -142,7 +142,8 @@ EXTRA_PROGRAMS = return77$(EXEEXT)
 @INSTALL_R7RS_SOURCE_TRUE@am__append_3 = $(R7RS_SCHEME)
 TESTS = $(am__append_5) $(am__append_7) $(am__append_8) \
 	$(am__append_9) $(am__append_10) $(am__append_11) \
-	$(am__append_12) $(am__append_13) $(am__append_14)
+	$(am__append_12) $(am__append_13) $(am__append_14) \
+	$(am__append_15) $(am__append_16)
 @CHICKEN_INSTALL_5_TRUE@@CSI_5_TRUE@am__append_4 = chicken-5-egg-stamp
 @CHICKEN_INSTALL_5_TRUE@@CSI_5_TRUE@am__append_5 = tests/r7rs/chicken-5/check-abstract-syntax-tree-csi \
 @CHICKEN_INSTALL_5_TRUE@@CSI_5_TRUE@	tests/r7rs/chicken-5/check-nix-embed-csi \
@@ -189,7 +190,16 @@ TESTS = $(am__append_5) $(am__append_7) $(am__append_8) \
 @MIT_SCHEME_TRUE@	tests/r7rs/check-nix-embed-mit \
 @MIT_SCHEME_TRUE@	tests/r7rs/check-nix-list-mit \
 @MIT_SCHEME_TRUE@	tests/r7rs/check-nix-set-mit
-@SAGITTARIUS_TRUE@am__append_14 = tests/r6rs/check-abstract-syntax-tree-sagittarius \
+@PLT_R6RS_TRUE@am__append_14 =  \
+@PLT_R6RS_TRUE@	tests/r6rs/check-abstract-syntax-tree-racket \
+@PLT_R6RS_TRUE@	tests/r6rs/check-nix-embed-racket \
+@PLT_R6RS_TRUE@	tests/r6rs/check-nix-list-racket \
+@PLT_R6RS_TRUE@	tests/r6rs/check-nix-set-racket
+@PLT_R6RSBC_TRUE@am__append_15 = tests/r6rs/check-abstract-syntax-tree-racketbc \
+@PLT_R6RSBC_TRUE@	tests/r6rs/check-nix-embed-racketbc \
+@PLT_R6RSBC_TRUE@	tests/r6rs/check-nix-list-racketbc \
+@PLT_R6RSBC_TRUE@	tests/r6rs/check-nix-set-racketbc
+@SAGITTARIUS_TRUE@am__append_16 = tests/r6rs/check-abstract-syntax-tree-sagittarius \
 @SAGITTARIUS_TRUE@	tests/r6rs/check-nix-embed-sagittarius \
 @SAGITTARIUS_TRUE@	tests/r6rs/check-nix-list-sagittarius \
 @SAGITTARIUS_TRUE@	tests/r6rs/check-nix-set-sagittarius \
@@ -211,6 +221,7 @@ am__aclocal_m4_deps = $(top_srcdir)/m4/ax_check_compile_flag.m4 \
 	$(top_srcdir)/ac-gauche-scheme.m4 \
 	$(top_srcdir)/ac-guile-scheme.m4 \
 	$(top_srcdir)/ac-loko-scheme.m4 $(top_srcdir)/ac-mit-scheme.m4 \
+	$(top_srcdir)/ac-racket.m4 \
 	$(top_srcdir)/ac-sagittarius-scheme.m4 \
 	$(top_srcdir)/ac-what-was-found.m4 $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
@@ -629,6 +640,8 @@ PACKAGE_TARNAME = @PACKAGE_TARNAME@
 PACKAGE_URL = @PACKAGE_URL@
 PACKAGE_VERSION = @PACKAGE_VERSION@
 PATH_SEPARATOR = @PATH_SEPARATOR@
+PLT_R6RS = @PLT_R6RS@
+PLT_R6RSBC = @PLT_R6RSBC@
 SAGITTARIUS = @SAGITTARIUS@
 SED = @SED@
 SET_MAKE = @SET_MAKE@
@@ -704,10 +717,9 @@ CLEANFILES = tmp.* $(R6RS_SCHEME) $(R6RS_SCHEME:%=%.tmp) \
 	$(R7RS_SCHEME) $(R7RS_SCHEME:%=%.tmp) $(CHICKEN_5_EGGFILES) \
 	$(CHICKEN_5_EGGDIR)/*.{$(OBJEXT),so,link,import.scm} \
 	$(CHICKEN_5_EGGDIR)/pipchix.{build,install}.sh \
-	chicken-5-egg-stamp tests/r6rs/*.tmp tests/r7rs/*.tmp \
-	tests/r7rs/*-mit.tmp.scm tests/r7rs/chicken-5/*.tmp \
-	tests/r7rs/chicken-5/*-csc.tmp.scm \
-	tests/r7rs/chicken-5/*-csc-exe$(EXEEXT) $(CHEX_WE_MADE)
+	chicken-5-egg-stamp tests/r{6,7}rs/*.tmp{,.scm} \
+	tests/r7rs/chicken-5/*.tmp{,.scm} \
+	tests/r7rs/chicken-5/*-exe$(EXEEXT) $(CHEX_WE_MADE)
 DISTCLEANFILES = Makefile GNUmakefile return77 return77.$(OBJEXT)
 EXTRA_DIST = silent-rules.mk COPYING README.adoc INSTALL AUTHORS \
 	pipchix/pipchix-includes.m4 $(R6RS_SCHEME:%=%.m4) \
@@ -833,6 +845,8 @@ CHEX = tests/check-abstract-syntax-tree.scm tests/check-nix-embed.scm \
 CHEX_WE_MADE = $(CHEX:tests/%.scm=tests/r6rs/%-chez) \
 	$(CHEX:tests/%.scm=tests/r6rs/%-guile) \
 	$(CHEX:tests/%.scm=tests/r6rs/%-loko) \
+	$(CHEX:tests/%.scm=tests/r6rs/%-racket) \
+	$(CHEX:tests/%.scm=tests/r6rs/%-racketbc) \
 	$(CHEX:tests/%.scm=tests/r6rs/%-sagittarius) \
 	$(CHEX:tests/%.scm=tests/r7rs/chicken-5/%-csi) \
 	$(CHEX:tests/%.scm=tests/r7rs/chicken-5/%-csc) \
@@ -1574,6 +1588,62 @@ tests/r7rs/check-nix-set-mit.log: tests/r7rs/check-nix-set-mit
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
 	"$$tst" $(AM_TESTS_FD_REDIRECT)
+tests/r6rs/check-abstract-syntax-tree-racket.log: tests/r6rs/check-abstract-syntax-tree-racket
+	@p='tests/r6rs/check-abstract-syntax-tree-racket'; \
+	b='tests/r6rs/check-abstract-syntax-tree-racket'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+tests/r6rs/check-nix-embed-racket.log: tests/r6rs/check-nix-embed-racket
+	@p='tests/r6rs/check-nix-embed-racket'; \
+	b='tests/r6rs/check-nix-embed-racket'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+tests/r6rs/check-nix-list-racket.log: tests/r6rs/check-nix-list-racket
+	@p='tests/r6rs/check-nix-list-racket'; \
+	b='tests/r6rs/check-nix-list-racket'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+tests/r6rs/check-nix-set-racket.log: tests/r6rs/check-nix-set-racket
+	@p='tests/r6rs/check-nix-set-racket'; \
+	b='tests/r6rs/check-nix-set-racket'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+tests/r6rs/check-abstract-syntax-tree-racketbc.log: tests/r6rs/check-abstract-syntax-tree-racketbc
+	@p='tests/r6rs/check-abstract-syntax-tree-racketbc'; \
+	b='tests/r6rs/check-abstract-syntax-tree-racketbc'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+tests/r6rs/check-nix-embed-racketbc.log: tests/r6rs/check-nix-embed-racketbc
+	@p='tests/r6rs/check-nix-embed-racketbc'; \
+	b='tests/r6rs/check-nix-embed-racketbc'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+tests/r6rs/check-nix-list-racketbc.log: tests/r6rs/check-nix-list-racketbc
+	@p='tests/r6rs/check-nix-list-racketbc'; \
+	b='tests/r6rs/check-nix-list-racketbc'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+tests/r6rs/check-nix-set-racketbc.log: tests/r6rs/check-nix-set-racketbc
+	@p='tests/r6rs/check-nix-set-racketbc'; \
+	b='tests/r6rs/check-nix-set-racketbc'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
 tests/r6rs/check-abstract-syntax-tree-sagittarius.log: tests/r6rs/check-abstract-syntax-tree-sagittarius
 	@p='tests/r6rs/check-abstract-syntax-tree-sagittarius'; \
 	b='tests/r6rs/check-abstract-syntax-tree-sagittarius'; \
@@ -2110,7 +2180,7 @@ tests/r7rs/chicken-5/%-csc: tests/%.scm \
 	$(call v,AWK/CSC) $(MKDIR_P) $(@D) && \
 	$(AWK) 'BEGIN{print "'$(R7RS_TEST_TOP)'"} \
 	        {print}' $(<) \
-	  > $(@).tmp.scm.tmp && mv $(@).tmp.scm{.tmp,} && \w
+	  > $(@).tmp.scm.tmp && mv $(@).tmp.scm{.tmp,} && \
 	$(CSC_5) -I $(CHICKEN_5_EGGDIR) -R utf8 -R r7rs -X r7rs $(@).tmp.scm -o $(@)-exe$(EXEEXT) && \
 	rm -f $(@).tmp.scm && \
 	$(AWK) 'BEGIN{print "#!$(SHELL)"; \
@@ -2186,6 +2256,26 @@ tests/r7rs/%-mit: tests/%.scm $(R7RS_SCHEME) GNUmakefile
 	              printf "exec $(MIT_SCHEME) --no-init-file --batch-mode "; \
 	              printf "--eval \"(find-scheme-libraries! \\\"$(abs_builddir)/r7rs\\\")\" "; \
 	              printf "--eval \"(load \\\"$(abs_builddir)/$(@).tmp.scm\\\")\"\n"}' \
+	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
+
+tests/r6rs/%-racket: tests/%.scm $(R6RS_SCHEME) GNUmakefile
+	$(call v,AWK) $(MKDIR_P) $(@D) && \
+	$(AWK) 'BEGIN{print "'$(R6RS_TEST_TOP)'"} \
+	        {print}' $(<) \
+	  > $(@).tmp.scm.tmp && mv $(@).tmp.scm{.tmp,} && \
+	$(AWK) 'BEGIN{printf "#!$(SHELL)\n"; \
+	              printf "exec $(PLT_R6RS) ++path \"$(abs_builddir)/r6rs\" "; \
+	              printf "\"$(abs_builddir)/$(@).tmp.scm\"\n"}' \
+	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
+
+tests/r6rs/%-racketbc: tests/%.scm $(R6RS_SCHEME) GNUmakefile
+	$(call v,AWK) $(MKDIR_P) $(@D) && \
+	$(AWK) 'BEGIN{print "'$(R6RS_TEST_TOP)'"} \
+	        {print}' $(<) \
+	  > $(@).tmp.scm.tmp && mv $(@).tmp.scm{.tmp,} && \
+	$(AWK) 'BEGIN{printf "#!$(SHELL)\n"; \
+	              printf "exec $(PLT_R6RSBC) ++path \"$(abs_builddir)/r6rs\" "; \
+	              printf "\"$(abs_builddir)/$(@).tmp.scm\"\n"}' \
 	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
 tests/r6rs/%-sagittarius: tests/%.scm $(R6RS_SCHEME) GNUmakefile

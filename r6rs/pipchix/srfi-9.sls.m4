@@ -1,3 +1,4 @@
+#!r6rs
 ;;;
 ;;; Copyright © 2025 Barry Schwartz. All Rights Reserved.
 ;;; Copyright © 1999 Richard Kelsey. All Rights Reserved.

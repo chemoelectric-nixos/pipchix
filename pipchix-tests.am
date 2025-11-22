@@ -172,6 +172,26 @@ tests/r7rs/%-mit: tests/%.scm $(R7RS_SCHEME) GNUmakefile
 	              printf "--eval \"(load \\\"$(abs_builddir)/$(@).tmp.scm\\\")\"\n"}' \
 	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
+tests/r6rs/%-racket: tests/%.scm $(R6RS_SCHEME) GNUmakefile
+	$(call v,AWK) $(MKDIR_P) $(@D) && \
+	$(AWK) 'BEGIN{print "'$(R6RS_TEST_TOP)'"} \
+	        {print}' $(<) \
+	  > $(@).tmp.scm.tmp && mv $(@).tmp.scm{.tmp,} && \
+	$(AWK) 'BEGIN{printf "#!$(SHELL)\n"; \
+	              printf "exec $(PLT_R6RS) ++path \"$(abs_builddir)/r6rs\" "; \
+	              printf "\"$(abs_builddir)/$(@).tmp.scm\"\n"}' \
+	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
+
+tests/r6rs/%-racketbc: tests/%.scm $(R6RS_SCHEME) GNUmakefile
+	$(call v,AWK) $(MKDIR_P) $(@D) && \
+	$(AWK) 'BEGIN{print "'$(R6RS_TEST_TOP)'"} \
+	        {print}' $(<) \
+	  > $(@).tmp.scm.tmp && mv $(@).tmp.scm{.tmp,} && \
+	$(AWK) 'BEGIN{printf "#!$(SHELL)\n"; \
+	              printf "exec $(PLT_R6RSBC) ++path \"$(abs_builddir)/r6rs\" "; \
+	              printf "\"$(abs_builddir)/$(@).tmp.scm\"\n"}' \
+	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
+
 tests/r6rs/%-sagittarius: tests/%.scm $(R6RS_SCHEME) GNUmakefile
 	$(call v,AWK) $(MKDIR_P) $(@D) && \
 	$(AWK) 'BEGIN{print "#!$(ENV_S) $(SAGITTARIUS) -r6 --loadpath='$(abs_builddir)/r6rs'"; \
@@ -186,12 +206,9 @@ tests/r7rs/%-sagittarius: tests/%.scm $(R7RS_SCHEME) GNUmakefile
 	        {print}' $(<) \
 	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
-CLEANFILES += tests/r6rs/*.tmp
-CLEANFILES += tests/r7rs/*.tmp
-CLEANFILES += tests/r7rs/*-mit.tmp.scm
-CLEANFILES += tests/r7rs/chicken-5/*.tmp
-CLEANFILES += tests/r7rs/chicken-5/*-csc.tmp.scm
-CLEANFILES += tests/r7rs/chicken-5/*-csc-exe$(EXEEXT)
+CLEANFILES += tests/r{6,7}rs/*.tmp{,.scm}
+CLEANFILES += tests/r7rs/chicken-5/*.tmp{,.scm}
+CLEANFILES += tests/r7rs/chicken-5/*-exe$(EXEEXT)
 
 TESTS =
 TESTS += $(TESTS_WE_MADE)
@@ -209,6 +226,8 @@ CHEX_WE_MADE =
 CHEX_WE_MADE += $(CHEX:tests/%.scm=tests/r6rs/%-chez)
 CHEX_WE_MADE += $(CHEX:tests/%.scm=tests/r6rs/%-guile)
 CHEX_WE_MADE += $(CHEX:tests/%.scm=tests/r6rs/%-loko)
+CHEX_WE_MADE += $(CHEX:tests/%.scm=tests/r6rs/%-racket)
+CHEX_WE_MADE += $(CHEX:tests/%.scm=tests/r6rs/%-racketbc)
 CHEX_WE_MADE += $(CHEX:tests/%.scm=tests/r6rs/%-sagittarius)
 
 CHEX_WE_MADE += $(CHEX:tests/%.scm=tests/r7rs/chicken-5/%-csi)
@@ -290,6 +309,20 @@ TESTS += tests/r7rs/check-nix-embed-mit
 TESTS += tests/r7rs/check-nix-list-mit
 TESTS += tests/r7rs/check-nix-set-mit
 endif MIT_SCHEME
+
+if PLT_R6RS
+TESTS += tests/r6rs/check-abstract-syntax-tree-racket
+TESTS += tests/r6rs/check-nix-embed-racket
+TESTS += tests/r6rs/check-nix-list-racket
+TESTS += tests/r6rs/check-nix-set-racket
+endif PLT_R6RS
+
+if PLT_R6RSBC
+TESTS += tests/r6rs/check-abstract-syntax-tree-racketbc
+TESTS += tests/r6rs/check-nix-embed-racketbc
+TESTS += tests/r6rs/check-nix-list-racketbc
+TESTS += tests/r6rs/check-nix-set-racketbc
+endif PLT_R6RSBC
 
 if SAGITTARIUS
 TESTS += tests/r6rs/check-abstract-syntax-tree-sagittarius

@@ -135,6 +135,7 @@ m4_include([ac-gauche-scheme.m4])
 m4_include([ac-guile-scheme.m4])
 m4_include([ac-loko-scheme.m4])
 m4_include([ac-mit-scheme.m4])
+m4_include([ac-racket.m4])
 m4_include([ac-sagittarius-scheme.m4])
 
 # You can use ‘@GNU@’ to make GNU Make co@GNU@ nstructs unbothersome to
