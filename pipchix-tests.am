@@ -23,12 +23,6 @@
 # Tests using the simple parallel test harness of GNU Automake.
 #
 
-#
-# FIXME: Setting CHICKEN_REPOSITORY_PATH here may not be a good
-#        approach once CHICKEN 6 can be supported alongside CHICKEN 5.
-#        For now it is the approach used to set the environment for
-#        the compiled versions of test programs.
-#
 AM_TESTS_ENVIRONMENT = \
 	LC_ALL=C.utf8; export LC_ALL; \
 	LANG=C.utf8; export LANG;
