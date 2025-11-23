@@ -1,0 +1,34 @@
+# -*- shell-script -*-
+# @configure_input@
+# Configurable variable values for Autoconf test suite.
+
+LC_ALL="@TEST_LOCALE@"
+LANG="@TEST_LOCALE@"
+
+SHELL="@SHELL@"
+CHEZ_SCHEME="@CHEZ_SCHEME@"
+CHIBI_SCHEME="@CHIBI_SCHEME@"
+CHICKEN_INSTALL_5="@CHICKEN_INSTALL_5@"
+CHICKEN_UNINSTALL_5="@CHICKEN_UNINSTALL_5@"
+CSC_5="@CSC_5@"
+CSI_5="@CSI_5@"
+
+srcdir="@srcdir@"
+builddir="@builddir@"
+top_srcdir="@top_srcdir@"
+top_builddir="@top_builddir@"
+abs_srcdir="@abs_srcdir@"
+abs_builddir="@abs_builddir@"
+abs_top_srcdir="@abs_top_srcdir@"
+abs_top_builddir="@abs_top_builddir@"
+
+prefix="@prefix@"
+exec_prefix="@exec_prefix@"
+bindir="@bindir@"
+libdir="@libdir@"
+includedir="@includedir@"
+datarootdir="@datarootdir@"
+mandir="@mandir@"
+localedir="@localedir@"
+
+#doing_installcheck="test x\"${1}\" = x\"AUTOTEST_PATH=@bindir@\""

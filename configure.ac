@@ -1,5 +1,7 @@
 # Copyright © 2025 Barry Schwartz
-# 
+#
+# This file is part of Pipchix.
+#
 # Permission is hereby granted, free of charge, to any person obtaining
 # a copy of Pipchix and associated documentation files (the
 # "Software"), to deal in the Software without restriction, including
@@ -23,6 +25,8 @@ AC_PREREQ([2.72])
 AC_INIT([Pipchix],[0.0.0])
 
 AC_CONFIG_SRCDIR([pipchix/pipchix-includes.m4])
+
+AC_CONFIG_TESTDIR([tests])
 
 AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_AUX_DIR([build-aux])
@@ -153,6 +157,11 @@ CHEM_REQUIRE_GNU_MAKE_IN_PATH
 CHEM_CONFIG_MAKEFILES
 CHEM_CONFIG_MAKEFILES([tinyscheme-1.42/Makefile],
                       [tinyscheme-1.42/GNUmakefile])
+CHEM_CONFIG_MAKEFILES([tests/Makefile],
+                      [tests/GNUmakefile])
+AC_CONFIG_FILES([tests/atlocal])
+AC_CONFIG_FILES([tests/run-chez.sh],
+                [chmod +x tests/run-chez.sh])
 
 m4_foreach([f],
   [[tinyscheme-1.42/init.scm],
@@ -163,6 +172,11 @@ m4_foreach([f],
    [tinyscheme-1.42/scheme-private.h],
    [tinyscheme-1.42/opdefines.h]],
   [AC_CONFIG_LINKS(f:f)])
+
+TEST_LOCALE=C.utf8
+AC_ARG_VAR([TEST_LOCALE],
+           [locale to use when running tests
+            (default: C.utf8)])
 
 AC_OUTPUT
 

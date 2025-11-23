@@ -15,7 +15,9 @@
 @SET_MAKE@
 
 # Copyright © 2025 Barry Schwartz
-# 
+#
+# This file is part of Pipchix.
+#
 # Permission is hereby granted, free of charge, to any person obtaining
 # a copy of Pipchix and associated documentation files (the
 # "Software"), to deal in the Software without restriction, including
@@ -34,6 +36,7 @@
 # LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+#
 VPATH = @srcdir@
 am__is_gnu_make = { \
   if test -z '$(MAKELEVEL)'; then \
@@ -110,7 +113,8 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-subdir = tinyscheme-1.42
+check_PROGRAMS =
+subdir = tests
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/ax_check_compile_flag.m4 \
 	$(top_srcdir)/m4/ax_check_gnu_make.m4 \
@@ -134,9 +138,8 @@ am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 DIST_COMMON = $(srcdir)/Makefile.am $(am__DIST_COMMON)
 mkinstalldirs = $(install_sh) -d
-CONFIG_CLEAN_FILES =
-CONFIG_CLEAN_VPATH_FILES = init.scm dynload.c dynload.h scheme.c \
-	scheme.h scheme-private.h opdefines.h
+CONFIG_CLEAN_FILES = atlocal run-chez.sh
+CONFIG_CLEAN_VPATH_FILES =
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -157,10 +160,8 @@ am__can_run_installinfo = \
     *) (install-info --version) >/dev/null 2>&1;; \
   esac
 am__tagged_files = $(HEADERS) $(SOURCES) $(TAGS_FILES) $(LISP)
-am__DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/dynload.c \
-	$(srcdir)/dynload.h $(srcdir)/init.scm $(srcdir)/opdefines.h \
-	$(srcdir)/scheme-private.h $(srcdir)/scheme.c \
-	$(srcdir)/scheme.h COPYING
+am__DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/atlocal.in \
+	$(srcdir)/run-chez.sh.in
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 ACLOCAL = @ACLOCAL@
 AMTAR = @AMTAR@
@@ -311,31 +312,18 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-ACLOCAL_AMFLAGS = -I m4 --install
-AUTOMAKE_OPTIONS = foreign
-MOSTLYCLEANFILES = 
-CLEANFILES = tinyscheme-exe$(EXEEXT) *.$(OBJEXT)
-DISTCLEANFILES = Makefile GNUmakefile
-
-#---------------------------------------------------------------------
-
-#
-# TinySCHEME as a scripting language for the Makefiles. (We do not
-# wish to force people to link their GNU Make with libguile, nor to
-# assume one has some particular Scheme implementation.)
-#
-EXTRA_DIST = BUILDING COPYING dynload.h init.scm MiniSCHEMETribute.txt \
-	scheme.c scheme-private.h CHANGES dynload.c hack.txt \
-	makefile.ORIGINAL Manual.txt opdefines.h scheme.h SConstruct
+EXTRA_DIST = testsuite.at $(srcdir)/package.m4 $(TESTSUITE) atlocal.in
 BUILT_SOURCES = 
-TINYSCHEME_C = $(addsuffix .c, scheme)
-TINYSCHEME_H = $(addsuffix .h, dynload opdefines \
-                               scheme scheme-private)
-
-TINYSCHEME_CFLAGS = \
-	${CFLAGS} $(CFLAGS_FOR_STATIC) $(CFLAGS_FOR_PIC) \
-	-DUSE_DL=0 -DUSE_MATH=1 -DUSE_ASCII_NAMES=0
-
+CLEANFILES = *.tmp tmp.*
+DISTCLEANFILES = Makefile GNUmakefile atconfig
+check_SCRIPTS = 
+CHECK_LOCAL_DEPS = atconfig atlocal $(TESTSUITE)
+AUTOM4TE = $(SHELL) $(top_srcdir)/build-aux/missing --run autom4te
+AUTOTEST = $(AUTOM4TE) --language=autotest
+TESTSUITE = $(srcdir)/testsuite
+TESTSUITE_DEPS = $(srcdir)/package.m4 $(srcdir)/testsuite.at \
+	$(srcdir)/testsuite-r6rs.at $(srcdir)/testsuite-r7rs.at \
+	$(srcdir)/testsuite-r6rs-chez.at
 all: $(BUILT_SOURCES)
 	$(MAKE) $(AM_MAKEFLAGS) all-am
 
@@ -349,9 +337,9 @@ $(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am  $(am__confi
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign tinyscheme-1.42/GNUmakefile:tinyscheme-1.42/Makefile.in'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu tests/GNUmakefile:tests/Makefile.in'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --foreign tinyscheme-1.42/GNUmakefile:tinyscheme-1.42/Makefile.in
+	  $(AUTOMAKE) --gnu tests/GNUmakefile:tests/Makefile.in
 GNUmakefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
 	  *config.status*) \
@@ -369,6 +357,13 @@ $(top_srcdir)/configure: @MAINTAINER_MODE_TRUE@ $(am__configure_deps)
 $(ACLOCAL_M4): @MAINTAINER_MODE_TRUE@ $(am__aclocal_m4_deps)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
 $(am__aclocal_m4_deps):
+atlocal: $(top_builddir)/config.status $(srcdir)/atlocal.in
+	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@
+run-chez.sh: $(top_builddir)/config.status $(srcdir)/run-chez.sh.in
+	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@
+
+clean-checkPROGRAMS:
+	-$(am__rm_f) $(check_PROGRAMS)
 tags TAGS:
 
 ctags CTAGS:
@@ -410,6 +405,8 @@ distdir-am: $(DISTFILES)
 	  fi; \
 	done
 check-am: all-am
+	$(MAKE) $(AM_MAKEFLAGS) $(check_PROGRAMS) $(check_SCRIPTS)
+	$(MAKE) $(AM_MAKEFLAGS) check-local
 check: $(BUILT_SOURCES)
 	$(MAKE) $(AM_MAKEFLAGS) check-am
 all-am: GNUmakefile
@@ -436,7 +433,6 @@ install-strip:
 	    "INSTALL_PROGRAM_ENV=STRIPPROG='$(STRIP)'" install; \
 	fi
 mostlyclean-generic:
-	-$(am__rm_f) $(MOSTLYCLEANFILES)
 
 clean-generic:
 	-$(am__rm_f) $(CLEANFILES)
@@ -452,7 +448,7 @@ maintainer-clean-generic:
 	-$(am__rm_f) $(BUILT_SOURCES)
 clean: clean-am
 
-clean-am: clean-generic mostlyclean-am
+clean-am: clean-checkPROGRAMS clean-generic clean-local mostlyclean-am
 
 distclean: distclean-am
 	-rm -f GNUmakefile
@@ -496,7 +492,7 @@ install-ps: install-ps-am
 
 install-ps-am:
 
-installcheck-am:
+installcheck-am: installcheck-local
 
 maintainer-clean: maintainer-clean-am
 	-rm -f GNUmakefile
@@ -516,34 +512,60 @@ ps-am:
 
 uninstall-am:
 
-.MAKE: all check install install-am install-exec install-strip
+.MAKE: all check check-am install install-am install-exec \
+	install-strip
 
-.PHONY: all all-am check check-am clean clean-generic cscopelist-am \
+.PHONY: all all-am check check-am check-local clean \
+	clean-checkPROGRAMS clean-generic clean-local cscopelist-am \
 	ctags-am distclean distclean-generic distdir dvi dvi-am html \
 	html-am info info-am install install-am install-data \
 	install-data-am install-dvi install-dvi-am install-exec \
 	install-exec-am install-html install-html-am install-info \
 	install-info-am install-man install-pdf install-pdf-am \
 	install-ps install-ps-am install-strip installcheck \
-	installcheck-am installdirs maintainer-clean \
-	maintainer-clean-generic mostlyclean mostlyclean-generic pdf \
-	pdf-am ps ps-am tags-am uninstall uninstall-am
+	installcheck-am installcheck-local installdirs \
+	maintainer-clean maintainer-clean-generic mostlyclean \
+	mostlyclean-generic pdf pdf-am ps ps-am tags-am uninstall \
+	uninstall-am
 
 .PRECIOUS: GNUmakefile
 
 
 .DELETE_ON_ERROR:
 
-@GNU@ include $(top_srcdir)/silent-rules.mk
+$(srcdir)/package.m4: $(top_srcdir)/configure.ac
+	$(AWK) \
+	  'BEGIN{print "# Signature of the current package."; \
+	         print "m4_define([AT_PACKAGE_NAME],"; \
+	         print "  [$(PACKAGE_NAME)])"; \
+	         print "m4_define([AT_PACKAGE_TARNAME],"; \
+	         print "  [$(PACKAGE_TARNAME)])"; \
+	         print "m4_define([AT_PACKAGE_VERSION],"; \
+	         print "  [$(PACKAGE_VERSION)])"; \
+	         print "m4_define([AT_PACKAGE_STRING],"; \
+	         print "  [$(PACKAGE_STRING)])"; \
+	         print "m4_define([AT_PACKAGE_BUGREPORT],"; \
+	         print "  [$(PACKAGE_BUGREPORT)])"; \
+	         print "m4_define([AT_PACKAGE_URL],"; \
+	         print "  [$(PACKAGE_URL)])"}' \
+	  > $(@).tmp && mv $(@){.tmp,}
 
-tinyscheme-exe$(EXEEXT): $(TINYSCHEME_C) $(TINYSCHEME_H)
-	$(call v,CC) $(CC) -o $(@) \
-	  $(TINYSCHEME_CFLAGS) $(TINYSCHEME_C) -lm
+check-local: $(CHECK_LOCAL_DEPS)
+	$(SHELL) '$(TESTSUITE)' $(TESTSUITEFLAGS)
 
-#---------------------------------------------------------------------
-# local variables:
-# coding: utf-8
-# end:
+installcheck-local: atconfig atlocal $(TESTSUITE)
+	$(SHELL) '$(TESTSUITE)' AUTOTEST_PATH='$(bindir)' \
+	  $(TESTSUITEFLAGS)
+
+clean-local:
+	test ! -f '$(TESTSUITE)' || \
+	 $(SHELL) '$(TESTSUITE)' --clean
+
+$(TESTSUITE): $(TESTSUITE_DEPS)
+	$(AUTOTEST) -I '$(srcdir)' -o $(@).tmp $(@).at && \
+	  mv $(@){.tmp,}
+
+../config.status: run-chez.sh.in
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

@@ -15,7 +15,9 @@
 @SET_MAKE@
 
 # Copyright © 2025 Barry Schwartz
-# 
+#
+# This file is part of Pipchix.
+#
 # Permission is hereby granted, free of charge, to any person obtaining
 # a copy of Pipchix and associated documentation files (the
 # "Software"), to deal in the Software without restriction, including
@@ -36,7 +38,9 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 # Copyright © 2025 Barry Schwartz
-# 
+#
+# This file is part of Pipchix.
+#
 # Permission is hereby granted, free of charge, to any person obtaining
 # a copy of Pipchix and associated documentation files (the
 # "Software"), to deal in the Software without restriction, including
@@ -55,10 +59,6 @@
 # LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-#
-# Tests using the simple parallel test harness of GNU Automake.
-#
 
 VPATH = @srcdir@
 am__is_gnu_make = { \
@@ -140,76 +140,11 @@ EXTRA_PROGRAMS = return77$(EXEEXT)
 @INSTALL_CHICKEN_5_EGG_SOURCE_TRUE@am__append_1 = $(CHICKEN_5_EGGFILES)
 @INSTALL_R6RS_SOURCE_TRUE@am__append_2 = $(R6RS_SCHEME)
 @INSTALL_R7RS_SOURCE_TRUE@am__append_3 = $(R7RS_SCHEME)
-TESTS = $(am__append_5) $(am__append_7) $(am__append_8) \
-	$(am__append_9) $(am__append_10) $(am__append_11) \
-	$(am__append_12) $(am__append_13) $(am__append_14) \
-	$(am__append_15) $(am__append_16) $(am__append_17) \
-	$(am__append_18) $(am__append_19)
 
 #
 @CHICKEN_INSTALL_5_TRUE@@CSI_5_TRUE@@ENABLE_CHECK_R7RS_CSI_5_TRUE@am__append_4 = chicken-5-egg-stamp
-@CHICKEN_INSTALL_5_TRUE@@CSI_5_TRUE@@ENABLE_CHECK_R7RS_CSI_5_TRUE@am__append_5 = tests/r7rs/chicken-5/check-abstract-syntax-tree-csi \
-@CHICKEN_INSTALL_5_TRUE@@CSI_5_TRUE@@ENABLE_CHECK_R7RS_CSI_5_TRUE@	tests/r7rs/chicken-5/check-nix-embed-csi \
-@CHICKEN_INSTALL_5_TRUE@@CSI_5_TRUE@@ENABLE_CHECK_R7RS_CSI_5_TRUE@	tests/r7rs/chicken-5/check-nix-list-csi \
-@CHICKEN_INSTALL_5_TRUE@@CSI_5_TRUE@@ENABLE_CHECK_R7RS_CSI_5_TRUE@	tests/r7rs/chicken-5/check-nix-set-csi
 #
-@CHICKEN_INSTALL_5_TRUE@@CSC_5_TRUE@@ENABLE_CHECK_R7RS_CSC_5_TRUE@am__append_6 = chicken-5-egg-stamp
-@CHICKEN_INSTALL_5_TRUE@@CSC_5_TRUE@@ENABLE_CHECK_R7RS_CSC_5_TRUE@am__append_7 = tests/r7rs/chicken-5/check-abstract-syntax-tree-csc \
-@CHICKEN_INSTALL_5_TRUE@@CSC_5_TRUE@@ENABLE_CHECK_R7RS_CSC_5_TRUE@	tests/r7rs/chicken-5/check-nix-embed-csc \
-@CHICKEN_INSTALL_5_TRUE@@CSC_5_TRUE@@ENABLE_CHECK_R7RS_CSC_5_TRUE@	tests/r7rs/chicken-5/check-nix-list-csc \
-@CHICKEN_INSTALL_5_TRUE@@CSC_5_TRUE@@ENABLE_CHECK_R7RS_CSC_5_TRUE@	tests/r7rs/chicken-5/check-nix-set-csc
-#
-@CHEZ_SCHEME_TRUE@@ENABLE_CHECK_R6RS_CHEZ_TRUE@am__append_8 = tests/r6rs/check-abstract-syntax-tree-chez \
-@CHEZ_SCHEME_TRUE@@ENABLE_CHECK_R6RS_CHEZ_TRUE@	tests/r6rs/check-nix-embed-chez \
-@CHEZ_SCHEME_TRUE@@ENABLE_CHECK_R6RS_CHEZ_TRUE@	tests/r6rs/check-nix-list-chez \
-@CHEZ_SCHEME_TRUE@@ENABLE_CHECK_R6RS_CHEZ_TRUE@	tests/r6rs/check-nix-set-chez
-@CHIBI_SCHEME_TRUE@@ENABLE_CHECK_R7RS_CHIBI_TRUE@am__append_9 = tests/r7rs/check-abstract-syntax-tree-chibi \
-@CHIBI_SCHEME_TRUE@@ENABLE_CHECK_R7RS_CHIBI_TRUE@	tests/r7rs/check-nix-embed-chibi \
-@CHIBI_SCHEME_TRUE@@ENABLE_CHECK_R7RS_CHIBI_TRUE@	tests/r7rs/check-nix-list-chibi \
-@CHIBI_SCHEME_TRUE@@ENABLE_CHECK_R7RS_CHIBI_TRUE@	tests/r7rs/check-nix-set-chibi
-@ENABLE_CHECK_R7RS_GAUCHE_TRUE@@GAUCHE_TRUE@am__append_10 = tests/r7rs/check-abstract-syntax-tree-gauche \
-@ENABLE_CHECK_R7RS_GAUCHE_TRUE@@GAUCHE_TRUE@	tests/r7rs/check-nix-embed-gauche \
-@ENABLE_CHECK_R7RS_GAUCHE_TRUE@@GAUCHE_TRUE@	tests/r7rs/check-nix-list-gauche \
-@ENABLE_CHECK_R7RS_GAUCHE_TRUE@@GAUCHE_TRUE@	tests/r7rs/check-nix-set-gauche
-@ENABLE_CHECK_R6RS_GUILE_TRUE@@GUILE_TRUE@am__append_11 = tests/r6rs/check-abstract-syntax-tree-guile \
-@ENABLE_CHECK_R6RS_GUILE_TRUE@@GUILE_TRUE@	tests/r6rs/check-nix-embed-guile \
-@ENABLE_CHECK_R6RS_GUILE_TRUE@@GUILE_TRUE@	tests/r6rs/check-nix-list-guile \
-@ENABLE_CHECK_R6RS_GUILE_TRUE@@GUILE_TRUE@	tests/r6rs/check-nix-set-guile
-#
-@ENABLE_CHECK_R7RS_GUILE_TRUE@@GUILE_TRUE@am__append_12 = tests/r7rs/check-abstract-syntax-tree-guile \
-@ENABLE_CHECK_R7RS_GUILE_TRUE@@GUILE_TRUE@	tests/r7rs/check-nix-embed-guile \
-@ENABLE_CHECK_R7RS_GUILE_TRUE@@GUILE_TRUE@	tests/r7rs/check-nix-list-guile \
-@ENABLE_CHECK_R7RS_GUILE_TRUE@@GUILE_TRUE@	tests/r7rs/check-nix-set-guile
-@ENABLE_CHECK_R6RS_LOKO_TRUE@@LOKO_TRUE@am__append_13 = tests/r6rs/check-abstract-syntax-tree-loko \
-@ENABLE_CHECK_R6RS_LOKO_TRUE@@LOKO_TRUE@	tests/r6rs/check-nix-embed-loko \
-@ENABLE_CHECK_R6RS_LOKO_TRUE@@LOKO_TRUE@	tests/r6rs/check-nix-list-loko \
-@ENABLE_CHECK_R6RS_LOKO_TRUE@@LOKO_TRUE@	tests/r6rs/check-nix-set-loko
-#
-@ENABLE_CHECK_R7RS_LOKO_TRUE@@LOKO_TRUE@am__append_14 = tests/r7rs/check-abstract-syntax-tree-loko \
-@ENABLE_CHECK_R7RS_LOKO_TRUE@@LOKO_TRUE@	tests/r7rs/check-nix-embed-loko \
-@ENABLE_CHECK_R7RS_LOKO_TRUE@@LOKO_TRUE@	tests/r7rs/check-nix-list-loko \
-@ENABLE_CHECK_R7RS_LOKO_TRUE@@LOKO_TRUE@	tests/r7rs/check-nix-set-loko
-@ENABLE_CHECK_R7RS_MIT_TRUE@@MIT_SCHEME_TRUE@am__append_15 = tests/r7rs/check-abstract-syntax-tree-mit \
-@ENABLE_CHECK_R7RS_MIT_TRUE@@MIT_SCHEME_TRUE@	tests/r7rs/check-nix-embed-mit \
-@ENABLE_CHECK_R7RS_MIT_TRUE@@MIT_SCHEME_TRUE@	tests/r7rs/check-nix-list-mit \
-@ENABLE_CHECK_R7RS_MIT_TRUE@@MIT_SCHEME_TRUE@	tests/r7rs/check-nix-set-mit
-@ENABLE_CHECK_R6RS_RACKET_TRUE@@PLT_R6RS_TRUE@am__append_16 = tests/r6rs/check-abstract-syntax-tree-racket \
-@ENABLE_CHECK_R6RS_RACKET_TRUE@@PLT_R6RS_TRUE@	tests/r6rs/check-nix-embed-racket \
-@ENABLE_CHECK_R6RS_RACKET_TRUE@@PLT_R6RS_TRUE@	tests/r6rs/check-nix-list-racket \
-@ENABLE_CHECK_R6RS_RACKET_TRUE@@PLT_R6RS_TRUE@	tests/r6rs/check-nix-set-racket
-@ENABLE_CHECK_R6RS_RACKETBC_TRUE@@PLT_R6RSBC_TRUE@am__append_17 = tests/r6rs/check-abstract-syntax-tree-racketbc \
-@ENABLE_CHECK_R6RS_RACKETBC_TRUE@@PLT_R6RSBC_TRUE@	tests/r6rs/check-nix-embed-racketbc \
-@ENABLE_CHECK_R6RS_RACKETBC_TRUE@@PLT_R6RSBC_TRUE@	tests/r6rs/check-nix-list-racketbc \
-@ENABLE_CHECK_R6RS_RACKETBC_TRUE@@PLT_R6RSBC_TRUE@	tests/r6rs/check-nix-set-racketbc
-@ENABLE_CHECK_R6RS_SAGITTARIUS_TRUE@@SAGITTARIUS_TRUE@am__append_18 = tests/r6rs/check-abstract-syntax-tree-sagittarius \
-@ENABLE_CHECK_R6RS_SAGITTARIUS_TRUE@@SAGITTARIUS_TRUE@	tests/r6rs/check-nix-embed-sagittarius \
-@ENABLE_CHECK_R6RS_SAGITTARIUS_TRUE@@SAGITTARIUS_TRUE@	tests/r6rs/check-nix-list-sagittarius \
-@ENABLE_CHECK_R6RS_SAGITTARIUS_TRUE@@SAGITTARIUS_TRUE@	tests/r6rs/check-nix-set-sagittarius
-#
-@ENABLE_CHECK_R7RS_SAGITTARIUS_TRUE@@SAGITTARIUS_TRUE@am__append_19 = tests/r7rs/check-abstract-syntax-tree-sagittarius \
-@ENABLE_CHECK_R7RS_SAGITTARIUS_TRUE@@SAGITTARIUS_TRUE@	tests/r7rs/check-nix-embed-sagittarius \
-@ENABLE_CHECK_R7RS_SAGITTARIUS_TRUE@@SAGITTARIUS_TRUE@	tests/r7rs/check-nix-list-sagittarius \
-@ENABLE_CHECK_R7RS_SAGITTARIUS_TRUE@@SAGITTARIUS_TRUE@	tests/r7rs/check-nix-set-sagittarius
+@CHICKEN_INSTALL_5_TRUE@@CSC_5_TRUE@@ENABLE_CHECK_R7RS_CSC_5_TRUE@am__append_5 = chicken-5-egg-stamp
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/ax_check_compile_flag.m4 \
@@ -323,8 +258,7 @@ am__recursive_targets = \
   $(RECURSIVE_CLEAN_TARGETS) \
   $(am__extra_recursive_targets)
 AM_RECURSIVE_TARGETS = $(am__recursive_targets:-recursive=) TAGS CTAGS \
-	cscope check recheck distdir distdir-am dist dist-all \
-	distcheck
+	cscope distdir distdir-am dist dist-all distcheck
 am__tagged_files = $(HEADERS) $(SOURCES) $(TAGS_FILES) $(LISP)
 # Read a list of newline-separated strings from the standard input,
 # and print each of them once, without duplicates.  Input order is
@@ -342,198 +276,15 @@ am__define_uniq_tagged_files = \
   unique=`for i in $$list; do \
     if test -f "$$i"; then echo $$i; else echo $(srcdir)/$$i; fi; \
   done | $(am__uniquify_input)`
-am__tty_colors_dummy = \
-  mgn= red= grn= lgn= blu= brg= std=; \
-  am__color_tests=no
-am__tty_colors = { \
-  $(am__tty_colors_dummy); \
-  if test "X$(AM_COLOR_TESTS)" = Xno; then \
-    am__color_tests=no; \
-  elif test "X$(AM_COLOR_TESTS)" = Xalways; then \
-    am__color_tests=yes; \
-  elif test "X$$TERM" != Xdumb && { test -t 1; } 2>/dev/null; then \
-    am__color_tests=yes; \
-  fi; \
-  if test $$am__color_tests = yes; then \
-    red='[0;31m'; \
-    grn='[0;32m'; \
-    lgn='[1;32m'; \
-    blu='[1;34m'; \
-    mgn='[0;35m'; \
-    brg='[1m'; \
-    std='[m'; \
-  fi; \
-}
-am__recheck_rx = ^[ 	]*:recheck:[ 	]*
-am__global_test_result_rx = ^[ 	]*:global-test-result:[ 	]*
-am__copy_in_global_log_rx = ^[ 	]*:copy-in-global-log:[ 	]*
-# A command that, given a newline-separated list of test names on the
-# standard input, print the name of the tests that are to be re-run
-# upon "make recheck".
-am__list_recheck_tests = $(AWK) '{ \
-  recheck = 1; \
-  while ((rc = (getline line < ($$0 ".trs"))) != 0) \
-    { \
-      if (rc < 0) \
-        { \
-          if ((getline line2 < ($$0 ".log")) < 0) \
-	    recheck = 0; \
-          break; \
-        } \
-      else if (line ~ /$(am__recheck_rx)[nN][Oo]/) \
-        { \
-          recheck = 0; \
-          break; \
-        } \
-      else if (line ~ /$(am__recheck_rx)[yY][eE][sS]/) \
-        { \
-          break; \
-        } \
-    }; \
-  if (recheck) \
-    print $$0; \
-  close ($$0 ".trs"); \
-  close ($$0 ".log"); \
-}'
-# A command that, given a newline-separated list of test names on the
-# standard input, create the global log from their .trs and .log files.
-am__create_global_log = $(AWK) ' \
-function fatal(msg) \
-{ \
-  print "fatal: making $@: " msg | "cat >&2"; \
-  exit 1; \
-} \
-function rst_section(header) \
-{ \
-  print header; \
-  len = length(header); \
-  for (i = 1; i <= len; i = i + 1) \
-    printf "="; \
-  printf "\n\n"; \
-} \
-{ \
-  copy_in_global_log = 1; \
-  global_test_result = "RUN"; \
-  while ((rc = (getline line < ($$0 ".trs"))) != 0) \
-    { \
-      if (rc < 0) \
-         fatal("failed to read from " $$0 ".trs"); \
-      if (line ~ /$(am__global_test_result_rx)/) \
-        { \
-          sub("$(am__global_test_result_rx)", "", line); \
-          sub("[ 	]*$$", "", line); \
-          global_test_result = line; \
-        } \
-      else if (line ~ /$(am__copy_in_global_log_rx)[nN][oO]/) \
-        copy_in_global_log = 0; \
-    }; \
-  if (copy_in_global_log) \
-    { \
-      rst_section(global_test_result ": " $$0); \
-      while ((rc = (getline line < ($$0 ".log"))) != 0) \
-      { \
-        if (rc < 0) \
-          fatal("failed to read from " $$0 ".log"); \
-        print line; \
-      }; \
-      printf "\n"; \
-    }; \
-  close ($$0 ".trs"); \
-  close ($$0 ".log"); \
-}'
-# Restructured Text title.
-am__rst_title = { sed 's/.*/   &   /;h;s/./=/g;p;x;s/ *$$//;p;g' && echo; }
-# Solaris 10 'make', and several other traditional 'make' implementations,
-# pass "-e" to $(SHELL), and POSIX 2008 even requires this.  Work around it
-# by disabling -e (using the XSI extension "set +e") if it's set.
-am__sh_e_setup = case $$- in *e*) set +e;; esac
-# Default flags passed to test drivers.
-am__common_driver_flags = \
-  --color-tests "$$am__color_tests" \
-  $$am__collect_skipped_logs \
-  --enable-hard-errors "$$am__enable_hard_errors" \
-  --expect-failure "$$am__expect_failure"
-# To be inserted before the command running the test.  Creates the
-# directory for the log if needed.  Stores in $dir the directory
-# containing $f, in $tst the test, in $log the log.  Executes the
-# developer-defined test setup AM_TESTS_ENVIRONMENT (if any), and
-# passes TESTS_ENVIRONMENT.  Set up options for the wrapper that
-# will run the test scripts (or their associated LOG_COMPILER, if
-# thy have one).
-am__check_pre = \
-$(am__sh_e_setup);					\
-$(am__vpath_adj_setup) $(am__vpath_adj)			\
-$(am__tty_colors);					\
-srcdir=$(srcdir); export srcdir;			\
-case "$@" in						\
-  */*) am__odir=`echo "./$@" | sed 's|/[^/]*$$||'`;;	\
-    *) am__odir=.;; 					\
-esac;							\
-test "x$$am__odir" = x"." || test -d "$$am__odir" 	\
-  || $(MKDIR_P) "$$am__odir" || exit $$?;		\
-if test -f "./$$f"; then dir=./;			\
-elif test -f "$$f"; then dir=;				\
-else dir="$(srcdir)/"; fi;				\
-tst=$$dir$$f; log='$@'; 				\
-if test -n '$(IGNORE_SKIPPED_LOGS)'; then		\
-  am__collect_skipped_logs='--collect-skipped-logs no';	\
-else							\
-  am__collect_skipped_logs='';				\
-fi;							\
-if test -n '$(DISABLE_HARD_ERRORS)'; then		\
-  am__enable_hard_errors=no; 				\
-else							\
-  am__enable_hard_errors=yes; 				\
-fi; 							\
-case " $(XFAIL_TESTS) " in				\
-  *[\ \	]$$f[\ \	]* | *[\ \	]$$dir$$f[\ \	]*) \
-    am__expect_failure=yes;;				\
-  *)							\
-    am__expect_failure=no;;				\
-esac; 							\
-$(AM_TESTS_ENVIRONMENT) $(TESTS_ENVIRONMENT)
-# A shell command to get the names of the tests scripts with any registered
-# extension removed (i.e., equivalently, the names of the test logs, with
-# the '.log' extension removed).  The result is saved in the shell variable
-# '$bases'.  This honors runtime overriding of TESTS and TEST_LOGS.  Sadly,
-# we cannot use something simpler, involving e.g., "$(TEST_LOGS:.log=)",
-# since that might cause problem with VPATH rewrites for suffix-less tests.
-# See also 'test-harness-vpath-rewrite.sh' and 'test-trs-basic.sh'.
-am__set_TESTS_bases = \
-  bases='$(TEST_LOGS)'; \
-  bases=`for i in $$bases; do echo $$i; done | sed 's/\.log$$//'`; \
-  bases=`echo $$bases`
-AM_TESTSUITE_SUMMARY_HEADER = ' for $(PACKAGE_STRING)'
-RECHECK_LOGS = $(TEST_LOGS)
-TEST_SUITE_LOG = test-suite.log
-TEST_EXTENSIONS = @EXEEXT@ .test
-LOG_DRIVER = $(SHELL) $(top_srcdir)/build-aux/test-driver
-LOG_COMPILE = $(LOG_COMPILER) $(AM_LOG_FLAGS) $(LOG_FLAGS)
-am__set_b = \
-  case '$@' in \
-    */*) \
-      case '$*' in \
-        */*) b='$*';; \
-          *) b=`echo '$@' | sed 's/\.log$$//'`; \
-       esac;; \
-    *) \
-      b='$*';; \
-  esac
-am__test_logs1 = $(TESTS:=.log)
-am__test_logs2 = $(am__test_logs1:@EXEEXT@.log=.log)
-TEST_LOGS = $(am__test_logs2:.test.log=.log)
-TEST_LOG_DRIVER = $(SHELL) $(top_srcdir)/build-aux/test-driver
-TEST_LOG_COMPILE = $(TEST_LOG_COMPILER) $(AM_TEST_LOG_FLAGS) \
-	$(TEST_LOG_FLAGS)
 DIST_SUBDIRS = $(SUBDIRS)
-am__DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/pipchix-tests.am \
+am__DIST_COMMON = $(srcdir)/Makefile.in \
+	$(srcdir)/tests-preparations.am \
 	$(top_srcdir)/build-aux/compile \
 	$(top_srcdir)/build-aux/config.guess \
 	$(top_srcdir)/build-aux/config.sub \
 	$(top_srcdir)/build-aux/depcomp \
 	$(top_srcdir)/build-aux/install-sh \
-	$(top_srcdir)/build-aux/missing \
-	$(top_srcdir)/build-aux/test-driver AUTHORS COPYING INSTALL \
+	$(top_srcdir)/build-aux/missing AUTHORS COPYING INSTALL \
 	build-aux/compile build-aux/config.guess build-aux/config.sub \
 	build-aux/depcomp build-aux/install-sh build-aux/missing
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
@@ -653,6 +404,7 @@ SED = @SED@
 SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
 STRIP = @STRIP@
+TEST_LOCALE = @TEST_LOCALE@
 VERSION = @VERSION@
 abs_builddir = @abs_builddir@
 abs_srcdir = @abs_srcdir@
@@ -730,16 +482,14 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-SUBDIRS = tinyscheme-1.42
+SUBDIRS = tinyscheme-1.42 . tests
 ACLOCAL_AMFLAGS = -I m4 --install
 AUTOMAKE_OPTIONS = foreign
 CLEANFILES = tmp.* $(R6RS_SCHEME) $(R6RS_SCHEME:%=%.tmp) \
 	$(R7RS_SCHEME) $(R7RS_SCHEME:%=%.tmp) $(CHICKEN_5_EGGFILES) \
 	$(CHICKEN_5_EGGDIR)/*.{$(OBJEXT),so,link,import.scm} \
 	$(CHICKEN_5_EGGDIR)/pipchix.{build,install}.sh \
-	chicken-5-egg-stamp tests/r{6,7}rs/*.tmp{,.scm} \
-	tests/r7rs/chicken-5/*.tmp{,.scm} \
-	tests/r7rs/chicken-5/*-exe$(EXEEXT) $(CHEX_WE_MADE)
+	chicken-5-egg-stamp
 DISTCLEANFILES = Makefile GNUmakefile return77 return77.$(OBJEXT)
 EXTRA_DIST = silent-rules.mk COPYING README.adoc INSTALL AUTHORS \
 	pipchix/pipchix-includes.m4 $(R6RS_SCHEME:%=%.m4) \
@@ -747,9 +497,9 @@ EXTRA_DIST = silent-rules.mk COPYING README.adoc INSTALL AUTHORS \
 	$(R6RS_SCHEME:r6rs/pipchix/%.sls=pipchix/%.exports.m4) \
 	$(R7RS_SCHEME:%=%.m4) \
 	$(R7RS_SCHEME:r7rs/pipchix/%.sld=pipchix/%.m4) \
-	$(R7RS_SCHEME:r7rs/pipchix/%.sld=pipchix/%.exports.m4) $(CHEX)
+	$(R7RS_SCHEME:r7rs/pipchix/%.sld=pipchix/%.exports.m4)
 EXTRA_SCRIPTS = 
-BUILT_SOURCES = $(am__append_4) $(am__append_6) return77
+BUILT_SOURCES = $(am__append_4) $(am__append_5) return77
 nodist_r6rspipchix_DATA = $(am__append_2)
 nodist_r7rspipchix_DATA = $(am__append_3)
 nodist_chickeneggs5pipchix_DATA = $(am__append_1)
@@ -814,62 +564,12 @@ CHICKEN_5_EGGSPEC = ' \
      "-compile-syntax")) \
  '$(CHICKEN_EGGSPEC_BOTTOM)
 
-AM_TESTS_ENVIRONMENT = \
-	LC_ALL=C.utf8; export LC_ALL; \
-	LANG=C.utf8; export LANG;
 
-R6RS_TEST_TOP = '\#!r6rs \
- \
-(import (except (rnrs)) \
-        (pipchix abstract-syntax-tree) \
-        (pipchix nix-embed) \
-        (pipchix nix-list) \
-        (pipchix nix-set)) \
- \
-(define PASS 0) \
-(define FAIL 1) \
-(define SKIP 77) \
-(define ERROR 99) \
- \
-(define result (make-string 0)) \
-(define (fill-result s) \
-  (set! result (string-append result s)))'
-
-R7RS_TEST_TOP = ' \
-(import (scheme base)) \
-(import (scheme process-context)) \
-(import (scheme write)) \
-(import (pipchix abstract-syntax-tree)) \
-(import (pipchix nix-embed)) \
-(import (pipchix nix-list)) \
-(import (pipchix nix-set)) \
- \
-(define PASS 0) \
-(define FAIL 1) \
-(define SKIP 77) \
-(define ERROR 99) \
- \
-(define result (make-string 0)) \
-(define (fill-result s) \
-  (set! result (string-append result s)))'
-
-CHEX = tests/check-abstract-syntax-tree.scm tests/check-nix-embed.scm \
-	tests/check-nix-list.scm tests/check-nix-set.scm
-CHEX_WE_MADE = $(CHEX:tests/%.scm=tests/r6rs/%-chez) \
-	$(CHEX:tests/%.scm=tests/r6rs/%-guile) \
-	$(CHEX:tests/%.scm=tests/r6rs/%-loko) \
-	$(CHEX:tests/%.scm=tests/r6rs/%-racket) \
-	$(CHEX:tests/%.scm=tests/r6rs/%-racketbc) \
-	$(CHEX:tests/%.scm=tests/r6rs/%-sagittarius) \
-	$(CHEX:tests/%.scm=tests/r7rs/chicken-5/%-csi) \
-	$(CHEX:tests/%.scm=tests/r7rs/chicken-5/%-csc) \
-	$(CHEX:tests/%.scm=tests/r7rs/%-chibi) \
-	$(CHEX:tests/%.scm=tests/r7rs/%-gauche) \
-	$(CHEX:tests/%.scm=tests/r7rs/%-guile) \
-	$(CHEX:tests/%.scm=tests/r7rs/%-loko) \
-	$(CHEX:tests/%.scm=tests/r7rs/%-mit) \
-	$(CHEX:tests/%.scm=tests/r7rs/%-sagittarius)
-
+#---------------------------------------------------------------------
+################################################################################### FIXME
+################################################ I AM REPLACING THIS WITH AUTOTEST ###########################################a
+#include pipchix-tests.am
+#
 #---------------------------------------------------------------------
 
 #---------------------------------------------------------------------
@@ -918,10 +618,10 @@ all: $(BUILT_SOURCES)
 	$(MAKE) $(AM_MAKEFLAGS) all-recursive
 
 .SUFFIXES:
-.SUFFIXES: .c .log .o .obj .test .test$(EXEEXT) .trs
+.SUFFIXES: .c .o .obj
 am--refresh: GNUmakefile
 	@:
-$(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am $(srcdir)/pipchix-tests.am $(am__configure_deps)
+$(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am $(srcdir)/tests-preparations.am $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
 	    *$$dep*) \
@@ -943,7 +643,7 @@ GNUmakefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	    echo ' cd $(top_builddir) && $(SHELL) ./config.status $@ $(am__maybe_remake_depfiles)'; \
 	    cd $(top_builddir) && $(SHELL) ./config.status $@ $(am__maybe_remake_depfiles);; \
 	esac;
-$(srcdir)/pipchix-tests.am $(am__empty):
+$(srcdir)/tests-preparations.am $(am__empty):
 
 $(top_builddir)/config.status: $(top_srcdir)/configure $(CONFIG_STATUS_DEPENDENCIES)
 	$(SHELL) ./config.status --recheck
@@ -1155,579 +855,6 @@ distclean-tags:
 	-rm -f TAGS ID GTAGS GRTAGS GSYMS GPATH tags
 	-rm -f cscope.out cscope.in.out cscope.po.out cscope.files
 
-# Recover from deleted '.trs' file; this should ensure that
-# "rm -f foo.log; make foo.trs" re-run 'foo.test', and re-create
-# both 'foo.log' and 'foo.trs'.  Break the recipe in two subshells
-# to avoid problems with "make -n".
-.log.trs:
-	rm -f $< $@
-	$(MAKE) $(AM_MAKEFLAGS) $<
-
-# Leading 'am--fnord' is there to ensure the list of targets does not
-# expand to empty, as could happen e.g. with make check TESTS=''.
-am--fnord $(TEST_LOGS) $(TEST_LOGS:.log=.trs): $(am__force_recheck)
-am--force-recheck:
-	@:
-$(TEST_SUITE_LOG): $(TEST_LOGS)
-	@$(am__set_TESTS_bases); \
-	am__f_ok () { test -f "$$1" && test -r "$$1"; }; \
-	redo_bases=`for i in $$bases; do \
-	              am__f_ok $$i.trs && am__f_ok $$i.log || echo $$i; \
-	            done`; \
-	if test -n "$$redo_bases"; then \
-	  redo_logs=`for i in $$redo_bases; do echo $$i.log; done`; \
-	  redo_results=`for i in $$redo_bases; do echo $$i.trs; done`; \
-	  if $(am__make_dryrun); then :; else \
-	    rm -f $$redo_logs && rm -f $$redo_results || exit 1; \
-	  fi; \
-	fi; \
-	if test -n "$$am__remaking_logs"; then \
-	  echo "fatal: making $(TEST_SUITE_LOG): possible infinite" \
-	       "recursion detected" >&2; \
-	elif test -n "$$redo_logs"; then \
-	  am__remaking_logs=yes $(MAKE) $(AM_MAKEFLAGS) $$redo_logs; \
-	fi; \
-	if $(am__make_dryrun); then :; else \
-	  st=0;  \
-	  errmsg="fatal: making $(TEST_SUITE_LOG): failed to create"; \
-	  for i in $$redo_bases; do \
-	    test -f $$i.trs && test -r $$i.trs \
-	      || { echo "$$errmsg $$i.trs" >&2; st=1; }; \
-	    test -f $$i.log && test -r $$i.log \
-	      || { echo "$$errmsg $$i.log" >&2; st=1; }; \
-	  done; \
-	  test $$st -eq 0 || exit 1; \
-	fi
-	@$(am__sh_e_setup); $(am__tty_colors); $(am__set_TESTS_bases); \
-	ws='[ 	]'; \
-	results=`for b in $$bases; do echo $$b.trs; done`; \
-	test -n "$$results" || results=/dev/null; \
-	all=`  grep "^$$ws*:test-result:"           $$results | wc -l`; \
-	pass=` grep "^$$ws*:test-result:$$ws*PASS"  $$results | wc -l`; \
-	fail=` grep "^$$ws*:test-result:$$ws*FAIL"  $$results | wc -l`; \
-	skip=` grep "^$$ws*:test-result:$$ws*SKIP"  $$results | wc -l`; \
-	xfail=`grep "^$$ws*:test-result:$$ws*XFAIL" $$results | wc -l`; \
-	xpass=`grep "^$$ws*:test-result:$$ws*XPASS" $$results | wc -l`; \
-	error=`grep "^$$ws*:test-result:$$ws*ERROR" $$results | wc -l`; \
-	if test `expr $$fail + $$xpass + $$error` -eq 0; then \
-	  success=true; \
-	else \
-	  success=false; \
-	fi; \
-	br='==================='; br=$$br$$br$$br$$br; \
-	result_count () \
-	{ \
-	    if test x"$$1" = x"--maybe-color"; then \
-	      maybe_colorize=yes; \
-	    elif test x"$$1" = x"--no-color"; then \
-	      maybe_colorize=no; \
-	    else \
-	      echo "$@: invalid 'result_count' usage" >&2; exit 4; \
-	    fi; \
-	    shift; \
-	    desc=$$1 count=$$2; \
-	    if test $$maybe_colorize = yes && test $$count -gt 0; then \
-	      color_start=$$3 color_end=$$std; \
-	    else \
-	      color_start= color_end=; \
-	    fi; \
-	    echo "$${color_start}# $$desc $$count$${color_end}"; \
-	}; \
-	create_testsuite_report () \
-	{ \
-	  result_count $$1 "TOTAL:" $$all   "$$brg"; \
-	  result_count $$1 "PASS: " $$pass  "$$grn"; \
-	  result_count $$1 "SKIP: " $$skip  "$$blu"; \
-	  result_count $$1 "XFAIL:" $$xfail "$$lgn"; \
-	  result_count $$1 "FAIL: " $$fail  "$$red"; \
-	  result_count $$1 "XPASS:" $$xpass "$$red"; \
-	  result_count $$1 "ERROR:" $$error "$$mgn"; \
-	}; \
-	output_system_information () \
-	{ \
-          echo;                                     \
-	  { uname -a | $(AWK) '{                    \
-  printf "System information (uname -a):";          \
-  for (i = 1; i < NF; ++i)                          \
-    {                                               \
-      if (i != 2)                                   \
-        printf " %s", $$i;                          \
-    }                                               \
-  printf "\n";                                      \
-}'; } 2>&1;                                         \
-	  if test -r /etc/os-release; then          \
-	    echo "Distribution information (/etc/os-release):"; \
-	    sed 8q /etc/os-release;                 \
-	  elif test -r /etc/issue; then             \
-	    echo "Distribution information (/etc/issue):";      \
-	    cat /etc/issue;                         \
-	  fi;                                       \
-	}; \
-	please_report () \
-	{ \
-echo "Some test(s) failed.  Please report this to $(PACKAGE_BUGREPORT),";    \
-echo "together with the test-suite.log file (gzipped) and your system";      \
-echo "information.  Thanks.";                                                \
-	}; \
-	{								\
-	  echo "$(PACKAGE_STRING): $(subdir)/$(TEST_SUITE_LOG)" |	\
-	    $(am__rst_title);						\
-	  create_testsuite_report --no-color;				\
-	  output_system_information;                                    \
-	  echo;								\
-	  echo ".. contents:: :depth: 2";				\
-	  echo;								\
-	  for b in $$bases; do echo $$b; done				\
-	    | $(am__create_global_log);					\
-	} >$(TEST_SUITE_LOG).tmp || exit 1;				\
-	mv $(TEST_SUITE_LOG).tmp $(TEST_SUITE_LOG);			\
-	if $$success; then						\
-	  col="$$grn";							\
-	 else								\
-	  col="$$red";							\
-	  test x"$$VERBOSE" = x || cat $(TEST_SUITE_LOG);		\
-	fi;								\
-	echo "$${col}$$br$${std}"; 					\
-	echo "$${col}Testsuite summary"$(AM_TESTSUITE_SUMMARY_HEADER)"$${std}";	\
-	echo "$${col}$$br$${std}"; 					\
-	create_testsuite_report --maybe-color;				\
-	echo "$$col$$br$$std";						\
-	if $$success; then :; else					\
-	  echo "$${col}See $(subdir)/$(TEST_SUITE_LOG) for debugging.$${std}";\
-	  if test -n "$(PACKAGE_BUGREPORT)"; then			\
-	    please_report | sed -e "s/^/$${col}/" -e s/'$$'/"$${std}"/; \
-	  fi;								\
-	  echo "$$col$$br$$std";					\
-	fi;								\
-	$$success || exit 1
-
-check-TESTS: 
-	@$(am__rm_f) $(RECHECK_LOGS)
-	@$(am__rm_f) $(RECHECK_LOGS:.log=.trs)
-	@$(am__rm_f) $(TEST_SUITE_LOG)
-	@set +e; $(am__set_TESTS_bases); \
-	log_list=`for i in $$bases; do echo $$i.log; done`; \
-	log_list=`echo $$log_list`; \
-	$(MAKE) $(AM_MAKEFLAGS) $(TEST_SUITE_LOG) TEST_LOGS="$$log_list"; \
-	exit $$?;
-recheck: all 
-	@$(am__rm_f) $(TEST_SUITE_LOG)
-	@set +e; $(am__set_TESTS_bases); \
-	bases=`for i in $$bases; do echo $$i; done \
-	         | $(am__list_recheck_tests)` || exit 1; \
-	log_list=`for i in $$bases; do echo $$i.log; done`; \
-	log_list=`echo $$log_list`; \
-	$(MAKE) $(AM_MAKEFLAGS) $(TEST_SUITE_LOG) \
-	        am__force_recheck=am--force-recheck \
-	        TEST_LOGS="$$log_list"; \
-	exit $$?
-tests/r7rs/chicken-5/check-abstract-syntax-tree-csi.log: tests/r7rs/chicken-5/check-abstract-syntax-tree-csi
-	@p='tests/r7rs/chicken-5/check-abstract-syntax-tree-csi'; \
-	b='tests/r7rs/chicken-5/check-abstract-syntax-tree-csi'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r7rs/chicken-5/check-nix-embed-csi.log: tests/r7rs/chicken-5/check-nix-embed-csi
-	@p='tests/r7rs/chicken-5/check-nix-embed-csi'; \
-	b='tests/r7rs/chicken-5/check-nix-embed-csi'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r7rs/chicken-5/check-nix-list-csi.log: tests/r7rs/chicken-5/check-nix-list-csi
-	@p='tests/r7rs/chicken-5/check-nix-list-csi'; \
-	b='tests/r7rs/chicken-5/check-nix-list-csi'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r7rs/chicken-5/check-nix-set-csi.log: tests/r7rs/chicken-5/check-nix-set-csi
-	@p='tests/r7rs/chicken-5/check-nix-set-csi'; \
-	b='tests/r7rs/chicken-5/check-nix-set-csi'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r7rs/chicken-5/check-abstract-syntax-tree-csc.log: tests/r7rs/chicken-5/check-abstract-syntax-tree-csc
-	@p='tests/r7rs/chicken-5/check-abstract-syntax-tree-csc'; \
-	b='tests/r7rs/chicken-5/check-abstract-syntax-tree-csc'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r7rs/chicken-5/check-nix-embed-csc.log: tests/r7rs/chicken-5/check-nix-embed-csc
-	@p='tests/r7rs/chicken-5/check-nix-embed-csc'; \
-	b='tests/r7rs/chicken-5/check-nix-embed-csc'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r7rs/chicken-5/check-nix-list-csc.log: tests/r7rs/chicken-5/check-nix-list-csc
-	@p='tests/r7rs/chicken-5/check-nix-list-csc'; \
-	b='tests/r7rs/chicken-5/check-nix-list-csc'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r7rs/chicken-5/check-nix-set-csc.log: tests/r7rs/chicken-5/check-nix-set-csc
-	@p='tests/r7rs/chicken-5/check-nix-set-csc'; \
-	b='tests/r7rs/chicken-5/check-nix-set-csc'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r6rs/check-abstract-syntax-tree-chez.log: tests/r6rs/check-abstract-syntax-tree-chez
-	@p='tests/r6rs/check-abstract-syntax-tree-chez'; \
-	b='tests/r6rs/check-abstract-syntax-tree-chez'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r6rs/check-nix-embed-chez.log: tests/r6rs/check-nix-embed-chez
-	@p='tests/r6rs/check-nix-embed-chez'; \
-	b='tests/r6rs/check-nix-embed-chez'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r6rs/check-nix-list-chez.log: tests/r6rs/check-nix-list-chez
-	@p='tests/r6rs/check-nix-list-chez'; \
-	b='tests/r6rs/check-nix-list-chez'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r6rs/check-nix-set-chez.log: tests/r6rs/check-nix-set-chez
-	@p='tests/r6rs/check-nix-set-chez'; \
-	b='tests/r6rs/check-nix-set-chez'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r7rs/check-abstract-syntax-tree-chibi.log: tests/r7rs/check-abstract-syntax-tree-chibi
-	@p='tests/r7rs/check-abstract-syntax-tree-chibi'; \
-	b='tests/r7rs/check-abstract-syntax-tree-chibi'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r7rs/check-nix-embed-chibi.log: tests/r7rs/check-nix-embed-chibi
-	@p='tests/r7rs/check-nix-embed-chibi'; \
-	b='tests/r7rs/check-nix-embed-chibi'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r7rs/check-nix-list-chibi.log: tests/r7rs/check-nix-list-chibi
-	@p='tests/r7rs/check-nix-list-chibi'; \
-	b='tests/r7rs/check-nix-list-chibi'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r7rs/check-nix-set-chibi.log: tests/r7rs/check-nix-set-chibi
-	@p='tests/r7rs/check-nix-set-chibi'; \
-	b='tests/r7rs/check-nix-set-chibi'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r7rs/check-abstract-syntax-tree-gauche.log: tests/r7rs/check-abstract-syntax-tree-gauche
-	@p='tests/r7rs/check-abstract-syntax-tree-gauche'; \
-	b='tests/r7rs/check-abstract-syntax-tree-gauche'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r7rs/check-nix-embed-gauche.log: tests/r7rs/check-nix-embed-gauche
-	@p='tests/r7rs/check-nix-embed-gauche'; \
-	b='tests/r7rs/check-nix-embed-gauche'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r7rs/check-nix-list-gauche.log: tests/r7rs/check-nix-list-gauche
-	@p='tests/r7rs/check-nix-list-gauche'; \
-	b='tests/r7rs/check-nix-list-gauche'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r7rs/check-nix-set-gauche.log: tests/r7rs/check-nix-set-gauche
-	@p='tests/r7rs/check-nix-set-gauche'; \
-	b='tests/r7rs/check-nix-set-gauche'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r6rs/check-abstract-syntax-tree-guile.log: tests/r6rs/check-abstract-syntax-tree-guile
-	@p='tests/r6rs/check-abstract-syntax-tree-guile'; \
-	b='tests/r6rs/check-abstract-syntax-tree-guile'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r6rs/check-nix-embed-guile.log: tests/r6rs/check-nix-embed-guile
-	@p='tests/r6rs/check-nix-embed-guile'; \
-	b='tests/r6rs/check-nix-embed-guile'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r6rs/check-nix-list-guile.log: tests/r6rs/check-nix-list-guile
-	@p='tests/r6rs/check-nix-list-guile'; \
-	b='tests/r6rs/check-nix-list-guile'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r6rs/check-nix-set-guile.log: tests/r6rs/check-nix-set-guile
-	@p='tests/r6rs/check-nix-set-guile'; \
-	b='tests/r6rs/check-nix-set-guile'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r7rs/check-abstract-syntax-tree-guile.log: tests/r7rs/check-abstract-syntax-tree-guile
-	@p='tests/r7rs/check-abstract-syntax-tree-guile'; \
-	b='tests/r7rs/check-abstract-syntax-tree-guile'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r7rs/check-nix-embed-guile.log: tests/r7rs/check-nix-embed-guile
-	@p='tests/r7rs/check-nix-embed-guile'; \
-	b='tests/r7rs/check-nix-embed-guile'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r7rs/check-nix-list-guile.log: tests/r7rs/check-nix-list-guile
-	@p='tests/r7rs/check-nix-list-guile'; \
-	b='tests/r7rs/check-nix-list-guile'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r7rs/check-nix-set-guile.log: tests/r7rs/check-nix-set-guile
-	@p='tests/r7rs/check-nix-set-guile'; \
-	b='tests/r7rs/check-nix-set-guile'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r6rs/check-abstract-syntax-tree-loko.log: tests/r6rs/check-abstract-syntax-tree-loko
-	@p='tests/r6rs/check-abstract-syntax-tree-loko'; \
-	b='tests/r6rs/check-abstract-syntax-tree-loko'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r6rs/check-nix-embed-loko.log: tests/r6rs/check-nix-embed-loko
-	@p='tests/r6rs/check-nix-embed-loko'; \
-	b='tests/r6rs/check-nix-embed-loko'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r6rs/check-nix-list-loko.log: tests/r6rs/check-nix-list-loko
-	@p='tests/r6rs/check-nix-list-loko'; \
-	b='tests/r6rs/check-nix-list-loko'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r6rs/check-nix-set-loko.log: tests/r6rs/check-nix-set-loko
-	@p='tests/r6rs/check-nix-set-loko'; \
-	b='tests/r6rs/check-nix-set-loko'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r7rs/check-abstract-syntax-tree-loko.log: tests/r7rs/check-abstract-syntax-tree-loko
-	@p='tests/r7rs/check-abstract-syntax-tree-loko'; \
-	b='tests/r7rs/check-abstract-syntax-tree-loko'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r7rs/check-nix-embed-loko.log: tests/r7rs/check-nix-embed-loko
-	@p='tests/r7rs/check-nix-embed-loko'; \
-	b='tests/r7rs/check-nix-embed-loko'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r7rs/check-nix-list-loko.log: tests/r7rs/check-nix-list-loko
-	@p='tests/r7rs/check-nix-list-loko'; \
-	b='tests/r7rs/check-nix-list-loko'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r7rs/check-nix-set-loko.log: tests/r7rs/check-nix-set-loko
-	@p='tests/r7rs/check-nix-set-loko'; \
-	b='tests/r7rs/check-nix-set-loko'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r7rs/check-abstract-syntax-tree-mit.log: tests/r7rs/check-abstract-syntax-tree-mit
-	@p='tests/r7rs/check-abstract-syntax-tree-mit'; \
-	b='tests/r7rs/check-abstract-syntax-tree-mit'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r7rs/check-nix-embed-mit.log: tests/r7rs/check-nix-embed-mit
-	@p='tests/r7rs/check-nix-embed-mit'; \
-	b='tests/r7rs/check-nix-embed-mit'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r7rs/check-nix-list-mit.log: tests/r7rs/check-nix-list-mit
-	@p='tests/r7rs/check-nix-list-mit'; \
-	b='tests/r7rs/check-nix-list-mit'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r7rs/check-nix-set-mit.log: tests/r7rs/check-nix-set-mit
-	@p='tests/r7rs/check-nix-set-mit'; \
-	b='tests/r7rs/check-nix-set-mit'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r6rs/check-abstract-syntax-tree-racket.log: tests/r6rs/check-abstract-syntax-tree-racket
-	@p='tests/r6rs/check-abstract-syntax-tree-racket'; \
-	b='tests/r6rs/check-abstract-syntax-tree-racket'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r6rs/check-nix-embed-racket.log: tests/r6rs/check-nix-embed-racket
-	@p='tests/r6rs/check-nix-embed-racket'; \
-	b='tests/r6rs/check-nix-embed-racket'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r6rs/check-nix-list-racket.log: tests/r6rs/check-nix-list-racket
-	@p='tests/r6rs/check-nix-list-racket'; \
-	b='tests/r6rs/check-nix-list-racket'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r6rs/check-nix-set-racket.log: tests/r6rs/check-nix-set-racket
-	@p='tests/r6rs/check-nix-set-racket'; \
-	b='tests/r6rs/check-nix-set-racket'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r6rs/check-abstract-syntax-tree-racketbc.log: tests/r6rs/check-abstract-syntax-tree-racketbc
-	@p='tests/r6rs/check-abstract-syntax-tree-racketbc'; \
-	b='tests/r6rs/check-abstract-syntax-tree-racketbc'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r6rs/check-nix-embed-racketbc.log: tests/r6rs/check-nix-embed-racketbc
-	@p='tests/r6rs/check-nix-embed-racketbc'; \
-	b='tests/r6rs/check-nix-embed-racketbc'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r6rs/check-nix-list-racketbc.log: tests/r6rs/check-nix-list-racketbc
-	@p='tests/r6rs/check-nix-list-racketbc'; \
-	b='tests/r6rs/check-nix-list-racketbc'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r6rs/check-nix-set-racketbc.log: tests/r6rs/check-nix-set-racketbc
-	@p='tests/r6rs/check-nix-set-racketbc'; \
-	b='tests/r6rs/check-nix-set-racketbc'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r6rs/check-abstract-syntax-tree-sagittarius.log: tests/r6rs/check-abstract-syntax-tree-sagittarius
-	@p='tests/r6rs/check-abstract-syntax-tree-sagittarius'; \
-	b='tests/r6rs/check-abstract-syntax-tree-sagittarius'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r6rs/check-nix-embed-sagittarius.log: tests/r6rs/check-nix-embed-sagittarius
-	@p='tests/r6rs/check-nix-embed-sagittarius'; \
-	b='tests/r6rs/check-nix-embed-sagittarius'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r6rs/check-nix-list-sagittarius.log: tests/r6rs/check-nix-list-sagittarius
-	@p='tests/r6rs/check-nix-list-sagittarius'; \
-	b='tests/r6rs/check-nix-list-sagittarius'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r6rs/check-nix-set-sagittarius.log: tests/r6rs/check-nix-set-sagittarius
-	@p='tests/r6rs/check-nix-set-sagittarius'; \
-	b='tests/r6rs/check-nix-set-sagittarius'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r7rs/check-abstract-syntax-tree-sagittarius.log: tests/r7rs/check-abstract-syntax-tree-sagittarius
-	@p='tests/r7rs/check-abstract-syntax-tree-sagittarius'; \
-	b='tests/r7rs/check-abstract-syntax-tree-sagittarius'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r7rs/check-nix-embed-sagittarius.log: tests/r7rs/check-nix-embed-sagittarius
-	@p='tests/r7rs/check-nix-embed-sagittarius'; \
-	b='tests/r7rs/check-nix-embed-sagittarius'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r7rs/check-nix-list-sagittarius.log: tests/r7rs/check-nix-list-sagittarius
-	@p='tests/r7rs/check-nix-list-sagittarius'; \
-	b='tests/r7rs/check-nix-list-sagittarius'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tests/r7rs/check-nix-set-sagittarius.log: tests/r7rs/check-nix-set-sagittarius
-	@p='tests/r7rs/check-nix-set-sagittarius'; \
-	b='tests/r7rs/check-nix-set-sagittarius'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-.test.log:
-	@p='$<'; \
-	$(am__set_b); \
-	$(am__check_pre) $(TEST_LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_TEST_LOG_DRIVER_FLAGS) $(TEST_LOG_DRIVER_FLAGS) -- $(TEST_LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-@am__EXEEXT_TRUE@.test$(EXEEXT).log:
-@am__EXEEXT_TRUE@	@p='$<'; \
-@am__EXEEXT_TRUE@	$(am__set_b); \
-@am__EXEEXT_TRUE@	$(am__check_pre) $(TEST_LOG_DRIVER) --test-name "$$f" \
-@am__EXEEXT_TRUE@	--log-file $$b.log --trs-file $$b.trs \
-@am__EXEEXT_TRUE@	$(am__common_driver_flags) $(AM_TEST_LOG_DRIVER_FLAGS) $(TEST_LOG_DRIVER_FLAGS) -- $(TEST_LOG_COMPILE) \
-@am__EXEEXT_TRUE@	"$$tst" $(AM_TESTS_FD_REDIRECT)
-
 distdir: $(BUILT_SOURCES)
 	$(MAKE) $(AM_MAKEFLAGS) distdir-am
 
@@ -1931,7 +1058,6 @@ distcleancheck: distclean
 	       $(distcleancheck_listfiles) ; \
 	       exit 1; } >&2
 check-am: all-am
-	$(MAKE) $(AM_MAKEFLAGS) check-TESTS
 check: $(BUILT_SOURCES)
 	$(MAKE) $(AM_MAKEFLAGS) check-recursive
 all-am: GNUmakefile $(DATA)
@@ -1962,9 +1088,6 @@ install-strip:
 	    "INSTALL_PROGRAM_ENV=STRIPPROG='$(STRIP)'" install; \
 	fi
 mostlyclean-generic:
-	-$(am__rm_f) $(TEST_LOGS)
-	-$(am__rm_f) $(TEST_LOGS:.log=.trs)
-	-$(am__rm_f) $(TEST_SUITE_LOG)
 
 clean-generic:
 	-$(am__rm_f) $(CLEANFILES)
@@ -2053,15 +1176,15 @@ uninstall-am: uninstall-nodist_chickeneggs5pipchixDATA \
 	uninstall-nodist_r6rspipchixDATA \
 	uninstall-nodist_r7rspipchixDATA
 
-.MAKE: $(am__recursive_targets) all check check-am install install-am \
+.MAKE: $(am__recursive_targets) all check install install-am \
 	install-exec install-strip
 
 .PHONY: $(am__recursive_targets) CTAGS GTAGS TAGS all all-am \
-	am--depfiles am--refresh check check-TESTS check-am clean \
-	clean-cscope clean-generic cscope cscopelist-am ctags ctags-am \
-	dist dist-all dist-bzip2 dist-bzip3 dist-gzip dist-lzip \
-	dist-shar dist-tarZ dist-xz dist-zip dist-zstd distcheck \
-	distclean distclean-compile distclean-generic distclean-tags \
+	am--depfiles am--refresh check check-am clean clean-cscope \
+	clean-generic cscope cscopelist-am ctags ctags-am dist \
+	dist-all dist-bzip2 dist-bzip3 dist-gzip dist-lzip dist-shar \
+	dist-tarZ dist-xz dist-zip dist-zstd distcheck distclean \
+	distclean-compile distclean-generic distclean-tags \
 	distcleancheck distdir distuninstallcheck dvi dvi-am html \
 	html-am info info-am install install-am install-data \
 	install-data-am install-dvi install-dvi-am install-exec \
@@ -2073,7 +1196,7 @@ uninstall-am: uninstall-nodist_chickeneggs5pipchixDATA \
 	install-strip installcheck installcheck-am installdirs \
 	installdirs-am maintainer-clean maintainer-clean-generic \
 	mostlyclean mostlyclean-compile mostlyclean-generic pdf pdf-am \
-	ps ps-am recheck tags tags-am uninstall uninstall-am \
+	ps ps-am tags tags-am uninstall uninstall-am \
 	uninstall-nodist_chickeneggs5pipchixDATA \
 	uninstall-nodist_r6rspipchixDATA \
 	uninstall-nodist_r7rspipchixDATA
@@ -2169,143 +1292,11 @@ make-chicken-5-egg: $(CHICKEN_5_EGGFILES)
 
 chicken-5-egg-stamp: make-chicken-5-egg
 	@test -e $(@) || touch $(@)
-
-@CSI_5_TRUE@@GNU@define get-chicken-5-repository-path
-@CSI_5_TRUE@@GNU@$(shell ($(CSI_5) -n -b -R r7rs -R utf8-srfi-13 -R chicken.platform \
-@CSI_5_TRUE@@GNU@    -e '(display (string-join (cons "$(abs_builddir)/$(CHICKEN_5_EGGDIR)" (repository-path)) ":"))'))
-@CSI_5_TRUE@@GNU@endef
-@CSI_5_FALSE@@GNU@define get-chicken-5-repository-path
-@CSI_5_FALSE@@GNU@$(shell true)
-@CSI_5_FALSE@@GNU@endef
-
-tests/r7rs/chicken-5/%-csi: tests/%.scm \
-                            chicken-5-egg-stamp \
-                            GNUmakefile
-	$(call v,AWK) $(MKDIR_P) $(@D) && \
-	$(AWK) 'BEGIN{printf "#!$(ENV_S) "; \
-	              printf "CHICKEN_REPOSITORY_PATH=\"$(get-chicken-5-repository-path)\" "; \
-	              printf "$(CSI_5) -n -b -R utf8 -R r7rs -s\n"; \
-	              printf "'$(R7RS_TEST_TOP)'\n"} \
-	        {print}' $(<) \
-	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
-
-tests/r7rs/chicken-5/%-csc: tests/%.scm \
-                            chicken-5-egg-stamp \
-                            GNUmakefile
-	$(call v,AWK/CSC) $(MKDIR_P) $(@D) && \
-	$(AWK) 'BEGIN{print "'$(R7RS_TEST_TOP)'"} \
-	        {print}' $(<) \
-	  > $(@).tmp.scm.tmp && mv $(@).tmp.scm{.tmp,} && \
-	$(CSC_5) -I $(CHICKEN_5_EGGDIR) -R utf8 -R r7rs -X r7rs $(@).tmp.scm -o $(@)-exe$(EXEEXT) && \
-	rm -f $(@).tmp.scm && \
-	$(AWK) 'BEGIN{print "#!$(SHELL)"; \
-	              print "CHICKEN_REPOSITORY_PATH=\"$(get-chicken-5-repository-path)\""; \
-	              print "export CHICKEN_REPOSITORY_PATH"; \
-	              print "exec \"$(abs_builddir)/$(@)-exe$(EXEEXT)\""}' \
-	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
-
-tests/r6rs/%-chez: tests/%.scm $(R6RS_SCHEME) GNUmakefile
-	$(call v,AWK) $(MKDIR_P) $(@D) && \
-	$(AWK) 'BEGIN{print "#!$(ENV_S) $(CHEZ_SCHEME) --libdirs '$(abs_builddir)/r6rs:' --program"; \
-	              print "'$(R6RS_TEST_TOP)'"} \
-	        {print}' $(<) \
-	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
-
-tests/r7rs/%-chibi: tests/%.scm $(R7RS_SCHEME) GNUmakefile
-	$(call v,AWK) $(MKDIR_P) $(@D) && \
-	$(AWK) 'BEGIN{print "#!$(CHIBI_SCHEME) -I'$(abs_builddir)/r7rs'"; \
-	              print "'$(R7RS_TEST_TOP)'"} \
-	        {print}' $(<) \
-	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
-
-tests/r7rs/%-gauche: tests/%.scm $(R7RS_SCHEME) GNUmakefile
-	$(call v,AWK) $(MKDIR_P) $(@D) && \
-	$(AWK) 'BEGIN{print "#!$(GAUCHE) -I'$(abs_builddir)/r7rs'"; \
-	              print "'$(R7RS_TEST_TOP)'"} \
-	        {print}' $(<) \
-	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
-
-tests/r6rs/%-guile: tests/%.scm $(R6RS_SCHEME) GNUmakefile
-	$(call v,AWK) $(MKDIR_P) $(@D) && \
-	$(AWK) 'BEGIN{print "#!$(GUILE) \\"; \
-	              print "-L '$(abs_builddir)/r6rs' --r6rs --no-auto-compile -s"; \
-	              print "!#"; \
-	              print "'$(R6RS_TEST_TOP)'"} \
-	        {print}' $(<) \
-	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
-
-tests/r7rs/%-guile: tests/%.scm $(R7RS_SCHEME) GNUmakefile
-	$(call v,AWK) $(MKDIR_P) $(@D) && \
-	$(AWK) 'BEGIN{print "#!$(GUILE) \\"; \
-	              print "-L '$(abs_builddir)/r7rs' --r7rs --no-auto-compile -s"; \
-	              print "!#"; \
-	              print "'$(R7RS_TEST_TOP)'"} \
-	        {print}' $(<) \
-	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
-
-tests/r6rs/%-loko: tests/%.scm $(R6RS_SCHEME) GNUmakefile
-	$(call v,AWK) $(MKDIR_P) $(@D) && \
-	$(AWK) 'BEGIN{print "#!$(ENV_S) LOKO_LIBRARY_PATH=\"$(abs_builddir)/r6rs\" $(LOKO) --program"; \
-	              print "'$(R6RS_TEST_TOP)'"} \
-	        {print}' $(<) \
-	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
-
-tests/r7rs/%-loko: tests/%.scm $(R7RS_SCHEME) GNUmakefile
-	$(call v,AWK) $(MKDIR_P) $(@D) && \
-	$(AWK) 'BEGIN{print "#!$(ENV_S) LOKO_LIBRARY_PATH=\"$(abs_builddir)/r7rs\" $(LOKO) --script"; \
-	              print "'$(R7RS_TEST_TOP)'"} \
-	        {print}' $(<) \
-	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
-
+@CHICKEN_INSTALL_5_TRUE@@CSI_5_TRUE@@ENABLE_CHECK_R7RS_CSI_5_TRUE@check: chicken-5-egg-stamp
+@CHICKEN_INSTALL_5_TRUE@@CSC_5_TRUE@@ENABLE_CHECK_R7RS_CSC_5_TRUE@check: chicken-5-egg-stamp
 #
-# FIXME: MIT/GNU Scheme does not seem able to output the actual status
-#        code given to (exit STATUS). Thus only PASS and FAIL may be
-#        effective.
-#
-tests/r7rs/%-mit: tests/%.scm $(R7RS_SCHEME) GNUmakefile
-	$(call v,AWK) $(MKDIR_P) $(@D) && \
-	$(AWK) 'BEGIN{print "'$(R7RS_TEST_TOP)'"} \
-	        {print}' $(<) \
-	  > $(@).tmp.scm.tmp && mv $(@).tmp.scm{.tmp,} && \
-	$(AWK) 'BEGIN{printf "#!$(SHELL)\n"; \
-	              printf "exec $(MIT_SCHEME) --no-init-file --batch-mode "; \
-	              printf "--eval \"(find-scheme-libraries! \\\"$(abs_builddir)/r7rs\\\")\" "; \
-	              printf "--eval \"(load \\\"$(abs_builddir)/$(@).tmp.scm\\\")\"\n"}' \
-	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
 
-tests/r6rs/%-racket: tests/%.scm $(R6RS_SCHEME) GNUmakefile
-	$(call v,AWK) $(MKDIR_P) $(@D) && \
-	$(AWK) 'BEGIN{print "'$(R6RS_TEST_TOP)'"} \
-	        {print}' $(<) \
-	  > $(@).tmp.scm.tmp && mv $(@).tmp.scm{.tmp,} && \
-	$(AWK) 'BEGIN{printf "#!$(SHELL)\n"; \
-	              printf "exec $(PLT_R6RS) ++path \"$(abs_builddir)/r6rs\" "; \
-	              printf "\"$(abs_builddir)/$(@).tmp.scm\"\n"}' \
-	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
-
-tests/r6rs/%-racketbc: tests/%.scm $(R6RS_SCHEME) GNUmakefile
-	$(call v,AWK) $(MKDIR_P) $(@D) && \
-	$(AWK) 'BEGIN{print "'$(R6RS_TEST_TOP)'"} \
-	        {print}' $(<) \
-	  > $(@).tmp.scm.tmp && mv $(@).tmp.scm{.tmp,} && \
-	$(AWK) 'BEGIN{printf "#!$(SHELL)\n"; \
-	              printf "exec $(PLT_R6RSBC) ++path \"$(abs_builddir)/r6rs\" "; \
-	              printf "\"$(abs_builddir)/$(@).tmp.scm\"\n"}' \
-	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
-
-tests/r6rs/%-sagittarius: tests/%.scm $(R6RS_SCHEME) GNUmakefile
-	$(call v,AWK) $(MKDIR_P) $(@D) && \
-	$(AWK) 'BEGIN{print "#!$(ENV_S) $(SAGITTARIUS) -r6 --loadpath='$(abs_builddir)/r6rs'"; \
-	              print "'$(R6RS_TEST_TOP)'"} \
-	        {print}' $(<) \
-	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
-
-tests/r7rs/%-sagittarius: tests/%.scm $(R7RS_SCHEME) GNUmakefile
-	$(call v,AWK) $(MKDIR_P) $(@D) && \
-	$(AWK) 'BEGIN{print "#!$(ENV_S) $(SAGITTARIUS) -r7 --loadpath='$(abs_builddir)/r7rs'"; \
-	              print "'$(R7RS_TEST_TOP)'"} \
-	        {print}' $(<) \
-	  > $(@).tmp && mv $(@){.tmp,} && chmod +x $(@)
+@CHEZ_SCHEME_TRUE@@ENABLE_CHECK_R6RS_CHEZ_TRUE@check: $(R6RS_SCHEME)
 
 @GNU@ define tinyscheme-1
 @GNU@ ( \

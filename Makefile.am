@@ -1,5 +1,7 @@
 # Copyright © 2025 Barry Schwartz
-# 
+#
+# This file is part of Pipchix.
+#
 # Permission is hereby granted, free of charge, to any person obtaining
 # a copy of Pipchix and associated documentation files (the
 # "Software"), to deal in the Software without restriction, including
@@ -21,7 +23,7 @@
 
 .DELETE_ON_ERROR:
 
-SUBDIRS = tinyscheme-1.42
+SUBDIRS = tinyscheme-1.42 . tests
 
 ACLOCAL_AMFLAGS = -I m4 --install
 AUTOMAKE_OPTIONS =
@@ -243,8 +245,13 @@ chicken-5-egg-stamp: make-chicken-5-egg
 CLEANFILES += chicken-5-egg-stamp
 
 #---------------------------------------------------------------------
+################################################################################### FIXME
+################################################ I AM REPLACING THIS WITH AUTOTEST ###########################################a
+#include pipchix-tests.am
+#
+#---------------------------------------------------------------------
 
-include pipchix-tests.am
+include tests-preparations.am
 
 #---------------------------------------------------------------------
 
