@@ -688,6 +688,48 @@ CHEZ_SCHEME_TRUE
 CHEZ_SCHEME
 CFLAGS_FOR_PIC
 CFLAGS_FOR_STATIC
+ENABLE_CHECK_R7RS_SAGITTARIUS_FALSE
+ENABLE_CHECK_R7RS_SAGITTARIUS_TRUE
+enable_check_r7rs_sagittarius
+ENABLE_CHECK_R6RS_SAGITTARIUS_FALSE
+ENABLE_CHECK_R6RS_SAGITTARIUS_TRUE
+enable_check_r6rs_sagittarius
+ENABLE_CHECK_R6RS_RACKETBC_FALSE
+ENABLE_CHECK_R6RS_RACKETBC_TRUE
+enable_check_r6rs_racketbc
+ENABLE_CHECK_R6RS_RACKET_FALSE
+ENABLE_CHECK_R6RS_RACKET_TRUE
+enable_check_r6rs_racket
+ENABLE_CHECK_R7RS_MIT_FALSE
+ENABLE_CHECK_R7RS_MIT_TRUE
+enable_check_r7rs_mit
+ENABLE_CHECK_R7RS_LOKO_FALSE
+ENABLE_CHECK_R7RS_LOKO_TRUE
+enable_check_r7rs_loko
+ENABLE_CHECK_R6RS_LOKO_FALSE
+ENABLE_CHECK_R6RS_LOKO_TRUE
+enable_check_r6rs_loko
+ENABLE_CHECK_R7RS_GUILE_FALSE
+ENABLE_CHECK_R7RS_GUILE_TRUE
+enable_check_r7rs_guile
+ENABLE_CHECK_R6RS_GUILE_FALSE
+ENABLE_CHECK_R6RS_GUILE_TRUE
+enable_check_r6rs_guile
+ENABLE_CHECK_R7RS_GAUCHE_FALSE
+ENABLE_CHECK_R7RS_GAUCHE_TRUE
+enable_check_r7rs_gauche
+ENABLE_CHECK_R7RS_CSC_5_FALSE
+ENABLE_CHECK_R7RS_CSC_5_TRUE
+enable_check_r7rs_csc_5
+ENABLE_CHECK_R7RS_CSI_5_FALSE
+ENABLE_CHECK_R7RS_CSI_5_TRUE
+enable_check_r7rs_csi_5
+ENABLE_CHECK_R7RS_CHIBI_FALSE
+ENABLE_CHECK_R7RS_CHIBI_TRUE
+enable_check_r7rs_chibi
+ENABLE_CHECK_R6RS_CHEZ_FALSE
+ENABLE_CHECK_R6RS_CHEZ_TRUE
+enable_check_r6rs_chez
 chickeneggs5pipchixdir
 INSTALL_CHICKEN_5_EGG_SOURCE_FALSE
 INSTALL_CHICKEN_5_EGG_SOURCE_TRUE
@@ -818,6 +860,20 @@ enable_maintainer_mode
 enable_install_r6rs_source
 enable_install_r7rs_source
 enable_install_chicken_5_egg_source
+enable_check_r6rs_chez
+enable_check_r7rs_chibi
+enable_check_r7rs_csi_5
+enable_check_r7rs_csc_5
+enable_check_r7rs_gauche
+enable_check_r6rs_guile
+enable_check_r7rs_guile
+enable_check_r6rs_loko
+enable_check_r7rs_loko
+enable_check_r7rs_mit
+enable_check_r6rs_racket
+enable_check_r6rs_racketbc
+enable_check_r6rs_sagittarius
+enable_check_r7rs_sagittarius
 '
       ac_precious_vars='build_alias
 host_alias
@@ -1482,16 +1538,58 @@ Optional Features:
                           sometimes confusing) to the casual installer
   --enable-install-r6rs-source[=DIR]
                           install R⁶RS source code
-                          [DATAROOTDIR/r6rs/pipchix] (not installed by
-                          default)
+                          [DATAROOTDIR/r6rs/pipchix] (by default not
+                          installed)
   --enable-install-r7rs-source[=DIR]
                           install R⁷RS source code
-                          [DATAROOTDIR/r7rs/pipchix] (not installed by
-                          default)
+                          [DATAROOTDIR/r7rs/pipchix] (by default not
+                          installed)
   --enable-install-chicken-5-egg-source[=DIR]
                           install CHICKEN 5 egg source code
-                          [DATAROOTDIR/chicken/eggs/5/pipchix] (not installed
-                          by default)
+                          [DATAROOTDIR/chicken/eggs/5/pipchix] (by default not
+                          installed)
+  --disable-check-r6rs-chez
+                          disable tests with Chez Scheme (enabled by default
+                          if the Scheme implementation is found)
+  --disable-check-r7rs-chibi
+                          disable tests with Chibi Scheme (enabled by default
+                          if the Scheme implementation is found)
+  --disable-check-r7rs-csi_5
+                          disable tests with CHICKEN 5 interpreter (enabled by
+                          default if the Scheme implementation is found)
+  --disable-check-r7rs-csc_5
+                          disable tests with CHICKEN 5 compiler (enabled by
+                          default if the Scheme implementation is found)
+  --disable-check-r7rs-gauche
+                          disable tests with Gauche Scheme (enabled by default
+                          if the Scheme implementation is found)
+  --disable-check-r6rs-guile
+                          disable R⁶RS tests with Guile (enabled by default
+                          if the Scheme implementation is found)
+  --disable-check-r7rs-guile
+                          disable R⁷RS tests with Guile (enabled by default
+                          if the Scheme implementation is found)
+  --disable-check-r6rs-loko
+                          disable R⁶RS tests with Loko Scheme (enabled by
+                          default if the Scheme implementation is found)
+  --disable-check-r7rs-loko
+                          disable R⁷RS tests with Loko Scheme (enabled by
+                          default if the Scheme implementation is found)
+  --disable-check-r7rs-mit
+                          disable tests with MIT/GNU Scheme (enabled by
+                          default if the Scheme implementation is found)
+  --disable-check-r6rs-racket
+                          disable tests with Racket (enabled by default if the
+                          Scheme implementation is found)
+  --disable-check-r6rs-racketbc
+                          disable tests with Racket BC (enabled by default if
+                          the Scheme implementation is found)
+  --disable-check-r6rs-sagittarius
+                          disable R⁶RS tests with Sagittarius (enabled by
+                          default if the Scheme implementation is found)
+  --disable-check-r7rs-sagittarius
+                          disable R⁷RS tests with Sagittarius (enabled by
+                          default if the Scheme implementation is found)
 
 Some influential environment variables:
   CC          C compiler command
@@ -6464,6 +6562,27 @@ test -n "$MKTEMP" || MKTEMP="echo tmp.\"\$\${RANDOM}\""
 
 MKTEMP="TMPDIR=. ${MKTEMP}"
 
+# Copyright © 2025 Barry Schwartz
+#
+# Permission is hereby granted, free of charge, to any person obtaining
+# a copy of Pipchix and associated documentation files (the
+# "Software"), to deal in the Software without restriction, including
+# without limitation the rights to use, copy, modify, merge, publish,
+# distribute, sublicense, and/or sell copies of the Software, and to
+# permit persons to whom the Software is furnished to do so, subject to
+# the following conditions:
+#
+# The above copyright notice and this permission notice shall be
+# included in all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+# LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+# OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+# WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
 
 
 # Check whether --enable-install-r6rs-source was given.
@@ -6486,6 +6605,27 @@ fi
  r6rspipchixdir="${r6rspipchixdir:-\$(datadir)/r6rs/pipchix}"
 
 
+# Copyright © 2025 Barry Schwartz
+#
+# Permission is hereby granted, free of charge, to any person obtaining
+# a copy of Pipchix and associated documentation files (the
+# "Software"), to deal in the Software without restriction, including
+# without limitation the rights to use, copy, modify, merge, publish,
+# distribute, sublicense, and/or sell copies of the Software, and to
+# permit persons to whom the Software is furnished to do so, subject to
+# the following conditions:
+#
+# The above copyright notice and this permission notice shall be
+# included in all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+# LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+# OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+# WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
 
 
 # Check whether --enable-install-r7rs-source was given.
@@ -6507,6 +6647,27 @@ else
 fi
  r7rspipchixdir="${r7rspipchixdir:-\$(datadir)/r7rs/pipchix}"
 
+
+# Copyright © 2025 Barry Schwartz
+#
+# Permission is hereby granted, free of charge, to any person obtaining
+# a copy of Pipchix and associated documentation files (the
+# "Software"), to deal in the Software without restriction, including
+# without limitation the rights to use, copy, modify, merge, publish,
+# distribute, sublicense, and/or sell copies of the Software, and to
+# permit persons to whom the Software is furnished to do so, subject to
+# the following conditions:
+#
+# The above copyright notice and this permission notice shall be
+# included in all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+# LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+# OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+# WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
 
@@ -6534,6 +6695,275 @@ else
 fi
 
 chickeneggs5pipchixdir="${chickeneggs5pipchixdir:-\$(chickeneggsdir)/5/pipchix}"
+
+
+
+
+
+# Check whether --enable-check-r6rs-chez was given.
+if test ${enable_check_r6rs_chez+y}
+then :
+  enableval=$enable_check_r6rs_chez; eval enable_check_r6rs_chez="${enableval}"
+else case e in #(
+  e) eval enable_check_r6rs_chez=yes ;;
+esac
+fi
+
+
+ if test "${enable_check_r6rs_chez}" != no; then
+  ENABLE_CHECK_R6RS_CHEZ_TRUE=
+  ENABLE_CHECK_R6RS_CHEZ_FALSE='#'
+else
+  ENABLE_CHECK_R6RS_CHEZ_TRUE='#'
+  ENABLE_CHECK_R6RS_CHEZ_FALSE=
+fi
+
+
+# Check whether --enable-check-r7rs-chibi was given.
+if test ${enable_check_r7rs_chibi+y}
+then :
+  enableval=$enable_check_r7rs_chibi; eval enable_check_r7rs_chibi="${enableval}"
+else case e in #(
+  e) eval enable_check_r7rs_chibi=yes ;;
+esac
+fi
+
+
+ if test "${enable_check_r7rs_chibi}" != no; then
+  ENABLE_CHECK_R7RS_CHIBI_TRUE=
+  ENABLE_CHECK_R7RS_CHIBI_FALSE='#'
+else
+  ENABLE_CHECK_R7RS_CHIBI_TRUE='#'
+  ENABLE_CHECK_R7RS_CHIBI_FALSE=
+fi
+
+
+# Check whether --enable-check-r7rs-csi-5 was given.
+if test ${enable_check_r7rs_csi_5+y}
+then :
+  enableval=$enable_check_r7rs_csi_5; eval enable_check_r7rs_csi_5="${enableval}"
+else case e in #(
+  e) eval enable_check_r7rs_csi_5=yes ;;
+esac
+fi
+
+
+ if test "${enable_check_r7rs_csi_5}" != no; then
+  ENABLE_CHECK_R7RS_CSI_5_TRUE=
+  ENABLE_CHECK_R7RS_CSI_5_FALSE='#'
+else
+  ENABLE_CHECK_R7RS_CSI_5_TRUE='#'
+  ENABLE_CHECK_R7RS_CSI_5_FALSE=
+fi
+
+
+# Check whether --enable-check-r7rs-csc-5 was given.
+if test ${enable_check_r7rs_csc_5+y}
+then :
+  enableval=$enable_check_r7rs_csc_5; eval enable_check_r7rs_csc_5="${enableval}"
+else case e in #(
+  e) eval enable_check_r7rs_csc_5=yes ;;
+esac
+fi
+
+
+ if test "${enable_check_r7rs_csc_5}" != no; then
+  ENABLE_CHECK_R7RS_CSC_5_TRUE=
+  ENABLE_CHECK_R7RS_CSC_5_FALSE='#'
+else
+  ENABLE_CHECK_R7RS_CSC_5_TRUE='#'
+  ENABLE_CHECK_R7RS_CSC_5_FALSE=
+fi
+
+
+# Check whether --enable-check-r7rs-gauche was given.
+if test ${enable_check_r7rs_gauche+y}
+then :
+  enableval=$enable_check_r7rs_gauche; eval enable_check_r7rs_gauche="${enableval}"
+else case e in #(
+  e) eval enable_check_r7rs_gauche=yes ;;
+esac
+fi
+
+
+ if test "${enable_check_r7rs_gauche}" != no; then
+  ENABLE_CHECK_R7RS_GAUCHE_TRUE=
+  ENABLE_CHECK_R7RS_GAUCHE_FALSE='#'
+else
+  ENABLE_CHECK_R7RS_GAUCHE_TRUE='#'
+  ENABLE_CHECK_R7RS_GAUCHE_FALSE=
+fi
+
+
+# Check whether --enable-check-r6rs-guile was given.
+if test ${enable_check_r6rs_guile+y}
+then :
+  enableval=$enable_check_r6rs_guile; eval enable_check_r6rs_guile="${enableval}"
+else case e in #(
+  e) eval enable_check_r6rs_guile=yes ;;
+esac
+fi
+
+
+ if test "${enable_check_r6rs_guile}" != no; then
+  ENABLE_CHECK_R6RS_GUILE_TRUE=
+  ENABLE_CHECK_R6RS_GUILE_FALSE='#'
+else
+  ENABLE_CHECK_R6RS_GUILE_TRUE='#'
+  ENABLE_CHECK_R6RS_GUILE_FALSE=
+fi
+
+
+# Check whether --enable-check-r7rs-guile was given.
+if test ${enable_check_r7rs_guile+y}
+then :
+  enableval=$enable_check_r7rs_guile; eval enable_check_r7rs_guile="${enableval}"
+else case e in #(
+  e) eval enable_check_r7rs_guile=yes ;;
+esac
+fi
+
+
+ if test "${enable_check_r7rs_guile}" != no; then
+  ENABLE_CHECK_R7RS_GUILE_TRUE=
+  ENABLE_CHECK_R7RS_GUILE_FALSE='#'
+else
+  ENABLE_CHECK_R7RS_GUILE_TRUE='#'
+  ENABLE_CHECK_R7RS_GUILE_FALSE=
+fi
+
+
+# Check whether --enable-check-r6rs-loko was given.
+if test ${enable_check_r6rs_loko+y}
+then :
+  enableval=$enable_check_r6rs_loko; eval enable_check_r6rs_loko="${enableval}"
+else case e in #(
+  e) eval enable_check_r6rs_loko=yes ;;
+esac
+fi
+
+
+ if test "${enable_check_r6rs_loko}" != no; then
+  ENABLE_CHECK_R6RS_LOKO_TRUE=
+  ENABLE_CHECK_R6RS_LOKO_FALSE='#'
+else
+  ENABLE_CHECK_R6RS_LOKO_TRUE='#'
+  ENABLE_CHECK_R6RS_LOKO_FALSE=
+fi
+
+
+# Check whether --enable-check-r7rs-loko was given.
+if test ${enable_check_r7rs_loko+y}
+then :
+  enableval=$enable_check_r7rs_loko; eval enable_check_r7rs_loko="${enableval}"
+else case e in #(
+  e) eval enable_check_r7rs_loko=yes ;;
+esac
+fi
+
+
+ if test "${enable_check_r7rs_loko}" != no; then
+  ENABLE_CHECK_R7RS_LOKO_TRUE=
+  ENABLE_CHECK_R7RS_LOKO_FALSE='#'
+else
+  ENABLE_CHECK_R7RS_LOKO_TRUE='#'
+  ENABLE_CHECK_R7RS_LOKO_FALSE=
+fi
+
+
+# Check whether --enable-check-r7rs-mit was given.
+if test ${enable_check_r7rs_mit+y}
+then :
+  enableval=$enable_check_r7rs_mit; eval enable_check_r7rs_mit="${enableval}"
+else case e in #(
+  e) eval enable_check_r7rs_mit=yes ;;
+esac
+fi
+
+
+ if test "${enable_check_r7rs_mit}" != no; then
+  ENABLE_CHECK_R7RS_MIT_TRUE=
+  ENABLE_CHECK_R7RS_MIT_FALSE='#'
+else
+  ENABLE_CHECK_R7RS_MIT_TRUE='#'
+  ENABLE_CHECK_R7RS_MIT_FALSE=
+fi
+
+
+# Check whether --enable-check-r6rs-racket was given.
+if test ${enable_check_r6rs_racket+y}
+then :
+  enableval=$enable_check_r6rs_racket; eval enable_check_r6rs_racket="${enableval}"
+else case e in #(
+  e) eval enable_check_r6rs_racket=yes ;;
+esac
+fi
+
+
+ if test "${enable_check_r6rs_racket}" != no; then
+  ENABLE_CHECK_R6RS_RACKET_TRUE=
+  ENABLE_CHECK_R6RS_RACKET_FALSE='#'
+else
+  ENABLE_CHECK_R6RS_RACKET_TRUE='#'
+  ENABLE_CHECK_R6RS_RACKET_FALSE=
+fi
+
+
+# Check whether --enable-check-r6rs-racketbc was given.
+if test ${enable_check_r6rs_racketbc+y}
+then :
+  enableval=$enable_check_r6rs_racketbc; eval enable_check_r6rs_racketbc="${enableval}"
+else case e in #(
+  e) eval enable_check_r6rs_racketbc=yes ;;
+esac
+fi
+
+
+ if test "${enable_check_r6rs_racketbc}" != no; then
+  ENABLE_CHECK_R6RS_RACKETBC_TRUE=
+  ENABLE_CHECK_R6RS_RACKETBC_FALSE='#'
+else
+  ENABLE_CHECK_R6RS_RACKETBC_TRUE='#'
+  ENABLE_CHECK_R6RS_RACKETBC_FALSE=
+fi
+
+
+# Check whether --enable-check-r6rs-sagittarius was given.
+if test ${enable_check_r6rs_sagittarius+y}
+then :
+  enableval=$enable_check_r6rs_sagittarius; eval enable_check_r6rs_sagittarius="${enableval}"
+else case e in #(
+  e) eval enable_check_r6rs_sagittarius=yes ;;
+esac
+fi
+
+
+ if test "${enable_check_r6rs_sagittarius}" != no; then
+  ENABLE_CHECK_R6RS_SAGITTARIUS_TRUE=
+  ENABLE_CHECK_R6RS_SAGITTARIUS_FALSE='#'
+else
+  ENABLE_CHECK_R6RS_SAGITTARIUS_TRUE='#'
+  ENABLE_CHECK_R6RS_SAGITTARIUS_FALSE=
+fi
+
+
+# Check whether --enable-check-r7rs-sagittarius was given.
+if test ${enable_check_r7rs_sagittarius+y}
+then :
+  enableval=$enable_check_r7rs_sagittarius; eval enable_check_r7rs_sagittarius="${enableval}"
+else case e in #(
+  e) eval enable_check_r7rs_sagittarius=yes ;;
+esac
+fi
+
+
+ if test "${enable_check_r7rs_sagittarius}" != no; then
+  ENABLE_CHECK_R7RS_SAGITTARIUS_TRUE=
+  ENABLE_CHECK_R7RS_SAGITTARIUS_FALSE='#'
+else
+  ENABLE_CHECK_R7RS_SAGITTARIUS_TRUE='#'
+  ENABLE_CHECK_R7RS_SAGITTARIUS_FALSE=
+fi
 
 
 # Copyright © 2025 Barry Schwartz
@@ -8358,6 +8788,62 @@ Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${INSTALL_CHICKEN_5_EGG_SOURCE_TRUE}" && test -z "${INSTALL_CHICKEN_5_EGG_SOURCE_FALSE}"; then
   as_fn_error $? "conditional \"INSTALL_CHICKEN_5_EGG_SOURCE\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${ENABLE_CHECK_R6RS_CHEZ_TRUE}" && test -z "${ENABLE_CHECK_R6RS_CHEZ_FALSE}"; then
+  as_fn_error $? "conditional \"ENABLE_CHECK_R6RS_CHEZ\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${ENABLE_CHECK_R7RS_CHIBI_TRUE}" && test -z "${ENABLE_CHECK_R7RS_CHIBI_FALSE}"; then
+  as_fn_error $? "conditional \"ENABLE_CHECK_R7RS_CHIBI\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${ENABLE_CHECK_R7RS_CSI_5_TRUE}" && test -z "${ENABLE_CHECK_R7RS_CSI_5_FALSE}"; then
+  as_fn_error $? "conditional \"ENABLE_CHECK_R7RS_CSI_5\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${ENABLE_CHECK_R7RS_CSC_5_TRUE}" && test -z "${ENABLE_CHECK_R7RS_CSC_5_FALSE}"; then
+  as_fn_error $? "conditional \"ENABLE_CHECK_R7RS_CSC_5\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${ENABLE_CHECK_R7RS_GAUCHE_TRUE}" && test -z "${ENABLE_CHECK_R7RS_GAUCHE_FALSE}"; then
+  as_fn_error $? "conditional \"ENABLE_CHECK_R7RS_GAUCHE\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${ENABLE_CHECK_R6RS_GUILE_TRUE}" && test -z "${ENABLE_CHECK_R6RS_GUILE_FALSE}"; then
+  as_fn_error $? "conditional \"ENABLE_CHECK_R6RS_GUILE\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${ENABLE_CHECK_R7RS_GUILE_TRUE}" && test -z "${ENABLE_CHECK_R7RS_GUILE_FALSE}"; then
+  as_fn_error $? "conditional \"ENABLE_CHECK_R7RS_GUILE\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${ENABLE_CHECK_R6RS_LOKO_TRUE}" && test -z "${ENABLE_CHECK_R6RS_LOKO_FALSE}"; then
+  as_fn_error $? "conditional \"ENABLE_CHECK_R6RS_LOKO\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${ENABLE_CHECK_R7RS_LOKO_TRUE}" && test -z "${ENABLE_CHECK_R7RS_LOKO_FALSE}"; then
+  as_fn_error $? "conditional \"ENABLE_CHECK_R7RS_LOKO\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${ENABLE_CHECK_R7RS_MIT_TRUE}" && test -z "${ENABLE_CHECK_R7RS_MIT_FALSE}"; then
+  as_fn_error $? "conditional \"ENABLE_CHECK_R7RS_MIT\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${ENABLE_CHECK_R6RS_RACKET_TRUE}" && test -z "${ENABLE_CHECK_R6RS_RACKET_FALSE}"; then
+  as_fn_error $? "conditional \"ENABLE_CHECK_R6RS_RACKET\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${ENABLE_CHECK_R6RS_RACKETBC_TRUE}" && test -z "${ENABLE_CHECK_R6RS_RACKETBC_FALSE}"; then
+  as_fn_error $? "conditional \"ENABLE_CHECK_R6RS_RACKETBC\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${ENABLE_CHECK_R6RS_SAGITTARIUS_TRUE}" && test -z "${ENABLE_CHECK_R6RS_SAGITTARIUS_FALSE}"; then
+  as_fn_error $? "conditional \"ENABLE_CHECK_R6RS_SAGITTARIUS\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${ENABLE_CHECK_R7RS_SAGITTARIUS_TRUE}" && test -z "${ENABLE_CHECK_R7RS_SAGITTARIUS_FALSE}"; then
+  as_fn_error $? "conditional \"ENABLE_CHECK_R7RS_SAGITTARIUS\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${CHEZ_SCHEME_TRUE}" && test -z "${CHEZ_SCHEME_FALSE}"; then

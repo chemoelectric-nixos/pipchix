@@ -77,55 +77,61 @@ AC_CHECK_PROGS([MKTEMP],[mktemp],[echo tmp.\"\$\${RANDOM}\"])
 AC_ARG_VAR([MKTEMP],[mktemp command])
 MKTEMP="TMPDIR=. ${MKTEMP}"
 
-m4_define([r6rspipchixdir_reldefault],[r6rs/pipchix])
-m4_define([r6rspipchixdir_default],[\$(datadir)/r6rspipchixdir_reldefault])
-AC_ARG_ENABLE([install-r6rs-source],
-  [AS_HELP_STRING([--enable-install-r6rs-source[[=DIR]]],
-        [install R⁶RS source code
-         @<:@DATAROOTDIR/]r6rspipchixdir_reldefault@:>@
-         [(not installed by default)])],
-  [install_r6rs_source="${enableval}"],
-  [install_r6rs_source=no])
-AC_SUBST([install_r6rs_source])
-AM_CONDITIONAL([INSTALL_R6RS_SOURCE],
-               [test "${install_r6rs_source}" != no]) dnl FIXME: COME UP WITH A BETTER yes/no TEST.##################################
-r6rspipchixdir="${r6rspipchixdir:-r6rspipchixdir_default}"
-AC_SUBST([r6rspipchixdir])
+m4_include([ac-r6rs-install-options.m4])
+m4_include([ac-r7rs-install-options.m4])
+m4_include([ac-chicken-install-options.m4])
 
-m4_define([r7rspipchixdir_reldefault],[r7rs/pipchix])
-m4_define([r7rspipchixdir_default],[\$(datadir)/r7rspipchixdir_reldefault])
-AC_ARG_ENABLE([install-r7rs-source],
-  [AS_HELP_STRING([--enable-install-r7rs-source[[=DIR]]],
-        [install R⁷RS source code
-         @<:@DATAROOTDIR/]r7rspipchixdir_reldefault@:>@
-         [(not installed by default)])],
-  [install_r7rs_source="${enableval}"],
-  [install_r7rs_source=no])
-AC_SUBST([install_r7rs_source])
-AM_CONDITIONAL([INSTALL_R7RS_SOURCE],
-               [test "${install_r7rs_source}" != no]) dnl FIXME: COME UP WITH A BETTER yes/no TEST.##################################
-r7rspipchixdir="${r7rspipchixdir:-r7rspipchixdir_default}"
-AC_SUBST([r7rspipchixdir])
+m4_define([offer_disable_of_check],
+[AC_ARG_ENABLE([check-[$1]-[$2]],
+  [AS_HELP_STRING([--disable-check-[$1]-[]m4_translit([$2],[-],[_])],
+        [$3 (enabled by default if the Scheme implementation is found)])],
+  [eval enable_check_[$1]_[]m4_translit([$2],[-],[_])="${enableval}"],
+  [eval enable_check_[$1]_[]m4_translit([$2],[-],[_])=yes])
+AC_SUBST(enable_check_[$1]_[]m4_translit([$2],[-],[_]))
+AM_CONDITIONAL(ENABLE_CHECK_[]m4_toupper([$1])_[]m4_toupper(m4_translit([$2],[-],[_])),
+               [test "${enable_check_[$1]_[]m4_translit([$2],[-],[_])}" != no])])
 
-m4_define([chickeneggsdir_reldefault],[chicken/eggs])
-m4_define([chickeneggsdir_default],[\$(datadir)/chickeneggsdir_reldefault])
-chickeneggsdir="${chickeneggsdir:-chickeneggsdir_default}"
-AC_SUBST([chickeneggsdir])
+offer_disable_of_check([r6rs],[chez],
+  [disable tests with Chez Scheme])
 
-m4_define([chickeneggs5pipchixdir_reldefault],[5/pipchix])
-m4_define([chickeneggs5pipchixdir_default],[\$(chickeneggsdir)/chickeneggs5pipchixdir_reldefault])
-AC_ARG_ENABLE([install-chicken-5-egg-source],
-  [AS_HELP_STRING([--enable-install-chicken-5-egg-source[[=DIR]]],
-        [install CHICKEN 5 egg source code
-         @<:@DATAROOTDIR/]chickeneggsdir_reldefault/chickeneggs5pipchixdir_reldefault@:>@
-         [(not installed by default)])],
-  [install_chicken_5_egg_source="${enableval}"],
-  [install_chicken_5_egg_source=no])
-AC_SUBST([install_chicken_5_egg_source])
-AM_CONDITIONAL([INSTALL_CHICKEN_5_EGG_SOURCE],
-               [test "${install_chicken_5_egg_source}" != no])
-chickeneggs5pipchixdir="${chickeneggs5pipchixdir:-chickeneggs5pipchixdir_default}"
-AC_SUBST([chickeneggs5pipchixdir])
+offer_disable_of_check([r7rs],[chibi],
+  [disable tests with Chibi Scheme])
+
+offer_disable_of_check([r7rs],[csi-5],
+  [disable tests with CHICKEN 5 interpreter])
+
+offer_disable_of_check([r7rs],[csc-5],
+  [disable tests with CHICKEN 5 compiler])
+
+offer_disable_of_check([r7rs],[gauche],
+  [disable tests with Gauche Scheme])
+
+offer_disable_of_check([r6rs],[guile],
+  [disable R⁶RS tests with Guile])
+
+offer_disable_of_check([r7rs],[guile],
+  [disable R⁷RS tests with Guile])
+
+offer_disable_of_check([r6rs],[loko],
+  [disable R⁶RS tests with Loko Scheme])
+
+offer_disable_of_check([r7rs],[loko],
+  [disable R⁷RS tests with Loko Scheme])
+
+offer_disable_of_check([r7rs],[mit],
+  [disable tests with MIT/GNU Scheme])
+
+offer_disable_of_check([r6rs],[racket],
+  [disable tests with Racket])
+
+offer_disable_of_check([r6rs],[racketbc],
+  [disable tests with Racket BC])
+
+offer_disable_of_check([r6rs],[sagittarius],
+  [disable R⁶RS tests with Sagittarius])
+
+offer_disable_of_check([r7rs],[sagittarius],
+  [disable R⁷RS tests with Sagittarius])
 
 m4_include([ac-tinyscheme.m4])
 m4_include([ac-chez-scheme.m4])

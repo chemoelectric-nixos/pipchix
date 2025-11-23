@@ -143,70 +143,73 @@ EXTRA_PROGRAMS = return77$(EXEEXT)
 TESTS = $(am__append_5) $(am__append_7) $(am__append_8) \
 	$(am__append_9) $(am__append_10) $(am__append_11) \
 	$(am__append_12) $(am__append_13) $(am__append_14) \
-	$(am__append_15) $(am__append_16)
-@CHICKEN_INSTALL_5_TRUE@@CSI_5_TRUE@am__append_4 = chicken-5-egg-stamp
-@CHICKEN_INSTALL_5_TRUE@@CSI_5_TRUE@am__append_5 = tests/r7rs/chicken-5/check-abstract-syntax-tree-csi \
-@CHICKEN_INSTALL_5_TRUE@@CSI_5_TRUE@	tests/r7rs/chicken-5/check-nix-embed-csi \
-@CHICKEN_INSTALL_5_TRUE@@CSI_5_TRUE@	tests/r7rs/chicken-5/check-nix-list-csi \
-@CHICKEN_INSTALL_5_TRUE@@CSI_5_TRUE@	tests/r7rs/chicken-5/check-nix-set-csi
-@CHICKEN_INSTALL_5_TRUE@@CSC_5_TRUE@am__append_6 = chicken-5-egg-stamp
-@CHICKEN_INSTALL_5_TRUE@@CSC_5_TRUE@am__append_7 = tests/r7rs/chicken-5/check-abstract-syntax-tree-csc \
-@CHICKEN_INSTALL_5_TRUE@@CSC_5_TRUE@	tests/r7rs/chicken-5/check-nix-embed-csc \
-@CHICKEN_INSTALL_5_TRUE@@CSC_5_TRUE@	tests/r7rs/chicken-5/check-nix-list-csc \
-@CHICKEN_INSTALL_5_TRUE@@CSC_5_TRUE@	tests/r7rs/chicken-5/check-nix-set-csc
-@CHEZ_SCHEME_TRUE@am__append_8 =  \
-@CHEZ_SCHEME_TRUE@	tests/r6rs/check-abstract-syntax-tree-chez \
-@CHEZ_SCHEME_TRUE@	tests/r6rs/check-nix-embed-chez \
-@CHEZ_SCHEME_TRUE@	tests/r6rs/check-nix-list-chez \
-@CHEZ_SCHEME_TRUE@	tests/r6rs/check-nix-set-chez
-@CHIBI_SCHEME_TRUE@am__append_9 = tests/r7rs/check-abstract-syntax-tree-chibi \
-@CHIBI_SCHEME_TRUE@	tests/r7rs/check-nix-embed-chibi \
-@CHIBI_SCHEME_TRUE@	tests/r7rs/check-nix-list-chibi \
-@CHIBI_SCHEME_TRUE@	tests/r7rs/check-nix-set-chibi
-@GAUCHE_TRUE@am__append_10 =  \
-@GAUCHE_TRUE@	tests/r7rs/check-abstract-syntax-tree-gauche \
-@GAUCHE_TRUE@	tests/r7rs/check-nix-embed-gauche \
-@GAUCHE_TRUE@	tests/r7rs/check-nix-list-gauche \
-@GAUCHE_TRUE@	tests/r7rs/check-nix-set-gauche
-@GUILE_TRUE@am__append_11 =  \
-@GUILE_TRUE@	tests/r6rs/check-abstract-syntax-tree-guile \
-@GUILE_TRUE@	tests/r6rs/check-nix-embed-guile \
-@GUILE_TRUE@	tests/r6rs/check-nix-list-guile \
-@GUILE_TRUE@	tests/r6rs/check-nix-set-guile \
-@GUILE_TRUE@	tests/r7rs/check-abstract-syntax-tree-guile \
-@GUILE_TRUE@	tests/r7rs/check-nix-embed-guile \
-@GUILE_TRUE@	tests/r7rs/check-nix-list-guile \
-@GUILE_TRUE@	tests/r7rs/check-nix-set-guile
-@LOKO_TRUE@am__append_12 = tests/r6rs/check-abstract-syntax-tree-loko \
-@LOKO_TRUE@	tests/r6rs/check-nix-embed-loko \
-@LOKO_TRUE@	tests/r6rs/check-nix-list-loko \
-@LOKO_TRUE@	tests/r6rs/check-nix-set-loko \
-@LOKO_TRUE@	tests/r7rs/check-abstract-syntax-tree-loko \
-@LOKO_TRUE@	tests/r7rs/check-nix-embed-loko \
-@LOKO_TRUE@	tests/r7rs/check-nix-list-loko \
-@LOKO_TRUE@	tests/r7rs/check-nix-set-loko
-@MIT_SCHEME_TRUE@am__append_13 =  \
-@MIT_SCHEME_TRUE@	tests/r7rs/check-abstract-syntax-tree-mit \
-@MIT_SCHEME_TRUE@	tests/r7rs/check-nix-embed-mit \
-@MIT_SCHEME_TRUE@	tests/r7rs/check-nix-list-mit \
-@MIT_SCHEME_TRUE@	tests/r7rs/check-nix-set-mit
-@PLT_R6RS_TRUE@am__append_14 =  \
-@PLT_R6RS_TRUE@	tests/r6rs/check-abstract-syntax-tree-racket \
-@PLT_R6RS_TRUE@	tests/r6rs/check-nix-embed-racket \
-@PLT_R6RS_TRUE@	tests/r6rs/check-nix-list-racket \
-@PLT_R6RS_TRUE@	tests/r6rs/check-nix-set-racket
-@PLT_R6RSBC_TRUE@am__append_15 = tests/r6rs/check-abstract-syntax-tree-racketbc \
-@PLT_R6RSBC_TRUE@	tests/r6rs/check-nix-embed-racketbc \
-@PLT_R6RSBC_TRUE@	tests/r6rs/check-nix-list-racketbc \
-@PLT_R6RSBC_TRUE@	tests/r6rs/check-nix-set-racketbc
-@SAGITTARIUS_TRUE@am__append_16 = tests/r6rs/check-abstract-syntax-tree-sagittarius \
-@SAGITTARIUS_TRUE@	tests/r6rs/check-nix-embed-sagittarius \
-@SAGITTARIUS_TRUE@	tests/r6rs/check-nix-list-sagittarius \
-@SAGITTARIUS_TRUE@	tests/r6rs/check-nix-set-sagittarius \
-@SAGITTARIUS_TRUE@	tests/r7rs/check-abstract-syntax-tree-sagittarius \
-@SAGITTARIUS_TRUE@	tests/r7rs/check-nix-embed-sagittarius \
-@SAGITTARIUS_TRUE@	tests/r7rs/check-nix-list-sagittarius \
-@SAGITTARIUS_TRUE@	tests/r7rs/check-nix-set-sagittarius
+	$(am__append_15) $(am__append_16) $(am__append_17) \
+	$(am__append_18) $(am__append_19)
+
+#
+@CHICKEN_INSTALL_5_TRUE@@CSI_5_TRUE@@ENABLE_CHECK_R7RS_CSI_5_TRUE@am__append_4 = chicken-5-egg-stamp
+@CHICKEN_INSTALL_5_TRUE@@CSI_5_TRUE@@ENABLE_CHECK_R7RS_CSI_5_TRUE@am__append_5 = tests/r7rs/chicken-5/check-abstract-syntax-tree-csi \
+@CHICKEN_INSTALL_5_TRUE@@CSI_5_TRUE@@ENABLE_CHECK_R7RS_CSI_5_TRUE@	tests/r7rs/chicken-5/check-nix-embed-csi \
+@CHICKEN_INSTALL_5_TRUE@@CSI_5_TRUE@@ENABLE_CHECK_R7RS_CSI_5_TRUE@	tests/r7rs/chicken-5/check-nix-list-csi \
+@CHICKEN_INSTALL_5_TRUE@@CSI_5_TRUE@@ENABLE_CHECK_R7RS_CSI_5_TRUE@	tests/r7rs/chicken-5/check-nix-set-csi
+#
+@CHICKEN_INSTALL_5_TRUE@@CSC_5_TRUE@@ENABLE_CHECK_R7RS_CSC_5_TRUE@am__append_6 = chicken-5-egg-stamp
+@CHICKEN_INSTALL_5_TRUE@@CSC_5_TRUE@@ENABLE_CHECK_R7RS_CSC_5_TRUE@am__append_7 = tests/r7rs/chicken-5/check-abstract-syntax-tree-csc \
+@CHICKEN_INSTALL_5_TRUE@@CSC_5_TRUE@@ENABLE_CHECK_R7RS_CSC_5_TRUE@	tests/r7rs/chicken-5/check-nix-embed-csc \
+@CHICKEN_INSTALL_5_TRUE@@CSC_5_TRUE@@ENABLE_CHECK_R7RS_CSC_5_TRUE@	tests/r7rs/chicken-5/check-nix-list-csc \
+@CHICKEN_INSTALL_5_TRUE@@CSC_5_TRUE@@ENABLE_CHECK_R7RS_CSC_5_TRUE@	tests/r7rs/chicken-5/check-nix-set-csc
+#
+@CHEZ_SCHEME_TRUE@@ENABLE_CHECK_R6RS_CHEZ_TRUE@am__append_8 = tests/r6rs/check-abstract-syntax-tree-chez \
+@CHEZ_SCHEME_TRUE@@ENABLE_CHECK_R6RS_CHEZ_TRUE@	tests/r6rs/check-nix-embed-chez \
+@CHEZ_SCHEME_TRUE@@ENABLE_CHECK_R6RS_CHEZ_TRUE@	tests/r6rs/check-nix-list-chez \
+@CHEZ_SCHEME_TRUE@@ENABLE_CHECK_R6RS_CHEZ_TRUE@	tests/r6rs/check-nix-set-chez
+@CHIBI_SCHEME_TRUE@@ENABLE_CHECK_R7RS_CHIBI_TRUE@am__append_9 = tests/r7rs/check-abstract-syntax-tree-chibi \
+@CHIBI_SCHEME_TRUE@@ENABLE_CHECK_R7RS_CHIBI_TRUE@	tests/r7rs/check-nix-embed-chibi \
+@CHIBI_SCHEME_TRUE@@ENABLE_CHECK_R7RS_CHIBI_TRUE@	tests/r7rs/check-nix-list-chibi \
+@CHIBI_SCHEME_TRUE@@ENABLE_CHECK_R7RS_CHIBI_TRUE@	tests/r7rs/check-nix-set-chibi
+@ENABLE_CHECK_R7RS_GAUCHE_TRUE@@GAUCHE_TRUE@am__append_10 = tests/r7rs/check-abstract-syntax-tree-gauche \
+@ENABLE_CHECK_R7RS_GAUCHE_TRUE@@GAUCHE_TRUE@	tests/r7rs/check-nix-embed-gauche \
+@ENABLE_CHECK_R7RS_GAUCHE_TRUE@@GAUCHE_TRUE@	tests/r7rs/check-nix-list-gauche \
+@ENABLE_CHECK_R7RS_GAUCHE_TRUE@@GAUCHE_TRUE@	tests/r7rs/check-nix-set-gauche
+@ENABLE_CHECK_R6RS_GUILE_TRUE@@GUILE_TRUE@am__append_11 = tests/r6rs/check-abstract-syntax-tree-guile \
+@ENABLE_CHECK_R6RS_GUILE_TRUE@@GUILE_TRUE@	tests/r6rs/check-nix-embed-guile \
+@ENABLE_CHECK_R6RS_GUILE_TRUE@@GUILE_TRUE@	tests/r6rs/check-nix-list-guile \
+@ENABLE_CHECK_R6RS_GUILE_TRUE@@GUILE_TRUE@	tests/r6rs/check-nix-set-guile
+#
+@ENABLE_CHECK_R7RS_GUILE_TRUE@@GUILE_TRUE@am__append_12 = tests/r7rs/check-abstract-syntax-tree-guile \
+@ENABLE_CHECK_R7RS_GUILE_TRUE@@GUILE_TRUE@	tests/r7rs/check-nix-embed-guile \
+@ENABLE_CHECK_R7RS_GUILE_TRUE@@GUILE_TRUE@	tests/r7rs/check-nix-list-guile \
+@ENABLE_CHECK_R7RS_GUILE_TRUE@@GUILE_TRUE@	tests/r7rs/check-nix-set-guile
+@ENABLE_CHECK_R6RS_LOKO_TRUE@@LOKO_TRUE@am__append_13 = tests/r6rs/check-abstract-syntax-tree-loko \
+@ENABLE_CHECK_R6RS_LOKO_TRUE@@LOKO_TRUE@	tests/r6rs/check-nix-embed-loko \
+@ENABLE_CHECK_R6RS_LOKO_TRUE@@LOKO_TRUE@	tests/r6rs/check-nix-list-loko \
+@ENABLE_CHECK_R6RS_LOKO_TRUE@@LOKO_TRUE@	tests/r6rs/check-nix-set-loko
+#
+@ENABLE_CHECK_R7RS_LOKO_TRUE@@LOKO_TRUE@am__append_14 = tests/r7rs/check-abstract-syntax-tree-loko \
+@ENABLE_CHECK_R7RS_LOKO_TRUE@@LOKO_TRUE@	tests/r7rs/check-nix-embed-loko \
+@ENABLE_CHECK_R7RS_LOKO_TRUE@@LOKO_TRUE@	tests/r7rs/check-nix-list-loko \
+@ENABLE_CHECK_R7RS_LOKO_TRUE@@LOKO_TRUE@	tests/r7rs/check-nix-set-loko
+@ENABLE_CHECK_R7RS_MIT_TRUE@@MIT_SCHEME_TRUE@am__append_15 = tests/r7rs/check-abstract-syntax-tree-mit \
+@ENABLE_CHECK_R7RS_MIT_TRUE@@MIT_SCHEME_TRUE@	tests/r7rs/check-nix-embed-mit \
+@ENABLE_CHECK_R7RS_MIT_TRUE@@MIT_SCHEME_TRUE@	tests/r7rs/check-nix-list-mit \
+@ENABLE_CHECK_R7RS_MIT_TRUE@@MIT_SCHEME_TRUE@	tests/r7rs/check-nix-set-mit
+@ENABLE_CHECK_R6RS_RACKET_TRUE@@PLT_R6RS_TRUE@am__append_16 = tests/r6rs/check-abstract-syntax-tree-racket \
+@ENABLE_CHECK_R6RS_RACKET_TRUE@@PLT_R6RS_TRUE@	tests/r6rs/check-nix-embed-racket \
+@ENABLE_CHECK_R6RS_RACKET_TRUE@@PLT_R6RS_TRUE@	tests/r6rs/check-nix-list-racket \
+@ENABLE_CHECK_R6RS_RACKET_TRUE@@PLT_R6RS_TRUE@	tests/r6rs/check-nix-set-racket
+@ENABLE_CHECK_R6RS_RACKETBC_TRUE@@PLT_R6RSBC_TRUE@am__append_17 = tests/r6rs/check-abstract-syntax-tree-racketbc \
+@ENABLE_CHECK_R6RS_RACKETBC_TRUE@@PLT_R6RSBC_TRUE@	tests/r6rs/check-nix-embed-racketbc \
+@ENABLE_CHECK_R6RS_RACKETBC_TRUE@@PLT_R6RSBC_TRUE@	tests/r6rs/check-nix-list-racketbc \
+@ENABLE_CHECK_R6RS_RACKETBC_TRUE@@PLT_R6RSBC_TRUE@	tests/r6rs/check-nix-set-racketbc
+@ENABLE_CHECK_R6RS_SAGITTARIUS_TRUE@@SAGITTARIUS_TRUE@am__append_18 = tests/r6rs/check-abstract-syntax-tree-sagittarius \
+@ENABLE_CHECK_R6RS_SAGITTARIUS_TRUE@@SAGITTARIUS_TRUE@	tests/r6rs/check-nix-embed-sagittarius \
+@ENABLE_CHECK_R6RS_SAGITTARIUS_TRUE@@SAGITTARIUS_TRUE@	tests/r6rs/check-nix-list-sagittarius \
+@ENABLE_CHECK_R6RS_SAGITTARIUS_TRUE@@SAGITTARIUS_TRUE@	tests/r6rs/check-nix-set-sagittarius
+#
+@ENABLE_CHECK_R7RS_SAGITTARIUS_TRUE@@SAGITTARIUS_TRUE@am__append_19 = tests/r7rs/check-abstract-syntax-tree-sagittarius \
+@ENABLE_CHECK_R7RS_SAGITTARIUS_TRUE@@SAGITTARIUS_TRUE@	tests/r7rs/check-nix-embed-sagittarius \
+@ENABLE_CHECK_R7RS_SAGITTARIUS_TRUE@@SAGITTARIUS_TRUE@	tests/r7rs/check-nix-list-sagittarius \
+@ENABLE_CHECK_R7RS_SAGITTARIUS_TRUE@@SAGITTARIUS_TRUE@	tests/r7rs/check-nix-set-sagittarius
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/ax_check_compile_flag.m4 \
@@ -215,6 +218,9 @@ am__aclocal_m4_deps = $(top_srcdir)/m4/ax_check_compile_flag.m4 \
 	$(top_srcdir)/m4/chem_path_progs_cached_and_precious.m4 \
 	$(top_srcdir)/m4/chem_prog_gnu_make.m4 \
 	$(top_srcdir)/m4/chem_prog_m4.m4 \
+	$(top_srcdir)/ac-r6rs-install-options.m4 \
+	$(top_srcdir)/ac-r7rs-install-options.m4 \
+	$(top_srcdir)/ac-chicken-install-options.m4 \
 	$(top_srcdir)/ac-tinyscheme.m4 $(top_srcdir)/ac-chez-scheme.m4 \
 	$(top_srcdir)/ac-chicken-scheme.m4 \
 	$(top_srcdir)/ac-chibi-scheme.m4 \
@@ -673,6 +679,20 @@ datadir = @datadir@
 datarootdir = @datarootdir@
 docdir = @docdir@
 dvidir = @dvidir@
+enable_check_r6rs_chez = @enable_check_r6rs_chez@
+enable_check_r6rs_guile = @enable_check_r6rs_guile@
+enable_check_r6rs_loko = @enable_check_r6rs_loko@
+enable_check_r6rs_racket = @enable_check_r6rs_racket@
+enable_check_r6rs_racketbc = @enable_check_r6rs_racketbc@
+enable_check_r6rs_sagittarius = @enable_check_r6rs_sagittarius@
+enable_check_r7rs_chibi = @enable_check_r7rs_chibi@
+enable_check_r7rs_csc_5 = @enable_check_r7rs_csc_5@
+enable_check_r7rs_csi_5 = @enable_check_r7rs_csi_5@
+enable_check_r7rs_gauche = @enable_check_r7rs_gauche@
+enable_check_r7rs_guile = @enable_check_r7rs_guile@
+enable_check_r7rs_loko = @enable_check_r7rs_loko@
+enable_check_r7rs_mit = @enable_check_r7rs_mit@
+enable_check_r7rs_sagittarius = @enable_check_r7rs_sagittarius@
 exec_prefix = @exec_prefix@
 host = @host@
 host_alias = @host_alias@
@@ -794,13 +814,6 @@ CHICKEN_5_EGGSPEC = ' \
      "-compile-syntax")) \
  '$(CHICKEN_EGGSPEC_BOTTOM)
 
-
-#
-# FIXME: Setting CHICKEN_REPOSITORY_PATH here may not be a good
-#        approach once CHICKEN 6 can be supported alongside CHICKEN 5.
-#        For now it is the approach used to set the environment for
-#        the compiled versions of test programs.
-#
 AM_TESTS_ENVIRONMENT = \
 	LC_ALL=C.utf8; export LC_ALL; \
 	LANG=C.utf8; export LANG;

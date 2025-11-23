@@ -118,6 +118,9 @@ am__aclocal_m4_deps = $(top_srcdir)/m4/ax_check_compile_flag.m4 \
 	$(top_srcdir)/m4/chem_path_progs_cached_and_precious.m4 \
 	$(top_srcdir)/m4/chem_prog_gnu_make.m4 \
 	$(top_srcdir)/m4/chem_prog_m4.m4 \
+	$(top_srcdir)/ac-r6rs-install-options.m4 \
+	$(top_srcdir)/ac-r7rs-install-options.m4 \
+	$(top_srcdir)/ac-chicken-install-options.m4 \
 	$(top_srcdir)/ac-tinyscheme.m4 $(top_srcdir)/ac-chez-scheme.m4 \
 	$(top_srcdir)/ac-chicken-scheme.m4 \
 	$(top_srcdir)/ac-chibi-scheme.m4 \
@@ -256,6 +259,20 @@ datadir = @datadir@
 datarootdir = @datarootdir@
 docdir = @docdir@
 dvidir = @dvidir@
+enable_check_r6rs_chez = @enable_check_r6rs_chez@
+enable_check_r6rs_guile = @enable_check_r6rs_guile@
+enable_check_r6rs_loko = @enable_check_r6rs_loko@
+enable_check_r6rs_racket = @enable_check_r6rs_racket@
+enable_check_r6rs_racketbc = @enable_check_r6rs_racketbc@
+enable_check_r6rs_sagittarius = @enable_check_r6rs_sagittarius@
+enable_check_r7rs_chibi = @enable_check_r7rs_chibi@
+enable_check_r7rs_csc_5 = @enable_check_r7rs_csc_5@
+enable_check_r7rs_csi_5 = @enable_check_r7rs_csi_5@
+enable_check_r7rs_gauche = @enable_check_r7rs_gauche@
+enable_check_r7rs_guile = @enable_check_r7rs_guile@
+enable_check_r7rs_loko = @enable_check_r7rs_loko@
+enable_check_r7rs_mit = @enable_check_r7rs_mit@
+enable_check_r7rs_sagittarius = @enable_check_r7rs_sagittarius@
 exec_prefix = @exec_prefix@
 host = @host@
 host_alias = @host_alias@

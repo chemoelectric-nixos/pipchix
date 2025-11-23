@@ -238,96 +238,127 @@ CHEX_WE_MADE += $(CHEX:tests/%.scm=tests/r7rs/%-sagittarius)
 CLEANFILES += $(CHEX_WE_MADE)
 
 if CHICKEN_INSTALL_5
+#
 if CSI_5
+if ENABLE_CHECK_R7RS_CSI_5
 BUILT_SOURCES += chicken-5-egg-stamp
 TESTS += tests/r7rs/chicken-5/check-abstract-syntax-tree-csi
 TESTS += tests/r7rs/chicken-5/check-nix-embed-csi
 TESTS += tests/r7rs/chicken-5/check-nix-list-csi
 TESTS += tests/r7rs/chicken-5/check-nix-set-csi
-endif
+endif ENABLE_CHECK_R7RS_CSI_5
+endif CSI_5
+#
 if CSC_5
+if ENABLE_CHECK_R7RS_CSC_5
 BUILT_SOURCES += chicken-5-egg-stamp
 TESTS += tests/r7rs/chicken-5/check-abstract-syntax-tree-csc
 TESTS += tests/r7rs/chicken-5/check-nix-embed-csc
 TESTS += tests/r7rs/chicken-5/check-nix-list-csc
 TESTS += tests/r7rs/chicken-5/check-nix-set-csc
-endif
-endif
+endif ENABLE_CHECK_R7RS_CSC_5
+endif CSC_5
+#
+endif CHICKEN_INSTALL_5
 
 if CHEZ_SCHEME
+if ENABLE_CHECK_R6RS_CHEZ
 TESTS += tests/r6rs/check-abstract-syntax-tree-chez
 TESTS += tests/r6rs/check-nix-embed-chez
 TESTS += tests/r6rs/check-nix-list-chez
 TESTS += tests/r6rs/check-nix-set-chez
+endif ENABLE_CHECK_R6RS_CHEZ
 endif CHEZ_SCHEME
 
 if CHIBI_SCHEME
+if ENABLE_CHECK_R7RS_CHIBI
 TESTS += tests/r7rs/check-abstract-syntax-tree-chibi
 TESTS += tests/r7rs/check-nix-embed-chibi
 TESTS += tests/r7rs/check-nix-list-chibi
 TESTS += tests/r7rs/check-nix-set-chibi
+endif ENABLE_CHECK_R7RS_CHIBI
 endif CHIBI_SCHEME
 
 if GAUCHE
+if ENABLE_CHECK_R7RS_GAUCHE
 TESTS += tests/r7rs/check-abstract-syntax-tree-gauche
 TESTS += tests/r7rs/check-nix-embed-gauche
 TESTS += tests/r7rs/check-nix-list-gauche
 TESTS += tests/r7rs/check-nix-set-gauche
+endif ENABLE_CHECK_R7RS_GAUCHE
 endif GAUCHE
 
 if GUILE
+if ENABLE_CHECK_R6RS_GUILE
 TESTS += tests/r6rs/check-abstract-syntax-tree-guile
 TESTS += tests/r6rs/check-nix-embed-guile
 TESTS += tests/r6rs/check-nix-list-guile
 TESTS += tests/r6rs/check-nix-set-guile
-
+endif ENABLE_CHECK_R6RS_GUILE
+#
+if ENABLE_CHECK_R7RS_GUILE
 TESTS += tests/r7rs/check-abstract-syntax-tree-guile
 TESTS += tests/r7rs/check-nix-embed-guile
 TESTS += tests/r7rs/check-nix-list-guile
 TESTS += tests/r7rs/check-nix-set-guile
+endif ENABLE_CHECK_R7RS_GUILE
 endif GUILE
 
 if LOKO
+if ENABLE_CHECK_R6RS_LOKO
 TESTS += tests/r6rs/check-abstract-syntax-tree-loko
 TESTS += tests/r6rs/check-nix-embed-loko
 TESTS += tests/r6rs/check-nix-list-loko
 TESTS += tests/r6rs/check-nix-set-loko
-
+endif ENABLE_CHECK_R6RS_LOKO
+#
+if ENABLE_CHECK_R7RS_LOKO
 TESTS += tests/r7rs/check-abstract-syntax-tree-loko
 TESTS += tests/r7rs/check-nix-embed-loko
 TESTS += tests/r7rs/check-nix-list-loko
 TESTS += tests/r7rs/check-nix-set-loko
+endif ENABLE_CHECK_R7RS_LOKO
 endif LOKO
 
 if MIT_SCHEME
+if ENABLE_CHECK_R7RS_MIT
 TESTS += tests/r7rs/check-abstract-syntax-tree-mit
 TESTS += tests/r7rs/check-nix-embed-mit
 TESTS += tests/r7rs/check-nix-list-mit
 TESTS += tests/r7rs/check-nix-set-mit
+endif ENABLE_CHECK_R7RS_MIT
 endif MIT_SCHEME
 
 if PLT_R6RS
+if ENABLE_CHECK_R6RS_RACKET
 TESTS += tests/r6rs/check-abstract-syntax-tree-racket
 TESTS += tests/r6rs/check-nix-embed-racket
 TESTS += tests/r6rs/check-nix-list-racket
 TESTS += tests/r6rs/check-nix-set-racket
+endif ENABLE_CHECK_R6RS_RACKET
 endif PLT_R6RS
 
 if PLT_R6RSBC
+if ENABLE_CHECK_R6RS_RACKETBC
 TESTS += tests/r6rs/check-abstract-syntax-tree-racketbc
 TESTS += tests/r6rs/check-nix-embed-racketbc
 TESTS += tests/r6rs/check-nix-list-racketbc
 TESTS += tests/r6rs/check-nix-set-racketbc
+endif ENABLE_CHECK_R6RS_RACKETBC
 endif PLT_R6RSBC
 
 if SAGITTARIUS
+if ENABLE_CHECK_R6RS_SAGITTARIUS
 TESTS += tests/r6rs/check-abstract-syntax-tree-sagittarius
 TESTS += tests/r6rs/check-nix-embed-sagittarius
 TESTS += tests/r6rs/check-nix-list-sagittarius
 TESTS += tests/r6rs/check-nix-set-sagittarius
-
+endif ENABLE_CHECK_R6RS_SAGITTARIUS
+#
+if ENABLE_CHECK_R7RS_SAGITTARIUS
 TESTS += tests/r7rs/check-abstract-syntax-tree-sagittarius
 TESTS += tests/r7rs/check-nix-embed-sagittarius
 TESTS += tests/r7rs/check-nix-list-sagittarius
 TESTS += tests/r7rs/check-nix-set-sagittarius
+endif ENABLE_CHECK_R7RS_SAGITTARIUS
 endif SAGITTARIUS
