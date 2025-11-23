@@ -85,12 +85,10 @@ TESTSUITE = $(srcdir)/testsuite
 TESTSUITE_DEPS =
 TESTSUITE_DEPS += $(srcdir)/package.m4
 TESTSUITE_DEPS += $(srcdir)/testsuite.at
-TESTSUITE_DEPS += $(srcdir)/testsuite-r6rs.at
-TESTSUITE_DEPS += $(srcdir)/testsuite-r7rs.at
-TESTSUITE_DEPS += $(srcdir)/testsuite-r6rs-chez.at
+TESTSUITE_DEPS += $(srcdir)/tests-template.at
 
 $(TESTSUITE): $(TESTSUITE_DEPS)
 	$(AUTOTEST) -I '$(srcdir)' -o $(@).tmp $(@).at && \
 	  mv $(@){.tmp,}
 
-../config.status: run-chez.sh.in
+../config.status: run-r6rs-chez.sh.in

@@ -8616,7 +8616,7 @@ printf "%s\n" "$as_me: WARNING: Please consider installing and using GNU Make:
 }
 ac_config_files="$ac_config_files tests/atlocal"
 
-ac_config_files="$ac_config_files tests/run-chez.sh"
+ac_config_files="$ac_config_files tests/run-r6rs-chez.sh"
 
 
 ac_config_links="$ac_config_links tinyscheme-1.42/init.scm:tinyscheme-1.42/init.scm"
@@ -9528,7 +9528,7 @@ do
     "tests/Makefile") CONFIG_FILES="$CONFIG_FILES tests/Makefile" ;;
     "tests/GNUmakefile") CONFIG_FILES="$CONFIG_FILES tests/GNUmakefile:tests/Makefile.in" ;;
     "tests/atlocal") CONFIG_FILES="$CONFIG_FILES tests/atlocal" ;;
-    "tests/run-chez.sh") CONFIG_FILES="$CONFIG_FILES tests/run-chez.sh" ;;
+    "tests/run-r6rs-chez.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r6rs-chez.sh" ;;
     "tinyscheme-1.42/init.scm") CONFIG_LINKS="$CONFIG_LINKS tinyscheme-1.42/init.scm:tinyscheme-1.42/init.scm" ;;
     "tinyscheme-1.42/dynload.c") CONFIG_LINKS="$CONFIG_LINKS tinyscheme-1.42/dynload.c:tinyscheme-1.42/dynload.c" ;;
     "tinyscheme-1.42/dynload.h") CONFIG_LINKS="$CONFIG_LINKS tinyscheme-1.42/dynload.h:tinyscheme-1.42/dynload.h" ;;
@@ -10160,7 +10160,7 @@ EOF
 EOF
       fi
     ;;
-    "tests/run-chez.sh":F) chmod +x tests/run-chez.sh ;;
+    "tests/run-r6rs-chez.sh":F) chmod +x tests/run-r6rs-chez.sh ;;
 
   esac
 done # for ac_tag

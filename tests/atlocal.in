@@ -2,17 +2,6 @@
 # @configure_input@
 # Configurable variable values for Autoconf test suite.
 
-LC_ALL="@TEST_LOCALE@"
-LANG="@TEST_LOCALE@"
-
-SHELL="@SHELL@"
-CHEZ_SCHEME="@CHEZ_SCHEME@"
-CHIBI_SCHEME="@CHIBI_SCHEME@"
-CHICKEN_INSTALL_5="@CHICKEN_INSTALL_5@"
-CHICKEN_UNINSTALL_5="@CHICKEN_UNINSTALL_5@"
-CSC_5="@CSC_5@"
-CSI_5="@CSI_5@"
-
 srcdir="@srcdir@"
 builddir="@builddir@"
 top_srcdir="@top_srcdir@"

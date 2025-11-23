@@ -160,8 +160,8 @@ CHEM_CONFIG_MAKEFILES([tinyscheme-1.42/Makefile],
 CHEM_CONFIG_MAKEFILES([tests/Makefile],
                       [tests/GNUmakefile])
 AC_CONFIG_FILES([tests/atlocal])
-AC_CONFIG_FILES([tests/run-chez.sh],
-                [chmod +x tests/run-chez.sh])
+AC_CONFIG_FILES([tests/run-r6rs-chez.sh],
+                [chmod +x tests/run-r6rs-chez.sh])
 
 m4_foreach([f],
   [[tinyscheme-1.42/init.scm],
