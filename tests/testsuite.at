@@ -27,11 +27,21 @@ AT_COLOR_TESTS
 
 m4_include(tests-template.at)
 
-m4_define([run_chez],["${abs_builddir}"/run-r6rs-chez.sh])
+m4_define([run_r6rs_chez],["${abs_builddir}"/run-r6rs-chez.sh])
+m4_define([run_r6rs_loko],["${abs_builddir}"/run-r6rs-loko.sh])
+m4_define([run_r7rs_loko],["${abs_builddir}"/run-r7rs-loko.sh])
 
 tests_template([Chez Scheme (R⁶RS)],
   [R6RS r6rs Chez chez chez-scheme chezscheme],
-  [run_chez])
+  [run_r6rs_chez])
+
+tests_template([Loko Scheme (R⁶RS)],
+  [R6RS r6rs Loko loko loko-scheme lokoscheme],
+  [run_r6rs_loko])
+
+tests_template([Loko Scheme (R⁷RS)],
+  [R7RS r7rs Loko loko loko-scheme lokoscheme],
+  [run_r7rs_loko])
 
 # local variables:
 # mode: autoconf

@@ -138,7 +138,8 @@ am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 DIST_COMMON = $(srcdir)/Makefile.am $(am__DIST_COMMON)
 mkinstalldirs = $(install_sh) -d
-CONFIG_CLEAN_FILES = atlocal run-r6rs-chez.sh
+CONFIG_CLEAN_FILES = atlocal run-r6rs-chez.sh run-r6rs-loko.sh \
+	run-r7rs-loko.sh
 CONFIG_CLEAN_VPATH_FILES =
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
@@ -161,7 +162,8 @@ am__can_run_installinfo = \
   esac
 am__tagged_files = $(HEADERS) $(SOURCES) $(TAGS_FILES) $(LISP)
 am__DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/atlocal.in \
-	$(srcdir)/run-r6rs-chez.sh.in
+	$(srcdir)/run-r6rs-chez.sh.in $(srcdir)/run-r6rs-loko.sh.in \
+	$(srcdir)/run-r7rs-loko.sh.in
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 ACLOCAL = @ACLOCAL@
 AMTAR = @AMTAR@
@@ -359,6 +361,10 @@ $(am__aclocal_m4_deps):
 atlocal: $(top_builddir)/config.status $(srcdir)/atlocal.in
 	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@
 run-r6rs-chez.sh: $(top_builddir)/config.status $(srcdir)/run-r6rs-chez.sh.in
+	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@
+run-r6rs-loko.sh: $(top_builddir)/config.status $(srcdir)/run-r6rs-loko.sh.in
+	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@
+run-r7rs-loko.sh: $(top_builddir)/config.status $(srcdir)/run-r7rs-loko.sh.in
 	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@
 
 clean-checkPROGRAMS:
@@ -563,8 +569,6 @@ clean-local:
 $(TESTSUITE): $(TESTSUITE_DEPS)
 	$(AUTOTEST) -I '$(srcdir)' -o $(@).tmp $(@).at && \
 	  mv $(@){.tmp,}
-
-../config.status: run-r6rs-chez.sh.in
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

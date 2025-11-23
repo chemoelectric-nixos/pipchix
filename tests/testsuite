@@ -613,20 +613,48 @@ at_color=auto
 # numerical order.
 at_format='??'
 # Description of all the test groups.
-at_help_all="1;testsuite.at:32;(nix-embed \"let a = 4; b = a + 5; in b\");r6rs chez chez-scheme chezscheme nix-embed;
-2;testsuite.at:32;(nix-list 1 2 3 4 5);r6rs chez chez-scheme chezscheme nix-list;
-3;testsuite.at:32;(list->nix-list (list \"1\" \"2\" \"3\" \"4\" \"5\"));r6rs chez chez-scheme chezscheme nix-list;
-4;testsuite.at:32;(make-nix-embedded-node \"let a = 4; b = a + 5; in b\");r6rs chez chez-scheme chezscheme nix-embedded-node;
-5;testsuite.at:32;(make-nix-data-node #t);r6rs chez chez-scheme chezscheme nix-data-node;
-6;testsuite.at:32;(make-nix-data-node #f);r6rs chez chez-scheme chezscheme nix-data-node;
-7;testsuite.at:32;(make-nix-data-node 1234.5);r6rs chez chez-scheme chezscheme nix-data-node;
-8;testsuite.at:32;(make-nix-data-node \"➕➖➗✖️🟰\");r6rs chez chez-scheme chezscheme nix-data-node;
-9;testsuite.at:32;(make-nix-data-node \`());r6rs chez chez-scheme chezscheme nix-data-node;
-10;testsuite.at:32;(make-nix-path-node \".\");r6rs chez chez-scheme chezscheme nix-path-node;
-11;testsuite.at:32;(make-nix-path-node \"this/is/a/path\");r6rs chez chez-scheme chezscheme nix-path-node;
-12;testsuite.at:32;(list->nix-attributepath-node \`(\"variable\"));r6rs chez chez-scheme chezscheme nix-attributepath-node;
-13;testsuite.at:32;(list->nix-attributepath-node \`(a b \"c\"));r6rs chez chez-scheme chezscheme nix-attributepath-node;
-14;testsuite.at:32;(list->nix-attributepath-node \`(\"x.y\" \"u.v\"));r6rs chez chez-scheme chezscheme nix-attributepath-node;
+at_help_all="1;testsuite.at:34;(nix-embed \"let a = 4; b = a + 5; in b\");r6rs chez chez-scheme chezscheme nix-embed;
+2;testsuite.at:34;(nix-list 1 2 3 4 5);r6rs chez chez-scheme chezscheme nix-list;
+3;testsuite.at:34;(list->nix-list (list \"1\" \"2\" \"3\" \"4\" \"5\"));r6rs chez chez-scheme chezscheme nix-list;
+4;testsuite.at:34;(make-nix-embedded-node \"let a = 4; b = a + 5; in b\");r6rs chez chez-scheme chezscheme nix-embedded-node;
+5;testsuite.at:34;(make-nix-data-node #t);r6rs chez chez-scheme chezscheme nix-data-node;
+6;testsuite.at:34;(make-nix-data-node #f);r6rs chez chez-scheme chezscheme nix-data-node;
+7;testsuite.at:34;(make-nix-data-node 1234.5);r6rs chez chez-scheme chezscheme nix-data-node;
+8;testsuite.at:34;(make-nix-data-node \"➕➖➗✖️🟰\");r6rs chez chez-scheme chezscheme nix-data-node;
+9;testsuite.at:34;(make-nix-data-node \`());r6rs chez chez-scheme chezscheme nix-data-node;
+10;testsuite.at:34;(make-nix-path-node \".\");r6rs chez chez-scheme chezscheme nix-path-node;
+11;testsuite.at:34;(make-nix-path-node \"this/is/a/path\");r6rs chez chez-scheme chezscheme nix-path-node;
+12;testsuite.at:34;(list->nix-attributepath-node \`(\"variable\"));r6rs chez chez-scheme chezscheme nix-attributepath-node;
+13;testsuite.at:34;(list->nix-attributepath-node \`(a b \"c\"));r6rs chez chez-scheme chezscheme nix-attributepath-node;
+14;testsuite.at:34;(list->nix-attributepath-node \`(\"x.y\" \"u.v\"));r6rs chez chez-scheme chezscheme nix-attributepath-node;
+15;testsuite.at:38;(nix-embed \"let a = 4; b = a + 5; in b\");r6rs loko loko-scheme lokoscheme nix-embed;
+16;testsuite.at:38;(nix-list 1 2 3 4 5);r6rs loko loko-scheme lokoscheme nix-list;
+17;testsuite.at:38;(list->nix-list (list \"1\" \"2\" \"3\" \"4\" \"5\"));r6rs loko loko-scheme lokoscheme nix-list;
+18;testsuite.at:38;(make-nix-embedded-node \"let a = 4; b = a + 5; in b\");r6rs loko loko-scheme lokoscheme nix-embedded-node;
+19;testsuite.at:38;(make-nix-data-node #t);r6rs loko loko-scheme lokoscheme nix-data-node;
+20;testsuite.at:38;(make-nix-data-node #f);r6rs loko loko-scheme lokoscheme nix-data-node;
+21;testsuite.at:38;(make-nix-data-node 1234.5);r6rs loko loko-scheme lokoscheme nix-data-node;
+22;testsuite.at:38;(make-nix-data-node \"➕➖➗✖️🟰\");r6rs loko loko-scheme lokoscheme nix-data-node;
+23;testsuite.at:38;(make-nix-data-node \`());r6rs loko loko-scheme lokoscheme nix-data-node;
+24;testsuite.at:38;(make-nix-path-node \".\");r6rs loko loko-scheme lokoscheme nix-path-node;
+25;testsuite.at:38;(make-nix-path-node \"this/is/a/path\");r6rs loko loko-scheme lokoscheme nix-path-node;
+26;testsuite.at:38;(list->nix-attributepath-node \`(\"variable\"));r6rs loko loko-scheme lokoscheme nix-attributepath-node;
+27;testsuite.at:38;(list->nix-attributepath-node \`(a b \"c\"));r6rs loko loko-scheme lokoscheme nix-attributepath-node;
+28;testsuite.at:38;(list->nix-attributepath-node \`(\"x.y\" \"u.v\"));r6rs loko loko-scheme lokoscheme nix-attributepath-node;
+29;testsuite.at:42;(nix-embed \"let a = 4; b = a + 5; in b\");r7rs loko loko-scheme lokoscheme nix-embed;
+30;testsuite.at:42;(nix-list 1 2 3 4 5);r7rs loko loko-scheme lokoscheme nix-list;
+31;testsuite.at:42;(list->nix-list (list \"1\" \"2\" \"3\" \"4\" \"5\"));r7rs loko loko-scheme lokoscheme nix-list;
+32;testsuite.at:42;(make-nix-embedded-node \"let a = 4; b = a + 5; in b\");r7rs loko loko-scheme lokoscheme nix-embedded-node;
+33;testsuite.at:42;(make-nix-data-node #t);r7rs loko loko-scheme lokoscheme nix-data-node;
+34;testsuite.at:42;(make-nix-data-node #f);r7rs loko loko-scheme lokoscheme nix-data-node;
+35;testsuite.at:42;(make-nix-data-node 1234.5);r7rs loko loko-scheme lokoscheme nix-data-node;
+36;testsuite.at:42;(make-nix-data-node \"➕➖➗✖️🟰\");r7rs loko loko-scheme lokoscheme nix-data-node;
+37;testsuite.at:42;(make-nix-data-node \`());r7rs loko loko-scheme lokoscheme nix-data-node;
+38;testsuite.at:42;(make-nix-path-node \".\");r7rs loko loko-scheme lokoscheme nix-path-node;
+39;testsuite.at:42;(make-nix-path-node \"this/is/a/path\");r7rs loko loko-scheme lokoscheme nix-path-node;
+40;testsuite.at:42;(list->nix-attributepath-node \`(\"variable\"));r7rs loko loko-scheme lokoscheme nix-attributepath-node;
+41;testsuite.at:42;(list->nix-attributepath-node \`(a b \"c\"));r7rs loko loko-scheme lokoscheme nix-attributepath-node;
+42;testsuite.at:42;(list->nix-attributepath-node \`(\"x.y\" \"u.v\"));r7rs loko loko-scheme lokoscheme nix-attributepath-node;
 "
 # List of the all the test groups.
 at_groups_all=`printf "%s\n" "$at_help_all" | sed 's/;.*//'`
@@ -640,7 +668,7 @@ at_fn_validate_ranges ()
   for at_grp
   do
     eval at_value=\$$at_grp
-    if test $at_value -lt 1 || test $at_value -gt 14; then
+    if test $at_value -lt 1 || test $at_value -gt 42; then
       printf "%s\n" "invalid test group: $at_value" >&2
       exit 1
     fi
@@ -997,9 +1025,15 @@ case $at_groups in #(
   * ) at_print_banners=false ;;
 esac
 # Text for banner N, set to a single space once printed.
-# Banner 1. testsuite.at:32
+# Banner 1. testsuite.at:34
 # Category starts at test group 1.
 at_banner_text_1="Chez Scheme (R⁶RS)"
+# Banner 2. testsuite.at:38
+# Category starts at test group 15.
+at_banner_text_2="Loko Scheme (R⁶RS)"
+# Banner 3. testsuite.at:42
+# Category starts at test group 29.
+at_banner_text_3="Loko Scheme (R⁷RS)"
 
 # Take any -C into account.
 if $at_change_dir ; then
@@ -2001,7 +2035,7 @@ exit 0
 ## Actual tests. ##
 ## ------------- ##
 #AT_START_1
-at_fn_group_banner 1 'testsuite.at:32' \
+at_fn_group_banner 1 'testsuite.at:34' \
   "(nix-embed \"let a = 4; b = a + 5; in b\")" "       " 1
 at_xfail=no
 (
@@ -2010,8 +2044,8 @@ at_xfail=no
 
 
 { set +x
-printf "%s\n" "$at_srcdir/testsuite.at:32: \"\${abs_builddir}\"/run-r6rs-chez.sh '(nix-embed \"let a = 4; b = a + 5; in b\")'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:32"
+printf "%s\n" "$at_srcdir/testsuite.at:34: \"\${abs_builddir}\"/run-r6rs-chez.sh '(nix-embed \"let a = 4; b = a + 5; in b\")'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:34"
 ( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '(nix-embed "let a = 4; b = a + 5; in b")'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -2019,7 +2053,7 @@ $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
 echo >>"$at_stdout"; printf "%s\n" "let a = 4; b = a + 5; in b" | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:32"
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:34"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -2029,7 +2063,7 @@ $at_traceon; }
 read at_status <"$at_status_file"
 #AT_STOP_1
 #AT_START_2
-at_fn_group_banner 2 'testsuite.at:32' \
+at_fn_group_banner 2 'testsuite.at:34' \
   "(nix-list 1 2 3 4 5)" "                           " 1
 at_xfail=no
 (
@@ -2038,8 +2072,8 @@ at_xfail=no
 
 
 { set +x
-printf "%s\n" "$at_srcdir/testsuite.at:32: \"\${abs_builddir}\"/run-r6rs-chez.sh '(nix-list 1 2 3 4 5)'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:32"
+printf "%s\n" "$at_srcdir/testsuite.at:34: \"\${abs_builddir}\"/run-r6rs-chez.sh '(nix-list 1 2 3 4 5)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:34"
 ( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '(nix-list 1 2 3 4 5)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -2054,7 +2088,7 @@ echo >>"$at_stdout"; printf "%s\n" "[
 ]
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:32"
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:34"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -2064,7 +2098,7 @@ $at_traceon; }
 read at_status <"$at_status_file"
 #AT_STOP_2
 #AT_START_3
-at_fn_group_banner 3 'testsuite.at:32' \
+at_fn_group_banner 3 'testsuite.at:34' \
   "(list->nix-list (list \"1\" \"2\" \"3\" \"4\" \"5\"))" "    " 1
 at_xfail=no
 (
@@ -2073,8 +2107,8 @@ at_xfail=no
 
 
 { set +x
-printf "%s\n" "$at_srcdir/testsuite.at:32: \"\${abs_builddir}\"/run-r6rs-chez.sh '(list->nix-list (list \"1\" \"2\" \"3\" \"4\" \"5\"))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:32"
+printf "%s\n" "$at_srcdir/testsuite.at:34: \"\${abs_builddir}\"/run-r6rs-chez.sh '(list->nix-list (list \"1\" \"2\" \"3\" \"4\" \"5\"))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:34"
 ( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '(list->nix-list (list "1" "2" "3" "4" "5"))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -2089,7 +2123,7 @@ echo >>"$at_stdout"; printf "%s\n" "[
 ]
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:32"
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:34"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -2099,7 +2133,7 @@ $at_traceon; }
 read at_status <"$at_status_file"
 #AT_STOP_3
 #AT_START_4
-at_fn_group_banner 4 'testsuite.at:32' \
+at_fn_group_banner 4 'testsuite.at:34' \
   "(make-nix-embedded-node \"let a = 4; b = a + 5; in b\")" "" 1
 at_xfail=no
 (
@@ -2108,8 +2142,8 @@ at_xfail=no
 
 
 { set +x
-printf "%s\n" "$at_srcdir/testsuite.at:32: \"\${abs_builddir}\"/run-r6rs-chez.sh '(make-nix-embedded-node \"let a = 4; b = a + 5; in b\")'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:32"
+printf "%s\n" "$at_srcdir/testsuite.at:34: \"\${abs_builddir}\"/run-r6rs-chez.sh '(make-nix-embedded-node \"let a = 4; b = a + 5; in b\")'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:34"
 ( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '(make-nix-embedded-node "let a = 4; b = a + 5; in b")'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -2117,7 +2151,7 @@ $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
 echo >>"$at_stdout"; printf "%s\n" "let a = 4; b = a + 5; in b" | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:32"
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:34"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -2127,7 +2161,7 @@ $at_traceon; }
 read at_status <"$at_status_file"
 #AT_STOP_4
 #AT_START_5
-at_fn_group_banner 5 'testsuite.at:32' \
+at_fn_group_banner 5 'testsuite.at:34' \
   "(make-nix-data-node #t)" "                        " 1
 at_xfail=no
 (
@@ -2136,8 +2170,8 @@ at_xfail=no
 
 
 { set +x
-printf "%s\n" "$at_srcdir/testsuite.at:32: \"\${abs_builddir}\"/run-r6rs-chez.sh '(make-nix-data-node #t)'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:32"
+printf "%s\n" "$at_srcdir/testsuite.at:34: \"\${abs_builddir}\"/run-r6rs-chez.sh '(make-nix-data-node #t)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:34"
 ( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '(make-nix-data-node #t)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -2146,7 +2180,7 @@ at_fn_diff_devnull "$at_stderr" || at_failed=:
 echo >>"$at_stdout"; printf "%s\n" "(builtins.true)
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:32"
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:34"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -2156,7 +2190,7 @@ $at_traceon; }
 read at_status <"$at_status_file"
 #AT_STOP_5
 #AT_START_6
-at_fn_group_banner 6 'testsuite.at:32' \
+at_fn_group_banner 6 'testsuite.at:34' \
   "(make-nix-data-node #f)" "                        " 1
 at_xfail=no
 (
@@ -2165,8 +2199,8 @@ at_xfail=no
 
 
 { set +x
-printf "%s\n" "$at_srcdir/testsuite.at:32: \"\${abs_builddir}\"/run-r6rs-chez.sh '(make-nix-data-node #f)'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:32"
+printf "%s\n" "$at_srcdir/testsuite.at:34: \"\${abs_builddir}\"/run-r6rs-chez.sh '(make-nix-data-node #f)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:34"
 ( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '(make-nix-data-node #f)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -2175,7 +2209,7 @@ at_fn_diff_devnull "$at_stderr" || at_failed=:
 echo >>"$at_stdout"; printf "%s\n" "(builtins.false)
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:32"
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:34"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -2185,7 +2219,7 @@ $at_traceon; }
 read at_status <"$at_status_file"
 #AT_STOP_6
 #AT_START_7
-at_fn_group_banner 7 'testsuite.at:32' \
+at_fn_group_banner 7 'testsuite.at:34' \
   "(make-nix-data-node 1234.5)" "                    " 1
 at_xfail=no
 (
@@ -2194,8 +2228,8 @@ at_xfail=no
 
 
 { set +x
-printf "%s\n" "$at_srcdir/testsuite.at:32: \"\${abs_builddir}\"/run-r6rs-chez.sh '(make-nix-data-node 1234.5)'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:32"
+printf "%s\n" "$at_srcdir/testsuite.at:34: \"\${abs_builddir}\"/run-r6rs-chez.sh '(make-nix-data-node 1234.5)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:34"
 ( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '(make-nix-data-node 1234.5)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -2204,7 +2238,7 @@ at_fn_diff_devnull "$at_stderr" || at_failed=:
 echo >>"$at_stdout"; printf "%s\n" "(1234.5)
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:32"
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:34"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -2214,7 +2248,7 @@ $at_traceon; }
 read at_status <"$at_status_file"
 #AT_STOP_7
 #AT_START_8
-at_fn_group_banner 8 'testsuite.at:32' \
+at_fn_group_banner 8 'testsuite.at:34' \
   "(make-nix-data-node \"➕➖➗✖️🟰\")" "     " 1
 at_xfail=no
 (
@@ -2223,8 +2257,8 @@ at_xfail=no
 
 
 { set +x
-printf "%s\n" "$at_srcdir/testsuite.at:32: \"\${abs_builddir}\"/run-r6rs-chez.sh '(make-nix-data-node \"➕➖➗✖️🟰\")'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:32"
+printf "%s\n" "$at_srcdir/testsuite.at:34: \"\${abs_builddir}\"/run-r6rs-chez.sh '(make-nix-data-node \"➕➖➗✖️🟰\")'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:34"
 ( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '(make-nix-data-node "➕➖➗✖️🟰")'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -2233,7 +2267,7 @@ at_fn_diff_devnull "$at_stderr" || at_failed=:
 echo >>"$at_stdout"; printf "%s\n" "(\"➕➖➗✖️🟰\")
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:32"
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:34"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -2243,7 +2277,7 @@ $at_traceon; }
 read at_status <"$at_status_file"
 #AT_STOP_8
 #AT_START_9
-at_fn_group_banner 9 'testsuite.at:32' \
+at_fn_group_banner 9 'testsuite.at:34' \
   "(make-nix-data-node \`())" "                       " 1
 at_xfail=no
 (
@@ -2252,8 +2286,8 @@ at_xfail=no
 
 
 { set +x
-printf "%s\n" "$at_srcdir/testsuite.at:32: \"\${abs_builddir}\"/run-r6rs-chez.sh '(make-nix-data-node \`())'"
-at_fn_check_prepare_notrace 'a `...` command substitution' "testsuite.at:32"
+printf "%s\n" "$at_srcdir/testsuite.at:34: \"\${abs_builddir}\"/run-r6rs-chez.sh '(make-nix-data-node \`())'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "testsuite.at:34"
 ( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '(make-nix-data-node `())'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -2262,7 +2296,7 @@ at_fn_diff_devnull "$at_stderr" || at_failed=:
 echo >>"$at_stdout"; printf "%s\n" "(builtins.null)
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:32"
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:34"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -2272,7 +2306,7 @@ $at_traceon; }
 read at_status <"$at_status_file"
 #AT_STOP_9
 #AT_START_10
-at_fn_group_banner 10 'testsuite.at:32' \
+at_fn_group_banner 10 'testsuite.at:34' \
   "(make-nix-path-node \".\")" "                       " 1
 at_xfail=no
 (
@@ -2281,8 +2315,8 @@ at_xfail=no
 
 
 { set +x
-printf "%s\n" "$at_srcdir/testsuite.at:32: \"\${abs_builddir}\"/run-r6rs-chez.sh '(make-nix-path-node \".\")'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:32"
+printf "%s\n" "$at_srcdir/testsuite.at:34: \"\${abs_builddir}\"/run-r6rs-chez.sh '(make-nix-path-node \".\")'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:34"
 ( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '(make-nix-path-node ".")'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -2291,7 +2325,7 @@ at_fn_diff_devnull "$at_stderr" || at_failed=:
 echo >>"$at_stdout"; printf "%s\n" "( ./. )
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:32"
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:34"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -2301,7 +2335,7 @@ $at_traceon; }
 read at_status <"$at_status_file"
 #AT_STOP_10
 #AT_START_11
-at_fn_group_banner 11 'testsuite.at:32' \
+at_fn_group_banner 11 'testsuite.at:34' \
   "(make-nix-path-node \"this/is/a/path\")" "          " 1
 at_xfail=no
 (
@@ -2310,8 +2344,8 @@ at_xfail=no
 
 
 { set +x
-printf "%s\n" "$at_srcdir/testsuite.at:32: \"\${abs_builddir}\"/run-r6rs-chez.sh '(make-nix-path-node \"this/is/a/path\")'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:32"
+printf "%s\n" "$at_srcdir/testsuite.at:34: \"\${abs_builddir}\"/run-r6rs-chez.sh '(make-nix-path-node \"this/is/a/path\")'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:34"
 ( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '(make-nix-path-node "this/is/a/path")'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -2320,7 +2354,7 @@ at_fn_diff_devnull "$at_stderr" || at_failed=:
 echo >>"$at_stdout"; printf "%s\n" "( this/is/a/path )
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:32"
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:34"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -2330,7 +2364,7 @@ $at_traceon; }
 read at_status <"$at_status_file"
 #AT_STOP_11
 #AT_START_12
-at_fn_group_banner 12 'testsuite.at:32' \
+at_fn_group_banner 12 'testsuite.at:34' \
   "(list->nix-attributepath-node \`(\"variable\"))" "   " 1
 at_xfail=no
 (
@@ -2339,8 +2373,8 @@ at_xfail=no
 
 
 { set +x
-printf "%s\n" "$at_srcdir/testsuite.at:32: \"\${abs_builddir}\"/run-r6rs-chez.sh '(list->nix-attributepath-node \`(\"variable\"))'"
-at_fn_check_prepare_notrace 'a `...` command substitution' "testsuite.at:32"
+printf "%s\n" "$at_srcdir/testsuite.at:34: \"\${abs_builddir}\"/run-r6rs-chez.sh '(list->nix-attributepath-node \`(\"variable\"))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "testsuite.at:34"
 ( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '(list->nix-attributepath-node `("variable"))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -2349,7 +2383,7 @@ at_fn_diff_devnull "$at_stderr" || at_failed=:
 echo >>"$at_stdout"; printf "%s\n" "variable
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:32"
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:34"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -2359,7 +2393,7 @@ $at_traceon; }
 read at_status <"$at_status_file"
 #AT_STOP_12
 #AT_START_13
-at_fn_group_banner 13 'testsuite.at:32' \
+at_fn_group_banner 13 'testsuite.at:34' \
   "(list->nix-attributepath-node \`(a b \"c\"))" "      " 1
 at_xfail=no
 (
@@ -2368,8 +2402,8 @@ at_xfail=no
 
 
 { set +x
-printf "%s\n" "$at_srcdir/testsuite.at:32: \"\${abs_builddir}\"/run-r6rs-chez.sh '(list->nix-attributepath-node \`(a b \"c\"))'"
-at_fn_check_prepare_notrace 'a `...` command substitution' "testsuite.at:32"
+printf "%s\n" "$at_srcdir/testsuite.at:34: \"\${abs_builddir}\"/run-r6rs-chez.sh '(list->nix-attributepath-node \`(a b \"c\"))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "testsuite.at:34"
 ( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '(list->nix-attributepath-node `(a b "c"))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -2382,7 +2416,7 @@ b
 c
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:32"
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:34"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -2392,7 +2426,7 @@ $at_traceon; }
 read at_status <"$at_status_file"
 #AT_STOP_13
 #AT_START_14
-at_fn_group_banner 14 'testsuite.at:32' \
+at_fn_group_banner 14 'testsuite.at:34' \
   "(list->nix-attributepath-node \`(\"x.y\" \"u.v\"))" "  " 1
 at_xfail=no
 (
@@ -2401,8 +2435,8 @@ at_xfail=no
 
 
 { set +x
-printf "%s\n" "$at_srcdir/testsuite.at:32: \"\${abs_builddir}\"/run-r6rs-chez.sh '(list->nix-attributepath-node \`(\"x.y\" \"u.v\"))'"
-at_fn_check_prepare_notrace 'a `...` command substitution' "testsuite.at:32"
+printf "%s\n" "$at_srcdir/testsuite.at:34: \"\${abs_builddir}\"/run-r6rs-chez.sh '(list->nix-attributepath-node \`(\"x.y\" \"u.v\"))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "testsuite.at:34"
 ( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '(list->nix-attributepath-node `("x.y" "u.v"))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -2413,7 +2447,7 @@ echo >>"$at_stdout"; printf "%s\n" "\"x.y\"
 \"u.v\"
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:32"
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:34"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -2422,3 +2456,847 @@ $at_traceon; }
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
 #AT_STOP_14
+#AT_START_15
+at_fn_group_banner 15 'testsuite.at:38' \
+  "(nix-embed \"let a = 4; b = a + 5; in b\")" "       " 2
+at_xfail=no
+(
+  printf "%s\n" "15. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:38: \"\${abs_builddir}\"/run-r6rs-loko.sh '(nix-embed \"let a = 4; b = a + 5; in b\")'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:38"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '(nix-embed "let a = 4; b = a + 5; in b")'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "let a = 4; b = a + 5; in b" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:38"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_15
+#AT_START_16
+at_fn_group_banner 16 'testsuite.at:38' \
+  "(nix-list 1 2 3 4 5)" "                           " 2
+at_xfail=no
+(
+  printf "%s\n" "16. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:38: \"\${abs_builddir}\"/run-r6rs-loko.sh '(nix-list 1 2 3 4 5)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:38"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '(nix-list 1 2 3 4 5)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(1)
+(2)
+(3)
+(4)
+(5)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:38"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_16
+#AT_START_17
+at_fn_group_banner 17 'testsuite.at:38' \
+  "(list->nix-list (list \"1\" \"2\" \"3\" \"4\" \"5\"))" "    " 2
+at_xfail=no
+(
+  printf "%s\n" "17. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:38: \"\${abs_builddir}\"/run-r6rs-loko.sh '(list->nix-list (list \"1\" \"2\" \"3\" \"4\" \"5\"))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:38"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '(list->nix-list (list "1" "2" "3" "4" "5"))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(\"1\")
+(\"2\")
+(\"3\")
+(\"4\")
+(\"5\")
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:38"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_17
+#AT_START_18
+at_fn_group_banner 18 'testsuite.at:38' \
+  "(make-nix-embedded-node \"let a = 4; b = a + 5; in b\")" "" 2
+at_xfail=no
+(
+  printf "%s\n" "18. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:38: \"\${abs_builddir}\"/run-r6rs-loko.sh '(make-nix-embedded-node \"let a = 4; b = a + 5; in b\")'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:38"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '(make-nix-embedded-node "let a = 4; b = a + 5; in b")'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "let a = 4; b = a + 5; in b" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:38"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_18
+#AT_START_19
+at_fn_group_banner 19 'testsuite.at:38' \
+  "(make-nix-data-node #t)" "                        " 2
+at_xfail=no
+(
+  printf "%s\n" "19. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:38: \"\${abs_builddir}\"/run-r6rs-loko.sh '(make-nix-data-node #t)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:38"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '(make-nix-data-node #t)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.true)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:38"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_19
+#AT_START_20
+at_fn_group_banner 20 'testsuite.at:38' \
+  "(make-nix-data-node #f)" "                        " 2
+at_xfail=no
+(
+  printf "%s\n" "20. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:38: \"\${abs_builddir}\"/run-r6rs-loko.sh '(make-nix-data-node #f)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:38"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '(make-nix-data-node #f)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.false)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:38"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_20
+#AT_START_21
+at_fn_group_banner 21 'testsuite.at:38' \
+  "(make-nix-data-node 1234.5)" "                    " 2
+at_xfail=no
+(
+  printf "%s\n" "21. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:38: \"\${abs_builddir}\"/run-r6rs-loko.sh '(make-nix-data-node 1234.5)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:38"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '(make-nix-data-node 1234.5)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(1234.5)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:38"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_21
+#AT_START_22
+at_fn_group_banner 22 'testsuite.at:38' \
+  "(make-nix-data-node \"➕➖➗✖️🟰\")" "     " 2
+at_xfail=no
+(
+  printf "%s\n" "22. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:38: \"\${abs_builddir}\"/run-r6rs-loko.sh '(make-nix-data-node \"➕➖➗✖️🟰\")'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:38"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '(make-nix-data-node "➕➖➗✖️🟰")'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(\"➕➖➗✖️🟰\")
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:38"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_22
+#AT_START_23
+at_fn_group_banner 23 'testsuite.at:38' \
+  "(make-nix-data-node \`())" "                       " 2
+at_xfail=no
+(
+  printf "%s\n" "23. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:38: \"\${abs_builddir}\"/run-r6rs-loko.sh '(make-nix-data-node \`())'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "testsuite.at:38"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '(make-nix-data-node `())'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.null)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:38"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_23
+#AT_START_24
+at_fn_group_banner 24 'testsuite.at:38' \
+  "(make-nix-path-node \".\")" "                       " 2
+at_xfail=no
+(
+  printf "%s\n" "24. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:38: \"\${abs_builddir}\"/run-r6rs-loko.sh '(make-nix-path-node \".\")'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:38"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '(make-nix-path-node ".")'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "( ./. )
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:38"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_24
+#AT_START_25
+at_fn_group_banner 25 'testsuite.at:38' \
+  "(make-nix-path-node \"this/is/a/path\")" "          " 2
+at_xfail=no
+(
+  printf "%s\n" "25. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:38: \"\${abs_builddir}\"/run-r6rs-loko.sh '(make-nix-path-node \"this/is/a/path\")'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:38"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '(make-nix-path-node "this/is/a/path")'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "( this/is/a/path )
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:38"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_25
+#AT_START_26
+at_fn_group_banner 26 'testsuite.at:38' \
+  "(list->nix-attributepath-node \`(\"variable\"))" "   " 2
+at_xfail=no
+(
+  printf "%s\n" "26. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:38: \"\${abs_builddir}\"/run-r6rs-loko.sh '(list->nix-attributepath-node \`(\"variable\"))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "testsuite.at:38"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '(list->nix-attributepath-node `("variable"))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "variable
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:38"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_26
+#AT_START_27
+at_fn_group_banner 27 'testsuite.at:38' \
+  "(list->nix-attributepath-node \`(a b \"c\"))" "      " 2
+at_xfail=no
+(
+  printf "%s\n" "27. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:38: \"\${abs_builddir}\"/run-r6rs-loko.sh '(list->nix-attributepath-node \`(a b \"c\"))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "testsuite.at:38"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '(list->nix-attributepath-node `(a b "c"))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "a
+.
+b
+.
+c
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:38"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_27
+#AT_START_28
+at_fn_group_banner 28 'testsuite.at:38' \
+  "(list->nix-attributepath-node \`(\"x.y\" \"u.v\"))" "  " 2
+at_xfail=no
+(
+  printf "%s\n" "28. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:38: \"\${abs_builddir}\"/run-r6rs-loko.sh '(list->nix-attributepath-node \`(\"x.y\" \"u.v\"))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "testsuite.at:38"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '(list->nix-attributepath-node `("x.y" "u.v"))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "\"x.y\"
+.
+\"u.v\"
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:38"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_28
+#AT_START_29
+at_fn_group_banner 29 'testsuite.at:42' \
+  "(nix-embed \"let a = 4; b = a + 5; in b\")" "       " 3
+at_xfail=no
+(
+  printf "%s\n" "29. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:42: \"\${abs_builddir}\"/run-r7rs-loko.sh '(nix-embed \"let a = 4; b = a + 5; in b\")'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:42"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(nix-embed "let a = 4; b = a + 5; in b")'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "let a = 4; b = a + 5; in b" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:42"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_29
+#AT_START_30
+at_fn_group_banner 30 'testsuite.at:42' \
+  "(nix-list 1 2 3 4 5)" "                           " 3
+at_xfail=no
+(
+  printf "%s\n" "30. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:42: \"\${abs_builddir}\"/run-r7rs-loko.sh '(nix-list 1 2 3 4 5)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:42"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(nix-list 1 2 3 4 5)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(1)
+(2)
+(3)
+(4)
+(5)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:42"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_30
+#AT_START_31
+at_fn_group_banner 31 'testsuite.at:42' \
+  "(list->nix-list (list \"1\" \"2\" \"3\" \"4\" \"5\"))" "    " 3
+at_xfail=no
+(
+  printf "%s\n" "31. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:42: \"\${abs_builddir}\"/run-r7rs-loko.sh '(list->nix-list (list \"1\" \"2\" \"3\" \"4\" \"5\"))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:42"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(list->nix-list (list "1" "2" "3" "4" "5"))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(\"1\")
+(\"2\")
+(\"3\")
+(\"4\")
+(\"5\")
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:42"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_31
+#AT_START_32
+at_fn_group_banner 32 'testsuite.at:42' \
+  "(make-nix-embedded-node \"let a = 4; b = a + 5; in b\")" "" 3
+at_xfail=no
+(
+  printf "%s\n" "32. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:42: \"\${abs_builddir}\"/run-r7rs-loko.sh '(make-nix-embedded-node \"let a = 4; b = a + 5; in b\")'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:42"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(make-nix-embedded-node "let a = 4; b = a + 5; in b")'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "let a = 4; b = a + 5; in b" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:42"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_32
+#AT_START_33
+at_fn_group_banner 33 'testsuite.at:42' \
+  "(make-nix-data-node #t)" "                        " 3
+at_xfail=no
+(
+  printf "%s\n" "33. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:42: \"\${abs_builddir}\"/run-r7rs-loko.sh '(make-nix-data-node #t)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:42"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(make-nix-data-node #t)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.true)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:42"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_33
+#AT_START_34
+at_fn_group_banner 34 'testsuite.at:42' \
+  "(make-nix-data-node #f)" "                        " 3
+at_xfail=no
+(
+  printf "%s\n" "34. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:42: \"\${abs_builddir}\"/run-r7rs-loko.sh '(make-nix-data-node #f)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:42"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(make-nix-data-node #f)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.false)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:42"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_34
+#AT_START_35
+at_fn_group_banner 35 'testsuite.at:42' \
+  "(make-nix-data-node 1234.5)" "                    " 3
+at_xfail=no
+(
+  printf "%s\n" "35. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:42: \"\${abs_builddir}\"/run-r7rs-loko.sh '(make-nix-data-node 1234.5)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:42"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(make-nix-data-node 1234.5)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(1234.5)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:42"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_35
+#AT_START_36
+at_fn_group_banner 36 'testsuite.at:42' \
+  "(make-nix-data-node \"➕➖➗✖️🟰\")" "     " 3
+at_xfail=no
+(
+  printf "%s\n" "36. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:42: \"\${abs_builddir}\"/run-r7rs-loko.sh '(make-nix-data-node \"➕➖➗✖️🟰\")'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:42"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(make-nix-data-node "➕➖➗✖️🟰")'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(\"➕➖➗✖️🟰\")
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:42"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_36
+#AT_START_37
+at_fn_group_banner 37 'testsuite.at:42' \
+  "(make-nix-data-node \`())" "                       " 3
+at_xfail=no
+(
+  printf "%s\n" "37. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:42: \"\${abs_builddir}\"/run-r7rs-loko.sh '(make-nix-data-node \`())'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "testsuite.at:42"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(make-nix-data-node `())'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.null)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:42"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_37
+#AT_START_38
+at_fn_group_banner 38 'testsuite.at:42' \
+  "(make-nix-path-node \".\")" "                       " 3
+at_xfail=no
+(
+  printf "%s\n" "38. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:42: \"\${abs_builddir}\"/run-r7rs-loko.sh '(make-nix-path-node \".\")'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:42"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(make-nix-path-node ".")'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "( ./. )
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:42"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_38
+#AT_START_39
+at_fn_group_banner 39 'testsuite.at:42' \
+  "(make-nix-path-node \"this/is/a/path\")" "          " 3
+at_xfail=no
+(
+  printf "%s\n" "39. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:42: \"\${abs_builddir}\"/run-r7rs-loko.sh '(make-nix-path-node \"this/is/a/path\")'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:42"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(make-nix-path-node "this/is/a/path")'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "( this/is/a/path )
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:42"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_39
+#AT_START_40
+at_fn_group_banner 40 'testsuite.at:42' \
+  "(list->nix-attributepath-node \`(\"variable\"))" "   " 3
+at_xfail=no
+(
+  printf "%s\n" "40. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:42: \"\${abs_builddir}\"/run-r7rs-loko.sh '(list->nix-attributepath-node \`(\"variable\"))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "testsuite.at:42"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(list->nix-attributepath-node `("variable"))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "variable
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:42"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_40
+#AT_START_41
+at_fn_group_banner 41 'testsuite.at:42' \
+  "(list->nix-attributepath-node \`(a b \"c\"))" "      " 3
+at_xfail=no
+(
+  printf "%s\n" "41. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:42: \"\${abs_builddir}\"/run-r7rs-loko.sh '(list->nix-attributepath-node \`(a b \"c\"))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "testsuite.at:42"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(list->nix-attributepath-node `(a b "c"))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "a
+.
+b
+.
+c
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:42"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_41
+#AT_START_42
+at_fn_group_banner 42 'testsuite.at:42' \
+  "(list->nix-attributepath-node \`(\"x.y\" \"u.v\"))" "  " 3
+at_xfail=no
+(
+  printf "%s\n" "42. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:42: \"\${abs_builddir}\"/run-r7rs-loko.sh '(list->nix-attributepath-node \`(\"x.y\" \"u.v\"))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "testsuite.at:42"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(list->nix-attributepath-node `("x.y" "u.v"))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "\"x.y\"
+.
+\"u.v\"
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:42"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_42

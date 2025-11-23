@@ -253,6 +253,14 @@ CLEANFILES += chicken-5-egg-stamp
 
 include tests-preparations.am
 
+tests/run-r6rs-%.sh: tests/run-r6rs-%.sh.in
+tests/run-r7rs-%.sh: tests/run-r7rs-%.sh.in
+
+config.status: tests/run-r6rs-chez.sh.in
+
+config.status: tests/run-r6rs-loko.sh.in
+config.status: tests/run-r7rs-loko.sh.in
+
 #---------------------------------------------------------------------
 
 TINYSCHEME_DIR = tinyscheme-1.42

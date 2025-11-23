@@ -90,5 +90,3 @@ TESTSUITE_DEPS += $(srcdir)/tests-template.at
 $(TESTSUITE): $(TESTSUITE_DEPS)
 	$(AUTOTEST) -I '$(srcdir)' -o $(@).tmp $(@).at && \
 	  mv $(@){.tmp,}
-
-../config.status: run-r6rs-chez.sh.in

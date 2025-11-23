@@ -566,13 +566,6 @@ CHICKEN_5_EGGSPEC = ' \
 
 
 #---------------------------------------------------------------------
-################################################################################### FIXME
-################################################ I AM REPLACING THIS WITH AUTOTEST ###########################################a
-#include pipchix-tests.am
-#
-#---------------------------------------------------------------------
-
-#---------------------------------------------------------------------
 TINYSCHEME_DIR = tinyscheme-1.42
 TINYSCHEME_EXE = $(TINYSCHEME_DIR)/tinyscheme-exe$(EXEEXT)
 
@@ -1319,6 +1312,21 @@ chicken-5-egg-stamp: make-chicken-5-egg
 @ENABLE_CHECK_R6RS_SAGITTARIUS_TRUE@@SAGITTARIUS_TRUE@check: $(R6RS_SCHEME)
 #
 @ENABLE_CHECK_R7RS_SAGITTARIUS_TRUE@@SAGITTARIUS_TRUE@check: $(R7RS_SCHEME)
+
+#---------------------------------------------------------------------
+################################################################################### FIXME
+################################################ I AM REPLACING THIS WITH AUTOTEST ###########################################a
+#include pipchix-tests.am
+#
+#---------------------------------------------------------------------
+
+tests/run-r6rs-%.sh: tests/run-r6rs-%.sh.in
+tests/run-r7rs-%.sh: tests/run-r7rs-%.sh.in
+
+config.status: tests/run-r6rs-chez.sh.in
+
+config.status: tests/run-r6rs-loko.sh.in
+config.status: tests/run-r7rs-loko.sh.in
 
 @GNU@ define tinyscheme-1
 @GNU@ ( \

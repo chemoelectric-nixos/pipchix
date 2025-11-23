@@ -1,6 +1,6 @@
 #!@SHELL@
 #
-# Run a tiny R⁶RS program in Chez Scheme.
+# Run a tiny R⁶RS program in Loko Scheme.
 #
 
 prog_scm=`TMPDIR=. mktemp || echo tmp."${RANDOM}"`.scm
@@ -18,9 +18,8 @@ EOF
 
 env LC_ALL="@TEST_LOCALE@" \
     LANG="@TEST_LOCALE@" \
-    @CHEZ_SCHEME@ \
-    --libdirs "@abs_top_builddir@/r6rs:" \
-    --program "${prog_scm}"
+    LOKO_LIBRARY_PATH="@abs_top_builddir@/r6rs" \
+    @LOKO@ --program "${prog_scm}"
 
 # local variables:
 # mode: shell-script

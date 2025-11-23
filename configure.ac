@@ -162,6 +162,10 @@ CHEM_CONFIG_MAKEFILES([tests/Makefile],
 AC_CONFIG_FILES([tests/atlocal])
 AC_CONFIG_FILES([tests/run-r6rs-chez.sh],
                 [chmod +x tests/run-r6rs-chez.sh])
+AC_CONFIG_FILES([tests/run-r6rs-loko.sh],
+                [chmod +x tests/run-r6rs-loko.sh])
+AC_CONFIG_FILES([tests/run-r7rs-loko.sh],
+                [chmod +x tests/run-r7rs-loko.sh])
 
 m4_foreach([f],
   [[tinyscheme-1.42/init.scm],
