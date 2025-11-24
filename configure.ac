@@ -172,6 +172,8 @@ AC_CONFIG_FILES([tests/run-r6rs-loko.sh],
                 [chmod +x tests/run-r6rs-loko.sh])
 AC_CONFIG_FILES([tests/run-r7rs-loko.sh],
                 [chmod +x tests/run-r7rs-loko.sh])
+AC_CONFIG_FILES([tests/run-r6rs-racket.sh],
+                [chmod +x tests/run-r6rs-racket.sh])
 AC_CONFIG_FILES([tests/run-r6rs-sagittarius.sh],
                 [chmod +x tests/run-r6rs-sagittarius.sh])
 AC_CONFIG_FILES([tests/run-r7rs-sagittarius.sh],

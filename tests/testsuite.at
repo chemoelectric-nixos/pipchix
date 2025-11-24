@@ -33,42 +33,47 @@ m4_define([run_r7rs_gauche],["${abs_builddir}"/run-r7rs-gauche.sh])
 m4_define([run_r7rs_mit],["${abs_builddir}"/run-r7rs-mit.sh])
 m4_define([run_r6rs_loko],["${abs_builddir}"/run-r6rs-loko.sh])
 m4_define([run_r7rs_loko],["${abs_builddir}"/run-r7rs-loko.sh])
+m4_define([run_r6rs_racket],["${abs_builddir}"/run-r6rs-racket.sh])
 m4_define([run_r6rs_sagittarius],["${abs_builddir}"/run-r6rs-sagittarius.sh])
 m4_define([run_r7rs_sagittarius],["${abs_builddir}"/run-r7rs-sagittarius.sh])
 
 tests_template([chez        ],[Chez Scheme (R⁶RS)],
   [R6RS r6rs Chez chez chez-scheme chezscheme],
-  [run_r6rs_chez])
+  [${enable_check_r6rs_chez}],[run_r6rs_chez])
 
 tests_template([chibi       ],[Chibi Scheme (R⁷RS)],
   [R7RS r7rs Chibi chibi chibi-scheme chibischeme],
-  [run_r7rs_chibi])
+  [${enable_check_r7rs_chibi}],[run_r7rs_chibi])
 
 tests_template([gauche      ],[Gauche Scheme (R⁷RS)],
   [R7RS r7rs Gauche gauche gauche-scheme gauchescheme],
-  [run_r7rs_gauche])
-
-tests_template([mit/gnu     ],[MIT/GNU Scheme (R⁷RS)],
-  [R7RS r7rs MIT MIT/GNU mit mit/gnu mit-scheme mitscheme],
-  [run_r7rs_mit])
+  [${enable_check_r7rs_gauche}],[run_r7rs_gauche])
 
 tests_template([loko(r6rs)  ],[Loko Scheme (R⁶RS)],
   [R6RS r6rs Loko loko loko-scheme lokoscheme],
-  [run_r6rs_loko])
+  [${enable_check_r6rs_loko}],[run_r6rs_loko])
 
 tests_template([loko(r7rs)  ],[Loko Scheme (R⁷RS)],
   [R7RS r7rs Loko loko loko-scheme lokoscheme],
-  [run_r7rs_loko])
+  [${enable_check_r7rs_loko}],[run_r7rs_loko])
+
+tests_template([mit/gnu     ],[MIT/GNU Scheme (R⁷RS)],
+  [R7RS r7rs MIT MIT/GNU mit mit/gnu mit-scheme mitscheme],
+  [${enable_check_r7rs_mit}],[run_r7rs_mit])
+
+tests_template([racket      ],[Racket (R⁶RS)],
+  [R6RS r6rs Racket racket PLT plt plt-scheme plt-r6rs],
+  [${enable_check_r6rs_racket}],[run_r6rs_racket])
 
 tests_template([sagitt(r6rs)],[Sagittarius Scheme (R⁶RS)],
   [R6RS r6rs Sagittarius sagittarius sagittarius-scheme
    sagittariusscheme sash],
-  [run_r6rs_sagittarius])
+  [${enable_check_r6rs_sagittarius}],[run_r6rs_sagittarius])
 
 tests_template([sagitt(r7rs)],[Sagittarius Scheme (R⁷RS)],
   [R7RS r7rs Sagittarius sagittarius sagittarius-scheme
    sagittariusscheme sash],
-  [run_r7rs_sagittarius])
+  [${enable_check_r7rs_sagittarius}],[run_r7rs_sagittarius])
 
 # local variables:
 # mode: autoconf

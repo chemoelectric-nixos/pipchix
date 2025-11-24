@@ -262,6 +262,8 @@ config.status: tests/run-r7rs-mit.sh.in
 config.status: tests/run-r6rs-loko.sh.in
 config.status: tests/run-r7rs-loko.sh.in
 
+config.status: tests/run-r6rs-racket.sh.in
+
 config.status: tests/run-r6rs-sagittarius.sh.in
 config.status: tests/run-r7rs-sagittarius.sh.in
 
