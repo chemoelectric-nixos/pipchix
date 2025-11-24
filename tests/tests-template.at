@@ -22,9 +22,17 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
+m4_define([setup_message],
+          [m4_format([%s		%s],[tests_tag],[$1])])
+
 m4_define([tests_template],[
 
-AT_BANNER([$1])
+m4_pushdef([tests_tag],[$1])
+m4_pushdef([tests_banner],[$2])
+m4_pushdef([default_keywords],[tests_tag $3])
+m4_pushdef([run_scheme],[$4])
+
+AT_BANNER([tests_banner])
 
 dnl FIXME: ADD TESTS FOR THINGS LIKE nix-embedded-node?
 dnl FIXME: ADD TESTS FOR THINGS LIKE nix-embedded-node?
@@ -33,90 +41,95 @@ dnl FIXME: ADD TESTS FOR THINGS LIKE nix-embedded-node?
 dnl FIXME: ADD TESTS FOR THINGS LIKE nix-embedded-node?
 dnl FIXME: ADD TESTS FOR THINGS LIKE nix-embedded-node?
 
-AT_SETUP([<nix-data-node>])
+AT_SETUP([setup_message(<nix-data-node>)])
 #
-AT_KEYWORDS([$2 nix-data-node])
+AT_KEYWORDS([default_keywords nix-data-node])
 #
 m4_define([sexpr],[(make-nix-embedded-node "let a = 4; b = a + 5; in b")])
-AT_CHECK_UNQUOTED([$3 'sexpr'],[0],[let a = 4; b = a + 5; in b],[])
+AT_CHECK_UNQUOTED([run_scheme 'sexpr'],[0],[let a = 4; b = a + 5; in b],[])
 #
 m4_define([sexpr],[(make-nix-data-node @%:@t)])
-AT_CHECK_UNQUOTED([$3 'sexpr'],[0],[(builtins.true)
+AT_CHECK_UNQUOTED([run_scheme 'sexpr'],[0],[(builtins.true)
 ],[])
 #
 m4_define([sexpr],[(make-nix-data-node @%:@f)])
-AT_CHECK_UNQUOTED([$3 'sexpr'],[0],[(builtins.false)
+AT_CHECK_UNQUOTED([run_scheme 'sexpr'],[0],[(builtins.false)
 ],[])
 #
 m4_define([sexpr],[(make-nix-data-node 1234.5)])
-AT_CHECK_UNQUOTED([$3 'sexpr'],[0],[(1234.5)
+AT_CHECK_UNQUOTED([run_scheme 'sexpr'],[0],[(1234.5)
 ],[])
 #
 m4_define([sexpr],[(make-nix-data-node "➕➖➗✖️🟰")])
-AT_CHECK_UNQUOTED([$3 'sexpr'],[0],[("➕➖➗✖️🟰")
+AT_CHECK_UNQUOTED([run_scheme 'sexpr'],[0],[("➕➖➗✖️🟰")
 ],[])
 #
 m4_define([sexpr],[(make-nix-data-node `())])
-AT_CHECK_UNQUOTED([$3 'sexpr'],[0],[(builtins.null)
+AT_CHECK_UNQUOTED([run_scheme 'sexpr'],[0],[(builtins.null)
 ],[])
 #
 AT_CLEANUP
 
-AT_SETUP([<nix-path-node>])
+AT_SETUP([setup_message(<nix-path-node>)])
 #
-AT_KEYWORDS([$2 nix-path-node])
+AT_KEYWORDS([default_keywords nix-path-node])
 #
 m4_define([sexpr],[(make-nix-path-node ".")])
-AT_CHECK_UNQUOTED([$3 'sexpr'],[0],[( ./. )
+AT_CHECK_UNQUOTED([run_scheme 'sexpr'],[0],[( ./. )
 ],[])
 #
 m4_define([sexpr],[(make-nix-path-node "this/is/a/path")])
-AT_CHECK_UNQUOTED([$3 'sexpr'],[0],[( this/is/a/path )
+AT_CHECK_UNQUOTED([run_scheme 'sexpr'],[0],[( this/is/a/path )
 ],[])
 #
 AT_CLEANUP
 
-AT_SETUP([<nix-attributepath-node>])
-AT_KEYWORDS([$2 nix-attributepath-node])
+AT_SETUP([setup_message(<nix-attributepath-node>)])
+AT_KEYWORDS([default_keywords nix-attributepath-node])
 #
 m4_define([sexpr],[(list->nix-attributepath-node `("variable"))])
-AT_CHECK_UNQUOTED([$3 'sexpr'],[0],[variable
+AT_CHECK_UNQUOTED([run_scheme 'sexpr'],[0],[variable
 ],[])
 #
 m4_define([sexpr],[(list->nix-attributepath-node `(a b "c"))])
-AT_CHECK_UNQUOTED([$3 'sexpr'],[0],
+AT_CHECK_UNQUOTED([run_scheme 'sexpr'],[0],
 [m4_translit([a·.·b·.·c·],[·],[
 ])],[])
 #
 m4_define([sexpr],[(list->nix-attributepath-node `("x.y" "u.v"))])
-AT_CHECK_UNQUOTED([$3 'sexpr'],[0],
+AT_CHECK_UNQUOTED([run_scheme 'sexpr'],[0],
 [m4_translit(["x.y"·.·"u.v"·],[·],[
 ])],[])
 #
 AT_CLEANUP
 
-AT_SETUP([(pipchix nix-embed)])
-AT_KEYWORDS([$2 nix-embed])
+AT_SETUP([setup_message((pipchix nix-embed))])
+AT_KEYWORDS([default_keywords nix-embed])
 #
 m4_define([sexpr],[(nix-embed "let a = 4; b = a + 5; in b")])
-AT_CHECK_UNQUOTED([$3 'sexpr'],[0],[let a = 4; b = a + 5; in b],[])
+AT_CHECK_UNQUOTED([run_scheme 'sexpr'],[0],[let a = 4; b = a + 5; in b],[])
 #
 AT_CLEANUP
 
-AT_SETUP([(pipchix nix-list)])
-AT_KEYWORDS([$2 nix-list])
+AT_SETUP([setup_message((pipchix nix-list))])
+AT_KEYWORDS([default_keywords nix-list])
 #
 m4_define([sexpr],[(nix-list 1 2 3 4 5)])
-AT_CHECK_UNQUOTED([$3 'sexpr'],[0],
+AT_CHECK_UNQUOTED([run_scheme 'sexpr'],[0],
 [m4_translit([@<:@·(1)·(2)·(3)·(4)·(5)·@:>@·],[·],[
 ])],[])
 #
 m4_define([sexpr],[(list->nix-list (list "1" "2" "3" "4" "5"))])
-AT_KEYWORDS([$2 nix-list])
-AT_CHECK_UNQUOTED([$3 'sexpr'],[0],
+AT_KEYWORDS([default_keywords nix-list])
+AT_CHECK_UNQUOTED([run_scheme 'sexpr'],[0],
 [m4_translit([@<:@·("1")·("2")·("3")·("4")·("5")·@:>@·],[·],[
 ])],[])
-#
+
+m4_popdef([tests_tag])
+m4_popdef([tests_banner])
+m4_popdef([default_keywords])
+m4_popdef([run_scheme])
+
 AT_CLEANUP
 
 dnl "🐶🐱🐭🐹🐰🦊🐻🐼🐻‍❄🐯🦁🐮🐷🐽🐸"
