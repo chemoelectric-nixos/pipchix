@@ -1,9 +1,10 @@
 #!@SHELL@
 #
-# Run a tiny R⁷RS program in Loko Scheme.
+# Run a tiny R⁷RS program in MIT/GNU Scheme.
 #
 
 prog_scm=`TMPDIR=. mktemp 2>/dev/null || echo tmp."${RANDOM}"`.scm
+output=`TMPDIR=. mktemp 2>/dev/null || echo tmp."${RANDOM}"`.out
 
 cat > "${prog_scm}" <<EOF
 (import (scheme base))
@@ -13,16 +14,19 @@ cat > "${prog_scm}" <<EOF
 (import (pipchix nix-embed))
 (import (pipchix nix-list))
 (import (pipchix nix-set))
-(output-nix-abstract-syntax-tree $1)
-(exit 0)
+(output-nix-abstract-syntax-tree $1
+  (lambda (s) (display s (current-error-port))))
 EOF
 
 env LC_ALL="@TEST_LOCALE@" \
     LANG="@TEST_LOCALE@" \
-    LOKO_LIBRARY_PATH="@abs_top_builddir@/r7rs" \
-    @LOKO@ --script "${prog_scm}"
+    @MIT_SCHEME@ --quiet --no-init-file \
+    --eval '(find-scheme-libraries! "@abs_top_builddir@/r7rs")' \
+    --eval "(load \"${prog_scm}\")" --eval '(exit)' \
+    1>/dev/null 2>"${output}" || true
 
-rm "${prog_scm}"
+cat "${output}"
+rm "${prog_scm}" "${output}"
 
 exit 0
 

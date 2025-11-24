@@ -245,11 +245,6 @@ chicken-5-egg-stamp: make-chicken-5-egg
 CLEANFILES += chicken-5-egg-stamp
 
 #---------------------------------------------------------------------
-################################################################################### FIXME
-################################################ I AM REPLACING THIS WITH AUTOTEST ###########################################a
-#include pipchix-tests.am
-#
-#---------------------------------------------------------------------
 
 include tests-preparations.am
 
@@ -258,8 +253,17 @@ tests/run-r7rs-%.sh: tests/run-r7rs-%.sh.in
 
 config.status: tests/run-r6rs-chez.sh.in
 
+config.status: tests/run-r7rs-chibi.sh.in
+
+config.status: tests/run-r7rs-gauche.sh.in
+
+config.status: tests/run-r7rs-mit.sh.in
+
 config.status: tests/run-r6rs-loko.sh.in
 config.status: tests/run-r7rs-loko.sh.in
+
+config.status: tests/run-r6rs-sagittarius.sh.in
+config.status: tests/run-r7rs-sagittarius.sh.in
 
 #---------------------------------------------------------------------
 

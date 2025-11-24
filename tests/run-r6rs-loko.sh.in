@@ -3,7 +3,7 @@
 # Run a tiny R⁶RS program in Loko Scheme.
 #
 
-prog_scm=`TMPDIR=. mktemp || echo tmp."${RANDOM}"`.scm
+prog_scm=`TMPDIR=. mktemp 2>/dev/null || echo tmp."${RANDOM}"`.scm
 
 cat > "${prog_scm}" <<EOF
 #!r6rs
@@ -20,6 +20,10 @@ env LC_ALL="@TEST_LOCALE@" \
     LANG="@TEST_LOCALE@" \
     LOKO_LIBRARY_PATH="@abs_top_builddir@/r6rs" \
     @LOKO@ --program "${prog_scm}"
+
+rm "${prog_scm}"
+
+exit 0
 
 # local variables:
 # mode: shell-script

@@ -1,6 +1,6 @@
 #!@SHELL@
 #
-# Run a tiny R⁷RS program in Loko Scheme.
+# Run a tiny R⁷RS program in Sagittarius Scheme.
 #
 
 prog_scm=`TMPDIR=. mktemp 2>/dev/null || echo tmp."${RANDOM}"`.scm
@@ -19,8 +19,7 @@ EOF
 
 env LC_ALL="@TEST_LOCALE@" \
     LANG="@TEST_LOCALE@" \
-    LOKO_LIBRARY_PATH="@abs_top_builddir@/r7rs" \
-    @LOKO@ --script "${prog_scm}"
+    @SAGITTARIUS@ -r7 --loadpath='@abs_top_builddir@/r7rs' "${prog_scm}"
 
 rm "${prog_scm}"
 

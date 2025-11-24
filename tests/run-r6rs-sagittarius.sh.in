@@ -1,6 +1,6 @@
 #!@SHELL@
 #
-# Run a tiny R⁶RS program in Chez Scheme.
+# Run a tiny R⁶RS program in Sagittarius Scheme.
 #
 
 prog_scm=`TMPDIR=. mktemp 2>/dev/null || echo tmp."${RANDOM}"`.scm
@@ -18,9 +18,7 @@ EOF
 
 env LC_ALL="@TEST_LOCALE@" \
     LANG="@TEST_LOCALE@" \
-    @CHEZ_SCHEME@ \
-    --libdirs "@abs_top_builddir@/r6rs:" \
-    --program "${prog_scm}"
+    @SAGITTARIUS@ -r6 --loadpath='@abs_top_builddir@/r6rs' "${prog_scm}"
 
 rm "${prog_scm}"
 

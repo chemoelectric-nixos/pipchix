@@ -8618,9 +8618,19 @@ ac_config_files="$ac_config_files tests/atlocal"
 
 ac_config_files="$ac_config_files tests/run-r6rs-chez.sh"
 
+ac_config_files="$ac_config_files tests/run-r7rs-chibi.sh"
+
+ac_config_files="$ac_config_files tests/run-r7rs-gauche.sh"
+
+ac_config_files="$ac_config_files tests/run-r7rs-mit.sh"
+
 ac_config_files="$ac_config_files tests/run-r6rs-loko.sh"
 
 ac_config_files="$ac_config_files tests/run-r7rs-loko.sh"
+
+ac_config_files="$ac_config_files tests/run-r6rs-sagittarius.sh"
+
+ac_config_files="$ac_config_files tests/run-r7rs-sagittarius.sh"
 
 
 ac_config_links="$ac_config_links tinyscheme-1.42/init.scm:tinyscheme-1.42/init.scm"
@@ -9533,8 +9543,13 @@ do
     "tests/GNUmakefile") CONFIG_FILES="$CONFIG_FILES tests/GNUmakefile:tests/Makefile.in" ;;
     "tests/atlocal") CONFIG_FILES="$CONFIG_FILES tests/atlocal" ;;
     "tests/run-r6rs-chez.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r6rs-chez.sh" ;;
+    "tests/run-r7rs-chibi.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r7rs-chibi.sh" ;;
+    "tests/run-r7rs-gauche.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r7rs-gauche.sh" ;;
+    "tests/run-r7rs-mit.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r7rs-mit.sh" ;;
     "tests/run-r6rs-loko.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r6rs-loko.sh" ;;
     "tests/run-r7rs-loko.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r7rs-loko.sh" ;;
+    "tests/run-r6rs-sagittarius.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r6rs-sagittarius.sh" ;;
+    "tests/run-r7rs-sagittarius.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r7rs-sagittarius.sh" ;;
     "tinyscheme-1.42/init.scm") CONFIG_LINKS="$CONFIG_LINKS tinyscheme-1.42/init.scm:tinyscheme-1.42/init.scm" ;;
     "tinyscheme-1.42/dynload.c") CONFIG_LINKS="$CONFIG_LINKS tinyscheme-1.42/dynload.c:tinyscheme-1.42/dynload.c" ;;
     "tinyscheme-1.42/dynload.h") CONFIG_LINKS="$CONFIG_LINKS tinyscheme-1.42/dynload.h:tinyscheme-1.42/dynload.h" ;;
@@ -10167,8 +10182,13 @@ EOF
       fi
     ;;
     "tests/run-r6rs-chez.sh":F) chmod +x tests/run-r6rs-chez.sh ;;
+    "tests/run-r7rs-chibi.sh":F) chmod +x tests/run-r7rs-chibi.sh ;;
+    "tests/run-r7rs-gauche.sh":F) chmod +x tests/run-r7rs-gauche.sh ;;
+    "tests/run-r7rs-mit.sh":F) chmod +x tests/run-r7rs-mit.sh ;;
     "tests/run-r6rs-loko.sh":F) chmod +x tests/run-r6rs-loko.sh ;;
     "tests/run-r7rs-loko.sh":F) chmod +x tests/run-r7rs-loko.sh ;;
+    "tests/run-r6rs-sagittarius.sh":F) chmod +x tests/run-r6rs-sagittarius.sh ;;
+    "tests/run-r7rs-sagittarius.sh":F) chmod +x tests/run-r7rs-sagittarius.sh ;;
 
   esac
 done # for ac_tag
