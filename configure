@@ -8622,6 +8622,10 @@ ac_config_files="$ac_config_files tests/run-r7rs-chibi.sh"
 
 ac_config_files="$ac_config_files tests/run-r7rs-gauche.sh"
 
+ac_config_files="$ac_config_files tests/run-r6rs-guile.sh"
+
+ac_config_files="$ac_config_files tests/run-r7rs-guile.sh"
+
 ac_config_files="$ac_config_files tests/run-r7rs-mit.sh"
 
 ac_config_files="$ac_config_files tests/run-r6rs-loko.sh"
@@ -8629,6 +8633,8 @@ ac_config_files="$ac_config_files tests/run-r6rs-loko.sh"
 ac_config_files="$ac_config_files tests/run-r7rs-loko.sh"
 
 ac_config_files="$ac_config_files tests/run-r6rs-racket.sh"
+
+ac_config_files="$ac_config_files tests/run-r6rs-racketbc.sh"
 
 ac_config_files="$ac_config_files tests/run-r6rs-sagittarius.sh"
 
@@ -9547,10 +9553,13 @@ do
     "tests/run-r6rs-chez.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r6rs-chez.sh" ;;
     "tests/run-r7rs-chibi.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r7rs-chibi.sh" ;;
     "tests/run-r7rs-gauche.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r7rs-gauche.sh" ;;
+    "tests/run-r6rs-guile.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r6rs-guile.sh" ;;
+    "tests/run-r7rs-guile.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r7rs-guile.sh" ;;
     "tests/run-r7rs-mit.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r7rs-mit.sh" ;;
     "tests/run-r6rs-loko.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r6rs-loko.sh" ;;
     "tests/run-r7rs-loko.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r7rs-loko.sh" ;;
     "tests/run-r6rs-racket.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r6rs-racket.sh" ;;
+    "tests/run-r6rs-racketbc.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r6rs-racketbc.sh" ;;
     "tests/run-r6rs-sagittarius.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r6rs-sagittarius.sh" ;;
     "tests/run-r7rs-sagittarius.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r7rs-sagittarius.sh" ;;
     "tinyscheme-1.42/init.scm") CONFIG_LINKS="$CONFIG_LINKS tinyscheme-1.42/init.scm:tinyscheme-1.42/init.scm" ;;
@@ -10187,10 +10196,13 @@ EOF
     "tests/run-r6rs-chez.sh":F) chmod +x tests/run-r6rs-chez.sh ;;
     "tests/run-r7rs-chibi.sh":F) chmod +x tests/run-r7rs-chibi.sh ;;
     "tests/run-r7rs-gauche.sh":F) chmod +x tests/run-r7rs-gauche.sh ;;
+    "tests/run-r6rs-guile.sh":F) chmod +x tests/run-r6rs-guile.sh ;;
+    "tests/run-r7rs-guile.sh":F) chmod +x tests/run-r7rs-guile.sh ;;
     "tests/run-r7rs-mit.sh":F) chmod +x tests/run-r7rs-mit.sh ;;
     "tests/run-r6rs-loko.sh":F) chmod +x tests/run-r6rs-loko.sh ;;
     "tests/run-r7rs-loko.sh":F) chmod +x tests/run-r7rs-loko.sh ;;
     "tests/run-r6rs-racket.sh":F) chmod +x tests/run-r6rs-racket.sh ;;
+    "tests/run-r6rs-racketbc.sh":F) chmod +x tests/run-r6rs-racketbc.sh ;;
     "tests/run-r6rs-sagittarius.sh":F) chmod +x tests/run-r6rs-sagittarius.sh ;;
     "tests/run-r7rs-sagittarius.sh":F) chmod +x tests/run-r7rs-sagittarius.sh ;;
 
