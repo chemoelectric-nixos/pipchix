@@ -23,13 +23,13 @@
 #
 
 m4_define([setup_message],
-          [m4_format([%s		%s],[tests_tag],[$1])])
+          [m4_format([%s %30s],[tests_tag],[$1])])
 
 m4_define([tests_template],[
 
 m4_pushdef([tests_tag],[$1])
 m4_pushdef([tests_banner],[$2])
-m4_pushdef([default_keywords],[tests_tag $3])
+m4_pushdef([default_keywords],[$3])
 m4_pushdef([run_scheme],[$4])
 
 AT_BANNER([tests_banner])
