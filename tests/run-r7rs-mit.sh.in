@@ -8,14 +8,18 @@ output=`TMPDIR=. mktemp 2>/dev/null || echo tmp."${RANDOM}"`.out
 
 cat > "${prog_scm}" <<EOF
 (import (scheme base))
+(import (scheme file))
 (import (scheme process-context))
 (import (scheme write))
 (import (pipchix abstract-syntax-tree))
 (import (pipchix nix-embed))
 (import (pipchix nix-list))
 (import (pipchix nix-set))
-(output-nix-abstract-syntax-tree $1
-  (lambda (s) (display s (current-error-port))))
+(define ast $1)
+(define outp (open-output-file "${output}"))
+(output-nix-abstract-syntax-tree ast
+  (lambda (s) (display s outp)))
+(close-output-port outp)
 EOF
 
 env LC_ALL="@TEST_LOCALE@" \
@@ -23,7 +27,7 @@ env LC_ALL="@TEST_LOCALE@" \
     @MIT_SCHEME@ --quiet --no-init-file \
     --eval '(find-scheme-libraries! "@abs_top_builddir@/r7rs")' \
     --eval "(load \"${prog_scm}\")" --eval '(exit)' \
-    1>/dev/null 2>"${output}" || true
+    1>/dev/null || true
 
 cat "${output}"
 rm "${prog_scm}" "${output}"
