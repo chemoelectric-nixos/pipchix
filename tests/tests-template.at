@@ -26,111 +26,97 @@ m4_define([tests_template],[
 
 AT_BANNER([$1])
 
-m4_define([sexpr],[(nix-embed "let a = 4; b = a + 5; in b")])
-AT_SETUP([sexpr])
-AT_KEYWORDS([$2 nix-embed])
+dnl FIXME: ADD TESTS FOR THINGS LIKE nix-embedded-node?
+dnl FIXME: ADD TESTS FOR THINGS LIKE nix-embedded-node?
+dnl FIXME: ADD TESTS FOR THINGS LIKE nix-embedded-node?
+dnl FIXME: ADD TESTS FOR THINGS LIKE nix-embedded-node?
+dnl FIXME: ADD TESTS FOR THINGS LIKE nix-embedded-node?
+dnl FIXME: ADD TESTS FOR THINGS LIKE nix-embedded-node?
+
+AT_SETUP([<nix-data-node>])
+#
+AT_KEYWORDS([$2 nix-data-node])
+#
+m4_define([sexpr],[(make-nix-embedded-node "let a = 4; b = a + 5; in b")])
 AT_CHECK_UNQUOTED([$3 'sexpr'],[0],[let a = 4; b = a + 5; in b],[])
+#
+m4_define([sexpr],[(make-nix-data-node @%:@t)])
+AT_CHECK_UNQUOTED([$3 'sexpr'],[0],[(builtins.true)
+],[])
+#
+m4_define([sexpr],[(make-nix-data-node @%:@f)])
+AT_CHECK_UNQUOTED([$3 'sexpr'],[0],[(builtins.false)
+],[])
+#
+m4_define([sexpr],[(make-nix-data-node 1234.5)])
+AT_CHECK_UNQUOTED([$3 'sexpr'],[0],[(1234.5)
+],[])
+#
+m4_define([sexpr],[(make-nix-data-node "➕➖➗✖️🟰")])
+AT_CHECK_UNQUOTED([$3 'sexpr'],[0],[("➕➖➗✖️🟰")
+],[])
+#
+m4_define([sexpr],[(make-nix-data-node `())])
+AT_CHECK_UNQUOTED([$3 'sexpr'],[0],[(builtins.null)
+],[])
+#
 AT_CLEANUP
 
-m4_define([sexpr],[(nix-list 1 2 3 4 5)])
-AT_SETUP([sexpr])
+AT_SETUP([<nix-path-node>])
+#
+AT_KEYWORDS([$2 nix-path-node])
+#
+m4_define([sexpr],[(make-nix-path-node ".")])
+AT_CHECK_UNQUOTED([$3 'sexpr'],[0],[( ./. )
+],[])
+#
+m4_define([sexpr],[(make-nix-path-node "this/is/a/path")])
+AT_CHECK_UNQUOTED([$3 'sexpr'],[0],[( this/is/a/path )
+],[])
+#
+AT_CLEANUP
+
+AT_SETUP([<nix-attributepath-node>])
+AT_KEYWORDS([$2 nix-attributepath-node])
+#
+m4_define([sexpr],[(list->nix-attributepath-node `("variable"))])
+AT_CHECK_UNQUOTED([$3 'sexpr'],[0],[variable
+],[])
+#
+m4_define([sexpr],[(list->nix-attributepath-node `(a b "c"))])
+AT_CHECK_UNQUOTED([$3 'sexpr'],[0],
+[m4_translit([a·.·b·.·c·],[·],[
+])],[])
+#
+m4_define([sexpr],[(list->nix-attributepath-node `("x.y" "u.v"))])
+AT_CHECK_UNQUOTED([$3 'sexpr'],[0],
+[m4_translit(["x.y"·.·"u.v"·],[·],[
+])],[])
+#
+AT_CLEANUP
+
+AT_SETUP([(pipchix nix-embed)])
+AT_KEYWORDS([$2 nix-embed])
+#
+m4_define([sexpr],[(nix-embed "let a = 4; b = a + 5; in b")])
+AT_CHECK_UNQUOTED([$3 'sexpr'],[0],[let a = 4; b = a + 5; in b],[])
+#
+AT_CLEANUP
+
+AT_SETUP([(pipchix nix-list)])
 AT_KEYWORDS([$2 nix-list])
+#
+m4_define([sexpr],[(nix-list 1 2 3 4 5)])
 AT_CHECK_UNQUOTED([$3 'sexpr'],[0],
 [m4_translit([@<:@·(1)·(2)·(3)·(4)·(5)·@:>@·],[·],[
 ])],[])
-AT_CLEANUP
-
+#
 m4_define([sexpr],[(list->nix-list (list "1" "2" "3" "4" "5"))])
-AT_SETUP([sexpr])
 AT_KEYWORDS([$2 nix-list])
 AT_CHECK_UNQUOTED([$3 'sexpr'],[0],
 [m4_translit([@<:@·("1")·("2")·("3")·("4")·("5")·@:>@·],[·],[
 ])],[])
-AT_CLEANUP
-
-dnl FIXME: ADD TESTS FOR THINGS LIKE nix-embedded-node?
-dnl FIXME: ADD TESTS FOR THINGS LIKE nix-embedded-node?
-dnl FIXME: ADD TESTS FOR THINGS LIKE nix-embedded-node?
-dnl FIXME: ADD TESTS FOR THINGS LIKE nix-embedded-node?
-dnl FIXME: ADD TESTS FOR THINGS LIKE nix-embedded-node?
-dnl FIXME: ADD TESTS FOR THINGS LIKE nix-embedded-node?
-
-m4_define([sexpr],[(make-nix-embedded-node "let a = 4; b = a + 5; in b")])
-AT_SETUP([sexpr])
-AT_KEYWORDS([$2 nix-embedded-node])
-AT_CHECK_UNQUOTED([$3 'sexpr'],[0],[let a = 4; b = a + 5; in b],[])
-AT_CLEANUP
-
-m4_define([sexpr],[(make-nix-data-node @%:@t)])
-AT_SETUP([sexpr])
-AT_KEYWORDS([$2 nix-data-node])
-AT_CHECK_UNQUOTED([$3 'sexpr'],[0],[(builtins.true)
-],[])
-AT_CLEANUP
-
-m4_define([sexpr],[(make-nix-data-node @%:@f)])
-AT_SETUP([sexpr])
-AT_KEYWORDS([$2 nix-data-node])
-AT_CHECK_UNQUOTED([$3 'sexpr'],[0],[(builtins.false)
-],[])
-AT_CLEANUP
-
-m4_define([sexpr],[(make-nix-data-node 1234.5)])
-AT_SETUP([sexpr])
-AT_KEYWORDS([$2 nix-data-node])
-AT_CHECK_UNQUOTED([$3 'sexpr'],[0],[(1234.5)
-],[])
-AT_CLEANUP
-
-m4_define([sexpr],[(make-nix-data-node "➕➖➗✖️🟰")])
-AT_SETUP([sexpr])
-AT_KEYWORDS([$2 nix-data-node])
-AT_CHECK_UNQUOTED([$3 'sexpr'],[0],[("➕➖➗✖️🟰")
-],[])
-AT_CLEANUP
-
-m4_define([sexpr],[(make-nix-data-node `())])
-AT_SETUP([sexpr])
-AT_KEYWORDS([$2 nix-data-node])
-AT_CHECK_UNQUOTED([$3 'sexpr'],[0],[(builtins.null)
-],[])
-AT_CLEANUP
-
-m4_define([sexpr],[(make-nix-path-node ".")])
-AT_SETUP([sexpr])
-AT_KEYWORDS([$2 nix-path-node])
-AT_CHECK_UNQUOTED([$3 'sexpr'],[0],[( ./. )
-],[])
-AT_CLEANUP
-
-m4_define([sexpr],[(make-nix-path-node "this/is/a/path")])
-AT_SETUP([sexpr])
-AT_KEYWORDS([$2 nix-path-node])
-AT_CHECK_UNQUOTED([$3 'sexpr'],[0],[( this/is/a/path )
-],[])
-AT_CLEANUP
-
-m4_define([sexpr],[(list->nix-attributepath-node `("variable"))])
-AT_SETUP([sexpr])
-AT_KEYWORDS([$2 nix-attributepath-node])
-AT_CHECK_UNQUOTED([$3 'sexpr'],[0],[variable
-],[])
-AT_CLEANUP
-
-m4_define([sexpr],[(list->nix-attributepath-node `(a b "c"))])
-AT_SETUP([sexpr])
-AT_KEYWORDS([$2 nix-attributepath-node])
-AT_CHECK_UNQUOTED([$3 'sexpr'],[0],
-[m4_translit([a·.·b·.·c·],[·],[
-])],[])
-AT_CLEANUP
-
-m4_define([sexpr],[(list->nix-attributepath-node `("x.y" "u.v"))])
-AT_SETUP([sexpr])
-AT_KEYWORDS([$2 nix-attributepath-node])
-AT_CHECK_UNQUOTED([$3 'sexpr'],[0],
-[m4_translit(["x.y"·.·"u.v"·],[·],[
-])],[])
+#
 AT_CLEANUP
 
 dnl "🐶🐱🐭🐹🐰🦊🐻🐼🐻‍❄🐯🦁🐮🐷🐽🐸"
