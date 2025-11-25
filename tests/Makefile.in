@@ -272,7 +272,6 @@ enable_check_r6rs_chez = @enable_check_r6rs_chez@
 enable_check_r6rs_guile = @enable_check_r6rs_guile@
 enable_check_r6rs_loko = @enable_check_r6rs_loko@
 enable_check_r6rs_racket = @enable_check_r6rs_racket@
-enable_check_r6rs_racketbc = @enable_check_r6rs_racketbc@
 enable_check_r6rs_sagittarius = @enable_check_r6rs_sagittarius@
 enable_check_r7rs_chibi = @enable_check_r7rs_chibi@
 enable_check_r7rs_csc_5 = @enable_check_r7rs_csc_5@

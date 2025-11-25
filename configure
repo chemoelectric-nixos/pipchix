@@ -692,9 +692,6 @@ enable_check_r7rs_sagittarius
 ENABLE_CHECK_R6RS_SAGITTARIUS_FALSE
 ENABLE_CHECK_R6RS_SAGITTARIUS_TRUE
 enable_check_r6rs_sagittarius
-ENABLE_CHECK_R6RS_RACKETBC_FALSE
-ENABLE_CHECK_R6RS_RACKETBC_TRUE
-enable_check_r6rs_racketbc
 ENABLE_CHECK_R6RS_RACKET_FALSE
 ENABLE_CHECK_R6RS_RACKET_TRUE
 enable_check_r6rs_racket
@@ -866,7 +863,6 @@ enable_check_r6rs_loko
 enable_check_r7rs_loko
 enable_check_r7rs_mit
 enable_check_r6rs_racket
-enable_check_r6rs_racketbc
 enable_check_r6rs_sagittarius
 enable_check_r7rs_sagittarius
 '
@@ -1574,9 +1570,6 @@ Optional Features:
   --disable-check-r6rs-racket
                           disable tests with Racket (enabled by default if the
                           Scheme implementation is found)
-  --disable-check-r6rs-racketbc
-                          disable tests with Racket BC (enabled by default if
-                          the Scheme implementation is found)
   --disable-check-r6rs-sagittarius
                           disable R⁶RS tests with Sagittarius (enabled by
                           default if the Scheme implementation is found)
@@ -6762,25 +6755,6 @@ else
 fi
 
 
-# Check whether --enable-check-r6rs-racketbc was given.
-if test ${enable_check_r6rs_racketbc+y}
-then :
-  enableval=$enable_check_r6rs_racketbc; eval enable_check_r6rs_racketbc="${enableval}"
-else case e in #(
-  e) eval enable_check_r6rs_racketbc=yes ;;
-esac
-fi
-
-
- if test "${enable_check_r6rs_racketbc}" != no; then
-  ENABLE_CHECK_R6RS_RACKETBC_TRUE=
-  ENABLE_CHECK_R6RS_RACKETBC_FALSE='#'
-else
-  ENABLE_CHECK_R6RS_RACKETBC_TRUE='#'
-  ENABLE_CHECK_R6RS_RACKETBC_FALSE=
-fi
-
-
 # Check whether --enable-check-r6rs-sagittarius was given.
 if test ${enable_check_r6rs_sagittarius+y}
 then :
@@ -8655,10 +8629,6 @@ Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${ENABLE_CHECK_R6RS_RACKET_TRUE}" && test -z "${ENABLE_CHECK_R6RS_RACKET_FALSE}"; then
   as_fn_error $? "conditional \"ENABLE_CHECK_R6RS_RACKET\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
-if test -z "${ENABLE_CHECK_R6RS_RACKETBC_TRUE}" && test -z "${ENABLE_CHECK_R6RS_RACKETBC_FALSE}"; then
-  as_fn_error $? "conditional \"ENABLE_CHECK_R6RS_RACKETBC\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${ENABLE_CHECK_R6RS_SAGITTARIUS_TRUE}" && test -z "${ENABLE_CHECK_R6RS_SAGITTARIUS_FALSE}"; then
