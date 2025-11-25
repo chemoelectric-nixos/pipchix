@@ -55,32 +55,6 @@ if test -z "${GNU_M4}"; then
    AC_MSG_ERROR([GNU m4 not found. Perhaps set GNU_M4 to OpenBSD m4.])
 fi
 
-CHEM_PATH_PROGS_CACHED_AND_PRECIOUS([ENV],[env with a working -S option],[env],[
-     if LC_ALL=C LANG=C \
-            printf '@%:@!%s -S %s -v DAFFYDUCK=12345 -f\nBEGIN { print DAFFYDUCK }\n' \
-              "${ac_path_ENV}" "${AWK}" > conftest.sh 2> /dev/null &&
-          chmod +x conftest.sh &&
-          LC_ALL=C LANG=C ./conftest.sh > conftest.out 2> /dev/null &&
-          LC_ALL=C LANG=C ${FGREP} 12345 conftest.out 2> /dev/null > /dev/null; then
-       ac_cv_path_ENV="${ac_path_ENV}"
-       ac_path_ENV_found=:
-     fi
-     rm -f conftest.{sh,out}
-   ])
-if test "${chem_cv_path_ENV_found}" != no; then
-  ENV_S="${ac_cv_path_ENV} -S"
-else
-  ENV_S="\$(abs_builddir)/return77"
-fi
-AC_SUBST([ENV_S])
-
-#
-# A way to get names for temporary files.
-#
-AC_CHECK_PROGS([MKTEMP],[mktemp],[echo tmp.\"\$\${RANDOM}\"])
-AC_ARG_VAR([MKTEMP],[mktemp command])
-MKTEMP="TMPDIR=. ${MKTEMP}"
-
 m4_include([ac-r6rs-install-options.m4])
 m4_include([ac-r7rs-install-options.m4])
 m4_include([ac-chicken-install-options.m4])

@@ -136,7 +136,7 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-EXTRA_PROGRAMS = return77$(EXEEXT)
+EXTRA_PROGRAMS =
 @INSTALL_CHICKEN_5_EGG_SOURCE_TRUE@am__append_1 = $(CHICKEN_5_EGGFILES)
 @INSTALL_R6RS_SOURCE_TRUE@am__append_2 = $(R6RS_SCHEME)
 @INSTALL_R7RS_SOURCE_TRUE@am__append_3 = $(R7RS_SCHEME)
@@ -174,9 +174,6 @@ am__CONFIG_DISTCLEAN_FILES = config.status config.cache config.log \
 mkinstalldirs = $(install_sh) -d
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
-return77_SOURCES = return77.c
-return77_OBJECTS = return77.$(OBJEXT)
-return77_LDADD = $(LDADD)
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -189,25 +186,8 @@ AM_V_at = $(am__v_at_@AM_V@)
 am__v_at_ = $(am__v_at_@AM_DEFAULT_V@)
 am__v_at_0 = @
 am__v_at_1 = 
-DEFAULT_INCLUDES = -I.@am__isrc@
-depcomp = $(SHELL) $(top_srcdir)/build-aux/depcomp
-am__maybe_remake_depfiles = depfiles
-am__depfiles_remade = ./$(DEPDIR)/return77.Po
-am__mv = mv -f
-COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
-	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
-AM_V_CC = $(am__v_CC_@AM_V@)
-am__v_CC_ = $(am__v_CC_@AM_DEFAULT_V@)
-am__v_CC_0 = @echo "  CC      " $@;
-am__v_CC_1 = 
-CCLD = $(CC)
-LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
-AM_V_CCLD = $(am__v_CCLD_@AM_V@)
-am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
-am__v_CCLD_0 = @echo "  CCLD    " $@;
-am__v_CCLD_1 = 
-SOURCES = return77.c
-DIST_SOURCES = return77.c
+SOURCES =
+DIST_SOURCES =
 RECURSIVE_TARGETS = all-recursive check-recursive cscopelist-recursive \
 	ctags-recursive dvi-recursive html-recursive info-recursive \
 	install-data-recursive install-dvi-recursive \
@@ -282,7 +262,6 @@ am__DIST_COMMON = $(srcdir)/Makefile.in \
 	$(top_srcdir)/build-aux/compile \
 	$(top_srcdir)/build-aux/config.guess \
 	$(top_srcdir)/build-aux/config.sub \
-	$(top_srcdir)/build-aux/depcomp \
 	$(top_srcdir)/build-aux/install-sh \
 	$(top_srcdir)/build-aux/missing AUTHORS COPYING INSTALL \
 	build-aux/compile build-aux/config.guess build-aux/config.sub \
@@ -361,8 +340,6 @@ ECHO_C = @ECHO_C@
 ECHO_N = @ECHO_N@
 ECHO_T = @ECHO_T@
 EGREP = @EGREP@
-ENV = @ENV@
-ENV_S = @ENV_S@
 ETAGS = @ETAGS@
 EXEEXT = @EXEEXT@
 FGREP = @FGREP@
@@ -387,7 +364,6 @@ MAINT = @MAINT@
 MAKEINFO = @MAKEINFO@
 MIT_SCHEME = @MIT_SCHEME@
 MKDIR_P = @MKDIR_P@
-MKTEMP = @MKTEMP@
 OBJEXT = @OBJEXT@
 PACKAGE = @PACKAGE@
 PACKAGE_BUGREPORT = @PACKAGE_BUGREPORT@
@@ -489,7 +465,7 @@ CLEANFILES = tmp.* $(R6RS_SCHEME) $(R6RS_SCHEME:%=%.tmp) \
 	$(CHICKEN_5_EGGDIR)/*.{$(OBJEXT),so,link,import.scm} \
 	$(CHICKEN_5_EGGDIR)/pipchix.{build,install}.sh \
 	chicken-5-egg-stamp
-DISTCLEANFILES = Makefile GNUmakefile return77 return77.$(OBJEXT)
+DISTCLEANFILES = Makefile GNUmakefile
 EXTRA_DIST = silent-rules.mk COPYING README.adoc INSTALL AUTHORS \
 	pipchix/pipchix-includes.m4 $(R6RS_SCHEME:%=%.m4) \
 	$(R6RS_SCHEME:r6rs/pipchix/%.sls=pipchix/%.m4) \
@@ -498,7 +474,7 @@ EXTRA_DIST = silent-rules.mk COPYING README.adoc INSTALL AUTHORS \
 	$(R7RS_SCHEME:r7rs/pipchix/%.sld=pipchix/%.m4) \
 	$(R7RS_SCHEME:r7rs/pipchix/%.sld=pipchix/%.exports.m4)
 EXTRA_SCRIPTS = 
-BUILT_SOURCES = $(am__append_4) $(am__append_5) return77
+BUILT_SOURCES = $(am__append_4) $(am__append_5)
 nodist_r6rspipchix_DATA = $(am__append_2)
 nodist_r7rspipchix_DATA = $(am__append_3)
 nodist_chickeneggs5pipchix_DATA = $(am__append_1)
@@ -509,6 +485,11 @@ R6RS_SCHEME = r6rs/pipchix/srfi-9.sls r6rs/pipchix/base.sls \
 R7RS_SCHEME = r7rs/pipchix/base.sld r7rs/pipchix/nix-embed.sld \
 	r7rs/pipchix/nix-list.sld r7rs/pipchix/nix-set.sld \
 	r7rs/pipchix/abstract-syntax-tree.sld
+
+#
+# A way to get names for temporary files.
+#
+MKTEMP = $(shell TMPDIR=. mktemp 2>/dev/null || echo tmp.$${RANDOM})
 
 #---------------------------------------------------------------------
 #
@@ -610,7 +591,6 @@ all: $(BUILT_SOURCES)
 	$(MAKE) $(AM_MAKEFLAGS) all-recursive
 
 .SUFFIXES:
-.SUFFIXES: .c .o .obj
 am--refresh: GNUmakefile
 	@:
 $(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am $(srcdir)/tests-preparations.am $(am__configure_deps)
@@ -645,38 +625,6 @@ $(top_srcdir)/configure: @MAINTAINER_MODE_TRUE@ $(am__configure_deps)
 $(ACLOCAL_M4): @MAINTAINER_MODE_TRUE@ $(am__aclocal_m4_deps)
 	$(am__cd) $(srcdir) && $(ACLOCAL) $(ACLOCAL_AMFLAGS)
 $(am__aclocal_m4_deps):
-
-return77$(EXEEXT): $(return77_OBJECTS) $(return77_DEPENDENCIES) $(EXTRA_return77_DEPENDENCIES) 
-	@rm -f return77$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(return77_OBJECTS) $(return77_LDADD) $(LIBS)
-
-mostlyclean-compile:
-	-rm -f *.$(OBJEXT)
-
-distclean-compile:
-	-rm -f *.tab.c
-
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/return77.Po@am__quote@ # am--include-marker
-
-$(am__depfiles_remade):
-	@$(MKDIR_P) $(@D)
-	@: >>$@
-
-am--depfiles: $(am__depfiles_remade)
-
-.c.o:
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(COMPILE) -c -o $@ $<
-
-.c.obj:
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ `$(CYGPATH_W) '$<'`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(COMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
 install-nodist_chickeneggs5pipchixDATA: $(nodist_chickeneggs5pipchix_DATA)
 	@$(NORMAL_INSTALL)
 	@list='$(nodist_chickeneggs5pipchix_DATA)'; test -n "$(chickeneggs5pipchixdir)" || list=; \
@@ -1099,10 +1047,8 @@ clean-am: clean-generic mostlyclean-am
 
 distclean: distclean-recursive
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
-	-rm -f ./$(DEPDIR)/return77.Po
 	-rm -f GNUmakefile
-distclean-am: clean-am distclean-compile distclean-generic \
-	distclean-tags
+distclean-am: clean-am distclean-generic distclean-tags
 
 dvi: dvi-recursive
 
@@ -1148,13 +1094,12 @@ installcheck-am:
 maintainer-clean: maintainer-clean-recursive
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
 	-rm -rf $(top_srcdir)/autom4te.cache
-	-rm -f ./$(DEPDIR)/return77.Po
 	-rm -f GNUmakefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 
 mostlyclean: mostlyclean-recursive
 
-mostlyclean-am: mostlyclean-compile mostlyclean-generic
+mostlyclean-am: mostlyclean-generic
 
 pdf: pdf-recursive
 
@@ -1172,23 +1117,22 @@ uninstall-am: uninstall-nodist_chickeneggs5pipchixDATA \
 	install-exec install-strip
 
 .PHONY: $(am__recursive_targets) CTAGS GTAGS TAGS all all-am \
-	am--depfiles am--refresh check check-am clean clean-cscope \
-	clean-generic cscope cscopelist-am ctags ctags-am dist \
-	dist-all dist-bzip2 dist-bzip3 dist-gzip dist-lzip dist-shar \
-	dist-tarZ dist-xz dist-zip dist-zstd distcheck distclean \
-	distclean-compile distclean-generic distclean-tags \
-	distcleancheck distdir distuninstallcheck dvi dvi-am html \
-	html-am info info-am install install-am install-data \
-	install-data-am install-dvi install-dvi-am install-exec \
-	install-exec-am install-html install-html-am install-info \
-	install-info-am install-man \
+	am--refresh check check-am clean clean-cscope clean-generic \
+	cscope cscopelist-am ctags ctags-am dist dist-all dist-bzip2 \
+	dist-bzip3 dist-gzip dist-lzip dist-shar dist-tarZ dist-xz \
+	dist-zip dist-zstd distcheck distclean distclean-generic \
+	distclean-tags distcleancheck distdir distuninstallcheck dvi \
+	dvi-am html html-am info info-am install install-am \
+	install-data install-data-am install-dvi install-dvi-am \
+	install-exec install-exec-am install-html install-html-am \
+	install-info install-info-am install-man \
 	install-nodist_chickeneggs5pipchixDATA \
 	install-nodist_r6rspipchixDATA install-nodist_r7rspipchixDATA \
 	install-pdf install-pdf-am install-ps install-ps-am \
 	install-strip installcheck installcheck-am installdirs \
 	installdirs-am maintainer-clean maintainer-clean-generic \
-	mostlyclean mostlyclean-compile mostlyclean-generic pdf pdf-am \
-	ps ps-am tags tags-am uninstall uninstall-am \
+	mostlyclean mostlyclean-generic pdf pdf-am ps ps-am tags \
+	tags-am uninstall uninstall-am \
 	uninstall-nodist_chickeneggs5pipchixDATA \
 	uninstall-nodist_r6rspipchixDATA \
 	uninstall-nodist_r7rspipchixDATA
@@ -1238,7 +1182,7 @@ $(CHICKEN_5_EGGDIR)/README.adoc: README.adoc
 
 $(CHICKEN_5_EGGDIR)/pipchix.egg: GNUmakefile $(TINYSCHEME_EXE)
 	$(call v,SEXP) \
-	script=`$(MKTEMP)` && \
+	script=$(MKTEMP) && \
 	$(MKDIR_P) $(@D) && \
 	if true; then \
 	  printf '%s' $(DEFINE_NICELY_PRINT); \
@@ -1247,7 +1191,8 @@ $(CHICKEN_5_EGGDIR)/pipchix.egg: GNUmakefile $(TINYSCHEME_EXE)
 	  printf '(nicely-print eggfile)'; \
 	fi > "$${script}" && \
 	$(call tinyscheme-1, ${abs_builddir}/"$${script}") \
-			> $(abs_builddir)/$(@)
+			> $(abs_builddir)/$(@) && \
+	rm "$${script}"
 
 @CHICKEN_INSTALL_5_TRUE@chicken-install-5: $(CHICKEN_5_EGGFILES)
 @CHICKEN_INSTALL_5_TRUE@	( \

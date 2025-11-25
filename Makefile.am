@@ -112,6 +112,12 @@ $(builddir)/r7rs/pipchix/%.sld: $(srcdir)/r7rs/pipchix/%.sld.m4 \
 		$(M4_PREPROCESS) $(<) > $(@).tmp && \
 		mv $(@){.tmp,}
 
+
+#
+# A way to get names for temporary files.
+#
+MKTEMP=$(shell TMPDIR=. mktemp 2>/dev/null || echo tmp.$${RANDOM})
+
 #---------------------------------------------------------------------
 #
 # CHICKEN Scheme support.
@@ -173,7 +179,7 @@ $(CHICKEN_5_EGGDIR)/README.adoc: README.adoc
 
 $(CHICKEN_5_EGGDIR)/pipchix.egg: GNUmakefile $(TINYSCHEME_EXE)
 	$(call v,SEXP) \
-	script=`$(MKTEMP)` && \
+	script=$(MKTEMP) && \
 	$(MKDIR_P) $(@D) && \
 	if true; then \
 	  printf '%s' $(DEFINE_NICELY_PRINT); \
@@ -182,7 +188,8 @@ $(CHICKEN_5_EGGDIR)/pipchix.egg: GNUmakefile $(TINYSCHEME_EXE)
 	  printf '(nicely-print eggfile)'; \
 	fi > "$${script}" && \
 	$(call tinyscheme-1, ${abs_builddir}/"$${script}") \
-			> $(abs_builddir)/$(@)
+			> $(abs_builddir)/$(@) && \
+	rm "$${script}"
 
 CHICKEN_5_EGGSPEC = ' \
  '$(CHICKEN_EGGSPEC_TOP)' \
@@ -327,17 +334,6 @@ DEFINE_NICELY_PRINT = ' \
 		(display ")"))))) \
 	 (else \
 	   (write obj)))))'
-
-#---------------------------------------------------------------------
-
-#
-# A program that returns exit code 77, the return code to skip a test.
-#
-
-EXTRA_PROGRAMS += return77
-BUILT_SOURCES += return77
-
-DISTCLEANFILES += return77 return77.$(OBJEXT)
 
 #---------------------------------------------------------------------
 # local variables:

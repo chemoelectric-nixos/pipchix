@@ -202,8 +202,6 @@ ECHO_C = @ECHO_C@
 ECHO_N = @ECHO_N@
 ECHO_T = @ECHO_T@
 EGREP = @EGREP@
-ENV = @ENV@
-ENV_S = @ENV_S@
 ETAGS = @ETAGS@
 EXEEXT = @EXEEXT@
 FGREP = @FGREP@
@@ -228,7 +226,6 @@ MAINT = @MAINT@
 MAKEINFO = @MAKEINFO@
 MIT_SCHEME = @MIT_SCHEME@
 MKDIR_P = @MKDIR_P@
-MKTEMP = @MKTEMP@
 OBJEXT = @OBJEXT@
 PACKAGE = @PACKAGE@
 PACKAGE_BUGREPORT = @PACKAGE_BUGREPORT@
@@ -346,9 +343,9 @@ $(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am  $(am__confi
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu tests/GNUmakefile:tests/Makefile.in'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign tests/GNUmakefile:tests/Makefile.in'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu tests/GNUmakefile:tests/Makefile.in
+	  $(AUTOMAKE) --foreign tests/GNUmakefile:tests/Makefile.in
 GNUmakefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
 	  *config.status*) \
