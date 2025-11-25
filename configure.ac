@@ -102,9 +102,6 @@ offer_disable_of_check([r7rs],[mit],
 offer_disable_of_check([r6rs],[racket],
   [disable tests with Racket])
 
-offer_disable_of_check([r6rs],[racketbc],
-  [disable tests with Racket BC])
-
 offer_disable_of_check([r6rs],[sagittarius],
   [disable R⁶RS tests with Sagittarius])
 
