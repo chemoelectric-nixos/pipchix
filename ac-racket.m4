@@ -24,8 +24,7 @@
 #
 
 CHEM_PATH_PROGS_CACHED_AND_PRECIOUS([PLT_R6RS],
-  [Racket (R⁶RS, CS or BC implementation)],
-  [plt-r6rs],
+  [Racket (R⁶RS)],[plt-r6rs plt-r6rscs plt-r6rsbc],
   [
     if LC_ALL=C LANG=C ${ac_path_PLT_R6RS} --help 2>&1 | \
       LC_ALL=C LANG=C ${FGREP} '++path <dir>' \
@@ -36,17 +35,3 @@ CHEM_PATH_PROGS_CACHED_AND_PRECIOUS([PLT_R6RS],
   ])
 AM_CONDITIONAL([PLT_R6RS],
                [test "${chem_cv_path_PLT_R6RS_found}" != no])
-
-CHEM_PATH_PROGS_CACHED_AND_PRECIOUS([PLT_R6RSBC],
-  [Racket (R⁶RS, BC implementation)],
-  [plt-r6rsbc],
-  [
-    if LC_ALL=C LANG=C ${ac_path_PLT_R6RSBC} --help 2>&1 | \
-      LC_ALL=C LANG=C ${FGREP} '++path <dir>' \
-               2> /dev/null > /dev/null; then
-        ac_cv_path_PLT_R6RSBC="${ac_path_PLT_R6RSBC}"
-        ac_path_PLT_R6RSBC_found=:
-    fi
-  ])
-AM_CONDITIONAL([PLT_R6RSBC],
-               [test "${chem_cv_path_PLT_R6RSBC_found}" != no])

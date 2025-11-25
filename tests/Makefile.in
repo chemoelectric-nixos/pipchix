@@ -142,8 +142,7 @@ CONFIG_CLEAN_FILES = atlocal run-r6rs-chez.sh run-r7rs-chibi.sh \
 	run-r7rs-csc-5.sh run-r7rs-csi-5.sh run-r7rs-gauche.sh \
 	run-r6rs-guile.sh run-r7rs-guile.sh run-r7rs-mit.sh \
 	run-r6rs-loko.sh run-r7rs-loko.sh run-r6rs-racket.sh \
-	run-r6rs-racketbc.sh run-r6rs-sagittarius.sh \
-	run-r7rs-sagittarius.sh
+	run-r6rs-sagittarius.sh run-r7rs-sagittarius.sh
 CONFIG_CLEAN_VPATH_FILES =
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
@@ -168,7 +167,6 @@ am__tagged_files = $(HEADERS) $(SOURCES) $(TAGS_FILES) $(LISP)
 am__DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/atlocal.in \
 	$(srcdir)/run-r6rs-chez.sh.in $(srcdir)/run-r6rs-guile.sh.in \
 	$(srcdir)/run-r6rs-loko.sh.in $(srcdir)/run-r6rs-racket.sh.in \
-	$(srcdir)/run-r6rs-racketbc.sh.in \
 	$(srcdir)/run-r6rs-sagittarius.sh.in \
 	$(srcdir)/run-r7rs-chibi.sh.in $(srcdir)/run-r7rs-csc-5.sh.in \
 	$(srcdir)/run-r7rs-csi-5.sh.in $(srcdir)/run-r7rs-gauche.sh.in \
@@ -241,7 +239,6 @@ PACKAGE_URL = @PACKAGE_URL@
 PACKAGE_VERSION = @PACKAGE_VERSION@
 PATH_SEPARATOR = @PATH_SEPARATOR@
 PLT_R6RS = @PLT_R6RS@
-PLT_R6RSBC = @PLT_R6RSBC@
 SAGITTARIUS = @SAGITTARIUS@
 SED = @SED@
 SET_MAKE = @SET_MAKE@
@@ -349,9 +346,9 @@ $(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am  $(am__confi
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign tests/GNUmakefile:tests/Makefile.in'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu tests/GNUmakefile:tests/Makefile.in'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --foreign tests/GNUmakefile:tests/Makefile.in
+	  $(AUTOMAKE) --gnu tests/GNUmakefile:tests/Makefile.in
 GNUmakefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
 	  *config.status*) \
@@ -392,8 +389,6 @@ run-r6rs-loko.sh: $(top_builddir)/config.status $(srcdir)/run-r6rs-loko.sh.in
 run-r7rs-loko.sh: $(top_builddir)/config.status $(srcdir)/run-r7rs-loko.sh.in
 	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@
 run-r6rs-racket.sh: $(top_builddir)/config.status $(srcdir)/run-r6rs-racket.sh.in
-	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@
-run-r6rs-racketbc.sh: $(top_builddir)/config.status $(srcdir)/run-r6rs-racketbc.sh.in
 	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@
 run-r6rs-sagittarius.sh: $(top_builddir)/config.status $(srcdir)/run-r6rs-sagittarius.sh.in
 	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@

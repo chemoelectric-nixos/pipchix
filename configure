@@ -651,9 +651,6 @@ GNU
 SAGITTARIUS_FALSE
 SAGITTARIUS_TRUE
 SAGITTARIUS
-PLT_R6RSBC_FALSE
-PLT_R6RSBC_TRUE
-PLT_R6RSBC
 PLT_R6RS_FALSE
 PLT_R6RS_TRUE
 PLT_R6RS
@@ -898,7 +895,6 @@ GUILE
 LOKO
 MIT_SCHEME
 PLT_R6RS
-PLT_R6RSBC
 SAGITTARIUS
 GNU_MAKE
 TEST_LOCALE'
@@ -1617,8 +1613,7 @@ Some influential environment variables:
   GUILE       Guile Scheme version 3
   LOKO        Loko Scheme
   MIT_SCHEME  MIT/GNU Scheme
-  PLT_R6RS    Racket (R⁶RS, CS or BC implementation)
-  PLT_R6RSBC  Racket (R⁶RS, BC implementation)
+  PLT_R6RS    Racket (R⁶RS)
   SAGITTARIUS Sagittarius Scheme
   GNU_MAKE    GNU Make command
   TEST_LOCALE locale to use when running tests (default: C.utf8)
@@ -8159,8 +8154,8 @@ fi
 # Override the cache if the precious variable PLT_R6RS is set.
 test -n "${PLT_R6RS}" && unset ac_cv_path_PLT_R6RS
 chem_cv_path_PLT_R6RS_found=yes
-{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for plt-r6rs" >&5
-printf %s "checking for plt-r6rs... " >&6; }
+{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for plt-r6rs plt-r6rscs plt-r6rsbc" >&5
+printf %s "checking for plt-r6rs plt-r6rscs plt-r6rsbc... " >&6; }
 if test ${ac_cv_path_PLT_R6RS+y}
 then :
   printf %s "(cached) " >&6
@@ -8177,7 +8172,7 @@ do
     */) ;;
     *) as_dir=$as_dir/ ;;
   esac
-    for ac_prog in plt-r6rs
+    for ac_prog in plt-r6rs plt-r6rscs plt-r6rsbc
    do
     for ac_exec_ext in '' $ac_executable_extensions; do
       ac_path_PLT_R6RS="$as_dir$ac_prog$ac_exec_ext"
@@ -8235,90 +8230,6 @@ fi
 else
   PLT_R6RS_TRUE='#'
   PLT_R6RS_FALSE=
-fi
-
-
-{ :;
-
-# Override the cache if the precious variable PLT_R6RSBC is set.
-test -n "${PLT_R6RSBC}" && unset ac_cv_path_PLT_R6RSBC
-chem_cv_path_PLT_R6RSBC_found=yes
-{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for plt-r6rsbc" >&5
-printf %s "checking for plt-r6rsbc... " >&6; }
-if test ${ac_cv_path_PLT_R6RSBC+y}
-then :
-  printf %s "(cached) " >&6
-else case e in #(
-  e) if test -z "$PLT_R6RSBC"; then
-  ac_path_PLT_R6RSBC_found=false
-  # Loop through the user's path and test for each of PROGNAME-LIST
-  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-for as_dir in $PATH
-do
-  IFS=$as_save_IFS
-  case $as_dir in #(((
-    '') as_dir=./ ;;
-    */) ;;
-    *) as_dir=$as_dir/ ;;
-  esac
-    for ac_prog in plt-r6rsbc
-   do
-    for ac_exec_ext in '' $ac_executable_extensions; do
-      ac_path_PLT_R6RSBC="$as_dir$ac_prog$ac_exec_ext"
-      as_fn_executable_p "$ac_path_PLT_R6RSBC" || continue
-
-      if test -n "${PLT_R6RSBC}"; then
-         # Bypass the test if the precious variable PLT_R6RSBC is set.
-         ac_cv_path_PLT_R6RSBC="${PLT_R6RSBC}"
-         ac_path_PLT_R6RSBC_found=:
-      else
-         # Run the test.
-
-    if LC_ALL=C LANG=C ${ac_path_PLT_R6RSBC} --help 2>&1 | \
-      LC_ALL=C LANG=C ${FGREP} '++path <dir>' \
-               2> /dev/null > /dev/null; then
-        ac_cv_path_PLT_R6RSBC="${ac_path_PLT_R6RSBC}"
-        ac_path_PLT_R6RSBC_found=:
-    fi
-
-      fi
-      $ac_path_PLT_R6RSBC_found && break 3
-    done
-  done
-  done
-IFS=$as_save_IFS
-  if test -z "$ac_cv_path_PLT_R6RSBC"; then
-    :
-  fi
-else
-  ac_cv_path_PLT_R6RSBC=$PLT_R6RSBC
-fi
-
-      if test -z "${ac_cv_path_PLT_R6RSBC}"; then
-         ac_cv_path_PLT_R6RSBC="not found"
-         chem_cv_path_PLT_R6RSBC_found=no
-      fi
-    ;;
-esac
-fi
-{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $ac_cv_path_PLT_R6RSBC" >&5
-printf "%s\n" "$ac_cv_path_PLT_R6RSBC" >&6; }
-if test x"${chem_cv_path_PLT_R6RSBC_found}" = x"yes"; then
-   PLT_R6RSBC="${ac_cv_path_PLT_R6RSBC}"
-else
-   PLT_R6RSBC=""
-   # Do not cache the negative result. That way someone can install
-   # the program and have it be discovered, even though they did not
-   # clear a cache entry.
-   unset ac_cv_path_PLT_R6RSBC
-fi
-}
- if test "${chem_cv_path_PLT_R6RSBC_found}" != no; then
-  PLT_R6RSBC_TRUE=
-  PLT_R6RSBC_FALSE='#'
-else
-  PLT_R6RSBC_TRUE='#'
-  PLT_R6RSBC_FALSE=
 fi
 
 
@@ -8638,8 +8549,6 @@ ac_config_files="$ac_config_files tests/run-r7rs-loko.sh"
 
 ac_config_files="$ac_config_files tests/run-r6rs-racket.sh"
 
-ac_config_files="$ac_config_files tests/run-r6rs-racketbc.sh"
-
 ac_config_files="$ac_config_files tests/run-r6rs-sagittarius.sh"
 
 ac_config_files="$ac_config_files tests/run-r7rs-sagittarius.sh"
@@ -8950,10 +8859,6 @@ Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${PLT_R6RS_TRUE}" && test -z "${PLT_R6RS_FALSE}"; then
   as_fn_error $? "conditional \"PLT_R6RS\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
-if test -z "${PLT_R6RSBC_TRUE}" && test -z "${PLT_R6RSBC_FALSE}"; then
-  as_fn_error $? "conditional \"PLT_R6RSBC\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${SAGITTARIUS_TRUE}" && test -z "${SAGITTARIUS_FALSE}"; then
@@ -9565,7 +9470,6 @@ do
     "tests/run-r6rs-loko.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r6rs-loko.sh" ;;
     "tests/run-r7rs-loko.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r7rs-loko.sh" ;;
     "tests/run-r6rs-racket.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r6rs-racket.sh" ;;
-    "tests/run-r6rs-racketbc.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r6rs-racketbc.sh" ;;
     "tests/run-r6rs-sagittarius.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r6rs-sagittarius.sh" ;;
     "tests/run-r7rs-sagittarius.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r7rs-sagittarius.sh" ;;
     "tinyscheme-1.42/init.scm") CONFIG_LINKS="$CONFIG_LINKS tinyscheme-1.42/init.scm:tinyscheme-1.42/init.scm" ;;
@@ -10210,7 +10114,6 @@ EOF
     "tests/run-r6rs-loko.sh":F) chmod +x tests/run-r6rs-loko.sh ;;
     "tests/run-r7rs-loko.sh":F) chmod +x tests/run-r7rs-loko.sh ;;
     "tests/run-r6rs-racket.sh":F) chmod +x tests/run-r6rs-racket.sh ;;
-    "tests/run-r6rs-racketbc.sh":F) chmod +x tests/run-r6rs-racketbc.sh ;;
     "tests/run-r6rs-sagittarius.sh":F) chmod +x tests/run-r6rs-sagittarius.sh ;;
     "tests/run-r7rs-sagittarius.sh":F) chmod +x tests/run-r7rs-sagittarius.sh ;;
 
@@ -10318,12 +10221,8 @@ if test "${chem_cv_path_MIT_SCHEME_found}" != no; then
 printf "%s\n" "$as_me: MIT/GNU Scheme: ${MIT_SCHEME}" >&6;}
 fi
 if test "${chem_cv_path_PLT_R6RS_found}" != no; then
-  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: Racket (CS or BC implementation): ${PLT_R6RS}" >&5
-printf "%s\n" "$as_me: Racket (CS or BC implementation): ${PLT_R6RS}" >&6;}
-fi
-if test "${chem_cv_path_PLT_R6RSBC_found}" != no; then
-  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: Racket (BC implementation): ${PLT_R6RSBC}" >&5
-printf "%s\n" "$as_me: Racket (BC implementation): ${PLT_R6RSBC}" >&6;}
+  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: Racket (R⁶RS): ${PLT_R6RS}" >&5
+printf "%s\n" "$as_me: Racket (R⁶RS): ${PLT_R6RS}" >&6;}
 fi
 if test "${chem_cv_path_SAGITTARIUS_found}" != no; then
   { printf "%s\n" "$as_me:${as_lineno-$LINENO}: Sagittarius Scheme: ${SAGITTARIUS}" >&5

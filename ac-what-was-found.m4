@@ -52,10 +52,7 @@ if test "${chem_cv_path_MIT_SCHEME_found}" != no; then
   AC_MSG_NOTICE([MIT/GNU Scheme: ${MIT_SCHEME}])
 fi
 if test "${chem_cv_path_PLT_R6RS_found}" != no; then
-  AC_MSG_NOTICE([Racket (CS or BC implementation): ${PLT_R6RS}])
-fi
-if test "${chem_cv_path_PLT_R6RSBC_found}" != no; then
-  AC_MSG_NOTICE([Racket (BC implementation): ${PLT_R6RSBC}])
+  AC_MSG_NOTICE([Racket (R⁶RS): ${PLT_R6RS}])
 fi
 if test "${chem_cv_path_SAGITTARIUS_found}" != no; then
   AC_MSG_NOTICE([Sagittarius Scheme: ${SAGITTARIUS}])

@@ -38,7 +38,6 @@ m4_define([run_r7rs_mit],["${abs_builddir}"/run-r7rs-mit.sh])
 m4_define([run_r6rs_loko],["${abs_builddir}"/run-r6rs-loko.sh])
 m4_define([run_r7rs_loko],["${abs_builddir}"/run-r7rs-loko.sh])
 m4_define([run_r6rs_racket],["${abs_builddir}"/run-r6rs-racket.sh])
-m4_define([run_r6rs_racketbc],["${abs_builddir}"/run-r6rs-racketbc.sh])
 m4_define([run_r6rs_sagittarius],["${abs_builddir}"/run-r6rs-sagittarius.sh])
 m4_define([run_r7rs_sagittarius],["${abs_builddir}"/run-r7rs-sagittarius.sh])
 
@@ -89,11 +88,6 @@ tests_template([mit/gnu     ],[MIT/GNU Scheme (R⁷RS)],
 tests_template([racket      ],[Racket (R⁶RS)],
   [R6RS r6rs Racket racket PLT plt plt-scheme plt-r6rs],
   [${enable_check_r6rs_racket}],[run_r6rs_racket])
-
-tests_template([racketbc    ],[Racket BC (R⁶RS)],
-  [R6RS r6rs RacketBC racketbc PLT plt plt-scheme
-   plt-schemebc plt-r6rsbc PLTBC pltbc],
-  [${enable_check_r6rs_racketbc}],[run_r6rs_racketbc])
 
 tests_template([sagitt(r6rs)],[Sagittarius Scheme (R⁶RS)],
   [R6RS r6rs Sagittarius sagittarius sagittarius-scheme

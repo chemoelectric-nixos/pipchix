@@ -398,7 +398,6 @@ PACKAGE_URL = @PACKAGE_URL@
 PACKAGE_VERSION = @PACKAGE_VERSION@
 PATH_SEPARATOR = @PATH_SEPARATOR@
 PLT_R6RS = @PLT_R6RS@
-PLT_R6RSBC = @PLT_R6RSBC@
 SAGITTARIUS = @SAGITTARIUS@
 SED = @SED@
 SET_MAKE = @SET_MAKE@
@@ -1307,8 +1306,6 @@ chicken-5-egg-stamp: make-chicken-5-egg
 
 @ENABLE_CHECK_R6RS_RACKET_TRUE@@PLT_R6RS_TRUE@check: $(R6RS_SCHEME)
 
-@ENABLE_CHECK_R6RS_RACKETBC_TRUE@@PLT_R6RSBC_TRUE@check: $(R6RS_SCHEME)
-
 @ENABLE_CHECK_R6RS_SAGITTARIUS_TRUE@@SAGITTARIUS_TRUE@check: $(R6RS_SCHEME)
 #
 @ENABLE_CHECK_R7RS_SAGITTARIUS_TRUE@@SAGITTARIUS_TRUE@check: $(R7RS_SCHEME)
@@ -1336,7 +1333,6 @@ config.status: tests/run-r6rs-loko.sh.in
 config.status: tests/run-r7rs-loko.sh.in
 
 config.status: tests/run-r6rs-racket.sh.in
-config.status: tests/run-r6rs-racketbc.sh.in
 
 config.status: tests/run-r6rs-sagittarius.sh.in
 config.status: tests/run-r7rs-sagittarius.sh.in
