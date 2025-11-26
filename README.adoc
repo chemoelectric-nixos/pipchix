@@ -12,9 +12,8 @@ CHICKEN 5:: Install the NixOS packages +chicken+,
   should produce a compressed tar file. Untar the file into your
   +/etc/nixos+ or equivalent directory. Run +chicken-install -n+ to
   build the egg in place. Now you can run CHICKEN scripts in
-  +/etc/nixos+ that import R⁷RS Pipchix libraries.
-
-  Please remember that CHICKEN 5 is not an R⁷RS implementation. It
-  does not, for instance, recognize the same syntax for escapes in
-  strings. CHICKEN 6 will be an R⁷RS implementation, but does not work
-  yet with Pipchix (as of 2025-11-26).
+  +/etc/nixos+ that import R⁷RS Pipchix libraries.footnote:[Please
+  remember that CHICKEN 5 is not an R⁷RS implementation. It does not,
+  for instance, recognize the same syntax for escapes in strings.
+  CHICKEN 6 will be an R⁷RS implementation, but does not work yet with
+  Pipchix (as of 2025-11-26).]
