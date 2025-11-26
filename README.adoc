@@ -1,3 +1,20 @@
 = Pipchix
 
 Pipchix is currently under development.
+
+Here is a quick guide to how one might use Pipchix to write NixOS
+configurations, once Pipchix is sufficiently developed.
+
+CHICKEN 5:: Install the NixOS packages +chicken+,
+  +chickenPackages.chickenEggs.utf8+, and
+  +chickenPackages.chickenEggs.r7rs+. Configure Pipchix, preferably
+  for an out-of-source build. Do +make dist-chicken-egg-5+, which
+  should produce a compressed tar file. Untar the file into your
+  +/etc/nixos+ or equivalent directory. Run +chicken-install -n+ to
+  build the egg in place. Now you can run CHICKEN scripts in
+  +/etc/nixos+ that import R⁷RS Pipchix libraries.
+
+  Please remember that CHICKEN 5 is not an R⁷RS implementation. It
+  does not, for instance, recognize the same syntax for escapes in
+  strings. CHICKEN 6 will be an R⁷RS implementation, but does not work
+  yet with Pipchix (as of 2025-11-26).
