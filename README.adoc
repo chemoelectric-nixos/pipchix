@@ -71,3 +71,6 @@ included in the test suite are simply those against which Pipchix is
 tested, not those to which Pipchix is limited. R⁶RS and R⁷RS are
 standards, and Pipchix is written to try to conform to those
 standards.
+
+TinySCHEME is included with Pipchix, but it is for scripting in the
+build process. I use it to make the CHICKEN egg file.
