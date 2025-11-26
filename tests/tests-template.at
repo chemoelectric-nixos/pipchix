@@ -133,6 +133,35 @@ check_unquoted([run_scheme 'sexpr'],[0],[nix_true],[])
 m4_define([sexpr],
   [(make-nix-data-node (nix-list-node? `(1 2 3 4)))])
 check_unquoted([run_scheme 'sexpr'],[0],[nix_false],[])
+m4_define([sexpr],
+  [(make-nix-data-node (nix-data-node? `(1 2 3 4)))])
+check_unquoted([run_scheme 'sexpr'],[0],[nix_false],[])
+m4_define([sexpr],
+  [(make-nix-data-node
+    (nix-data-node? (list->nix-list-node `(1 2 3 4))))])
+check_unquoted([run_scheme 'sexpr'],[0],[nix_false],[])
+m4_define([sexpr],
+  [(make-nix-data-node
+    (nix-data-node?
+     (make-nix-data-node
+      (nix-data-node? (list->nix-list-node `(1 2 3 4))))))])
+check_unquoted([run_scheme 'sexpr'],[0],[nix_true],[])
+m4_define([sexpr],
+  [(make-nix-data-node (nix-path-node? (make-nix-path-node ".")))])
+check_unquoted([run_scheme 'sexpr'],[0],[nix_true],[])
+m4_define([sexpr],
+  [(make-nix-data-node (nix-path-node? (make-nix-data-node ".")))])
+check_unquoted([run_scheme 'sexpr'],[0],[nix_false],[])
+m4_define([sexpr],
+  [(make-nix-data-node
+    (nix-path-node?
+     (list->nix-attributepath-node `("a" "b"))))])
+check_unquoted([run_scheme 'sexpr'],[0],[nix_false],[])
+m4_define([sexpr],
+  [(make-nix-data-node
+    (nix-attributepath-node?
+     (list->nix-attributepath-node `("a" "b"))))])
+check_unquoted([run_scheme 'sexpr'],[0],[nix_true],[])
 AT_CLEANUP
 
 m4_popdef([tests_tag])
