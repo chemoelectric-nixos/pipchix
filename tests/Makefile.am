@@ -36,21 +36,21 @@ DISTCLEANFILES += Makefile
 DISTCLEANFILES += GNUmakefile
 DISTCLEANFILES += atconfig
 
-$(srcdir)/package.m4: $(top_srcdir)/configure.ac
+$(srcdir)/package.m4: $(top_srcdir)/configure.ac $(srcdir)/Makefile.am
 	$(AWK) \
 	  'BEGIN{print "# Signature of the current package."; \
-	         print "m4_define([AT_PACKAGE_NAME],"; \
-	         print "  [$(PACKAGE_NAME)])"; \
-	         print "m4_define([AT_PACKAGE_TARNAME],"; \
-	         print "  [$(PACKAGE_TARNAME)])"; \
-	         print "m4_define([AT_PACKAGE_VERSION],"; \
-	         print "  [$(PACKAGE_VERSION)])"; \
-	         print "m4_define([AT_PACKAGE_STRING],"; \
-	         print "  [$(PACKAGE_STRING)])"; \
-	         print "m4_define([AT_PACKAGE_BUGREPORT],"; \
-	         print "  [$(PACKAGE_BUGREPORT)])"; \
-	         print "m4_define([AT_PACKAGE_URL],"; \
-	         print "  [$(PACKAGE_URL)])"}' \
+	         printf "m4_define([AT_PACKAGE_NAME],"; \
+	         printf "[$(PACKAGE_NAME)])\n"; \
+	         printf "m4_define([AT_PACKAGE_TARNAME],"; \
+	         printf "[$(PACKAGE_TARNAME)])\n"; \
+	         printf "m4_define([AT_PACKAGE_VERSION],"; \
+	         printf "[$(PACKAGE_VERSION)])\n"; \
+	         printf "m4_define([AT_PACKAGE_STRING],"; \
+	         printf "[$(PACKAGE_STRING)])\n"; \
+	         printf "m4_define([AT_PACKAGE_BUGREPORT],"; \
+	         printf "[$(PACKAGE_BUGREPORT)])\n"; \
+	         printf "m4_define([AT_PACKAGE_URL],"; \
+	         printf "[$(PACKAGE_URL)])\n"}' \
 	  > $(@).tmp && mv $(@){.tmp,}
 
 CLEANFILES += *.tmp
@@ -86,6 +86,16 @@ TESTSUITE_DEPS =
 TESTSUITE_DEPS += $(srcdir)/package.m4
 TESTSUITE_DEPS += $(srcdir)/testsuite.at
 TESTSUITE_DEPS += $(srcdir)/tests-template.at
+#
+TESTSUITE_DEPS += $(srcdir)/ast-nodes-preds-template.at
+#
+TESTSUITE_DEPS += $(srcdir)/nix-attributepath-node-template.at
+TESTSUITE_DEPS += $(srcdir)/nix-data-node-template.at
+TESTSUITE_DEPS += $(srcdir)/nix-embedded-node-template.at
+TESTSUITE_DEPS += $(srcdir)/nix-path-node-template.at
+#
+TESTSUITE_DEPS += $(srcdir)/nix-embed-template.at
+TESTSUITE_DEPS += $(srcdir)/nix-list-template.at
 
 $(TESTSUITE): $(TESTSUITE_DEPS)
 	$(AUTOTEST) -I '$(srcdir)' -o $(@).tmp $(@).at && \

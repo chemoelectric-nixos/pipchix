@@ -327,8 +327,17 @@ CHECK_LOCAL_DEPS = atconfig atlocal $(TESTSUITE)
 AUTOM4TE = $(SHELL) $(top_srcdir)/build-aux/missing --run autom4te
 AUTOTEST = $(AUTOM4TE) --language=autotest
 TESTSUITE = $(srcdir)/testsuite
+#
+#
+#
 TESTSUITE_DEPS = $(srcdir)/package.m4 $(srcdir)/testsuite.at \
-	$(srcdir)/tests-template.at
+	$(srcdir)/tests-template.at \
+	$(srcdir)/ast-nodes-preds-template.at \
+	$(srcdir)/nix-attributepath-node-template.at \
+	$(srcdir)/nix-data-node-template.at \
+	$(srcdir)/nix-embedded-node-template.at \
+	$(srcdir)/nix-path-node-template.at \
+	$(srcdir)/nix-embed-template.at $(srcdir)/nix-list-template.at
 all: $(BUILT_SOURCES)
 	$(MAKE) $(AM_MAKEFLAGS) all-am
 
@@ -562,21 +571,21 @@ uninstall-am:
 
 .DELETE_ON_ERROR:
 
-$(srcdir)/package.m4: $(top_srcdir)/configure.ac
+$(srcdir)/package.m4: $(top_srcdir)/configure.ac $(srcdir)/Makefile.am
 	$(AWK) \
 	  'BEGIN{print "# Signature of the current package."; \
-	         print "m4_define([AT_PACKAGE_NAME],"; \
-	         print "  [$(PACKAGE_NAME)])"; \
-	         print "m4_define([AT_PACKAGE_TARNAME],"; \
-	         print "  [$(PACKAGE_TARNAME)])"; \
-	         print "m4_define([AT_PACKAGE_VERSION],"; \
-	         print "  [$(PACKAGE_VERSION)])"; \
-	         print "m4_define([AT_PACKAGE_STRING],"; \
-	         print "  [$(PACKAGE_STRING)])"; \
-	         print "m4_define([AT_PACKAGE_BUGREPORT],"; \
-	         print "  [$(PACKAGE_BUGREPORT)])"; \
-	         print "m4_define([AT_PACKAGE_URL],"; \
-	         print "  [$(PACKAGE_URL)])"}' \
+	         printf "m4_define([AT_PACKAGE_NAME],"; \
+	         printf "[$(PACKAGE_NAME)])\n"; \
+	         printf "m4_define([AT_PACKAGE_TARNAME],"; \
+	         printf "[$(PACKAGE_TARNAME)])\n"; \
+	         printf "m4_define([AT_PACKAGE_VERSION],"; \
+	         printf "[$(PACKAGE_VERSION)])\n"; \
+	         printf "m4_define([AT_PACKAGE_STRING],"; \
+	         printf "[$(PACKAGE_STRING)])\n"; \
+	         printf "m4_define([AT_PACKAGE_BUGREPORT],"; \
+	         printf "[$(PACKAGE_BUGREPORT)])\n"; \
+	         printf "m4_define([AT_PACKAGE_URL],"; \
+	         printf "[$(PACKAGE_URL)])\n"}' \
 	  > $(@).tmp && mv $(@){.tmp,}
 
 check-local: $(CHECK_LOCAL_DEPS)
