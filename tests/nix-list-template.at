@@ -28,13 +28,11 @@ AT_KEYWORDS([default_keywords nix-list])
 
 m4_define([sexpr],[(nix-list 1 2 3 4 5)])
 check_unquoted([run_scheme 'sexpr'],[0],
-[m4_translit([@<:@·(1)·(2)·(3)·(4)·(5)·@:>@·],[·],[
-])],[])
+  [interpunct_nl([@<:@·(1)·(2)·(3)·(4)·(5)·@:>@·])],[])
 
 m4_define([sexpr],[(list->nix-list (list "1" "2" "3" "4" "5"))])
 check_unquoted([run_scheme 'sexpr'],[0],
-[m4_translit([@<:@·("1")·("2")·("3")·("4")·("5")·@:>@·],[·],[
-])],[])
+  [interpunct_nl([@<:@·("1")·("2")·("3")·("4")·("5")·@:>@·])],[])
 
 AT_CLEANUP
 

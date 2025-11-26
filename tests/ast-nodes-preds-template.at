@@ -102,6 +102,18 @@ m4_define([sexpr],[
 ])
 check_unquoted([run_scheme 'sexpr'],[0],[nix_true],[])
 
+m4_define([sexpr],
+  [(make-nix-data-node
+    (nix-attributebinding-node?
+     (list->nix-inherit-node (map scheme->nix `(a "b" c)))))])
+check_unquoted([run_scheme 'sexpr'],[0],[nix_false],[])
+
+m4_define([sexpr],
+  [(make-nix-data-node
+    (nix-inherit-node?
+     (list->nix-inherit-node (map scheme->nix `(a "b" c)))))])
+check_unquoted([run_scheme 'sexpr'],[0],[nix_true],[])
+
 AT_CLEANUP
 
 # local variables:

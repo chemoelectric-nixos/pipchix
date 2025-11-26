@@ -27,18 +27,16 @@ AT_SETUP([setup_message(<nix-attributepath-node>)])
 AT_KEYWORDS([default_keywords nix-attributepath-node])
 
 m4_define([sexpr],[(list->nix-attributepath-node `("variable"))])
-check_unquoted([run_scheme 'sexpr'],[0],[variable
-],[])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([variable·])],[])
 
 m4_define([sexpr],[(list->nix-attributepath-node `(a b "c"))])
 check_unquoted([run_scheme 'sexpr'],[0],
-[m4_translit([a·.·b·.·c·],[·],[
-])],[])
+  [interpunct_nl([a·.·b·.·c·])],[])
 
 m4_define([sexpr],[(list->nix-attributepath-node `("x.y" "u.v"))])
 check_unquoted([run_scheme 'sexpr'],[0],
-[m4_translit(["x.y"·.·"u.v"·],[·],[
-])],[])
+  [interpunct_nl(["x.y"·.·"u.v"·])],[])
 
 AT_CLEANUP
 

@@ -19,7 +19,7 @@ env LC_ALL="@TEST_LOCALE@" \
     LANG="@TEST_LOCALE@" \
     @GUILE@ --language=scheme --r6rs \
     -q -L '@abs_top_builddir@/r6rs' \
-    --no-auto-compile -s "${prog_scm}"
+    --no-auto-compile -s "${prog_scm}" 2>/dev/null
 
 rm "${prog_scm}"
 

@@ -20,7 +20,7 @@ env LC_ALL="@TEST_LOCALE@" \
     LANG="@TEST_LOCALE@" \
     @GUILE@ --language=scheme --r7rs \
     -q -L '@abs_top_builddir@/r7rs' \
-    --no-auto-compile -s "${prog_scm}"
+    --no-auto-compile -s "${prog_scm}" 2>/dev/null
 
 rm "${prog_scm}"
 
