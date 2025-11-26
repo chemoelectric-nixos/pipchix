@@ -5,15 +5,41 @@ Pipchix is currently under development.
 Here is a quick guide to how one might use Pipchix to write NixOS
 configurations, once Pipchix is sufficiently developed.
 
+Pipchix is designed for out-of-source builds. You can +mkdir+ a
+directory separate from the one in which the sources are (or as a
+subdirectory of it), and run +configure+ from that directory. This is
+the preferred way to configure and build Pipchix. It is cleaner and
+you can do multiple builds with different
+configurations.footnote:[Also it is required if an Autotooled package
+is to pass the ‘+distcheck+’ test.]
+
 CHICKEN 5:: Install the NixOS packages +chicken+,
   +chickenPackages.chickenEggs.utf8+, and
-  +chickenPackages.chickenEggs.r7rs+. Configure Pipchix, preferably
-  for an out-of-source build. Do +make dist-chicken-egg-5+, which
-  should produce a compressed tar file. Untar the file into your
-  +/etc/nixos+ or equivalent directory. Run +chicken-install -n+ to
-  build the egg in place. Now you can run CHICKEN scripts in
-  +/etc/nixos+ that import R⁷RS Pipchix libraries.footnote:[Please
-  remember that CHICKEN 5 is not an R⁷RS implementation. It does not,
-  for instance, recognize the same syntax for escapes in strings.
-  CHICKEN 6 will be an R⁷RS implementation, but does not work yet with
-  Pipchix (as of 2025-11-26).]
+  +chickenPackages.chickenEggs.r7rs+. Configure Pipchix. Do ‘+make
+  dist-chicken-egg-5+’, which should produce a compressed tar file.
+  Untar the file into your +/etc/nixos+ or equivalent directory. Run
+  ‘+chicken-install -n+’ to build the egg in place. Now, when you run
+  CHICKEN scripts in +/etc/nixos+, they can import the R⁷RS Pipchix
+  libraries.footnote:[Please remember that CHICKEN 5 is not an R⁷RS
+  implementation. It does not, for instance, recognize the same syntax
+  for escapes in strings. CHICKEN 6 will be an R⁷RS implementation,
+  but does not work yet with Pipchix (as of 2025-11-26).]
+
+Most R⁶RS Schemes:: Configure Pipchix with
+  +--enable-install-r6rs-source=/etc/nixos/pipchix+ or similar. Do
+  ‘+make install+’. In some cases you may need to add ‘+.+’ to the
+  list of places to search for libraries. For Racket, perhaps you will
+  have to run ‘+plt-r6rs ++path $PWD your-script.scm+’ or some such
+  command.footnote:[I do not deal here with how to precompile R⁶RS libraries.]
+
+Most R⁷RS Schemes:: Configure Pipchix with
+  +--enable-install-r7rs-source=/etc/nixos/pipchix+ or similar. Do
+  ‘+make install+’. In some cases you may need to add ‘+.+’ to the
+  list of places to search for libraries. MIT/GNU Scheme requires that
+  you first register the libraries, before you can load
+  them.footnote:[I do not deal here with how to precompile R⁷RS
+  libraries, except for CHICKEN 5. CHICKEN 5 was discussed earlier.]
+
+In general, you can refer to the scripts in the +tests+ directory for
+hints on how to run the different Scheme implementations. I have
+not done precompiling, except in the case of CHICKEN.
