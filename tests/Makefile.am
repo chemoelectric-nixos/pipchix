@@ -68,11 +68,13 @@ CHECK_LOCAL_DEPS += $(TESTSUITE)
 
 check-local: $(CHECK_LOCAL_DEPS)
 	$(SHELL) '$(TESTSUITE)' \
-	  "$(filter -j%,$(MAKEFLAGS)) "$(TESTSUITEFLAGS)
+	  $(shell printf "%s" "$(filter -j%,$(MAKEFLAGS)) $(TESTSUITEFLAGS)" \
+	     | $(SED) -e 's|^[[:space:]]*||' -e 's|[[:space:]]*$$||')
 
 installcheck-local: atconfig atlocal $(TESTSUITE)
 	$(SHELL) '$(TESTSUITE)' AUTOTEST_PATH='$(bindir)' \
-	  "$(filter -j%,$(MAKEFLAGS)) "$(TESTSUITEFLAGS)
+	  $(shell printf "%s" "$(filter -j%,$(MAKEFLAGS)) $(TESTSUITEFLAGS)" \
+	     | $(SED) -e 's|^[[:space:]]*||' -e 's|[[:space:]]*$$||')
 
 clean-local:
 	test ! -f '$(TESTSUITE)' || \
