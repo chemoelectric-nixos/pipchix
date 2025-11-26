@@ -613,71 +613,97 @@ at_color=auto
 # numerical order.
 at_format='??'
 # Description of all the test groups.
-at_help_all="1;testsuite.at:44;chez                        <nix-data-node>;r6rs chez chez-scheme chezscheme nix-data-node;
-2;testsuite.at:44;chez                        <nix-path-node>;r6rs chez chez-scheme chezscheme nix-path-node;
-3;testsuite.at:44;chez               <nix-attributepath-node>;r6rs chez chez-scheme chezscheme nix-attributepath-node;
-4;testsuite.at:44;chez                    (pipchix nix-embed);r6rs chez chez-scheme chezscheme nix-embed;
-5;testsuite.at:44;chez                     (pipchix nix-list);r6rs chez chez-scheme chezscheme nix-list;
-6;testsuite.at:48;chibi                       <nix-data-node>;r7rs chibi chibi-scheme chibischeme nix-data-node;
-7;testsuite.at:48;chibi                       <nix-path-node>;r7rs chibi chibi-scheme chibischeme nix-path-node;
-8;testsuite.at:48;chibi              <nix-attributepath-node>;r7rs chibi chibi-scheme chibischeme nix-attributepath-node;
-9;testsuite.at:48;chibi                   (pipchix nix-embed);r7rs chibi chibi-scheme chibischeme nix-embed;
-10;testsuite.at:48;chibi                    (pipchix nix-list);r7rs chibi chibi-scheme chibischeme nix-list;
-11;testsuite.at:52;csc-5                       <nix-data-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler nix-data-node;
-12;testsuite.at:52;csc-5                       <nix-path-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler nix-path-node;
-13;testsuite.at:52;csc-5              <nix-attributepath-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler nix-attributepath-node;
-14;testsuite.at:52;csc-5                   (pipchix nix-embed);r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler nix-embed;
-15;testsuite.at:52;csc-5                    (pipchix nix-list);r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler nix-list;
-16;testsuite.at:58;csi-5                       <nix-data-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter nix-data-node;
-17;testsuite.at:58;csi-5                       <nix-path-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter nix-path-node;
-18;testsuite.at:58;csi-5              <nix-attributepath-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter nix-attributepath-node;
-19;testsuite.at:58;csi-5                   (pipchix nix-embed);r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter nix-embed;
-20;testsuite.at:58;csi-5                    (pipchix nix-list);r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter nix-list;
-21;testsuite.at:64;gauche                      <nix-data-node>;r7rs gauche gauche-scheme gauchescheme nix-data-node;
-22;testsuite.at:64;gauche                      <nix-path-node>;r7rs gauche gauche-scheme gauchescheme nix-path-node;
-23;testsuite.at:64;gauche             <nix-attributepath-node>;r7rs gauche gauche-scheme gauchescheme nix-attributepath-node;
-24;testsuite.at:64;gauche                  (pipchix nix-embed);r7rs gauche gauche-scheme gauchescheme nix-embed;
-25;testsuite.at:64;gauche                   (pipchix nix-list);r7rs gauche gauche-scheme gauchescheme nix-list;
-26;testsuite.at:68;guile(r6rs)                 <nix-data-node>;r6rs guile guile-scheme guilescheme nix-data-node;
-27;testsuite.at:68;guile(r6rs)                 <nix-path-node>;r6rs guile guile-scheme guilescheme nix-path-node;
-28;testsuite.at:68;guile(r6rs)        <nix-attributepath-node>;r6rs guile guile-scheme guilescheme nix-attributepath-node;
-29;testsuite.at:68;guile(r6rs)             (pipchix nix-embed);r6rs guile guile-scheme guilescheme nix-embed;
-30;testsuite.at:68;guile(r6rs)              (pipchix nix-list);r6rs guile guile-scheme guilescheme nix-list;
-31;testsuite.at:72;guile(r7rs)                 <nix-data-node>;r7rs guile guile-scheme guilescheme nix-data-node;
-32;testsuite.at:72;guile(r7rs)                 <nix-path-node>;r7rs guile guile-scheme guilescheme nix-path-node;
-33;testsuite.at:72;guile(r7rs)        <nix-attributepath-node>;r7rs guile guile-scheme guilescheme nix-attributepath-node;
-34;testsuite.at:72;guile(r7rs)             (pipchix nix-embed);r7rs guile guile-scheme guilescheme nix-embed;
-35;testsuite.at:72;guile(r7rs)              (pipchix nix-list);r7rs guile guile-scheme guilescheme nix-list;
-36;testsuite.at:76;loko(r6rs)                  <nix-data-node>;r6rs loko loko-scheme lokoscheme nix-data-node;
-37;testsuite.at:76;loko(r6rs)                  <nix-path-node>;r6rs loko loko-scheme lokoscheme nix-path-node;
-38;testsuite.at:76;loko(r6rs)         <nix-attributepath-node>;r6rs loko loko-scheme lokoscheme nix-attributepath-node;
-39;testsuite.at:76;loko(r6rs)              (pipchix nix-embed);r6rs loko loko-scheme lokoscheme nix-embed;
-40;testsuite.at:76;loko(r6rs)               (pipchix nix-list);r6rs loko loko-scheme lokoscheme nix-list;
-41;testsuite.at:80;loko(r7rs)                  <nix-data-node>;r7rs loko loko-scheme lokoscheme nix-data-node;
-42;testsuite.at:80;loko(r7rs)                  <nix-path-node>;r7rs loko loko-scheme lokoscheme nix-path-node;
-43;testsuite.at:80;loko(r7rs)         <nix-attributepath-node>;r7rs loko loko-scheme lokoscheme nix-attributepath-node;
-44;testsuite.at:80;loko(r7rs)              (pipchix nix-embed);r7rs loko loko-scheme lokoscheme nix-embed;
-45;testsuite.at:80;loko(r7rs)               (pipchix nix-list);r7rs loko loko-scheme lokoscheme nix-list;
-46;testsuite.at:84;mit/gnu                     <nix-data-node>;r7rs mit mit/gnu mit-scheme mitscheme nix-data-node;
-47;testsuite.at:84;mit/gnu                     <nix-path-node>;r7rs mit mit/gnu mit-scheme mitscheme nix-path-node;
-48;testsuite.at:84;mit/gnu            <nix-attributepath-node>;r7rs mit mit/gnu mit-scheme mitscheme nix-attributepath-node;
-49;testsuite.at:84;mit/gnu                 (pipchix nix-embed);r7rs mit mit/gnu mit-scheme mitscheme nix-embed;
-50;testsuite.at:84;mit/gnu                  (pipchix nix-list);r7rs mit mit/gnu mit-scheme mitscheme nix-list;
-51;testsuite.at:88;racket                      <nix-data-node>;r6rs racket plt plt-scheme plt-r6rs nix-data-node;
-52;testsuite.at:88;racket                      <nix-path-node>;r6rs racket plt plt-scheme plt-r6rs nix-path-node;
-53;testsuite.at:88;racket             <nix-attributepath-node>;r6rs racket plt plt-scheme plt-r6rs nix-attributepath-node;
-54;testsuite.at:88;racket                  (pipchix nix-embed);r6rs racket plt plt-scheme plt-r6rs nix-embed;
-55;testsuite.at:88;racket                   (pipchix nix-list);r6rs racket plt plt-scheme plt-r6rs nix-list;
-56;testsuite.at:92;sagitt(r6rs)                <nix-data-node>;r6rs sagittarius sagittarius-scheme sagittariusscheme sash nix-data-node;
-57;testsuite.at:92;sagitt(r6rs)                <nix-path-node>;r6rs sagittarius sagittarius-scheme sagittariusscheme sash nix-path-node;
-58;testsuite.at:92;sagitt(r6rs)       <nix-attributepath-node>;r6rs sagittarius sagittarius-scheme sagittariusscheme sash nix-attributepath-node;
-59;testsuite.at:92;sagitt(r6rs)            (pipchix nix-embed);r6rs sagittarius sagittarius-scheme sagittariusscheme sash nix-embed;
-60;testsuite.at:92;sagitt(r6rs)             (pipchix nix-list);r6rs sagittarius sagittarius-scheme sagittariusscheme sash nix-list;
-61;testsuite.at:97;sagitt(r7rs)                <nix-data-node>;r7rs sagittarius sagittarius-scheme sagittariusscheme sash nix-data-node;
-62;testsuite.at:97;sagitt(r7rs)                <nix-path-node>;r7rs sagittarius sagittarius-scheme sagittariusscheme sash nix-path-node;
-63;testsuite.at:97;sagitt(r7rs)       <nix-attributepath-node>;r7rs sagittarius sagittarius-scheme sagittariusscheme sash nix-attributepath-node;
-64;testsuite.at:97;sagitt(r7rs)            (pipchix nix-embed);r7rs sagittarius sagittarius-scheme sagittariusscheme sash nix-embed;
-65;testsuite.at:97;sagitt(r7rs)             (pipchix nix-list);r7rs sagittarius sagittarius-scheme sagittariusscheme sash nix-list;
+at_help_all="1;testsuite.at:44;chez                    <nix-embedded-node>;r6rs chez chez-scheme chezscheme nix-embedded-node;
+2;testsuite.at:44;chez                        <nix-data-node>;r6rs chez chez-scheme chezscheme nix-data-node;
+3;testsuite.at:44;chez                        <nix-path-node>;r6rs chez chez-scheme chezscheme nix-path-node;
+4;testsuite.at:44;chez               <nix-attributepath-node>;r6rs chez chez-scheme chezscheme nix-attributepath-node;
+5;testsuite.at:44;chez                    (pipchix nix-embed);r6rs chez chez-scheme chezscheme nix-embed;
+6;testsuite.at:44;chez                     (pipchix nix-list);r6rs chez chez-scheme chezscheme nix-list;
+7;testsuite.at:44;chez                    AST node predicates;;
+8;testsuite.at:48;chibi                   <nix-embedded-node>;r7rs chibi chibi-scheme chibischeme nix-embedded-node;
+9;testsuite.at:48;chibi                       <nix-data-node>;r7rs chibi chibi-scheme chibischeme nix-data-node;
+10;testsuite.at:48;chibi                       <nix-path-node>;r7rs chibi chibi-scheme chibischeme nix-path-node;
+11;testsuite.at:48;chibi              <nix-attributepath-node>;r7rs chibi chibi-scheme chibischeme nix-attributepath-node;
+12;testsuite.at:48;chibi                   (pipchix nix-embed);r7rs chibi chibi-scheme chibischeme nix-embed;
+13;testsuite.at:48;chibi                    (pipchix nix-list);r7rs chibi chibi-scheme chibischeme nix-list;
+14;testsuite.at:48;chibi                   AST node predicates;;
+15;testsuite.at:52;csc-5                   <nix-embedded-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler nix-embedded-node;
+16;testsuite.at:52;csc-5                       <nix-data-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler nix-data-node;
+17;testsuite.at:52;csc-5                       <nix-path-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler nix-path-node;
+18;testsuite.at:52;csc-5              <nix-attributepath-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler nix-attributepath-node;
+19;testsuite.at:52;csc-5                   (pipchix nix-embed);r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler nix-embed;
+20;testsuite.at:52;csc-5                    (pipchix nix-list);r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler nix-list;
+21;testsuite.at:52;csc-5                   AST node predicates;;
+22;testsuite.at:58;csi-5                   <nix-embedded-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter nix-embedded-node;
+23;testsuite.at:58;csi-5                       <nix-data-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter nix-data-node;
+24;testsuite.at:58;csi-5                       <nix-path-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter nix-path-node;
+25;testsuite.at:58;csi-5              <nix-attributepath-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter nix-attributepath-node;
+26;testsuite.at:58;csi-5                   (pipchix nix-embed);r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter nix-embed;
+27;testsuite.at:58;csi-5                    (pipchix nix-list);r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter nix-list;
+28;testsuite.at:58;csi-5                   AST node predicates;;
+29;testsuite.at:64;gauche                  <nix-embedded-node>;r7rs gauche gauche-scheme gauchescheme nix-embedded-node;
+30;testsuite.at:64;gauche                      <nix-data-node>;r7rs gauche gauche-scheme gauchescheme nix-data-node;
+31;testsuite.at:64;gauche                      <nix-path-node>;r7rs gauche gauche-scheme gauchescheme nix-path-node;
+32;testsuite.at:64;gauche             <nix-attributepath-node>;r7rs gauche gauche-scheme gauchescheme nix-attributepath-node;
+33;testsuite.at:64;gauche                  (pipchix nix-embed);r7rs gauche gauche-scheme gauchescheme nix-embed;
+34;testsuite.at:64;gauche                   (pipchix nix-list);r7rs gauche gauche-scheme gauchescheme nix-list;
+35;testsuite.at:64;gauche                  AST node predicates;;
+36;testsuite.at:68;guile(r6rs)             <nix-embedded-node>;r6rs guile guile-scheme guilescheme nix-embedded-node;
+37;testsuite.at:68;guile(r6rs)                 <nix-data-node>;r6rs guile guile-scheme guilescheme nix-data-node;
+38;testsuite.at:68;guile(r6rs)                 <nix-path-node>;r6rs guile guile-scheme guilescheme nix-path-node;
+39;testsuite.at:68;guile(r6rs)        <nix-attributepath-node>;r6rs guile guile-scheme guilescheme nix-attributepath-node;
+40;testsuite.at:68;guile(r6rs)             (pipchix nix-embed);r6rs guile guile-scheme guilescheme nix-embed;
+41;testsuite.at:68;guile(r6rs)              (pipchix nix-list);r6rs guile guile-scheme guilescheme nix-list;
+42;testsuite.at:68;guile(r6rs)             AST node predicates;;
+43;testsuite.at:72;guile(r7rs)             <nix-embedded-node>;r7rs guile guile-scheme guilescheme nix-embedded-node;
+44;testsuite.at:72;guile(r7rs)                 <nix-data-node>;r7rs guile guile-scheme guilescheme nix-data-node;
+45;testsuite.at:72;guile(r7rs)                 <nix-path-node>;r7rs guile guile-scheme guilescheme nix-path-node;
+46;testsuite.at:72;guile(r7rs)        <nix-attributepath-node>;r7rs guile guile-scheme guilescheme nix-attributepath-node;
+47;testsuite.at:72;guile(r7rs)             (pipchix nix-embed);r7rs guile guile-scheme guilescheme nix-embed;
+48;testsuite.at:72;guile(r7rs)              (pipchix nix-list);r7rs guile guile-scheme guilescheme nix-list;
+49;testsuite.at:72;guile(r7rs)             AST node predicates;;
+50;testsuite.at:76;loko(r6rs)              <nix-embedded-node>;r6rs loko loko-scheme lokoscheme nix-embedded-node;
+51;testsuite.at:76;loko(r6rs)                  <nix-data-node>;r6rs loko loko-scheme lokoscheme nix-data-node;
+52;testsuite.at:76;loko(r6rs)                  <nix-path-node>;r6rs loko loko-scheme lokoscheme nix-path-node;
+53;testsuite.at:76;loko(r6rs)         <nix-attributepath-node>;r6rs loko loko-scheme lokoscheme nix-attributepath-node;
+54;testsuite.at:76;loko(r6rs)              (pipchix nix-embed);r6rs loko loko-scheme lokoscheme nix-embed;
+55;testsuite.at:76;loko(r6rs)               (pipchix nix-list);r6rs loko loko-scheme lokoscheme nix-list;
+56;testsuite.at:76;loko(r6rs)              AST node predicates;;
+57;testsuite.at:80;loko(r7rs)              <nix-embedded-node>;r7rs loko loko-scheme lokoscheme nix-embedded-node;
+58;testsuite.at:80;loko(r7rs)                  <nix-data-node>;r7rs loko loko-scheme lokoscheme nix-data-node;
+59;testsuite.at:80;loko(r7rs)                  <nix-path-node>;r7rs loko loko-scheme lokoscheme nix-path-node;
+60;testsuite.at:80;loko(r7rs)         <nix-attributepath-node>;r7rs loko loko-scheme lokoscheme nix-attributepath-node;
+61;testsuite.at:80;loko(r7rs)              (pipchix nix-embed);r7rs loko loko-scheme lokoscheme nix-embed;
+62;testsuite.at:80;loko(r7rs)               (pipchix nix-list);r7rs loko loko-scheme lokoscheme nix-list;
+63;testsuite.at:80;loko(r7rs)              AST node predicates;;
+64;testsuite.at:84;mit/gnu                 <nix-embedded-node>;r7rs mit mit/gnu mit-scheme mitscheme nix-embedded-node;
+65;testsuite.at:84;mit/gnu                     <nix-data-node>;r7rs mit mit/gnu mit-scheme mitscheme nix-data-node;
+66;testsuite.at:84;mit/gnu                     <nix-path-node>;r7rs mit mit/gnu mit-scheme mitscheme nix-path-node;
+67;testsuite.at:84;mit/gnu            <nix-attributepath-node>;r7rs mit mit/gnu mit-scheme mitscheme nix-attributepath-node;
+68;testsuite.at:84;mit/gnu                 (pipchix nix-embed);r7rs mit mit/gnu mit-scheme mitscheme nix-embed;
+69;testsuite.at:84;mit/gnu                  (pipchix nix-list);r7rs mit mit/gnu mit-scheme mitscheme nix-list;
+70;testsuite.at:84;mit/gnu                 AST node predicates;;
+71;testsuite.at:88;racket                  <nix-embedded-node>;r6rs racket plt plt-scheme plt-r6rs nix-embedded-node;
+72;testsuite.at:88;racket                      <nix-data-node>;r6rs racket plt plt-scheme plt-r6rs nix-data-node;
+73;testsuite.at:88;racket                      <nix-path-node>;r6rs racket plt plt-scheme plt-r6rs nix-path-node;
+74;testsuite.at:88;racket             <nix-attributepath-node>;r6rs racket plt plt-scheme plt-r6rs nix-attributepath-node;
+75;testsuite.at:88;racket                  (pipchix nix-embed);r6rs racket plt plt-scheme plt-r6rs nix-embed;
+76;testsuite.at:88;racket                   (pipchix nix-list);r6rs racket plt plt-scheme plt-r6rs nix-list;
+77;testsuite.at:88;racket                  AST node predicates;;
+78;testsuite.at:92;sagitt(r6rs)            <nix-embedded-node>;r6rs sagittarius sagittarius-scheme sagittariusscheme sash nix-embedded-node;
+79;testsuite.at:92;sagitt(r6rs)                <nix-data-node>;r6rs sagittarius sagittarius-scheme sagittariusscheme sash nix-data-node;
+80;testsuite.at:92;sagitt(r6rs)                <nix-path-node>;r6rs sagittarius sagittarius-scheme sagittariusscheme sash nix-path-node;
+81;testsuite.at:92;sagitt(r6rs)       <nix-attributepath-node>;r6rs sagittarius sagittarius-scheme sagittariusscheme sash nix-attributepath-node;
+82;testsuite.at:92;sagitt(r6rs)            (pipchix nix-embed);r6rs sagittarius sagittarius-scheme sagittariusscheme sash nix-embed;
+83;testsuite.at:92;sagitt(r6rs)             (pipchix nix-list);r6rs sagittarius sagittarius-scheme sagittariusscheme sash nix-list;
+84;testsuite.at:92;sagitt(r6rs)            AST node predicates;;
+85;testsuite.at:97;sagitt(r7rs)            <nix-embedded-node>;r7rs sagittarius sagittarius-scheme sagittariusscheme sash nix-embedded-node;
+86;testsuite.at:97;sagitt(r7rs)                <nix-data-node>;r7rs sagittarius sagittarius-scheme sagittariusscheme sash nix-data-node;
+87;testsuite.at:97;sagitt(r7rs)                <nix-path-node>;r7rs sagittarius sagittarius-scheme sagittariusscheme sash nix-path-node;
+88;testsuite.at:97;sagitt(r7rs)       <nix-attributepath-node>;r7rs sagittarius sagittarius-scheme sagittariusscheme sash nix-attributepath-node;
+89;testsuite.at:97;sagitt(r7rs)            (pipchix nix-embed);r7rs sagittarius sagittarius-scheme sagittariusscheme sash nix-embed;
+90;testsuite.at:97;sagitt(r7rs)             (pipchix nix-list);r7rs sagittarius sagittarius-scheme sagittariusscheme sash nix-list;
+91;testsuite.at:97;sagitt(r7rs)            AST node predicates;;
 "
 # List of the all the test groups.
 at_groups_all=`printf "%s\n" "$at_help_all" | sed 's/;.*//'`
@@ -691,7 +717,7 @@ at_fn_validate_ranges ()
   for at_grp
   do
     eval at_value=\$$at_grp
-    if test $at_value -lt 1 || test $at_value -gt 65; then
+    if test $at_value -lt 1 || test $at_value -gt 91; then
       printf "%s\n" "invalid test group: $at_value" >&2
       exit 1
     fi
@@ -1052,40 +1078,40 @@ esac
 # Category starts at test group 1.
 at_banner_text_1="Chez Scheme (R⁶RS)"
 # Banner 2. testsuite.at:48
-# Category starts at test group 6.
+# Category starts at test group 8.
 at_banner_text_2="Chibi Scheme (R⁷RS)"
 # Banner 3. testsuite.at:52
-# Category starts at test group 11.
+# Category starts at test group 15.
 at_banner_text_3="CHICKEN 5 compiler (R⁷RS)"
 # Banner 4. testsuite.at:58
-# Category starts at test group 16.
+# Category starts at test group 22.
 at_banner_text_4="CHICKEN 5 interpreter (R⁷RS)"
 # Banner 5. testsuite.at:64
-# Category starts at test group 21.
+# Category starts at test group 29.
 at_banner_text_5="Gauche Scheme (R⁷RS)"
 # Banner 6. testsuite.at:68
-# Category starts at test group 26.
+# Category starts at test group 36.
 at_banner_text_6="Guile (R⁶RS)"
 # Banner 7. testsuite.at:72
-# Category starts at test group 31.
+# Category starts at test group 43.
 at_banner_text_7="Guile (R⁷RS)"
 # Banner 8. testsuite.at:76
-# Category starts at test group 36.
+# Category starts at test group 50.
 at_banner_text_8="Loko Scheme (R⁶RS)"
 # Banner 9. testsuite.at:80
-# Category starts at test group 41.
+# Category starts at test group 57.
 at_banner_text_9="Loko Scheme (R⁷RS)"
 # Banner 10. testsuite.at:84
-# Category starts at test group 46.
+# Category starts at test group 64.
 at_banner_text_10="MIT/GNU Scheme (R⁷RS)"
 # Banner 11. testsuite.at:88
-# Category starts at test group 51.
+# Category starts at test group 71.
 at_banner_text_11="Racket (R⁶RS)"
 # Banner 12. testsuite.at:92
-# Category starts at test group 56.
+# Category starts at test group 78.
 at_banner_text_12="Sagittarius Scheme (R⁶RS)"
 # Banner 13. testsuite.at:97
-# Category starts at test group 61.
+# Category starts at test group 85.
 at_banner_text_13="Sagittarius Scheme (R⁷RS)"
 
 # Take any -C into account.
@@ -2089,15 +2115,13 @@ exit 0
 ## ------------- ##
 #AT_START_1
 at_fn_group_banner 1 'testsuite.at:44' \
-  "chez                        <nix-data-node>" "    " 1
+  "chez                    <nix-embedded-node>" "    " 1
 at_xfail=no
 (
   printf "%s\n" "1. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
-#
 
-#
 
 
 printf "%s\n" "testsuite.at:44" >"$at_check_line_file"
@@ -2118,7 +2142,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_1
+#AT_START_2
+at_fn_group_banner 2 'testsuite.at:44' \
+  "chez                        <nix-data-node>" "    " 1
+at_xfail=no
+(
+  printf "%s\n" "2. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
 
 
 printf "%s\n" "testsuite.at:44" >"$at_check_line_file"
@@ -2140,7 +2177,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:44" >"$at_check_line_file"
@@ -2162,7 +2198,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:44" >"$at_check_line_file"
@@ -2184,7 +2219,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:44" >"$at_check_line_file"
@@ -2206,7 +2240,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:44" >"$at_check_line_file"
@@ -2228,23 +2261,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_1
-#AT_START_2
-at_fn_group_banner 2 'testsuite.at:44' \
+#AT_STOP_2
+#AT_START_3
+at_fn_group_banner 3 'testsuite.at:44' \
   "chez                        <nix-path-node>" "    " 1
 at_xfail=no
 (
-  printf "%s\n" "2. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "3. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
-#
 
-#
 
 
 printf "%s\n" "testsuite.at:44" >"$at_check_line_file"
@@ -2266,7 +2296,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:44" >"$at_check_line_file"
@@ -2288,22 +2317,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_2
-#AT_START_3
-at_fn_group_banner 3 'testsuite.at:44' \
+#AT_STOP_3
+#AT_START_4
+at_fn_group_banner 4 'testsuite.at:44' \
   "chez               <nix-attributepath-node>" "    " 1
 at_xfail=no
 (
-  printf "%s\n" "3. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "4. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
-#
 
 
 printf "%s\n" "testsuite.at:44" >"$at_check_line_file"
@@ -2325,7 +2352,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:44" >"$at_check_line_file"
@@ -2351,7 +2377,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:44" >"$at_check_line_file"
@@ -2375,22 +2400,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_3
-#AT_START_4
-at_fn_group_banner 4 'testsuite.at:44' \
+#AT_STOP_4
+#AT_START_5
+at_fn_group_banner 5 'testsuite.at:44' \
   "chez                    (pipchix nix-embed)" "    " 1
 at_xfail=no
 (
-  printf "%s\n" "4. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "5. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
-#
 
 
 printf "%s\n" "testsuite.at:44" >"$at_check_line_file"
@@ -2411,22 +2434,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_4
-#AT_START_5
-at_fn_group_banner 5 'testsuite.at:44' \
+#AT_STOP_5
+#AT_START_6
+at_fn_group_banner 6 'testsuite.at:44' \
   "chez                     (pipchix nix-list)" "    " 1
 at_xfail=no
 (
-  printf "%s\n" "5. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "6. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
-#
 
 
 printf "%s\n" "testsuite.at:44" >"$at_check_line_file"
@@ -2454,7 +2475,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 
@@ -2483,23 +2503,146 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_5
-#AT_START_6
-at_fn_group_banner 6 'testsuite.at:48' \
-  "chibi                       <nix-data-node>" "    " 2
+#AT_STOP_6
+#AT_START_7
+at_fn_group_banner 7 'testsuite.at:44' \
+  "chez                    AST node predicates" "    " 1
 at_xfail=no
 (
-  printf "%s\n" "6. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "7. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
-#
 
-#
+
+printf "%s\n" "testsuite.at:44" >"$at_check_line_file"
+(test ${enable_check_r6rs_chez} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:44"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:44: \"\${abs_builddir}\"/run-r6rs-chez.sh '(make-nix-data-node
+    (nix-embedded-node?
+     (make-nix-embedded-node \"let a = 4; b = a + 5; in b\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:44"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '(make-nix-data-node
+    (nix-embedded-node?
+     (make-nix-embedded-node "let a = 4; b = a + 5; in b")))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.true)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:44"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+printf "%s\n" "testsuite.at:44" >"$at_check_line_file"
+(test ${enable_check_r6rs_chez} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:44"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:44: \"\${abs_builddir}\"/run-r6rs-chez.sh '(make-nix-data-node (nix-embedded-node? 12345))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:44"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '(make-nix-data-node (nix-embedded-node? 12345))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.false)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:44"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+printf "%s\n" "testsuite.at:44" >"$at_check_line_file"
+(test ${enable_check_r6rs_chez} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:44"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:44: \"\${abs_builddir}\"/run-r6rs-chez.sh '(make-nix-data-node
+    (nix-embedded-node? (list->nix-list-node \`(1 2 3 4))))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "testsuite.at:44"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '(make-nix-data-node
+    (nix-embedded-node? (list->nix-list-node `(1 2 3 4))))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.false)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:44"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+printf "%s\n" "testsuite.at:44" >"$at_check_line_file"
+(test ${enable_check_r6rs_chez} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:44"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:44: \"\${abs_builddir}\"/run-r6rs-chez.sh '(make-nix-data-node
+    (nix-list-node? (list->nix-list-node \`(1 2 3 4))))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "testsuite.at:44"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '(make-nix-data-node
+    (nix-list-node? (list->nix-list-node `(1 2 3 4))))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.true)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:44"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+printf "%s\n" "testsuite.at:44" >"$at_check_line_file"
+(test ${enable_check_r6rs_chez} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:44"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:44: \"\${abs_builddir}\"/run-r6rs-chez.sh '(make-nix-data-node (nix-list-node? \`(1 2 3 4)))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "testsuite.at:44"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '(make-nix-data-node (nix-list-node? `(1 2 3 4)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.false)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:44"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_7
+#AT_START_8
+at_fn_group_banner 8 'testsuite.at:48' \
+  "chibi                   <nix-embedded-node>" "    " 2
+at_xfail=no
+(
+  printf "%s\n" "8. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
 
 
 printf "%s\n" "testsuite.at:48" >"$at_check_line_file"
@@ -2520,7 +2663,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_8
+#AT_START_9
+at_fn_group_banner 9 'testsuite.at:48' \
+  "chibi                       <nix-data-node>" "    " 2
+at_xfail=no
+(
+  printf "%s\n" "9. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
 
 
 printf "%s\n" "testsuite.at:48" >"$at_check_line_file"
@@ -2542,7 +2698,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:48" >"$at_check_line_file"
@@ -2564,7 +2719,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:48" >"$at_check_line_file"
@@ -2586,7 +2740,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:48" >"$at_check_line_file"
@@ -2608,7 +2761,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:48" >"$at_check_line_file"
@@ -2630,23 +2782,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_6
-#AT_START_7
-at_fn_group_banner 7 'testsuite.at:48' \
+#AT_STOP_9
+#AT_START_10
+at_fn_group_banner 10 'testsuite.at:48' \
   "chibi                       <nix-path-node>" "    " 2
 at_xfail=no
 (
-  printf "%s\n" "7. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "10. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
-#
 
-#
 
 
 printf "%s\n" "testsuite.at:48" >"$at_check_line_file"
@@ -2668,7 +2817,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:48" >"$at_check_line_file"
@@ -2690,22 +2838,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_7
-#AT_START_8
-at_fn_group_banner 8 'testsuite.at:48' \
+#AT_STOP_10
+#AT_START_11
+at_fn_group_banner 11 'testsuite.at:48' \
   "chibi              <nix-attributepath-node>" "    " 2
 at_xfail=no
 (
-  printf "%s\n" "8. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "11. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
-#
 
 
 printf "%s\n" "testsuite.at:48" >"$at_check_line_file"
@@ -2727,7 +2873,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:48" >"$at_check_line_file"
@@ -2753,7 +2898,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:48" >"$at_check_line_file"
@@ -2777,22 +2921,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_8
-#AT_START_9
-at_fn_group_banner 9 'testsuite.at:48' \
+#AT_STOP_11
+#AT_START_12
+at_fn_group_banner 12 'testsuite.at:48' \
   "chibi                   (pipchix nix-embed)" "    " 2
 at_xfail=no
 (
-  printf "%s\n" "9. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "12. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
-#
 
 
 printf "%s\n" "testsuite.at:48" >"$at_check_line_file"
@@ -2813,22 +2955,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_9
-#AT_START_10
-at_fn_group_banner 10 'testsuite.at:48' \
+#AT_STOP_12
+#AT_START_13
+at_fn_group_banner 13 'testsuite.at:48' \
   "chibi                    (pipchix nix-list)" "    " 2
 at_xfail=no
 (
-  printf "%s\n" "10. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "13. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
-#
 
 
 printf "%s\n" "testsuite.at:48" >"$at_check_line_file"
@@ -2856,7 +2996,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 
@@ -2885,23 +3024,146 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_10
-#AT_START_11
-at_fn_group_banner 11 'testsuite.at:52' \
-  "csc-5                       <nix-data-node>" "    " 3
+#AT_STOP_13
+#AT_START_14
+at_fn_group_banner 14 'testsuite.at:48' \
+  "chibi                   AST node predicates" "    " 2
 at_xfail=no
 (
-  printf "%s\n" "11. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "14. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
-#
 
-#
+
+printf "%s\n" "testsuite.at:48" >"$at_check_line_file"
+(test ${enable_check_r7rs_chibi} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:48"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:48: \"\${abs_builddir}\"/run-r7rs-chibi.sh '(make-nix-data-node
+    (nix-embedded-node?
+     (make-nix-embedded-node \"let a = 4; b = a + 5; in b\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:48"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-chibi.sh '(make-nix-data-node
+    (nix-embedded-node?
+     (make-nix-embedded-node "let a = 4; b = a + 5; in b")))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.true)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:48"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+printf "%s\n" "testsuite.at:48" >"$at_check_line_file"
+(test ${enable_check_r7rs_chibi} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:48"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:48: \"\${abs_builddir}\"/run-r7rs-chibi.sh '(make-nix-data-node (nix-embedded-node? 12345))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:48"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-chibi.sh '(make-nix-data-node (nix-embedded-node? 12345))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.false)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:48"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+printf "%s\n" "testsuite.at:48" >"$at_check_line_file"
+(test ${enable_check_r7rs_chibi} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:48"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:48: \"\${abs_builddir}\"/run-r7rs-chibi.sh '(make-nix-data-node
+    (nix-embedded-node? (list->nix-list-node \`(1 2 3 4))))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "testsuite.at:48"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-chibi.sh '(make-nix-data-node
+    (nix-embedded-node? (list->nix-list-node `(1 2 3 4))))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.false)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:48"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+printf "%s\n" "testsuite.at:48" >"$at_check_line_file"
+(test ${enable_check_r7rs_chibi} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:48"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:48: \"\${abs_builddir}\"/run-r7rs-chibi.sh '(make-nix-data-node
+    (nix-list-node? (list->nix-list-node \`(1 2 3 4))))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "testsuite.at:48"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-chibi.sh '(make-nix-data-node
+    (nix-list-node? (list->nix-list-node `(1 2 3 4))))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.true)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:48"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+printf "%s\n" "testsuite.at:48" >"$at_check_line_file"
+(test ${enable_check_r7rs_chibi} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:48"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:48: \"\${abs_builddir}\"/run-r7rs-chibi.sh '(make-nix-data-node (nix-list-node? \`(1 2 3 4)))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "testsuite.at:48"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-chibi.sh '(make-nix-data-node (nix-list-node? `(1 2 3 4)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.false)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:48"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_14
+#AT_START_15
+at_fn_group_banner 15 'testsuite.at:52' \
+  "csc-5                   <nix-embedded-node>" "    " 3
+at_xfail=no
+(
+  printf "%s\n" "15. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
 
 
 printf "%s\n" "testsuite.at:52" >"$at_check_line_file"
@@ -2922,7 +3184,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_15
+#AT_START_16
+at_fn_group_banner 16 'testsuite.at:52' \
+  "csc-5                       <nix-data-node>" "    " 3
+at_xfail=no
+(
+  printf "%s\n" "16. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
 
 
 printf "%s\n" "testsuite.at:52" >"$at_check_line_file"
@@ -2944,7 +3219,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:52" >"$at_check_line_file"
@@ -2966,7 +3240,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:52" >"$at_check_line_file"
@@ -2988,7 +3261,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:52" >"$at_check_line_file"
@@ -3010,7 +3282,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:52" >"$at_check_line_file"
@@ -3032,23 +3303,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_11
-#AT_START_12
-at_fn_group_banner 12 'testsuite.at:52' \
+#AT_STOP_16
+#AT_START_17
+at_fn_group_banner 17 'testsuite.at:52' \
   "csc-5                       <nix-path-node>" "    " 3
 at_xfail=no
 (
-  printf "%s\n" "12. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "17. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
-#
 
-#
 
 
 printf "%s\n" "testsuite.at:52" >"$at_check_line_file"
@@ -3070,7 +3338,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:52" >"$at_check_line_file"
@@ -3092,22 +3359,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_12
-#AT_START_13
-at_fn_group_banner 13 'testsuite.at:52' \
+#AT_STOP_17
+#AT_START_18
+at_fn_group_banner 18 'testsuite.at:52' \
   "csc-5              <nix-attributepath-node>" "    " 3
 at_xfail=no
 (
-  printf "%s\n" "13. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "18. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
-#
 
 
 printf "%s\n" "testsuite.at:52" >"$at_check_line_file"
@@ -3129,7 +3394,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:52" >"$at_check_line_file"
@@ -3155,7 +3419,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:52" >"$at_check_line_file"
@@ -3179,22 +3442,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_13
-#AT_START_14
-at_fn_group_banner 14 'testsuite.at:52' \
+#AT_STOP_18
+#AT_START_19
+at_fn_group_banner 19 'testsuite.at:52' \
   "csc-5                   (pipchix nix-embed)" "    " 3
 at_xfail=no
 (
-  printf "%s\n" "14. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "19. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
-#
 
 
 printf "%s\n" "testsuite.at:52" >"$at_check_line_file"
@@ -3215,22 +3476,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_14
-#AT_START_15
-at_fn_group_banner 15 'testsuite.at:52' \
+#AT_STOP_19
+#AT_START_20
+at_fn_group_banner 20 'testsuite.at:52' \
   "csc-5                    (pipchix nix-list)" "    " 3
 at_xfail=no
 (
-  printf "%s\n" "15. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "20. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
-#
 
 
 printf "%s\n" "testsuite.at:52" >"$at_check_line_file"
@@ -3258,7 +3517,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 
@@ -3287,23 +3545,146 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_15
-#AT_START_16
-at_fn_group_banner 16 'testsuite.at:58' \
-  "csi-5                       <nix-data-node>" "    " 4
+#AT_STOP_20
+#AT_START_21
+at_fn_group_banner 21 'testsuite.at:52' \
+  "csc-5                   AST node predicates" "    " 3
 at_xfail=no
 (
-  printf "%s\n" "16. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "21. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
-#
 
-#
+
+printf "%s\n" "testsuite.at:52" >"$at_check_line_file"
+(test ${enable_check_r7rs_csc_5} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:52"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:52: \"\${abs_builddir}\"/run-r7rs-csc-5.sh '(make-nix-data-node
+    (nix-embedded-node?
+     (make-nix-embedded-node \"let a = 4; b = a + 5; in b\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:52"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csc-5.sh '(make-nix-data-node
+    (nix-embedded-node?
+     (make-nix-embedded-node "let a = 4; b = a + 5; in b")))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.true)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:52"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+printf "%s\n" "testsuite.at:52" >"$at_check_line_file"
+(test ${enable_check_r7rs_csc_5} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:52"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:52: \"\${abs_builddir}\"/run-r7rs-csc-5.sh '(make-nix-data-node (nix-embedded-node? 12345))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:52"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csc-5.sh '(make-nix-data-node (nix-embedded-node? 12345))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.false)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:52"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+printf "%s\n" "testsuite.at:52" >"$at_check_line_file"
+(test ${enable_check_r7rs_csc_5} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:52"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:52: \"\${abs_builddir}\"/run-r7rs-csc-5.sh '(make-nix-data-node
+    (nix-embedded-node? (list->nix-list-node \`(1 2 3 4))))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "testsuite.at:52"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csc-5.sh '(make-nix-data-node
+    (nix-embedded-node? (list->nix-list-node `(1 2 3 4))))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.false)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:52"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+printf "%s\n" "testsuite.at:52" >"$at_check_line_file"
+(test ${enable_check_r7rs_csc_5} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:52"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:52: \"\${abs_builddir}\"/run-r7rs-csc-5.sh '(make-nix-data-node
+    (nix-list-node? (list->nix-list-node \`(1 2 3 4))))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "testsuite.at:52"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csc-5.sh '(make-nix-data-node
+    (nix-list-node? (list->nix-list-node `(1 2 3 4))))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.true)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:52"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+printf "%s\n" "testsuite.at:52" >"$at_check_line_file"
+(test ${enable_check_r7rs_csc_5} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:52"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:52: \"\${abs_builddir}\"/run-r7rs-csc-5.sh '(make-nix-data-node (nix-list-node? \`(1 2 3 4)))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "testsuite.at:52"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csc-5.sh '(make-nix-data-node (nix-list-node? `(1 2 3 4)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.false)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:52"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_21
+#AT_START_22
+at_fn_group_banner 22 'testsuite.at:58' \
+  "csi-5                   <nix-embedded-node>" "    " 4
+at_xfail=no
+(
+  printf "%s\n" "22. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
 
 
 printf "%s\n" "testsuite.at:58" >"$at_check_line_file"
@@ -3324,7 +3705,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_22
+#AT_START_23
+at_fn_group_banner 23 'testsuite.at:58' \
+  "csi-5                       <nix-data-node>" "    " 4
+at_xfail=no
+(
+  printf "%s\n" "23. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
 
 
 printf "%s\n" "testsuite.at:58" >"$at_check_line_file"
@@ -3346,7 +3740,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:58" >"$at_check_line_file"
@@ -3368,7 +3761,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:58" >"$at_check_line_file"
@@ -3390,7 +3782,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:58" >"$at_check_line_file"
@@ -3412,7 +3803,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:58" >"$at_check_line_file"
@@ -3434,23 +3824,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_16
-#AT_START_17
-at_fn_group_banner 17 'testsuite.at:58' \
+#AT_STOP_23
+#AT_START_24
+at_fn_group_banner 24 'testsuite.at:58' \
   "csi-5                       <nix-path-node>" "    " 4
 at_xfail=no
 (
-  printf "%s\n" "17. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "24. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
-#
 
-#
 
 
 printf "%s\n" "testsuite.at:58" >"$at_check_line_file"
@@ -3472,7 +3859,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:58" >"$at_check_line_file"
@@ -3494,22 +3880,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_17
-#AT_START_18
-at_fn_group_banner 18 'testsuite.at:58' \
+#AT_STOP_24
+#AT_START_25
+at_fn_group_banner 25 'testsuite.at:58' \
   "csi-5              <nix-attributepath-node>" "    " 4
 at_xfail=no
 (
-  printf "%s\n" "18. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "25. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
-#
 
 
 printf "%s\n" "testsuite.at:58" >"$at_check_line_file"
@@ -3531,7 +3915,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:58" >"$at_check_line_file"
@@ -3557,7 +3940,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:58" >"$at_check_line_file"
@@ -3581,22 +3963,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_18
-#AT_START_19
-at_fn_group_banner 19 'testsuite.at:58' \
+#AT_STOP_25
+#AT_START_26
+at_fn_group_banner 26 'testsuite.at:58' \
   "csi-5                   (pipchix nix-embed)" "    " 4
 at_xfail=no
 (
-  printf "%s\n" "19. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "26. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
-#
 
 
 printf "%s\n" "testsuite.at:58" >"$at_check_line_file"
@@ -3617,22 +3997,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_19
-#AT_START_20
-at_fn_group_banner 20 'testsuite.at:58' \
+#AT_STOP_26
+#AT_START_27
+at_fn_group_banner 27 'testsuite.at:58' \
   "csi-5                    (pipchix nix-list)" "    " 4
 at_xfail=no
 (
-  printf "%s\n" "20. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "27. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
-#
 
 
 printf "%s\n" "testsuite.at:58" >"$at_check_line_file"
@@ -3660,7 +4038,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 
@@ -3689,23 +4066,146 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_20
-#AT_START_21
-at_fn_group_banner 21 'testsuite.at:64' \
-  "gauche                      <nix-data-node>" "    " 5
+#AT_STOP_27
+#AT_START_28
+at_fn_group_banner 28 'testsuite.at:58' \
+  "csi-5                   AST node predicates" "    " 4
 at_xfail=no
 (
-  printf "%s\n" "21. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "28. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
-#
 
-#
+
+printf "%s\n" "testsuite.at:58" >"$at_check_line_file"
+(test ${enable_check_r7rs_csi_5} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:58"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:58: \"\${abs_builddir}\"/run-r7rs-csi-5.sh '(make-nix-data-node
+    (nix-embedded-node?
+     (make-nix-embedded-node \"let a = 4; b = a + 5; in b\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:58"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csi-5.sh '(make-nix-data-node
+    (nix-embedded-node?
+     (make-nix-embedded-node "let a = 4; b = a + 5; in b")))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.true)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:58"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+printf "%s\n" "testsuite.at:58" >"$at_check_line_file"
+(test ${enable_check_r7rs_csi_5} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:58"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:58: \"\${abs_builddir}\"/run-r7rs-csi-5.sh '(make-nix-data-node (nix-embedded-node? 12345))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:58"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csi-5.sh '(make-nix-data-node (nix-embedded-node? 12345))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.false)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:58"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+printf "%s\n" "testsuite.at:58" >"$at_check_line_file"
+(test ${enable_check_r7rs_csi_5} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:58"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:58: \"\${abs_builddir}\"/run-r7rs-csi-5.sh '(make-nix-data-node
+    (nix-embedded-node? (list->nix-list-node \`(1 2 3 4))))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "testsuite.at:58"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csi-5.sh '(make-nix-data-node
+    (nix-embedded-node? (list->nix-list-node `(1 2 3 4))))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.false)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:58"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+printf "%s\n" "testsuite.at:58" >"$at_check_line_file"
+(test ${enable_check_r7rs_csi_5} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:58"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:58: \"\${abs_builddir}\"/run-r7rs-csi-5.sh '(make-nix-data-node
+    (nix-list-node? (list->nix-list-node \`(1 2 3 4))))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "testsuite.at:58"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csi-5.sh '(make-nix-data-node
+    (nix-list-node? (list->nix-list-node `(1 2 3 4))))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.true)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:58"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+printf "%s\n" "testsuite.at:58" >"$at_check_line_file"
+(test ${enable_check_r7rs_csi_5} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:58"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:58: \"\${abs_builddir}\"/run-r7rs-csi-5.sh '(make-nix-data-node (nix-list-node? \`(1 2 3 4)))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "testsuite.at:58"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csi-5.sh '(make-nix-data-node (nix-list-node? `(1 2 3 4)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.false)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:58"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_28
+#AT_START_29
+at_fn_group_banner 29 'testsuite.at:64' \
+  "gauche                  <nix-embedded-node>" "    " 5
+at_xfail=no
+(
+  printf "%s\n" "29. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
 
 
 printf "%s\n" "testsuite.at:64" >"$at_check_line_file"
@@ -3726,7 +4226,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_29
+#AT_START_30
+at_fn_group_banner 30 'testsuite.at:64' \
+  "gauche                      <nix-data-node>" "    " 5
+at_xfail=no
+(
+  printf "%s\n" "30. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
 
 
 printf "%s\n" "testsuite.at:64" >"$at_check_line_file"
@@ -3748,7 +4261,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:64" >"$at_check_line_file"
@@ -3770,7 +4282,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:64" >"$at_check_line_file"
@@ -3792,7 +4303,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:64" >"$at_check_line_file"
@@ -3814,7 +4324,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:64" >"$at_check_line_file"
@@ -3836,23 +4345,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_21
-#AT_START_22
-at_fn_group_banner 22 'testsuite.at:64' \
+#AT_STOP_30
+#AT_START_31
+at_fn_group_banner 31 'testsuite.at:64' \
   "gauche                      <nix-path-node>" "    " 5
 at_xfail=no
 (
-  printf "%s\n" "22. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "31. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
-#
 
-#
 
 
 printf "%s\n" "testsuite.at:64" >"$at_check_line_file"
@@ -3874,7 +4380,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:64" >"$at_check_line_file"
@@ -3896,22 +4401,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_22
-#AT_START_23
-at_fn_group_banner 23 'testsuite.at:64' \
+#AT_STOP_31
+#AT_START_32
+at_fn_group_banner 32 'testsuite.at:64' \
   "gauche             <nix-attributepath-node>" "    " 5
 at_xfail=no
 (
-  printf "%s\n" "23. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "32. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
-#
 
 
 printf "%s\n" "testsuite.at:64" >"$at_check_line_file"
@@ -3933,7 +4436,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:64" >"$at_check_line_file"
@@ -3959,7 +4461,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:64" >"$at_check_line_file"
@@ -3983,22 +4484,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_23
-#AT_START_24
-at_fn_group_banner 24 'testsuite.at:64' \
+#AT_STOP_32
+#AT_START_33
+at_fn_group_banner 33 'testsuite.at:64' \
   "gauche                  (pipchix nix-embed)" "    " 5
 at_xfail=no
 (
-  printf "%s\n" "24. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "33. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
-#
 
 
 printf "%s\n" "testsuite.at:64" >"$at_check_line_file"
@@ -4019,22 +4518,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_24
-#AT_START_25
-at_fn_group_banner 25 'testsuite.at:64' \
+#AT_STOP_33
+#AT_START_34
+at_fn_group_banner 34 'testsuite.at:64' \
   "gauche                   (pipchix nix-list)" "    " 5
 at_xfail=no
 (
-  printf "%s\n" "25. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "34. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
-#
 
 
 printf "%s\n" "testsuite.at:64" >"$at_check_line_file"
@@ -4062,7 +4559,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 
@@ -4091,23 +4587,146 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_25
-#AT_START_26
-at_fn_group_banner 26 'testsuite.at:68' \
-  "guile(r6rs)                 <nix-data-node>" "    " 6
+#AT_STOP_34
+#AT_START_35
+at_fn_group_banner 35 'testsuite.at:64' \
+  "gauche                  AST node predicates" "    " 5
 at_xfail=no
 (
-  printf "%s\n" "26. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "35. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
-#
 
-#
+
+printf "%s\n" "testsuite.at:64" >"$at_check_line_file"
+(test ${enable_check_r7rs_gauche} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:64"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:64: \"\${abs_builddir}\"/run-r7rs-gauche.sh '(make-nix-data-node
+    (nix-embedded-node?
+     (make-nix-embedded-node \"let a = 4; b = a + 5; in b\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:64"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gauche.sh '(make-nix-data-node
+    (nix-embedded-node?
+     (make-nix-embedded-node "let a = 4; b = a + 5; in b")))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.true)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:64"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+printf "%s\n" "testsuite.at:64" >"$at_check_line_file"
+(test ${enable_check_r7rs_gauche} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:64"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:64: \"\${abs_builddir}\"/run-r7rs-gauche.sh '(make-nix-data-node (nix-embedded-node? 12345))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:64"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gauche.sh '(make-nix-data-node (nix-embedded-node? 12345))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.false)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:64"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+printf "%s\n" "testsuite.at:64" >"$at_check_line_file"
+(test ${enable_check_r7rs_gauche} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:64"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:64: \"\${abs_builddir}\"/run-r7rs-gauche.sh '(make-nix-data-node
+    (nix-embedded-node? (list->nix-list-node \`(1 2 3 4))))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "testsuite.at:64"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gauche.sh '(make-nix-data-node
+    (nix-embedded-node? (list->nix-list-node `(1 2 3 4))))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.false)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:64"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+printf "%s\n" "testsuite.at:64" >"$at_check_line_file"
+(test ${enable_check_r7rs_gauche} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:64"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:64: \"\${abs_builddir}\"/run-r7rs-gauche.sh '(make-nix-data-node
+    (nix-list-node? (list->nix-list-node \`(1 2 3 4))))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "testsuite.at:64"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gauche.sh '(make-nix-data-node
+    (nix-list-node? (list->nix-list-node `(1 2 3 4))))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.true)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:64"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+printf "%s\n" "testsuite.at:64" >"$at_check_line_file"
+(test ${enable_check_r7rs_gauche} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:64"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:64: \"\${abs_builddir}\"/run-r7rs-gauche.sh '(make-nix-data-node (nix-list-node? \`(1 2 3 4)))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "testsuite.at:64"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gauche.sh '(make-nix-data-node (nix-list-node? `(1 2 3 4)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.false)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:64"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_35
+#AT_START_36
+at_fn_group_banner 36 'testsuite.at:68' \
+  "guile(r6rs)             <nix-embedded-node>" "    " 6
+at_xfail=no
+(
+  printf "%s\n" "36. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
 
 
 printf "%s\n" "testsuite.at:68" >"$at_check_line_file"
@@ -4128,7 +4747,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_36
+#AT_START_37
+at_fn_group_banner 37 'testsuite.at:68' \
+  "guile(r6rs)                 <nix-data-node>" "    " 6
+at_xfail=no
+(
+  printf "%s\n" "37. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
 
 
 printf "%s\n" "testsuite.at:68" >"$at_check_line_file"
@@ -4150,7 +4782,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:68" >"$at_check_line_file"
@@ -4172,7 +4803,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:68" >"$at_check_line_file"
@@ -4194,7 +4824,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:68" >"$at_check_line_file"
@@ -4216,7 +4845,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:68" >"$at_check_line_file"
@@ -4238,23 +4866,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_26
-#AT_START_27
-at_fn_group_banner 27 'testsuite.at:68' \
+#AT_STOP_37
+#AT_START_38
+at_fn_group_banner 38 'testsuite.at:68' \
   "guile(r6rs)                 <nix-path-node>" "    " 6
 at_xfail=no
 (
-  printf "%s\n" "27. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "38. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
-#
 
-#
 
 
 printf "%s\n" "testsuite.at:68" >"$at_check_line_file"
@@ -4276,7 +4901,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:68" >"$at_check_line_file"
@@ -4298,22 +4922,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_27
-#AT_START_28
-at_fn_group_banner 28 'testsuite.at:68' \
+#AT_STOP_38
+#AT_START_39
+at_fn_group_banner 39 'testsuite.at:68' \
   "guile(r6rs)        <nix-attributepath-node>" "    " 6
 at_xfail=no
 (
-  printf "%s\n" "28. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "39. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
-#
 
 
 printf "%s\n" "testsuite.at:68" >"$at_check_line_file"
@@ -4335,7 +4957,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:68" >"$at_check_line_file"
@@ -4361,7 +4982,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:68" >"$at_check_line_file"
@@ -4385,22 +5005,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_28
-#AT_START_29
-at_fn_group_banner 29 'testsuite.at:68' \
+#AT_STOP_39
+#AT_START_40
+at_fn_group_banner 40 'testsuite.at:68' \
   "guile(r6rs)             (pipchix nix-embed)" "    " 6
 at_xfail=no
 (
-  printf "%s\n" "29. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "40. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
-#
 
 
 printf "%s\n" "testsuite.at:68" >"$at_check_line_file"
@@ -4421,22 +5039,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_29
-#AT_START_30
-at_fn_group_banner 30 'testsuite.at:68' \
+#AT_STOP_40
+#AT_START_41
+at_fn_group_banner 41 'testsuite.at:68' \
   "guile(r6rs)              (pipchix nix-list)" "    " 6
 at_xfail=no
 (
-  printf "%s\n" "30. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "41. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
-#
 
 
 printf "%s\n" "testsuite.at:68" >"$at_check_line_file"
@@ -4464,7 +5080,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 
@@ -4493,23 +5108,146 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_30
-#AT_START_31
-at_fn_group_banner 31 'testsuite.at:72' \
-  "guile(r7rs)                 <nix-data-node>" "    " 7
+#AT_STOP_41
+#AT_START_42
+at_fn_group_banner 42 'testsuite.at:68' \
+  "guile(r6rs)             AST node predicates" "    " 6
 at_xfail=no
 (
-  printf "%s\n" "31. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "42. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
-#
 
-#
+
+printf "%s\n" "testsuite.at:68" >"$at_check_line_file"
+(test ${enable_check_r6rs_guile} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:68"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:68: \"\${abs_builddir}\"/run-r6rs-guile.sh '(make-nix-data-node
+    (nix-embedded-node?
+     (make-nix-embedded-node \"let a = 4; b = a + 5; in b\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:68"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-guile.sh '(make-nix-data-node
+    (nix-embedded-node?
+     (make-nix-embedded-node "let a = 4; b = a + 5; in b")))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.true)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:68"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+printf "%s\n" "testsuite.at:68" >"$at_check_line_file"
+(test ${enable_check_r6rs_guile} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:68"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:68: \"\${abs_builddir}\"/run-r6rs-guile.sh '(make-nix-data-node (nix-embedded-node? 12345))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:68"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-guile.sh '(make-nix-data-node (nix-embedded-node? 12345))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.false)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:68"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+printf "%s\n" "testsuite.at:68" >"$at_check_line_file"
+(test ${enable_check_r6rs_guile} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:68"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:68: \"\${abs_builddir}\"/run-r6rs-guile.sh '(make-nix-data-node
+    (nix-embedded-node? (list->nix-list-node \`(1 2 3 4))))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "testsuite.at:68"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-guile.sh '(make-nix-data-node
+    (nix-embedded-node? (list->nix-list-node `(1 2 3 4))))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.false)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:68"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+printf "%s\n" "testsuite.at:68" >"$at_check_line_file"
+(test ${enable_check_r6rs_guile} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:68"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:68: \"\${abs_builddir}\"/run-r6rs-guile.sh '(make-nix-data-node
+    (nix-list-node? (list->nix-list-node \`(1 2 3 4))))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "testsuite.at:68"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-guile.sh '(make-nix-data-node
+    (nix-list-node? (list->nix-list-node `(1 2 3 4))))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.true)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:68"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+printf "%s\n" "testsuite.at:68" >"$at_check_line_file"
+(test ${enable_check_r6rs_guile} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:68"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:68: \"\${abs_builddir}\"/run-r6rs-guile.sh '(make-nix-data-node (nix-list-node? \`(1 2 3 4)))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "testsuite.at:68"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-guile.sh '(make-nix-data-node (nix-list-node? `(1 2 3 4)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.false)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:68"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_42
+#AT_START_43
+at_fn_group_banner 43 'testsuite.at:72' \
+  "guile(r7rs)             <nix-embedded-node>" "    " 7
+at_xfail=no
+(
+  printf "%s\n" "43. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
 
 
 printf "%s\n" "testsuite.at:72" >"$at_check_line_file"
@@ -4530,7 +5268,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_43
+#AT_START_44
+at_fn_group_banner 44 'testsuite.at:72' \
+  "guile(r7rs)                 <nix-data-node>" "    " 7
+at_xfail=no
+(
+  printf "%s\n" "44. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
 
 
 printf "%s\n" "testsuite.at:72" >"$at_check_line_file"
@@ -4552,7 +5303,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:72" >"$at_check_line_file"
@@ -4574,7 +5324,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:72" >"$at_check_line_file"
@@ -4596,7 +5345,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:72" >"$at_check_line_file"
@@ -4618,7 +5366,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:72" >"$at_check_line_file"
@@ -4640,23 +5387,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_31
-#AT_START_32
-at_fn_group_banner 32 'testsuite.at:72' \
+#AT_STOP_44
+#AT_START_45
+at_fn_group_banner 45 'testsuite.at:72' \
   "guile(r7rs)                 <nix-path-node>" "    " 7
 at_xfail=no
 (
-  printf "%s\n" "32. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "45. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
-#
 
-#
 
 
 printf "%s\n" "testsuite.at:72" >"$at_check_line_file"
@@ -4678,7 +5422,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:72" >"$at_check_line_file"
@@ -4700,22 +5443,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_32
-#AT_START_33
-at_fn_group_banner 33 'testsuite.at:72' \
+#AT_STOP_45
+#AT_START_46
+at_fn_group_banner 46 'testsuite.at:72' \
   "guile(r7rs)        <nix-attributepath-node>" "    " 7
 at_xfail=no
 (
-  printf "%s\n" "33. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "46. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
-#
 
 
 printf "%s\n" "testsuite.at:72" >"$at_check_line_file"
@@ -4737,7 +5478,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:72" >"$at_check_line_file"
@@ -4763,7 +5503,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:72" >"$at_check_line_file"
@@ -4787,22 +5526,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_33
-#AT_START_34
-at_fn_group_banner 34 'testsuite.at:72' \
+#AT_STOP_46
+#AT_START_47
+at_fn_group_banner 47 'testsuite.at:72' \
   "guile(r7rs)             (pipchix nix-embed)" "    " 7
 at_xfail=no
 (
-  printf "%s\n" "34. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "47. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
-#
 
 
 printf "%s\n" "testsuite.at:72" >"$at_check_line_file"
@@ -4823,22 +5560,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_34
-#AT_START_35
-at_fn_group_banner 35 'testsuite.at:72' \
+#AT_STOP_47
+#AT_START_48
+at_fn_group_banner 48 'testsuite.at:72' \
   "guile(r7rs)              (pipchix nix-list)" "    " 7
 at_xfail=no
 (
-  printf "%s\n" "35. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "48. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
-#
 
 
 printf "%s\n" "testsuite.at:72" >"$at_check_line_file"
@@ -4866,7 +5601,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 
@@ -4895,23 +5629,146 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_35
-#AT_START_36
-at_fn_group_banner 36 'testsuite.at:76' \
-  "loko(r6rs)                  <nix-data-node>" "    " 8
+#AT_STOP_48
+#AT_START_49
+at_fn_group_banner 49 'testsuite.at:72' \
+  "guile(r7rs)             AST node predicates" "    " 7
 at_xfail=no
 (
-  printf "%s\n" "36. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "49. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
-#
 
-#
+
+printf "%s\n" "testsuite.at:72" >"$at_check_line_file"
+(test ${enable_check_r7rs_guile} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:72"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:72: \"\${abs_builddir}\"/run-r7rs-guile.sh '(make-nix-data-node
+    (nix-embedded-node?
+     (make-nix-embedded-node \"let a = 4; b = a + 5; in b\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:72"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-guile.sh '(make-nix-data-node
+    (nix-embedded-node?
+     (make-nix-embedded-node "let a = 4; b = a + 5; in b")))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.true)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:72"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+printf "%s\n" "testsuite.at:72" >"$at_check_line_file"
+(test ${enable_check_r7rs_guile} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:72"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:72: \"\${abs_builddir}\"/run-r7rs-guile.sh '(make-nix-data-node (nix-embedded-node? 12345))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:72"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-guile.sh '(make-nix-data-node (nix-embedded-node? 12345))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.false)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:72"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+printf "%s\n" "testsuite.at:72" >"$at_check_line_file"
+(test ${enable_check_r7rs_guile} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:72"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:72: \"\${abs_builddir}\"/run-r7rs-guile.sh '(make-nix-data-node
+    (nix-embedded-node? (list->nix-list-node \`(1 2 3 4))))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "testsuite.at:72"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-guile.sh '(make-nix-data-node
+    (nix-embedded-node? (list->nix-list-node `(1 2 3 4))))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.false)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:72"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+printf "%s\n" "testsuite.at:72" >"$at_check_line_file"
+(test ${enable_check_r7rs_guile} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:72"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:72: \"\${abs_builddir}\"/run-r7rs-guile.sh '(make-nix-data-node
+    (nix-list-node? (list->nix-list-node \`(1 2 3 4))))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "testsuite.at:72"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-guile.sh '(make-nix-data-node
+    (nix-list-node? (list->nix-list-node `(1 2 3 4))))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.true)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:72"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+printf "%s\n" "testsuite.at:72" >"$at_check_line_file"
+(test ${enable_check_r7rs_guile} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:72"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:72: \"\${abs_builddir}\"/run-r7rs-guile.sh '(make-nix-data-node (nix-list-node? \`(1 2 3 4)))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "testsuite.at:72"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-guile.sh '(make-nix-data-node (nix-list-node? `(1 2 3 4)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.false)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:72"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_49
+#AT_START_50
+at_fn_group_banner 50 'testsuite.at:76' \
+  "loko(r6rs)              <nix-embedded-node>" "    " 8
+at_xfail=no
+(
+  printf "%s\n" "50. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
 
 
 printf "%s\n" "testsuite.at:76" >"$at_check_line_file"
@@ -4932,7 +5789,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_50
+#AT_START_51
+at_fn_group_banner 51 'testsuite.at:76' \
+  "loko(r6rs)                  <nix-data-node>" "    " 8
+at_xfail=no
+(
+  printf "%s\n" "51. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
 
 
 printf "%s\n" "testsuite.at:76" >"$at_check_line_file"
@@ -4954,7 +5824,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:76" >"$at_check_line_file"
@@ -4976,7 +5845,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:76" >"$at_check_line_file"
@@ -4998,7 +5866,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:76" >"$at_check_line_file"
@@ -5020,7 +5887,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:76" >"$at_check_line_file"
@@ -5042,23 +5908,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_36
-#AT_START_37
-at_fn_group_banner 37 'testsuite.at:76' \
+#AT_STOP_51
+#AT_START_52
+at_fn_group_banner 52 'testsuite.at:76' \
   "loko(r6rs)                  <nix-path-node>" "    " 8
 at_xfail=no
 (
-  printf "%s\n" "37. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "52. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
-#
 
-#
 
 
 printf "%s\n" "testsuite.at:76" >"$at_check_line_file"
@@ -5080,7 +5943,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:76" >"$at_check_line_file"
@@ -5102,22 +5964,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_37
-#AT_START_38
-at_fn_group_banner 38 'testsuite.at:76' \
+#AT_STOP_52
+#AT_START_53
+at_fn_group_banner 53 'testsuite.at:76' \
   "loko(r6rs)         <nix-attributepath-node>" "    " 8
 at_xfail=no
 (
-  printf "%s\n" "38. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "53. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
-#
 
 
 printf "%s\n" "testsuite.at:76" >"$at_check_line_file"
@@ -5139,7 +5999,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:76" >"$at_check_line_file"
@@ -5165,7 +6024,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:76" >"$at_check_line_file"
@@ -5189,22 +6047,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_38
-#AT_START_39
-at_fn_group_banner 39 'testsuite.at:76' \
+#AT_STOP_53
+#AT_START_54
+at_fn_group_banner 54 'testsuite.at:76' \
   "loko(r6rs)              (pipchix nix-embed)" "    " 8
 at_xfail=no
 (
-  printf "%s\n" "39. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "54. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
-#
 
 
 printf "%s\n" "testsuite.at:76" >"$at_check_line_file"
@@ -5225,22 +6081,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_39
-#AT_START_40
-at_fn_group_banner 40 'testsuite.at:76' \
+#AT_STOP_54
+#AT_START_55
+at_fn_group_banner 55 'testsuite.at:76' \
   "loko(r6rs)               (pipchix nix-list)" "    " 8
 at_xfail=no
 (
-  printf "%s\n" "40. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "55. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
-#
 
 
 printf "%s\n" "testsuite.at:76" >"$at_check_line_file"
@@ -5268,7 +6122,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 
@@ -5297,23 +6150,146 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_40
-#AT_START_41
-at_fn_group_banner 41 'testsuite.at:80' \
-  "loko(r7rs)                  <nix-data-node>" "    " 9
+#AT_STOP_55
+#AT_START_56
+at_fn_group_banner 56 'testsuite.at:76' \
+  "loko(r6rs)              AST node predicates" "    " 8
 at_xfail=no
 (
-  printf "%s\n" "41. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "56. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
-#
 
-#
+
+printf "%s\n" "testsuite.at:76" >"$at_check_line_file"
+(test ${enable_check_r6rs_loko} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:76"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:76: \"\${abs_builddir}\"/run-r6rs-loko.sh '(make-nix-data-node
+    (nix-embedded-node?
+     (make-nix-embedded-node \"let a = 4; b = a + 5; in b\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:76"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '(make-nix-data-node
+    (nix-embedded-node?
+     (make-nix-embedded-node "let a = 4; b = a + 5; in b")))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.true)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:76"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+printf "%s\n" "testsuite.at:76" >"$at_check_line_file"
+(test ${enable_check_r6rs_loko} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:76"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:76: \"\${abs_builddir}\"/run-r6rs-loko.sh '(make-nix-data-node (nix-embedded-node? 12345))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:76"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '(make-nix-data-node (nix-embedded-node? 12345))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.false)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:76"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+printf "%s\n" "testsuite.at:76" >"$at_check_line_file"
+(test ${enable_check_r6rs_loko} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:76"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:76: \"\${abs_builddir}\"/run-r6rs-loko.sh '(make-nix-data-node
+    (nix-embedded-node? (list->nix-list-node \`(1 2 3 4))))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "testsuite.at:76"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '(make-nix-data-node
+    (nix-embedded-node? (list->nix-list-node `(1 2 3 4))))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.false)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:76"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+printf "%s\n" "testsuite.at:76" >"$at_check_line_file"
+(test ${enable_check_r6rs_loko} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:76"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:76: \"\${abs_builddir}\"/run-r6rs-loko.sh '(make-nix-data-node
+    (nix-list-node? (list->nix-list-node \`(1 2 3 4))))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "testsuite.at:76"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '(make-nix-data-node
+    (nix-list-node? (list->nix-list-node `(1 2 3 4))))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.true)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:76"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+printf "%s\n" "testsuite.at:76" >"$at_check_line_file"
+(test ${enable_check_r6rs_loko} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:76"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:76: \"\${abs_builddir}\"/run-r6rs-loko.sh '(make-nix-data-node (nix-list-node? \`(1 2 3 4)))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "testsuite.at:76"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '(make-nix-data-node (nix-list-node? `(1 2 3 4)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.false)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:76"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_56
+#AT_START_57
+at_fn_group_banner 57 'testsuite.at:80' \
+  "loko(r7rs)              <nix-embedded-node>" "    " 9
+at_xfail=no
+(
+  printf "%s\n" "57. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
 
 
 printf "%s\n" "testsuite.at:80" >"$at_check_line_file"
@@ -5334,7 +6310,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_57
+#AT_START_58
+at_fn_group_banner 58 'testsuite.at:80' \
+  "loko(r7rs)                  <nix-data-node>" "    " 9
+at_xfail=no
+(
+  printf "%s\n" "58. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
 
 
 printf "%s\n" "testsuite.at:80" >"$at_check_line_file"
@@ -5356,7 +6345,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:80" >"$at_check_line_file"
@@ -5378,7 +6366,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:80" >"$at_check_line_file"
@@ -5400,7 +6387,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:80" >"$at_check_line_file"
@@ -5422,7 +6408,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:80" >"$at_check_line_file"
@@ -5444,23 +6429,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_41
-#AT_START_42
-at_fn_group_banner 42 'testsuite.at:80' \
+#AT_STOP_58
+#AT_START_59
+at_fn_group_banner 59 'testsuite.at:80' \
   "loko(r7rs)                  <nix-path-node>" "    " 9
 at_xfail=no
 (
-  printf "%s\n" "42. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "59. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
-#
 
-#
 
 
 printf "%s\n" "testsuite.at:80" >"$at_check_line_file"
@@ -5482,7 +6464,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:80" >"$at_check_line_file"
@@ -5504,22 +6485,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_42
-#AT_START_43
-at_fn_group_banner 43 'testsuite.at:80' \
+#AT_STOP_59
+#AT_START_60
+at_fn_group_banner 60 'testsuite.at:80' \
   "loko(r7rs)         <nix-attributepath-node>" "    " 9
 at_xfail=no
 (
-  printf "%s\n" "43. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "60. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
-#
 
 
 printf "%s\n" "testsuite.at:80" >"$at_check_line_file"
@@ -5541,7 +6520,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:80" >"$at_check_line_file"
@@ -5567,7 +6545,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:80" >"$at_check_line_file"
@@ -5591,22 +6568,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_43
-#AT_START_44
-at_fn_group_banner 44 'testsuite.at:80' \
+#AT_STOP_60
+#AT_START_61
+at_fn_group_banner 61 'testsuite.at:80' \
   "loko(r7rs)              (pipchix nix-embed)" "    " 9
 at_xfail=no
 (
-  printf "%s\n" "44. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "61. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
-#
 
 
 printf "%s\n" "testsuite.at:80" >"$at_check_line_file"
@@ -5627,22 +6602,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_44
-#AT_START_45
-at_fn_group_banner 45 'testsuite.at:80' \
+#AT_STOP_61
+#AT_START_62
+at_fn_group_banner 62 'testsuite.at:80' \
   "loko(r7rs)               (pipchix nix-list)" "    " 9
 at_xfail=no
 (
-  printf "%s\n" "45. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "62. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
-#
 
 
 printf "%s\n" "testsuite.at:80" >"$at_check_line_file"
@@ -5670,7 +6643,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 
@@ -5699,23 +6671,146 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_45
-#AT_START_46
-at_fn_group_banner 46 'testsuite.at:84' \
-  "mit/gnu                     <nix-data-node>" "    " 10
+#AT_STOP_62
+#AT_START_63
+at_fn_group_banner 63 'testsuite.at:80' \
+  "loko(r7rs)              AST node predicates" "    " 9
 at_xfail=no
 (
-  printf "%s\n" "46. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "63. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
-#
 
-#
+
+printf "%s\n" "testsuite.at:80" >"$at_check_line_file"
+(test ${enable_check_r7rs_loko} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:80"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:80: \"\${abs_builddir}\"/run-r7rs-loko.sh '(make-nix-data-node
+    (nix-embedded-node?
+     (make-nix-embedded-node \"let a = 4; b = a + 5; in b\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:80"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(make-nix-data-node
+    (nix-embedded-node?
+     (make-nix-embedded-node "let a = 4; b = a + 5; in b")))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.true)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:80"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+printf "%s\n" "testsuite.at:80" >"$at_check_line_file"
+(test ${enable_check_r7rs_loko} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:80"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:80: \"\${abs_builddir}\"/run-r7rs-loko.sh '(make-nix-data-node (nix-embedded-node? 12345))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:80"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(make-nix-data-node (nix-embedded-node? 12345))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.false)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:80"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+printf "%s\n" "testsuite.at:80" >"$at_check_line_file"
+(test ${enable_check_r7rs_loko} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:80"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:80: \"\${abs_builddir}\"/run-r7rs-loko.sh '(make-nix-data-node
+    (nix-embedded-node? (list->nix-list-node \`(1 2 3 4))))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "testsuite.at:80"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(make-nix-data-node
+    (nix-embedded-node? (list->nix-list-node `(1 2 3 4))))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.false)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:80"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+printf "%s\n" "testsuite.at:80" >"$at_check_line_file"
+(test ${enable_check_r7rs_loko} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:80"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:80: \"\${abs_builddir}\"/run-r7rs-loko.sh '(make-nix-data-node
+    (nix-list-node? (list->nix-list-node \`(1 2 3 4))))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "testsuite.at:80"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(make-nix-data-node
+    (nix-list-node? (list->nix-list-node `(1 2 3 4))))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.true)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:80"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+printf "%s\n" "testsuite.at:80" >"$at_check_line_file"
+(test ${enable_check_r7rs_loko} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:80"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:80: \"\${abs_builddir}\"/run-r7rs-loko.sh '(make-nix-data-node (nix-list-node? \`(1 2 3 4)))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "testsuite.at:80"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(make-nix-data-node (nix-list-node? `(1 2 3 4)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.false)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:80"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_63
+#AT_START_64
+at_fn_group_banner 64 'testsuite.at:84' \
+  "mit/gnu                 <nix-embedded-node>" "    " 10
+at_xfail=no
+(
+  printf "%s\n" "64. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
 
 
 printf "%s\n" "testsuite.at:84" >"$at_check_line_file"
@@ -5736,7 +6831,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_64
+#AT_START_65
+at_fn_group_banner 65 'testsuite.at:84' \
+  "mit/gnu                     <nix-data-node>" "    " 10
+at_xfail=no
+(
+  printf "%s\n" "65. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
 
 
 printf "%s\n" "testsuite.at:84" >"$at_check_line_file"
@@ -5758,7 +6866,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:84" >"$at_check_line_file"
@@ -5780,7 +6887,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:84" >"$at_check_line_file"
@@ -5802,7 +6908,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:84" >"$at_check_line_file"
@@ -5824,7 +6929,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:84" >"$at_check_line_file"
@@ -5846,23 +6950,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_46
-#AT_START_47
-at_fn_group_banner 47 'testsuite.at:84' \
+#AT_STOP_65
+#AT_START_66
+at_fn_group_banner 66 'testsuite.at:84' \
   "mit/gnu                     <nix-path-node>" "    " 10
 at_xfail=no
 (
-  printf "%s\n" "47. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "66. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
-#
 
-#
 
 
 printf "%s\n" "testsuite.at:84" >"$at_check_line_file"
@@ -5884,7 +6985,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:84" >"$at_check_line_file"
@@ -5906,22 +7006,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_47
-#AT_START_48
-at_fn_group_banner 48 'testsuite.at:84' \
+#AT_STOP_66
+#AT_START_67
+at_fn_group_banner 67 'testsuite.at:84' \
   "mit/gnu            <nix-attributepath-node>" "    " 10
 at_xfail=no
 (
-  printf "%s\n" "48. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "67. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
-#
 
 
 printf "%s\n" "testsuite.at:84" >"$at_check_line_file"
@@ -5943,7 +7041,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:84" >"$at_check_line_file"
@@ -5969,7 +7066,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:84" >"$at_check_line_file"
@@ -5993,22 +7089,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_48
-#AT_START_49
-at_fn_group_banner 49 'testsuite.at:84' \
+#AT_STOP_67
+#AT_START_68
+at_fn_group_banner 68 'testsuite.at:84' \
   "mit/gnu                 (pipchix nix-embed)" "    " 10
 at_xfail=no
 (
-  printf "%s\n" "49. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "68. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
-#
 
 
 printf "%s\n" "testsuite.at:84" >"$at_check_line_file"
@@ -6029,22 +7123,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_49
-#AT_START_50
-at_fn_group_banner 50 'testsuite.at:84' \
+#AT_STOP_68
+#AT_START_69
+at_fn_group_banner 69 'testsuite.at:84' \
   "mit/gnu                  (pipchix nix-list)" "    " 10
 at_xfail=no
 (
-  printf "%s\n" "50. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "69. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
-#
 
 
 printf "%s\n" "testsuite.at:84" >"$at_check_line_file"
@@ -6072,7 +7164,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 
@@ -6101,23 +7192,146 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_50
-#AT_START_51
-at_fn_group_banner 51 'testsuite.at:88' \
-  "racket                      <nix-data-node>" "    " 11
+#AT_STOP_69
+#AT_START_70
+at_fn_group_banner 70 'testsuite.at:84' \
+  "mit/gnu                 AST node predicates" "    " 10
 at_xfail=no
 (
-  printf "%s\n" "51. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "70. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
-#
 
-#
+
+printf "%s\n" "testsuite.at:84" >"$at_check_line_file"
+(test ${enable_check_r7rs_mit} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:84"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:84: \"\${abs_builddir}\"/run-r7rs-mit.sh '(make-nix-data-node
+    (nix-embedded-node?
+     (make-nix-embedded-node \"let a = 4; b = a + 5; in b\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:84"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-mit.sh '(make-nix-data-node
+    (nix-embedded-node?
+     (make-nix-embedded-node "let a = 4; b = a + 5; in b")))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.true)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:84"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+printf "%s\n" "testsuite.at:84" >"$at_check_line_file"
+(test ${enable_check_r7rs_mit} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:84"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:84: \"\${abs_builddir}\"/run-r7rs-mit.sh '(make-nix-data-node (nix-embedded-node? 12345))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:84"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-mit.sh '(make-nix-data-node (nix-embedded-node? 12345))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.false)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:84"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+printf "%s\n" "testsuite.at:84" >"$at_check_line_file"
+(test ${enable_check_r7rs_mit} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:84"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:84: \"\${abs_builddir}\"/run-r7rs-mit.sh '(make-nix-data-node
+    (nix-embedded-node? (list->nix-list-node \`(1 2 3 4))))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "testsuite.at:84"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-mit.sh '(make-nix-data-node
+    (nix-embedded-node? (list->nix-list-node `(1 2 3 4))))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.false)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:84"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+printf "%s\n" "testsuite.at:84" >"$at_check_line_file"
+(test ${enable_check_r7rs_mit} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:84"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:84: \"\${abs_builddir}\"/run-r7rs-mit.sh '(make-nix-data-node
+    (nix-list-node? (list->nix-list-node \`(1 2 3 4))))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "testsuite.at:84"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-mit.sh '(make-nix-data-node
+    (nix-list-node? (list->nix-list-node `(1 2 3 4))))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.true)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:84"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+printf "%s\n" "testsuite.at:84" >"$at_check_line_file"
+(test ${enable_check_r7rs_mit} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:84"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:84: \"\${abs_builddir}\"/run-r7rs-mit.sh '(make-nix-data-node (nix-list-node? \`(1 2 3 4)))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "testsuite.at:84"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-mit.sh '(make-nix-data-node (nix-list-node? `(1 2 3 4)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.false)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:84"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_70
+#AT_START_71
+at_fn_group_banner 71 'testsuite.at:88' \
+  "racket                  <nix-embedded-node>" "    " 11
+at_xfail=no
+(
+  printf "%s\n" "71. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
 
 
 printf "%s\n" "testsuite.at:88" >"$at_check_line_file"
@@ -6138,7 +7352,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_71
+#AT_START_72
+at_fn_group_banner 72 'testsuite.at:88' \
+  "racket                      <nix-data-node>" "    " 11
+at_xfail=no
+(
+  printf "%s\n" "72. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
 
 
 printf "%s\n" "testsuite.at:88" >"$at_check_line_file"
@@ -6160,7 +7387,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:88" >"$at_check_line_file"
@@ -6182,7 +7408,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:88" >"$at_check_line_file"
@@ -6204,7 +7429,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:88" >"$at_check_line_file"
@@ -6226,7 +7450,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:88" >"$at_check_line_file"
@@ -6248,23 +7471,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_51
-#AT_START_52
-at_fn_group_banner 52 'testsuite.at:88' \
+#AT_STOP_72
+#AT_START_73
+at_fn_group_banner 73 'testsuite.at:88' \
   "racket                      <nix-path-node>" "    " 11
 at_xfail=no
 (
-  printf "%s\n" "52. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "73. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
-#
 
-#
 
 
 printf "%s\n" "testsuite.at:88" >"$at_check_line_file"
@@ -6286,7 +7506,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:88" >"$at_check_line_file"
@@ -6308,22 +7527,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_52
-#AT_START_53
-at_fn_group_banner 53 'testsuite.at:88' \
+#AT_STOP_73
+#AT_START_74
+at_fn_group_banner 74 'testsuite.at:88' \
   "racket             <nix-attributepath-node>" "    " 11
 at_xfail=no
 (
-  printf "%s\n" "53. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "74. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
-#
 
 
 printf "%s\n" "testsuite.at:88" >"$at_check_line_file"
@@ -6345,7 +7562,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:88" >"$at_check_line_file"
@@ -6371,7 +7587,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:88" >"$at_check_line_file"
@@ -6395,22 +7610,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_53
-#AT_START_54
-at_fn_group_banner 54 'testsuite.at:88' \
+#AT_STOP_74
+#AT_START_75
+at_fn_group_banner 75 'testsuite.at:88' \
   "racket                  (pipchix nix-embed)" "    " 11
 at_xfail=no
 (
-  printf "%s\n" "54. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "75. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
-#
 
 
 printf "%s\n" "testsuite.at:88" >"$at_check_line_file"
@@ -6431,22 +7644,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_54
-#AT_START_55
-at_fn_group_banner 55 'testsuite.at:88' \
+#AT_STOP_75
+#AT_START_76
+at_fn_group_banner 76 'testsuite.at:88' \
   "racket                   (pipchix nix-list)" "    " 11
 at_xfail=no
 (
-  printf "%s\n" "55. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "76. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
-#
 
 
 printf "%s\n" "testsuite.at:88" >"$at_check_line_file"
@@ -6474,7 +7685,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 
@@ -6503,23 +7713,146 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_55
-#AT_START_56
-at_fn_group_banner 56 'testsuite.at:92' \
-  "sagitt(r6rs)                <nix-data-node>" "    " 12
+#AT_STOP_76
+#AT_START_77
+at_fn_group_banner 77 'testsuite.at:88' \
+  "racket                  AST node predicates" "    " 11
 at_xfail=no
 (
-  printf "%s\n" "56. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "77. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
-#
 
-#
+
+printf "%s\n" "testsuite.at:88" >"$at_check_line_file"
+(test ${enable_check_r6rs_racket} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:88"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:88: \"\${abs_builddir}\"/run-r6rs-racket.sh '(make-nix-data-node
+    (nix-embedded-node?
+     (make-nix-embedded-node \"let a = 4; b = a + 5; in b\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:88"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-racket.sh '(make-nix-data-node
+    (nix-embedded-node?
+     (make-nix-embedded-node "let a = 4; b = a + 5; in b")))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.true)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:88"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+printf "%s\n" "testsuite.at:88" >"$at_check_line_file"
+(test ${enable_check_r6rs_racket} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:88"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:88: \"\${abs_builddir}\"/run-r6rs-racket.sh '(make-nix-data-node (nix-embedded-node? 12345))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:88"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-racket.sh '(make-nix-data-node (nix-embedded-node? 12345))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.false)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:88"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+printf "%s\n" "testsuite.at:88" >"$at_check_line_file"
+(test ${enable_check_r6rs_racket} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:88"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:88: \"\${abs_builddir}\"/run-r6rs-racket.sh '(make-nix-data-node
+    (nix-embedded-node? (list->nix-list-node \`(1 2 3 4))))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "testsuite.at:88"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-racket.sh '(make-nix-data-node
+    (nix-embedded-node? (list->nix-list-node `(1 2 3 4))))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.false)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:88"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+printf "%s\n" "testsuite.at:88" >"$at_check_line_file"
+(test ${enable_check_r6rs_racket} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:88"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:88: \"\${abs_builddir}\"/run-r6rs-racket.sh '(make-nix-data-node
+    (nix-list-node? (list->nix-list-node \`(1 2 3 4))))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "testsuite.at:88"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-racket.sh '(make-nix-data-node
+    (nix-list-node? (list->nix-list-node `(1 2 3 4))))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.true)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:88"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+printf "%s\n" "testsuite.at:88" >"$at_check_line_file"
+(test ${enable_check_r6rs_racket} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:88"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:88: \"\${abs_builddir}\"/run-r6rs-racket.sh '(make-nix-data-node (nix-list-node? \`(1 2 3 4)))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "testsuite.at:88"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-racket.sh '(make-nix-data-node (nix-list-node? `(1 2 3 4)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.false)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:88"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_77
+#AT_START_78
+at_fn_group_banner 78 'testsuite.at:92' \
+  "sagitt(r6rs)            <nix-embedded-node>" "    " 12
+at_xfail=no
+(
+  printf "%s\n" "78. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
 
 
 printf "%s\n" "testsuite.at:92" >"$at_check_line_file"
@@ -6540,7 +7873,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_78
+#AT_START_79
+at_fn_group_banner 79 'testsuite.at:92' \
+  "sagitt(r6rs)                <nix-data-node>" "    " 12
+at_xfail=no
+(
+  printf "%s\n" "79. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
 
 
 printf "%s\n" "testsuite.at:92" >"$at_check_line_file"
@@ -6562,7 +7908,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:92" >"$at_check_line_file"
@@ -6584,7 +7929,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:92" >"$at_check_line_file"
@@ -6606,7 +7950,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:92" >"$at_check_line_file"
@@ -6628,7 +7971,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:92" >"$at_check_line_file"
@@ -6650,23 +7992,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_56
-#AT_START_57
-at_fn_group_banner 57 'testsuite.at:92' \
+#AT_STOP_79
+#AT_START_80
+at_fn_group_banner 80 'testsuite.at:92' \
   "sagitt(r6rs)                <nix-path-node>" "    " 12
 at_xfail=no
 (
-  printf "%s\n" "57. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "80. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
-#
 
-#
 
 
 printf "%s\n" "testsuite.at:92" >"$at_check_line_file"
@@ -6688,7 +8027,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:92" >"$at_check_line_file"
@@ -6710,22 +8048,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_57
-#AT_START_58
-at_fn_group_banner 58 'testsuite.at:92' \
+#AT_STOP_80
+#AT_START_81
+at_fn_group_banner 81 'testsuite.at:92' \
   "sagitt(r6rs)       <nix-attributepath-node>" "    " 12
 at_xfail=no
 (
-  printf "%s\n" "58. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "81. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
-#
 
 
 printf "%s\n" "testsuite.at:92" >"$at_check_line_file"
@@ -6747,7 +8083,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:92" >"$at_check_line_file"
@@ -6773,7 +8108,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:92" >"$at_check_line_file"
@@ -6797,22 +8131,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_58
-#AT_START_59
-at_fn_group_banner 59 'testsuite.at:92' \
+#AT_STOP_81
+#AT_START_82
+at_fn_group_banner 82 'testsuite.at:92' \
   "sagitt(r6rs)            (pipchix nix-embed)" "    " 12
 at_xfail=no
 (
-  printf "%s\n" "59. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "82. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
-#
 
 
 printf "%s\n" "testsuite.at:92" >"$at_check_line_file"
@@ -6833,22 +8165,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_59
-#AT_START_60
-at_fn_group_banner 60 'testsuite.at:92' \
+#AT_STOP_82
+#AT_START_83
+at_fn_group_banner 83 'testsuite.at:92' \
   "sagitt(r6rs)             (pipchix nix-list)" "    " 12
 at_xfail=no
 (
-  printf "%s\n" "60. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "83. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
-#
 
 
 printf "%s\n" "testsuite.at:92" >"$at_check_line_file"
@@ -6876,7 +8206,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 
@@ -6905,23 +8234,146 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_60
-#AT_START_61
-at_fn_group_banner 61 'testsuite.at:97' \
-  "sagitt(r7rs)                <nix-data-node>" "    " 13
+#AT_STOP_83
+#AT_START_84
+at_fn_group_banner 84 'testsuite.at:92' \
+  "sagitt(r6rs)            AST node predicates" "    " 12
 at_xfail=no
 (
-  printf "%s\n" "61. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "84. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
-#
 
-#
+
+printf "%s\n" "testsuite.at:92" >"$at_check_line_file"
+(test ${enable_check_r6rs_sagittarius} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:92"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:92: \"\${abs_builddir}\"/run-r6rs-sagittarius.sh '(make-nix-data-node
+    (nix-embedded-node?
+     (make-nix-embedded-node \"let a = 4; b = a + 5; in b\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:92"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-sagittarius.sh '(make-nix-data-node
+    (nix-embedded-node?
+     (make-nix-embedded-node "let a = 4; b = a + 5; in b")))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.true)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:92"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+printf "%s\n" "testsuite.at:92" >"$at_check_line_file"
+(test ${enable_check_r6rs_sagittarius} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:92"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:92: \"\${abs_builddir}\"/run-r6rs-sagittarius.sh '(make-nix-data-node (nix-embedded-node? 12345))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:92"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-sagittarius.sh '(make-nix-data-node (nix-embedded-node? 12345))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.false)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:92"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+printf "%s\n" "testsuite.at:92" >"$at_check_line_file"
+(test ${enable_check_r6rs_sagittarius} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:92"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:92: \"\${abs_builddir}\"/run-r6rs-sagittarius.sh '(make-nix-data-node
+    (nix-embedded-node? (list->nix-list-node \`(1 2 3 4))))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "testsuite.at:92"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-sagittarius.sh '(make-nix-data-node
+    (nix-embedded-node? (list->nix-list-node `(1 2 3 4))))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.false)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:92"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+printf "%s\n" "testsuite.at:92" >"$at_check_line_file"
+(test ${enable_check_r6rs_sagittarius} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:92"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:92: \"\${abs_builddir}\"/run-r6rs-sagittarius.sh '(make-nix-data-node
+    (nix-list-node? (list->nix-list-node \`(1 2 3 4))))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "testsuite.at:92"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-sagittarius.sh '(make-nix-data-node
+    (nix-list-node? (list->nix-list-node `(1 2 3 4))))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.true)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:92"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+printf "%s\n" "testsuite.at:92" >"$at_check_line_file"
+(test ${enable_check_r6rs_sagittarius} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:92"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:92: \"\${abs_builddir}\"/run-r6rs-sagittarius.sh '(make-nix-data-node (nix-list-node? \`(1 2 3 4)))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "testsuite.at:92"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-sagittarius.sh '(make-nix-data-node (nix-list-node? `(1 2 3 4)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.false)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:92"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_84
+#AT_START_85
+at_fn_group_banner 85 'testsuite.at:97' \
+  "sagitt(r7rs)            <nix-embedded-node>" "    " 13
+at_xfail=no
+(
+  printf "%s\n" "85. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
 
 
 printf "%s\n" "testsuite.at:97" >"$at_check_line_file"
@@ -6942,7 +8394,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_85
+#AT_START_86
+at_fn_group_banner 86 'testsuite.at:97' \
+  "sagitt(r7rs)                <nix-data-node>" "    " 13
+at_xfail=no
+(
+  printf "%s\n" "86. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
 
 
 printf "%s\n" "testsuite.at:97" >"$at_check_line_file"
@@ -6964,7 +8429,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:97" >"$at_check_line_file"
@@ -6986,7 +8450,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:97" >"$at_check_line_file"
@@ -7008,7 +8471,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:97" >"$at_check_line_file"
@@ -7030,7 +8492,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:97" >"$at_check_line_file"
@@ -7052,23 +8513,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_61
-#AT_START_62
-at_fn_group_banner 62 'testsuite.at:97' \
+#AT_STOP_86
+#AT_START_87
+at_fn_group_banner 87 'testsuite.at:97' \
   "sagitt(r7rs)                <nix-path-node>" "    " 13
 at_xfail=no
 (
-  printf "%s\n" "62. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "87. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
-#
 
-#
 
 
 printf "%s\n" "testsuite.at:97" >"$at_check_line_file"
@@ -7090,7 +8548,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:97" >"$at_check_line_file"
@@ -7112,22 +8569,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_62
-#AT_START_63
-at_fn_group_banner 63 'testsuite.at:97' \
+#AT_STOP_87
+#AT_START_88
+at_fn_group_banner 88 'testsuite.at:97' \
   "sagitt(r7rs)       <nix-attributepath-node>" "    " 13
 at_xfail=no
 (
-  printf "%s\n" "63. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "88. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
-#
 
 
 printf "%s\n" "testsuite.at:97" >"$at_check_line_file"
@@ -7149,7 +8604,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:97" >"$at_check_line_file"
@@ -7175,7 +8629,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 printf "%s\n" "testsuite.at:97" >"$at_check_line_file"
@@ -7199,22 +8652,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_63
-#AT_START_64
-at_fn_group_banner 64 'testsuite.at:97' \
+#AT_STOP_88
+#AT_START_89
+at_fn_group_banner 89 'testsuite.at:97' \
   "sagitt(r7rs)            (pipchix nix-embed)" "    " 13
 at_xfail=no
 (
-  printf "%s\n" "64. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "89. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
-#
 
 
 printf "%s\n" "testsuite.at:97" >"$at_check_line_file"
@@ -7235,22 +8686,20 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_64
-#AT_START_65
-at_fn_group_banner 65 'testsuite.at:97' \
+#AT_STOP_89
+#AT_START_90
+at_fn_group_banner 90 'testsuite.at:97' \
   "sagitt(r7rs)             (pipchix nix-list)" "    " 13
 at_xfail=no
 (
-  printf "%s\n" "65. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "90. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
-#
 
 
 printf "%s\n" "testsuite.at:97" >"$at_check_line_file"
@@ -7278,7 +8727,6 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
 
 
 
@@ -7307,9 +8755,134 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-#
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_65
+#AT_STOP_90
+#AT_START_91
+at_fn_group_banner 91 'testsuite.at:97' \
+  "sagitt(r7rs)            AST node predicates" "    " 13
+at_xfail=no
+(
+  printf "%s\n" "91. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
+
+printf "%s\n" "testsuite.at:97" >"$at_check_line_file"
+(test ${enable_check_r7rs_sagittarius} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:97"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:97: \"\${abs_builddir}\"/run-r7rs-sagittarius.sh '(make-nix-data-node
+    (nix-embedded-node?
+     (make-nix-embedded-node \"let a = 4; b = a + 5; in b\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:97"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-sagittarius.sh '(make-nix-data-node
+    (nix-embedded-node?
+     (make-nix-embedded-node "let a = 4; b = a + 5; in b")))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.true)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:97"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+printf "%s\n" "testsuite.at:97" >"$at_check_line_file"
+(test ${enable_check_r7rs_sagittarius} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:97"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:97: \"\${abs_builddir}\"/run-r7rs-sagittarius.sh '(make-nix-data-node (nix-embedded-node? 12345))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "testsuite.at:97"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-sagittarius.sh '(make-nix-data-node (nix-embedded-node? 12345))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.false)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:97"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+printf "%s\n" "testsuite.at:97" >"$at_check_line_file"
+(test ${enable_check_r7rs_sagittarius} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:97"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:97: \"\${abs_builddir}\"/run-r7rs-sagittarius.sh '(make-nix-data-node
+    (nix-embedded-node? (list->nix-list-node \`(1 2 3 4))))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "testsuite.at:97"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-sagittarius.sh '(make-nix-data-node
+    (nix-embedded-node? (list->nix-list-node `(1 2 3 4))))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.false)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:97"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+printf "%s\n" "testsuite.at:97" >"$at_check_line_file"
+(test ${enable_check_r7rs_sagittarius} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:97"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:97: \"\${abs_builddir}\"/run-r7rs-sagittarius.sh '(make-nix-data-node
+    (nix-list-node? (list->nix-list-node \`(1 2 3 4))))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "testsuite.at:97"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-sagittarius.sh '(make-nix-data-node
+    (nix-list-node? (list->nix-list-node `(1 2 3 4))))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.true)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:97"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+printf "%s\n" "testsuite.at:97" >"$at_check_line_file"
+(test ${enable_check_r7rs_sagittarius} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/testsuite.at:97"
+{ set +x
+printf "%s\n" "$at_srcdir/testsuite.at:97: \"\${abs_builddir}\"/run-r7rs-sagittarius.sh '(make-nix-data-node (nix-list-node? \`(1 2 3 4)))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "testsuite.at:97"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-sagittarius.sh '(make-nix-data-node (nix-list-node? `(1 2 3 4)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.false)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/testsuite.at:97"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_91

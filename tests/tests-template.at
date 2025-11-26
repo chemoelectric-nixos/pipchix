@@ -22,6 +22,13 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
+m4_define([nix_null],[(builtins.null)
+])
+m4_define([nix_false],[(builtins.false)
+])
+m4_define([nix_true],[(builtins.true)
+])
+
 m4_define([setup_message],
           [m4_format([%s %30s],[tests_tag],[$1])])
 
@@ -40,13 +47,6 @@ m4_pushdef([run_scheme],[$5])
 
 AT_BANNER([tests_banner])
 
-dnl FIXME: ADD TESTS FOR THINGS LIKE nix-embedded-node?
-dnl FIXME: ADD TESTS FOR THINGS LIKE nix-embedded-node?
-dnl FIXME: ADD TESTS FOR THINGS LIKE nix-embedded-node?
-dnl FIXME: ADD TESTS FOR THINGS LIKE nix-embedded-node?
-dnl FIXME: ADD TESTS FOR THINGS LIKE nix-embedded-node?
-dnl FIXME: ADD TESTS FOR THINGS LIKE nix-embedded-node?
-
 AT_SETUP([setup_message(<nix-embedded-node>)])
 AT_KEYWORDS([default_keywords nix-embedded-node])
 m4_define([sexpr],[(make-nix-embedded-node "let a = 4; b = a + 5; in b")])
@@ -56,11 +56,9 @@ AT_CLEANUP
 AT_SETUP([setup_message(<nix-data-node>)])
 AT_KEYWORDS([default_keywords nix-data-node])
 m4_define([sexpr],[(make-nix-data-node @%:@t)])
-check_unquoted([run_scheme 'sexpr'],[0],[(builtins.true)
-],[])
+check_unquoted([run_scheme 'sexpr'],[0],[nix_true],[])
 m4_define([sexpr],[(make-nix-data-node @%:@f)])
-check_unquoted([run_scheme 'sexpr'],[0],[(builtins.false)
-],[])
+check_unquoted([run_scheme 'sexpr'],[0],[nix_false],[])
 m4_define([sexpr],[(make-nix-data-node 1234.5)])
 check_unquoted([run_scheme 'sexpr'],[0],[(1234.5)
 ],[])
@@ -68,8 +66,7 @@ m4_define([sexpr],[(make-nix-data-node "➕➖➗✖️🟰")])
 check_unquoted([run_scheme 'sexpr'],[0],[("➕➖➗✖️🟰")
 ],[])
 m4_define([sexpr],[(make-nix-data-node `())])
-check_unquoted([run_scheme 'sexpr'],[0],[(builtins.null)
-],[])
+check_unquoted([run_scheme 'sexpr'],[0],[nix_null],[])
 AT_CLEANUP
 
 AT_SETUP([setup_message(<nix-path-node>)])
@@ -121,8 +118,21 @@ m4_define([sexpr],
   [(make-nix-data-node
     (nix-embedded-node?
      (make-nix-embedded-node "let a = 4; b = a + 5; in b")))])
-check_unquoted([run_scheme 'sexpr'],[0],[(builtins.true)
-],[])
+check_unquoted([run_scheme 'sexpr'],[0],[nix_true],[])
+m4_define([sexpr],
+  [(make-nix-data-node (nix-embedded-node? 12345))])
+check_unquoted([run_scheme 'sexpr'],[0],[nix_false],[])
+m4_define([sexpr],
+  [(make-nix-data-node
+    (nix-embedded-node? (list->nix-list-node `(1 2 3 4))))])
+check_unquoted([run_scheme 'sexpr'],[0],[nix_false],[])
+m4_define([sexpr],
+  [(make-nix-data-node
+    (nix-list-node? (list->nix-list-node `(1 2 3 4))))])
+check_unquoted([run_scheme 'sexpr'],[0],[nix_true],[])
+m4_define([sexpr],
+  [(make-nix-data-node (nix-list-node? `(1 2 3 4)))])
+check_unquoted([run_scheme 'sexpr'],[0],[nix_false],[])
 AT_CLEANUP
 
 m4_popdef([tests_tag])
