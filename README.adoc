@@ -54,8 +54,8 @@ designed for bare metal development but seems to work perfectly well
 for Pipchix. It does _not_ come with R⁷RS-large support.
 
 I am not a fan of Guile. It is an R⁵RS implementation with too many
-uncoordinated features, is compliant with neither R⁶RS nor R⁷RS, and
-perhaps never will be. But Pipchix is tested to work with Guile in
+uncoordinated features. It is compliant with neither R⁶RS nor R⁷RS,
+and perhaps never will be. But Pipchix is tested to work with Guile in
 both R⁶RS and R⁷RS emulation, because Guile is ubiquitous since having
 been linked pointlessly to GNU Make.footnote:[You can use a Scheme
 with the GNU Make +$(shell ...)+ function, and the Scheme need not be
