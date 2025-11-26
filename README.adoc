@@ -62,3 +62,6 @@ both R⁶RS and R⁷RS emulation, because Guile is ubiquitous since having
 been linked pointlessly to GNU Make.footnote:[You can use a Scheme
 with the GNU Make +$(shell ...)+ function, and the Scheme need not be
 Guile.]
+
+I tried Mosh Scheme, but it seemed to mishandle strings. Therefore it
+was removed from the test suite.
