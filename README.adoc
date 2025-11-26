@@ -52,7 +52,8 @@ of ‘+(scheme list)+’). Sagittarius probably is good for R⁶RS, and of
 course Chez Scheme is the ‘gold standard’ for R⁶RS. You might,
 however, prefer rhodium or even plain steel. Loko Scheme is designed
 for bare metal development but seems to work perfectly well for
-Pipchix. It does _not_ come with R⁷RS-large support.
+Pipchix. It supports both R⁶RS and R⁷RS-small, but does _not_ come
+with R⁷RS-large support.
 
 I am not a fan of Guile. It is an R⁵RS implementation with too many
 uncoordinated features. It is compliant with neither R⁶RS nor R⁷RS,
