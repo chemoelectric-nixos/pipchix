@@ -22,52 +22,29 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
-m4_define([nix_null],[(builtins.null)
+AT_SETUP([setup_message(<nix-attributepath-node>)])
+
+AT_KEYWORDS([default_keywords nix-attributepath-node])
+
+m4_define([sexpr],[
+(let ((key (list->nix-attributepath-node `(a b c)))
+      (value (make-nix-data-node 1234)))
+  (make-nix-attributebinding-node key value))
 ])
-m4_define([nix_false],[(builtins.false)
+check_unquoted([run_scheme 'sexpr'],[0],
+[m4_translit([a·.·b·.·c·=·(1234)·;·],[·],[
+])],[])
+
+m4_define([sexpr],[
+(let ((key (list->nix-attributepath-node `(a b c)))
+      (value (make-nix-data-node `())))
+  (make-nix-attributebinding-node key value))
 ])
-m4_define([nix_true],[(builtins.true)
-])
+check_unquoted([run_scheme 'sexpr'],[0],
+[m4_translit([a·.·b·.·c·=·nix_null;·],[·],[
+])],[])
 
-m4_define([setup_message],
-          [m4_format([%s %30s],[tests_tag],[$1])])
-
-m4_define([check_unquoted],[
-AT_SKIP_IF([test enable_check = no])
-AT_CHECK_UNQUOTED([$1],[$2],[$3],[$4],[$5],[$6])
-])
-
-m4_define([tests_template],[
-
-m4_pushdef([tests_tag],[$1])
-m4_pushdef([tests_banner],[$2])
-m4_pushdef([default_keywords],[$3])
-m4_pushdef([enable_check],[$4])
-m4_pushdef([run_scheme],[$5])
-
-AT_BANNER([tests_banner])
-
-m4_include(nix-embedded-node-template.at)
-m4_include(nix-data-node-template.at)
-m4_include(nix-path-node-template.at)
-m4_include(nix-attributepath-node-template.at)
-m4_include(nix-attributebinding-node-template.at)
-
-m4_include(ast-nodes-preds-template.at)
-
-m4_include(nix-embed-template.at)
-m4_include(nix-list-template.at)
-
-m4_popdef([tests_tag])
-m4_popdef([tests_banner])
-m4_popdef([default_keywords])
-m4_popdef([enable_check])
-m4_popdef([run_scheme])
-
-
-dnl "🐶🐱🐭🐹🐰🦊🐻🐼🐻‍❄🐯🦁🐮🐷🐽🐸"
-
-])
+AT_CLEANUP
 
 # local variables:
 # mode: autoconf

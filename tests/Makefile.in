@@ -333,6 +333,7 @@ TESTSUITE = $(srcdir)/testsuite
 TESTSUITE_DEPS = $(srcdir)/package.m4 $(srcdir)/testsuite.at \
 	$(srcdir)/tests-template.at \
 	$(srcdir)/ast-nodes-preds-template.at \
+	$(srcdir)/nix-attributebinding-node-template.at \
 	$(srcdir)/nix-attributepath-node-template.at \
 	$(srcdir)/nix-data-node-template.at \
 	$(srcdir)/nix-embedded-node-template.at \

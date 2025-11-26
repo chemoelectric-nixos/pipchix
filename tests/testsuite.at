@@ -62,7 +62,8 @@ tests_template([csi-5       ],[CHICKEN 5 interpreter (R⁷RS)],
   [${enable_check_r7rs_csi_5}],[run_r7rs_csi_5])
 
 tests_template([gauche      ],[Gauche Scheme (R⁷RS)],
-  [R7RS r7rs Gauche gauche gauche-scheme gauchescheme],
+  [R7RS r7rs Gauche gauche gauche-scheme gauchescheme
+   gosh gosh-scheme goshscheme],
   [${enable_check_r7rs_gauche}],[run_r7rs_gauche])
 
 tests_template([guile(r6rs) ],[Guile (R⁶RS)],
