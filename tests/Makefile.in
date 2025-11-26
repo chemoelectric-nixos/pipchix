@@ -122,9 +122,9 @@ am__aclocal_m4_deps = $(top_srcdir)/m4/ax_check_compile_flag.m4 \
 	$(top_srcdir)/m4/chem_path_progs_cached_and_precious.m4 \
 	$(top_srcdir)/m4/chem_prog_gnu_make.m4 \
 	$(top_srcdir)/m4/chem_prog_m4.m4 \
+	$(top_srcdir)/ac-chicken-install-options.m4 \
 	$(top_srcdir)/ac-r6rs-install-options.m4 \
 	$(top_srcdir)/ac-r7rs-install-options.m4 \
-	$(top_srcdir)/ac-chicken-install-options.m4 \
 	$(top_srcdir)/ac-tinyscheme.m4 $(top_srcdir)/ac-chez-scheme.m4 \
 	$(top_srcdir)/ac-chicken-scheme.m4 \
 	$(top_srcdir)/ac-chibi-scheme.m4 \
@@ -342,9 +342,9 @@ $(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am  $(am__confi
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign tests/GNUmakefile:tests/Makefile.in'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu tests/GNUmakefile:tests/Makefile.in'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --foreign tests/GNUmakefile:tests/Makefile.in
+	  $(AUTOMAKE) --gnu tests/GNUmakefile:tests/Makefile.in
 GNUmakefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
 	  *config.status*) \

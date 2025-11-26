@@ -55,9 +55,9 @@ if test -z "${GNU_M4}"; then
    AC_MSG_ERROR([GNU m4 not found. Perhaps set GNU_M4 to OpenBSD m4.])
 fi
 
+m4_include([ac-chicken-install-options.m4])
 m4_include([ac-r6rs-install-options.m4])
 m4_include([ac-r7rs-install-options.m4])
-m4_include([ac-chicken-install-options.m4])
 
 m4_define([offer_disable_of_check],
 [AC_ARG_ENABLE([check-[$1]-[$2]],
@@ -177,10 +177,27 @@ AC_OUTPUT
 
 m4_include([ac-what-was-found.m4])
 
-if test "${chem_cv_path_ENV_found}" = no; then
-  AC_MSG_WARN([${ac_path_ENV} does not have a working -S option.])
-  AC_MSG_WARN([Some tests will be skipped.])
-  AC_MSG_WARN([Consider installing GNU coreutils.])
+AC_MSG_NOTICE([🔵 ‘make dist-chicken-egg-5’ to make a compressed tar])
+AC_MSG_NOTICE([     of the CHICKEN 5 egg sources.])
+AC_MSG_NOTICE([])
+
+if test "${install_chicken_5_egg_source}" != no; then
+  AC_MSG_NOTICE([‘make install’ will put CHICKEN 5 egg sources in])
+  AC_MSG_NOTICE([   ${chickeneggs5pipchixdir}])
+  AC_MSG_NOTICE([   where \@S|@(chickeneggsdir) is ${chickeneggsdir}])
+  AC_MSG_NOTICE([])
+fi
+
+if test "${install_r6rs_source}" != no; then
+  AC_MSG_NOTICE([‘make install’ will put R⁶RS sources in])
+  AC_MSG_NOTICE([   ${r6rspipchixdir}])
+  AC_MSG_NOTICE([])
+fi
+
+if test "${install_r7rs_source}" != no; then
+  AC_MSG_NOTICE([‘make install’ will put R⁷RS sources in])
+  AC_MSG_NOTICE([   ${r7rspipchixdir}])
+  AC_MSG_NOTICE([])
 fi
 
 # local variables:

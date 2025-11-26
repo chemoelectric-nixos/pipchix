@@ -203,6 +203,15 @@ CHICKEN_5_EGGSPEC = ' \
      "-compile-syntax")) \
  '$(CHICKEN_EGGSPEC_BOTTOM)
 
+$(PACKAGE_TARNAME)-$(PACKAGE_VERSION).egg-5.tar.xz: $(CHICKEN_5_EGGFILES)
+	( \
+	  cd $(CHICKEN_5_EGGDIR) && \
+	  tar --format=posix -chf - $(notdir $(CHICKEN_5_EGGFILES)) \
+	     | Z_OPT=$${XZ_OPT--e} xz -c \
+	) > $(@).tmp && mv $(@){.tmp,}
+
+dist-chicken-egg-5: $(PACKAGE_TARNAME)-$(PACKAGE_VERSION).egg-5.tar.xz
+
 if CHICKEN_INSTALL_5
 chicken-install-5: $(CHICKEN_5_EGGFILES)
 	( \

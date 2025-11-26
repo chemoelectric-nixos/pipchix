@@ -34,9 +34,11 @@ if test "${chem_cv_path_CSC_5_found}" != no; then
   AC_MSG_NOTICE([CHICKEN 5 compiler: ${CSC_5}])
 fi
 if test "${chem_cv_path_CHICKEN_INSTALL_5_found}" != no; then
-  AC_MSG_NOTICE([🔵 Use ‘make chicken-install-5 INSTALL_AS=sudo’ to install the ‘pipchix’ egg.])
+  AC_MSG_NOTICE([🔵 ‘make chicken-install-5 INSTALL_AS=sudo’])
+  AC_MSG_NOTICE([     to install the ‘pipchix’ egg.])
   if test "${chem_cv_path_CHICKEN_UNINSTALL_5_found}" != no; then
-    AC_MSG_NOTICE([🔵 Use ‘make chicken-uninstall-5 INSTALL_AS=sudo’ to uninstall the ‘pipchix’ egg.])
+    AC_MSG_NOTICE([🔵 ‘make chicken-uninstall-5 INSTALL_AS=sudo’])
+    AC_MSG_NOTICE([     to uninstall the ‘pipchix’ egg.])
   fi
 fi
 if test "${chem_cv_path_GAUCHE_found}" != no; then

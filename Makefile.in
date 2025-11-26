@@ -153,9 +153,9 @@ am__aclocal_m4_deps = $(top_srcdir)/m4/ax_check_compile_flag.m4 \
 	$(top_srcdir)/m4/chem_path_progs_cached_and_precious.m4 \
 	$(top_srcdir)/m4/chem_prog_gnu_make.m4 \
 	$(top_srcdir)/m4/chem_prog_m4.m4 \
+	$(top_srcdir)/ac-chicken-install-options.m4 \
 	$(top_srcdir)/ac-r6rs-install-options.m4 \
 	$(top_srcdir)/ac-r7rs-install-options.m4 \
-	$(top_srcdir)/ac-chicken-install-options.m4 \
 	$(top_srcdir)/ac-tinyscheme.m4 $(top_srcdir)/ac-chez-scheme.m4 \
 	$(top_srcdir)/ac-chicken-scheme.m4 \
 	$(top_srcdir)/ac-chibi-scheme.m4 \
@@ -1192,6 +1192,15 @@ $(CHICKEN_5_EGGDIR)/pipchix.egg: GNUmakefile $(TINYSCHEME_EXE)
 	$(call tinyscheme-1, ${abs_builddir}/"$${script}") \
 			> $(abs_builddir)/$(@) && \
 	rm "$${script}"
+
+$(PACKAGE_TARNAME)-$(PACKAGE_VERSION).egg-5.tar.xz: $(CHICKEN_5_EGGFILES)
+	( \
+	  cd $(CHICKEN_5_EGGDIR) && \
+	  tar --format=posix -chf - $(notdir $(CHICKEN_5_EGGFILES)) \
+	     | Z_OPT=$${XZ_OPT--e} xz -c \
+	) > $(@).tmp && mv $(@){.tmp,}
+
+dist-chicken-egg-5: $(PACKAGE_TARNAME)-$(PACKAGE_VERSION).egg-5.tar.xz
 
 @CHICKEN_INSTALL_5_TRUE@chicken-install-5: $(CHICKEN_5_EGGFILES)
 @CHICKEN_INSTALL_5_TRUE@	( \
