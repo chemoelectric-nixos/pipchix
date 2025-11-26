@@ -47,90 +47,82 @@ dnl FIXME: ADD TESTS FOR THINGS LIKE nix-embedded-node?
 dnl FIXME: ADD TESTS FOR THINGS LIKE nix-embedded-node?
 dnl FIXME: ADD TESTS FOR THINGS LIKE nix-embedded-node?
 
-AT_SETUP([setup_message(<nix-data-node>)])
-#
-AT_KEYWORDS([default_keywords nix-data-node])
-#
+AT_SETUP([setup_message(<nix-embedded-node>)])
+AT_KEYWORDS([default_keywords nix-embedded-node])
 m4_define([sexpr],[(make-nix-embedded-node "let a = 4; b = a + 5; in b")])
 check_unquoted([run_scheme 'sexpr'],[0],[let a = 4; b = a + 5; in b],[])
-#
+AT_CLEANUP
+
+AT_SETUP([setup_message(<nix-data-node>)])
+AT_KEYWORDS([default_keywords nix-data-node])
 m4_define([sexpr],[(make-nix-data-node @%:@t)])
 check_unquoted([run_scheme 'sexpr'],[0],[(builtins.true)
 ],[])
-#
 m4_define([sexpr],[(make-nix-data-node @%:@f)])
 check_unquoted([run_scheme 'sexpr'],[0],[(builtins.false)
 ],[])
-#
 m4_define([sexpr],[(make-nix-data-node 1234.5)])
 check_unquoted([run_scheme 'sexpr'],[0],[(1234.5)
 ],[])
-#
 m4_define([sexpr],[(make-nix-data-node "➕➖➗✖️🟰")])
 check_unquoted([run_scheme 'sexpr'],[0],[("➕➖➗✖️🟰")
 ],[])
-#
 m4_define([sexpr],[(make-nix-data-node `())])
 check_unquoted([run_scheme 'sexpr'],[0],[(builtins.null)
 ],[])
-#
 AT_CLEANUP
 
 AT_SETUP([setup_message(<nix-path-node>)])
-#
 AT_KEYWORDS([default_keywords nix-path-node])
-#
 m4_define([sexpr],[(make-nix-path-node ".")])
 check_unquoted([run_scheme 'sexpr'],[0],[( ./. )
 ],[])
-#
 m4_define([sexpr],[(make-nix-path-node "this/is/a/path")])
 check_unquoted([run_scheme 'sexpr'],[0],[( this/is/a/path )
 ],[])
-#
 AT_CLEANUP
 
 AT_SETUP([setup_message(<nix-attributepath-node>)])
 AT_KEYWORDS([default_keywords nix-attributepath-node])
-#
 m4_define([sexpr],[(list->nix-attributepath-node `("variable"))])
 check_unquoted([run_scheme 'sexpr'],[0],[variable
 ],[])
-#
 m4_define([sexpr],[(list->nix-attributepath-node `(a b "c"))])
 check_unquoted([run_scheme 'sexpr'],[0],
 [m4_translit([a·.·b·.·c·],[·],[
 ])],[])
-#
 m4_define([sexpr],[(list->nix-attributepath-node `("x.y" "u.v"))])
 check_unquoted([run_scheme 'sexpr'],[0],
 [m4_translit(["x.y"·.·"u.v"·],[·],[
 ])],[])
-#
 AT_CLEANUP
 
 AT_SETUP([setup_message((pipchix nix-embed))])
 AT_KEYWORDS([default_keywords nix-embed])
-#
 m4_define([sexpr],[(nix-embed "let a = 4; b = a + 5; in b")])
 check_unquoted([run_scheme 'sexpr'],[0],[let a = 4; b = a + 5; in b],[])
-#
 AT_CLEANUP
 
 AT_SETUP([setup_message((pipchix nix-list))])
 AT_KEYWORDS([default_keywords nix-list])
-#
 m4_define([sexpr],[(nix-list 1 2 3 4 5)])
 check_unquoted([run_scheme 'sexpr'],[0],
 [m4_translit([@<:@·(1)·(2)·(3)·(4)·(5)·@:>@·],[·],[
 ])],[])
-#
 m4_define([sexpr],[(list->nix-list (list "1" "2" "3" "4" "5"))])
 AT_KEYWORDS([default_keywords nix-list])
 check_unquoted([run_scheme 'sexpr'],[0],
 [m4_translit([@<:@·("1")·("2")·("3")·("4")·("5")·@:>@·],[·],[
 ])],[])
-#
+AT_CLEANUP
+
+AT_SETUP([setup_message(AST node predicates)])
+m4_define([sexpr],
+  [(make-nix-data-node
+    (nix-embedded-node?
+     (make-nix-embedded-node "let a = 4; b = a + 5; in b")))])
+check_unquoted([run_scheme 'sexpr'],[0],[(builtins.true)
+],[])
 AT_CLEANUP
 
 m4_popdef([tests_tag])
