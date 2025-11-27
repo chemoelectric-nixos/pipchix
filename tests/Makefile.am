@@ -61,15 +61,27 @@ EXTRA_DIST += $(srcdir)/package.m4
 EXTRA_DIST += $(TESTSUITE)
 EXTRA_DIST += atlocal.in
 
+@GNU@ define jobs-flag
+@GNU@ $(filter -j%,$(MAKEFLAGS))
+@GNU@ endef
+
+@GNU@ define color-flag
+@GNU@ $(shell \
+@GNU@   if test "${enable_color}" = no; then \
+@GNU@     printf '%s' "--color=never"; \
+@GNU@   else \
+@GNU@     printf '%s' "--color=auto"; \
+@GNU@   fi \
+@GNU@ )
+@GNU@ endef
+
 check-local: atconfig atlocal $(TESTSUITE)
 	$(SHELL) '$(TESTSUITE)' \
-	  $(shell printf "%s" "$(filter -j%,$(MAKEFLAGS)) $(TESTSUITEFLAGS)" \
-	     | $(SED) -e 's|^[[:space:]]*||' -e 's|[[:space:]]*$$||')
+	   $(color-flag) $(jobs-flag) $(TESTSUITEFLAGS)
 
 installcheck-local: atconfig atlocal $(TESTSUITE)
 	$(SHELL) '$(TESTSUITE)' AUTOTEST_PATH='$(bindir)' \
-	  $(shell printf "%s" "$(filter -j%,$(MAKEFLAGS)) $(TESTSUITEFLAGS)" \
-	     | $(SED) -e 's|^[[:space:]]*||' -e 's|[[:space:]]*$$||')
+	   $(color-flag) $(jobs-flag) $(TESTSUITEFLAGS)
 
 clean-local:
 	test ! -f '$(TESTSUITE)' || \
@@ -81,8 +93,8 @@ AUTOTEST = $(AUTOM4TE) --language=autotest
 TESTSUITE = $(srcdir)/testsuite
 
 TESTSUITE_DEPS =
+TESTSUITE_DEPS += $(srcdir)/atlocal.in
 TESTSUITE_DEPS += $(srcdir)/package.m4
-TESTSUITE_DEPS += $(srcdir)/testsuite.at
 TESTSUITE_DEPS += $(srcdir)/tests-template.at
 #
 TESTSUITE_DEPS += $(srcdir)/ast-nodes-preds-template.at
@@ -97,6 +109,6 @@ TESTSUITE_DEPS += $(srcdir)/nix-path-node-template.at
 TESTSUITE_DEPS += $(srcdir)/nix-embed-template.at
 TESTSUITE_DEPS += $(srcdir)/nix-list-template.at
 
-$(TESTSUITE): $(TESTSUITE_DEPS)
-	$(AUTOTEST) -I '$(srcdir)' -o $(@).tmp $(@).at && \
+$(TESTSUITE): $(srcdir)/testsuite.at $(TESTSUITE_DEPS)
+	$(AUTOTEST) -I '$(srcdir)' -o $(@).tmp $(<) && \
 	  mv $(@){.tmp,}

@@ -23,8 +23,6 @@ AT_COPYRIGHT([Copyright © 2025 Barry Schwartz])
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
-AT_COLOR_TESTS 
-
 m4_include(tests-template.at)
 
 m4_define([run_r6rs_chez],["${abs_builddir}"/run-r6rs-chez.sh])

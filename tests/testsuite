@@ -607,7 +607,7 @@ esac
 at_change_dir=false
 
 # Whether to enable colored test results.
-at_color=auto
+at_color=no
 # As many question marks as there are digits in the last test group number.
 # Used to normalize the test group numbers so that 'ls' lists them in
 # numerical order.
@@ -1016,7 +1016,7 @@ Execution tuning:
   -C, --directory=DIR
                  change to directory DIR before starting
       --color[=never|auto|always]
-                 disable colored test results, or enable even without terminal
+                 enable colored test results on terminal, or always
   -j, --jobs[=N]
                  Allow N jobs at once; infinite jobs with no arg (default 1)
   -k, --keywords=KEYWORDS
@@ -1100,43 +1100,43 @@ case $at_groups in #(
   * ) at_print_banners=false ;;
 esac
 # Text for banner N, set to a single space once printed.
-# Banner 1. testsuite.at:44
+# Banner 1. testsuite.at:42
 # Category starts at test group 1.
 at_banner_text_1="Chez Scheme (R⁶RS)"
-# Banner 2. testsuite.at:48
+# Banner 2. testsuite.at:46
 # Category starts at test group 10.
 at_banner_text_2="Chibi Scheme (R⁷RS)"
-# Banner 3. testsuite.at:52
+# Banner 3. testsuite.at:50
 # Category starts at test group 19.
 at_banner_text_3="CHICKEN 5 compiler (R⁷RS)"
-# Banner 4. testsuite.at:58
+# Banner 4. testsuite.at:56
 # Category starts at test group 28.
 at_banner_text_4="CHICKEN 5 interpreter (R⁷RS)"
-# Banner 5. testsuite.at:64
+# Banner 5. testsuite.at:62
 # Category starts at test group 37.
 at_banner_text_5="Gauche Scheme (R⁷RS)"
-# Banner 6. testsuite.at:69
+# Banner 6. testsuite.at:67
 # Category starts at test group 46.
 at_banner_text_6="Guile (R⁶RS)"
-# Banner 7. testsuite.at:73
+# Banner 7. testsuite.at:71
 # Category starts at test group 55.
 at_banner_text_7="Guile (R⁷RS)"
-# Banner 8. testsuite.at:77
+# Banner 8. testsuite.at:75
 # Category starts at test group 64.
 at_banner_text_8="Loko Scheme (R⁶RS)"
-# Banner 9. testsuite.at:81
+# Banner 9. testsuite.at:79
 # Category starts at test group 73.
 at_banner_text_9="Loko Scheme (R⁷RS)"
-# Banner 10. testsuite.at:85
+# Banner 10. testsuite.at:83
 # Category starts at test group 82.
 at_banner_text_10="MIT/GNU Scheme (R⁷RS)"
-# Banner 11. testsuite.at:89
+# Banner 11. testsuite.at:87
 # Category starts at test group 91.
 at_banner_text_11="Racket (R⁶RS)"
-# Banner 12. testsuite.at:93
+# Banner 12. testsuite.at:91
 # Category starts at test group 100.
 at_banner_text_12="Sagittarius Scheme (R⁶RS)"
-# Banner 13. testsuite.at:98
+# Banner 13. testsuite.at:96
 # Category starts at test group 109.
 at_banner_text_13="Sagittarius Scheme (R⁷RS)"
 

@@ -738,6 +738,7 @@ INSTALL_CHICKEN_5_EGG_SOURCE_FALSE
 INSTALL_CHICKEN_5_EGG_SOURCE_TRUE
 install_chicken_5_egg_source
 chickeneggsdir
+enable_color
 GNU_M4
 EGREP
 FGREP
@@ -849,6 +850,7 @@ enable_option_checking
 enable_dependency_tracking
 enable_silent_rules
 enable_maintainer_mode
+enable_color
 enable_install_chicken_5_egg_source
 enable_install_r6rs_source
 enable_install_r7rs_source
@@ -1525,6 +1527,8 @@ Optional Features:
   --enable-maintainer-mode
                           enable make rules and dependencies not useful (and
                           sometimes confusing) to the casual installer
+  --disable-color         disable color in configure and test outputs (enabled
+                          by default)
   --enable-install-chicken-5-egg-source[=DIR]
                           install CHICKEN 5 egg source code
                           [DATAROOTDIR/chicken/eggs/5/pipchix] (by default not
@@ -6408,6 +6412,19 @@ if test -z "${GNU_M4}"; then
    as_fn_error $? "GNU m4 not found. Perhaps set GNU_M4 to OpenBSD m4." "$LINENO" 5
 fi
 
+# Check whether --enable-color was given.
+if test ${enable_color+y}
+then :
+  enableval=$enable_color; enable_color="${enableval}"
+else case e in #(
+  e) enable_color=yes ;;
+esac
+fi
+
+
+
+,
+
 # Copyright © 2025 Barry Schwartz
 #
 # Permission is hereby granted, free of charge, to any person obtaining
@@ -10019,13 +10036,13 @@ printf "%s\n" "$as_me: " >&6;}
 printf "%s\n" "$as_me: CHICKEN 5 compiler: ${CSC_5}" >&6;}
 fi
 if test "${chem_cv_path_CHICKEN_INSTALL_5_found}" != no; then
-  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: 🔵 ‘make chicken-install-5 INSTALL_AS=sudo’" >&5
-printf "%s\n" "$as_me: 🔵 ‘make chicken-install-5 INSTALL_AS=sudo’" >&6;}
+  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: `if test "${enable_color}" = no; then echo ⬤; else echo 🔵; fi` ‘make chicken-install-5 INSTALL_AS=sudo’" >&5
+printf "%s\n" "$as_me: `if test "${enable_color}" = no; then echo ⬤; else echo 🔵; fi` ‘make chicken-install-5 INSTALL_AS=sudo’" >&6;}
   { printf "%s\n" "$as_me:${as_lineno-$LINENO}:      to install the ‘pipchix’ egg." >&5
 printf "%s\n" "$as_me:      to install the ‘pipchix’ egg." >&6;}
   if test "${chem_cv_path_CHICKEN_UNINSTALL_5_found}" != no; then
-    { printf "%s\n" "$as_me:${as_lineno-$LINENO}: 🔵 ‘make chicken-uninstall-5 INSTALL_AS=sudo’" >&5
-printf "%s\n" "$as_me: 🔵 ‘make chicken-uninstall-5 INSTALL_AS=sudo’" >&6;}
+    { printf "%s\n" "$as_me:${as_lineno-$LINENO}: `if test "${enable_color}" = no; then echo ⬤; else echo 🔵; fi` ‘make chicken-uninstall-5 INSTALL_AS=sudo’" >&5
+printf "%s\n" "$as_me: `if test "${enable_color}" = no; then echo ⬤; else echo 🔵; fi` ‘make chicken-uninstall-5 INSTALL_AS=sudo’" >&6;}
     { printf "%s\n" "$as_me:${as_lineno-$LINENO}:      to uninstall the ‘pipchix’ egg." >&5
 printf "%s\n" "$as_me:      to uninstall the ‘pipchix’ egg." >&6;}
   fi
@@ -10058,8 +10075,8 @@ fi
 printf "%s\n" "$as_me: " >&6;}
 
 
-{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: 🔵 ‘make dist-chicken-egg-5’ to make a compressed tar" >&5
-printf "%s\n" "$as_me: 🔵 ‘make dist-chicken-egg-5’ to make a compressed tar" >&6;}
+{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: `if test "${enable_color}" = no; then echo ⬤; else echo 🔵; fi` ‘make dist-chicken-egg-5’ to make a compressed tar" >&5
+printf "%s\n" "$as_me: `if test "${enable_color}" = no; then echo ⬤; else echo 🔵; fi` ‘make dist-chicken-egg-5’ to make a compressed tar" >&6;}
 { printf "%s\n" "$as_me:${as_lineno-$LINENO}:      of the CHICKEN 5 egg sources." >&5
 printf "%s\n" "$as_me:      of the CHICKEN 5 egg sources." >&6;}
 { printf "%s\n" "$as_me:${as_lineno-$LINENO}: " >&5

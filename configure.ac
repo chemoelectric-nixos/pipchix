@@ -55,6 +55,16 @@ if test -z "${GNU_M4}"; then
    AC_MSG_ERROR([GNU m4 not found. Perhaps set GNU_M4 to OpenBSD m4.])
 fi
 
+AC_ARG_ENABLE([color],
+  [AS_HELP_STRING([--disable-color],
+    [disable color in configure and test outputs (enabled by default)])],
+  [enable_color="${enableval}"],
+  [enable_color=yes])
+AC_SUBST([enable_color])
+
+m4_define([large_circle],
+  [`if test "${enable_color}" = no; then echo ⬤; else echo 🔵; fi`]),
+
 m4_include([ac-chicken-install-options.m4])
 m4_include([ac-r6rs-install-options.m4])
 m4_include([ac-r7rs-install-options.m4])
@@ -177,7 +187,7 @@ AC_OUTPUT
 
 m4_include([ac-what-was-found.m4])
 
-AC_MSG_NOTICE([🔵 ‘make dist-chicken-egg-5’ to make a compressed tar])
+AC_MSG_NOTICE([large_circle ‘make dist-chicken-egg-5’ to make a compressed tar])
 AC_MSG_NOTICE([     of the CHICKEN 5 egg sources.])
 AC_MSG_NOTICE([])
 

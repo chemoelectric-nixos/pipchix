@@ -20,6 +20,8 @@ datarootdir="@datarootdir@"
 mandir="@mandir@"
 localedir="@localedir@"
 
+enable_color="@enable_color@"
+
 enable_check_r6rs_chez="@enable_check_r6rs_chez@"
 enable_check_r6rs_guile="@enable_check_r6rs_guile@"
 enable_check_r6rs_loko="@enable_check_r6rs_loko@"

@@ -281,6 +281,7 @@ enable_check_r7rs_guile = @enable_check_r7rs_guile@
 enable_check_r7rs_loko = @enable_check_r7rs_loko@
 enable_check_r7rs_mit = @enable_check_r7rs_mit@
 enable_check_r7rs_sagittarius = @enable_check_r7rs_sagittarius@
+enable_color = @enable_color@
 exec_prefix = @exec_prefix@
 host = @host@
 host_alias = @host_alias@
@@ -329,7 +330,7 @@ TESTSUITE = $(srcdir)/testsuite
 #
 #
 #
-TESTSUITE_DEPS = $(srcdir)/package.m4 $(srcdir)/testsuite.at \
+TESTSUITE_DEPS = $(srcdir)/atlocal.in $(srcdir)/package.m4 \
 	$(srcdir)/tests-template.at \
 	$(srcdir)/ast-nodes-preds-template.at \
 	$(srcdir)/nix-attributebinding-node-template.at \
@@ -589,22 +590,34 @@ $(srcdir)/package.m4: $(top_srcdir)/configure.ac $(srcdir)/Makefile.am
 	         printf "[$(PACKAGE_URL)])\n"}' \
 	  > $(@).tmp && mv $(@){.tmp,}
 
+@GNU@ define jobs-flag
+@GNU@ $(filter -j%,$(MAKEFLAGS))
+@GNU@ endef
+
+@GNU@ define color-flag
+@GNU@ $(shell \
+@GNU@   if test "${enable_color}" = no; then \
+@GNU@     printf '%s' "--color=never"; \
+@GNU@   else \
+@GNU@     printf '%s' "--color=auto"; \
+@GNU@   fi \
+@GNU@ )
+@GNU@ endef
+
 check-local: atconfig atlocal $(TESTSUITE)
 	$(SHELL) '$(TESTSUITE)' \
-	  $(shell printf "%s" "$(filter -j%,$(MAKEFLAGS)) $(TESTSUITEFLAGS)" \
-	     | $(SED) -e 's|^[[:space:]]*||' -e 's|[[:space:]]*$$||')
+	   $(color-flag) $(jobs-flag) $(TESTSUITEFLAGS)
 
 installcheck-local: atconfig atlocal $(TESTSUITE)
 	$(SHELL) '$(TESTSUITE)' AUTOTEST_PATH='$(bindir)' \
-	  $(shell printf "%s" "$(filter -j%,$(MAKEFLAGS)) $(TESTSUITEFLAGS)" \
-	     | $(SED) -e 's|^[[:space:]]*||' -e 's|[[:space:]]*$$||')
+	   $(color-flag) $(jobs-flag) $(TESTSUITEFLAGS)
 
 clean-local:
 	test ! -f '$(TESTSUITE)' || \
 	 $(SHELL) '$(TESTSUITE)' --clean
 
-$(TESTSUITE): $(TESTSUITE_DEPS)
-	$(AUTOTEST) -I '$(srcdir)' -o $(@).tmp $(@).at && \
+$(TESTSUITE): $(srcdir)/testsuite.at $(TESTSUITE_DEPS)
+	$(AUTOTEST) -I '$(srcdir)' -o $(@).tmp $(<) && \
 	  mv $(@){.tmp,}
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
