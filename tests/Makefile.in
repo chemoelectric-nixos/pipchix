@@ -323,7 +323,6 @@ BUILT_SOURCES =
 CLEANFILES = *.tmp tmp.*
 DISTCLEANFILES = Makefile GNUmakefile atconfig
 check_SCRIPTS = 
-CHECK_LOCAL_DEPS = atconfig atlocal $(TESTSUITE)
 AUTOM4TE = $(SHELL) $(top_srcdir)/build-aux/missing --run autom4te
 AUTOTEST = $(AUTOM4TE) --language=autotest
 TESTSUITE = $(srcdir)/testsuite
@@ -590,7 +589,7 @@ $(srcdir)/package.m4: $(top_srcdir)/configure.ac $(srcdir)/Makefile.am
 	         printf "[$(PACKAGE_URL)])\n"}' \
 	  > $(@).tmp && mv $(@){.tmp,}
 
-check-local: $(CHECK_LOCAL_DEPS)
+check-local: atconfig atlocal $(TESTSUITE)
 	$(SHELL) '$(TESTSUITE)' \
 	  $(shell printf "%s" "$(filter -j%,$(MAKEFLAGS)) $(TESTSUITEFLAGS)" \
 	     | $(SED) -e 's|^[[:space:]]*||' -e 's|[[:space:]]*$$||')

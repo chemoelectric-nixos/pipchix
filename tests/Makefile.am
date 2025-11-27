@@ -61,12 +61,7 @@ EXTRA_DIST += $(srcdir)/package.m4
 EXTRA_DIST += $(TESTSUITE)
 EXTRA_DIST += atlocal.in
 
-CHECK_LOCAL_DEPS =
-CHECK_LOCAL_DEPS += atconfig
-CHECK_LOCAL_DEPS += atlocal
-CHECK_LOCAL_DEPS += $(TESTSUITE)
-
-check-local: $(CHECK_LOCAL_DEPS)
+check-local: atconfig atlocal $(TESTSUITE)
 	$(SHELL) '$(TESTSUITE)' \
 	  $(shell printf "%s" "$(filter -j%,$(MAKEFLAGS)) $(TESTSUITEFLAGS)" \
 	     | $(SED) -e 's|^[[:space:]]*||' -e 's|[[:space:]]*$$||')
