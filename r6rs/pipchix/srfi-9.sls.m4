@@ -31,6 +31,10 @@ m4_include(pipchix/pipchix-includes.m4)
 ;;; low-level implementation of records is replaced with vectors
 ;;; wrapped in R⁶RS records.
 ;;;
+;;; This implementation has the problem with unhygienic field names
+;;; that is described in SRFI-150. However, for Pipchix this is no
+;;; difficulty.
+;;;
 
 (library (pipchix srfi-9)
 
