@@ -335,6 +335,7 @@ TESTSUITE_DEPS = $(srcdir)/atlocal.in $(srcdir)/package.m4 \
 	$(srcdir)/nix-data-node-template.at \
 	$(srcdir)/nix-embedded-node-template.at \
 	$(srcdir)/nix-inherit-node-template.at \
+	$(srcdir)/nix-list-node-template.at \
 	$(srcdir)/nix-path-node-template.at \
 	$(srcdir)/nix-embed-template.at $(srcdir)/nix-list-template.at
 all: $(BUILT_SOURCES)

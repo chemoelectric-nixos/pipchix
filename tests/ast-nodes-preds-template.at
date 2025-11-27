@@ -134,6 +134,30 @@ m4_define([sexpr],
     (nix-attributeset-node? (make-nix-attributeset-node @%:@t)))])
 check_unquoted([run_scheme 'sexpr'],[0],[nix_true],[])
 
+m4_define([sexpr],
+  [(make-nix-data-node
+    (nix-attributeset-node?
+     (list->nix-list-node (map scheme->nix `(1 2 3)))))])
+check_unquoted([run_scheme 'sexpr'],[0],[nix_false],[])
+
+m4_define([sexpr],
+  [(make-nix-data-node
+    (nix-list-node?
+     (list->nix-list-node (map scheme->nix `(1 2 3)))))])
+check_unquoted([run_scheme 'sexpr'],[0],[nix_true],[])
+
+m4_define([sexpr], dnl  Test of scheme->nix for lists.
+  [(make-nix-data-node
+    (nix-attributeset-node?
+     (scheme->nix `(1 2 3))))])
+check_unquoted([run_scheme 'sexpr'],[0],[nix_false],[])
+
+m4_define([sexpr], dnl  Test of scheme->nix for lists.
+  [(make-nix-data-node
+    (nix-list-node?
+     (scheme->nix `(1 2 3))))])
+check_unquoted([run_scheme 'sexpr'],[0],[nix_true],[])
+
 AT_CLEANUP
 
 # local variables:
