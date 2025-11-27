@@ -35,10 +35,9 @@ Most R⁶RS Schemes:: Configure Pipchix with
 Most R⁷RS Schemes:: Configure Pipchix with
   +--enable-install-r7rs-source=/etc/nixos/pipchix+ or similar. Do
   ‘+make install+’. In some cases you may need to add ‘+.+’ to the
-  list of places to search for libraries. MIT/GNU Scheme requires that
-  you first register the libraries, before you can load
-  them.footnote:[I do not deal here with how to precompile R⁷RS
-  libraries, except for CHICKEN 5. CHICKEN 5 was discussed earlier.]
+  list of places to search for libraries.footnote:[I do not deal here
+  with how to precompile R⁷RS libraries, except for CHICKEN 5. CHICKEN
+  5 was discussed earlier.]
 
 In general, you can refer to the scripts in the +tests+ directory for
 hints on how to run the different Scheme implementations. I have

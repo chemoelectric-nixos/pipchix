@@ -106,9 +106,6 @@ offer_disable_of_check([r6rs],[loko],
 offer_disable_of_check([r7rs],[loko],
   [disable R⁷RS tests with Loko Scheme])
 
-offer_disable_of_check([r7rs],[mit],
-  [disable tests with MIT/GNU Scheme])
-
 offer_disable_of_check([r6rs],[racket],
   [disable tests with Racket])
 
@@ -125,7 +122,6 @@ m4_include([ac-chibi-scheme.m4])
 m4_include([ac-gauche-scheme.m4])
 m4_include([ac-guile-scheme.m4])
 m4_include([ac-loko-scheme.m4])
-m4_include([ac-mit-scheme.m4])
 m4_include([ac-racket.m4])
 m4_include([ac-sagittarius-scheme.m4])
 
@@ -155,8 +151,6 @@ AC_CONFIG_FILES([tests/run-r6rs-guile.sh],
                 [chmod +x tests/run-r6rs-guile.sh])
 AC_CONFIG_FILES([tests/run-r7rs-guile.sh],
                 [chmod +x tests/run-r7rs-guile.sh])
-AC_CONFIG_FILES([tests/run-r7rs-mit.sh],
-                [chmod +x tests/run-r7rs-mit.sh])
 AC_CONFIG_FILES([tests/run-r6rs-loko.sh],
                 [chmod +x tests/run-r6rs-loko.sh])
 AC_CONFIG_FILES([tests/run-r7rs-loko.sh],

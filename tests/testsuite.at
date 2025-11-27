@@ -32,7 +32,6 @@ m4_define([run_r7rs_csi_5],["${abs_builddir}"/run-r7rs-csi-5.sh])
 m4_define([run_r7rs_gauche],["${abs_builddir}"/run-r7rs-gauche.sh])
 m4_define([run_r6rs_guile],["${abs_builddir}"/run-r6rs-guile.sh])
 m4_define([run_r7rs_guile],["${abs_builddir}"/run-r7rs-guile.sh])
-m4_define([run_r7rs_mit],["${abs_builddir}"/run-r7rs-mit.sh])
 m4_define([run_r6rs_loko],["${abs_builddir}"/run-r6rs-loko.sh])
 m4_define([run_r7rs_loko],["${abs_builddir}"/run-r7rs-loko.sh])
 m4_define([run_r6rs_racket],["${abs_builddir}"/run-r6rs-racket.sh])
@@ -79,10 +78,6 @@ tests_template([loko(r6rs)  ],[Loko Scheme (R⁶RS)],
 tests_template([loko(r7rs)  ],[Loko Scheme (R⁷RS)],
   [R7RS r7rs Loko loko loko-scheme lokoscheme],
   [${enable_check_r7rs_loko}],[run_r7rs_loko])
-
-tests_template([mit/gnu     ],[MIT/GNU Scheme (R⁷RS)],
-  [R7RS r7rs MIT MIT/GNU mit mit/gnu mit-scheme mitscheme],
-  [${enable_check_r7rs_mit}],[run_r7rs_mit])
 
 tests_template([racket      ],[Racket (R⁶RS)],
   [R6RS r6rs Racket racket PLT plt plt-scheme plt-r6rs],

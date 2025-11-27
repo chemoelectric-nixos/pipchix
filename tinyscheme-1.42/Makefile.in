@@ -126,8 +126,7 @@ am__aclocal_m4_deps = $(top_srcdir)/m4/ax_check_compile_flag.m4 \
 	$(top_srcdir)/ac-chibi-scheme.m4 \
 	$(top_srcdir)/ac-gauche-scheme.m4 \
 	$(top_srcdir)/ac-guile-scheme.m4 \
-	$(top_srcdir)/ac-loko-scheme.m4 $(top_srcdir)/ac-mit-scheme.m4 \
-	$(top_srcdir)/ac-racket.m4 \
+	$(top_srcdir)/ac-loko-scheme.m4 $(top_srcdir)/ac-racket.m4 \
 	$(top_srcdir)/ac-sagittarius-scheme.m4 \
 	$(top_srcdir)/ac-what-was-found.m4 $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
@@ -212,7 +211,6 @@ LOKO = @LOKO@
 LTLIBOBJS = @LTLIBOBJS@
 MAINT = @MAINT@
 MAKEINFO = @MAKEINFO@
-MIT_SCHEME = @MIT_SCHEME@
 MKDIR_P = @MKDIR_P@
 OBJEXT = @OBJEXT@
 PACKAGE = @PACKAGE@
@@ -267,7 +265,6 @@ enable_check_r7rs_csi_5 = @enable_check_r7rs_csi_5@
 enable_check_r7rs_gauche = @enable_check_r7rs_gauche@
 enable_check_r7rs_guile = @enable_check_r7rs_guile@
 enable_check_r7rs_loko = @enable_check_r7rs_loko@
-enable_check_r7rs_mit = @enable_check_r7rs_mit@
 enable_check_r7rs_sagittarius = @enable_check_r7rs_sagittarius@
 enable_color = @enable_color@
 exec_prefix = @exec_prefix@
