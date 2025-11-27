@@ -29,11 +29,7 @@ m4_include(pipchix/pipchix-includes.m4)
 ;;; Richard Kelsey’s reference implementation for SRFI-9, modified for
 ;;; R⁶RS. The modifications are by Barry Schwartz. The original
 ;;; low-level implementation of records is replaced with vectors
-;;; wrapped in R⁶RS records.
-;;;
-;;; This implementation has the problem with unhygienic field names
-;;; that is described in SRFI-150. However, for Pipchix this is no
-;;; difficulty.
+;;; wrapped in R⁶RS records. Other changes also have been made.
 ;;;
 
 (library (pipchix srfi-9)
@@ -196,22 +192,6 @@ m4_include(pipchix/pipchix-includes.m4)
             (error "modifier applied to bad value"
                    type tag thing)))))
 
-  ;; An auxiliary macro for define field accessors and
-  ;; modifiers. This is needed only because modifiers are
-  ;; optional.
-
-  (define-syntax srfi-9:define-record-field
-    (syntax-rules ()
-      ((X type field-tag accessor)
-       (define accessor
-         (srfi-9:record-accessor type 'field-tag)))
-      ((X type field-tag accessor modifier)
-       (begin
-         (define accessor
-           (srfi-9:record-accessor type 'field-tag))
-         (define modifier
-           (srfi-9:record-modifier type 'field-tag))))))
-
   ;; Definition of define-record-type
 
   (define-syntax srfi-9:define-record-type
@@ -220,7 +200,18 @@ m4_include(pipchix/pipchix-includes.m4)
           (constructor constructor-tag ...)
           predicate
           (field-tag accessor . more) ...)
-       (begin
+       (let-syntax
+           ((srfi-9:define-record-field^
+             (syntax-rules ()
+               ((X type^ field-tag^ accessor^)
+                (define accessor^
+                  (srfi-9:record-accessor type^ 'field-tag^)))
+               ((X type^ field-tag^ accessor^ modifier^)
+                (begin
+                  (define accessor^
+                    (srfi-9:record-accessor type^ 'field-tag^))
+                  (define modifier^
+                    (srfi-9:record-modifier type^ 'field-tag^)))))))
          (define type
            (srfi-9:make-record-type
             'type '(field-tag ...)))
@@ -229,7 +220,7 @@ m4_include(pipchix/pipchix-includes.m4)
             type '(constructor-tag ...)))
          (define predicate
            (srfi-9:record-predicate type))
-         (srfi-9:define-record-field
+         (srfi-9:define-record-field^
           type field-tag accessor . more)
          ...))))
 
