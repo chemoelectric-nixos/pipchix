@@ -55,6 +55,7 @@ m4_include(nix-path-node-template.at)
 m4_include(nix-attributepath-node-template.at)
 m4_include(nix-attributebinding-node-template.at)
 m4_include(nix-inherit-node-template.at)
+m4_include(nix-attributeset-node-template.at)
 
 m4_include(ast-nodes-preds-template.at)
 

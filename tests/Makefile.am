@@ -101,6 +101,7 @@ TESTSUITE_DEPS += $(srcdir)/ast-nodes-preds-template.at
 #
 TESTSUITE_DEPS += $(srcdir)/nix-attributebinding-node-template.at
 TESTSUITE_DEPS += $(srcdir)/nix-attributepath-node-template.at
+TESTSUITE_DEPS += $(srcdir)/nix-attributeset-node-template.at
 TESTSUITE_DEPS += $(srcdir)/nix-data-node-template.at
 TESTSUITE_DEPS += $(srcdir)/nix-embedded-node-template.at
 TESTSUITE_DEPS += $(srcdir)/nix-inherit-node-template.at

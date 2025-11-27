@@ -335,6 +335,7 @@ TESTSUITE_DEPS = $(srcdir)/atlocal.in $(srcdir)/package.m4 \
 	$(srcdir)/ast-nodes-preds-template.at \
 	$(srcdir)/nix-attributebinding-node-template.at \
 	$(srcdir)/nix-attributepath-node-template.at \
+	$(srcdir)/nix-attributeset-node-template.at \
 	$(srcdir)/nix-data-node-template.at \
 	$(srcdir)/nix-embedded-node-template.at \
 	$(srcdir)/nix-inherit-node-template.at \

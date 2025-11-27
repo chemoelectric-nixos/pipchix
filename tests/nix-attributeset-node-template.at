@@ -1,0 +1,78 @@
+# Copyright © 2025 Barry Schwartz
+#
+# This file is part of Pipchix.
+#
+# Permission is hereby granted, free of charge, to any person obtaining
+# a copy of Pipchix and associated documentation files (the
+# "Software"), to deal in the Software without restriction, including
+# without limitation the rights to use, copy, modify, merge, publish,
+# distribute, sublicense, and/or sell copies of the Software, and to
+# permit persons to whom the Software is furnished to do so, subject to
+# the following conditions:
+# 
+# The above copyright notice and this permission notice shall be
+# included in all copies or substantial portions of the Software.
+# 
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+# LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+# OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+# WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+#
+
+AT_SETUP([setup_message(<nix-attributeset-node>)])
+
+AT_KEYWORDS([default_keywords nix-attributeset-node])
+
+m4_define([sexpr],
+  [(make-nix-data-node
+    (nix-attributeset-node-recursive?
+     (make-nix-attributeset-node @%:@f)))])
+check_unquoted([run_scheme 'sexpr'],[0],[nix_false],[])
+
+m4_define([sexpr],
+  [(make-nix-data-node
+    (nix-attributeset-node-recursive?
+     (make-nix-attributeset-node @%:@t)))])
+check_unquoted([run_scheme 'sexpr'],[0],[nix_true],[])
+
+m4_define([sexpr],[(make-nix-attributeset-node @%:@f)])
+check_unquoted([run_scheme 'sexpr'],[0],[interpunct_nl(({·})·)],[])
+
+m4_define([sexpr],[(make-nix-attributeset-node @%:@t)])
+check_unquoted([run_scheme 'sexpr'],[0],[interpunct_nl((rec{·})·)],[])
+
+m4_define([sexpr],
+  [(let ((attrset (make-nix-attributeset-node @%:@f)))
+     (nix-attributeset-node-set!
+      attrset (let ((key (list->nix-attributepath-node `(a b c)))
+                    (value (make-nix-data-node 1234)))
+                (make-nix-attributebinding-node key value)))
+     (nix-attributeset-node-set!
+      attrset (list->nix-inherit-node (map scheme->nix `("a" b "c"))
+                                      (scheme->nix "set1")))
+     attrset)])
+check_unquoted([run_scheme 'sexpr'],[0],
+[interpunct_nl(({·a·.·b·.·c·=·(1234)·;·inherit·(·set1·)·a·b·c·;·})·)],[])
+
+m4_define([sexpr],
+  [(let ((attrset (make-nix-attributeset-node @%:@t)))
+     (nix-attributeset-node-set!
+      attrset (let ((key (list->nix-attributepath-node `(a b c)))
+                    (value (make-nix-data-node 1234)))
+                (make-nix-attributebinding-node key value)))
+     (nix-attributeset-node-set!
+      attrset (list->nix-inherit-node (map scheme->nix `("a" b "c"))
+                                      (scheme->nix "set1")))
+     attrset)])f
+check_unquoted([run_scheme 'sexpr'],[0],
+[interpunct_nl((rec{·a·.·b·.·c·=·(1234)·;·inherit·(·set1·)·a·b·c·;·})·)],[])
+
+AT_CLEANUP
+
+# local variables:
+# mode: autoconf
+# coding: utf-8
+# end:
