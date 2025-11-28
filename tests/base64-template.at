@@ -113,43 +113,6 @@ check_unquoted([run_scheme 'sexpr'],[0],
 
 AT_CLEANUP
 
-dnl 3. Strings with Special Characters:
-dnl 
-dnl     Input: "Hello, world!"
-dnl     Expected Encoded Output: "SGVsbG8sIHdvcmxkIQ=="
-dnl     Input: "Test with !@#$%^&*()_+-={}[]|\\:;\"'<>,.?/"
-dnl     Expected Encoded Output: "VGVzdCB3aXRoICEjJCVeJiooKV8rLT0ne31bXVx8OjsiJzw+LC4_Lw==" 
-dnl 
-dnl 4. Strings with Unicode Characters:
-dnl 
-dnl     Input: "你好世界" (Chinese characters for "Hello world")
-dnl     Expected Encoded Output: "5L2g5aW95LiJ5rGg" (assuming UTF-8 encoding before Base64) 
-dnl 
-dnl 5. Long Strings:
-dnl 
-dnl     Test with a very long string (e.g., several kilobytes of random data) to ensure performance and memory handling are adequate. 
-dnl 
-dnl 6. Invalid Base64 Strings (for decoding):
-dnl 
-dnl     Input: "Invalid!" (contains characters not in the Base64 alphabet)
-dnl     Expected Decoding Outcome: Error or exception
-dnl     Input: "SGVsbG8sIHdvcmxkIQ=" (incorrect padding)
-dnl     Expected Decoding Outcome: Error or exception
-dnl     Input: "SGVsbG8sIHdvcmxkIQ===" (excessive padding)
-dnl     Expected Decoding Outcome: Error or exception (or correct decoding depending on strictness) 
-dnl 
-dnl 7. Edge Cases for Padding:
-dnl 
-dnl     Test inputs that result in one or two padding characters (e.g., "f", "fo").
-dnl     Test inputs that result in no padding characters (e.g., "foo"). 
-dnl 
-dnl 8. Case Sensitivity (for decoding):
-dnl 
-dnl     Input: "sGVsbG8sIHdvcmxkIQ==" (lowercase 's' at the beginning)
-dnl     Expected Decoding Outcome: Error or exception, as Base64 is case-sensitive. 
-dnl 
-
-
 ])
 
 # local variables:
