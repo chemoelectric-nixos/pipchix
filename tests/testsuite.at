@@ -38,56 +38,71 @@ m4_define([run_r6rs_racket],["${abs_builddir}"/run-r6rs-racket.sh])
 m4_define([run_r6rs_sagittarius],["${abs_builddir}"/run-r6rs-sagittarius.sh])
 m4_define([run_r7rs_sagittarius],["${abs_builddir}"/run-r7rs-sagittarius.sh])
 
+m4_define([u8_bytevec_r6rs],[@%:@vu8])
+m4_define([u8_bytevec_r7rs],[@%:@u8])
+
+m4_define([u8_bytevec],[u8_bytevec_r6rs])
 tests_template([chez        ],[Chez Scheme (R⁶RS)],
   [R6RS r6rs Chez chez chez-scheme chezscheme],
   [${enable_check_r6rs_chez}],[run_r6rs_chez])
 
+m4_define([u8_bytevec],[u8_bytevec_r7rs])
 tests_template([chibi       ],[Chibi Scheme (R⁷RS)],
   [R7RS r7rs Chibi chibi chibi-scheme chibischeme],
   [${enable_check_r7rs_chibi}],[run_r7rs_chibi])
 
+m4_define([u8_bytevec],[u8_bytevec_r7rs])
 tests_template([csc-5       ],[CHICKEN 5 compiler (R⁷RS)],
   [R7RS r7rs CHICKEN CHICKEN-5 chicken chicken-5 chicken-scheme
    chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5
    compiler],
   [${enable_check_r7rs_csc_5}],[run_r7rs_csc_5])
 
+m4_define([u8_bytevec],[u8_bytevec_r7rs])
 tests_template([csi-5       ],[CHICKEN 5 interpreter (R⁷RS)],
   [R7RS r7rs CHICKEN CHICKEN-5 chicken chicken-5 chicken-scheme
    chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5
    interpreter],
   [${enable_check_r7rs_csi_5}],[run_r7rs_csi_5])
 
+m4_define([u8_bytevec],[u8_bytevec_r7rs])
 tests_template([gauche      ],[Gauche Scheme (R⁷RS)],
   [R7RS r7rs Gauche gauche gauche-scheme gauchescheme
    gosh gosh-scheme goshscheme],
   [${enable_check_r7rs_gauche}],[run_r7rs_gauche])
 
+m4_define([u8_bytevec],[u8_bytevec_r6rs])
 tests_template([guile(r6rs) ],[Guile (R⁶RS)],
   [R6RS r6rs Guile guile guile-scheme guilescheme],
   [${enable_check_r6rs_guile}],[run_r6rs_guile])
 
+m4_define([u8_bytevec],[u8_bytevec_r7rs])
 tests_template([guile(r7rs) ],[Guile (R⁷RS)],
   [R7RS r7rs Guile guile guile-scheme guilescheme],
   [${enable_check_r7rs_guile}],[run_r7rs_guile])
 
+m4_define([u8_bytevec],[u8_bytevec_r6rs])
 tests_template([loko(r6rs)  ],[Loko Scheme (R⁶RS)],
   [R6RS r6rs Loko loko loko-scheme lokoscheme],
   [${enable_check_r6rs_loko}],[run_r6rs_loko])
 
+m4_define([u8_bytevec],[u8_bytevec_r7rs])
 tests_template([loko(r7rs)  ],[Loko Scheme (R⁷RS)],
   [R7RS r7rs Loko loko loko-scheme lokoscheme],
   [${enable_check_r7rs_loko}],[run_r7rs_loko])
 
+m4_define([u8_bytevec],[u8_bytevec_r6rs])
 tests_template([racket      ],[Racket (R⁶RS)],
   [R6RS r6rs Racket racket PLT plt plt-scheme plt-r6rs],
   [${enable_check_r6rs_racket}],[run_r6rs_racket])
 
+m4_define([u8_bytevec],[u8_bytevec_r6rs])
 tests_template([sagitt(r6rs)],[Sagittarius Scheme (R⁶RS)],
   [R6RS r6rs Sagittarius sagittarius sagittarius-scheme
    sagittariusscheme sash],
   [${enable_check_r6rs_sagittarius}],[run_r6rs_sagittarius])
 
+m4_define([u8_bytevec],[u8_bytevec_r7rs])
 tests_template([sagitt(r7rs)],[Sagittarius Scheme (R⁷RS)],
   [R7RS r7rs Sagittarius sagittarius sagittarius-scheme
    sagittariusscheme sash],

@@ -35,6 +35,16 @@ m4_include(pipchix/pipchix-includes.m4)
 
   (define integer-division div-and-mod)
 
+  (define (string-copy! to at from)
+    ;; A limited version of string-copy! that assumes non-overlapping
+    ;; regions.
+    (let ((n (string-length from)))
+      (let loop ((i at)
+                 (j 0))
+        (unless (= j n)
+          (string-set! to i (string-ref from j))
+          (loop (+ i 1) (+ j 1))))))
+
   m4_include(pipchix/string-manipulation.m4)
 
   )

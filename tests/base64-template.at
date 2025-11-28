@@ -25,7 +25,7 @@
 AT_SETUP([setup_message(base64)])
 
 AT_KEYWORDS([default_keywords string-manipulation
-             string strings base64 BASE64])
+             string strings base64 BASE64 base64-utf8 utf8])
 
 m4_define([sexpr],[(nix-embed (base64-utf8 ""))])
 check_unquoted([run_scheme 'sexpr'],[0],[],[])

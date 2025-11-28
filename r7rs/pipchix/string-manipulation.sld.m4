@@ -35,6 +35,7 @@ m4_include(pipchix/pipchix-includes.m4)
      (import (utf8-srfi-13)))
     (else))
 
+  (import (scheme write));;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   (begin
 
     (define integer-division truncate/)

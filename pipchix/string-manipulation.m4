@@ -66,6 +66,65 @@
 (define (base64-utf8 str)
   (bytevector->base64 (string->utf8 str)))
 
+(define (bytevector->printf-utf8 bv)
+  (define (fragment u)
+    (cond ((= u #x5C) (string-append "\\" "\\"))  ;; #\\
+          ((= u #x25) (string-append "\\" "045")) ;; #\%
+          ((= u #x22) (string-append "\\" "042")) ;; #\"
+          ((= u #x27) (string-append "\\" "047")) ;; #\'
+          ((= u #x07) (string-append "\\" "a"))
+          ((= u #x08) (string-append "\\" "b"))
+          ((= u #x09) (string-append "\\" "t"))
+          ((= u #x0A) (string-append "\\" "n"))
+          ((= u #x0B) (string-append "\\" "v"))
+          ((= u #x0C) (string-append "\\" "f"))
+          ((= u #x0D) (string-append "\\" "r"))
+          ((<= #x7F u) (string-append
+                        "\\" (number->string u 8)))
+          ((<= u #x07) (string-append
+                        "\\" "00" (number->string u 8)))
+          ((<= u #x1F) (string-append
+                        "\\" "0" (number->string u 8)))
+          (else (string (integer->char u)))))
+  (define (fragment-length u)
+    (cond ((= u #x5C) 2)
+          ((= u #x25) 4)
+          ((= u #x22) 4)
+          ((= u #x27) 4)
+          ((= u #x07) 2)
+          ((= u #x08) 2)
+          ((= u #x09) 2)
+          ((= u #x0A) 2)
+          ((= u #x0B) 2)
+          ((= u #x0C) 2)
+          ((= u #x0D) 2)
+          ((<= #x7F u) 4)
+          ((<= u #x07) 4)
+          ((<= u #x1F) 4)
+          (else 1)))
+  (define (find-string-length bv)
+    (let ((m (bytevector-length bv)))
+      (let loop ((i 0)
+                 (n 0))
+        (cond ((= i m) n)
+              (else
+               (loop (+ i 1)
+                     (+ n (fragment-length
+                           (bytevector-u8-ref bv i)))))))))
+  (let* ((m (bytevector-length bv))
+         (n (find-string-length bv))
+         (str (make-string n)))
+    (let loop ((i 0)
+               (j 0))
+      (unless (= i m)
+        (let ((frag (fragment (bytevector-u8-ref bv i))))
+          (string-copy! str j frag)
+          (loop (+ i 1) (+ j (string-length frag))))))
+    str))
+
+(define (printf-utf8 str)
+  (bytevector->printf-utf8 (string->utf8 str)))
+
 m4_divert(-1)
 ;;; local variables:
 ;;; mode: scheme
