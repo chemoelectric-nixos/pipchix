@@ -24,11 +24,9 @@
 ;;;
 
 (define bytevector->base64
-  (let ((look-up
-         (lambda (i)
-           (string-ref
-            "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
-            i))))
+  (let* ((digits
+          "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/")
+         (look-up (lambda (i) (string-ref digits i))))
     (lambda (bv)
       (let* ((n (bytevector-length bv))
              (bvref (lambda (bv j)
