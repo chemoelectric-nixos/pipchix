@@ -72,6 +72,7 @@ R6RS_SCHEME += r6rs/pipchix/nix-embed.sls
 R6RS_SCHEME += r6rs/pipchix/nix-list.sls
 R6RS_SCHEME += r6rs/pipchix/nix-set.sls
 R6RS_SCHEME += r6rs/pipchix/abstract-syntax-tree.sls
+R6RS_SCHEME += r6rs/pipchix/string-manipulation.sls
 EXTRA_DIST += $(R6RS_SCHEME:%=%.m4)
 EXTRA_DIST += $(R6RS_SCHEME:r6rs/pipchix/%.sls=pipchix/%.m4)
 EXTRA_DIST += $(R6RS_SCHEME:r6rs/pipchix/%.sls=pipchix/%.exports.m4)
@@ -87,6 +88,7 @@ R7RS_SCHEME += r7rs/pipchix/nix-embed.sld
 R7RS_SCHEME += r7rs/pipchix/nix-list.sld
 R7RS_SCHEME += r7rs/pipchix/nix-set.sld
 R7RS_SCHEME += r7rs/pipchix/abstract-syntax-tree.sld
+R7RS_SCHEME += r7rs/pipchix/string-manipulation.sld
 EXTRA_DIST += $(R7RS_SCHEME:%=%.m4)
 EXTRA_DIST += $(R7RS_SCHEME:r7rs/pipchix/%.sld=pipchix/%.m4)
 EXTRA_DIST += $(R7RS_SCHEME:r7rs/pipchix/%.sld=pipchix/%.exports.m4)
@@ -132,6 +134,7 @@ CHICKEN_EGGSPEC_TOP = ' \
 
 CHICKEN_EGGSPEC_BOTTOM = ' \
    (components \
+    (extension pipchix.string-manipulation) \
     (extension pipchix.abstract-syntax-tree) \
     (extension pipchix.nix-embed \
       (component-dependencies \
@@ -163,6 +166,7 @@ CHICKEN_5_EGGDIR = $(CHICKEN_5_EGGS)/pipchix
 CHICKEN_5_EGGFILES = \
   $(addprefix $(CHICKEN_5_EGGDIR)/, \
     pipchix.egg \
+    pipchix.string-manipulation.scm \
     pipchix.abstract-syntax-tree.scm \
     pipchix.nix-embed.scm \
     pipchix.nix-list.scm \
