@@ -37,6 +37,8 @@ m4_include(pipchix/pipchix-includes.m4)
 
   (begin
 
+    (define integer-division truncate/)
+
     m4_include(pipchix/string-manipulation.m4)
 
     ))

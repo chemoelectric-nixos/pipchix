@@ -1,0 +1,158 @@
+# Copyright © 2025 Barry Schwartz
+#
+# This file is part of Pipchix.
+#
+# Permission is hereby granted, free of charge, to any person obtaining
+# a copy of Pipchix and associated documentation files (the
+# "Software"), to deal in the Software without restriction, including
+# without limitation the rights to use, copy, modify, merge, publish,
+# distribute, sublicense, and/or sell copies of the Software, and to
+# permit persons to whom the Software is furnished to do so, subject to
+# the following conditions:
+# 
+# The above copyright notice and this permission notice shall be
+# included in all copies or substantial portions of the Software.
+# 
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+# LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+# OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+# WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+#
+
+AT_SETUP([setup_message(base64)])
+
+AT_KEYWORDS([default_keywords string-manipulation
+             string strings base64 BASE64])
+
+m4_define([sexpr],[(nix-embed (base64-utf8 ""))])
+check_unquoted([run_scheme 'sexpr'],[0],[],[])
+
+m4_define([sexpr],[(nix-embed (base64-utf8 "A"))])
+check_unquoted([run_scheme 'sexpr'],[0],[QQ==],[])
+
+m4_define([sexpr],[(nix-embed (base64-utf8 "z"))])
+check_unquoted([run_scheme 'sexpr'],[0],[eg==],[])
+
+m4_define([sexpr],[(nix-embed (base64-utf8 "A\n"))])
+check_unquoted([run_scheme 'sexpr'],[0],[QQo=],[])
+
+m4_define([sexpr],[(nix-embed (base64-utf8 "z\n"))])
+check_unquoted([run_scheme 'sexpr'],[0],[ego=],[])
+
+m4_define([sexpr],[(nix-embed (base64-utf8 "Su"))])
+check_unquoted([run_scheme 'sexpr'],[0],[U3U=],[])
+
+m4_define([sexpr],[(nix-embed (base64-utf8 "Sun"))])
+check_unquoted([run_scheme 'sexpr'],[0],[U3Vu],[])
+
+m4_define([sexpr],[(nix-embed (base64-utf8 "f"))])
+check_unquoted([run_scheme 'sexpr'],[0],[Zg==],[])
+
+m4_define([sexpr],[(nix-embed (base64-utf8 "fo"))])
+check_unquoted([run_scheme 'sexpr'],[0],[Zm8=],[])
+
+m4_define([sexpr],[(nix-embed (base64-utf8 "foo"))])
+check_unquoted([run_scheme 'sexpr'],[0],[Zm9v],[])
+
+m4_define([sexpr],[(nix-embed (base64-utf8 "foob"))])
+check_unquoted([run_scheme 'sexpr'],[0],[Zm9vYg==],[])
+
+m4_define([sexpr],[(nix-embed (base64-utf8 "fooba"))])
+check_unquoted([run_scheme 'sexpr'],[0],[Zm9vYmE=],[])
+
+m4_define([sexpr],[(nix-embed (base64-utf8 "foobar"))])
+check_unquoted([run_scheme 'sexpr'],[0],[Zm9vYmFy],[])
+
+m4_define([sexpr],[(nix-embed (base64-utf8 "Hello, world!"))])
+check_unquoted([run_scheme 'sexpr'],[0],[SGVsbG8sIHdvcmxkIQ==],[])
+
+m4_define([sexpr],[(nix-embed (base64-utf8 "你好世界"))])
+check_unquoted([run_scheme 'sexpr'],[0],[5L2g5aW95LiW55WM],[])
+
+m4_define([sexpr],
+  dnl The string "tseTtiw @! h^%$#)(*&=-+_@:>@@<:@}{;:\\|><'\"/?.,"
+  [(let* ((lst `(@%:@x74 @%:@x73 @%:@x65 @%:@x54 @%:@x74 @%:@x69 @%:@x77 @%:@x20
+                 @%:@x40 @%:@x21 @%:@x20 @%:@x68 @%:@x5e @%:@x25 @%:@x24 @%:@x23
+                 @%:@x29 @%:@x28 @%:@x2a @%:@x26 @%:@x3d @%:@x2d @%:@x2b @%:@x5f
+                 @%:@x5d @%:@x5b @%:@x7d @%:@x7b @%:@x3b @%:@x3a @%:@x5c @%:@x7c
+                 @%:@x3e @%:@x3c @%:@x27 @%:@x22 @%:@x2f @%:@x3f @%:@x2e @%:@x2c))
+          (bv (make-bytevector (length lst))))
+     (let loop ((i 0)
+                (p lst))
+       (when (pair? p)
+         (bytevector-u8-set! bv i (car p))
+         (loop (+ i 1) (cdr p))))
+     (nix-embed (bytevector->base64 bv)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [dHNlVHRpdyBAISBoXiUkIykoKiY9LStfXVt9ezs6XHw+PCciLz8uLA==],[])
+
+m4_define([sexpr],
+  dnl  0 to 255 in ascending order.
+  [(let ((bv (make-bytevector 256)))
+     (let loop ((i 0))
+       (unless (= i 256)
+         (bytevector-u8-set! bv i i)
+         (loop (+ i 1))))
+     (nix-embed (bytevector->base64 bv)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCUmJygpKissLS4vMDEyMzQ1Njc4OTo7PD0+P0BBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWltcXV5fYGFiY2RlZmdoaWprbG1ub3BxcnN0dXZ3eHl6e3x9fn+AgYKDhIWGh4iJiouMjY6PkJGSk5SVlpeYmZqbnJ2en6ChoqOkpaanqKmqq6ytrq+wsbKztLW2t7i5uru8vb6/wMHCw8TFxsfIycrLzM3Oz9DR0tPU1dbX2Nna29zd3t/g4eLj5OXm5+jp6uvs7e7v8PHy8/T19vf4+fr7/P3+/w==],[])
+
+m4_define([sexpr],
+  dnl  255 to 0 in descending order.
+  [(let ((bv (make-bytevector 256)))
+     (let loop ((i 0))
+       (unless (= i 256)
+         (bytevector-u8-set! bv i (- 255 i))
+         (loop (+ i 1))))
+     (nix-embed (bytevector->base64 bv)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [//79/Pv6+fj39vX08/Lx8O/u7ezr6uno5+bl5OPi4eDf3t3c29rZ2NfW1dTT0tHQz87NzMvKycjHxsXEw8LBwL++vby7urm4t7a1tLOysbCvrq2sq6qpqKempaSjoqGgn56dnJuamZiXlpWUk5KRkI+OjYyLiomIh4aFhIOCgYB/fn18e3p5eHd2dXRzcnFwb25tbGtqaWhnZmVkY2JhYF9eXVxbWllYV1ZVVFNSUVBPTk1MS0pJSEdGRURDQkFAPz49PDs6OTg3NjU0MzIxMC8uLSwrKikoJyYlJCMiISAfHh0cGxoZGBcWFRQTEhEQDw4NDAsKCQgHBgUEAwIBAA==],[])
+
+AT_CLEANUP
+
+dnl 3. Strings with Special Characters:
+dnl 
+dnl     Input: "Hello, world!"
+dnl     Expected Encoded Output: "SGVsbG8sIHdvcmxkIQ=="
+dnl     Input: "Test with !@#$%^&*()_+-={}[]|\\:;\"'<>,.?/"
+dnl     Expected Encoded Output: "VGVzdCB3aXRoICEjJCVeJiooKV8rLT0ne31bXVx8OjsiJzw+LC4_Lw==" 
+dnl 
+dnl 4. Strings with Unicode Characters:
+dnl 
+dnl     Input: "你好世界" (Chinese characters for "Hello world")
+dnl     Expected Encoded Output: "5L2g5aW95LiJ5rGg" (assuming UTF-8 encoding before Base64) 
+dnl 
+dnl 5. Long Strings:
+dnl 
+dnl     Test with a very long string (e.g., several kilobytes of random data) to ensure performance and memory handling are adequate. 
+dnl 
+dnl 6. Invalid Base64 Strings (for decoding):
+dnl 
+dnl     Input: "Invalid!" (contains characters not in the Base64 alphabet)
+dnl     Expected Decoding Outcome: Error or exception
+dnl     Input: "SGVsbG8sIHdvcmxkIQ=" (incorrect padding)
+dnl     Expected Decoding Outcome: Error or exception
+dnl     Input: "SGVsbG8sIHdvcmxkIQ===" (excessive padding)
+dnl     Expected Decoding Outcome: Error or exception (or correct decoding depending on strictness) 
+dnl 
+dnl 7. Edge Cases for Padding:
+dnl 
+dnl     Test inputs that result in one or two padding characters (e.g., "f", "fo").
+dnl     Test inputs that result in no padding characters (e.g., "foo"). 
+dnl 
+dnl 8. Case Sensitivity (for decoding):
+dnl 
+dnl     Input: "sGVsbG8sIHdvcmxkIQ==" (lowercase 's' at the beginning)
+dnl     Expected Decoding Outcome: Error or exception, as Base64 is case-sensitive. 
+dnl 
+
+
+])
+
+# local variables:
+# mode: autoconf
+# coding: utf-8
+# end:

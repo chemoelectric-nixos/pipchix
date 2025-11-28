@@ -15,6 +15,7 @@ cat > "${prog_scm}" <<EOF
 (import (pipchix nix-embed))
 (import (pipchix nix-list))
 (import (pipchix nix-set))
+(import (pipchix string-manipulation))
 (output-nix-abstract-syntax-tree $1)
 (exit 0)
 EOF
