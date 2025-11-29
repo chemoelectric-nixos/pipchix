@@ -98,7 +98,7 @@ TESTSUITE_DEPS += $(srcdir)/package.m4
 TESTSUITE_DEPS += $(srcdir)/tests-template.at
 #
 TESTSUITE_DEPS += $(srcdir)/base64-template.at
-TESTSUITE_DEPS += $(srcdir)/printf-template.at
+TESTSUITE_DEPS += $(srcdir)/escaped-template.at
 #
 TESTSUITE_DEPS += $(srcdir)/ast-nodes-preds-template.at
 #

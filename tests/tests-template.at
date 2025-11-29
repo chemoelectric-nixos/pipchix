@@ -64,16 +64,13 @@ m4_include(nix-embed-template.at)
 m4_include(nix-list-template.at)
 
 m4_include(base64-template.at)
-m4_include(printf-template.at)
+m4_include(escaped-template.at)
 
 m4_popdef([tests_tag])
 m4_popdef([tests_banner])
 m4_popdef([default_keywords])
 m4_popdef([enable_check])
 m4_popdef([run_scheme])
-
-
-dnl "🐶🐱🐭🐹🐰🦊🐻🐼🐻‍❄🐯🦁🐮🐷🐽🐸"
 
 ])
 

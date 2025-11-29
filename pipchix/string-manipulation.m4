@@ -66,7 +66,7 @@
 (define (base64-utf8 str)
   (bytevector->base64 (string->utf8 str)))
 
-(define (bytevector->printf-utf8 bv)
+(define (bytevector->escaped-utf8 bv)
   ;; Use only ASCII alphanumerics, and also backslashes for escapes.
   (define (fragment u)
     (cond ((%%is-alphanumeric-ascii? u) (string (integer->char u)))
@@ -81,7 +81,7 @@
       ((#o013) "\\v")
       ((#o014) "\\f")
       ((#o015) "\\r")
-      (else (error "internal error in bytevector->printf-utf8" u))))
+      (else (error "internal error in bytevector->escaped-utf8" u))))
   (define (fragment-length u)
     (cond ((%%is-alphanumeric-ascii? u) 1)
           ((and (<= #o007 u) (<= u #o015)) 2)
@@ -106,8 +106,8 @@
           (loop (+ i 1) (+ j (string-length frag))))))
     str))
 
-(define (printf-utf8 str)
-  (bytevector->printf-utf8 (string->utf8 str)))
+(define (escaped-utf8 str)
+  (bytevector->escaped-utf8 (string->utf8 str)))
 
 (define (%%is-alphanumeric-ascii? u)
   (or (and (<= #o101 u) (<= u #o132))   ;; A-Z

@@ -329,7 +329,7 @@ TESTSUITE = $(srcdir)/testsuite
 #
 TESTSUITE_DEPS = $(srcdir)/atlocal.in $(srcdir)/package.m4 \
 	$(srcdir)/tests-template.at $(srcdir)/base64-template.at \
-	$(srcdir)/printf-template.at \
+	$(srcdir)/escaped-template.at \
 	$(srcdir)/ast-nodes-preds-template.at \
 	$(srcdir)/nix-attributebinding-node-template.at \
 	$(srcdir)/nix-attributepath-node-template.at \
