@@ -67,41 +67,25 @@
   (bytevector->base64 (string->utf8 str)))
 
 (define (bytevector->printf-utf8 bv)
+  ;; Use only ASCII alphanumerics, and also backslashes for escapes.
   (define (fragment u)
-    (cond ((= u #x5C) (string-append "\\" "\\"))  ;; #\\
-          ((= u #x25) (string-append "\\" "045")) ;; #\%
-          ((= u #x22) (string-append "\\" "042")) ;; #\"
-          ((= u #x27) (string-append "\\" "047")) ;; #\'
-          ((= u #x07) (string-append "\\" "a"))
-          ((= u #x08) (string-append "\\" "b"))
-          ((= u #x09) (string-append "\\" "t"))
-          ((= u #x0A) (string-append "\\" "n"))
-          ((= u #x0B) (string-append "\\" "v"))
-          ((= u #x0C) (string-append "\\" "f"))
-          ((= u #x0D) (string-append "\\" "r"))
-          ((<= #x7F u) (string-append
-                        "\\" (number->string u 8)))
-          ((<= u #x07) (string-append
-                        "\\" "00" (number->string u 8)))
-          ((<= u #x1F) (string-append
-                        "\\" "0" (number->string u 8)))
-          (else (string (integer->char u)))))
+    (cond ((%%is-alphanumeric-ascii? u) (string (integer->char u)))
+          ((and (<= #o007 u) (<= u #o015)) (control-fragment u))
+          (else (string-append "\\" (%%three-digit-octal u)))))
+  (define (control-fragment u)
+    (case u
+      ((#o007) "\\a")
+      ((#o010) "\\b")
+      ((#o011) "\\t")
+      ((#o012) "\\n")
+      ((#o013) "\\v")
+      ((#o014) "\\f")
+      ((#o015) "\\r")
+      (else (error "internal error in bytevector->printf-utf8" u))))
   (define (fragment-length u)
-    (cond ((= u #x5C) 2)
-          ((= u #x25) 4)
-          ((= u #x22) 4)
-          ((= u #x27) 4)
-          ((= u #x07) 2)
-          ((= u #x08) 2)
-          ((= u #x09) 2)
-          ((= u #x0A) 2)
-          ((= u #x0B) 2)
-          ((= u #x0C) 2)
-          ((= u #x0D) 2)
-          ((<= #x7F u) 4)
-          ((<= u #x07) 4)
-          ((<= u #x1F) 4)
-          (else 1)))
+    (cond ((%%is-alphanumeric-ascii? u) 1)
+          ((and (<= #o007 u) (<= u #o015)) 2)
+          (else 4)))
   (define (find-string-length bv)
     (let ((m (bytevector-length bv)))
       (let loop ((i 0)
@@ -124,6 +108,17 @@
 
 (define (printf-utf8 str)
   (bytevector->printf-utf8 (string->utf8 str)))
+
+(define (%%is-alphanumeric-ascii? u)
+  (or (and (<= #o101 u) (<= u #o132))   ;; A-Z
+      (and (<= #o141 u) (<= u #o172))   ;; a-z
+      (and (<= #o060 u) (<= u #o071)))) ;; 0-9
+
+(define (%%three-digit-octal u)
+  (let ((s (number->string u 8)))
+    (cond ((< u #o010) (string-append "00" s))
+          ((< u #o100) (string-append "0" s))
+          (else s))))
 
 m4_divert(-1)
 ;;; local variables:

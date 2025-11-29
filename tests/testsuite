@@ -4154,7 +4154,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "printf-template.at:3
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "This is a test." | \
+echo >>"$at_stdout"; printf "%s\n" "This\040is\040a\040test\056" | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/printf-template.at:31"
 $at_failed && at_fn_log_failure
@@ -4164,28 +4164,32 @@ $at_traceon; }
 
 
 
-printf "%s\n" "printf-template.at:39" >"$at_check_line_file"
+printf "%s\n" "printf-template.at:42" >"$at_check_line_file"
 (test ${enable_check_r6rs_chez} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/printf-template.at:39"
+  && at_fn_check_skip 77 "$at_srcdir/printf-template.at:42"
 { set +x
-printf "%s\n" "$at_srcdir/printf-template.at:39: \"\${abs_builddir}\"/run-r6rs-chez.sh '(nix-embed
+printf "%s\n" "$at_srcdir/printf-template.at:42: \"\${abs_builddir}\"/run-r6rs-chez.sh '(nix-embed
     (printf-utf8
      (utf8->string
       #vu8(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
-                   17 18 19 20 21 22 23 24 25 26 27 28 29 30 31))))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "printf-template.at:39"
+                   17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
+                   32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47
+                   48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63))))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "printf-template.at:42"
 ( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '(nix-embed
     (printf-utf8
      (utf8->string
       #vu8(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
-                   17 18 19 20 21 22 23 24 25 26 27 28 29 30 31))))'
+                   17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
+                   32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47
+                   48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63))))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "\000\001\002\003\004\005\006\a\b\t\n\v\f\r\016\017\020\021\022\023\024\025\026\027\030\031\032\033\034\035\036\037" | \
+echo >>"$at_stdout"; printf "%s\n" "\000\001\002\003\004\005\006\a\b\t\n\v\f\r\016\017\020\021\022\023\024\025\026\027\030\031\032\033\034\035\036\037\040\041\042\043\044\045\046\047\050\051\052\053\054\055\056\0570123456789\072\073\074\075\076\077" | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/printf-template.at:39"
+at_fn_check_status 0 $at_status "$at_srcdir/printf-template.at:42"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -4193,12 +4197,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "printf-template.at:43" >"$at_check_line_file"
+printf "%s\n" "printf-template.at:46" >"$at_check_line_file"
 (test ${enable_check_r6rs_chez} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/printf-template.at:43"
+  && at_fn_check_skip 77 "$at_srcdir/printf-template.at:46"
 { set +x
-printf "%s\n" "$at_srcdir/printf-template.at:43: \"\${abs_builddir}\"/run-r6rs-chez.sh '(nix-embed (printf-utf8 \"你好世界\"))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "printf-template.at:43"
+printf "%s\n" "$at_srcdir/printf-template.at:46: \"\${abs_builddir}\"/run-r6rs-chez.sh '(nix-embed (printf-utf8 \"你好世界\"))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "printf-template.at:46"
 ( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '(nix-embed (printf-utf8 "你好世界"))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -4206,7 +4210,7 @@ $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
 echo >>"$at_stdout"; printf "%s\n" "\344\275\240\345\245\275\344\270\226\347\225\214" | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/printf-template.at:43"
+at_fn_check_status 0 $at_status "$at_srcdir/printf-template.at:46"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -6196,7 +6200,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "printf-template.at:3
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "This is a test." | \
+echo >>"$at_stdout"; printf "%s\n" "This\040is\040a\040test\056" | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/printf-template.at:31"
 $at_failed && at_fn_log_failure
@@ -6206,28 +6210,32 @@ $at_traceon; }
 
 
 
-printf "%s\n" "printf-template.at:39" >"$at_check_line_file"
+printf "%s\n" "printf-template.at:42" >"$at_check_line_file"
 (test ${enable_check_r7rs_chibi} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/printf-template.at:39"
+  && at_fn_check_skip 77 "$at_srcdir/printf-template.at:42"
 { set +x
-printf "%s\n" "$at_srcdir/printf-template.at:39: \"\${abs_builddir}\"/run-r7rs-chibi.sh '(nix-embed
+printf "%s\n" "$at_srcdir/printf-template.at:42: \"\${abs_builddir}\"/run-r7rs-chibi.sh '(nix-embed
     (printf-utf8
      (utf8->string
       #u8(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
-                   17 18 19 20 21 22 23 24 25 26 27 28 29 30 31))))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "printf-template.at:39"
+                   17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
+                   32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47
+                   48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63))))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "printf-template.at:42"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-chibi.sh '(nix-embed
     (printf-utf8
      (utf8->string
       #u8(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
-                   17 18 19 20 21 22 23 24 25 26 27 28 29 30 31))))'
+                   17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
+                   32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47
+                   48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63))))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "\000\001\002\003\004\005\006\a\b\t\n\v\f\r\016\017\020\021\022\023\024\025\026\027\030\031\032\033\034\035\036\037" | \
+echo >>"$at_stdout"; printf "%s\n" "\000\001\002\003\004\005\006\a\b\t\n\v\f\r\016\017\020\021\022\023\024\025\026\027\030\031\032\033\034\035\036\037\040\041\042\043\044\045\046\047\050\051\052\053\054\055\056\0570123456789\072\073\074\075\076\077" | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/printf-template.at:39"
+at_fn_check_status 0 $at_status "$at_srcdir/printf-template.at:42"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -6235,12 +6243,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "printf-template.at:43" >"$at_check_line_file"
+printf "%s\n" "printf-template.at:46" >"$at_check_line_file"
 (test ${enable_check_r7rs_chibi} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/printf-template.at:43"
+  && at_fn_check_skip 77 "$at_srcdir/printf-template.at:46"
 { set +x
-printf "%s\n" "$at_srcdir/printf-template.at:43: \"\${abs_builddir}\"/run-r7rs-chibi.sh '(nix-embed (printf-utf8 \"你好世界\"))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "printf-template.at:43"
+printf "%s\n" "$at_srcdir/printf-template.at:46: \"\${abs_builddir}\"/run-r7rs-chibi.sh '(nix-embed (printf-utf8 \"你好世界\"))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "printf-template.at:46"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-chibi.sh '(nix-embed (printf-utf8 "你好世界"))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -6248,7 +6256,7 @@ $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
 echo >>"$at_stdout"; printf "%s\n" "\344\275\240\345\245\275\344\270\226\347\225\214" | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/printf-template.at:43"
+at_fn_check_status 0 $at_status "$at_srcdir/printf-template.at:46"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -8238,7 +8246,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "printf-template.at:3
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "This is a test." | \
+echo >>"$at_stdout"; printf "%s\n" "This\040is\040a\040test\056" | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/printf-template.at:31"
 $at_failed && at_fn_log_failure
@@ -8248,28 +8256,32 @@ $at_traceon; }
 
 
 
-printf "%s\n" "printf-template.at:39" >"$at_check_line_file"
+printf "%s\n" "printf-template.at:42" >"$at_check_line_file"
 (test ${enable_check_r7rs_csc_5} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/printf-template.at:39"
+  && at_fn_check_skip 77 "$at_srcdir/printf-template.at:42"
 { set +x
-printf "%s\n" "$at_srcdir/printf-template.at:39: \"\${abs_builddir}\"/run-r7rs-csc-5.sh '(nix-embed
+printf "%s\n" "$at_srcdir/printf-template.at:42: \"\${abs_builddir}\"/run-r7rs-csc-5.sh '(nix-embed
     (printf-utf8
      (utf8->string
       #u8(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
-                   17 18 19 20 21 22 23 24 25 26 27 28 29 30 31))))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "printf-template.at:39"
+                   17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
+                   32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47
+                   48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63))))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "printf-template.at:42"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-csc-5.sh '(nix-embed
     (printf-utf8
      (utf8->string
       #u8(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
-                   17 18 19 20 21 22 23 24 25 26 27 28 29 30 31))))'
+                   17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
+                   32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47
+                   48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63))))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "\000\001\002\003\004\005\006\a\b\t\n\v\f\r\016\017\020\021\022\023\024\025\026\027\030\031\032\033\034\035\036\037" | \
+echo >>"$at_stdout"; printf "%s\n" "\000\001\002\003\004\005\006\a\b\t\n\v\f\r\016\017\020\021\022\023\024\025\026\027\030\031\032\033\034\035\036\037\040\041\042\043\044\045\046\047\050\051\052\053\054\055\056\0570123456789\072\073\074\075\076\077" | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/printf-template.at:39"
+at_fn_check_status 0 $at_status "$at_srcdir/printf-template.at:42"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -8277,12 +8289,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "printf-template.at:43" >"$at_check_line_file"
+printf "%s\n" "printf-template.at:46" >"$at_check_line_file"
 (test ${enable_check_r7rs_csc_5} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/printf-template.at:43"
+  && at_fn_check_skip 77 "$at_srcdir/printf-template.at:46"
 { set +x
-printf "%s\n" "$at_srcdir/printf-template.at:43: \"\${abs_builddir}\"/run-r7rs-csc-5.sh '(nix-embed (printf-utf8 \"你好世界\"))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "printf-template.at:43"
+printf "%s\n" "$at_srcdir/printf-template.at:46: \"\${abs_builddir}\"/run-r7rs-csc-5.sh '(nix-embed (printf-utf8 \"你好世界\"))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "printf-template.at:46"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-csc-5.sh '(nix-embed (printf-utf8 "你好世界"))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -8290,7 +8302,7 @@ $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
 echo >>"$at_stdout"; printf "%s\n" "\344\275\240\345\245\275\344\270\226\347\225\214" | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/printf-template.at:43"
+at_fn_check_status 0 $at_status "$at_srcdir/printf-template.at:46"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -10280,7 +10292,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "printf-template.at:3
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "This is a test." | \
+echo >>"$at_stdout"; printf "%s\n" "This\040is\040a\040test\056" | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/printf-template.at:31"
 $at_failed && at_fn_log_failure
@@ -10290,28 +10302,32 @@ $at_traceon; }
 
 
 
-printf "%s\n" "printf-template.at:39" >"$at_check_line_file"
+printf "%s\n" "printf-template.at:42" >"$at_check_line_file"
 (test ${enable_check_r7rs_csi_5} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/printf-template.at:39"
+  && at_fn_check_skip 77 "$at_srcdir/printf-template.at:42"
 { set +x
-printf "%s\n" "$at_srcdir/printf-template.at:39: \"\${abs_builddir}\"/run-r7rs-csi-5.sh '(nix-embed
+printf "%s\n" "$at_srcdir/printf-template.at:42: \"\${abs_builddir}\"/run-r7rs-csi-5.sh '(nix-embed
     (printf-utf8
      (utf8->string
       #u8(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
-                   17 18 19 20 21 22 23 24 25 26 27 28 29 30 31))))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "printf-template.at:39"
+                   17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
+                   32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47
+                   48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63))))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "printf-template.at:42"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-csi-5.sh '(nix-embed
     (printf-utf8
      (utf8->string
       #u8(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
-                   17 18 19 20 21 22 23 24 25 26 27 28 29 30 31))))'
+                   17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
+                   32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47
+                   48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63))))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "\000\001\002\003\004\005\006\a\b\t\n\v\f\r\016\017\020\021\022\023\024\025\026\027\030\031\032\033\034\035\036\037" | \
+echo >>"$at_stdout"; printf "%s\n" "\000\001\002\003\004\005\006\a\b\t\n\v\f\r\016\017\020\021\022\023\024\025\026\027\030\031\032\033\034\035\036\037\040\041\042\043\044\045\046\047\050\051\052\053\054\055\056\0570123456789\072\073\074\075\076\077" | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/printf-template.at:39"
+at_fn_check_status 0 $at_status "$at_srcdir/printf-template.at:42"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -10319,12 +10335,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "printf-template.at:43" >"$at_check_line_file"
+printf "%s\n" "printf-template.at:46" >"$at_check_line_file"
 (test ${enable_check_r7rs_csi_5} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/printf-template.at:43"
+  && at_fn_check_skip 77 "$at_srcdir/printf-template.at:46"
 { set +x
-printf "%s\n" "$at_srcdir/printf-template.at:43: \"\${abs_builddir}\"/run-r7rs-csi-5.sh '(nix-embed (printf-utf8 \"你好世界\"))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "printf-template.at:43"
+printf "%s\n" "$at_srcdir/printf-template.at:46: \"\${abs_builddir}\"/run-r7rs-csi-5.sh '(nix-embed (printf-utf8 \"你好世界\"))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "printf-template.at:46"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-csi-5.sh '(nix-embed (printf-utf8 "你好世界"))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -10332,7 +10348,7 @@ $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
 echo >>"$at_stdout"; printf "%s\n" "\344\275\240\345\245\275\344\270\226\347\225\214" | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/printf-template.at:43"
+at_fn_check_status 0 $at_status "$at_srcdir/printf-template.at:46"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -12322,7 +12338,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "printf-template.at:3
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "This is a test." | \
+echo >>"$at_stdout"; printf "%s\n" "This\040is\040a\040test\056" | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/printf-template.at:31"
 $at_failed && at_fn_log_failure
@@ -12332,28 +12348,32 @@ $at_traceon; }
 
 
 
-printf "%s\n" "printf-template.at:39" >"$at_check_line_file"
+printf "%s\n" "printf-template.at:42" >"$at_check_line_file"
 (test ${enable_check_r7rs_gauche} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/printf-template.at:39"
+  && at_fn_check_skip 77 "$at_srcdir/printf-template.at:42"
 { set +x
-printf "%s\n" "$at_srcdir/printf-template.at:39: \"\${abs_builddir}\"/run-r7rs-gauche.sh '(nix-embed
+printf "%s\n" "$at_srcdir/printf-template.at:42: \"\${abs_builddir}\"/run-r7rs-gauche.sh '(nix-embed
     (printf-utf8
      (utf8->string
       #u8(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
-                   17 18 19 20 21 22 23 24 25 26 27 28 29 30 31))))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "printf-template.at:39"
+                   17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
+                   32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47
+                   48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63))))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "printf-template.at:42"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-gauche.sh '(nix-embed
     (printf-utf8
      (utf8->string
       #u8(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
-                   17 18 19 20 21 22 23 24 25 26 27 28 29 30 31))))'
+                   17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
+                   32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47
+                   48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63))))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "\000\001\002\003\004\005\006\a\b\t\n\v\f\r\016\017\020\021\022\023\024\025\026\027\030\031\032\033\034\035\036\037" | \
+echo >>"$at_stdout"; printf "%s\n" "\000\001\002\003\004\005\006\a\b\t\n\v\f\r\016\017\020\021\022\023\024\025\026\027\030\031\032\033\034\035\036\037\040\041\042\043\044\045\046\047\050\051\052\053\054\055\056\0570123456789\072\073\074\075\076\077" | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/printf-template.at:39"
+at_fn_check_status 0 $at_status "$at_srcdir/printf-template.at:42"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -12361,12 +12381,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "printf-template.at:43" >"$at_check_line_file"
+printf "%s\n" "printf-template.at:46" >"$at_check_line_file"
 (test ${enable_check_r7rs_gauche} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/printf-template.at:43"
+  && at_fn_check_skip 77 "$at_srcdir/printf-template.at:46"
 { set +x
-printf "%s\n" "$at_srcdir/printf-template.at:43: \"\${abs_builddir}\"/run-r7rs-gauche.sh '(nix-embed (printf-utf8 \"你好世界\"))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "printf-template.at:43"
+printf "%s\n" "$at_srcdir/printf-template.at:46: \"\${abs_builddir}\"/run-r7rs-gauche.sh '(nix-embed (printf-utf8 \"你好世界\"))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "printf-template.at:46"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-gauche.sh '(nix-embed (printf-utf8 "你好世界"))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -12374,7 +12394,7 @@ $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
 echo >>"$at_stdout"; printf "%s\n" "\344\275\240\345\245\275\344\270\226\347\225\214" | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/printf-template.at:43"
+at_fn_check_status 0 $at_status "$at_srcdir/printf-template.at:46"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -14364,7 +14384,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "printf-template.at:3
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "This is a test." | \
+echo >>"$at_stdout"; printf "%s\n" "This\040is\040a\040test\056" | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/printf-template.at:31"
 $at_failed && at_fn_log_failure
@@ -14374,28 +14394,32 @@ $at_traceon; }
 
 
 
-printf "%s\n" "printf-template.at:39" >"$at_check_line_file"
+printf "%s\n" "printf-template.at:42" >"$at_check_line_file"
 (test ${enable_check_r6rs_guile} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/printf-template.at:39"
+  && at_fn_check_skip 77 "$at_srcdir/printf-template.at:42"
 { set +x
-printf "%s\n" "$at_srcdir/printf-template.at:39: \"\${abs_builddir}\"/run-r6rs-guile.sh '(nix-embed
+printf "%s\n" "$at_srcdir/printf-template.at:42: \"\${abs_builddir}\"/run-r6rs-guile.sh '(nix-embed
     (printf-utf8
      (utf8->string
       #vu8(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
-                   17 18 19 20 21 22 23 24 25 26 27 28 29 30 31))))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "printf-template.at:39"
+                   17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
+                   32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47
+                   48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63))))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "printf-template.at:42"
 ( $at_check_trace; "${abs_builddir}"/run-r6rs-guile.sh '(nix-embed
     (printf-utf8
      (utf8->string
       #vu8(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
-                   17 18 19 20 21 22 23 24 25 26 27 28 29 30 31))))'
+                   17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
+                   32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47
+                   48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63))))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "\000\001\002\003\004\005\006\a\b\t\n\v\f\r\016\017\020\021\022\023\024\025\026\027\030\031\032\033\034\035\036\037" | \
+echo >>"$at_stdout"; printf "%s\n" "\000\001\002\003\004\005\006\a\b\t\n\v\f\r\016\017\020\021\022\023\024\025\026\027\030\031\032\033\034\035\036\037\040\041\042\043\044\045\046\047\050\051\052\053\054\055\056\0570123456789\072\073\074\075\076\077" | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/printf-template.at:39"
+at_fn_check_status 0 $at_status "$at_srcdir/printf-template.at:42"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -14403,12 +14427,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "printf-template.at:43" >"$at_check_line_file"
+printf "%s\n" "printf-template.at:46" >"$at_check_line_file"
 (test ${enable_check_r6rs_guile} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/printf-template.at:43"
+  && at_fn_check_skip 77 "$at_srcdir/printf-template.at:46"
 { set +x
-printf "%s\n" "$at_srcdir/printf-template.at:43: \"\${abs_builddir}\"/run-r6rs-guile.sh '(nix-embed (printf-utf8 \"你好世界\"))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "printf-template.at:43"
+printf "%s\n" "$at_srcdir/printf-template.at:46: \"\${abs_builddir}\"/run-r6rs-guile.sh '(nix-embed (printf-utf8 \"你好世界\"))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "printf-template.at:46"
 ( $at_check_trace; "${abs_builddir}"/run-r6rs-guile.sh '(nix-embed (printf-utf8 "你好世界"))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -14416,7 +14440,7 @@ $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
 echo >>"$at_stdout"; printf "%s\n" "\344\275\240\345\245\275\344\270\226\347\225\214" | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/printf-template.at:43"
+at_fn_check_status 0 $at_status "$at_srcdir/printf-template.at:46"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -16406,7 +16430,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "printf-template.at:3
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "This is a test." | \
+echo >>"$at_stdout"; printf "%s\n" "This\040is\040a\040test\056" | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/printf-template.at:31"
 $at_failed && at_fn_log_failure
@@ -16416,28 +16440,32 @@ $at_traceon; }
 
 
 
-printf "%s\n" "printf-template.at:39" >"$at_check_line_file"
+printf "%s\n" "printf-template.at:42" >"$at_check_line_file"
 (test ${enable_check_r7rs_guile} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/printf-template.at:39"
+  && at_fn_check_skip 77 "$at_srcdir/printf-template.at:42"
 { set +x
-printf "%s\n" "$at_srcdir/printf-template.at:39: \"\${abs_builddir}\"/run-r7rs-guile.sh '(nix-embed
+printf "%s\n" "$at_srcdir/printf-template.at:42: \"\${abs_builddir}\"/run-r7rs-guile.sh '(nix-embed
     (printf-utf8
      (utf8->string
       #u8(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
-                   17 18 19 20 21 22 23 24 25 26 27 28 29 30 31))))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "printf-template.at:39"
+                   17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
+                   32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47
+                   48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63))))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "printf-template.at:42"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-guile.sh '(nix-embed
     (printf-utf8
      (utf8->string
       #u8(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
-                   17 18 19 20 21 22 23 24 25 26 27 28 29 30 31))))'
+                   17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
+                   32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47
+                   48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63))))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "\000\001\002\003\004\005\006\a\b\t\n\v\f\r\016\017\020\021\022\023\024\025\026\027\030\031\032\033\034\035\036\037" | \
+echo >>"$at_stdout"; printf "%s\n" "\000\001\002\003\004\005\006\a\b\t\n\v\f\r\016\017\020\021\022\023\024\025\026\027\030\031\032\033\034\035\036\037\040\041\042\043\044\045\046\047\050\051\052\053\054\055\056\0570123456789\072\073\074\075\076\077" | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/printf-template.at:39"
+at_fn_check_status 0 $at_status "$at_srcdir/printf-template.at:42"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -16445,12 +16473,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "printf-template.at:43" >"$at_check_line_file"
+printf "%s\n" "printf-template.at:46" >"$at_check_line_file"
 (test ${enable_check_r7rs_guile} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/printf-template.at:43"
+  && at_fn_check_skip 77 "$at_srcdir/printf-template.at:46"
 { set +x
-printf "%s\n" "$at_srcdir/printf-template.at:43: \"\${abs_builddir}\"/run-r7rs-guile.sh '(nix-embed (printf-utf8 \"你好世界\"))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "printf-template.at:43"
+printf "%s\n" "$at_srcdir/printf-template.at:46: \"\${abs_builddir}\"/run-r7rs-guile.sh '(nix-embed (printf-utf8 \"你好世界\"))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "printf-template.at:46"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-guile.sh '(nix-embed (printf-utf8 "你好世界"))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -16458,7 +16486,7 @@ $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
 echo >>"$at_stdout"; printf "%s\n" "\344\275\240\345\245\275\344\270\226\347\225\214" | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/printf-template.at:43"
+at_fn_check_status 0 $at_status "$at_srcdir/printf-template.at:46"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -18448,7 +18476,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "printf-template.at:3
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "This is a test." | \
+echo >>"$at_stdout"; printf "%s\n" "This\040is\040a\040test\056" | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/printf-template.at:31"
 $at_failed && at_fn_log_failure
@@ -18458,28 +18486,32 @@ $at_traceon; }
 
 
 
-printf "%s\n" "printf-template.at:39" >"$at_check_line_file"
+printf "%s\n" "printf-template.at:42" >"$at_check_line_file"
 (test ${enable_check_r6rs_loko} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/printf-template.at:39"
+  && at_fn_check_skip 77 "$at_srcdir/printf-template.at:42"
 { set +x
-printf "%s\n" "$at_srcdir/printf-template.at:39: \"\${abs_builddir}\"/run-r6rs-loko.sh '(nix-embed
+printf "%s\n" "$at_srcdir/printf-template.at:42: \"\${abs_builddir}\"/run-r6rs-loko.sh '(nix-embed
     (printf-utf8
      (utf8->string
       #vu8(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
-                   17 18 19 20 21 22 23 24 25 26 27 28 29 30 31))))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "printf-template.at:39"
+                   17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
+                   32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47
+                   48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63))))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "printf-template.at:42"
 ( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '(nix-embed
     (printf-utf8
      (utf8->string
       #vu8(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
-                   17 18 19 20 21 22 23 24 25 26 27 28 29 30 31))))'
+                   17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
+                   32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47
+                   48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63))))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "\000\001\002\003\004\005\006\a\b\t\n\v\f\r\016\017\020\021\022\023\024\025\026\027\030\031\032\033\034\035\036\037" | \
+echo >>"$at_stdout"; printf "%s\n" "\000\001\002\003\004\005\006\a\b\t\n\v\f\r\016\017\020\021\022\023\024\025\026\027\030\031\032\033\034\035\036\037\040\041\042\043\044\045\046\047\050\051\052\053\054\055\056\0570123456789\072\073\074\075\076\077" | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/printf-template.at:39"
+at_fn_check_status 0 $at_status "$at_srcdir/printf-template.at:42"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -18487,12 +18519,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "printf-template.at:43" >"$at_check_line_file"
+printf "%s\n" "printf-template.at:46" >"$at_check_line_file"
 (test ${enable_check_r6rs_loko} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/printf-template.at:43"
+  && at_fn_check_skip 77 "$at_srcdir/printf-template.at:46"
 { set +x
-printf "%s\n" "$at_srcdir/printf-template.at:43: \"\${abs_builddir}\"/run-r6rs-loko.sh '(nix-embed (printf-utf8 \"你好世界\"))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "printf-template.at:43"
+printf "%s\n" "$at_srcdir/printf-template.at:46: \"\${abs_builddir}\"/run-r6rs-loko.sh '(nix-embed (printf-utf8 \"你好世界\"))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "printf-template.at:46"
 ( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '(nix-embed (printf-utf8 "你好世界"))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -18500,7 +18532,7 @@ $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
 echo >>"$at_stdout"; printf "%s\n" "\344\275\240\345\245\275\344\270\226\347\225\214" | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/printf-template.at:43"
+at_fn_check_status 0 $at_status "$at_srcdir/printf-template.at:46"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -20490,7 +20522,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "printf-template.at:3
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "This is a test." | \
+echo >>"$at_stdout"; printf "%s\n" "This\040is\040a\040test\056" | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/printf-template.at:31"
 $at_failed && at_fn_log_failure
@@ -20500,28 +20532,32 @@ $at_traceon; }
 
 
 
-printf "%s\n" "printf-template.at:39" >"$at_check_line_file"
+printf "%s\n" "printf-template.at:42" >"$at_check_line_file"
 (test ${enable_check_r7rs_loko} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/printf-template.at:39"
+  && at_fn_check_skip 77 "$at_srcdir/printf-template.at:42"
 { set +x
-printf "%s\n" "$at_srcdir/printf-template.at:39: \"\${abs_builddir}\"/run-r7rs-loko.sh '(nix-embed
+printf "%s\n" "$at_srcdir/printf-template.at:42: \"\${abs_builddir}\"/run-r7rs-loko.sh '(nix-embed
     (printf-utf8
      (utf8->string
       #u8(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
-                   17 18 19 20 21 22 23 24 25 26 27 28 29 30 31))))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "printf-template.at:39"
+                   17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
+                   32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47
+                   48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63))))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "printf-template.at:42"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(nix-embed
     (printf-utf8
      (utf8->string
       #u8(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
-                   17 18 19 20 21 22 23 24 25 26 27 28 29 30 31))))'
+                   17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
+                   32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47
+                   48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63))))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "\000\001\002\003\004\005\006\a\b\t\n\v\f\r\016\017\020\021\022\023\024\025\026\027\030\031\032\033\034\035\036\037" | \
+echo >>"$at_stdout"; printf "%s\n" "\000\001\002\003\004\005\006\a\b\t\n\v\f\r\016\017\020\021\022\023\024\025\026\027\030\031\032\033\034\035\036\037\040\041\042\043\044\045\046\047\050\051\052\053\054\055\056\0570123456789\072\073\074\075\076\077" | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/printf-template.at:39"
+at_fn_check_status 0 $at_status "$at_srcdir/printf-template.at:42"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -20529,12 +20565,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "printf-template.at:43" >"$at_check_line_file"
+printf "%s\n" "printf-template.at:46" >"$at_check_line_file"
 (test ${enable_check_r7rs_loko} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/printf-template.at:43"
+  && at_fn_check_skip 77 "$at_srcdir/printf-template.at:46"
 { set +x
-printf "%s\n" "$at_srcdir/printf-template.at:43: \"\${abs_builddir}\"/run-r7rs-loko.sh '(nix-embed (printf-utf8 \"你好世界\"))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "printf-template.at:43"
+printf "%s\n" "$at_srcdir/printf-template.at:46: \"\${abs_builddir}\"/run-r7rs-loko.sh '(nix-embed (printf-utf8 \"你好世界\"))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "printf-template.at:46"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(nix-embed (printf-utf8 "你好世界"))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -20542,7 +20578,7 @@ $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
 echo >>"$at_stdout"; printf "%s\n" "\344\275\240\345\245\275\344\270\226\347\225\214" | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/printf-template.at:43"
+at_fn_check_status 0 $at_status "$at_srcdir/printf-template.at:46"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -22532,7 +22568,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "printf-template.at:3
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "This is a test." | \
+echo >>"$at_stdout"; printf "%s\n" "This\040is\040a\040test\056" | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/printf-template.at:31"
 $at_failed && at_fn_log_failure
@@ -22542,28 +22578,32 @@ $at_traceon; }
 
 
 
-printf "%s\n" "printf-template.at:39" >"$at_check_line_file"
+printf "%s\n" "printf-template.at:42" >"$at_check_line_file"
 (test ${enable_check_r6rs_racket} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/printf-template.at:39"
+  && at_fn_check_skip 77 "$at_srcdir/printf-template.at:42"
 { set +x
-printf "%s\n" "$at_srcdir/printf-template.at:39: \"\${abs_builddir}\"/run-r6rs-racket.sh '(nix-embed
+printf "%s\n" "$at_srcdir/printf-template.at:42: \"\${abs_builddir}\"/run-r6rs-racket.sh '(nix-embed
     (printf-utf8
      (utf8->string
       #vu8(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
-                   17 18 19 20 21 22 23 24 25 26 27 28 29 30 31))))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "printf-template.at:39"
+                   17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
+                   32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47
+                   48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63))))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "printf-template.at:42"
 ( $at_check_trace; "${abs_builddir}"/run-r6rs-racket.sh '(nix-embed
     (printf-utf8
      (utf8->string
       #vu8(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
-                   17 18 19 20 21 22 23 24 25 26 27 28 29 30 31))))'
+                   17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
+                   32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47
+                   48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63))))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "\000\001\002\003\004\005\006\a\b\t\n\v\f\r\016\017\020\021\022\023\024\025\026\027\030\031\032\033\034\035\036\037" | \
+echo >>"$at_stdout"; printf "%s\n" "\000\001\002\003\004\005\006\a\b\t\n\v\f\r\016\017\020\021\022\023\024\025\026\027\030\031\032\033\034\035\036\037\040\041\042\043\044\045\046\047\050\051\052\053\054\055\056\0570123456789\072\073\074\075\076\077" | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/printf-template.at:39"
+at_fn_check_status 0 $at_status "$at_srcdir/printf-template.at:42"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -22571,12 +22611,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "printf-template.at:43" >"$at_check_line_file"
+printf "%s\n" "printf-template.at:46" >"$at_check_line_file"
 (test ${enable_check_r6rs_racket} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/printf-template.at:43"
+  && at_fn_check_skip 77 "$at_srcdir/printf-template.at:46"
 { set +x
-printf "%s\n" "$at_srcdir/printf-template.at:43: \"\${abs_builddir}\"/run-r6rs-racket.sh '(nix-embed (printf-utf8 \"你好世界\"))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "printf-template.at:43"
+printf "%s\n" "$at_srcdir/printf-template.at:46: \"\${abs_builddir}\"/run-r6rs-racket.sh '(nix-embed (printf-utf8 \"你好世界\"))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "printf-template.at:46"
 ( $at_check_trace; "${abs_builddir}"/run-r6rs-racket.sh '(nix-embed (printf-utf8 "你好世界"))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -22584,7 +22624,7 @@ $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
 echo >>"$at_stdout"; printf "%s\n" "\344\275\240\345\245\275\344\270\226\347\225\214" | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/printf-template.at:43"
+at_fn_check_status 0 $at_status "$at_srcdir/printf-template.at:46"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -24574,7 +24614,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "printf-template.at:3
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "This is a test." | \
+echo >>"$at_stdout"; printf "%s\n" "This\040is\040a\040test\056" | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/printf-template.at:31"
 $at_failed && at_fn_log_failure
@@ -24584,28 +24624,32 @@ $at_traceon; }
 
 
 
-printf "%s\n" "printf-template.at:39" >"$at_check_line_file"
+printf "%s\n" "printf-template.at:42" >"$at_check_line_file"
 (test ${enable_check_r6rs_sagittarius} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/printf-template.at:39"
+  && at_fn_check_skip 77 "$at_srcdir/printf-template.at:42"
 { set +x
-printf "%s\n" "$at_srcdir/printf-template.at:39: \"\${abs_builddir}\"/run-r6rs-sagittarius.sh '(nix-embed
+printf "%s\n" "$at_srcdir/printf-template.at:42: \"\${abs_builddir}\"/run-r6rs-sagittarius.sh '(nix-embed
     (printf-utf8
      (utf8->string
       #vu8(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
-                   17 18 19 20 21 22 23 24 25 26 27 28 29 30 31))))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "printf-template.at:39"
+                   17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
+                   32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47
+                   48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63))))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "printf-template.at:42"
 ( $at_check_trace; "${abs_builddir}"/run-r6rs-sagittarius.sh '(nix-embed
     (printf-utf8
      (utf8->string
       #vu8(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
-                   17 18 19 20 21 22 23 24 25 26 27 28 29 30 31))))'
+                   17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
+                   32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47
+                   48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63))))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "\000\001\002\003\004\005\006\a\b\t\n\v\f\r\016\017\020\021\022\023\024\025\026\027\030\031\032\033\034\035\036\037" | \
+echo >>"$at_stdout"; printf "%s\n" "\000\001\002\003\004\005\006\a\b\t\n\v\f\r\016\017\020\021\022\023\024\025\026\027\030\031\032\033\034\035\036\037\040\041\042\043\044\045\046\047\050\051\052\053\054\055\056\0570123456789\072\073\074\075\076\077" | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/printf-template.at:39"
+at_fn_check_status 0 $at_status "$at_srcdir/printf-template.at:42"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -24613,12 +24657,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "printf-template.at:43" >"$at_check_line_file"
+printf "%s\n" "printf-template.at:46" >"$at_check_line_file"
 (test ${enable_check_r6rs_sagittarius} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/printf-template.at:43"
+  && at_fn_check_skip 77 "$at_srcdir/printf-template.at:46"
 { set +x
-printf "%s\n" "$at_srcdir/printf-template.at:43: \"\${abs_builddir}\"/run-r6rs-sagittarius.sh '(nix-embed (printf-utf8 \"你好世界\"))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "printf-template.at:43"
+printf "%s\n" "$at_srcdir/printf-template.at:46: \"\${abs_builddir}\"/run-r6rs-sagittarius.sh '(nix-embed (printf-utf8 \"你好世界\"))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "printf-template.at:46"
 ( $at_check_trace; "${abs_builddir}"/run-r6rs-sagittarius.sh '(nix-embed (printf-utf8 "你好世界"))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -24626,7 +24670,7 @@ $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
 echo >>"$at_stdout"; printf "%s\n" "\344\275\240\345\245\275\344\270\226\347\225\214" | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/printf-template.at:43"
+at_fn_check_status 0 $at_status "$at_srcdir/printf-template.at:46"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -26616,7 +26660,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "printf-template.at:3
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "This is a test." | \
+echo >>"$at_stdout"; printf "%s\n" "This\040is\040a\040test\056" | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/printf-template.at:31"
 $at_failed && at_fn_log_failure
@@ -26626,28 +26670,32 @@ $at_traceon; }
 
 
 
-printf "%s\n" "printf-template.at:39" >"$at_check_line_file"
+printf "%s\n" "printf-template.at:42" >"$at_check_line_file"
 (test ${enable_check_r7rs_sagittarius} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/printf-template.at:39"
+  && at_fn_check_skip 77 "$at_srcdir/printf-template.at:42"
 { set +x
-printf "%s\n" "$at_srcdir/printf-template.at:39: \"\${abs_builddir}\"/run-r7rs-sagittarius.sh '(nix-embed
+printf "%s\n" "$at_srcdir/printf-template.at:42: \"\${abs_builddir}\"/run-r7rs-sagittarius.sh '(nix-embed
     (printf-utf8
      (utf8->string
       #u8(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
-                   17 18 19 20 21 22 23 24 25 26 27 28 29 30 31))))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "printf-template.at:39"
+                   17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
+                   32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47
+                   48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63))))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "printf-template.at:42"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-sagittarius.sh '(nix-embed
     (printf-utf8
      (utf8->string
       #u8(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
-                   17 18 19 20 21 22 23 24 25 26 27 28 29 30 31))))'
+                   17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
+                   32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47
+                   48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63))))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "\000\001\002\003\004\005\006\a\b\t\n\v\f\r\016\017\020\021\022\023\024\025\026\027\030\031\032\033\034\035\036\037" | \
+echo >>"$at_stdout"; printf "%s\n" "\000\001\002\003\004\005\006\a\b\t\n\v\f\r\016\017\020\021\022\023\024\025\026\027\030\031\032\033\034\035\036\037\040\041\042\043\044\045\046\047\050\051\052\053\054\055\056\0570123456789\072\073\074\075\076\077" | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/printf-template.at:39"
+at_fn_check_status 0 $at_status "$at_srcdir/printf-template.at:42"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -26655,12 +26703,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "printf-template.at:43" >"$at_check_line_file"
+printf "%s\n" "printf-template.at:46" >"$at_check_line_file"
 (test ${enable_check_r7rs_sagittarius} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/printf-template.at:43"
+  && at_fn_check_skip 77 "$at_srcdir/printf-template.at:46"
 { set +x
-printf "%s\n" "$at_srcdir/printf-template.at:43: \"\${abs_builddir}\"/run-r7rs-sagittarius.sh '(nix-embed (printf-utf8 \"你好世界\"))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "printf-template.at:43"
+printf "%s\n" "$at_srcdir/printf-template.at:46: \"\${abs_builddir}\"/run-r7rs-sagittarius.sh '(nix-embed (printf-utf8 \"你好世界\"))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "printf-template.at:46"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-sagittarius.sh '(nix-embed (printf-utf8 "你好世界"))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -26668,7 +26716,7 @@ $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
 echo >>"$at_stdout"; printf "%s\n" "\344\275\240\345\245\275\344\270\226\347\225\214" | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/printf-template.at:43"
+at_fn_check_status 0 $at_status "$at_srcdir/printf-template.at:46"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
