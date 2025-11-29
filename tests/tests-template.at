@@ -63,6 +63,7 @@ m4_include(ast-nodes-preds-template.at)
 m4_include(nix-embed-template.at)
 m4_include(nix-list-template.at)
 
+m4_include(shell-print-template.at)
 m4_include(base64-utf8-template.at)
 m4_include(escaped-utf8-template.at)
 

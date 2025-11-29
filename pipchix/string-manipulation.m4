@@ -23,7 +23,7 @@
 ;;; WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ;;;
 
-(define %%print-utf8-handlers
+(define %%shell-print-handlers
   (list (cons 'base64 (lambda (str)
                         (string-append
                          "if :; then printf '"
@@ -35,38 +35,38 @@
                           (escaped-utf8 str)
                           "'")))))
 
-(define (add-print-utf8-format! format handler)
+(define (add-shell-print-format! format handler)
   ;; There is nothing here to ensure the handler is actually a
   ;; handler. We assume the programmer knows what they are doing.
   (unless (symbol? format)
     (error "not a symbol" format))
   (unless (procedure? handler)
     (error "not a procedure" handler))
-  (%%add-print-utf8-format! format handler))
+  (%%add-shell-print-format! format handler))
 
-(define (%%add-print-utf8-format! format handler)
-  (set! %%print-utf8-handlers
-    (cons (cons format handler) %%print-utf8-handlers)))
+(define (%%add-shell-print-format! format handler)
+  (set! %%shell-print-handlers
+    (cons (cons format handler) %%shell-print-handlers)))
 
-(define current-print-utf8-format
+(define current-shell-print-format
   ;; 'base64 is much more compact than 'escaped, but would be slower.
   (make-parameter 'escaped
                   (lambda (format)
                     (unless (symbol? format)
                       (error "not a symbol" format))
-                    (unless (assq format %%print-utf8-handlers)
+                    (unless (assq format %%shell-print-handlers)
                       (error "not an available handler" format))
                     format)))
 
-(define print-utf8
+(define shell-print
   (case-lambda
-    ((str) (print-utf8 (current-print-utf8-format) str))
+    ((str) (shell-print (current-shell-print-format) str))
     ((format str)
      (unless (symbol? format)
        (error "not a symbol" format))
-     (unless (assq format %%print-utf8-handlers)
+     (unless (assq format %%shell-print-handlers)
        (error "not an available handler" format))
-     (let ((handler-pair (assq format %%print-utf8-handlers)))
+     (let ((handler-pair (assq format %%shell-print-handlers)))
        (let ((handler (cdr handler-pair)))
          (handler str))))))
 

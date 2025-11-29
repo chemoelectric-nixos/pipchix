@@ -1,7 +1,6 @@
 #!@SHELL@
 #
-# Run a tiny R⁶RS program in Racket (using whatever Racket
-# implementation the plt-r6rs command invokes).
+# Run a tiny R⁶RS program in Racket (plt-r6rs).
 #
 
 prog_scm=`TMPDIR=. mktemp 2>/dev/null || echo tmp."${RANDOM}"`.scm
@@ -9,6 +8,7 @@ prog_scm=`TMPDIR=. mktemp 2>/dev/null || echo tmp."${RANDOM}"`.scm
 cat > "${prog_scm}" <<EOF
 #!r6rs
 (import (rnrs (6))
+        (pipchix base)
         (pipchix abstract-syntax-tree)
         (pipchix nix-embed)
         (pipchix nix-list)
