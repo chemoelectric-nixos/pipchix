@@ -44,9 +44,8 @@ check_unquoted([run_scheme 'sexpr'],[0],
 
 m4_define([sexpr],
   [(nix-embed
-    (parameterize
-        ((current-shell-print-format `base64))
-      (shell-print "This is a test.")))])
+    (with-shell-print-format
+     `base64 (lambda () (shell-print "This is a test."))))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [if :; then printf 'VGhpcyBpcyBhIHRlc3Qu' | base64 -d -; fi],[])
 
@@ -55,9 +54,8 @@ m4_define([sexpr],
      (add-shell-print-format!
       `hello-world (lambda (str) "Hello, world!"))
      (nix-embed
-      (parameterize
-          ((current-shell-print-format `hello-world))
-        (shell-print "This is a test."))))])
+      (with-shell-print-format
+       `hello-world (lambda () (shell-print "This is a test.")))))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [Hello, world!],[])
 

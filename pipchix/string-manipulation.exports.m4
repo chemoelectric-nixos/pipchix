@@ -4,4 +4,5 @@ bytevector->escaped-8bit
 escaped-utf8
 shell-print
 current-shell-print-format
+with-shell-print-format
 add-shell-print-format!

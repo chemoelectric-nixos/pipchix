@@ -58,6 +58,10 @@
                       (error "not an available handler" format))
                     format)))
 
+(define (with-shell-print-format format thunk)
+  (parameterize ((current-shell-print-format format))
+    (thunk)))
+
 (define shell-print
   (case-lambda
     ((str) (shell-print (current-shell-print-format) str))

@@ -1,7 +1,3 @@
-parameterize   #|  This has to be reëxported, in    |#
-               #|  case it is was made available    |#
-               #|  by (pipchix srfi-39).            |#
-
 nix-list       #|  Nix list from elements.          |#
 nix-set        #|  Set attributes non-recursively.  |#
 nix-setrec     #|  Set attributes recursively.      |#
