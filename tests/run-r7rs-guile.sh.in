@@ -8,6 +8,7 @@ prog_scm=`TMPDIR=. mktemp 2>/dev/null || echo tmp."${RANDOM}"`.scm
 cat > "${prog_scm}" <<EOF
 (import (scheme base))
 (import (scheme write))
+(import (pipchix base))
 (import (pipchix abstract-syntax-tree))
 (import (pipchix nix-embed))
 (import (pipchix nix-list))

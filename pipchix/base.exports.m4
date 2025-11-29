@@ -13,4 +13,5 @@ shell-print    #|  Return a string for shell code   |#
                #|  to print a string. The format    |#
                #|  for encoding the string to print |#
                #|  is selectable.                   |#
-current-shell-print-format  #| A parameter object.  |#
+current-shell-print-format  #|  The format to use.  |#
+with-shell-print-format     #|  Select the format.  |#
