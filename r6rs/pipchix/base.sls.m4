@@ -32,7 +32,8 @@ m4_include(pipchix/pipchix-includes.m4)
           (pipchix nix-list)
           (pipchix nix-set)
           (pipchix abstract-syntax-tree)
-          (pipchix string-manipulation))
+          (pipchix string-manipulation)
+          (pipchix srfi-39))
   )
 
 ;;; local variables:

@@ -22,7 +22,7 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
-AT_SETUP([setup_message(base64)])
+AT_SETUP([setup_message(base64-utf8)])
 
 AT_KEYWORDS([default_keywords string-manipulation
              string strings base64 BASE64 base64-utf8 utf8])

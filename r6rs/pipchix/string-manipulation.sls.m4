@@ -29,9 +29,11 @@ m4_include(pipchix/pipchix-includes.m4)
 
   (import (rnrs base (6))
           (rnrs control (6))
+          (rnrs lists (6))
           (rnrs mutable-strings (6))
           (rnrs unicode (6))
-          (rnrs bytevectors (6)))
+          (rnrs bytevectors (6))
+          (pipchix srfi-39))
 
   (define integer-division div-and-mod)
 

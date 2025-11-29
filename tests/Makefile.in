@@ -320,16 +320,13 @@ BUILT_SOURCES =
 CLEANFILES = *.tmp tmp.*
 DISTCLEANFILES = Makefile GNUmakefile atconfig
 check_SCRIPTS = 
+BUNCHOFFLAGS = $(color-flag) $(jobs-flag) $(TESTSUITEFLAGS)
 AUTOM4TE = $(SHELL) $(top_srcdir)/build-aux/missing --run autom4te
 AUTOTEST = $(AUTOM4TE) --language=autotest
 TESTSUITE = $(srcdir)/testsuite
-#
-#
-#
-#
 TESTSUITE_DEPS = $(srcdir)/atlocal.in $(srcdir)/package.m4 \
-	$(srcdir)/tests-template.at $(srcdir)/base64-template.at \
-	$(srcdir)/escaped-template.at \
+	$(srcdir)/tests-template.at $(srcdir)/base64-utf8-template.at \
+	$(srcdir)/escaped-utf8-template.at \
 	$(srcdir)/ast-nodes-preds-template.at \
 	$(srcdir)/nix-attributebinding-node-template.at \
 	$(srcdir)/nix-attributepath-node-template.at \
@@ -339,7 +336,8 @@ TESTSUITE_DEPS = $(srcdir)/atlocal.in $(srcdir)/package.m4 \
 	$(srcdir)/nix-inherit-node-template.at \
 	$(srcdir)/nix-list-node-template.at \
 	$(srcdir)/nix-path-node-template.at \
-	$(srcdir)/nix-embed-template.at $(srcdir)/nix-list-template.at
+	$(srcdir)/nix-embed-template.at $(srcdir)/nix-list-template.at \
+	$(srcdir)/testsuite.at
 all: $(BUILT_SOURCES)
 	$(MAKE) $(AM_MAKEFLAGS) all-am
 
@@ -603,20 +601,17 @@ $(srcdir)/package.m4: $(top_srcdir)/configure.ac $(srcdir)/Makefile.am
 @GNU@ endef
 
 check-local: atconfig atlocal $(TESTSUITE)
-	$(SHELL) '$(TESTSUITE)' \
-	   $(color-flag) $(jobs-flag) $(TESTSUITEFLAGS)
+	$(SHELL) '$(TESTSUITE)' $(BUNCHOFFLAGS)
 
 installcheck-local: atconfig atlocal $(TESTSUITE)
-	$(SHELL) '$(TESTSUITE)' AUTOTEST_PATH='$(bindir)' \
-	   $(color-flag) $(jobs-flag) $(TESTSUITEFLAGS)
+	$(SHELL) '$(TESTSUITE)' AUTOTEST_PATH='$(bindir)' $(BUNCHOFFLAGS)
 
 clean-local:
-	test ! -f '$(TESTSUITE)' || \
-	 $(SHELL) '$(TESTSUITE)' --clean
+	test ! -f '$(TESTSUITE)' || $(SHELL) '$(TESTSUITE)' --clean
 
-$(TESTSUITE): $(srcdir)/testsuite.at $(TESTSUITE_DEPS)
-	$(AUTOTEST) -I '$(srcdir)' -o $(@).tmp $(<) && \
-	  mv $(@){.tmp,}
+$(TESTSUITE): $(TESTSUITE_DEPS)
+	$(AUTOTEST) -I '$(srcdir)' -o $(@).tmp $(srcdir)/testsuite.at \
+	    && mv $(@){.tmp,}
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

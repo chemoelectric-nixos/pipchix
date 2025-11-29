@@ -67,6 +67,7 @@ endif
 
 R6RS_SCHEME =
 R6RS_SCHEME += r6rs/pipchix/srfi-9.sls
+R6RS_SCHEME += r6rs/pipchix/srfi-39.sls
 R6RS_SCHEME += r6rs/pipchix/base.sls
 R6RS_SCHEME += r6rs/pipchix/nix-embed.sls
 R6RS_SCHEME += r6rs/pipchix/nix-list.sls
@@ -246,21 +247,17 @@ else !CSI_5
 @GNU@endef
 endif !CSI_5
 
-#
-# make-chicken-5-egg may fail if you have not installed the
-# dependencies of pipchix.
-#
-make-chicken-5-egg: $(CHICKEN_5_EGGFILES)
+# The following may require that you have installed the eggs needed by
+# Pipchix.
+chicken-5-egg-stamp: $(CHICKEN_5_EGGFILES)
 	@if ! test -e chicken-5-egg-stamp; then \
 	  ( \
 	    $(MKDIR_P) $(CHICKEN_5_EGGDIR) && \
 	    cd $(CHICKEN_5_EGGDIR) && \
 	    $(CHICKEN_INSTALL_5) -n \
-	  ) \
+	  ); \
+	  touch $(@); \
 	fi
-
-chicken-5-egg-stamp: make-chicken-5-egg
-	@test -e $(@) || touch $(@)
 
 CLEANFILES += chicken-5-egg-stamp
 
@@ -345,6 +342,16 @@ DEFINE_NICELY_PRINT = ' \
 		(display ")"))))) \
 	 (else \
 	   (write obj)))))'
+
+#---------------------------------------------------------------------
+#
+# ‘is-older’ is a program that augments Make itself in checking for
+# whether files need rebuilding. (FIXME: FIGURE OUT HOW TO USE THIS!)
+#
+
+EXTRA_PROGRAMS += is-older
+BUILT_SOURCES += is-older
+DISTCLEANFILES += is-older
 
 #---------------------------------------------------------------------
 # local variables:

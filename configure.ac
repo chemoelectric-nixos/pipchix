@@ -136,6 +136,7 @@ CHEM_CONFIG_MAKEFILES([tinyscheme-1.42/Makefile],
                       [tinyscheme-1.42/GNUmakefile])
 CHEM_CONFIG_MAKEFILES([tests/Makefile],
                       [tests/GNUmakefile])
+
 AC_CONFIG_FILES([tests/atlocal])
 AC_CONFIG_FILES([tests/run-r6rs-chez.sh],
                 [chmod +x tests/run-r6rs-chez.sh])

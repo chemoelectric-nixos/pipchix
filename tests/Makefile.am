@@ -75,17 +75,16 @@ EXTRA_DIST += atlocal.in
 @GNU@ )
 @GNU@ endef
 
+BUNCHOFFLAGS = $(color-flag) $(jobs-flag) $(TESTSUITEFLAGS)
+
 check-local: atconfig atlocal $(TESTSUITE)
-	$(SHELL) '$(TESTSUITE)' \
-	   $(color-flag) $(jobs-flag) $(TESTSUITEFLAGS)
+	$(SHELL) '$(TESTSUITE)' $(BUNCHOFFLAGS)
 
 installcheck-local: atconfig atlocal $(TESTSUITE)
-	$(SHELL) '$(TESTSUITE)' AUTOTEST_PATH='$(bindir)' \
-	   $(color-flag) $(jobs-flag) $(TESTSUITEFLAGS)
+	$(SHELL) '$(TESTSUITE)' AUTOTEST_PATH='$(bindir)' $(BUNCHOFFLAGS)
 
 clean-local:
-	test ! -f '$(TESTSUITE)' || \
-	 $(SHELL) '$(TESTSUITE)' --clean
+	test ! -f '$(TESTSUITE)' || $(SHELL) '$(TESTSUITE)' --clean
 
 AUTOM4TE = $(SHELL) $(top_srcdir)/build-aux/missing --run autom4te
 AUTOTEST = $(AUTOM4TE) --language=autotest
@@ -93,15 +92,16 @@ AUTOTEST = $(AUTOM4TE) --language=autotest
 TESTSUITE = $(srcdir)/testsuite
 
 TESTSUITE_DEPS =
+
 TESTSUITE_DEPS += $(srcdir)/atlocal.in
 TESTSUITE_DEPS += $(srcdir)/package.m4
 TESTSUITE_DEPS += $(srcdir)/tests-template.at
-#
-TESTSUITE_DEPS += $(srcdir)/base64-template.at
-TESTSUITE_DEPS += $(srcdir)/escaped-template.at
-#
+
+TESTSUITE_DEPS += $(srcdir)/base64-utf8-template.at
+TESTSUITE_DEPS += $(srcdir)/escaped-utf8-template.at
+
 TESTSUITE_DEPS += $(srcdir)/ast-nodes-preds-template.at
-#
+
 TESTSUITE_DEPS += $(srcdir)/nix-attributebinding-node-template.at
 TESTSUITE_DEPS += $(srcdir)/nix-attributepath-node-template.at
 TESTSUITE_DEPS += $(srcdir)/nix-attributeset-node-template.at
@@ -110,10 +110,12 @@ TESTSUITE_DEPS += $(srcdir)/nix-embedded-node-template.at
 TESTSUITE_DEPS += $(srcdir)/nix-inherit-node-template.at
 TESTSUITE_DEPS += $(srcdir)/nix-list-node-template.at
 TESTSUITE_DEPS += $(srcdir)/nix-path-node-template.at
-#
+
 TESTSUITE_DEPS += $(srcdir)/nix-embed-template.at
 TESTSUITE_DEPS += $(srcdir)/nix-list-template.at
 
-$(TESTSUITE): $(srcdir)/testsuite.at $(TESTSUITE_DEPS)
-	$(AUTOTEST) -I '$(srcdir)' -o $(@).tmp $(<) && \
-	  mv $(@){.tmp,}
+TESTSUITE_DEPS += $(srcdir)/testsuite.at
+
+$(TESTSUITE): $(TESTSUITE_DEPS)
+	$(AUTOTEST) -I '$(srcdir)' -o $(@).tmp $(srcdir)/testsuite.at \
+	    && mv $(@){.tmp,}

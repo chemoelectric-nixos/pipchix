@@ -27,6 +27,7 @@ m4_include(pipchix/pipchix-includes.m4)
   (export m4_include(pipchix/string-manipulation.exports.m4))
 
   (import (scheme base))
+  (import (scheme case-lambda))
   (import (scheme char))
 
   (cond-expand

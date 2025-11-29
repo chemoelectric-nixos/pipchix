@@ -3,6 +3,8 @@
 ;;; Copyright © 2025 Barry Schwartz. All Rights Reserved.
 ;;; Copyright © 1999 Richard Kelsey. All Rights Reserved.
 ;;;
+;;; This file is part of Pipchix.
+;;;
 ;;; Permission is hereby granted, free of charge, to any person
 ;;; obtaining a copy of this software and associated documentation
 ;;; files (the "Software"), to deal in the Software without

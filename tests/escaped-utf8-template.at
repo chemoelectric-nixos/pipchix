@@ -22,7 +22,7 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
-AT_SETUP([setup_message(escaped)])
+AT_SETUP([setup_message(escaped-utf8)])
 
 AT_KEYWORDS([default_keywords string-manipulation
              string strings escaped utf8 escaped-utf8])
@@ -31,20 +31,30 @@ m4_define([sexpr],[(nix-embed (escaped-utf8 "This is a test."))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [This\040is\040a\040test\056],[])
 
-m4_define([sexpr],
-  [(nix-embed
-    (escaped-utf8
-     (utf8->string
-      u8_bytevec[](0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
-                   17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
-                   32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47
-                   48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63))))])
-check_unquoted([run_scheme 'sexpr'],[0],
-  [\000\001\002\003\004\005\006\a\b\t\n\v\f\r\016\017\020\021\022\023\024\025\026\027\030\031\032\033\034\035\036\037\040\041\042\043\044\045\046\047\050\051\052\053\054\055\056\0570123456789\072\073\074\075\076\077],[])
-
 m4_define([sexpr],[(nix-embed (escaped-utf8 "你好世界"))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [\344\275\240\345\245\275\344\270\226\347\225\214],[])
+
+m4_define([sexpr],
+  [(nix-embed
+    (bytevector->escaped-8bit
+     u8_bytevec[](0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
+                  17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
+                  32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47
+                  48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [\000\001\002\003\004\005\006\a\b\t\n\v\f\r\016\017\020\021\022\023\024\025\026\027\030\031\032\033\034\035\036\037\040\041\042\043\044\045\046\047\050\051\052\053\054\055\056\0570123456789\072\073\074\075\076\077],[])
+
+m4_define([sexpr],
+  [(nix-embed
+    (bytevector->escaped-8bit
+     u8_bytevec[](64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79
+                  80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95
+                  96 97 98 99 100 102 103 104 105 106 107 108 109 110 111
+                  112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127
+                  128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [\100ABCDEFGHIJKLMNOPQRSTUVWXYZ\133\134\135\136\137\140abcdfghijklmnopqrstuvwxyz\173\174\175\176\177\200\201\202\203\204\205\206\207\210\211\212\213\214\215\216\217],[])
 
 AT_CLEANUP
 

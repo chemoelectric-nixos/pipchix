@@ -8228,6 +8228,7 @@ printf "%s\n" "$as_me: WARNING: Please consider installing and using GNU Make:
    ac_config_files="$ac_config_files tests/GNUmakefile:tests/Makefile.in"
 
 }
+
 ac_config_files="$ac_config_files tests/atlocal"
 
 ac_config_files="$ac_config_files tests/run-r6rs-chez.sh"

@@ -23,7 +23,55 @@
 ;;; WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ;;;
 
+(define %%print-utf8-handlers
+  (list (cons 'base64 (lambda (str)
+                        (string-append
+                         "if :; then printf '"
+                         (base64-utf8 str)
+                         "' | base64 -d -; fi")))
+        (cons 'escaped (lambda (str)
+                         (string-append
+                          "printf '"
+                          (escaped-utf8 str)
+                          "'")))))
+
+(define (add-print-utf8-format! format handler)
+  ;; There is nothing here to ensure the handler is actually a
+  ;; handler. We assume the programmer knows what they are doing.
+  (unless (symbol? format)
+    (error "not a symbol" format))
+  (unless (procedure? handler)
+    (error "not a procedure" handler))
+  (%%add-print-utf8-format! format handler))
+
+(define (%%add-print-utf8-format! format handler)
+  (set! %%print-utf8-handlers
+    (cons (cons format handler) %%print-utf8-handlers)))
+
+(define current-print-utf8-format
+  ;; 'base64 is much more compact than 'escaped, but would be slower.
+  (make-parameter 'escaped
+                  (lambda (format)
+                    (unless (symbol? format)
+                      (error "not a symbol" format))
+                    (unless (assq format %%print-utf8-handlers)
+                      (error "not an available handler" format))
+                    format)))
+
+(define print-utf8
+  (case-lambda
+    ((str) (print-utf8 (current-print-utf8-format) str))
+    ((format str)
+     (unless (symbol? format)
+       (error "not a symbol" format))
+     (unless (assq format %%print-utf8-handlers)
+       (error "not an available handler" format))
+     (let ((handler-pair (assq format %%print-utf8-handlers)))
+       (let ((handler (cdr handler-pair)))
+         (handler str))))))
+
 (define bytevector->base64
+  ;; Return the BASE64 representation of a bytevector.
   (let* ((digits
           "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/")
          (look-up (lambda (i) (string-ref digits i))))
@@ -64,10 +112,16 @@
             str))))))
 
 (define (base64-utf8 str)
+  ;; Return the BASE64 representation of the UTF-8 encoding of a
+  ;; string.
   (bytevector->base64 (string->utf8 str)))
 
-(define (bytevector->escaped-utf8 bv)
-  ;; Use only ASCII alphanumerics, and also backslashes for escapes.
+(define (bytevector->escaped-8bit bv)
+  ;; Assume a bytevector holds an 8-bit encoded string. Return a
+  ;; string suitable for printing with printf(1) or echo(1).
+  ;;
+  ;; This implemementation uses only backslashes and ASCII
+  ;; alphanumerics.
   (define (fragment u)
     (cond ((%%is-alphanumeric-ascii? u) (string (integer->char u)))
           ((and (<= #o007 u) (<= u #o015)) (control-fragment u))
@@ -81,7 +135,7 @@
       ((#o013) "\\v")
       ((#o014) "\\f")
       ((#o015) "\\r")
-      (else (error "internal error in bytevector->escaped-utf8" u))))
+      (else (error "internal error in bytevector->escaped-8bit" u))))
   (define (fragment-length u)
     (cond ((%%is-alphanumeric-ascii? u) 1)
           ((and (<= #o007 u) (<= u #o015)) 2)
@@ -107,7 +161,9 @@
     str))
 
 (define (escaped-utf8 str)
-  (bytevector->escaped-utf8 (string->utf8 str)))
+  ;; Encode the string in UTF-8. Return a string representing that
+  ;; encoding, and suitable for printing with printf(1) or echo(1).
+  (bytevector->escaped-8bit (string->utf8 str)))
 
 (define (%%is-alphanumeric-ascii? u)
   (or (and (<= #o101 u) (<= u #o132))   ;; A-Z
