@@ -97,6 +97,8 @@ TESTSUITE_DEPS += $(srcdir)/atlocal.in
 TESTSUITE_DEPS += $(srcdir)/package.m4
 TESTSUITE_DEPS += $(srcdir)/tests-template.at
 
+TESTSUITE_DEPS += $(srcdir)/continuation-capture-template.at
+
 TESTSUITE_DEPS += $(srcdir)/shell-print-template.at
 TESTSUITE_DEPS += $(srcdir)/base64-utf8-template.at
 TESTSUITE_DEPS += $(srcdir)/escaped-utf8-template.at

@@ -22,25 +22,15 @@
 ;;;
 m4_include(pipchix/pipchix-includes.m4)
 
-(define-library (pipchix string-manipulation)
+(define-library (pipchix continuation-capture)
 
-  (export m4_include(pipchix/string-manipulation.exports.m4))
+  (export m4_include(pipchix/continuation-capture.exports.m4))
 
   (import (scheme base))
-  (import (scheme case-lambda))
-  (import (scheme char))
-
-  (cond-expand
-    (chicken-5
-     (import (utf8))
-     (import (utf8-srfi-13)))
-    (else))
 
   (begin
 
-    (define integer-division truncate/)
-
-    m4_include(pipchix/string-manipulation.m4)
+    m4_include(pipchix/continuation-capture.m4)
 
     ))
 

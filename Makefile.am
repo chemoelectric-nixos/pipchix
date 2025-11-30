@@ -68,6 +68,7 @@ endif
 R6RS_SCHEME =
 R6RS_SCHEME += r6rs/pipchix/srfi-9.sls
 R6RS_SCHEME += r6rs/pipchix/srfi-39.sls
+R6RS_SCHEME += r6rs/pipchix/continuation-capture.sls
 R6RS_SCHEME += r6rs/pipchix/base.sls
 R6RS_SCHEME += r6rs/pipchix/nix-embed.sls
 R6RS_SCHEME += r6rs/pipchix/nix-list.sls
@@ -84,6 +85,7 @@ nodist_r6rspipchix_DATA += $(R6RS_SCHEME)
 endif
 
 R7RS_SCHEME =
+R7RS_SCHEME += r7rs/pipchix/continuation-capture.sld
 R7RS_SCHEME += r7rs/pipchix/base.sld
 R7RS_SCHEME += r7rs/pipchix/nix-embed.sld
 R7RS_SCHEME += r7rs/pipchix/nix-list.sld
@@ -135,6 +137,7 @@ CHICKEN_EGGSPEC_TOP = ' \
 
 CHICKEN_EGGSPEC_BOTTOM = ' \
    (components \
+    (extension pipchix.continuation-capture) \
     (extension pipchix.string-manipulation) \
     (extension pipchix.abstract-syntax-tree) \
     (extension pipchix.nix-embed \
@@ -148,6 +151,7 @@ CHICKEN_EGGSPEC_BOTTOM = ' \
        pipchix.abstract-syntax-tree)) \
     (extension pipchix.base \
       (component-dependencies \
+       pipchix.string-manipulation \
        pipchix.abstract-syntax-tree \
        pipchix.nix-list \
        pipchix.nix-set))))'
@@ -167,6 +171,7 @@ CHICKEN_5_EGGDIR = $(CHICKEN_5_EGGS)/pipchix
 CHICKEN_5_EGGFILES = \
   $(addprefix $(CHICKEN_5_EGGDIR)/, \
     pipchix.egg \
+    pipchix.continuation-capture.scm \
     pipchix.string-manipulation.scm \
     pipchix.abstract-syntax-tree.scm \
     pipchix.nix-embed.scm \

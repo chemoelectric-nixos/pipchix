@@ -1,3 +1,4 @@
+#!r6rs
 ;;;
 ;;; Copyright © 2025 Barry Schwartz
 ;;; 
@@ -22,30 +23,19 @@
 ;;;
 m4_include(pipchix/pipchix-includes.m4)
 
-(define-library (pipchix string-manipulation)
+(library (pipchix continuation-capture)
 
-  (export m4_include(pipchix/string-manipulation.exports.m4))
+  (export m4_include(pipchix/continuation-capture.exports.m4))
 
-  (import (scheme base))
-  (import (scheme case-lambda))
-  (import (scheme char))
+  (import (rnrs base (6))
+          (pipchix srfi-9))
 
-  (cond-expand
-    (chicken-5
-     (import (utf8))
-     (import (utf8-srfi-13)))
-    (else))
+  m4_include(pipchix/continuation-capture.m4)
 
-  (begin
-
-    (define integer-division truncate/)
-
-    m4_include(pipchix/string-manipulation.m4)
-
-    ))
+  )
 
 ;;; local variables:
 ;;; mode: scheme
-;;; geiser-scheme-implementation: chibi
+;;; geiser-scheme-implementation: chez
 ;;; coding: utf-8
 ;;; end:

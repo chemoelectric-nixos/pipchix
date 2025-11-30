@@ -1,5 +1,7 @@
 ;;;
 ;;; Copyright © 2025 Barry Schwartz
+;;;
+;;; This file is part of Pipchix.
 ;;; 
 ;;; Permission is hereby granted, free of charge, to any person obtaining
 ;;; a copy of Pipchix and associated documentation files (the
@@ -20,32 +22,37 @@
 ;;; OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 ;;; WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ;;;
-m4_include(pipchix/pipchix-includes.m4)
 
-(define-library (pipchix string-manipulation)
+;;;
+;;; The continuations interface of Marc Feeley’s paper, ‘A Better API
+;;; for First-Class Continuations’,
+;;; http://www.iro.umontreal.ca/~feeley/papers/FeeleySW01.pdf
+;;; https://web.archive.org/web/20250701033312/http://www.iro.umontreal.ca/~feeley/papers/FeeleySW01.pdf
+;;;
+;;; See also SRFI-226: Control Features, which includes an interface
+;;; derived from this one.
+;;;
 
-  (export m4_include(pipchix/string-manipulation.exports.m4))
+#|(define-record-type <continuation>
+  (%%make-continuation proc)
+  continuation?
+  (proc %%continuation-proc))|#
 
-  (import (scheme base))
-  (import (scheme case-lambda))
-  (import (scheme char))
+(define (continuation-capture receiver)
+  ((call/cc receiver)))
 
-  (cond-expand
-    (chicken-5
-     (import (utf8))
-     (import (utf8-srfi-13)))
-    (else))
+(define (continuation-graft cont thunk)
+  (cont thunk))
 
-  (begin
+(define (continuation-return cont . returned-values)
+  (continuation-graft
+   cont
+   (lambda () (apply values returned-values))))
 
-    (define integer-division truncate/)
-
-    m4_include(pipchix/string-manipulation.m4)
-
-    ))
-
+m4_divert(-1)
 ;;; local variables:
 ;;; mode: scheme
 ;;; geiser-scheme-implementation: chibi
 ;;; coding: utf-8
 ;;; end:
+m4_divert«»m4_dnl
