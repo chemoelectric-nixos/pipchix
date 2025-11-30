@@ -63,7 +63,7 @@ AC_ARG_ENABLE([color],
 AC_SUBST([enable_color])
 
 m4_define([large_circle],
-  [`if test "${enable_color}" = no; then echo ⬤; else echo 🔵; fi`]),
+  [`if test "${enable_color}" = no; then echo ⬤; else echo 🔵; fi`])
 
 m4_include([ac-chicken-install-options.m4])
 m4_include([ac-r6rs-install-options.m4])
@@ -125,9 +125,9 @@ m4_include([ac-loko-scheme.m4])
 m4_include([ac-racket.m4])
 m4_include([ac-sagittarius-scheme.m4])
 
-# You can use ‘@GNU@’ to make GNU Make co@GNU@ nstructs unbothersome to
-# Automake. (By the way, you often can use ‘$(eval ...)’ as well, but
-# @GNU@ here may be better.)
+# You can use ‘@GNU@’ to make GNU Make constructs unbothersome to
+# Automake. (Often you can use ‘$(eval ...)’ instead, but @GNU@ is
+# more straightforward.)
 AC_SUBST([GNU],[])
 
 CHEM_REQUIRE_GNU_MAKE_IN_PATH

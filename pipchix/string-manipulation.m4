@@ -66,13 +66,18 @@
   (case-lambda
     ((str) (shell-print (current-shell-print-format) str))
     ((format str)
-     (unless (symbol? format)
-       (error "not a symbol" format))
-     (unless (assq format %%shell-print-handlers)
-       (error "not an available handler" format))
-     (let ((handler-pair (assq format %%shell-print-handlers)))
-       (let ((handler (cdr handler-pair)))
-         (handler str))))))
+     (cond
+      ((not format)
+       ;; (shell-print #f str) is equivalent to (shell-print str)
+       (shell-print str))
+      (else
+       (unless (symbol? format)
+         (error "not a symbol" format))
+       (unless (assq format %%shell-print-handlers)
+         (error "not an available handler" format))
+       (let ((handler-pair (assq format %%shell-print-handlers)))
+         (let ((handler (cdr handler-pair)))
+           (handler str))))))))
 
 (define bytevector->base64
   ;; Return the BASE64 representation of a bytevector.

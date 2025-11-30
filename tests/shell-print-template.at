@@ -43,6 +43,11 @@ check_unquoted([run_scheme 'sexpr'],[0],
   [printf 'This\040is\040a\040test\056'],[])
 
 m4_define([sexpr],
+  [(nix-embed (shell-print @%:@f "This is a test."))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [printf 'This\040is\040a\040test\056'],[])
+
+m4_define([sexpr],
   [(nix-embed
     (with-shell-print-format
      `base64 (lambda () (shell-print "This is a test."))))])

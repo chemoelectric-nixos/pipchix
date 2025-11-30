@@ -351,7 +351,16 @@ DEFINE_NICELY_PRINT = ' \
 #---------------------------------------------------------------------
 #
 # ‘is-older’ is a program that augments Make itself in checking for
-# whether files need rebuilding. (FIXME: FIGURE OUT HOW TO USE THIS!)
+# whether files need rebuilding.
+#
+# FIXME: FIGURE OUT HOW TO USE THIS! CURRENTLY I AM NOT USING IT FOR
+#        ANYTHING. I TRIED BUT COULD NOT FIGURE OUT HOW TO MAKE IT
+#        WORK. THE PROBLEM IS THAT THE CHICKEN EGG IS NOT REBUILT WHEN
+#        TESTS ARE MODIFIED. PROBABLY is-older IS NOT NECESSARY, BUT
+#        MAYBE IT WOULD BE HELPFUL.
+#
+#        In any case, what one must do to deal with the problem is do
+#        a ‘make clean’ before running tests on the CHICKEN egg.
 #
 
 EXTRA_PROGRAMS += is-older

@@ -6411,9 +6411,11 @@ fi
 
 
 
-,
+
 
 # Copyright © 2025 Barry Schwartz
+#
+# This file is part of Pipchix.
 #
 # Permission is hereby granted, free of charge, to any person obtaining
 # a copy of Pipchix and associated documentation files (the
@@ -6464,6 +6466,8 @@ chickeneggs5pipchixdir="${chickeneggs5pipchixdir:-\$(chickeneggsdir)/5/pipchix}"
 
 # Copyright © 2025 Barry Schwartz
 #
+# This file is part of Pipchix.
+#
 # Permission is hereby granted, free of charge, to any person obtaining
 # a copy of Pipchix and associated documentation files (the
 # "Software"), to deal in the Software without restriction, including
@@ -6506,6 +6510,8 @@ fi
 
 
 # Copyright © 2025 Barry Schwartz
+#
+# This file is part of Pipchix.
 #
 # Permission is hereby granted, free of charge, to any person obtaining
 # a copy of Pipchix and associated documentation files (the
@@ -6781,6 +6787,8 @@ fi
 
 # Copyright © 2025 Barry Schwartz
 #
+# This file is part of Pipchix.
+#
 # Permission is hereby granted, free of charge, to any person obtaining
 # a copy of Pipchix and associated documentation files (the
 # "Software"), to deal in the Software without restriction, including
@@ -6922,6 +6930,8 @@ fi
 
 # Copyright © 2025 Barry Schwartz
 #
+# This file is part of Pipchix.
+#
 # Permission is hereby granted, free of charge, to any person obtaining
 # a copy of Pipchix and associated documentation files (the
 # "Software"), to deal in the Software without restriction, including
@@ -7030,6 +7040,8 @@ fi
 
 
 # Copyright © 2025 Barry Schwartz
+#
+# This file is part of Pipchix.
 #
 # Permission is hereby granted, free of charge, to any person obtaining
 # a copy of Pipchix and associated documentation files (the
@@ -7394,6 +7406,8 @@ fi
 
 # Copyright © 2025 Barry Schwartz
 #
+# This file is part of Pipchix.
+#
 # Permission is hereby granted, free of charge, to any person obtaining
 # a copy of Pipchix and associated documentation files (the
 # "Software"), to deal in the Software without restriction, including
@@ -7501,6 +7515,8 @@ fi
 
 
 # Copyright © 2025 Barry Schwartz
+#
+# This file is part of Pipchix.
 #
 # Permission is hereby granted, free of charge, to any person obtaining
 # a copy of Pipchix and associated documentation files (the
@@ -7611,6 +7627,8 @@ fi
 
 # Copyright © 2025 Barry Schwartz
 #
+# This file is part of Pipchix.
+#
 # Permission is hereby granted, free of charge, to any person obtaining
 # a copy of Pipchix and associated documentation files (the
 # "Software"), to deal in the Software without restriction, including
@@ -7719,6 +7737,8 @@ fi
 
 
 # Copyright © 2025 Barry Schwartz
+#
+# This file is part of Pipchix.
 #
 # Permission is hereby granted, free of charge, to any person obtaining
 # a copy of Pipchix and associated documentation files (the
@@ -7829,6 +7849,8 @@ fi
 
 # Copyright © 2025 Barry Schwartz
 #
+# This file is part of Pipchix.
+#
 # Permission is hereby granted, free of charge, to any person obtaining
 # a copy of Pipchix and associated documentation files (the
 # "Software"), to deal in the Software without restriction, including
@@ -7938,6 +7960,8 @@ fi
 
 # Copyright © 2025 Barry Schwartz
 #
+# This file is part of Pipchix.
+#
 # Permission is hereby granted, free of charge, to any person obtaining
 # a copy of Pipchix and associated documentation files (the
 # "Software"), to deal in the Software without restriction, including
@@ -8046,9 +8070,9 @@ fi
 
 
 
-# You can use ‘@GNU@’ to make GNU Make co@GNU@ nstructs unbothersome to
-# Automake. (By the way, you often can use ‘$(eval ...)’ as well, but
-# @GNU@ here may be better.)
+# You can use ‘@GNU@’ to make GNU Make constructs unbothersome to
+# Automake. (Often you can use ‘$(eval ...)’ instead, but @GNU@ is
+# more straightforward.)
 
 
 { :;
@@ -9844,6 +9868,8 @@ fi
 
 
 # Copyright © 2025 Barry Schwartz
+#
+# This file is part of Pipchix.
 #
 # Permission is hereby granted, free of charge, to any person obtaining
 # a copy of Pipchix and associated documentation files (the
