@@ -40,7 +40,6 @@
   (begin
 
     (cond-expand
-      (srfi-111)
       ((or chibi chicken gauche guile sagittarius))
       (else
        (define-record-type box-type
