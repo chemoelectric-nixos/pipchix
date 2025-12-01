@@ -42,6 +42,16 @@ m4_define([sexpr],
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([(rec{·a·.·bc·.·def·=·@<:@·(1)·(2)·(3)·@:>@·;·b·.·"e.f.g"·=·@<:@1 2 3@:>@;·})·])],[])
 
+m4_if(implementation,[csc-5],[],implementation,[csi-5],[],rnrs_version,[7],[
+dnl I want to test the symbol prime' but it is difficult to get past
+dnl shell quotes.
+m4_define([primevar],[|prime\x27;|]) dnl This is R⁷RS notation for the symbol prime'
+m4_define([sexpr],
+  [(nix-set ((quote primevar) ==> (nix-set (`a ==> @%:@t)(`b ==> @%:@f)(`c ==> `()))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([({·prime'·=·({·a·=·nix_true;·b·=·nix_false;·c·=·nix_null;·})·;·})·])],[])
+])
+
 AT_CLEANUP
 
 # local variables:

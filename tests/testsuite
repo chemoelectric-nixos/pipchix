@@ -1175,40 +1175,40 @@ case $at_groups in #(
   * ) at_print_banners=false ;;
 esac
 # Text for banner N, set to a single space once printed.
-# Banner 1. testsuite.at:45
+# Banner 1. testsuite.at:49
 # Category starts at test group 1.
 at_banner_text_1="Chez Scheme (R⁶RS)"
-# Banner 2. testsuite.at:50
+# Banner 2. testsuite.at:56
 # Category starts at test group 17.
 at_banner_text_2="Chibi Scheme (R⁷RS)"
-# Banner 3. testsuite.at:55
+# Banner 3. testsuite.at:63
 # Category starts at test group 33.
 at_banner_text_3="CHICKEN 5 compiler (R⁷RS)"
-# Banner 4. testsuite.at:62
+# Banner 4. testsuite.at:72
 # Category starts at test group 49.
 at_banner_text_4="CHICKEN 5 interpreter (R⁷RS)"
-# Banner 5. testsuite.at:69
+# Banner 5. testsuite.at:81
 # Category starts at test group 65.
 at_banner_text_5="Gauche Scheme (R⁷RS)"
-# Banner 6. testsuite.at:75
+# Banner 6. testsuite.at:89
 # Category starts at test group 81.
 at_banner_text_6="Guile (R⁶RS)"
-# Banner 7. testsuite.at:80
+# Banner 7. testsuite.at:96
 # Category starts at test group 97.
 at_banner_text_7="Guile (R⁷RS)"
-# Banner 8. testsuite.at:85
+# Banner 8. testsuite.at:103
 # Category starts at test group 113.
 at_banner_text_8="Loko Scheme (R⁶RS)"
-# Banner 9. testsuite.at:90
+# Banner 9. testsuite.at:110
 # Category starts at test group 129.
 at_banner_text_9="Loko Scheme (R⁷RS)"
-# Banner 10. testsuite.at:95
+# Banner 10. testsuite.at:117
 # Category starts at test group 145.
 at_banner_text_10="Racket (R⁶RS)"
-# Banner 11. testsuite.at:100
+# Banner 11. testsuite.at:124
 # Category starts at test group 161.
 at_banner_text_11="Sagittarius Scheme (R⁶RS)"
-# Banner 12. testsuite.at:106
+# Banner 12. testsuite.at:132
 # Category starts at test group 177.
 at_banner_text_12="Sagittarius Scheme (R⁷RS)"
 
@@ -4039,6 +4039,8 @@ $at_traceon; }
 
 
 
+
+
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
@@ -6611,6 +6613,48 @@ b
 at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:42"
 $at_failed && at_fn_log_failure
 $at_traceon; }
+
+
+
+
+
+
+printf "%s\n" "nix-set-template.at:45" >"$at_check_line_file"
+(test ${enable_check_r7rs_chibi} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:45"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-set-template.at:45: \"\${abs_builddir}\"/run-r7rs-chibi.sh '(nix-set ((quote |prime\\x27;|) ==> (nix-set (\`a ==> #t)(\`b ==> #f)(\`c ==> \`()))))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "nix-set-template.at:45"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-chibi.sh '(nix-set ((quote |prime\x27;|) ==> (nix-set (`a ==> #t)(`b ==> #f)(`c ==> `()))))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "({
+prime'
+=
+({
+a
+=
+(builtins.true)
+;
+b
+=
+(builtins.false)
+;
+c
+=
+(builtins.null)
+;
+})
+;
+})
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:45"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
 
 
 
@@ -9189,6 +9233,8 @@ $at_traceon; }
 
 
 
+
+
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
@@ -11761,6 +11807,8 @@ b
 at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:42"
 $at_failed && at_fn_log_failure
 $at_traceon; }
+
+
 
 
 
@@ -14339,6 +14387,48 @@ $at_traceon; }
 
 
 
+
+
+
+printf "%s\n" "nix-set-template.at:45" >"$at_check_line_file"
+(test ${enable_check_r7rs_gauche} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:45"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-set-template.at:45: \"\${abs_builddir}\"/run-r7rs-gauche.sh '(nix-set ((quote |prime\\x27;|) ==> (nix-set (\`a ==> #t)(\`b ==> #f)(\`c ==> \`()))))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "nix-set-template.at:45"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gauche.sh '(nix-set ((quote |prime\x27;|) ==> (nix-set (`a ==> #t)(`b ==> #f)(`c ==> `()))))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "({
+prime'
+=
+({
+a
+=
+(builtins.true)
+;
+b
+=
+(builtins.false)
+;
+c
+=
+(builtins.null)
+;
+})
+;
+})
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:45"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
@@ -16911,6 +17001,8 @@ b
 at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:42"
 $at_failed && at_fn_log_failure
 $at_traceon; }
+
+
 
 
 
@@ -19489,6 +19581,48 @@ $at_traceon; }
 
 
 
+
+
+
+printf "%s\n" "nix-set-template.at:45" >"$at_check_line_file"
+(test ${enable_check_r7rs_guile} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:45"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-set-template.at:45: \"\${abs_builddir}\"/run-r7rs-guile.sh '(nix-set ((quote |prime\\x27;|) ==> (nix-set (\`a ==> #t)(\`b ==> #f)(\`c ==> \`()))))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "nix-set-template.at:45"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-guile.sh '(nix-set ((quote |prime\x27;|) ==> (nix-set (`a ==> #t)(`b ==> #f)(`c ==> `()))))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "({
+prime'
+=
+({
+a
+=
+(builtins.true)
+;
+b
+=
+(builtins.false)
+;
+c
+=
+(builtins.null)
+;
+})
+;
+})
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:45"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
@@ -22061,6 +22195,8 @@ b
 at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:42"
 $at_failed && at_fn_log_failure
 $at_traceon; }
+
+
 
 
 
@@ -24639,6 +24775,48 @@ $at_traceon; }
 
 
 
+
+
+
+printf "%s\n" "nix-set-template.at:45" >"$at_check_line_file"
+(test ${enable_check_r7rs_loko} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:45"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-set-template.at:45: \"\${abs_builddir}\"/run-r7rs-loko.sh '(nix-set ((quote |prime\\x27;|) ==> (nix-set (\`a ==> #t)(\`b ==> #f)(\`c ==> \`()))))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "nix-set-template.at:45"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(nix-set ((quote |prime\x27;|) ==> (nix-set (`a ==> #t)(`b ==> #f)(`c ==> `()))))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "({
+prime'
+=
+({
+a
+=
+(builtins.true)
+;
+b
+=
+(builtins.false)
+;
+c
+=
+(builtins.null)
+;
+})
+;
+})
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:45"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
@@ -27211,6 +27389,8 @@ b
 at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:42"
 $at_failed && at_fn_log_failure
 $at_traceon; }
+
+
 
 
 
@@ -29789,6 +29969,8 @@ $at_traceon; }
 
 
 
+
+
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
@@ -32361,6 +32543,48 @@ b
 at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:42"
 $at_failed && at_fn_log_failure
 $at_traceon; }
+
+
+
+
+
+
+printf "%s\n" "nix-set-template.at:45" >"$at_check_line_file"
+(test ${enable_check_r7rs_sagittarius} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:45"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-set-template.at:45: \"\${abs_builddir}\"/run-r7rs-sagittarius.sh '(nix-set ((quote |prime\\x27;|) ==> (nix-set (\`a ==> #t)(\`b ==> #f)(\`c ==> \`()))))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "nix-set-template.at:45"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-sagittarius.sh '(nix-set ((quote |prime\x27;|) ==> (nix-set (`a ==> #t)(`b ==> #f)(`c ==> `()))))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "({
+prime'
+=
+({
+a
+=
+(builtins.true)
+;
+b
+=
+(builtins.false)
+;
+c
+=
+(builtins.null)
+;
+})
+;
+})
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:45"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
 
 
 
