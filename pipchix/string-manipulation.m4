@@ -48,19 +48,26 @@
   (set! %%shell-print-handlers
     (cons (cons format handler) %%shell-print-handlers)))
 
-(define current-shell-print-format
+(define %%current-shell-print-format
   ;; 'base64 is much more compact than 'escaped, but would be slower.
-  (make-parameter 'escaped
-                  (lambda (format)
-                    (unless (symbol? format)
-                      (error "not a symbol" format))
-                    (unless (assq format %%shell-print-handlers)
-                      (error "not an available handler" format))
-                    format)))
+  (make-parameter (box 'escaped)
+                  (lambda (boxed-format)
+                    (let ((format (unbox boxed-format)))
+                      (unless (symbol? format)
+                        (error "not a symbol" format))
+                      (unless (assq format %%shell-print-handlers)
+                        (error "not an available handler" format))
+                      boxed-format))))
+
+(define (current-shell-print-format)
+  (unbox (%%current-shell-print-format)))
 
 (define (with-shell-print-format format thunk)
-  (parameterize ((current-shell-print-format format))
+  (parameterize ((%%current-shell-print-format (box format)))
     (thunk)))
+
+(define (set-shell-print-format! format)
+  (set-box! (%%current-shell-print-format) format))
 
 (define shell-print
   (case-lambda

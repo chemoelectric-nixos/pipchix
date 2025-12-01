@@ -29,6 +29,7 @@ m4_include(pipchix/pipchix-includes.m4)
   (import (scheme base))
   (import (scheme case-lambda))
   (import (scheme char))
+  (import (pipchix srfi-111))
 
   (cond-expand
     (chicken-5

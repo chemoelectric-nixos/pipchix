@@ -47,8 +47,14 @@ shell-print
 ;;; selected.
 current-shell-print-format
 
-;;; Set a new default format for shell-print, within a given thunk.
+;;; Set a new default format for shell-print, within a given thunk,
+;;; but without changing the setting in the current dynamic context.
 with-shell-print-format
+
+;;; Set a new default format for shell-print, within the current
+;;; dynamic context.
+set-shell-print-format!
+
 
 ;;; local variables:
 ;;; mode: scheme

@@ -498,14 +498,15 @@ nodist_r7rspipchix_DATA = $(am__append_3)
 nodist_chickeneggs5pipchix_DATA = $(am__append_1)
 M4_PREPROCESS = $(GNU_M4) -P -I '$(srcdir)'
 R6RS_SCHEME = r6rs/pipchix/srfi-9.sls r6rs/pipchix/srfi-39.sls \
+	r6rs/pipchix/srfi-111.sls \
 	r6rs/pipchix/continuation-capture.sls r6rs/pipchix/base.sls \
 	r6rs/pipchix/nix-embed.sls r6rs/pipchix/nix-list.sls \
 	r6rs/pipchix/nix-set.sls r6rs/pipchix/abstract-syntax-tree.sls \
 	r6rs/pipchix/string-manipulation.sls
-R7RS_SCHEME = r7rs/pipchix/continuation-capture.sld \
-	r7rs/pipchix/base.sld r7rs/pipchix/nix-embed.sld \
-	r7rs/pipchix/nix-list.sld r7rs/pipchix/nix-set.sld \
-	r7rs/pipchix/abstract-syntax-tree.sld \
+R7RS_SCHEME = r7rs/pipchix/srfi-111.sld \
+	r7rs/pipchix/continuation-capture.sld r7rs/pipchix/base.sld \
+	r7rs/pipchix/nix-embed.sld r7rs/pipchix/nix-list.sld \
+	r7rs/pipchix/nix-set.sld r7rs/pipchix/abstract-syntax-tree.sld \
 	r7rs/pipchix/string-manipulation.sld
 
 #
@@ -526,6 +527,7 @@ CHICKEN_EGGSPEC_TOP = ' \
 
 CHICKEN_EGGSPEC_BOTTOM = ' \
    (components \
+    (extension pipchix.srfi-111) \
     (extension pipchix.continuation-capture) \
     (extension pipchix.string-manipulation) \
     (extension pipchix.abstract-syntax-tree) \
@@ -550,6 +552,7 @@ CHICKEN_5_EGGDIR = $(CHICKEN_5_EGGS)/pipchix
 CHICKEN_5_EGGFILES = \
   $(addprefix $(CHICKEN_5_EGGDIR)/, \
     pipchix.egg \
+    pipchix.srfi-111.scm \
     pipchix.continuation-capture.scm \
     pipchix.string-manipulation.scm \
     pipchix.abstract-syntax-tree.scm \
@@ -561,7 +564,7 @@ CHICKEN_5_EGGFILES = \
 
 CHICKEN_5_EGGSPEC = ' \
  '$(CHICKEN_EGGSPEC_TOP)' \
-   (dependencies r7rs utf8) \
+   (dependencies r7rs utf8 srfi-111) \
    (component-options \
     (csc-options \
      "-R" "utf8" \

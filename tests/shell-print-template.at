@@ -64,6 +64,15 @@ m4_define([sexpr],
 check_unquoted([run_scheme 'sexpr'],[0],
   [Hello, world!],[])
 
+m4_define([sexpr],
+  [(begin
+     (add-shell-print-format!
+      `hello-world (lambda (str) "Hello, world!"))
+     (set-shell-print-format! `hello-world)
+     (nix-embed (shell-print "This is a test.")))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [Hello, world!],[])
+
 AT_CLEANUP
 
 ])
