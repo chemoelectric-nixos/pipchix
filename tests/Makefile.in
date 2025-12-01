@@ -340,7 +340,7 @@ TESTSUITE_DEPS = $(srcdir)/atlocal.in $(srcdir)/package.m4 \
 	$(srcdir)/nix-list-node-template.at \
 	$(srcdir)/nix-path-node-template.at \
 	$(srcdir)/nix-embed-template.at $(srcdir)/nix-list-template.at \
-	$(srcdir)/testsuite.at
+	$(srcdir)/nix-set-template.at $(srcdir)/testsuite.at
 all: $(BUILT_SOURCES)
 	$(MAKE) $(AM_MAKEFLAGS) all-am
 
@@ -354,9 +354,9 @@ $(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am  $(am__confi
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu tests/GNUmakefile:tests/Makefile.in'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign tests/GNUmakefile:tests/Makefile.in'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu tests/GNUmakefile:tests/Makefile.in
+	  $(AUTOMAKE) --foreign tests/GNUmakefile:tests/Makefile.in
 GNUmakefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
 	  *config.status*) \

@@ -116,6 +116,7 @@ TESTSUITE_DEPS += $(srcdir)/nix-path-node-template.at
 
 TESTSUITE_DEPS += $(srcdir)/nix-embed-template.at
 TESTSUITE_DEPS += $(srcdir)/nix-list-template.at
+TESTSUITE_DEPS += $(srcdir)/nix-set-template.at
 
 TESTSUITE_DEPS += $(srcdir)/testsuite.at
 

@@ -625,174 +625,186 @@ at_help_all="1;continuation-capture-template.at:25;chez                   contin
 10;ast-nodes-preds-template.at:25;chez                    AST node predicates;;
 11;nix-embed-template.at:25;chez                    (pipchix nix-embed);r6rs chez chez-scheme chezscheme nix-embed;
 12;nix-list-template.at:25;chez                     (pipchix nix-list);r6rs chez chez-scheme chezscheme nix-list;
-13;base64-utf8-template.at:25;chez                            base64-utf8;r6rs chez chez-scheme chezscheme string-manipulation string strings base64 base64-utf8 utf8;
-14;escaped-utf8-template.at:25;chez                           escaped-utf8;r6rs chez chez-scheme chezscheme string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
-15;shell-print-template.at:25;chez                            shell-print;r6rs chez chez-scheme chezscheme string-manipulation string strings print shell utf8 shell-print;
-16;continuation-capture-template.at:25;chibi                  continuation-capture;r7rs chibi chibi-scheme chibischeme continuation continuations continuation-capture continuation-graft continuation-return call/cc;
-17;nix-embedded-node-template.at:25;chibi                   <nix-embedded-node>;r7rs chibi chibi-scheme chibischeme nix-embedded-node;
-18;nix-data-node-template.at:25;chibi                       <nix-data-node>;r7rs chibi chibi-scheme chibischeme nix-data-node;
-19;nix-path-node-template.at:25;chibi                       <nix-path-node>;r7rs chibi chibi-scheme chibischeme nix-path-node;
-20;nix-attributepath-node-template.at:25;chibi              <nix-attributepath-node>;r7rs chibi chibi-scheme chibischeme nix-attributepath-node;
-21;nix-attributebinding-node-template.at:25;chibi           <nix-attributebinding-node>;r7rs chibi chibi-scheme chibischeme nix-attributebinding-node;
-22;nix-inherit-node-template.at:25;chibi                    <nix-inherit-node>;r7rs chibi chibi-scheme chibischeme nix-inherit-node;
-23;nix-attributeset-node-template.at:25;chibi               <nix-attributeset-node>;r7rs chibi chibi-scheme chibischeme nix-attributeset-node;
-24;nix-list-node-template.at:25;chibi                       <nix-list-node>;r7rs chibi chibi-scheme chibischeme nix-list-node;
-25;ast-nodes-preds-template.at:25;chibi                   AST node predicates;;
-26;nix-embed-template.at:25;chibi                   (pipchix nix-embed);r7rs chibi chibi-scheme chibischeme nix-embed;
-27;nix-list-template.at:25;chibi                    (pipchix nix-list);r7rs chibi chibi-scheme chibischeme nix-list;
-28;base64-utf8-template.at:25;chibi                           base64-utf8;r7rs chibi chibi-scheme chibischeme string-manipulation string strings base64 base64-utf8 utf8;
-29;escaped-utf8-template.at:25;chibi                          escaped-utf8;r7rs chibi chibi-scheme chibischeme string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
-30;shell-print-template.at:25;chibi                           shell-print;r7rs chibi chibi-scheme chibischeme string-manipulation string strings print shell utf8 shell-print;
-31;continuation-capture-template.at:25;csc-5                  continuation-capture;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler continuation continuations continuation-capture continuation-graft continuation-return call/cc;
-32;nix-embedded-node-template.at:25;csc-5                   <nix-embedded-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler nix-embedded-node;
-33;nix-data-node-template.at:25;csc-5                       <nix-data-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler nix-data-node;
-34;nix-path-node-template.at:25;csc-5                       <nix-path-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler nix-path-node;
-35;nix-attributepath-node-template.at:25;csc-5              <nix-attributepath-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler nix-attributepath-node;
-36;nix-attributebinding-node-template.at:25;csc-5           <nix-attributebinding-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler nix-attributebinding-node;
-37;nix-inherit-node-template.at:25;csc-5                    <nix-inherit-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler nix-inherit-node;
-38;nix-attributeset-node-template.at:25;csc-5               <nix-attributeset-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler nix-attributeset-node;
-39;nix-list-node-template.at:25;csc-5                       <nix-list-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler nix-list-node;
-40;ast-nodes-preds-template.at:25;csc-5                   AST node predicates;;
-41;nix-embed-template.at:25;csc-5                   (pipchix nix-embed);r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler nix-embed;
-42;nix-list-template.at:25;csc-5                    (pipchix nix-list);r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler nix-list;
-43;base64-utf8-template.at:25;csc-5                           base64-utf8;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler string-manipulation string strings base64 base64-utf8 utf8;
-44;escaped-utf8-template.at:25;csc-5                          escaped-utf8;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
-45;shell-print-template.at:25;csc-5                           shell-print;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler string-manipulation string strings print shell utf8 shell-print;
-46;continuation-capture-template.at:25;csi-5                  continuation-capture;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter continuation continuations continuation-capture continuation-graft continuation-return call/cc;
-47;nix-embedded-node-template.at:25;csi-5                   <nix-embedded-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter nix-embedded-node;
-48;nix-data-node-template.at:25;csi-5                       <nix-data-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter nix-data-node;
-49;nix-path-node-template.at:25;csi-5                       <nix-path-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter nix-path-node;
-50;nix-attributepath-node-template.at:25;csi-5              <nix-attributepath-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter nix-attributepath-node;
-51;nix-attributebinding-node-template.at:25;csi-5           <nix-attributebinding-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter nix-attributebinding-node;
-52;nix-inherit-node-template.at:25;csi-5                    <nix-inherit-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter nix-inherit-node;
-53;nix-attributeset-node-template.at:25;csi-5               <nix-attributeset-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter nix-attributeset-node;
-54;nix-list-node-template.at:25;csi-5                       <nix-list-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter nix-list-node;
-55;ast-nodes-preds-template.at:25;csi-5                   AST node predicates;;
-56;nix-embed-template.at:25;csi-5                   (pipchix nix-embed);r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter nix-embed;
-57;nix-list-template.at:25;csi-5                    (pipchix nix-list);r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter nix-list;
-58;base64-utf8-template.at:25;csi-5                           base64-utf8;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter string-manipulation string strings base64 base64-utf8 utf8;
-59;escaped-utf8-template.at:25;csi-5                          escaped-utf8;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
-60;shell-print-template.at:25;csi-5                           shell-print;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter string-manipulation string strings print shell utf8 shell-print;
-61;continuation-capture-template.at:25;gauche                 continuation-capture;r7rs gauche gauche-scheme gauchescheme gosh gosh-scheme goshscheme continuation continuations continuation-capture continuation-graft continuation-return call/cc;
-62;nix-embedded-node-template.at:25;gauche                  <nix-embedded-node>;r7rs gauche gauche-scheme gauchescheme gosh gosh-scheme goshscheme nix-embedded-node;
-63;nix-data-node-template.at:25;gauche                      <nix-data-node>;r7rs gauche gauche-scheme gauchescheme gosh gosh-scheme goshscheme nix-data-node;
-64;nix-path-node-template.at:25;gauche                      <nix-path-node>;r7rs gauche gauche-scheme gauchescheme gosh gosh-scheme goshscheme nix-path-node;
-65;nix-attributepath-node-template.at:25;gauche             <nix-attributepath-node>;r7rs gauche gauche-scheme gauchescheme gosh gosh-scheme goshscheme nix-attributepath-node;
-66;nix-attributebinding-node-template.at:25;gauche          <nix-attributebinding-node>;r7rs gauche gauche-scheme gauchescheme gosh gosh-scheme goshscheme nix-attributebinding-node;
-67;nix-inherit-node-template.at:25;gauche                   <nix-inherit-node>;r7rs gauche gauche-scheme gauchescheme gosh gosh-scheme goshscheme nix-inherit-node;
-68;nix-attributeset-node-template.at:25;gauche              <nix-attributeset-node>;r7rs gauche gauche-scheme gauchescheme gosh gosh-scheme goshscheme nix-attributeset-node;
-69;nix-list-node-template.at:25;gauche                      <nix-list-node>;r7rs gauche gauche-scheme gauchescheme gosh gosh-scheme goshscheme nix-list-node;
-70;ast-nodes-preds-template.at:25;gauche                  AST node predicates;;
-71;nix-embed-template.at:25;gauche                  (pipchix nix-embed);r7rs gauche gauche-scheme gauchescheme gosh gosh-scheme goshscheme nix-embed;
-72;nix-list-template.at:25;gauche                   (pipchix nix-list);r7rs gauche gauche-scheme gauchescheme gosh gosh-scheme goshscheme nix-list;
-73;base64-utf8-template.at:25;gauche                          base64-utf8;r7rs gauche gauche-scheme gauchescheme gosh gosh-scheme goshscheme string-manipulation string strings base64 base64-utf8 utf8;
-74;escaped-utf8-template.at:25;gauche                         escaped-utf8;r7rs gauche gauche-scheme gauchescheme gosh gosh-scheme goshscheme string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
-75;shell-print-template.at:25;gauche                          shell-print;r7rs gauche gauche-scheme gauchescheme gosh gosh-scheme goshscheme string-manipulation string strings print shell utf8 shell-print;
-76;continuation-capture-template.at:25;guile(r6rs)            continuation-capture;r6rs guile guile-scheme guilescheme continuation continuations continuation-capture continuation-graft continuation-return call/cc;
-77;nix-embedded-node-template.at:25;guile(r6rs)             <nix-embedded-node>;r6rs guile guile-scheme guilescheme nix-embedded-node;
-78;nix-data-node-template.at:25;guile(r6rs)                 <nix-data-node>;r6rs guile guile-scheme guilescheme nix-data-node;
-79;nix-path-node-template.at:25;guile(r6rs)                 <nix-path-node>;r6rs guile guile-scheme guilescheme nix-path-node;
-80;nix-attributepath-node-template.at:25;guile(r6rs)        <nix-attributepath-node>;r6rs guile guile-scheme guilescheme nix-attributepath-node;
-81;nix-attributebinding-node-template.at:25;guile(r6rs)     <nix-attributebinding-node>;r6rs guile guile-scheme guilescheme nix-attributebinding-node;
-82;nix-inherit-node-template.at:25;guile(r6rs)              <nix-inherit-node>;r6rs guile guile-scheme guilescheme nix-inherit-node;
-83;nix-attributeset-node-template.at:25;guile(r6rs)         <nix-attributeset-node>;r6rs guile guile-scheme guilescheme nix-attributeset-node;
-84;nix-list-node-template.at:25;guile(r6rs)                 <nix-list-node>;r6rs guile guile-scheme guilescheme nix-list-node;
-85;ast-nodes-preds-template.at:25;guile(r6rs)             AST node predicates;;
-86;nix-embed-template.at:25;guile(r6rs)             (pipchix nix-embed);r6rs guile guile-scheme guilescheme nix-embed;
-87;nix-list-template.at:25;guile(r6rs)              (pipchix nix-list);r6rs guile guile-scheme guilescheme nix-list;
-88;base64-utf8-template.at:25;guile(r6rs)                     base64-utf8;r6rs guile guile-scheme guilescheme string-manipulation string strings base64 base64-utf8 utf8;
-89;escaped-utf8-template.at:25;guile(r6rs)                    escaped-utf8;r6rs guile guile-scheme guilescheme string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
-90;shell-print-template.at:25;guile(r6rs)                     shell-print;r6rs guile guile-scheme guilescheme string-manipulation string strings print shell utf8 shell-print;
-91;continuation-capture-template.at:25;guile(r7rs)            continuation-capture;r7rs guile guile-scheme guilescheme continuation continuations continuation-capture continuation-graft continuation-return call/cc;
-92;nix-embedded-node-template.at:25;guile(r7rs)             <nix-embedded-node>;r7rs guile guile-scheme guilescheme nix-embedded-node;
-93;nix-data-node-template.at:25;guile(r7rs)                 <nix-data-node>;r7rs guile guile-scheme guilescheme nix-data-node;
-94;nix-path-node-template.at:25;guile(r7rs)                 <nix-path-node>;r7rs guile guile-scheme guilescheme nix-path-node;
-95;nix-attributepath-node-template.at:25;guile(r7rs)        <nix-attributepath-node>;r7rs guile guile-scheme guilescheme nix-attributepath-node;
-96;nix-attributebinding-node-template.at:25;guile(r7rs)     <nix-attributebinding-node>;r7rs guile guile-scheme guilescheme nix-attributebinding-node;
-97;nix-inherit-node-template.at:25;guile(r7rs)              <nix-inherit-node>;r7rs guile guile-scheme guilescheme nix-inherit-node;
-98;nix-attributeset-node-template.at:25;guile(r7rs)         <nix-attributeset-node>;r7rs guile guile-scheme guilescheme nix-attributeset-node;
-99;nix-list-node-template.at:25;guile(r7rs)                 <nix-list-node>;r7rs guile guile-scheme guilescheme nix-list-node;
-100;ast-nodes-preds-template.at:25;guile(r7rs)             AST node predicates;;
-101;nix-embed-template.at:25;guile(r7rs)             (pipchix nix-embed);r7rs guile guile-scheme guilescheme nix-embed;
-102;nix-list-template.at:25;guile(r7rs)              (pipchix nix-list);r7rs guile guile-scheme guilescheme nix-list;
-103;base64-utf8-template.at:25;guile(r7rs)                     base64-utf8;r7rs guile guile-scheme guilescheme string-manipulation string strings base64 base64-utf8 utf8;
-104;escaped-utf8-template.at:25;guile(r7rs)                    escaped-utf8;r7rs guile guile-scheme guilescheme string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
-105;shell-print-template.at:25;guile(r7rs)                     shell-print;r7rs guile guile-scheme guilescheme string-manipulation string strings print shell utf8 shell-print;
-106;continuation-capture-template.at:25;loko(r6rs)             continuation-capture;r6rs loko loko-scheme lokoscheme continuation continuations continuation-capture continuation-graft continuation-return call/cc;
-107;nix-embedded-node-template.at:25;loko(r6rs)              <nix-embedded-node>;r6rs loko loko-scheme lokoscheme nix-embedded-node;
-108;nix-data-node-template.at:25;loko(r6rs)                  <nix-data-node>;r6rs loko loko-scheme lokoscheme nix-data-node;
-109;nix-path-node-template.at:25;loko(r6rs)                  <nix-path-node>;r6rs loko loko-scheme lokoscheme nix-path-node;
-110;nix-attributepath-node-template.at:25;loko(r6rs)         <nix-attributepath-node>;r6rs loko loko-scheme lokoscheme nix-attributepath-node;
-111;nix-attributebinding-node-template.at:25;loko(r6rs)      <nix-attributebinding-node>;r6rs loko loko-scheme lokoscheme nix-attributebinding-node;
-112;nix-inherit-node-template.at:25;loko(r6rs)               <nix-inherit-node>;r6rs loko loko-scheme lokoscheme nix-inherit-node;
-113;nix-attributeset-node-template.at:25;loko(r6rs)          <nix-attributeset-node>;r6rs loko loko-scheme lokoscheme nix-attributeset-node;
-114;nix-list-node-template.at:25;loko(r6rs)                  <nix-list-node>;r6rs loko loko-scheme lokoscheme nix-list-node;
-115;ast-nodes-preds-template.at:25;loko(r6rs)              AST node predicates;;
-116;nix-embed-template.at:25;loko(r6rs)              (pipchix nix-embed);r6rs loko loko-scheme lokoscheme nix-embed;
-117;nix-list-template.at:25;loko(r6rs)               (pipchix nix-list);r6rs loko loko-scheme lokoscheme nix-list;
-118;base64-utf8-template.at:25;loko(r6rs)                      base64-utf8;r6rs loko loko-scheme lokoscheme string-manipulation string strings base64 base64-utf8 utf8;
-119;escaped-utf8-template.at:25;loko(r6rs)                     escaped-utf8;r6rs loko loko-scheme lokoscheme string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
-120;shell-print-template.at:25;loko(r6rs)                      shell-print;r6rs loko loko-scheme lokoscheme string-manipulation string strings print shell utf8 shell-print;
-121;continuation-capture-template.at:25;loko(r7rs)             continuation-capture;r7rs loko loko-scheme lokoscheme continuation continuations continuation-capture continuation-graft continuation-return call/cc;
-122;nix-embedded-node-template.at:25;loko(r7rs)              <nix-embedded-node>;r7rs loko loko-scheme lokoscheme nix-embedded-node;
-123;nix-data-node-template.at:25;loko(r7rs)                  <nix-data-node>;r7rs loko loko-scheme lokoscheme nix-data-node;
-124;nix-path-node-template.at:25;loko(r7rs)                  <nix-path-node>;r7rs loko loko-scheme lokoscheme nix-path-node;
-125;nix-attributepath-node-template.at:25;loko(r7rs)         <nix-attributepath-node>;r7rs loko loko-scheme lokoscheme nix-attributepath-node;
-126;nix-attributebinding-node-template.at:25;loko(r7rs)      <nix-attributebinding-node>;r7rs loko loko-scheme lokoscheme nix-attributebinding-node;
-127;nix-inherit-node-template.at:25;loko(r7rs)               <nix-inherit-node>;r7rs loko loko-scheme lokoscheme nix-inherit-node;
-128;nix-attributeset-node-template.at:25;loko(r7rs)          <nix-attributeset-node>;r7rs loko loko-scheme lokoscheme nix-attributeset-node;
-129;nix-list-node-template.at:25;loko(r7rs)                  <nix-list-node>;r7rs loko loko-scheme lokoscheme nix-list-node;
-130;ast-nodes-preds-template.at:25;loko(r7rs)              AST node predicates;;
-131;nix-embed-template.at:25;loko(r7rs)              (pipchix nix-embed);r7rs loko loko-scheme lokoscheme nix-embed;
-132;nix-list-template.at:25;loko(r7rs)               (pipchix nix-list);r7rs loko loko-scheme lokoscheme nix-list;
-133;base64-utf8-template.at:25;loko(r7rs)                      base64-utf8;r7rs loko loko-scheme lokoscheme string-manipulation string strings base64 base64-utf8 utf8;
-134;escaped-utf8-template.at:25;loko(r7rs)                     escaped-utf8;r7rs loko loko-scheme lokoscheme string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
-135;shell-print-template.at:25;loko(r7rs)                      shell-print;r7rs loko loko-scheme lokoscheme string-manipulation string strings print shell utf8 shell-print;
-136;continuation-capture-template.at:25;racket                 continuation-capture;r6rs racket plt plt-scheme plt-r6rs continuation continuations continuation-capture continuation-graft continuation-return call/cc;
-137;nix-embedded-node-template.at:25;racket                  <nix-embedded-node>;r6rs racket plt plt-scheme plt-r6rs nix-embedded-node;
-138;nix-data-node-template.at:25;racket                      <nix-data-node>;r6rs racket plt plt-scheme plt-r6rs nix-data-node;
-139;nix-path-node-template.at:25;racket                      <nix-path-node>;r6rs racket plt plt-scheme plt-r6rs nix-path-node;
-140;nix-attributepath-node-template.at:25;racket             <nix-attributepath-node>;r6rs racket plt plt-scheme plt-r6rs nix-attributepath-node;
-141;nix-attributebinding-node-template.at:25;racket          <nix-attributebinding-node>;r6rs racket plt plt-scheme plt-r6rs nix-attributebinding-node;
-142;nix-inherit-node-template.at:25;racket                   <nix-inherit-node>;r6rs racket plt plt-scheme plt-r6rs nix-inherit-node;
-143;nix-attributeset-node-template.at:25;racket              <nix-attributeset-node>;r6rs racket plt plt-scheme plt-r6rs nix-attributeset-node;
-144;nix-list-node-template.at:25;racket                      <nix-list-node>;r6rs racket plt plt-scheme plt-r6rs nix-list-node;
-145;ast-nodes-preds-template.at:25;racket                  AST node predicates;;
-146;nix-embed-template.at:25;racket                  (pipchix nix-embed);r6rs racket plt plt-scheme plt-r6rs nix-embed;
-147;nix-list-template.at:25;racket                   (pipchix nix-list);r6rs racket plt plt-scheme plt-r6rs nix-list;
-148;base64-utf8-template.at:25;racket                          base64-utf8;r6rs racket plt plt-scheme plt-r6rs string-manipulation string strings base64 base64-utf8 utf8;
-149;escaped-utf8-template.at:25;racket                         escaped-utf8;r6rs racket plt plt-scheme plt-r6rs string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
-150;shell-print-template.at:25;racket                          shell-print;r6rs racket plt plt-scheme plt-r6rs string-manipulation string strings print shell utf8 shell-print;
-151;continuation-capture-template.at:25;sagitt(r6rs)           continuation-capture;r6rs sagittarius sagittarius-scheme sagittariusscheme sash continuation continuations continuation-capture continuation-graft continuation-return call/cc;
-152;nix-embedded-node-template.at:25;sagitt(r6rs)            <nix-embedded-node>;r6rs sagittarius sagittarius-scheme sagittariusscheme sash nix-embedded-node;
-153;nix-data-node-template.at:25;sagitt(r6rs)                <nix-data-node>;r6rs sagittarius sagittarius-scheme sagittariusscheme sash nix-data-node;
-154;nix-path-node-template.at:25;sagitt(r6rs)                <nix-path-node>;r6rs sagittarius sagittarius-scheme sagittariusscheme sash nix-path-node;
-155;nix-attributepath-node-template.at:25;sagitt(r6rs)       <nix-attributepath-node>;r6rs sagittarius sagittarius-scheme sagittariusscheme sash nix-attributepath-node;
-156;nix-attributebinding-node-template.at:25;sagitt(r6rs)    <nix-attributebinding-node>;r6rs sagittarius sagittarius-scheme sagittariusscheme sash nix-attributebinding-node;
-157;nix-inherit-node-template.at:25;sagitt(r6rs)             <nix-inherit-node>;r6rs sagittarius sagittarius-scheme sagittariusscheme sash nix-inherit-node;
-158;nix-attributeset-node-template.at:25;sagitt(r6rs)        <nix-attributeset-node>;r6rs sagittarius sagittarius-scheme sagittariusscheme sash nix-attributeset-node;
-159;nix-list-node-template.at:25;sagitt(r6rs)                <nix-list-node>;r6rs sagittarius sagittarius-scheme sagittariusscheme sash nix-list-node;
-160;ast-nodes-preds-template.at:25;sagitt(r6rs)            AST node predicates;;
-161;nix-embed-template.at:25;sagitt(r6rs)            (pipchix nix-embed);r6rs sagittarius sagittarius-scheme sagittariusscheme sash nix-embed;
-162;nix-list-template.at:25;sagitt(r6rs)             (pipchix nix-list);r6rs sagittarius sagittarius-scheme sagittariusscheme sash nix-list;
-163;base64-utf8-template.at:25;sagitt(r6rs)                    base64-utf8;r6rs sagittarius sagittarius-scheme sagittariusscheme sash string-manipulation string strings base64 base64-utf8 utf8;
-164;escaped-utf8-template.at:25;sagitt(r6rs)                   escaped-utf8;r6rs sagittarius sagittarius-scheme sagittariusscheme sash string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
-165;shell-print-template.at:25;sagitt(r6rs)                    shell-print;r6rs sagittarius sagittarius-scheme sagittariusscheme sash string-manipulation string strings print shell utf8 shell-print;
-166;continuation-capture-template.at:25;sagitt(r7rs)           continuation-capture;r7rs sagittarius sagittarius-scheme sagittariusscheme sash continuation continuations continuation-capture continuation-graft continuation-return call/cc;
-167;nix-embedded-node-template.at:25;sagitt(r7rs)            <nix-embedded-node>;r7rs sagittarius sagittarius-scheme sagittariusscheme sash nix-embedded-node;
-168;nix-data-node-template.at:25;sagitt(r7rs)                <nix-data-node>;r7rs sagittarius sagittarius-scheme sagittariusscheme sash nix-data-node;
-169;nix-path-node-template.at:25;sagitt(r7rs)                <nix-path-node>;r7rs sagittarius sagittarius-scheme sagittariusscheme sash nix-path-node;
-170;nix-attributepath-node-template.at:25;sagitt(r7rs)       <nix-attributepath-node>;r7rs sagittarius sagittarius-scheme sagittariusscheme sash nix-attributepath-node;
-171;nix-attributebinding-node-template.at:25;sagitt(r7rs)    <nix-attributebinding-node>;r7rs sagittarius sagittarius-scheme sagittariusscheme sash nix-attributebinding-node;
-172;nix-inherit-node-template.at:25;sagitt(r7rs)             <nix-inherit-node>;r7rs sagittarius sagittarius-scheme sagittariusscheme sash nix-inherit-node;
-173;nix-attributeset-node-template.at:25;sagitt(r7rs)        <nix-attributeset-node>;r7rs sagittarius sagittarius-scheme sagittariusscheme sash nix-attributeset-node;
-174;nix-list-node-template.at:25;sagitt(r7rs)                <nix-list-node>;r7rs sagittarius sagittarius-scheme sagittariusscheme sash nix-list-node;
-175;ast-nodes-preds-template.at:25;sagitt(r7rs)            AST node predicates;;
-176;nix-embed-template.at:25;sagitt(r7rs)            (pipchix nix-embed);r7rs sagittarius sagittarius-scheme sagittariusscheme sash nix-embed;
-177;nix-list-template.at:25;sagitt(r7rs)             (pipchix nix-list);r7rs sagittarius sagittarius-scheme sagittariusscheme sash nix-list;
-178;base64-utf8-template.at:25;sagitt(r7rs)                    base64-utf8;r7rs sagittarius sagittarius-scheme sagittariusscheme sash string-manipulation string strings base64 base64-utf8 utf8;
-179;escaped-utf8-template.at:25;sagitt(r7rs)                   escaped-utf8;r7rs sagittarius sagittarius-scheme sagittariusscheme sash string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
-180;shell-print-template.at:25;sagitt(r7rs)                    shell-print;r7rs sagittarius sagittarius-scheme sagittariusscheme sash string-manipulation string strings print shell utf8 shell-print;
+13;nix-set-template.at:25;chez                      (pipchix nix-set);r6rs chez chez-scheme chezscheme nix-set;
+14;base64-utf8-template.at:25;chez                            base64-utf8;r6rs chez chez-scheme chezscheme string-manipulation string strings base64 base64-utf8 utf8;
+15;escaped-utf8-template.at:25;chez                           escaped-utf8;r6rs chez chez-scheme chezscheme string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
+16;shell-print-template.at:25;chez                            shell-print;r6rs chez chez-scheme chezscheme string-manipulation string strings print shell utf8 shell-print;
+17;continuation-capture-template.at:25;chibi                  continuation-capture;r7rs chibi chibi-scheme chibischeme continuation continuations continuation-capture continuation-graft continuation-return call/cc;
+18;nix-embedded-node-template.at:25;chibi                   <nix-embedded-node>;r7rs chibi chibi-scheme chibischeme nix-embedded-node;
+19;nix-data-node-template.at:25;chibi                       <nix-data-node>;r7rs chibi chibi-scheme chibischeme nix-data-node;
+20;nix-path-node-template.at:25;chibi                       <nix-path-node>;r7rs chibi chibi-scheme chibischeme nix-path-node;
+21;nix-attributepath-node-template.at:25;chibi              <nix-attributepath-node>;r7rs chibi chibi-scheme chibischeme nix-attributepath-node;
+22;nix-attributebinding-node-template.at:25;chibi           <nix-attributebinding-node>;r7rs chibi chibi-scheme chibischeme nix-attributebinding-node;
+23;nix-inherit-node-template.at:25;chibi                    <nix-inherit-node>;r7rs chibi chibi-scheme chibischeme nix-inherit-node;
+24;nix-attributeset-node-template.at:25;chibi               <nix-attributeset-node>;r7rs chibi chibi-scheme chibischeme nix-attributeset-node;
+25;nix-list-node-template.at:25;chibi                       <nix-list-node>;r7rs chibi chibi-scheme chibischeme nix-list-node;
+26;ast-nodes-preds-template.at:25;chibi                   AST node predicates;;
+27;nix-embed-template.at:25;chibi                   (pipchix nix-embed);r7rs chibi chibi-scheme chibischeme nix-embed;
+28;nix-list-template.at:25;chibi                    (pipchix nix-list);r7rs chibi chibi-scheme chibischeme nix-list;
+29;nix-set-template.at:25;chibi                     (pipchix nix-set);r7rs chibi chibi-scheme chibischeme nix-set;
+30;base64-utf8-template.at:25;chibi                           base64-utf8;r7rs chibi chibi-scheme chibischeme string-manipulation string strings base64 base64-utf8 utf8;
+31;escaped-utf8-template.at:25;chibi                          escaped-utf8;r7rs chibi chibi-scheme chibischeme string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
+32;shell-print-template.at:25;chibi                           shell-print;r7rs chibi chibi-scheme chibischeme string-manipulation string strings print shell utf8 shell-print;
+33;continuation-capture-template.at:25;csc-5                  continuation-capture;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler continuation continuations continuation-capture continuation-graft continuation-return call/cc;
+34;nix-embedded-node-template.at:25;csc-5                   <nix-embedded-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler nix-embedded-node;
+35;nix-data-node-template.at:25;csc-5                       <nix-data-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler nix-data-node;
+36;nix-path-node-template.at:25;csc-5                       <nix-path-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler nix-path-node;
+37;nix-attributepath-node-template.at:25;csc-5              <nix-attributepath-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler nix-attributepath-node;
+38;nix-attributebinding-node-template.at:25;csc-5           <nix-attributebinding-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler nix-attributebinding-node;
+39;nix-inherit-node-template.at:25;csc-5                    <nix-inherit-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler nix-inherit-node;
+40;nix-attributeset-node-template.at:25;csc-5               <nix-attributeset-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler nix-attributeset-node;
+41;nix-list-node-template.at:25;csc-5                       <nix-list-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler nix-list-node;
+42;ast-nodes-preds-template.at:25;csc-5                   AST node predicates;;
+43;nix-embed-template.at:25;csc-5                   (pipchix nix-embed);r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler nix-embed;
+44;nix-list-template.at:25;csc-5                    (pipchix nix-list);r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler nix-list;
+45;nix-set-template.at:25;csc-5                     (pipchix nix-set);r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler nix-set;
+46;base64-utf8-template.at:25;csc-5                           base64-utf8;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler string-manipulation string strings base64 base64-utf8 utf8;
+47;escaped-utf8-template.at:25;csc-5                          escaped-utf8;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
+48;shell-print-template.at:25;csc-5                           shell-print;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler string-manipulation string strings print shell utf8 shell-print;
+49;continuation-capture-template.at:25;csi-5                  continuation-capture;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter continuation continuations continuation-capture continuation-graft continuation-return call/cc;
+50;nix-embedded-node-template.at:25;csi-5                   <nix-embedded-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter nix-embedded-node;
+51;nix-data-node-template.at:25;csi-5                       <nix-data-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter nix-data-node;
+52;nix-path-node-template.at:25;csi-5                       <nix-path-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter nix-path-node;
+53;nix-attributepath-node-template.at:25;csi-5              <nix-attributepath-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter nix-attributepath-node;
+54;nix-attributebinding-node-template.at:25;csi-5           <nix-attributebinding-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter nix-attributebinding-node;
+55;nix-inherit-node-template.at:25;csi-5                    <nix-inherit-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter nix-inherit-node;
+56;nix-attributeset-node-template.at:25;csi-5               <nix-attributeset-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter nix-attributeset-node;
+57;nix-list-node-template.at:25;csi-5                       <nix-list-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter nix-list-node;
+58;ast-nodes-preds-template.at:25;csi-5                   AST node predicates;;
+59;nix-embed-template.at:25;csi-5                   (pipchix nix-embed);r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter nix-embed;
+60;nix-list-template.at:25;csi-5                    (pipchix nix-list);r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter nix-list;
+61;nix-set-template.at:25;csi-5                     (pipchix nix-set);r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter nix-set;
+62;base64-utf8-template.at:25;csi-5                           base64-utf8;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter string-manipulation string strings base64 base64-utf8 utf8;
+63;escaped-utf8-template.at:25;csi-5                          escaped-utf8;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
+64;shell-print-template.at:25;csi-5                           shell-print;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter string-manipulation string strings print shell utf8 shell-print;
+65;continuation-capture-template.at:25;gauche                 continuation-capture;r7rs gauche gauche-scheme gauchescheme gosh gosh-scheme goshscheme continuation continuations continuation-capture continuation-graft continuation-return call/cc;
+66;nix-embedded-node-template.at:25;gauche                  <nix-embedded-node>;r7rs gauche gauche-scheme gauchescheme gosh gosh-scheme goshscheme nix-embedded-node;
+67;nix-data-node-template.at:25;gauche                      <nix-data-node>;r7rs gauche gauche-scheme gauchescheme gosh gosh-scheme goshscheme nix-data-node;
+68;nix-path-node-template.at:25;gauche                      <nix-path-node>;r7rs gauche gauche-scheme gauchescheme gosh gosh-scheme goshscheme nix-path-node;
+69;nix-attributepath-node-template.at:25;gauche             <nix-attributepath-node>;r7rs gauche gauche-scheme gauchescheme gosh gosh-scheme goshscheme nix-attributepath-node;
+70;nix-attributebinding-node-template.at:25;gauche          <nix-attributebinding-node>;r7rs gauche gauche-scheme gauchescheme gosh gosh-scheme goshscheme nix-attributebinding-node;
+71;nix-inherit-node-template.at:25;gauche                   <nix-inherit-node>;r7rs gauche gauche-scheme gauchescheme gosh gosh-scheme goshscheme nix-inherit-node;
+72;nix-attributeset-node-template.at:25;gauche              <nix-attributeset-node>;r7rs gauche gauche-scheme gauchescheme gosh gosh-scheme goshscheme nix-attributeset-node;
+73;nix-list-node-template.at:25;gauche                      <nix-list-node>;r7rs gauche gauche-scheme gauchescheme gosh gosh-scheme goshscheme nix-list-node;
+74;ast-nodes-preds-template.at:25;gauche                  AST node predicates;;
+75;nix-embed-template.at:25;gauche                  (pipchix nix-embed);r7rs gauche gauche-scheme gauchescheme gosh gosh-scheme goshscheme nix-embed;
+76;nix-list-template.at:25;gauche                   (pipchix nix-list);r7rs gauche gauche-scheme gauchescheme gosh gosh-scheme goshscheme nix-list;
+77;nix-set-template.at:25;gauche                    (pipchix nix-set);r7rs gauche gauche-scheme gauchescheme gosh gosh-scheme goshscheme nix-set;
+78;base64-utf8-template.at:25;gauche                          base64-utf8;r7rs gauche gauche-scheme gauchescheme gosh gosh-scheme goshscheme string-manipulation string strings base64 base64-utf8 utf8;
+79;escaped-utf8-template.at:25;gauche                         escaped-utf8;r7rs gauche gauche-scheme gauchescheme gosh gosh-scheme goshscheme string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
+80;shell-print-template.at:25;gauche                          shell-print;r7rs gauche gauche-scheme gauchescheme gosh gosh-scheme goshscheme string-manipulation string strings print shell utf8 shell-print;
+81;continuation-capture-template.at:25;guile(r6rs)            continuation-capture;r6rs guile guile-scheme guilescheme continuation continuations continuation-capture continuation-graft continuation-return call/cc;
+82;nix-embedded-node-template.at:25;guile(r6rs)             <nix-embedded-node>;r6rs guile guile-scheme guilescheme nix-embedded-node;
+83;nix-data-node-template.at:25;guile(r6rs)                 <nix-data-node>;r6rs guile guile-scheme guilescheme nix-data-node;
+84;nix-path-node-template.at:25;guile(r6rs)                 <nix-path-node>;r6rs guile guile-scheme guilescheme nix-path-node;
+85;nix-attributepath-node-template.at:25;guile(r6rs)        <nix-attributepath-node>;r6rs guile guile-scheme guilescheme nix-attributepath-node;
+86;nix-attributebinding-node-template.at:25;guile(r6rs)     <nix-attributebinding-node>;r6rs guile guile-scheme guilescheme nix-attributebinding-node;
+87;nix-inherit-node-template.at:25;guile(r6rs)              <nix-inherit-node>;r6rs guile guile-scheme guilescheme nix-inherit-node;
+88;nix-attributeset-node-template.at:25;guile(r6rs)         <nix-attributeset-node>;r6rs guile guile-scheme guilescheme nix-attributeset-node;
+89;nix-list-node-template.at:25;guile(r6rs)                 <nix-list-node>;r6rs guile guile-scheme guilescheme nix-list-node;
+90;ast-nodes-preds-template.at:25;guile(r6rs)             AST node predicates;;
+91;nix-embed-template.at:25;guile(r6rs)             (pipchix nix-embed);r6rs guile guile-scheme guilescheme nix-embed;
+92;nix-list-template.at:25;guile(r6rs)              (pipchix nix-list);r6rs guile guile-scheme guilescheme nix-list;
+93;nix-set-template.at:25;guile(r6rs)               (pipchix nix-set);r6rs guile guile-scheme guilescheme nix-set;
+94;base64-utf8-template.at:25;guile(r6rs)                     base64-utf8;r6rs guile guile-scheme guilescheme string-manipulation string strings base64 base64-utf8 utf8;
+95;escaped-utf8-template.at:25;guile(r6rs)                    escaped-utf8;r6rs guile guile-scheme guilescheme string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
+96;shell-print-template.at:25;guile(r6rs)                     shell-print;r6rs guile guile-scheme guilescheme string-manipulation string strings print shell utf8 shell-print;
+97;continuation-capture-template.at:25;guile(r7rs)            continuation-capture;r7rs guile guile-scheme guilescheme continuation continuations continuation-capture continuation-graft continuation-return call/cc;
+98;nix-embedded-node-template.at:25;guile(r7rs)             <nix-embedded-node>;r7rs guile guile-scheme guilescheme nix-embedded-node;
+99;nix-data-node-template.at:25;guile(r7rs)                 <nix-data-node>;r7rs guile guile-scheme guilescheme nix-data-node;
+100;nix-path-node-template.at:25;guile(r7rs)                 <nix-path-node>;r7rs guile guile-scheme guilescheme nix-path-node;
+101;nix-attributepath-node-template.at:25;guile(r7rs)        <nix-attributepath-node>;r7rs guile guile-scheme guilescheme nix-attributepath-node;
+102;nix-attributebinding-node-template.at:25;guile(r7rs)     <nix-attributebinding-node>;r7rs guile guile-scheme guilescheme nix-attributebinding-node;
+103;nix-inherit-node-template.at:25;guile(r7rs)              <nix-inherit-node>;r7rs guile guile-scheme guilescheme nix-inherit-node;
+104;nix-attributeset-node-template.at:25;guile(r7rs)         <nix-attributeset-node>;r7rs guile guile-scheme guilescheme nix-attributeset-node;
+105;nix-list-node-template.at:25;guile(r7rs)                 <nix-list-node>;r7rs guile guile-scheme guilescheme nix-list-node;
+106;ast-nodes-preds-template.at:25;guile(r7rs)             AST node predicates;;
+107;nix-embed-template.at:25;guile(r7rs)             (pipchix nix-embed);r7rs guile guile-scheme guilescheme nix-embed;
+108;nix-list-template.at:25;guile(r7rs)              (pipchix nix-list);r7rs guile guile-scheme guilescheme nix-list;
+109;nix-set-template.at:25;guile(r7rs)               (pipchix nix-set);r7rs guile guile-scheme guilescheme nix-set;
+110;base64-utf8-template.at:25;guile(r7rs)                     base64-utf8;r7rs guile guile-scheme guilescheme string-manipulation string strings base64 base64-utf8 utf8;
+111;escaped-utf8-template.at:25;guile(r7rs)                    escaped-utf8;r7rs guile guile-scheme guilescheme string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
+112;shell-print-template.at:25;guile(r7rs)                     shell-print;r7rs guile guile-scheme guilescheme string-manipulation string strings print shell utf8 shell-print;
+113;continuation-capture-template.at:25;loko(r6rs)             continuation-capture;r6rs loko loko-scheme lokoscheme continuation continuations continuation-capture continuation-graft continuation-return call/cc;
+114;nix-embedded-node-template.at:25;loko(r6rs)              <nix-embedded-node>;r6rs loko loko-scheme lokoscheme nix-embedded-node;
+115;nix-data-node-template.at:25;loko(r6rs)                  <nix-data-node>;r6rs loko loko-scheme lokoscheme nix-data-node;
+116;nix-path-node-template.at:25;loko(r6rs)                  <nix-path-node>;r6rs loko loko-scheme lokoscheme nix-path-node;
+117;nix-attributepath-node-template.at:25;loko(r6rs)         <nix-attributepath-node>;r6rs loko loko-scheme lokoscheme nix-attributepath-node;
+118;nix-attributebinding-node-template.at:25;loko(r6rs)      <nix-attributebinding-node>;r6rs loko loko-scheme lokoscheme nix-attributebinding-node;
+119;nix-inherit-node-template.at:25;loko(r6rs)               <nix-inherit-node>;r6rs loko loko-scheme lokoscheme nix-inherit-node;
+120;nix-attributeset-node-template.at:25;loko(r6rs)          <nix-attributeset-node>;r6rs loko loko-scheme lokoscheme nix-attributeset-node;
+121;nix-list-node-template.at:25;loko(r6rs)                  <nix-list-node>;r6rs loko loko-scheme lokoscheme nix-list-node;
+122;ast-nodes-preds-template.at:25;loko(r6rs)              AST node predicates;;
+123;nix-embed-template.at:25;loko(r6rs)              (pipchix nix-embed);r6rs loko loko-scheme lokoscheme nix-embed;
+124;nix-list-template.at:25;loko(r6rs)               (pipchix nix-list);r6rs loko loko-scheme lokoscheme nix-list;
+125;nix-set-template.at:25;loko(r6rs)                (pipchix nix-set);r6rs loko loko-scheme lokoscheme nix-set;
+126;base64-utf8-template.at:25;loko(r6rs)                      base64-utf8;r6rs loko loko-scheme lokoscheme string-manipulation string strings base64 base64-utf8 utf8;
+127;escaped-utf8-template.at:25;loko(r6rs)                     escaped-utf8;r6rs loko loko-scheme lokoscheme string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
+128;shell-print-template.at:25;loko(r6rs)                      shell-print;r6rs loko loko-scheme lokoscheme string-manipulation string strings print shell utf8 shell-print;
+129;continuation-capture-template.at:25;loko(r7rs)             continuation-capture;r7rs loko loko-scheme lokoscheme continuation continuations continuation-capture continuation-graft continuation-return call/cc;
+130;nix-embedded-node-template.at:25;loko(r7rs)              <nix-embedded-node>;r7rs loko loko-scheme lokoscheme nix-embedded-node;
+131;nix-data-node-template.at:25;loko(r7rs)                  <nix-data-node>;r7rs loko loko-scheme lokoscheme nix-data-node;
+132;nix-path-node-template.at:25;loko(r7rs)                  <nix-path-node>;r7rs loko loko-scheme lokoscheme nix-path-node;
+133;nix-attributepath-node-template.at:25;loko(r7rs)         <nix-attributepath-node>;r7rs loko loko-scheme lokoscheme nix-attributepath-node;
+134;nix-attributebinding-node-template.at:25;loko(r7rs)      <nix-attributebinding-node>;r7rs loko loko-scheme lokoscheme nix-attributebinding-node;
+135;nix-inherit-node-template.at:25;loko(r7rs)               <nix-inherit-node>;r7rs loko loko-scheme lokoscheme nix-inherit-node;
+136;nix-attributeset-node-template.at:25;loko(r7rs)          <nix-attributeset-node>;r7rs loko loko-scheme lokoscheme nix-attributeset-node;
+137;nix-list-node-template.at:25;loko(r7rs)                  <nix-list-node>;r7rs loko loko-scheme lokoscheme nix-list-node;
+138;ast-nodes-preds-template.at:25;loko(r7rs)              AST node predicates;;
+139;nix-embed-template.at:25;loko(r7rs)              (pipchix nix-embed);r7rs loko loko-scheme lokoscheme nix-embed;
+140;nix-list-template.at:25;loko(r7rs)               (pipchix nix-list);r7rs loko loko-scheme lokoscheme nix-list;
+141;nix-set-template.at:25;loko(r7rs)                (pipchix nix-set);r7rs loko loko-scheme lokoscheme nix-set;
+142;base64-utf8-template.at:25;loko(r7rs)                      base64-utf8;r7rs loko loko-scheme lokoscheme string-manipulation string strings base64 base64-utf8 utf8;
+143;escaped-utf8-template.at:25;loko(r7rs)                     escaped-utf8;r7rs loko loko-scheme lokoscheme string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
+144;shell-print-template.at:25;loko(r7rs)                      shell-print;r7rs loko loko-scheme lokoscheme string-manipulation string strings print shell utf8 shell-print;
+145;continuation-capture-template.at:25;racket                 continuation-capture;r6rs racket plt plt-scheme plt-r6rs continuation continuations continuation-capture continuation-graft continuation-return call/cc;
+146;nix-embedded-node-template.at:25;racket                  <nix-embedded-node>;r6rs racket plt plt-scheme plt-r6rs nix-embedded-node;
+147;nix-data-node-template.at:25;racket                      <nix-data-node>;r6rs racket plt plt-scheme plt-r6rs nix-data-node;
+148;nix-path-node-template.at:25;racket                      <nix-path-node>;r6rs racket plt plt-scheme plt-r6rs nix-path-node;
+149;nix-attributepath-node-template.at:25;racket             <nix-attributepath-node>;r6rs racket plt plt-scheme plt-r6rs nix-attributepath-node;
+150;nix-attributebinding-node-template.at:25;racket          <nix-attributebinding-node>;r6rs racket plt plt-scheme plt-r6rs nix-attributebinding-node;
+151;nix-inherit-node-template.at:25;racket                   <nix-inherit-node>;r6rs racket plt plt-scheme plt-r6rs nix-inherit-node;
+152;nix-attributeset-node-template.at:25;racket              <nix-attributeset-node>;r6rs racket plt plt-scheme plt-r6rs nix-attributeset-node;
+153;nix-list-node-template.at:25;racket                      <nix-list-node>;r6rs racket plt plt-scheme plt-r6rs nix-list-node;
+154;ast-nodes-preds-template.at:25;racket                  AST node predicates;;
+155;nix-embed-template.at:25;racket                  (pipchix nix-embed);r6rs racket plt plt-scheme plt-r6rs nix-embed;
+156;nix-list-template.at:25;racket                   (pipchix nix-list);r6rs racket plt plt-scheme plt-r6rs nix-list;
+157;nix-set-template.at:25;racket                    (pipchix nix-set);r6rs racket plt plt-scheme plt-r6rs nix-set;
+158;base64-utf8-template.at:25;racket                          base64-utf8;r6rs racket plt plt-scheme plt-r6rs string-manipulation string strings base64 base64-utf8 utf8;
+159;escaped-utf8-template.at:25;racket                         escaped-utf8;r6rs racket plt plt-scheme plt-r6rs string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
+160;shell-print-template.at:25;racket                          shell-print;r6rs racket plt plt-scheme plt-r6rs string-manipulation string strings print shell utf8 shell-print;
+161;continuation-capture-template.at:25;sagitt(r6rs)           continuation-capture;r6rs sagittarius sagittarius-scheme sagittariusscheme sash continuation continuations continuation-capture continuation-graft continuation-return call/cc;
+162;nix-embedded-node-template.at:25;sagitt(r6rs)            <nix-embedded-node>;r6rs sagittarius sagittarius-scheme sagittariusscheme sash nix-embedded-node;
+163;nix-data-node-template.at:25;sagitt(r6rs)                <nix-data-node>;r6rs sagittarius sagittarius-scheme sagittariusscheme sash nix-data-node;
+164;nix-path-node-template.at:25;sagitt(r6rs)                <nix-path-node>;r6rs sagittarius sagittarius-scheme sagittariusscheme sash nix-path-node;
+165;nix-attributepath-node-template.at:25;sagitt(r6rs)       <nix-attributepath-node>;r6rs sagittarius sagittarius-scheme sagittariusscheme sash nix-attributepath-node;
+166;nix-attributebinding-node-template.at:25;sagitt(r6rs)    <nix-attributebinding-node>;r6rs sagittarius sagittarius-scheme sagittariusscheme sash nix-attributebinding-node;
+167;nix-inherit-node-template.at:25;sagitt(r6rs)             <nix-inherit-node>;r6rs sagittarius sagittarius-scheme sagittariusscheme sash nix-inherit-node;
+168;nix-attributeset-node-template.at:25;sagitt(r6rs)        <nix-attributeset-node>;r6rs sagittarius sagittarius-scheme sagittariusscheme sash nix-attributeset-node;
+169;nix-list-node-template.at:25;sagitt(r6rs)                <nix-list-node>;r6rs sagittarius sagittarius-scheme sagittariusscheme sash nix-list-node;
+170;ast-nodes-preds-template.at:25;sagitt(r6rs)            AST node predicates;;
+171;nix-embed-template.at:25;sagitt(r6rs)            (pipchix nix-embed);r6rs sagittarius sagittarius-scheme sagittariusscheme sash nix-embed;
+172;nix-list-template.at:25;sagitt(r6rs)             (pipchix nix-list);r6rs sagittarius sagittarius-scheme sagittariusscheme sash nix-list;
+173;nix-set-template.at:25;sagitt(r6rs)              (pipchix nix-set);r6rs sagittarius sagittarius-scheme sagittariusscheme sash nix-set;
+174;base64-utf8-template.at:25;sagitt(r6rs)                    base64-utf8;r6rs sagittarius sagittarius-scheme sagittariusscheme sash string-manipulation string strings base64 base64-utf8 utf8;
+175;escaped-utf8-template.at:25;sagitt(r6rs)                   escaped-utf8;r6rs sagittarius sagittarius-scheme sagittariusscheme sash string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
+176;shell-print-template.at:25;sagitt(r6rs)                    shell-print;r6rs sagittarius sagittarius-scheme sagittariusscheme sash string-manipulation string strings print shell utf8 shell-print;
+177;continuation-capture-template.at:25;sagitt(r7rs)           continuation-capture;r7rs sagittarius sagittarius-scheme sagittariusscheme sash continuation continuations continuation-capture continuation-graft continuation-return call/cc;
+178;nix-embedded-node-template.at:25;sagitt(r7rs)            <nix-embedded-node>;r7rs sagittarius sagittarius-scheme sagittariusscheme sash nix-embedded-node;
+179;nix-data-node-template.at:25;sagitt(r7rs)                <nix-data-node>;r7rs sagittarius sagittarius-scheme sagittariusscheme sash nix-data-node;
+180;nix-path-node-template.at:25;sagitt(r7rs)                <nix-path-node>;r7rs sagittarius sagittarius-scheme sagittariusscheme sash nix-path-node;
+181;nix-attributepath-node-template.at:25;sagitt(r7rs)       <nix-attributepath-node>;r7rs sagittarius sagittarius-scheme sagittariusscheme sash nix-attributepath-node;
+182;nix-attributebinding-node-template.at:25;sagitt(r7rs)    <nix-attributebinding-node>;r7rs sagittarius sagittarius-scheme sagittariusscheme sash nix-attributebinding-node;
+183;nix-inherit-node-template.at:25;sagitt(r7rs)             <nix-inherit-node>;r7rs sagittarius sagittarius-scheme sagittariusscheme sash nix-inherit-node;
+184;nix-attributeset-node-template.at:25;sagitt(r7rs)        <nix-attributeset-node>;r7rs sagittarius sagittarius-scheme sagittariusscheme sash nix-attributeset-node;
+185;nix-list-node-template.at:25;sagitt(r7rs)                <nix-list-node>;r7rs sagittarius sagittarius-scheme sagittariusscheme sash nix-list-node;
+186;ast-nodes-preds-template.at:25;sagitt(r7rs)            AST node predicates;;
+187;nix-embed-template.at:25;sagitt(r7rs)            (pipchix nix-embed);r7rs sagittarius sagittarius-scheme sagittariusscheme sash nix-embed;
+188;nix-list-template.at:25;sagitt(r7rs)             (pipchix nix-list);r7rs sagittarius sagittarius-scheme sagittariusscheme sash nix-list;
+189;nix-set-template.at:25;sagitt(r7rs)              (pipchix nix-set);r7rs sagittarius sagittarius-scheme sagittariusscheme sash nix-set;
+190;base64-utf8-template.at:25;sagitt(r7rs)                    base64-utf8;r7rs sagittarius sagittarius-scheme sagittariusscheme sash string-manipulation string strings base64 base64-utf8 utf8;
+191;escaped-utf8-template.at:25;sagitt(r7rs)                   escaped-utf8;r7rs sagittarius sagittarius-scheme sagittariusscheme sash string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
+192;shell-print-template.at:25;sagitt(r7rs)                    shell-print;r7rs sagittarius sagittarius-scheme sagittariusscheme sash string-manipulation string strings print shell utf8 shell-print;
 "
 # List of the all the test groups.
 at_groups_all=`printf "%s\n" "$at_help_all" | sed 's/;.*//'`
@@ -806,7 +818,7 @@ at_fn_validate_ranges ()
   for at_grp
   do
     eval at_value=\$$at_grp
-    if test $at_value -lt 1 || test $at_value -gt 180; then
+    if test $at_value -lt 1 || test $at_value -gt 192; then
       printf "%s\n" "invalid test group: $at_value" >&2
       exit 1
     fi
@@ -1167,37 +1179,37 @@ esac
 # Category starts at test group 1.
 at_banner_text_1="Chez Scheme (R⁶RS)"
 # Banner 2. testsuite.at:50
-# Category starts at test group 16.
+# Category starts at test group 17.
 at_banner_text_2="Chibi Scheme (R⁷RS)"
 # Banner 3. testsuite.at:55
-# Category starts at test group 31.
+# Category starts at test group 33.
 at_banner_text_3="CHICKEN 5 compiler (R⁷RS)"
 # Banner 4. testsuite.at:62
-# Category starts at test group 46.
+# Category starts at test group 49.
 at_banner_text_4="CHICKEN 5 interpreter (R⁷RS)"
 # Banner 5. testsuite.at:69
-# Category starts at test group 61.
+# Category starts at test group 65.
 at_banner_text_5="Gauche Scheme (R⁷RS)"
 # Banner 6. testsuite.at:75
-# Category starts at test group 76.
+# Category starts at test group 81.
 at_banner_text_6="Guile (R⁶RS)"
 # Banner 7. testsuite.at:80
-# Category starts at test group 91.
+# Category starts at test group 97.
 at_banner_text_7="Guile (R⁷RS)"
 # Banner 8. testsuite.at:85
-# Category starts at test group 106.
+# Category starts at test group 113.
 at_banner_text_8="Loko Scheme (R⁶RS)"
 # Banner 9. testsuite.at:90
-# Category starts at test group 121.
+# Category starts at test group 129.
 at_banner_text_9="Loko Scheme (R⁷RS)"
 # Banner 10. testsuite.at:95
-# Category starts at test group 136.
+# Category starts at test group 145.
 at_banner_text_10="Racket (R⁶RS)"
 # Banner 11. testsuite.at:100
-# Category starts at test group 151.
+# Category starts at test group 161.
 at_banner_text_11="Sagittarius Scheme (R⁶RS)"
 # Banner 12. testsuite.at:106
-# Category starts at test group 166.
+# Category starts at test group 177.
 at_banner_text_12="Sagittarius Scheme (R⁷RS)"
 
 # Take any -C into account.
@@ -3898,11 +3910,73 @@ $at_traceon; }
 read at_status <"$at_status_file"
 #AT_STOP_12
 #AT_START_13
-at_fn_group_banner 13 'base64-utf8-template.at:25' \
-  "chez                            base64-utf8" "    " 1
+at_fn_group_banner 13 'nix-set-template.at:25' \
+  "chez                      (pipchix nix-set)" "    " 1
 at_xfail=no
 (
   printf "%s\n" "13. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
+
+
+
+
+printf "%s\n" "nix-set-template.at:30" >"$at_check_line_file"
+(test ${enable_check_r6rs_chez} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:30"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-set-template.at:30: \"\${abs_builddir}\"/run-r6rs-chez.sh '(nix-set)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:30"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '(nix-set)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "({
+})
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:30"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "nix-set-template.at:33" >"$at_check_line_file"
+(test ${enable_check_r6rs_chez} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:33"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-set-template.at:33: \"\${abs_builddir}\"/run-r6rs-chez.sh '(nix-setrec)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:33"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '(nix-setrec)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(rec{
+})
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:33"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_13
+#AT_START_14
+at_fn_group_banner 14 'base64-utf8-template.at:25' \
+  "chez                            base64-utf8" "    " 1
+at_xfail=no
+(
+  printf "%s\n" "14. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -4331,13 +4405,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_13
-#AT_START_14
-at_fn_group_banner 14 'escaped-utf8-template.at:25' \
+#AT_STOP_14
+#AT_START_15
+at_fn_group_banner 15 'escaped-utf8-template.at:25' \
   "chez                           escaped-utf8" "    " 1
 at_xfail=no
 (
-  printf "%s\n" "14. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "15. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -4453,13 +4527,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_14
-#AT_START_15
-at_fn_group_banner 15 'shell-print-template.at:25' \
+#AT_STOP_15
+#AT_START_16
+at_fn_group_banner 16 'shell-print-template.at:25' \
   "chez                            shell-print" "    " 1
 at_xfail=no
 (
-  printf "%s\n" "15. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "16. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -4638,13 +4712,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_15
-#AT_START_16
-at_fn_group_banner 16 'continuation-capture-template.at:25' \
+#AT_STOP_16
+#AT_START_17
+at_fn_group_banner 17 'continuation-capture-template.at:25' \
   "chibi                  continuation-capture" "    " 2
 at_xfail=no
 (
-  printf "%s\n" "16. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "17. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -4816,13 +4890,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_16
-#AT_START_17
-at_fn_group_banner 17 'nix-embedded-node-template.at:25' \
+#AT_STOP_17
+#AT_START_18
+at_fn_group_banner 18 'nix-embedded-node-template.at:25' \
   "chibi                   <nix-embedded-node>" "    " 2
 at_xfail=no
 (
-  printf "%s\n" "17. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "18. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -4853,13 +4927,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_17
-#AT_START_18
-at_fn_group_banner 18 'nix-data-node-template.at:25' \
+#AT_STOP_18
+#AT_START_19
+at_fn_group_banner 19 'nix-data-node-template.at:25' \
   "chibi                       <nix-data-node>" "    " 2
 at_xfail=no
 (
-  printf "%s\n" "18. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "19. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -4979,13 +5053,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_18
-#AT_START_19
-at_fn_group_banner 19 'nix-path-node-template.at:25' \
+#AT_STOP_19
+#AT_START_20
+at_fn_group_banner 20 'nix-path-node-template.at:25' \
   "chibi                       <nix-path-node>" "    " 2
 at_xfail=no
 (
-  printf "%s\n" "19. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "20. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -5039,13 +5113,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_19
-#AT_START_20
-at_fn_group_banner 20 'nix-attributepath-node-template.at:25' \
+#AT_STOP_20
+#AT_START_21
+at_fn_group_banner 21 'nix-attributepath-node-template.at:25' \
   "chibi              <nix-attributepath-node>" "    " 2
 at_xfail=no
 (
-  printf "%s\n" "20. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "21. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -5127,13 +5201,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_20
-#AT_START_21
-at_fn_group_banner 21 'nix-attributebinding-node-template.at:25' \
+#AT_STOP_21
+#AT_START_22
+at_fn_group_banner 22 'nix-attributebinding-node-template.at:25' \
   "chibi           <nix-attributebinding-node>" "    " 2
 at_xfail=no
 (
-  printf "%s\n" "21. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "22. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -5217,13 +5291,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_21
-#AT_START_22
-at_fn_group_banner 22 'nix-inherit-node-template.at:25' \
+#AT_STOP_22
+#AT_START_23
+at_fn_group_banner 23 'nix-inherit-node-template.at:25' \
   "chibi                    <nix-inherit-node>" "    " 2
 at_xfail=no
 (
-  printf "%s\n" "22. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "23. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -5319,13 +5393,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_22
-#AT_START_23
-at_fn_group_banner 23 'nix-attributeset-node-template.at:25' \
+#AT_STOP_23
+#AT_START_24
+at_fn_group_banner 24 'nix-attributeset-node-template.at:25' \
   "chibi               <nix-attributeset-node>" "    " 2
 at_xfail=no
 (
-  printf "%s\n" "23. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "24. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -5543,13 +5617,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_23
-#AT_START_24
-at_fn_group_banner 24 'nix-list-node-template.at:25' \
+#AT_STOP_24
+#AT_START_25
+at_fn_group_banner 25 'nix-list-node-template.at:25' \
   "chibi                       <nix-list-node>" "    " 2
 at_xfail=no
 (
-  printf "%s\n" "24. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "25. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -5605,13 +5679,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_24
-#AT_START_25
-at_fn_group_banner 25 'ast-nodes-preds-template.at:25' \
+#AT_STOP_25
+#AT_START_26
+at_fn_group_banner 26 'ast-nodes-preds-template.at:25' \
   "chibi                   AST node predicates" "    " 2
 at_xfail=no
 (
-  printf "%s\n" "25. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "26. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -6227,13 +6301,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_25
-#AT_START_26
-at_fn_group_banner 26 'nix-embed-template.at:25' \
+#AT_STOP_26
+#AT_START_27
+at_fn_group_banner 27 'nix-embed-template.at:25' \
   "chibi                   (pipchix nix-embed)" "    " 2
 at_xfail=no
 (
-  printf "%s\n" "26. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "27. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -6264,13 +6338,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_26
-#AT_START_27
-at_fn_group_banner 27 'nix-list-template.at:25' \
+#AT_STOP_27
+#AT_START_28
+at_fn_group_banner 28 'nix-list-template.at:25' \
   "chibi                    (pipchix nix-list)" "    " 2
 at_xfail=no
 (
-  printf "%s\n" "27. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "28. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -6336,13 +6410,75 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_27
-#AT_START_28
-at_fn_group_banner 28 'base64-utf8-template.at:25' \
+#AT_STOP_28
+#AT_START_29
+at_fn_group_banner 29 'nix-set-template.at:25' \
+  "chibi                     (pipchix nix-set)" "    " 2
+at_xfail=no
+(
+  printf "%s\n" "29. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
+
+
+
+
+printf "%s\n" "nix-set-template.at:30" >"$at_check_line_file"
+(test ${enable_check_r7rs_chibi} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:30"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-set-template.at:30: \"\${abs_builddir}\"/run-r7rs-chibi.sh '(nix-set)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:30"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-chibi.sh '(nix-set)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "({
+})
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:30"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "nix-set-template.at:33" >"$at_check_line_file"
+(test ${enable_check_r7rs_chibi} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:33"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-set-template.at:33: \"\${abs_builddir}\"/run-r7rs-chibi.sh '(nix-setrec)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:33"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-chibi.sh '(nix-setrec)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(rec{
+})
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:33"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_29
+#AT_START_30
+at_fn_group_banner 30 'base64-utf8-template.at:25' \
   "chibi                           base64-utf8" "    " 2
 at_xfail=no
 (
-  printf "%s\n" "28. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "30. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -6771,13 +6907,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_28
-#AT_START_29
-at_fn_group_banner 29 'escaped-utf8-template.at:25' \
+#AT_STOP_30
+#AT_START_31
+at_fn_group_banner 31 'escaped-utf8-template.at:25' \
   "chibi                          escaped-utf8" "    " 2
 at_xfail=no
 (
-  printf "%s\n" "29. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "31. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -6893,13 +7029,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_29
-#AT_START_30
-at_fn_group_banner 30 'shell-print-template.at:25' \
+#AT_STOP_31
+#AT_START_32
+at_fn_group_banner 32 'shell-print-template.at:25' \
   "chibi                           shell-print" "    " 2
 at_xfail=no
 (
-  printf "%s\n" "30. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "32. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -7078,13 +7214,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_30
-#AT_START_31
-at_fn_group_banner 31 'continuation-capture-template.at:25' \
+#AT_STOP_32
+#AT_START_33
+at_fn_group_banner 33 'continuation-capture-template.at:25' \
   "csc-5                  continuation-capture" "    " 3
 at_xfail=no
 (
-  printf "%s\n" "31. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "33. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -7256,13 +7392,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_31
-#AT_START_32
-at_fn_group_banner 32 'nix-embedded-node-template.at:25' \
+#AT_STOP_33
+#AT_START_34
+at_fn_group_banner 34 'nix-embedded-node-template.at:25' \
   "csc-5                   <nix-embedded-node>" "    " 3
 at_xfail=no
 (
-  printf "%s\n" "32. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "34. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -7293,13 +7429,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_32
-#AT_START_33
-at_fn_group_banner 33 'nix-data-node-template.at:25' \
+#AT_STOP_34
+#AT_START_35
+at_fn_group_banner 35 'nix-data-node-template.at:25' \
   "csc-5                       <nix-data-node>" "    " 3
 at_xfail=no
 (
-  printf "%s\n" "33. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "35. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -7419,13 +7555,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_33
-#AT_START_34
-at_fn_group_banner 34 'nix-path-node-template.at:25' \
+#AT_STOP_35
+#AT_START_36
+at_fn_group_banner 36 'nix-path-node-template.at:25' \
   "csc-5                       <nix-path-node>" "    " 3
 at_xfail=no
 (
-  printf "%s\n" "34. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "36. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -7479,13 +7615,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_34
-#AT_START_35
-at_fn_group_banner 35 'nix-attributepath-node-template.at:25' \
+#AT_STOP_36
+#AT_START_37
+at_fn_group_banner 37 'nix-attributepath-node-template.at:25' \
   "csc-5              <nix-attributepath-node>" "    " 3
 at_xfail=no
 (
-  printf "%s\n" "35. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "37. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -7567,13 +7703,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_35
-#AT_START_36
-at_fn_group_banner 36 'nix-attributebinding-node-template.at:25' \
+#AT_STOP_37
+#AT_START_38
+at_fn_group_banner 38 'nix-attributebinding-node-template.at:25' \
   "csc-5           <nix-attributebinding-node>" "    " 3
 at_xfail=no
 (
-  printf "%s\n" "36. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "38. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -7657,13 +7793,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_36
-#AT_START_37
-at_fn_group_banner 37 'nix-inherit-node-template.at:25' \
+#AT_STOP_38
+#AT_START_39
+at_fn_group_banner 39 'nix-inherit-node-template.at:25' \
   "csc-5                    <nix-inherit-node>" "    " 3
 at_xfail=no
 (
-  printf "%s\n" "37. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "39. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -7759,13 +7895,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_37
-#AT_START_38
-at_fn_group_banner 38 'nix-attributeset-node-template.at:25' \
+#AT_STOP_39
+#AT_START_40
+at_fn_group_banner 40 'nix-attributeset-node-template.at:25' \
   "csc-5               <nix-attributeset-node>" "    " 3
 at_xfail=no
 (
-  printf "%s\n" "38. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "40. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -7983,13 +8119,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_38
-#AT_START_39
-at_fn_group_banner 39 'nix-list-node-template.at:25' \
+#AT_STOP_40
+#AT_START_41
+at_fn_group_banner 41 'nix-list-node-template.at:25' \
   "csc-5                       <nix-list-node>" "    " 3
 at_xfail=no
 (
-  printf "%s\n" "39. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "41. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -8045,13 +8181,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_39
-#AT_START_40
-at_fn_group_banner 40 'ast-nodes-preds-template.at:25' \
+#AT_STOP_41
+#AT_START_42
+at_fn_group_banner 42 'ast-nodes-preds-template.at:25' \
   "csc-5                   AST node predicates" "    " 3
 at_xfail=no
 (
-  printf "%s\n" "40. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "42. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -8667,13 +8803,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_40
-#AT_START_41
-at_fn_group_banner 41 'nix-embed-template.at:25' \
+#AT_STOP_42
+#AT_START_43
+at_fn_group_banner 43 'nix-embed-template.at:25' \
   "csc-5                   (pipchix nix-embed)" "    " 3
 at_xfail=no
 (
-  printf "%s\n" "41. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "43. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -8704,13 +8840,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_41
-#AT_START_42
-at_fn_group_banner 42 'nix-list-template.at:25' \
+#AT_STOP_43
+#AT_START_44
+at_fn_group_banner 44 'nix-list-template.at:25' \
   "csc-5                    (pipchix nix-list)" "    " 3
 at_xfail=no
 (
-  printf "%s\n" "42. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "44. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -8776,13 +8912,75 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_42
-#AT_START_43
-at_fn_group_banner 43 'base64-utf8-template.at:25' \
+#AT_STOP_44
+#AT_START_45
+at_fn_group_banner 45 'nix-set-template.at:25' \
+  "csc-5                     (pipchix nix-set)" "    " 3
+at_xfail=no
+(
+  printf "%s\n" "45. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
+
+
+
+
+printf "%s\n" "nix-set-template.at:30" >"$at_check_line_file"
+(test ${enable_check_r7rs_csc_5} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:30"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-set-template.at:30: \"\${abs_builddir}\"/run-r7rs-csc-5.sh '(nix-set)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:30"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csc-5.sh '(nix-set)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "({
+})
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:30"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "nix-set-template.at:33" >"$at_check_line_file"
+(test ${enable_check_r7rs_csc_5} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:33"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-set-template.at:33: \"\${abs_builddir}\"/run-r7rs-csc-5.sh '(nix-setrec)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:33"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csc-5.sh '(nix-setrec)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(rec{
+})
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:33"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_45
+#AT_START_46
+at_fn_group_banner 46 'base64-utf8-template.at:25' \
   "csc-5                           base64-utf8" "    " 3
 at_xfail=no
 (
-  printf "%s\n" "43. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "46. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -9211,13 +9409,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_43
-#AT_START_44
-at_fn_group_banner 44 'escaped-utf8-template.at:25' \
+#AT_STOP_46
+#AT_START_47
+at_fn_group_banner 47 'escaped-utf8-template.at:25' \
   "csc-5                          escaped-utf8" "    " 3
 at_xfail=no
 (
-  printf "%s\n" "44. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "47. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -9333,13 +9531,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_44
-#AT_START_45
-at_fn_group_banner 45 'shell-print-template.at:25' \
+#AT_STOP_47
+#AT_START_48
+at_fn_group_banner 48 'shell-print-template.at:25' \
   "csc-5                           shell-print" "    " 3
 at_xfail=no
 (
-  printf "%s\n" "45. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "48. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -9518,13 +9716,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_45
-#AT_START_46
-at_fn_group_banner 46 'continuation-capture-template.at:25' \
+#AT_STOP_48
+#AT_START_49
+at_fn_group_banner 49 'continuation-capture-template.at:25' \
   "csi-5                  continuation-capture" "    " 4
 at_xfail=no
 (
-  printf "%s\n" "46. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "49. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -9696,13 +9894,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_46
-#AT_START_47
-at_fn_group_banner 47 'nix-embedded-node-template.at:25' \
+#AT_STOP_49
+#AT_START_50
+at_fn_group_banner 50 'nix-embedded-node-template.at:25' \
   "csi-5                   <nix-embedded-node>" "    " 4
 at_xfail=no
 (
-  printf "%s\n" "47. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "50. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -9733,13 +9931,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_47
-#AT_START_48
-at_fn_group_banner 48 'nix-data-node-template.at:25' \
+#AT_STOP_50
+#AT_START_51
+at_fn_group_banner 51 'nix-data-node-template.at:25' \
   "csi-5                       <nix-data-node>" "    " 4
 at_xfail=no
 (
-  printf "%s\n" "48. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "51. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -9859,13 +10057,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_48
-#AT_START_49
-at_fn_group_banner 49 'nix-path-node-template.at:25' \
+#AT_STOP_51
+#AT_START_52
+at_fn_group_banner 52 'nix-path-node-template.at:25' \
   "csi-5                       <nix-path-node>" "    " 4
 at_xfail=no
 (
-  printf "%s\n" "49. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "52. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -9919,13 +10117,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_49
-#AT_START_50
-at_fn_group_banner 50 'nix-attributepath-node-template.at:25' \
+#AT_STOP_52
+#AT_START_53
+at_fn_group_banner 53 'nix-attributepath-node-template.at:25' \
   "csi-5              <nix-attributepath-node>" "    " 4
 at_xfail=no
 (
-  printf "%s\n" "50. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "53. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -10007,13 +10205,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_50
-#AT_START_51
-at_fn_group_banner 51 'nix-attributebinding-node-template.at:25' \
+#AT_STOP_53
+#AT_START_54
+at_fn_group_banner 54 'nix-attributebinding-node-template.at:25' \
   "csi-5           <nix-attributebinding-node>" "    " 4
 at_xfail=no
 (
-  printf "%s\n" "51. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "54. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -10097,13 +10295,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_51
-#AT_START_52
-at_fn_group_banner 52 'nix-inherit-node-template.at:25' \
+#AT_STOP_54
+#AT_START_55
+at_fn_group_banner 55 'nix-inherit-node-template.at:25' \
   "csi-5                    <nix-inherit-node>" "    " 4
 at_xfail=no
 (
-  printf "%s\n" "52. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "55. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -10199,13 +10397,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_52
-#AT_START_53
-at_fn_group_banner 53 'nix-attributeset-node-template.at:25' \
+#AT_STOP_55
+#AT_START_56
+at_fn_group_banner 56 'nix-attributeset-node-template.at:25' \
   "csi-5               <nix-attributeset-node>" "    " 4
 at_xfail=no
 (
-  printf "%s\n" "53. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "56. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -10423,13 +10621,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_53
-#AT_START_54
-at_fn_group_banner 54 'nix-list-node-template.at:25' \
+#AT_STOP_56
+#AT_START_57
+at_fn_group_banner 57 'nix-list-node-template.at:25' \
   "csi-5                       <nix-list-node>" "    " 4
 at_xfail=no
 (
-  printf "%s\n" "54. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "57. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -10485,13 +10683,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_54
-#AT_START_55
-at_fn_group_banner 55 'ast-nodes-preds-template.at:25' \
+#AT_STOP_57
+#AT_START_58
+at_fn_group_banner 58 'ast-nodes-preds-template.at:25' \
   "csi-5                   AST node predicates" "    " 4
 at_xfail=no
 (
-  printf "%s\n" "55. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "58. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -11107,13 +11305,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_55
-#AT_START_56
-at_fn_group_banner 56 'nix-embed-template.at:25' \
+#AT_STOP_58
+#AT_START_59
+at_fn_group_banner 59 'nix-embed-template.at:25' \
   "csi-5                   (pipchix nix-embed)" "    " 4
 at_xfail=no
 (
-  printf "%s\n" "56. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "59. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -11144,13 +11342,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_56
-#AT_START_57
-at_fn_group_banner 57 'nix-list-template.at:25' \
+#AT_STOP_59
+#AT_START_60
+at_fn_group_banner 60 'nix-list-template.at:25' \
   "csi-5                    (pipchix nix-list)" "    " 4
 at_xfail=no
 (
-  printf "%s\n" "57. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "60. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -11216,13 +11414,75 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_57
-#AT_START_58
-at_fn_group_banner 58 'base64-utf8-template.at:25' \
+#AT_STOP_60
+#AT_START_61
+at_fn_group_banner 61 'nix-set-template.at:25' \
+  "csi-5                     (pipchix nix-set)" "    " 4
+at_xfail=no
+(
+  printf "%s\n" "61. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
+
+
+
+
+printf "%s\n" "nix-set-template.at:30" >"$at_check_line_file"
+(test ${enable_check_r7rs_csi_5} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:30"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-set-template.at:30: \"\${abs_builddir}\"/run-r7rs-csi-5.sh '(nix-set)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:30"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csi-5.sh '(nix-set)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "({
+})
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:30"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "nix-set-template.at:33" >"$at_check_line_file"
+(test ${enable_check_r7rs_csi_5} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:33"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-set-template.at:33: \"\${abs_builddir}\"/run-r7rs-csi-5.sh '(nix-setrec)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:33"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csi-5.sh '(nix-setrec)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(rec{
+})
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:33"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_61
+#AT_START_62
+at_fn_group_banner 62 'base64-utf8-template.at:25' \
   "csi-5                           base64-utf8" "    " 4
 at_xfail=no
 (
-  printf "%s\n" "58. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "62. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -11651,13 +11911,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_58
-#AT_START_59
-at_fn_group_banner 59 'escaped-utf8-template.at:25' \
+#AT_STOP_62
+#AT_START_63
+at_fn_group_banner 63 'escaped-utf8-template.at:25' \
   "csi-5                          escaped-utf8" "    " 4
 at_xfail=no
 (
-  printf "%s\n" "59. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "63. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -11773,13 +12033,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_59
-#AT_START_60
-at_fn_group_banner 60 'shell-print-template.at:25' \
+#AT_STOP_63
+#AT_START_64
+at_fn_group_banner 64 'shell-print-template.at:25' \
   "csi-5                           shell-print" "    " 4
 at_xfail=no
 (
-  printf "%s\n" "60. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "64. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -11958,13 +12218,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_60
-#AT_START_61
-at_fn_group_banner 61 'continuation-capture-template.at:25' \
+#AT_STOP_64
+#AT_START_65
+at_fn_group_banner 65 'continuation-capture-template.at:25' \
   "gauche                 continuation-capture" "    " 5
 at_xfail=no
 (
-  printf "%s\n" "61. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "65. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -12136,13 +12396,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_61
-#AT_START_62
-at_fn_group_banner 62 'nix-embedded-node-template.at:25' \
+#AT_STOP_65
+#AT_START_66
+at_fn_group_banner 66 'nix-embedded-node-template.at:25' \
   "gauche                  <nix-embedded-node>" "    " 5
 at_xfail=no
 (
-  printf "%s\n" "62. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "66. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -12173,13 +12433,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_62
-#AT_START_63
-at_fn_group_banner 63 'nix-data-node-template.at:25' \
+#AT_STOP_66
+#AT_START_67
+at_fn_group_banner 67 'nix-data-node-template.at:25' \
   "gauche                      <nix-data-node>" "    " 5
 at_xfail=no
 (
-  printf "%s\n" "63. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "67. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -12299,13 +12559,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_63
-#AT_START_64
-at_fn_group_banner 64 'nix-path-node-template.at:25' \
+#AT_STOP_67
+#AT_START_68
+at_fn_group_banner 68 'nix-path-node-template.at:25' \
   "gauche                      <nix-path-node>" "    " 5
 at_xfail=no
 (
-  printf "%s\n" "64. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "68. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -12359,13 +12619,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_64
-#AT_START_65
-at_fn_group_banner 65 'nix-attributepath-node-template.at:25' \
+#AT_STOP_68
+#AT_START_69
+at_fn_group_banner 69 'nix-attributepath-node-template.at:25' \
   "gauche             <nix-attributepath-node>" "    " 5
 at_xfail=no
 (
-  printf "%s\n" "65. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "69. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -12447,13 +12707,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_65
-#AT_START_66
-at_fn_group_banner 66 'nix-attributebinding-node-template.at:25' \
+#AT_STOP_69
+#AT_START_70
+at_fn_group_banner 70 'nix-attributebinding-node-template.at:25' \
   "gauche          <nix-attributebinding-node>" "    " 5
 at_xfail=no
 (
-  printf "%s\n" "66. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "70. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -12537,13 +12797,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_66
-#AT_START_67
-at_fn_group_banner 67 'nix-inherit-node-template.at:25' \
+#AT_STOP_70
+#AT_START_71
+at_fn_group_banner 71 'nix-inherit-node-template.at:25' \
   "gauche                   <nix-inherit-node>" "    " 5
 at_xfail=no
 (
-  printf "%s\n" "67. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "71. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -12639,13 +12899,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_67
-#AT_START_68
-at_fn_group_banner 68 'nix-attributeset-node-template.at:25' \
+#AT_STOP_71
+#AT_START_72
+at_fn_group_banner 72 'nix-attributeset-node-template.at:25' \
   "gauche              <nix-attributeset-node>" "    " 5
 at_xfail=no
 (
-  printf "%s\n" "68. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "72. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -12863,13 +13123,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_68
-#AT_START_69
-at_fn_group_banner 69 'nix-list-node-template.at:25' \
+#AT_STOP_72
+#AT_START_73
+at_fn_group_banner 73 'nix-list-node-template.at:25' \
   "gauche                      <nix-list-node>" "    " 5
 at_xfail=no
 (
-  printf "%s\n" "69. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "73. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -12925,13 +13185,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_69
-#AT_START_70
-at_fn_group_banner 70 'ast-nodes-preds-template.at:25' \
+#AT_STOP_73
+#AT_START_74
+at_fn_group_banner 74 'ast-nodes-preds-template.at:25' \
   "gauche                  AST node predicates" "    " 5
 at_xfail=no
 (
-  printf "%s\n" "70. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "74. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -13547,13 +13807,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_70
-#AT_START_71
-at_fn_group_banner 71 'nix-embed-template.at:25' \
+#AT_STOP_74
+#AT_START_75
+at_fn_group_banner 75 'nix-embed-template.at:25' \
   "gauche                  (pipchix nix-embed)" "    " 5
 at_xfail=no
 (
-  printf "%s\n" "71. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "75. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -13584,13 +13844,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_71
-#AT_START_72
-at_fn_group_banner 72 'nix-list-template.at:25' \
+#AT_STOP_75
+#AT_START_76
+at_fn_group_banner 76 'nix-list-template.at:25' \
   "gauche                   (pipchix nix-list)" "    " 5
 at_xfail=no
 (
-  printf "%s\n" "72. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "76. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -13656,13 +13916,75 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_72
-#AT_START_73
-at_fn_group_banner 73 'base64-utf8-template.at:25' \
+#AT_STOP_76
+#AT_START_77
+at_fn_group_banner 77 'nix-set-template.at:25' \
+  "gauche                    (pipchix nix-set)" "    " 5
+at_xfail=no
+(
+  printf "%s\n" "77. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
+
+
+
+
+printf "%s\n" "nix-set-template.at:30" >"$at_check_line_file"
+(test ${enable_check_r7rs_gauche} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:30"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-set-template.at:30: \"\${abs_builddir}\"/run-r7rs-gauche.sh '(nix-set)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:30"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gauche.sh '(nix-set)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "({
+})
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:30"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "nix-set-template.at:33" >"$at_check_line_file"
+(test ${enable_check_r7rs_gauche} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:33"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-set-template.at:33: \"\${abs_builddir}\"/run-r7rs-gauche.sh '(nix-setrec)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:33"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gauche.sh '(nix-setrec)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(rec{
+})
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:33"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_77
+#AT_START_78
+at_fn_group_banner 78 'base64-utf8-template.at:25' \
   "gauche                          base64-utf8" "    " 5
 at_xfail=no
 (
-  printf "%s\n" "73. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "78. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -14091,13 +14413,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_73
-#AT_START_74
-at_fn_group_banner 74 'escaped-utf8-template.at:25' \
+#AT_STOP_78
+#AT_START_79
+at_fn_group_banner 79 'escaped-utf8-template.at:25' \
   "gauche                         escaped-utf8" "    " 5
 at_xfail=no
 (
-  printf "%s\n" "74. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "79. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -14213,13 +14535,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_74
-#AT_START_75
-at_fn_group_banner 75 'shell-print-template.at:25' \
+#AT_STOP_79
+#AT_START_80
+at_fn_group_banner 80 'shell-print-template.at:25' \
   "gauche                          shell-print" "    " 5
 at_xfail=no
 (
-  printf "%s\n" "75. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "80. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -14398,13 +14720,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_75
-#AT_START_76
-at_fn_group_banner 76 'continuation-capture-template.at:25' \
+#AT_STOP_80
+#AT_START_81
+at_fn_group_banner 81 'continuation-capture-template.at:25' \
   "guile(r6rs)            continuation-capture" "    " 6
 at_xfail=no
 (
-  printf "%s\n" "76. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "81. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -14576,13 +14898,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_76
-#AT_START_77
-at_fn_group_banner 77 'nix-embedded-node-template.at:25' \
+#AT_STOP_81
+#AT_START_82
+at_fn_group_banner 82 'nix-embedded-node-template.at:25' \
   "guile(r6rs)             <nix-embedded-node>" "    " 6
 at_xfail=no
 (
-  printf "%s\n" "77. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "82. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -14613,13 +14935,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_77
-#AT_START_78
-at_fn_group_banner 78 'nix-data-node-template.at:25' \
+#AT_STOP_82
+#AT_START_83
+at_fn_group_banner 83 'nix-data-node-template.at:25' \
   "guile(r6rs)                 <nix-data-node>" "    " 6
 at_xfail=no
 (
-  printf "%s\n" "78. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "83. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -14739,13 +15061,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_78
-#AT_START_79
-at_fn_group_banner 79 'nix-path-node-template.at:25' \
+#AT_STOP_83
+#AT_START_84
+at_fn_group_banner 84 'nix-path-node-template.at:25' \
   "guile(r6rs)                 <nix-path-node>" "    " 6
 at_xfail=no
 (
-  printf "%s\n" "79. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "84. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -14799,13 +15121,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_79
-#AT_START_80
-at_fn_group_banner 80 'nix-attributepath-node-template.at:25' \
+#AT_STOP_84
+#AT_START_85
+at_fn_group_banner 85 'nix-attributepath-node-template.at:25' \
   "guile(r6rs)        <nix-attributepath-node>" "    " 6
 at_xfail=no
 (
-  printf "%s\n" "80. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "85. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -14887,13 +15209,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_80
-#AT_START_81
-at_fn_group_banner 81 'nix-attributebinding-node-template.at:25' \
+#AT_STOP_85
+#AT_START_86
+at_fn_group_banner 86 'nix-attributebinding-node-template.at:25' \
   "guile(r6rs)     <nix-attributebinding-node>" "    " 6
 at_xfail=no
 (
-  printf "%s\n" "81. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "86. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -14977,13 +15299,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_81
-#AT_START_82
-at_fn_group_banner 82 'nix-inherit-node-template.at:25' \
+#AT_STOP_86
+#AT_START_87
+at_fn_group_banner 87 'nix-inherit-node-template.at:25' \
   "guile(r6rs)              <nix-inherit-node>" "    " 6
 at_xfail=no
 (
-  printf "%s\n" "82. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "87. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -15079,13 +15401,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_82
-#AT_START_83
-at_fn_group_banner 83 'nix-attributeset-node-template.at:25' \
+#AT_STOP_87
+#AT_START_88
+at_fn_group_banner 88 'nix-attributeset-node-template.at:25' \
   "guile(r6rs)         <nix-attributeset-node>" "    " 6
 at_xfail=no
 (
-  printf "%s\n" "83. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "88. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -15303,13 +15625,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_83
-#AT_START_84
-at_fn_group_banner 84 'nix-list-node-template.at:25' \
+#AT_STOP_88
+#AT_START_89
+at_fn_group_banner 89 'nix-list-node-template.at:25' \
   "guile(r6rs)                 <nix-list-node>" "    " 6
 at_xfail=no
 (
-  printf "%s\n" "84. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "89. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -15365,13 +15687,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_84
-#AT_START_85
-at_fn_group_banner 85 'ast-nodes-preds-template.at:25' \
+#AT_STOP_89
+#AT_START_90
+at_fn_group_banner 90 'ast-nodes-preds-template.at:25' \
   "guile(r6rs)             AST node predicates" "    " 6
 at_xfail=no
 (
-  printf "%s\n" "85. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "90. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -15987,13 +16309,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_85
-#AT_START_86
-at_fn_group_banner 86 'nix-embed-template.at:25' \
+#AT_STOP_90
+#AT_START_91
+at_fn_group_banner 91 'nix-embed-template.at:25' \
   "guile(r6rs)             (pipchix nix-embed)" "    " 6
 at_xfail=no
 (
-  printf "%s\n" "86. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "91. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -16024,13 +16346,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_86
-#AT_START_87
-at_fn_group_banner 87 'nix-list-template.at:25' \
+#AT_STOP_91
+#AT_START_92
+at_fn_group_banner 92 'nix-list-template.at:25' \
   "guile(r6rs)              (pipchix nix-list)" "    " 6
 at_xfail=no
 (
-  printf "%s\n" "87. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "92. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -16096,13 +16418,75 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_87
-#AT_START_88
-at_fn_group_banner 88 'base64-utf8-template.at:25' \
+#AT_STOP_92
+#AT_START_93
+at_fn_group_banner 93 'nix-set-template.at:25' \
+  "guile(r6rs)               (pipchix nix-set)" "    " 6
+at_xfail=no
+(
+  printf "%s\n" "93. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
+
+
+
+
+printf "%s\n" "nix-set-template.at:30" >"$at_check_line_file"
+(test ${enable_check_r6rs_guile} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:30"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-set-template.at:30: \"\${abs_builddir}\"/run-r6rs-guile.sh '(nix-set)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:30"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-guile.sh '(nix-set)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "({
+})
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:30"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "nix-set-template.at:33" >"$at_check_line_file"
+(test ${enable_check_r6rs_guile} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:33"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-set-template.at:33: \"\${abs_builddir}\"/run-r6rs-guile.sh '(nix-setrec)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:33"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-guile.sh '(nix-setrec)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(rec{
+})
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:33"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_93
+#AT_START_94
+at_fn_group_banner 94 'base64-utf8-template.at:25' \
   "guile(r6rs)                     base64-utf8" "    " 6
 at_xfail=no
 (
-  printf "%s\n" "88. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "94. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -16531,13 +16915,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_88
-#AT_START_89
-at_fn_group_banner 89 'escaped-utf8-template.at:25' \
+#AT_STOP_94
+#AT_START_95
+at_fn_group_banner 95 'escaped-utf8-template.at:25' \
   "guile(r6rs)                    escaped-utf8" "    " 6
 at_xfail=no
 (
-  printf "%s\n" "89. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "95. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -16653,13 +17037,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_89
-#AT_START_90
-at_fn_group_banner 90 'shell-print-template.at:25' \
+#AT_STOP_95
+#AT_START_96
+at_fn_group_banner 96 'shell-print-template.at:25' \
   "guile(r6rs)                     shell-print" "    " 6
 at_xfail=no
 (
-  printf "%s\n" "90. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "96. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -16838,13 +17222,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_90
-#AT_START_91
-at_fn_group_banner 91 'continuation-capture-template.at:25' \
+#AT_STOP_96
+#AT_START_97
+at_fn_group_banner 97 'continuation-capture-template.at:25' \
   "guile(r7rs)            continuation-capture" "    " 7
 at_xfail=no
 (
-  printf "%s\n" "91. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "97. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -17016,13 +17400,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_91
-#AT_START_92
-at_fn_group_banner 92 'nix-embedded-node-template.at:25' \
+#AT_STOP_97
+#AT_START_98
+at_fn_group_banner 98 'nix-embedded-node-template.at:25' \
   "guile(r7rs)             <nix-embedded-node>" "    " 7
 at_xfail=no
 (
-  printf "%s\n" "92. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "98. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -17053,13 +17437,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_92
-#AT_START_93
-at_fn_group_banner 93 'nix-data-node-template.at:25' \
+#AT_STOP_98
+#AT_START_99
+at_fn_group_banner 99 'nix-data-node-template.at:25' \
   "guile(r7rs)                 <nix-data-node>" "    " 7
 at_xfail=no
 (
-  printf "%s\n" "93. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "99. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -17179,13 +17563,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_93
-#AT_START_94
-at_fn_group_banner 94 'nix-path-node-template.at:25' \
+#AT_STOP_99
+#AT_START_100
+at_fn_group_banner 100 'nix-path-node-template.at:25' \
   "guile(r7rs)                 <nix-path-node>" "    " 7
 at_xfail=no
 (
-  printf "%s\n" "94. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "100. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -17239,13 +17623,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_94
-#AT_START_95
-at_fn_group_banner 95 'nix-attributepath-node-template.at:25' \
+#AT_STOP_100
+#AT_START_101
+at_fn_group_banner 101 'nix-attributepath-node-template.at:25' \
   "guile(r7rs)        <nix-attributepath-node>" "    " 7
 at_xfail=no
 (
-  printf "%s\n" "95. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "101. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -17327,13 +17711,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_95
-#AT_START_96
-at_fn_group_banner 96 'nix-attributebinding-node-template.at:25' \
+#AT_STOP_101
+#AT_START_102
+at_fn_group_banner 102 'nix-attributebinding-node-template.at:25' \
   "guile(r7rs)     <nix-attributebinding-node>" "    " 7
 at_xfail=no
 (
-  printf "%s\n" "96. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "102. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -17417,13 +17801,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_96
-#AT_START_97
-at_fn_group_banner 97 'nix-inherit-node-template.at:25' \
+#AT_STOP_102
+#AT_START_103
+at_fn_group_banner 103 'nix-inherit-node-template.at:25' \
   "guile(r7rs)              <nix-inherit-node>" "    " 7
 at_xfail=no
 (
-  printf "%s\n" "97. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "103. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -17519,13 +17903,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_97
-#AT_START_98
-at_fn_group_banner 98 'nix-attributeset-node-template.at:25' \
+#AT_STOP_103
+#AT_START_104
+at_fn_group_banner 104 'nix-attributeset-node-template.at:25' \
   "guile(r7rs)         <nix-attributeset-node>" "    " 7
 at_xfail=no
 (
-  printf "%s\n" "98. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "104. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -17743,13 +18127,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_98
-#AT_START_99
-at_fn_group_banner 99 'nix-list-node-template.at:25' \
+#AT_STOP_104
+#AT_START_105
+at_fn_group_banner 105 'nix-list-node-template.at:25' \
   "guile(r7rs)                 <nix-list-node>" "    " 7
 at_xfail=no
 (
-  printf "%s\n" "99. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "105. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -17805,13 +18189,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_99
-#AT_START_100
-at_fn_group_banner 100 'ast-nodes-preds-template.at:25' \
+#AT_STOP_105
+#AT_START_106
+at_fn_group_banner 106 'ast-nodes-preds-template.at:25' \
   "guile(r7rs)             AST node predicates" "    " 7
 at_xfail=no
 (
-  printf "%s\n" "100. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "106. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -18427,13 +18811,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_100
-#AT_START_101
-at_fn_group_banner 101 'nix-embed-template.at:25' \
+#AT_STOP_106
+#AT_START_107
+at_fn_group_banner 107 'nix-embed-template.at:25' \
   "guile(r7rs)             (pipchix nix-embed)" "    " 7
 at_xfail=no
 (
-  printf "%s\n" "101. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "107. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -18464,13 +18848,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_101
-#AT_START_102
-at_fn_group_banner 102 'nix-list-template.at:25' \
+#AT_STOP_107
+#AT_START_108
+at_fn_group_banner 108 'nix-list-template.at:25' \
   "guile(r7rs)              (pipchix nix-list)" "    " 7
 at_xfail=no
 (
-  printf "%s\n" "102. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "108. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -18536,13 +18920,75 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_102
-#AT_START_103
-at_fn_group_banner 103 'base64-utf8-template.at:25' \
+#AT_STOP_108
+#AT_START_109
+at_fn_group_banner 109 'nix-set-template.at:25' \
+  "guile(r7rs)               (pipchix nix-set)" "    " 7
+at_xfail=no
+(
+  printf "%s\n" "109. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
+
+
+
+
+printf "%s\n" "nix-set-template.at:30" >"$at_check_line_file"
+(test ${enable_check_r7rs_guile} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:30"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-set-template.at:30: \"\${abs_builddir}\"/run-r7rs-guile.sh '(nix-set)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:30"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-guile.sh '(nix-set)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "({
+})
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:30"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "nix-set-template.at:33" >"$at_check_line_file"
+(test ${enable_check_r7rs_guile} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:33"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-set-template.at:33: \"\${abs_builddir}\"/run-r7rs-guile.sh '(nix-setrec)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:33"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-guile.sh '(nix-setrec)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(rec{
+})
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:33"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_109
+#AT_START_110
+at_fn_group_banner 110 'base64-utf8-template.at:25' \
   "guile(r7rs)                     base64-utf8" "    " 7
 at_xfail=no
 (
-  printf "%s\n" "103. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "110. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -18971,13 +19417,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_103
-#AT_START_104
-at_fn_group_banner 104 'escaped-utf8-template.at:25' \
+#AT_STOP_110
+#AT_START_111
+at_fn_group_banner 111 'escaped-utf8-template.at:25' \
   "guile(r7rs)                    escaped-utf8" "    " 7
 at_xfail=no
 (
-  printf "%s\n" "104. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "111. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -19093,13 +19539,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_104
-#AT_START_105
-at_fn_group_banner 105 'shell-print-template.at:25' \
+#AT_STOP_111
+#AT_START_112
+at_fn_group_banner 112 'shell-print-template.at:25' \
   "guile(r7rs)                     shell-print" "    " 7
 at_xfail=no
 (
-  printf "%s\n" "105. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "112. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -19278,13 +19724,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_105
-#AT_START_106
-at_fn_group_banner 106 'continuation-capture-template.at:25' \
+#AT_STOP_112
+#AT_START_113
+at_fn_group_banner 113 'continuation-capture-template.at:25' \
   "loko(r6rs)             continuation-capture" "    " 8
 at_xfail=no
 (
-  printf "%s\n" "106. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "113. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -19456,13 +19902,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_106
-#AT_START_107
-at_fn_group_banner 107 'nix-embedded-node-template.at:25' \
+#AT_STOP_113
+#AT_START_114
+at_fn_group_banner 114 'nix-embedded-node-template.at:25' \
   "loko(r6rs)              <nix-embedded-node>" "    " 8
 at_xfail=no
 (
-  printf "%s\n" "107. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "114. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -19493,13 +19939,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_107
-#AT_START_108
-at_fn_group_banner 108 'nix-data-node-template.at:25' \
+#AT_STOP_114
+#AT_START_115
+at_fn_group_banner 115 'nix-data-node-template.at:25' \
   "loko(r6rs)                  <nix-data-node>" "    " 8
 at_xfail=no
 (
-  printf "%s\n" "108. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "115. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -19619,13 +20065,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_108
-#AT_START_109
-at_fn_group_banner 109 'nix-path-node-template.at:25' \
+#AT_STOP_115
+#AT_START_116
+at_fn_group_banner 116 'nix-path-node-template.at:25' \
   "loko(r6rs)                  <nix-path-node>" "    " 8
 at_xfail=no
 (
-  printf "%s\n" "109. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "116. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -19679,13 +20125,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_109
-#AT_START_110
-at_fn_group_banner 110 'nix-attributepath-node-template.at:25' \
+#AT_STOP_116
+#AT_START_117
+at_fn_group_banner 117 'nix-attributepath-node-template.at:25' \
   "loko(r6rs)         <nix-attributepath-node>" "    " 8
 at_xfail=no
 (
-  printf "%s\n" "110. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "117. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -19767,13 +20213,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_110
-#AT_START_111
-at_fn_group_banner 111 'nix-attributebinding-node-template.at:25' \
+#AT_STOP_117
+#AT_START_118
+at_fn_group_banner 118 'nix-attributebinding-node-template.at:25' \
   "loko(r6rs)      <nix-attributebinding-node>" "    " 8
 at_xfail=no
 (
-  printf "%s\n" "111. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "118. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -19857,13 +20303,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_111
-#AT_START_112
-at_fn_group_banner 112 'nix-inherit-node-template.at:25' \
+#AT_STOP_118
+#AT_START_119
+at_fn_group_banner 119 'nix-inherit-node-template.at:25' \
   "loko(r6rs)               <nix-inherit-node>" "    " 8
 at_xfail=no
 (
-  printf "%s\n" "112. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "119. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -19959,13 +20405,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_112
-#AT_START_113
-at_fn_group_banner 113 'nix-attributeset-node-template.at:25' \
+#AT_STOP_119
+#AT_START_120
+at_fn_group_banner 120 'nix-attributeset-node-template.at:25' \
   "loko(r6rs)          <nix-attributeset-node>" "    " 8
 at_xfail=no
 (
-  printf "%s\n" "113. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "120. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -20183,13 +20629,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_113
-#AT_START_114
-at_fn_group_banner 114 'nix-list-node-template.at:25' \
+#AT_STOP_120
+#AT_START_121
+at_fn_group_banner 121 'nix-list-node-template.at:25' \
   "loko(r6rs)                  <nix-list-node>" "    " 8
 at_xfail=no
 (
-  printf "%s\n" "114. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "121. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -20245,13 +20691,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_114
-#AT_START_115
-at_fn_group_banner 115 'ast-nodes-preds-template.at:25' \
+#AT_STOP_121
+#AT_START_122
+at_fn_group_banner 122 'ast-nodes-preds-template.at:25' \
   "loko(r6rs)              AST node predicates" "    " 8
 at_xfail=no
 (
-  printf "%s\n" "115. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "122. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -20867,13 +21313,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_115
-#AT_START_116
-at_fn_group_banner 116 'nix-embed-template.at:25' \
+#AT_STOP_122
+#AT_START_123
+at_fn_group_banner 123 'nix-embed-template.at:25' \
   "loko(r6rs)              (pipchix nix-embed)" "    " 8
 at_xfail=no
 (
-  printf "%s\n" "116. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "123. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -20904,13 +21350,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_116
-#AT_START_117
-at_fn_group_banner 117 'nix-list-template.at:25' \
+#AT_STOP_123
+#AT_START_124
+at_fn_group_banner 124 'nix-list-template.at:25' \
   "loko(r6rs)               (pipchix nix-list)" "    " 8
 at_xfail=no
 (
-  printf "%s\n" "117. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "124. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -20976,13 +21422,75 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_117
-#AT_START_118
-at_fn_group_banner 118 'base64-utf8-template.at:25' \
+#AT_STOP_124
+#AT_START_125
+at_fn_group_banner 125 'nix-set-template.at:25' \
+  "loko(r6rs)                (pipchix nix-set)" "    " 8
+at_xfail=no
+(
+  printf "%s\n" "125. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
+
+
+
+
+printf "%s\n" "nix-set-template.at:30" >"$at_check_line_file"
+(test ${enable_check_r6rs_loko} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:30"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-set-template.at:30: \"\${abs_builddir}\"/run-r6rs-loko.sh '(nix-set)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:30"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '(nix-set)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "({
+})
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:30"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "nix-set-template.at:33" >"$at_check_line_file"
+(test ${enable_check_r6rs_loko} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:33"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-set-template.at:33: \"\${abs_builddir}\"/run-r6rs-loko.sh '(nix-setrec)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:33"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '(nix-setrec)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(rec{
+})
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:33"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_125
+#AT_START_126
+at_fn_group_banner 126 'base64-utf8-template.at:25' \
   "loko(r6rs)                      base64-utf8" "    " 8
 at_xfail=no
 (
-  printf "%s\n" "118. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "126. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -21411,13 +21919,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_118
-#AT_START_119
-at_fn_group_banner 119 'escaped-utf8-template.at:25' \
+#AT_STOP_126
+#AT_START_127
+at_fn_group_banner 127 'escaped-utf8-template.at:25' \
   "loko(r6rs)                     escaped-utf8" "    " 8
 at_xfail=no
 (
-  printf "%s\n" "119. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "127. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -21533,13 +22041,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_119
-#AT_START_120
-at_fn_group_banner 120 'shell-print-template.at:25' \
+#AT_STOP_127
+#AT_START_128
+at_fn_group_banner 128 'shell-print-template.at:25' \
   "loko(r6rs)                      shell-print" "    " 8
 at_xfail=no
 (
-  printf "%s\n" "120. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "128. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -21718,13 +22226,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_120
-#AT_START_121
-at_fn_group_banner 121 'continuation-capture-template.at:25' \
+#AT_STOP_128
+#AT_START_129
+at_fn_group_banner 129 'continuation-capture-template.at:25' \
   "loko(r7rs)             continuation-capture" "    " 9
 at_xfail=no
 (
-  printf "%s\n" "121. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "129. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -21896,13 +22404,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_121
-#AT_START_122
-at_fn_group_banner 122 'nix-embedded-node-template.at:25' \
+#AT_STOP_129
+#AT_START_130
+at_fn_group_banner 130 'nix-embedded-node-template.at:25' \
   "loko(r7rs)              <nix-embedded-node>" "    " 9
 at_xfail=no
 (
-  printf "%s\n" "122. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "130. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -21933,13 +22441,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_122
-#AT_START_123
-at_fn_group_banner 123 'nix-data-node-template.at:25' \
+#AT_STOP_130
+#AT_START_131
+at_fn_group_banner 131 'nix-data-node-template.at:25' \
   "loko(r7rs)                  <nix-data-node>" "    " 9
 at_xfail=no
 (
-  printf "%s\n" "123. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "131. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -22059,13 +22567,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_123
-#AT_START_124
-at_fn_group_banner 124 'nix-path-node-template.at:25' \
+#AT_STOP_131
+#AT_START_132
+at_fn_group_banner 132 'nix-path-node-template.at:25' \
   "loko(r7rs)                  <nix-path-node>" "    " 9
 at_xfail=no
 (
-  printf "%s\n" "124. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "132. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -22119,13 +22627,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_124
-#AT_START_125
-at_fn_group_banner 125 'nix-attributepath-node-template.at:25' \
+#AT_STOP_132
+#AT_START_133
+at_fn_group_banner 133 'nix-attributepath-node-template.at:25' \
   "loko(r7rs)         <nix-attributepath-node>" "    " 9
 at_xfail=no
 (
-  printf "%s\n" "125. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "133. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -22207,13 +22715,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_125
-#AT_START_126
-at_fn_group_banner 126 'nix-attributebinding-node-template.at:25' \
+#AT_STOP_133
+#AT_START_134
+at_fn_group_banner 134 'nix-attributebinding-node-template.at:25' \
   "loko(r7rs)      <nix-attributebinding-node>" "    " 9
 at_xfail=no
 (
-  printf "%s\n" "126. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "134. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -22297,13 +22805,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_126
-#AT_START_127
-at_fn_group_banner 127 'nix-inherit-node-template.at:25' \
+#AT_STOP_134
+#AT_START_135
+at_fn_group_banner 135 'nix-inherit-node-template.at:25' \
   "loko(r7rs)               <nix-inherit-node>" "    " 9
 at_xfail=no
 (
-  printf "%s\n" "127. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "135. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -22399,13 +22907,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_127
-#AT_START_128
-at_fn_group_banner 128 'nix-attributeset-node-template.at:25' \
+#AT_STOP_135
+#AT_START_136
+at_fn_group_banner 136 'nix-attributeset-node-template.at:25' \
   "loko(r7rs)          <nix-attributeset-node>" "    " 9
 at_xfail=no
 (
-  printf "%s\n" "128. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "136. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -22623,13 +23131,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_128
-#AT_START_129
-at_fn_group_banner 129 'nix-list-node-template.at:25' \
+#AT_STOP_136
+#AT_START_137
+at_fn_group_banner 137 'nix-list-node-template.at:25' \
   "loko(r7rs)                  <nix-list-node>" "    " 9
 at_xfail=no
 (
-  printf "%s\n" "129. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "137. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -22685,13 +23193,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_129
-#AT_START_130
-at_fn_group_banner 130 'ast-nodes-preds-template.at:25' \
+#AT_STOP_137
+#AT_START_138
+at_fn_group_banner 138 'ast-nodes-preds-template.at:25' \
   "loko(r7rs)              AST node predicates" "    " 9
 at_xfail=no
 (
-  printf "%s\n" "130. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "138. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -23307,13 +23815,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_130
-#AT_START_131
-at_fn_group_banner 131 'nix-embed-template.at:25' \
+#AT_STOP_138
+#AT_START_139
+at_fn_group_banner 139 'nix-embed-template.at:25' \
   "loko(r7rs)              (pipchix nix-embed)" "    " 9
 at_xfail=no
 (
-  printf "%s\n" "131. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "139. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -23344,13 +23852,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_131
-#AT_START_132
-at_fn_group_banner 132 'nix-list-template.at:25' \
+#AT_STOP_139
+#AT_START_140
+at_fn_group_banner 140 'nix-list-template.at:25' \
   "loko(r7rs)               (pipchix nix-list)" "    " 9
 at_xfail=no
 (
-  printf "%s\n" "132. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "140. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -23416,13 +23924,75 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_132
-#AT_START_133
-at_fn_group_banner 133 'base64-utf8-template.at:25' \
+#AT_STOP_140
+#AT_START_141
+at_fn_group_banner 141 'nix-set-template.at:25' \
+  "loko(r7rs)                (pipchix nix-set)" "    " 9
+at_xfail=no
+(
+  printf "%s\n" "141. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
+
+
+
+
+printf "%s\n" "nix-set-template.at:30" >"$at_check_line_file"
+(test ${enable_check_r7rs_loko} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:30"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-set-template.at:30: \"\${abs_builddir}\"/run-r7rs-loko.sh '(nix-set)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:30"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(nix-set)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "({
+})
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:30"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "nix-set-template.at:33" >"$at_check_line_file"
+(test ${enable_check_r7rs_loko} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:33"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-set-template.at:33: \"\${abs_builddir}\"/run-r7rs-loko.sh '(nix-setrec)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:33"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(nix-setrec)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(rec{
+})
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:33"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_141
+#AT_START_142
+at_fn_group_banner 142 'base64-utf8-template.at:25' \
   "loko(r7rs)                      base64-utf8" "    " 9
 at_xfail=no
 (
-  printf "%s\n" "133. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "142. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -23851,13 +24421,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_133
-#AT_START_134
-at_fn_group_banner 134 'escaped-utf8-template.at:25' \
+#AT_STOP_142
+#AT_START_143
+at_fn_group_banner 143 'escaped-utf8-template.at:25' \
   "loko(r7rs)                     escaped-utf8" "    " 9
 at_xfail=no
 (
-  printf "%s\n" "134. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "143. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -23973,13 +24543,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_134
-#AT_START_135
-at_fn_group_banner 135 'shell-print-template.at:25' \
+#AT_STOP_143
+#AT_START_144
+at_fn_group_banner 144 'shell-print-template.at:25' \
   "loko(r7rs)                      shell-print" "    " 9
 at_xfail=no
 (
-  printf "%s\n" "135. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "144. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -24158,13 +24728,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_135
-#AT_START_136
-at_fn_group_banner 136 'continuation-capture-template.at:25' \
+#AT_STOP_144
+#AT_START_145
+at_fn_group_banner 145 'continuation-capture-template.at:25' \
   "racket                 continuation-capture" "    " 10
 at_xfail=no
 (
-  printf "%s\n" "136. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "145. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -24336,13 +24906,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_136
-#AT_START_137
-at_fn_group_banner 137 'nix-embedded-node-template.at:25' \
+#AT_STOP_145
+#AT_START_146
+at_fn_group_banner 146 'nix-embedded-node-template.at:25' \
   "racket                  <nix-embedded-node>" "    " 10
 at_xfail=no
 (
-  printf "%s\n" "137. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "146. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -24373,13 +24943,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_137
-#AT_START_138
-at_fn_group_banner 138 'nix-data-node-template.at:25' \
+#AT_STOP_146
+#AT_START_147
+at_fn_group_banner 147 'nix-data-node-template.at:25' \
   "racket                      <nix-data-node>" "    " 10
 at_xfail=no
 (
-  printf "%s\n" "138. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "147. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -24499,13 +25069,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_138
-#AT_START_139
-at_fn_group_banner 139 'nix-path-node-template.at:25' \
+#AT_STOP_147
+#AT_START_148
+at_fn_group_banner 148 'nix-path-node-template.at:25' \
   "racket                      <nix-path-node>" "    " 10
 at_xfail=no
 (
-  printf "%s\n" "139. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "148. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -24559,13 +25129,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_139
-#AT_START_140
-at_fn_group_banner 140 'nix-attributepath-node-template.at:25' \
+#AT_STOP_148
+#AT_START_149
+at_fn_group_banner 149 'nix-attributepath-node-template.at:25' \
   "racket             <nix-attributepath-node>" "    " 10
 at_xfail=no
 (
-  printf "%s\n" "140. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "149. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -24647,13 +25217,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_140
-#AT_START_141
-at_fn_group_banner 141 'nix-attributebinding-node-template.at:25' \
+#AT_STOP_149
+#AT_START_150
+at_fn_group_banner 150 'nix-attributebinding-node-template.at:25' \
   "racket          <nix-attributebinding-node>" "    " 10
 at_xfail=no
 (
-  printf "%s\n" "141. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "150. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -24737,13 +25307,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_141
-#AT_START_142
-at_fn_group_banner 142 'nix-inherit-node-template.at:25' \
+#AT_STOP_150
+#AT_START_151
+at_fn_group_banner 151 'nix-inherit-node-template.at:25' \
   "racket                   <nix-inherit-node>" "    " 10
 at_xfail=no
 (
-  printf "%s\n" "142. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "151. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -24839,13 +25409,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_142
-#AT_START_143
-at_fn_group_banner 143 'nix-attributeset-node-template.at:25' \
+#AT_STOP_151
+#AT_START_152
+at_fn_group_banner 152 'nix-attributeset-node-template.at:25' \
   "racket              <nix-attributeset-node>" "    " 10
 at_xfail=no
 (
-  printf "%s\n" "143. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "152. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -25063,13 +25633,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_143
-#AT_START_144
-at_fn_group_banner 144 'nix-list-node-template.at:25' \
+#AT_STOP_152
+#AT_START_153
+at_fn_group_banner 153 'nix-list-node-template.at:25' \
   "racket                      <nix-list-node>" "    " 10
 at_xfail=no
 (
-  printf "%s\n" "144. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "153. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -25125,13 +25695,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_144
-#AT_START_145
-at_fn_group_banner 145 'ast-nodes-preds-template.at:25' \
+#AT_STOP_153
+#AT_START_154
+at_fn_group_banner 154 'ast-nodes-preds-template.at:25' \
   "racket                  AST node predicates" "    " 10
 at_xfail=no
 (
-  printf "%s\n" "145. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "154. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -25747,13 +26317,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_145
-#AT_START_146
-at_fn_group_banner 146 'nix-embed-template.at:25' \
+#AT_STOP_154
+#AT_START_155
+at_fn_group_banner 155 'nix-embed-template.at:25' \
   "racket                  (pipchix nix-embed)" "    " 10
 at_xfail=no
 (
-  printf "%s\n" "146. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "155. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -25784,13 +26354,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_146
-#AT_START_147
-at_fn_group_banner 147 'nix-list-template.at:25' \
+#AT_STOP_155
+#AT_START_156
+at_fn_group_banner 156 'nix-list-template.at:25' \
   "racket                   (pipchix nix-list)" "    " 10
 at_xfail=no
 (
-  printf "%s\n" "147. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "156. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -25856,13 +26426,75 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_147
-#AT_START_148
-at_fn_group_banner 148 'base64-utf8-template.at:25' \
+#AT_STOP_156
+#AT_START_157
+at_fn_group_banner 157 'nix-set-template.at:25' \
+  "racket                    (pipchix nix-set)" "    " 10
+at_xfail=no
+(
+  printf "%s\n" "157. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
+
+
+
+
+printf "%s\n" "nix-set-template.at:30" >"$at_check_line_file"
+(test ${enable_check_r6rs_racket} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:30"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-set-template.at:30: \"\${abs_builddir}\"/run-r6rs-racket.sh '(nix-set)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:30"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-racket.sh '(nix-set)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "({
+})
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:30"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "nix-set-template.at:33" >"$at_check_line_file"
+(test ${enable_check_r6rs_racket} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:33"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-set-template.at:33: \"\${abs_builddir}\"/run-r6rs-racket.sh '(nix-setrec)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:33"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-racket.sh '(nix-setrec)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(rec{
+})
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:33"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_157
+#AT_START_158
+at_fn_group_banner 158 'base64-utf8-template.at:25' \
   "racket                          base64-utf8" "    " 10
 at_xfail=no
 (
-  printf "%s\n" "148. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "158. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -26291,13 +26923,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_148
-#AT_START_149
-at_fn_group_banner 149 'escaped-utf8-template.at:25' \
+#AT_STOP_158
+#AT_START_159
+at_fn_group_banner 159 'escaped-utf8-template.at:25' \
   "racket                         escaped-utf8" "    " 10
 at_xfail=no
 (
-  printf "%s\n" "149. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "159. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -26413,13 +27045,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_149
-#AT_START_150
-at_fn_group_banner 150 'shell-print-template.at:25' \
+#AT_STOP_159
+#AT_START_160
+at_fn_group_banner 160 'shell-print-template.at:25' \
   "racket                          shell-print" "    " 10
 at_xfail=no
 (
-  printf "%s\n" "150. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "160. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -26598,13 +27230,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_150
-#AT_START_151
-at_fn_group_banner 151 'continuation-capture-template.at:25' \
+#AT_STOP_160
+#AT_START_161
+at_fn_group_banner 161 'continuation-capture-template.at:25' \
   "sagitt(r6rs)           continuation-capture" "    " 11
 at_xfail=no
 (
-  printf "%s\n" "151. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "161. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -26776,13 +27408,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_151
-#AT_START_152
-at_fn_group_banner 152 'nix-embedded-node-template.at:25' \
+#AT_STOP_161
+#AT_START_162
+at_fn_group_banner 162 'nix-embedded-node-template.at:25' \
   "sagitt(r6rs)            <nix-embedded-node>" "    " 11
 at_xfail=no
 (
-  printf "%s\n" "152. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "162. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -26813,13 +27445,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_152
-#AT_START_153
-at_fn_group_banner 153 'nix-data-node-template.at:25' \
+#AT_STOP_162
+#AT_START_163
+at_fn_group_banner 163 'nix-data-node-template.at:25' \
   "sagitt(r6rs)                <nix-data-node>" "    " 11
 at_xfail=no
 (
-  printf "%s\n" "153. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "163. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -26939,13 +27571,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_153
-#AT_START_154
-at_fn_group_banner 154 'nix-path-node-template.at:25' \
+#AT_STOP_163
+#AT_START_164
+at_fn_group_banner 164 'nix-path-node-template.at:25' \
   "sagitt(r6rs)                <nix-path-node>" "    " 11
 at_xfail=no
 (
-  printf "%s\n" "154. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "164. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -26999,13 +27631,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_154
-#AT_START_155
-at_fn_group_banner 155 'nix-attributepath-node-template.at:25' \
+#AT_STOP_164
+#AT_START_165
+at_fn_group_banner 165 'nix-attributepath-node-template.at:25' \
   "sagitt(r6rs)       <nix-attributepath-node>" "    " 11
 at_xfail=no
 (
-  printf "%s\n" "155. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "165. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -27087,13 +27719,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_155
-#AT_START_156
-at_fn_group_banner 156 'nix-attributebinding-node-template.at:25' \
+#AT_STOP_165
+#AT_START_166
+at_fn_group_banner 166 'nix-attributebinding-node-template.at:25' \
   "sagitt(r6rs)    <nix-attributebinding-node>" "    " 11
 at_xfail=no
 (
-  printf "%s\n" "156. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "166. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -27177,13 +27809,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_156
-#AT_START_157
-at_fn_group_banner 157 'nix-inherit-node-template.at:25' \
+#AT_STOP_166
+#AT_START_167
+at_fn_group_banner 167 'nix-inherit-node-template.at:25' \
   "sagitt(r6rs)             <nix-inherit-node>" "    " 11
 at_xfail=no
 (
-  printf "%s\n" "157. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "167. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -27279,13 +27911,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_157
-#AT_START_158
-at_fn_group_banner 158 'nix-attributeset-node-template.at:25' \
+#AT_STOP_167
+#AT_START_168
+at_fn_group_banner 168 'nix-attributeset-node-template.at:25' \
   "sagitt(r6rs)        <nix-attributeset-node>" "    " 11
 at_xfail=no
 (
-  printf "%s\n" "158. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "168. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -27503,13 +28135,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_158
-#AT_START_159
-at_fn_group_banner 159 'nix-list-node-template.at:25' \
+#AT_STOP_168
+#AT_START_169
+at_fn_group_banner 169 'nix-list-node-template.at:25' \
   "sagitt(r6rs)                <nix-list-node>" "    " 11
 at_xfail=no
 (
-  printf "%s\n" "159. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "169. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -27565,13 +28197,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_159
-#AT_START_160
-at_fn_group_banner 160 'ast-nodes-preds-template.at:25' \
+#AT_STOP_169
+#AT_START_170
+at_fn_group_banner 170 'ast-nodes-preds-template.at:25' \
   "sagitt(r6rs)            AST node predicates" "    " 11
 at_xfail=no
 (
-  printf "%s\n" "160. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "170. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -28187,13 +28819,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_160
-#AT_START_161
-at_fn_group_banner 161 'nix-embed-template.at:25' \
+#AT_STOP_170
+#AT_START_171
+at_fn_group_banner 171 'nix-embed-template.at:25' \
   "sagitt(r6rs)            (pipchix nix-embed)" "    " 11
 at_xfail=no
 (
-  printf "%s\n" "161. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "171. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -28224,13 +28856,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_161
-#AT_START_162
-at_fn_group_banner 162 'nix-list-template.at:25' \
+#AT_STOP_171
+#AT_START_172
+at_fn_group_banner 172 'nix-list-template.at:25' \
   "sagitt(r6rs)             (pipchix nix-list)" "    " 11
 at_xfail=no
 (
-  printf "%s\n" "162. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "172. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -28296,13 +28928,75 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_162
-#AT_START_163
-at_fn_group_banner 163 'base64-utf8-template.at:25' \
+#AT_STOP_172
+#AT_START_173
+at_fn_group_banner 173 'nix-set-template.at:25' \
+  "sagitt(r6rs)              (pipchix nix-set)" "    " 11
+at_xfail=no
+(
+  printf "%s\n" "173. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
+
+
+
+
+printf "%s\n" "nix-set-template.at:30" >"$at_check_line_file"
+(test ${enable_check_r6rs_sagittarius} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:30"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-set-template.at:30: \"\${abs_builddir}\"/run-r6rs-sagittarius.sh '(nix-set)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:30"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-sagittarius.sh '(nix-set)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "({
+})
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:30"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "nix-set-template.at:33" >"$at_check_line_file"
+(test ${enable_check_r6rs_sagittarius} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:33"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-set-template.at:33: \"\${abs_builddir}\"/run-r6rs-sagittarius.sh '(nix-setrec)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:33"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-sagittarius.sh '(nix-setrec)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(rec{
+})
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:33"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_173
+#AT_START_174
+at_fn_group_banner 174 'base64-utf8-template.at:25' \
   "sagitt(r6rs)                    base64-utf8" "    " 11
 at_xfail=no
 (
-  printf "%s\n" "163. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "174. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -28731,13 +29425,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_163
-#AT_START_164
-at_fn_group_banner 164 'escaped-utf8-template.at:25' \
+#AT_STOP_174
+#AT_START_175
+at_fn_group_banner 175 'escaped-utf8-template.at:25' \
   "sagitt(r6rs)                   escaped-utf8" "    " 11
 at_xfail=no
 (
-  printf "%s\n" "164. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "175. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -28853,13 +29547,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_164
-#AT_START_165
-at_fn_group_banner 165 'shell-print-template.at:25' \
+#AT_STOP_175
+#AT_START_176
+at_fn_group_banner 176 'shell-print-template.at:25' \
   "sagitt(r6rs)                    shell-print" "    " 11
 at_xfail=no
 (
-  printf "%s\n" "165. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "176. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -29038,13 +29732,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_165
-#AT_START_166
-at_fn_group_banner 166 'continuation-capture-template.at:25' \
+#AT_STOP_176
+#AT_START_177
+at_fn_group_banner 177 'continuation-capture-template.at:25' \
   "sagitt(r7rs)           continuation-capture" "    " 12
 at_xfail=no
 (
-  printf "%s\n" "166. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "177. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -29216,13 +29910,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_166
-#AT_START_167
-at_fn_group_banner 167 'nix-embedded-node-template.at:25' \
+#AT_STOP_177
+#AT_START_178
+at_fn_group_banner 178 'nix-embedded-node-template.at:25' \
   "sagitt(r7rs)            <nix-embedded-node>" "    " 12
 at_xfail=no
 (
-  printf "%s\n" "167. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "178. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -29253,13 +29947,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_167
-#AT_START_168
-at_fn_group_banner 168 'nix-data-node-template.at:25' \
+#AT_STOP_178
+#AT_START_179
+at_fn_group_banner 179 'nix-data-node-template.at:25' \
   "sagitt(r7rs)                <nix-data-node>" "    " 12
 at_xfail=no
 (
-  printf "%s\n" "168. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "179. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -29379,13 +30073,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_168
-#AT_START_169
-at_fn_group_banner 169 'nix-path-node-template.at:25' \
+#AT_STOP_179
+#AT_START_180
+at_fn_group_banner 180 'nix-path-node-template.at:25' \
   "sagitt(r7rs)                <nix-path-node>" "    " 12
 at_xfail=no
 (
-  printf "%s\n" "169. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "180. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -29439,13 +30133,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_169
-#AT_START_170
-at_fn_group_banner 170 'nix-attributepath-node-template.at:25' \
+#AT_STOP_180
+#AT_START_181
+at_fn_group_banner 181 'nix-attributepath-node-template.at:25' \
   "sagitt(r7rs)       <nix-attributepath-node>" "    " 12
 at_xfail=no
 (
-  printf "%s\n" "170. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "181. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -29527,13 +30221,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_170
-#AT_START_171
-at_fn_group_banner 171 'nix-attributebinding-node-template.at:25' \
+#AT_STOP_181
+#AT_START_182
+at_fn_group_banner 182 'nix-attributebinding-node-template.at:25' \
   "sagitt(r7rs)    <nix-attributebinding-node>" "    " 12
 at_xfail=no
 (
-  printf "%s\n" "171. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "182. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -29617,13 +30311,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_171
-#AT_START_172
-at_fn_group_banner 172 'nix-inherit-node-template.at:25' \
+#AT_STOP_182
+#AT_START_183
+at_fn_group_banner 183 'nix-inherit-node-template.at:25' \
   "sagitt(r7rs)             <nix-inherit-node>" "    " 12
 at_xfail=no
 (
-  printf "%s\n" "172. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "183. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -29719,13 +30413,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_172
-#AT_START_173
-at_fn_group_banner 173 'nix-attributeset-node-template.at:25' \
+#AT_STOP_183
+#AT_START_184
+at_fn_group_banner 184 'nix-attributeset-node-template.at:25' \
   "sagitt(r7rs)        <nix-attributeset-node>" "    " 12
 at_xfail=no
 (
-  printf "%s\n" "173. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "184. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -29943,13 +30637,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_173
-#AT_START_174
-at_fn_group_banner 174 'nix-list-node-template.at:25' \
+#AT_STOP_184
+#AT_START_185
+at_fn_group_banner 185 'nix-list-node-template.at:25' \
   "sagitt(r7rs)                <nix-list-node>" "    " 12
 at_xfail=no
 (
-  printf "%s\n" "174. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "185. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -30005,13 +30699,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_174
-#AT_START_175
-at_fn_group_banner 175 'ast-nodes-preds-template.at:25' \
+#AT_STOP_185
+#AT_START_186
+at_fn_group_banner 186 'ast-nodes-preds-template.at:25' \
   "sagitt(r7rs)            AST node predicates" "    " 12
 at_xfail=no
 (
-  printf "%s\n" "175. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "186. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -30627,13 +31321,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_175
-#AT_START_176
-at_fn_group_banner 176 'nix-embed-template.at:25' \
+#AT_STOP_186
+#AT_START_187
+at_fn_group_banner 187 'nix-embed-template.at:25' \
   "sagitt(r7rs)            (pipchix nix-embed)" "    " 12
 at_xfail=no
 (
-  printf "%s\n" "176. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "187. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -30664,13 +31358,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_176
-#AT_START_177
-at_fn_group_banner 177 'nix-list-template.at:25' \
+#AT_STOP_187
+#AT_START_188
+at_fn_group_banner 188 'nix-list-template.at:25' \
   "sagitt(r7rs)             (pipchix nix-list)" "    " 12
 at_xfail=no
 (
-  printf "%s\n" "177. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "188. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -30736,13 +31430,75 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_177
-#AT_START_178
-at_fn_group_banner 178 'base64-utf8-template.at:25' \
+#AT_STOP_188
+#AT_START_189
+at_fn_group_banner 189 'nix-set-template.at:25' \
+  "sagitt(r7rs)              (pipchix nix-set)" "    " 12
+at_xfail=no
+(
+  printf "%s\n" "189. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+
+
+
+
+
+printf "%s\n" "nix-set-template.at:30" >"$at_check_line_file"
+(test ${enable_check_r7rs_sagittarius} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:30"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-set-template.at:30: \"\${abs_builddir}\"/run-r7rs-sagittarius.sh '(nix-set)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:30"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-sagittarius.sh '(nix-set)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "({
+})
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:30"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "nix-set-template.at:33" >"$at_check_line_file"
+(test ${enable_check_r7rs_sagittarius} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:33"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-set-template.at:33: \"\${abs_builddir}\"/run-r7rs-sagittarius.sh '(nix-setrec)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:33"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-sagittarius.sh '(nix-setrec)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(rec{
+})
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:33"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"
+#AT_STOP_189
+#AT_START_190
+at_fn_group_banner 190 'base64-utf8-template.at:25' \
   "sagitt(r7rs)                    base64-utf8" "    " 12
 at_xfail=no
 (
-  printf "%s\n" "178. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "190. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -31171,13 +31927,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_178
-#AT_START_179
-at_fn_group_banner 179 'escaped-utf8-template.at:25' \
+#AT_STOP_190
+#AT_START_191
+at_fn_group_banner 191 'escaped-utf8-template.at:25' \
   "sagitt(r7rs)                   escaped-utf8" "    " 12
 at_xfail=no
 (
-  printf "%s\n" "179. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "191. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -31293,13 +32049,13 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_179
-#AT_START_180
-at_fn_group_banner 180 'shell-print-template.at:25' \
+#AT_STOP_191
+#AT_START_192
+at_fn_group_banner 192 'shell-print-template.at:25' \
   "sagitt(r7rs)                    shell-print" "    " 12
 at_xfail=no
 (
-  printf "%s\n" "180. $at_setup_line: testing $at_desc ..."
+  printf "%s\n" "192. $at_setup_line: testing $at_desc ..."
   $at_traceon
 
 
@@ -31478,4 +32234,4 @@ $at_traceon; }
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
 read at_status <"$at_status_file"
-#AT_STOP_180
+#AT_STOP_192
