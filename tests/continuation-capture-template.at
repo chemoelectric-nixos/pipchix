@@ -53,6 +53,40 @@ m4_define([sexpr],
          (error "erroneous operation" `()))))])
 check_unquoted([run_scheme 'sexpr'],[0],[erroneous operation],[])
 
+m4_define([sexpr],
+  [(let ((obj (current-continuation)))
+     (cond ((continuation? obj)
+            (continuation-return
+             obj "This time obj will be a string!"))
+           (else (nix-embed obj))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [This time obj will be a string!],[])
+
+m4_define([sexpr],
+  [(let ((obj (current-continuation)))
+     (cond ((continuation? obj)
+            ((continuation->procedure obj)
+             "This time obj will be another string!"))
+           (else (nix-embed obj))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [This time obj will be another string!],[])
+
+m4_define([sexpr],
+  [(let* ((lst (list 11 22 33 44 55))
+          (goal 44)
+          (p lst)
+          (i 0))
+     (let ((loop (current-continuation)))
+       (cond ((= (car p) goal)
+              (nix-embed (string-append (number->string i)
+                                        " "
+                                        (number->string (car p)))))
+             (else
+              (set! i (+ i 1))
+              (set! p (cdr p))
+              (goto-continuation loop)))))])
+check_unquoted([run_scheme 'sexpr'],[0],[3 44],[])
+
 AT_CLEANUP
 
 ])
