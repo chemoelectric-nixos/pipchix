@@ -1,3 +1,4 @@
+#!r6rs
 ;;;
 ;;; Copyright © 2025 Barry Schwartz
 ;;;
@@ -24,21 +25,19 @@
 ;;;
 m4_include(pipchix/pipchix-includes.m4)
 
-(define-library (pipchix nix-list)
+(library (pipchix em-syntax-rules) ;; SRFI-148
 
-  (export m4_include(pipchix/nix-list.exports.m4))
+  (export m4_include(pipchix/em-syntax-rules.exports.m4))
 
-  (import (scheme base))
-  (import (pipchix abstract-syntax-tree))
+  (import (rnrs base (6)))
 
-  (begin
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;    m4_define(«rnrs_version»,«6»)
+    m4_include(pipchix/em-syntax-rules.m4)
 
-    m4_include(pipchix/nix-list.m4)
-
-    ))
+    )
 
 ;;; local variables:
 ;;; mode: scheme
-;;; geiser-scheme-implementation: chibi
+;;; geiser-scheme-implementation: chez
 ;;; coding: utf-8
 ;;; end:

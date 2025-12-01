@@ -1,5 +1,6 @@
 ;;;
-;;; Copyright © 2025 Barry Schwartz
+;;; Copyright © 2016 Marc Nieper-Wißkirchen (2016).  All Rights Reserved. 
+;;; Copyright © 2025 Barry Schwartz.  All Rights Reserved. 
 ;;;
 ;;; This file is part of Pipchix.
 ;;; 
@@ -24,16 +25,21 @@
 ;;;
 m4_include(pipchix/pipchix-includes.m4)
 
-(define-library (pipchix nix-list)
+(define-library (pipchix em-syntax-rules) ;; SRFI-148
 
-  (export m4_include(pipchix/nix-list.exports.m4))
+  (export m4_include(pipchix/em-syntax-rules.exports.m4))
 
   (import (scheme base))
-  (import (pipchix abstract-syntax-tree))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  (cond-expand
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;    (gauche (import (gauche base)))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;    (sagittarius (import (sagittarius)))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;    (else))
 
   (begin
 
-    m4_include(pipchix/nix-list.m4)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;    m4_define(«rnrs_version»,«7»)
+    m4_include(pipchix/em-syntax-rules.m4)
 
     ))
 
