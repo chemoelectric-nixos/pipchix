@@ -625,7 +625,7 @@ at_help_all="1;continuation-capture-template.at:25;chez                   contin
 10;ast-nodes-preds-template.at:25;chez                    AST node predicates;;
 11;nix-embed-template.at:25;chez                    (pipchix nix-embed);r6rs chez chez-scheme chezscheme nix-embed;
 12;nix-list-template.at:25;chez                     (pipchix nix-list);r6rs chez chez-scheme chezscheme nix-list;
-13;nix-set-template.at:25;chez                      (pipchix nix-set);r6rs chez chez-scheme chezscheme nix-set;
+13;nix-set-template.at:25;chez                      (pipchix nix-set);r6rs chez chez-scheme chezscheme nix-set nix-setrec;
 14;base64-utf8-template.at:25;chez                            base64-utf8;r6rs chez chez-scheme chezscheme string-manipulation string strings base64 base64-utf8 utf8;
 15;escaped-utf8-template.at:25;chez                           escaped-utf8;r6rs chez chez-scheme chezscheme string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
 16;shell-print-template.at:25;chez                            shell-print;r6rs chez chez-scheme chezscheme string-manipulation string strings print shell utf8 shell-print;
@@ -641,7 +641,7 @@ at_help_all="1;continuation-capture-template.at:25;chez                   contin
 26;ast-nodes-preds-template.at:25;chibi                   AST node predicates;;
 27;nix-embed-template.at:25;chibi                   (pipchix nix-embed);r7rs chibi chibi-scheme chibischeme nix-embed;
 28;nix-list-template.at:25;chibi                    (pipchix nix-list);r7rs chibi chibi-scheme chibischeme nix-list;
-29;nix-set-template.at:25;chibi                     (pipchix nix-set);r7rs chibi chibi-scheme chibischeme nix-set;
+29;nix-set-template.at:25;chibi                     (pipchix nix-set);r7rs chibi chibi-scheme chibischeme nix-set nix-setrec;
 30;base64-utf8-template.at:25;chibi                           base64-utf8;r7rs chibi chibi-scheme chibischeme string-manipulation string strings base64 base64-utf8 utf8;
 31;escaped-utf8-template.at:25;chibi                          escaped-utf8;r7rs chibi chibi-scheme chibischeme string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
 32;shell-print-template.at:25;chibi                           shell-print;r7rs chibi chibi-scheme chibischeme string-manipulation string strings print shell utf8 shell-print;
@@ -657,7 +657,7 @@ at_help_all="1;continuation-capture-template.at:25;chez                   contin
 42;ast-nodes-preds-template.at:25;csc-5                   AST node predicates;;
 43;nix-embed-template.at:25;csc-5                   (pipchix nix-embed);r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler nix-embed;
 44;nix-list-template.at:25;csc-5                    (pipchix nix-list);r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler nix-list;
-45;nix-set-template.at:25;csc-5                     (pipchix nix-set);r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler nix-set;
+45;nix-set-template.at:25;csc-5                     (pipchix nix-set);r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler nix-set nix-setrec;
 46;base64-utf8-template.at:25;csc-5                           base64-utf8;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler string-manipulation string strings base64 base64-utf8 utf8;
 47;escaped-utf8-template.at:25;csc-5                          escaped-utf8;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
 48;shell-print-template.at:25;csc-5                           shell-print;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler string-manipulation string strings print shell utf8 shell-print;
@@ -673,7 +673,7 @@ at_help_all="1;continuation-capture-template.at:25;chez                   contin
 58;ast-nodes-preds-template.at:25;csi-5                   AST node predicates;;
 59;nix-embed-template.at:25;csi-5                   (pipchix nix-embed);r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter nix-embed;
 60;nix-list-template.at:25;csi-5                    (pipchix nix-list);r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter nix-list;
-61;nix-set-template.at:25;csi-5                     (pipchix nix-set);r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter nix-set;
+61;nix-set-template.at:25;csi-5                     (pipchix nix-set);r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter nix-set nix-setrec;
 62;base64-utf8-template.at:25;csi-5                           base64-utf8;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter string-manipulation string strings base64 base64-utf8 utf8;
 63;escaped-utf8-template.at:25;csi-5                          escaped-utf8;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
 64;shell-print-template.at:25;csi-5                           shell-print;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter string-manipulation string strings print shell utf8 shell-print;
@@ -689,7 +689,7 @@ at_help_all="1;continuation-capture-template.at:25;chez                   contin
 74;ast-nodes-preds-template.at:25;gauche                  AST node predicates;;
 75;nix-embed-template.at:25;gauche                  (pipchix nix-embed);r7rs gauche gauche-scheme gauchescheme gosh gosh-scheme goshscheme nix-embed;
 76;nix-list-template.at:25;gauche                   (pipchix nix-list);r7rs gauche gauche-scheme gauchescheme gosh gosh-scheme goshscheme nix-list;
-77;nix-set-template.at:25;gauche                    (pipchix nix-set);r7rs gauche gauche-scheme gauchescheme gosh gosh-scheme goshscheme nix-set;
+77;nix-set-template.at:25;gauche                    (pipchix nix-set);r7rs gauche gauche-scheme gauchescheme gosh gosh-scheme goshscheme nix-set nix-setrec;
 78;base64-utf8-template.at:25;gauche                          base64-utf8;r7rs gauche gauche-scheme gauchescheme gosh gosh-scheme goshscheme string-manipulation string strings base64 base64-utf8 utf8;
 79;escaped-utf8-template.at:25;gauche                         escaped-utf8;r7rs gauche gauche-scheme gauchescheme gosh gosh-scheme goshscheme string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
 80;shell-print-template.at:25;gauche                          shell-print;r7rs gauche gauche-scheme gauchescheme gosh gosh-scheme goshscheme string-manipulation string strings print shell utf8 shell-print;
@@ -705,7 +705,7 @@ at_help_all="1;continuation-capture-template.at:25;chez                   contin
 90;ast-nodes-preds-template.at:25;guile(r6rs)             AST node predicates;;
 91;nix-embed-template.at:25;guile(r6rs)             (pipchix nix-embed);r6rs guile guile-scheme guilescheme nix-embed;
 92;nix-list-template.at:25;guile(r6rs)              (pipchix nix-list);r6rs guile guile-scheme guilescheme nix-list;
-93;nix-set-template.at:25;guile(r6rs)               (pipchix nix-set);r6rs guile guile-scheme guilescheme nix-set;
+93;nix-set-template.at:25;guile(r6rs)               (pipchix nix-set);r6rs guile guile-scheme guilescheme nix-set nix-setrec;
 94;base64-utf8-template.at:25;guile(r6rs)                     base64-utf8;r6rs guile guile-scheme guilescheme string-manipulation string strings base64 base64-utf8 utf8;
 95;escaped-utf8-template.at:25;guile(r6rs)                    escaped-utf8;r6rs guile guile-scheme guilescheme string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
 96;shell-print-template.at:25;guile(r6rs)                     shell-print;r6rs guile guile-scheme guilescheme string-manipulation string strings print shell utf8 shell-print;
@@ -721,7 +721,7 @@ at_help_all="1;continuation-capture-template.at:25;chez                   contin
 106;ast-nodes-preds-template.at:25;guile(r7rs)             AST node predicates;;
 107;nix-embed-template.at:25;guile(r7rs)             (pipchix nix-embed);r7rs guile guile-scheme guilescheme nix-embed;
 108;nix-list-template.at:25;guile(r7rs)              (pipchix nix-list);r7rs guile guile-scheme guilescheme nix-list;
-109;nix-set-template.at:25;guile(r7rs)               (pipchix nix-set);r7rs guile guile-scheme guilescheme nix-set;
+109;nix-set-template.at:25;guile(r7rs)               (pipchix nix-set);r7rs guile guile-scheme guilescheme nix-set nix-setrec;
 110;base64-utf8-template.at:25;guile(r7rs)                     base64-utf8;r7rs guile guile-scheme guilescheme string-manipulation string strings base64 base64-utf8 utf8;
 111;escaped-utf8-template.at:25;guile(r7rs)                    escaped-utf8;r7rs guile guile-scheme guilescheme string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
 112;shell-print-template.at:25;guile(r7rs)                     shell-print;r7rs guile guile-scheme guilescheme string-manipulation string strings print shell utf8 shell-print;
@@ -737,7 +737,7 @@ at_help_all="1;continuation-capture-template.at:25;chez                   contin
 122;ast-nodes-preds-template.at:25;loko(r6rs)              AST node predicates;;
 123;nix-embed-template.at:25;loko(r6rs)              (pipchix nix-embed);r6rs loko loko-scheme lokoscheme nix-embed;
 124;nix-list-template.at:25;loko(r6rs)               (pipchix nix-list);r6rs loko loko-scheme lokoscheme nix-list;
-125;nix-set-template.at:25;loko(r6rs)                (pipchix nix-set);r6rs loko loko-scheme lokoscheme nix-set;
+125;nix-set-template.at:25;loko(r6rs)                (pipchix nix-set);r6rs loko loko-scheme lokoscheme nix-set nix-setrec;
 126;base64-utf8-template.at:25;loko(r6rs)                      base64-utf8;r6rs loko loko-scheme lokoscheme string-manipulation string strings base64 base64-utf8 utf8;
 127;escaped-utf8-template.at:25;loko(r6rs)                     escaped-utf8;r6rs loko loko-scheme lokoscheme string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
 128;shell-print-template.at:25;loko(r6rs)                      shell-print;r6rs loko loko-scheme lokoscheme string-manipulation string strings print shell utf8 shell-print;
@@ -753,7 +753,7 @@ at_help_all="1;continuation-capture-template.at:25;chez                   contin
 138;ast-nodes-preds-template.at:25;loko(r7rs)              AST node predicates;;
 139;nix-embed-template.at:25;loko(r7rs)              (pipchix nix-embed);r7rs loko loko-scheme lokoscheme nix-embed;
 140;nix-list-template.at:25;loko(r7rs)               (pipchix nix-list);r7rs loko loko-scheme lokoscheme nix-list;
-141;nix-set-template.at:25;loko(r7rs)                (pipchix nix-set);r7rs loko loko-scheme lokoscheme nix-set;
+141;nix-set-template.at:25;loko(r7rs)                (pipchix nix-set);r7rs loko loko-scheme lokoscheme nix-set nix-setrec;
 142;base64-utf8-template.at:25;loko(r7rs)                      base64-utf8;r7rs loko loko-scheme lokoscheme string-manipulation string strings base64 base64-utf8 utf8;
 143;escaped-utf8-template.at:25;loko(r7rs)                     escaped-utf8;r7rs loko loko-scheme lokoscheme string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
 144;shell-print-template.at:25;loko(r7rs)                      shell-print;r7rs loko loko-scheme lokoscheme string-manipulation string strings print shell utf8 shell-print;
@@ -769,7 +769,7 @@ at_help_all="1;continuation-capture-template.at:25;chez                   contin
 154;ast-nodes-preds-template.at:25;racket                  AST node predicates;;
 155;nix-embed-template.at:25;racket                  (pipchix nix-embed);r6rs racket plt plt-scheme plt-r6rs nix-embed;
 156;nix-list-template.at:25;racket                   (pipchix nix-list);r6rs racket plt plt-scheme plt-r6rs nix-list;
-157;nix-set-template.at:25;racket                    (pipchix nix-set);r6rs racket plt plt-scheme plt-r6rs nix-set;
+157;nix-set-template.at:25;racket                    (pipchix nix-set);r6rs racket plt plt-scheme plt-r6rs nix-set nix-setrec;
 158;base64-utf8-template.at:25;racket                          base64-utf8;r6rs racket plt plt-scheme plt-r6rs string-manipulation string strings base64 base64-utf8 utf8;
 159;escaped-utf8-template.at:25;racket                         escaped-utf8;r6rs racket plt plt-scheme plt-r6rs string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
 160;shell-print-template.at:25;racket                          shell-print;r6rs racket plt plt-scheme plt-r6rs string-manipulation string strings print shell utf8 shell-print;
@@ -785,7 +785,7 @@ at_help_all="1;continuation-capture-template.at:25;chez                   contin
 170;ast-nodes-preds-template.at:25;sagitt(r6rs)            AST node predicates;;
 171;nix-embed-template.at:25;sagitt(r6rs)            (pipchix nix-embed);r6rs sagittarius sagittarius-scheme sagittariusscheme sash nix-embed;
 172;nix-list-template.at:25;sagitt(r6rs)             (pipchix nix-list);r6rs sagittarius sagittarius-scheme sagittariusscheme sash nix-list;
-173;nix-set-template.at:25;sagitt(r6rs)              (pipchix nix-set);r6rs sagittarius sagittarius-scheme sagittariusscheme sash nix-set;
+173;nix-set-template.at:25;sagitt(r6rs)              (pipchix nix-set);r6rs sagittarius sagittarius-scheme sagittariusscheme sash nix-set nix-setrec;
 174;base64-utf8-template.at:25;sagitt(r6rs)                    base64-utf8;r6rs sagittarius sagittarius-scheme sagittariusscheme sash string-manipulation string strings base64 base64-utf8 utf8;
 175;escaped-utf8-template.at:25;sagitt(r6rs)                   escaped-utf8;r6rs sagittarius sagittarius-scheme sagittariusscheme sash string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
 176;shell-print-template.at:25;sagitt(r6rs)                    shell-print;r6rs sagittarius sagittarius-scheme sagittariusscheme sash string-manipulation string strings print shell utf8 shell-print;
@@ -801,7 +801,7 @@ at_help_all="1;continuation-capture-template.at:25;chez                   contin
 186;ast-nodes-preds-template.at:25;sagitt(r7rs)            AST node predicates;;
 187;nix-embed-template.at:25;sagitt(r7rs)            (pipchix nix-embed);r7rs sagittarius sagittarius-scheme sagittariusscheme sash nix-embed;
 188;nix-list-template.at:25;sagitt(r7rs)             (pipchix nix-list);r7rs sagittarius sagittarius-scheme sagittariusscheme sash nix-list;
-189;nix-set-template.at:25;sagitt(r7rs)              (pipchix nix-set);r7rs sagittarius sagittarius-scheme sagittariusscheme sash nix-set;
+189;nix-set-template.at:25;sagitt(r7rs)              (pipchix nix-set);r7rs sagittarius sagittarius-scheme sagittariusscheme sash nix-set nix-setrec;
 190;base64-utf8-template.at:25;sagitt(r7rs)                    base64-utf8;r7rs sagittarius sagittarius-scheme sagittariusscheme sash string-manipulation string strings base64 base64-utf8 utf8;
 191;escaped-utf8-template.at:25;sagitt(r7rs)                   escaped-utf8;r7rs sagittarius sagittarius-scheme sagittariusscheme sash string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
 192;shell-print-template.at:25;sagitt(r7rs)                    shell-print;r7rs sagittarius sagittarius-scheme sagittariusscheme sash string-manipulation string strings print shell utf8 shell-print;
@@ -3966,6 +3966,79 @@ $at_traceon; }
 
 
 
+
+
+printf "%s\n" "nix-set-template.at:36" >"$at_check_line_file"
+(test ${enable_check_r6rs_chez} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:36"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-set-template.at:36: \"\${abs_builddir}\"/run-r6rs-chez.sh '(nix-set (\`a ==> 123) (123 <== \"b\"))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "nix-set-template.at:36"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '(nix-set (`a ==> 123) (123 <== "b"))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "({
+a
+=
+(123)
+;
+b
+=
+(123)
+;
+})
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:36"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "nix-set-template.at:42" >"$at_check_line_file"
+(test ${enable_check_r6rs_chez} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:42"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-set-template.at:42: \"\${abs_builddir}\"/run-r6rs-chez.sh '(nix-setrec (\`a \`bc \"def\" ==> (nix-list 1 2 3))
+               ((nix-embed \"[1 2 3]\") <== \"b\" \"e.f.g\" ))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "nix-set-template.at:42"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '(nix-setrec (`a `bc "def" ==> (nix-list 1 2 3))
+               ((nix-embed "[1 2 3]") <== "b" "e.f.g" ))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(rec{
+a
+.
+bc
+.
+def
+=
+[
+(1)
+(2)
+(3)
+]
+;
+b
+.
+\"e.f.g\"
+=
+[1 2 3];
+})
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:42"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
@@ -6463,6 +6536,79 @@ echo >>"$at_stdout"; printf "%s\n" "(rec{
 " | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:33"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "nix-set-template.at:36" >"$at_check_line_file"
+(test ${enable_check_r7rs_chibi} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:36"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-set-template.at:36: \"\${abs_builddir}\"/run-r7rs-chibi.sh '(nix-set (\`a ==> 123) (123 <== \"b\"))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "nix-set-template.at:36"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-chibi.sh '(nix-set (`a ==> 123) (123 <== "b"))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "({
+a
+=
+(123)
+;
+b
+=
+(123)
+;
+})
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:36"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "nix-set-template.at:42" >"$at_check_line_file"
+(test ${enable_check_r7rs_chibi} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:42"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-set-template.at:42: \"\${abs_builddir}\"/run-r7rs-chibi.sh '(nix-setrec (\`a \`bc \"def\" ==> (nix-list 1 2 3))
+               ((nix-embed \"[1 2 3]\") <== \"b\" \"e.f.g\" ))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "nix-set-template.at:42"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-chibi.sh '(nix-setrec (`a `bc "def" ==> (nix-list 1 2 3))
+               ((nix-embed "[1 2 3]") <== "b" "e.f.g" ))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(rec{
+a
+.
+bc
+.
+def
+=
+[
+(1)
+(2)
+(3)
+]
+;
+b
+.
+\"e.f.g\"
+=
+[1 2 3];
+})
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:42"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -8970,6 +9116,79 @@ $at_traceon; }
 
 
 
+
+
+printf "%s\n" "nix-set-template.at:36" >"$at_check_line_file"
+(test ${enable_check_r7rs_csc_5} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:36"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-set-template.at:36: \"\${abs_builddir}\"/run-r7rs-csc-5.sh '(nix-set (\`a ==> 123) (123 <== \"b\"))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "nix-set-template.at:36"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csc-5.sh '(nix-set (`a ==> 123) (123 <== "b"))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "({
+a
+=
+(123)
+;
+b
+=
+(123)
+;
+})
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:36"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "nix-set-template.at:42" >"$at_check_line_file"
+(test ${enable_check_r7rs_csc_5} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:42"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-set-template.at:42: \"\${abs_builddir}\"/run-r7rs-csc-5.sh '(nix-setrec (\`a \`bc \"def\" ==> (nix-list 1 2 3))
+               ((nix-embed \"[1 2 3]\") <== \"b\" \"e.f.g\" ))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "nix-set-template.at:42"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csc-5.sh '(nix-setrec (`a `bc "def" ==> (nix-list 1 2 3))
+               ((nix-embed "[1 2 3]") <== "b" "e.f.g" ))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(rec{
+a
+.
+bc
+.
+def
+=
+[
+(1)
+(2)
+(3)
+]
+;
+b
+.
+\"e.f.g\"
+=
+[1 2 3];
+})
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:42"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
@@ -11467,6 +11686,79 @@ echo >>"$at_stdout"; printf "%s\n" "(rec{
 " | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:33"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "nix-set-template.at:36" >"$at_check_line_file"
+(test ${enable_check_r7rs_csi_5} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:36"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-set-template.at:36: \"\${abs_builddir}\"/run-r7rs-csi-5.sh '(nix-set (\`a ==> 123) (123 <== \"b\"))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "nix-set-template.at:36"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csi-5.sh '(nix-set (`a ==> 123) (123 <== "b"))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "({
+a
+=
+(123)
+;
+b
+=
+(123)
+;
+})
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:36"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "nix-set-template.at:42" >"$at_check_line_file"
+(test ${enable_check_r7rs_csi_5} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:42"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-set-template.at:42: \"\${abs_builddir}\"/run-r7rs-csi-5.sh '(nix-setrec (\`a \`bc \"def\" ==> (nix-list 1 2 3))
+               ((nix-embed \"[1 2 3]\") <== \"b\" \"e.f.g\" ))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "nix-set-template.at:42"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csi-5.sh '(nix-setrec (`a `bc "def" ==> (nix-list 1 2 3))
+               ((nix-embed "[1 2 3]") <== "b" "e.f.g" ))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(rec{
+a
+.
+bc
+.
+def
+=
+[
+(1)
+(2)
+(3)
+]
+;
+b
+.
+\"e.f.g\"
+=
+[1 2 3];
+})
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:42"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -13974,6 +14266,79 @@ $at_traceon; }
 
 
 
+
+
+printf "%s\n" "nix-set-template.at:36" >"$at_check_line_file"
+(test ${enable_check_r7rs_gauche} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:36"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-set-template.at:36: \"\${abs_builddir}\"/run-r7rs-gauche.sh '(nix-set (\`a ==> 123) (123 <== \"b\"))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "nix-set-template.at:36"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gauche.sh '(nix-set (`a ==> 123) (123 <== "b"))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "({
+a
+=
+(123)
+;
+b
+=
+(123)
+;
+})
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:36"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "nix-set-template.at:42" >"$at_check_line_file"
+(test ${enable_check_r7rs_gauche} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:42"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-set-template.at:42: \"\${abs_builddir}\"/run-r7rs-gauche.sh '(nix-setrec (\`a \`bc \"def\" ==> (nix-list 1 2 3))
+               ((nix-embed \"[1 2 3]\") <== \"b\" \"e.f.g\" ))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "nix-set-template.at:42"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gauche.sh '(nix-setrec (`a `bc "def" ==> (nix-list 1 2 3))
+               ((nix-embed "[1 2 3]") <== "b" "e.f.g" ))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(rec{
+a
+.
+bc
+.
+def
+=
+[
+(1)
+(2)
+(3)
+]
+;
+b
+.
+\"e.f.g\"
+=
+[1 2 3];
+})
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:42"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
@@ -16471,6 +16836,79 @@ echo >>"$at_stdout"; printf "%s\n" "(rec{
 " | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:33"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "nix-set-template.at:36" >"$at_check_line_file"
+(test ${enable_check_r6rs_guile} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:36"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-set-template.at:36: \"\${abs_builddir}\"/run-r6rs-guile.sh '(nix-set (\`a ==> 123) (123 <== \"b\"))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "nix-set-template.at:36"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-guile.sh '(nix-set (`a ==> 123) (123 <== "b"))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "({
+a
+=
+(123)
+;
+b
+=
+(123)
+;
+})
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:36"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "nix-set-template.at:42" >"$at_check_line_file"
+(test ${enable_check_r6rs_guile} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:42"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-set-template.at:42: \"\${abs_builddir}\"/run-r6rs-guile.sh '(nix-setrec (\`a \`bc \"def\" ==> (nix-list 1 2 3))
+               ((nix-embed \"[1 2 3]\") <== \"b\" \"e.f.g\" ))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "nix-set-template.at:42"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-guile.sh '(nix-setrec (`a `bc "def" ==> (nix-list 1 2 3))
+               ((nix-embed "[1 2 3]") <== "b" "e.f.g" ))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(rec{
+a
+.
+bc
+.
+def
+=
+[
+(1)
+(2)
+(3)
+]
+;
+b
+.
+\"e.f.g\"
+=
+[1 2 3];
+})
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:42"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -18978,6 +19416,79 @@ $at_traceon; }
 
 
 
+
+
+printf "%s\n" "nix-set-template.at:36" >"$at_check_line_file"
+(test ${enable_check_r7rs_guile} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:36"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-set-template.at:36: \"\${abs_builddir}\"/run-r7rs-guile.sh '(nix-set (\`a ==> 123) (123 <== \"b\"))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "nix-set-template.at:36"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-guile.sh '(nix-set (`a ==> 123) (123 <== "b"))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "({
+a
+=
+(123)
+;
+b
+=
+(123)
+;
+})
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:36"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "nix-set-template.at:42" >"$at_check_line_file"
+(test ${enable_check_r7rs_guile} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:42"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-set-template.at:42: \"\${abs_builddir}\"/run-r7rs-guile.sh '(nix-setrec (\`a \`bc \"def\" ==> (nix-list 1 2 3))
+               ((nix-embed \"[1 2 3]\") <== \"b\" \"e.f.g\" ))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "nix-set-template.at:42"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-guile.sh '(nix-setrec (`a `bc "def" ==> (nix-list 1 2 3))
+               ((nix-embed "[1 2 3]") <== "b" "e.f.g" ))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(rec{
+a
+.
+bc
+.
+def
+=
+[
+(1)
+(2)
+(3)
+]
+;
+b
+.
+\"e.f.g\"
+=
+[1 2 3];
+})
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:42"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
@@ -21475,6 +21986,79 @@ echo >>"$at_stdout"; printf "%s\n" "(rec{
 " | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:33"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "nix-set-template.at:36" >"$at_check_line_file"
+(test ${enable_check_r6rs_loko} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:36"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-set-template.at:36: \"\${abs_builddir}\"/run-r6rs-loko.sh '(nix-set (\`a ==> 123) (123 <== \"b\"))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "nix-set-template.at:36"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '(nix-set (`a ==> 123) (123 <== "b"))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "({
+a
+=
+(123)
+;
+b
+=
+(123)
+;
+})
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:36"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "nix-set-template.at:42" >"$at_check_line_file"
+(test ${enable_check_r6rs_loko} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:42"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-set-template.at:42: \"\${abs_builddir}\"/run-r6rs-loko.sh '(nix-setrec (\`a \`bc \"def\" ==> (nix-list 1 2 3))
+               ((nix-embed \"[1 2 3]\") <== \"b\" \"e.f.g\" ))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "nix-set-template.at:42"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '(nix-setrec (`a `bc "def" ==> (nix-list 1 2 3))
+               ((nix-embed "[1 2 3]") <== "b" "e.f.g" ))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(rec{
+a
+.
+bc
+.
+def
+=
+[
+(1)
+(2)
+(3)
+]
+;
+b
+.
+\"e.f.g\"
+=
+[1 2 3];
+})
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:42"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -23982,6 +24566,79 @@ $at_traceon; }
 
 
 
+
+
+printf "%s\n" "nix-set-template.at:36" >"$at_check_line_file"
+(test ${enable_check_r7rs_loko} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:36"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-set-template.at:36: \"\${abs_builddir}\"/run-r7rs-loko.sh '(nix-set (\`a ==> 123) (123 <== \"b\"))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "nix-set-template.at:36"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(nix-set (`a ==> 123) (123 <== "b"))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "({
+a
+=
+(123)
+;
+b
+=
+(123)
+;
+})
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:36"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "nix-set-template.at:42" >"$at_check_line_file"
+(test ${enable_check_r7rs_loko} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:42"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-set-template.at:42: \"\${abs_builddir}\"/run-r7rs-loko.sh '(nix-setrec (\`a \`bc \"def\" ==> (nix-list 1 2 3))
+               ((nix-embed \"[1 2 3]\") <== \"b\" \"e.f.g\" ))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "nix-set-template.at:42"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(nix-setrec (`a `bc "def" ==> (nix-list 1 2 3))
+               ((nix-embed "[1 2 3]") <== "b" "e.f.g" ))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(rec{
+a
+.
+bc
+.
+def
+=
+[
+(1)
+(2)
+(3)
+]
+;
+b
+.
+\"e.f.g\"
+=
+[1 2 3];
+})
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:42"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
@@ -26479,6 +27136,79 @@ echo >>"$at_stdout"; printf "%s\n" "(rec{
 " | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:33"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "nix-set-template.at:36" >"$at_check_line_file"
+(test ${enable_check_r6rs_racket} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:36"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-set-template.at:36: \"\${abs_builddir}\"/run-r6rs-racket.sh '(nix-set (\`a ==> 123) (123 <== \"b\"))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "nix-set-template.at:36"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-racket.sh '(nix-set (`a ==> 123) (123 <== "b"))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "({
+a
+=
+(123)
+;
+b
+=
+(123)
+;
+})
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:36"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "nix-set-template.at:42" >"$at_check_line_file"
+(test ${enable_check_r6rs_racket} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:42"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-set-template.at:42: \"\${abs_builddir}\"/run-r6rs-racket.sh '(nix-setrec (\`a \`bc \"def\" ==> (nix-list 1 2 3))
+               ((nix-embed \"[1 2 3]\") <== \"b\" \"e.f.g\" ))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "nix-set-template.at:42"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-racket.sh '(nix-setrec (`a `bc "def" ==> (nix-list 1 2 3))
+               ((nix-embed "[1 2 3]") <== "b" "e.f.g" ))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(rec{
+a
+.
+bc
+.
+def
+=
+[
+(1)
+(2)
+(3)
+]
+;
+b
+.
+\"e.f.g\"
+=
+[1 2 3];
+})
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:42"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -28986,6 +29716,79 @@ $at_traceon; }
 
 
 
+
+
+printf "%s\n" "nix-set-template.at:36" >"$at_check_line_file"
+(test ${enable_check_r6rs_sagittarius} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:36"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-set-template.at:36: \"\${abs_builddir}\"/run-r6rs-sagittarius.sh '(nix-set (\`a ==> 123) (123 <== \"b\"))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "nix-set-template.at:36"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-sagittarius.sh '(nix-set (`a ==> 123) (123 <== "b"))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "({
+a
+=
+(123)
+;
+b
+=
+(123)
+;
+})
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:36"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "nix-set-template.at:42" >"$at_check_line_file"
+(test ${enable_check_r6rs_sagittarius} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:42"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-set-template.at:42: \"\${abs_builddir}\"/run-r6rs-sagittarius.sh '(nix-setrec (\`a \`bc \"def\" ==> (nix-list 1 2 3))
+               ((nix-embed \"[1 2 3]\") <== \"b\" \"e.f.g\" ))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "nix-set-template.at:42"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-sagittarius.sh '(nix-setrec (`a `bc "def" ==> (nix-list 1 2 3))
+               ((nix-embed "[1 2 3]") <== "b" "e.f.g" ))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(rec{
+a
+.
+bc
+.
+def
+=
+[
+(1)
+(2)
+(3)
+]
+;
+b
+.
+\"e.f.g\"
+=
+[1 2 3];
+})
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:42"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
@@ -31483,6 +32286,79 @@ echo >>"$at_stdout"; printf "%s\n" "(rec{
 " | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:33"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "nix-set-template.at:36" >"$at_check_line_file"
+(test ${enable_check_r7rs_sagittarius} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:36"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-set-template.at:36: \"\${abs_builddir}\"/run-r7rs-sagittarius.sh '(nix-set (\`a ==> 123) (123 <== \"b\"))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "nix-set-template.at:36"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-sagittarius.sh '(nix-set (`a ==> 123) (123 <== "b"))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "({
+a
+=
+(123)
+;
+b
+=
+(123)
+;
+})
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:36"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "nix-set-template.at:42" >"$at_check_line_file"
+(test ${enable_check_r7rs_sagittarius} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:42"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-set-template.at:42: \"\${abs_builddir}\"/run-r7rs-sagittarius.sh '(nix-setrec (\`a \`bc \"def\" ==> (nix-list 1 2 3))
+               ((nix-embed \"[1 2 3]\") <== \"b\" \"e.f.g\" ))'"
+at_fn_check_prepare_notrace 'a `...` command substitution' "nix-set-template.at:42"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-sagittarius.sh '(nix-setrec (`a `bc "def" ==> (nix-list 1 2 3))
+               ((nix-embed "[1 2 3]") <== "b" "e.f.g" ))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(rec{
+a
+.
+bc
+.
+def
+=
+[
+(1)
+(2)
+(3)
+]
+;
+b
+.
+\"e.f.g\"
+=
+[1 2 3];
+})
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:42"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 

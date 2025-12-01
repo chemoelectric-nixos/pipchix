@@ -24,13 +24,23 @@
 
 AT_SETUP([setup_message((pipchix nix-set))])
 
-AT_KEYWORDS([default_keywords nix-set])
+AT_KEYWORDS([default_keywords nix-set nix-setrec])
 
 m4_define([sexpr],[(nix-set)])
 check_unquoted([run_scheme 'sexpr'],[0],[interpunct_nl([({·})·])],[])
 
 m4_define([sexpr],[(nix-setrec)])
 check_unquoted([run_scheme 'sexpr'],[0],[interpunct_nl([(rec{·})·])],[])
+
+m4_define([sexpr],[(nix-set (`a ==> 123) (123 <== "b"))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([({·a·=·(123)·;·b·=·(123)·;·})·])],[])
+
+m4_define([sexpr],
+  [(nix-setrec (`a `bc "def" ==> (nix-list 1 2 3))
+               ((nix-embed "@<:@1 2 3@:>@") <== "b" "e.f.g" ))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(rec{·a·.·bc·.·def·=·@<:@·(1)·(2)·(3)·@:>@·;·b·.·"e.f.g"·=·@<:@1 2 3@:>@;·})·])],[])
 
 AT_CLEANUP
 
