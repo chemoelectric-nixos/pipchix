@@ -31,6 +31,16 @@ m4_include(pipchix/pipchix-includes.m4)
   (import (scheme base))
   (import (pipchix abstract-syntax-tree))
 
+  ;; The following quiets CHICKEN’s warnings about exported macros. A
+  ;; programmer should not use these macros directly.
+  (cond-expand
+    (chicken
+     (export %%nix-set%%nix-set
+             %%nix-set%%nix-set-insert-entry
+             %%nix-set%%nix-attributebinding
+             %%nix-set%%add-binding))
+    (else))
+
   (begin
 
     m4_include(pipchix/nix-set.m4)
