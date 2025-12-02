@@ -128,6 +128,7 @@ am__aclocal_m4_deps = $(top_srcdir)/m4/ax_check_compile_flag.m4 \
 	$(top_srcdir)/ac-tinyscheme.m4 $(top_srcdir)/ac-chez-scheme.m4 \
 	$(top_srcdir)/ac-chicken-scheme.m4 \
 	$(top_srcdir)/ac-chibi-scheme.m4 \
+	$(top_srcdir)/ac-gambit-scheme.m4 \
 	$(top_srcdir)/ac-gauche-scheme.m4 \
 	$(top_srcdir)/ac-guile-scheme.m4 \
 	$(top_srcdir)/ac-loko-scheme.m4 $(top_srcdir)/ac-racket.m4 \
@@ -138,10 +139,10 @@ am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 DIST_COMMON = $(srcdir)/Makefile.am $(am__DIST_COMMON)
 mkinstalldirs = $(install_sh) -d
 CONFIG_CLEAN_FILES = atlocal run-r6rs-chez.sh run-r7rs-chibi.sh \
-	run-r7rs-csc-5.sh run-r7rs-csi-5.sh run-r7rs-gauche.sh \
-	run-r6rs-guile.sh run-r7rs-guile.sh run-r6rs-loko.sh \
-	run-r7rs-loko.sh run-r6rs-racket.sh run-r6rs-sagittarius.sh \
-	run-r7rs-sagittarius.sh
+	run-r7rs-csc-5.sh run-r7rs-csi-5.sh run-r7rs-gsi.sh \
+	run-r7rs-gauche.sh run-r6rs-guile.sh run-r7rs-guile.sh \
+	run-r6rs-loko.sh run-r7rs-loko.sh run-r6rs-racket.sh \
+	run-r6rs-sagittarius.sh run-r7rs-sagittarius.sh
 CONFIG_CLEAN_VPATH_FILES =
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
@@ -169,7 +170,8 @@ am__DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/atlocal.in \
 	$(srcdir)/run-r6rs-sagittarius.sh.in \
 	$(srcdir)/run-r7rs-chibi.sh.in $(srcdir)/run-r7rs-csc-5.sh.in \
 	$(srcdir)/run-r7rs-csi-5.sh.in $(srcdir)/run-r7rs-gauche.sh.in \
-	$(srcdir)/run-r7rs-guile.sh.in $(srcdir)/run-r7rs-loko.sh.in \
+	$(srcdir)/run-r7rs-gsi.sh.in $(srcdir)/run-r7rs-guile.sh.in \
+	$(srcdir)/run-r7rs-loko.sh.in \
 	$(srcdir)/run-r7rs-sagittarius.sh.in
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 ACLOCAL = @ACLOCAL@
@@ -208,6 +210,7 @@ GNU = @GNU@
 GNU_M4 = @GNU_M4@
 GNU_MAKE = @GNU_MAKE@
 GREP = @GREP@
+GSI = @GSI@
 GUILE = @GUILE@
 INSTALL = @INSTALL@
 INSTALL_DATA = @INSTALL_DATA@
@@ -274,6 +277,7 @@ enable_check_r7rs_chibi = @enable_check_r7rs_chibi@
 enable_check_r7rs_csc_5 = @enable_check_r7rs_csc_5@
 enable_check_r7rs_csi_5 = @enable_check_r7rs_csi_5@
 enable_check_r7rs_gauche = @enable_check_r7rs_gauche@
+enable_check_r7rs_gsi = @enable_check_r7rs_gsi@
 enable_check_r7rs_guile = @enable_check_r7rs_guile@
 enable_check_r7rs_loko = @enable_check_r7rs_loko@
 enable_check_r7rs_sagittarius = @enable_check_r7rs_sagittarius@
@@ -354,9 +358,9 @@ $(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am  $(am__confi
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign tests/GNUmakefile:tests/Makefile.in'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu tests/GNUmakefile:tests/Makefile.in'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --foreign tests/GNUmakefile:tests/Makefile.in
+	  $(AUTOMAKE) --gnu tests/GNUmakefile:tests/Makefile.in
 GNUmakefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
 	  *config.status*) \
@@ -383,6 +387,8 @@ run-r7rs-chibi.sh: $(top_builddir)/config.status $(srcdir)/run-r7rs-chibi.sh.in
 run-r7rs-csc-5.sh: $(top_builddir)/config.status $(srcdir)/run-r7rs-csc-5.sh.in
 	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@
 run-r7rs-csi-5.sh: $(top_builddir)/config.status $(srcdir)/run-r7rs-csi-5.sh.in
+	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@
+run-r7rs-gsi.sh: $(top_builddir)/config.status $(srcdir)/run-r7rs-gsi.sh.in
 	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@
 run-r7rs-gauche.sh: $(top_builddir)/config.status $(srcdir)/run-r7rs-gauche.sh.in
 	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@

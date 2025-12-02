@@ -119,7 +119,6 @@ $(builddir)/r7rs/pipchix/%.sld: $(srcdir)/r7rs/pipchix/%.sld.m4 \
 		$(M4_PREPROCESS) $(<) > $(@).tmp && \
 		mv $(@){.tmp,}
 
-
 #
 # A way to get names for temporary files.
 #

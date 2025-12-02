@@ -43,6 +43,9 @@ if test "${chem_cv_path_CHICKEN_INSTALL_5_found}" != no; then
     AC_MSG_NOTICE([     to uninstall the ‘pipchix’ egg.])
   fi
 fi
+if test "${chem_cv_path_GSI_found}" != no; then
+  AC_MSG_NOTICE([Gambit Scheme interpreter: ${GSI}])
+fi
 if test "${chem_cv_path_GAUCHE_found}" != no; then
   AC_MSG_NOTICE([Gauche Scheme: ${GAUCHE}])
 fi

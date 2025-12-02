@@ -24,14 +24,13 @@
 ;;;
 
 ;;;
-;;; USE ONLY TRAILING ELLIPSES.
+;;; THESE MACROS USE ONLY TRAILING ELLIPSES.
 ;;;
 ;;; Do not require the extensions of SRFI-46 and R⁷RS. They seem not
 ;;; to be available in Gambit 4.9.7, despite the claim that it
-;;; supports R⁷RS. (On the other hand, Gambit 4.9.7 also seems unable
-;;; to export macros from libraries, so what difference does it make?
-;;; But it would make a difference, for instance, if we provided
-;;; Pipchix macros as ‘include’ files.)
+;;; supports R⁷RS. Gambit 4.9.7 also seems unable to export macros
+;;; from libraries, so let us make the macros available as a file for
+;;; inclusion.
 ;;;
 
 (define-syntax %%nix-set%%add-binding

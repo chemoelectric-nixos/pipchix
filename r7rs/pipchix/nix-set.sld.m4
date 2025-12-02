@@ -31,10 +31,10 @@ m4_include(pipchix/pipchix-includes.m4)
   (import (scheme base))
   (import (pipchix abstract-syntax-tree))
 
-  ;; The following quiets CHICKEN’s warnings about exported macros. A
-  ;; programmer should not use these macros directly.
+  ;; The following is necessary for Gambit (version 4.9.7) and quiets
+  ;; warnings from CHICKEN.
   (cond-expand
-    (chicken
+    ((or gambit chicken)
      (export %%nix-set%%nix-set
              %%nix-set%%nix-set-insert-entry
              %%nix-set%%nix-attributebinding

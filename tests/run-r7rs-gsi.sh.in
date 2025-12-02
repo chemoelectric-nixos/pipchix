@@ -1,0 +1,35 @@
+#!@SHELL@
+#
+# Run a tiny R⁷RS program in the Gambit Scheme interpreter.
+#
+
+prog_scm=`TMPDIR=. mktemp 2>/dev/null || echo tmp."${RANDOM}"`.scm
+
+cat > "${prog_scm}" <<EOF
+(import (scheme base))
+(import (scheme process-context))
+(import (scheme write))
+(import (pipchix base))
+(import (pipchix continuation-capture))
+(import (pipchix abstract-syntax-tree))
+(import (pipchix nix-embed))
+(import (pipchix nix-list))
+(import (pipchix string-manipulation))
+(output-nix-abstract-syntax-tree $1)
+(exit 0)
+EOF
+
+env LC_ALL="@TEST_LOCALE@" \
+    LC_CTYPE="@TEST_LOCALE@" \
+    LANG="@TEST_LOCALE@" \
+    @GSI@ -:r7rs,io-settings=L,search='@abs_top_builddir@/r7rs' \
+      "${prog_scm}"
+
+rm "${prog_scm}"
+
+exit 0
+
+# local variables:
+# mode: shell-script
+# sh-shell: sh
+# end:
