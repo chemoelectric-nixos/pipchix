@@ -44,7 +44,9 @@
 (define-syntax %%nix-set%%nix-attributebinding
   ;;
   ;; Avoid the need for a SRFI-46 ellipsis left of the ==>. Instead
-  ;; recursively rewrite the syntax.
+  ;; recursively rewrite the syntax so it has a trailing ellipsis. The
+  ;; new syntax will have a reversed attribute path inside
+  ;; parentheses.
   ;;
   (syntax-rules ( ==> )
     ;;

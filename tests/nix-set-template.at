@@ -1,4 +1,4 @@
- Copyright © 2025 Barry Schwartz
+# Copyright © 2025 Barry Schwartz
 #
 # This file is part of Pipchix.
 #
@@ -51,6 +51,14 @@ m4_define([sexpr],
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([({·prime'·=·({·a·=·nix_true;·b·=·nix_false;·c·=·nix_null;·})·;·})·])],[])
 ])
+
+m4_define([sexpr],
+  [(nix-set (`a ==> 123)
+            (inherit () `hummingbirds `bluejays "robins" "ducks" `turkeys)
+            (inherit ("bees") "bumble" `honey)
+            (123 <== "b"))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([({·a·=·(123)·;·inherit·hummingbirds·bluejays·robins·ducks·turkeys·;·inherit·(·bees·)·bumble·honey·;·b·=·(123)·;·})·])],[])
 
 AT_CLEANUP
 
