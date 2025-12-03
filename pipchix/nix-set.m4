@@ -81,6 +81,13 @@
                            attrset-node)))
        (nix-attributeset-node-set! attrset inherit-node)))
     ;;
+    ((%%nix-set%%nix-set-insert-entry   ; ‘inherit ...’
+
+      attrset (inherit identifier ...))
+     (syntax-error
+      "did you forget the ‘()’ in ‘inherit ()’?"
+      identifier ...))
+    ;;
     ((%%nix-set%%nix-set-insert-entry   ; (begin ...)
       attrset (begin entry ...))
      ;; Being able to group multiple entries into a single

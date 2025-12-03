@@ -60,6 +60,9 @@ m4_define([sexpr],
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([({·a·=·(123)·;·inherit·hummingbirds·bluejays·robins·ducks·turkeys·;·inherit·(·bees·)·bumble·honey·;·b·=·(123)·;·})·])],[])
 
+m4_define([sexpr],[(nix-set (inherit "a" "b"))]) dnl  I do not know how to test this.
+check_unquoted([run_scheme 'sexpr'],[ignore],[ignore],[ignore])
+
 AT_CLEANUP
 
 # local variables:
