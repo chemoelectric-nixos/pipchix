@@ -23,7 +23,7 @@ env LC_ALL="@TEST_LOCALE@" \
     LC_CTYPE="@TEST_LOCALE@" \
     LANG="@TEST_LOCALE@" \
     @GSI@ -:r7rs,io-settings=L,search='@abs_top_builddir@/r7rs' \
-      "${prog_scm}"
+      -f "${prog_scm}"
 
 rm "${prog_scm}"
 

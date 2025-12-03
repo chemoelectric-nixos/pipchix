@@ -30,6 +30,7 @@ m4_define([run_r7rs_chibi],["${abs_builddir}"/run-r7rs-chibi.sh])
 m4_define([run_r7rs_csc_5],["${abs_builddir}"/run-r7rs-csc-5.sh])
 m4_define([run_r7rs_csi_5],["${abs_builddir}"/run-r7rs-csi-5.sh])
 m4_define([run_r7rs_gsi],["${abs_builddir}"/run-r7rs-gsi.sh])
+dnl m4_define([run_r7rs_gsc],["${abs_builddir}"/run-r7rs-gsc.sh])
 m4_define([run_r7rs_gauche],["${abs_builddir}"/run-r7rs-gauche.sh])
 m4_define([run_r6rs_guile],["${abs_builddir}"/run-r6rs-guile.sh])
 m4_define([run_r7rs_guile],["${abs_builddir}"/run-r7rs-guile.sh])
@@ -83,6 +84,14 @@ tests_template([gsi         ],[Gambit Scheme interpreter (R⁷RS)],
   [R7RS r7rs Gambit gambit gambit-scheme gambitscheme gsi
    interpreter],
   [${enable_check_r7rs_gsi}],[run_r7rs_gsi])
+
+dnl m4_define([implementation],[gsc])
+dnl m4_define([rnrs_version],[7])
+dnl m4_define([u8_bytevec],[u8_bytevec_r7rs])
+dnl tests_template([gsc         ],[Gambit Scheme compiler (R⁷RS)],
+dnl   [R7RS r7rs Gambit gambit gambit-scheme gambitscheme gsc
+dnl    compiler],
+dnl   [${enable_check_r7rs_gsc}],[run_r7rs_gsc])
 
 m4_define([implementation],[gauche])
 m4_define([rnrs_version],[7])

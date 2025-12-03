@@ -1191,43 +1191,43 @@ case $at_groups in #(
   * ) at_print_banners=false ;;
 esac
 # Text for banner N, set to a single space once printed.
-# Banner 1. testsuite.at:50
+# Banner 1. testsuite.at:51
 # Category starts at test group 1.
 at_banner_text_1="Chez Scheme (R⁶RS)"
-# Banner 2. testsuite.at:57
+# Banner 2. testsuite.at:58
 # Category starts at test group 17.
 at_banner_text_2="Chibi Scheme (R⁷RS)"
-# Banner 3. testsuite.at:64
+# Banner 3. testsuite.at:65
 # Category starts at test group 33.
 at_banner_text_3="CHICKEN 5 compiler (R⁷RS)"
-# Banner 4. testsuite.at:73
+# Banner 4. testsuite.at:74
 # Category starts at test group 49.
 at_banner_text_4="CHICKEN 5 interpreter (R⁷RS)"
-# Banner 5. testsuite.at:82
+# Banner 5. testsuite.at:83
 # Category starts at test group 65.
 at_banner_text_5="Gambit Scheme interpreter (R⁷RS)"
-# Banner 6. testsuite.at:90
+# Banner 6. testsuite.at:99
 # Category starts at test group 81.
 at_banner_text_6="Gauche Scheme (R⁷RS)"
-# Banner 7. testsuite.at:98
+# Banner 7. testsuite.at:107
 # Category starts at test group 97.
 at_banner_text_7="Guile (R⁶RS)"
-# Banner 8. testsuite.at:105
+# Banner 8. testsuite.at:114
 # Category starts at test group 113.
 at_banner_text_8="Guile (R⁷RS)"
-# Banner 9. testsuite.at:112
+# Banner 9. testsuite.at:121
 # Category starts at test group 129.
 at_banner_text_9="Loko Scheme (R⁶RS)"
-# Banner 10. testsuite.at:119
+# Banner 10. testsuite.at:128
 # Category starts at test group 145.
 at_banner_text_10="Loko Scheme (R⁷RS)"
-# Banner 11. testsuite.at:126
+# Banner 11. testsuite.at:135
 # Category starts at test group 161.
 at_banner_text_11="Racket (R⁶RS)"
-# Banner 12. testsuite.at:133
+# Banner 12. testsuite.at:142
 # Category starts at test group 177.
 at_banner_text_12="Sagittarius Scheme (R⁶RS)"
-# Banner 13. testsuite.at:141
+# Banner 13. testsuite.at:150
 # Category starts at test group 193.
 at_banner_text_13="Sagittarius Scheme (R⁷RS)"
 

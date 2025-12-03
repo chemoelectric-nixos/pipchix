@@ -36,3 +36,15 @@ CHEM_PATH_PROGS_CACHED_AND_PRECIOUS([GSI],
     fi
   ])
 AM_CONDITIONAL([GSI],[test "${chem_cv_path_GSI_found}" != no])
+
+dnl CHEM_PATH_PROGS_CACHED_AND_PRECIOUS([GSC],
+dnl   [Gambit Scheme compiler],[gsc],
+dnl   [
+dnl     if LC_ALL=C LANG=C ${ac_path_GSC} -h 2>&1 | \
+dnl       LC_ALL=C LANG=C ${GREP} '^This is the Gambit Scheme compiler' \
+dnl                2> /dev/null > /dev/null; then
+dnl         ac_cv_path_GSC="${ac_path_GSC}"
+dnl         ac_path_GSC_found=:
+dnl     fi
+dnl   ])
+dnl AM_CONDITIONAL([GSC],[test "${chem_cv_path_GSC_found}" != no])

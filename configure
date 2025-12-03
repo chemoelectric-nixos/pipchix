@@ -6665,6 +6665,7 @@ else
 fi
 
 
+
 # Check whether --enable-check-r7rs-gauche was given.
 if test ${enable_check_r7rs_gauche+y}
 then :
@@ -7655,6 +7656,7 @@ else
   GSI_TRUE='#'
   GSI_FALSE=
 fi
+
 
 
 # Copyright © 2025 Barry Schwartz

@@ -42,7 +42,7 @@ m4_include(pipchix/pipchix-includes.m4)
              %%nix-set%%add-binding))
     (else))
 
-  (begin))
+  (begin #f))
 
 ;;; local variables:
 ;;; mode: scheme

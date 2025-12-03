@@ -1,0 +1,61 @@
+#!@SHELL@
+#
+# Run a tiny R⁷RS program in the Gambit Scheme interpreter.
+#
+
+#
+# FIXME: FIGURE OUT HOW TO COMPILE R7RS CODE WITH GAMBIT.
+#
+
+tmpnam=`basename $(TMPDIR=. mktemp) 2>/dev/null || echo tmp."${RANDOM}"`
+
+export LC_ALL="@TEST_LOCALE@"
+export LC_CTYPE="@TEST_LOCALE@"
+export LANG="@TEST_LOCALE@"
+
+modules=',srfi-111;,continuation-capture;,string-manipulation;,abstract-syntax-tree;,nix-embed;,nix-list;,nix-set;,base;'
+
+real_r7rsdir='@abs_top_builddir@/r7rs'
+#####r7rsdir=`realpath .`/"${tmpnam}"
+r7rsdir=`realpath .`/temporary
+
+rm -R -f "${r7rsdir}"
+@MKDIR_P@ "${r7rsdir}"/pipchix
+
+cd "${r7rsdir}"
+
+cat > prog.scm <<EOF
+(import (scheme base))
+(import (scheme process-context))
+(import (scheme write))
+(import (pipchix base))
+(import (pipchix continuation-capture))
+(import (pipchix abstract-syntax-tree))
+(import (pipchix nix-embed))
+(import (pipchix nix-list))
+(import (pipchix string-manipulation))
+(output-nix-abstract-syntax-tree $1)
+EOF
+
+for mod in $(echo ${modules} | sed -e 's|,| |g' -e 's|;| |g'); do
+    (cd pipchix && @LN_S@ "${real_r7rsdir}/pipchix/${mod}.sld" .)
+done
+
+flags="-:r7rs,io-settings=L,search=. -f -warnings"
+
+@GSC@ ${flags} -link -o pipchix/libpipchix.c \
+    $(echo ${modules} | sed -e 's|,| pipchix/|g' -e 's|;|.sld |g')
+@GSC@ ${flags} -obj pipchix/libpipchix.c \
+    $(echo ${modules} | sed -e 's|,| pipchix/|g' -e 's|;|.c |g')
+@GSC@ ${flags} -ld-options '-Wall -Wl,--allow-multiple-definition' \
+    -exe prog.scm pipchix/libpipchix.o \
+    $(echo ${modules} | sed -e 's|,| pipchix/|g' -e 's|;|.o |g')
+
+./prog
+
+exit 0
+
+# local variables:
+# mode: shell-script
+# sh-shell: sh
+# end:

@@ -283,6 +283,9 @@ config.status: tests/run-r7rs-chibi.sh.in
 config.status: tests/run-r7rs-csc-5.sh.in
 config.status: tests/run-r7rs-csi-5.sh.in
 
+# config.status: tests/run-r7rs-gsc.sh.in
+config.status: tests/run-r7rs-gsi.sh.in
+
 config.status: tests/run-r7rs-gauche.sh.in
 
 config.status: tests/run-r6rs-guile.sh.in

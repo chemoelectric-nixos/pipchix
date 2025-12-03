@@ -1312,6 +1312,14 @@ chicken-5-egg-stamp: $(CHICKEN_5_EGGFILES)
 
 @CHIBI_SCHEME_TRUE@@ENABLE_CHECK_R7RS_CHIBI_TRUE@check: $(R7RS_SCHEME)
 
+@ENABLE_CHECK_R7RS_GSI_TRUE@@GSI_TRUE@check: $(R7RS_SCHEME)
+
+# if GSC
+# if ENABLE_CHECK_R7RS_GSC
+# check: $(R7RS_SCHEME)
+# endif ENABLE_CHECK_R7RS_GSC
+# endif GSC
+
 @ENABLE_CHECK_R7RS_GAUCHE_TRUE@@GAUCHE_TRUE@check: $(R7RS_SCHEME)
 
 @ENABLE_CHECK_R6RS_GUILE_TRUE@@GUILE_TRUE@check: $(R6RS_SCHEME)
@@ -1339,6 +1347,9 @@ config.status: tests/run-r7rs-chibi.sh.in
 
 config.status: tests/run-r7rs-csc-5.sh.in
 config.status: tests/run-r7rs-csi-5.sh.in
+
+# config.status: tests/run-r7rs-gsc.sh.in
+config.status: tests/run-r7rs-gsi.sh.in
 
 config.status: tests/run-r7rs-gauche.sh.in
 
