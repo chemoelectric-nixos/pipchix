@@ -40,7 +40,7 @@ m4_define([sexpr],[(make-nix-data-node "➕➖➗✖️🟰")])
 check_unquoted([run_scheme 'sexpr'],[0],[("➕➖➗✖️🟰")
 ],[])
 
-m4_define([sexpr],[(make-nix-data-node `())])
+m4_define([sexpr],[(make-nix-data-node nix-null)])
 check_unquoted([run_scheme 'sexpr'],[0],[nix_null],[])
 
 AT_CLEANUP

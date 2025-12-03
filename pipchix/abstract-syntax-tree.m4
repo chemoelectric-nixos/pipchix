@@ -25,15 +25,50 @@
 
 m4_string_reverse_concatenate
 
+(define %%the-nix-null '#(nix-null))    ; An arbitrary unique object.
+
 (define-record-type <nix-embedded-node> ; Embedded Nix code.
   (make-nix-embedded-node code)
   nix-embedded-node?
   (code nix-embedded-node-ref))
 
-(define-record-type <nix-data-node> ; Boolean, number, string, null.
-  (make-nix-data-node data)     ; (A null list represents a Nix null.)
+(define-record-type <nix-data-node>
+  ;; boolean, number, string, %%the-nix-null
+  (%%make-nix-data-node data)
   nix-data-node?
   (data nix-data-node-ref))
+
+(define (make-nix-data-node data)
+  ;; This is a convenience. It lets you treat nix-null the same was as
+  ;; a boolean, number, or string.
+  (cond ((nix-null? data) (%%make-nix-data-node %%the-nix-null))
+        ((or (eq? #f data)
+             (eq? #t data)
+             (eq? %%the-nix-null data)
+             (string? data)
+             (number? data)) (%%make-nix-data-node data))
+        (else (error "incorrect type" data))))
+
+(define nix-false (%%make-nix-data-node #f))
+(define nix-true (%%make-nix-data-node #t))
+(define nix-null (%%make-nix-data-node %%the-nix-null))
+
+(define (nix-false? obj)
+  (and (nix-data-node? obj)
+       (eq? #f (nix-data-node-ref obj))))
+
+(define (nix-true? obj)
+  (and (nix-data-node? obj)
+       (eq? #t (nix-data-node-ref obj))))
+
+(define (nix-boolean? obj)
+  (and (nix-data-node? obj)
+       (let ((b (nix-data-node-ref obj)))
+         (or (eq? b #f) (eq? b #t)))))
+
+(define (nix-null? obj)
+  (and (nix-data-node? obj)
+       (eq? %%the-nix-null (nix-data-node-ref obj))))
 
 (define-record-type <nix-path-node>
   (make-nix-path-node path)
@@ -99,7 +134,7 @@ m4_string_reverse_concatenate
   (cond ((or (string? value)
              (number? value)
              (boolean? value)
-             (eq? '() value))
+             (eq? %%the-nix-null value))
          (make-nix-data-node value))
         ((symbol? value)
          (make-nix-data-node (symbol->string value)))
@@ -143,7 +178,7 @@ m4_string_reverse_concatenate
 
 (define (%%output-nix-data-node ast outp)
   (let ((data (nix-data-node-ref ast)))
-    (cond ((null? data)
+    (cond ((eq? %%the-nix-null data)
            (outp "(builtins.null)\n"))
           ((eq? #f data)
            (outp "(builtins.false)\n"))

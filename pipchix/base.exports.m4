@@ -23,6 +23,23 @@
 ;;; WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ;;;
 
+;;; Output Nix AST to a procedure, and by default to
+;;; (current-output-port).
+output-nix-abstract-syntax-tree
+
+;;; Transform Scheme objects to Nix AST.
+scheme->nix
+
+;;; Some Nix builtins.
+nix-false ;; (scheme->nix #f)
+nix-true  ;; (scheme->nix #t)
+nix-null  ;; (scheme->nix '())
+
+nix-false?   ;; Is an object nix-false ?
+nix-true?    ;; Is an object nix-true ?
+nix-boolean? ;; Is an object nix-false or nix-true ?
+nix-null?    ;; Is an object nix-null ?
+
 ;;; Nix list from elements.
 nix-list
 
@@ -54,7 +71,6 @@ with-shell-print-format
 ;;; Set a new default format for shell-print, within the current
 ;;; dynamic context.
 set-shell-print-format!
-
 
 ;;; local variables:
 ;;; mode: scheme

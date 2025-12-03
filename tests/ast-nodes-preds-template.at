@@ -88,7 +88,16 @@ m4_define([sexpr],[
 (make-nix-data-node
  (nix-attributepath-node?
   (let ((key (list->nix-attributepath-node `(a b c)))
-        (value (make-nix-data-node `())))
+        (value (make-nix-data-node nix-null)))
+    (make-nix-attributebinding-node key value))))
+])
+check_unquoted([run_scheme 'sexpr'],[0],[nix_false],[])
+
+m4_define([sexpr],[
+(make-nix-data-node
+ (nix-attributepath-node?
+  (let ((key (list->nix-attributepath-node `(a b c)))
+        (value nix-null))
     (make-nix-attributebinding-node key value))))
 ])
 check_unquoted([run_scheme 'sexpr'],[0],[nix_false],[])
@@ -97,7 +106,16 @@ m4_define([sexpr],[
 (make-nix-data-node
  (nix-attributebinding-node?
   (let ((key (list->nix-attributepath-node `(a b c)))
-        (value (make-nix-data-node `())))
+        (value (make-nix-data-node nix-null)))
+    (make-nix-attributebinding-node key value))))
+])
+check_unquoted([run_scheme 'sexpr'],[0],[nix_true],[])
+
+m4_define([sexpr],[
+(make-nix-data-node
+ (nix-attributebinding-node?
+  (let ((key (list->nix-attributepath-node `(a b c)))
+        (value nix-null))
     (make-nix-attributebinding-node key value))))
 ])
 check_unquoted([run_scheme 'sexpr'],[0],[nix_true],[])

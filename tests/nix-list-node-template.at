@@ -30,7 +30,7 @@ m4_define([sexpr],
   [(list->nix-list-node
     (map scheme->nix
      `("🐶" 🐱 🐭 🐹 "🐰" 🦊 🐻 🐼 🐯 🦁 🐸 🐮
-       1234 @%:@f @%:@t () -125e-1)))])
+       1234 @%:@f @%:@t ,nix-null -125e-1)))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl(@<:@·("🐶")·("🐱")·("🐭")·("🐹")·("🐰")·("🦊")·("🐻")·("🐼")·("🐯")·("🦁")·("🐸")·("🐮")·(1234)·nix_false[]nix_true[]nix_null[](-12.5)·@:>@·)],[])
 

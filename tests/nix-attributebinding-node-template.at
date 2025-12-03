@@ -36,7 +36,7 @@ check_unquoted([run_scheme 'sexpr'],[0],
 
 m4_define([sexpr],[
 (let ((key (list->nix-attributepath-node `(a b c)))
-      (value (make-nix-data-node `())))
+      (value (make-nix-data-node nix-null)))
   (make-nix-attributebinding-node key value))
 ])
 check_unquoted([run_scheme 'sexpr'],[0],

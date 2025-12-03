@@ -4,6 +4,15 @@ nix-embedded-node?
 make-nix-data-node
 nix-data-node?
 
+nix-false
+nix-true
+nix-null
+
+nix-false?
+nix-true?
+nix-boolean?
+nix-null?
+
 make-nix-path-node
 nix-path-node?
 

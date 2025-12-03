@@ -34,6 +34,9 @@ m4_include(pipchix/pipchix-includes.m4)
           (pipchix abstract-syntax-tree)
           (pipchix string-manipulation)
           (pipchix srfi-39))
+
+  m4_include(pipchix/base.m4)
+
   )
 
 ;;; local variables:

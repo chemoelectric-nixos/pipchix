@@ -47,7 +47,9 @@ dnl I want to test the symbol prime' but it is difficult to get past
 dnl shell quotes.
 m4_define([primevar],[|prime\x27;|]) dnl This is R⁷RS notation for the symbol prime'
 m4_define([sexpr],
-  [(nix-set ((quote primevar) ==> (nix-set (`a ==> @%:@t)(`b ==> @%:@f)(`c ==> `()))))])
+  [(nix-set ((quote primevar) ==> (nix-set (`a ==> nix-true)
+                                           (`b ==> nix-false)
+                                           (`c ==> nix-null))))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([({·prime'·=·({·a·=·nix_true;·b·=·nix_false;·c·=·nix_null;·})·;·})·])],[])
 ])
