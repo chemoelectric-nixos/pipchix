@@ -60,8 +60,16 @@ m4_define([sexpr],
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([({·a·=·(123)·;·inherit·hummingbirds·bluejays·robins·ducks·turkeys·;·inherit·(·bees·)·bumble·honey·;·b·=·(123)·;·})·])],[])
 
-m4_define([sexpr],[(nix-set (inherit "a" "b"))]) dnl  I do not know how to test this.
-check_unquoted([run_scheme 'sexpr'],[ignore],[ignore],[ignore])
+dnl m4_define([sexpr],[(nix-set (inherit "a" "b"))]) dnl  I do not know how to test this.
+dnl check_unquoted([run_scheme 'sexpr'],[ignore],[ignore],[ignore])
+
+m4_define([sexpr],
+  [(nix-set
+    (begin)
+    (begin (inherit () "a" "b")
+           (`c ==> `d)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([({·inherit·a·b·;·c·=·("d")·;·})·])],[])
 
 AT_CLEANUP
 
