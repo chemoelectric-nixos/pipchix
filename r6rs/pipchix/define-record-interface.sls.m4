@@ -23,18 +23,15 @@
 ;;;
 m4_include(pipchix/pipchix-includes.m4)
 
-(library (pipchix abstract-syntax-tree)
+(library (pipchix define-record-interface)
 
-  (export m4_include(pipchix/abstract-syntax-tree.exports.m4))
+  (export m4_include(pipchix/define-record-interface.exports.m4))
 
   (import (rnrs base (6))
           (rnrs control (6))
-          (rnrs io simple (6))
-          (rnrs mutable-strings (6))
-          (rnrs unicode (6))
-          (pipchix define-record-interface))
+          (pipchix srfi-9))
 
-  m4_include(pipchix/abstract-syntax-tree.m4)
+  m4_include(pipchix/define-record-interface.m4)
 
   )
 

@@ -27,69 +27,6 @@ m4_string_reverse_concatenate
 
 (define the-nix-null%% '#(nix-null))    ; An arbitrary unique object.
 
-(define-syntax define-record-interface
-  (syntax-rules ()
-    ((_ type-name type-name? constructor predicate access)
-     (begin
-       (define-record-type type-name
-         (make-type-name variety fields)
-         type-name?
-         (variety variety-ref)
-         (fields access))
-       (define (constructor variety)
-         (lambda fields
-           (make-type-name variety (list->vector fields))))
-       (define predicate
-         (case-lambda
-           ((variety)
-            ;; The default ‘eq?’ assumes the most common type for
-            ;; ‘variety’ is a symbol.
-            (lambda (obj)
-              (and (type-name? obj)
-                   (eq? (variety-ref obj) variety))))
-           ((variety equiv?)
-            (lambda (obj)
-              (and (type-name? obj)
-                   (equiv? (variety-ref obj) variety))))
-           ((variety obj check?)
-            (and (type-name? obj)
-                 (check? (variety-ref obj) obj variety)))))))))
-
-(define-syntax handle-record-interface-variety-rule
-  (syntax-rules ( constructor>
-                  predicate>
-                  getter> setter> )
-    ((_ variety constructor predicate access
-        (constructor> name proc))
-     (define name (proc (constructor 'variety))))
-    ((_ variety constructor predicate access
-        (constructor> name))
-     (define name (constructor 'variety)))
-    ((_ variety constructor predicate access
-        (predicate> name))
-     (define name (predicate 'variety)))
-    ((_ variety constructor predicate access
-        (getter> i name))
-     (define name
-       (lambda (obj)
-         (vector-ref (access obj) (- i 1)))))
-    ((_ variety constructor predicate access
-        (setter> i name))
-     (define name
-       (lambda (obj value)
-         (vector-set! (access obj) (- i 1) value))))))
-
-(define-syntax define-record-interface-variety
-  (syntax-rules ()
-    ((_ variety constructor predicate access
-        rule
-        ...)
-     (begin
-       (handle-record-interface-variety-rule
-        variety constructor predicate access
-        rule)
-       ...))))
-
 (define-record-interface <nix-node>
   nix-node?
   nix-node-constructor

@@ -1,4 +1,3 @@
-#!r6rs
 ;;;
 ;;; Copyright © 2025 Barry Schwartz
 ;;; 
@@ -23,23 +22,28 @@
 ;;;
 m4_include(pipchix/pipchix-includes.m4)
 
-(library (pipchix abstract-syntax-tree)
+(define-library (pipchix define-record-interface)
 
-  (export m4_include(pipchix/abstract-syntax-tree.exports.m4))
+  (export m4_include(pipchix/define-record-interface.exports.m4))
 
-  (import (rnrs base (6))
-          (rnrs control (6))
-          (rnrs io simple (6))
-          (rnrs mutable-strings (6))
-          (rnrs unicode (6))
-          (pipchix define-record-interface))
+  (import (scheme base))
+  (import (scheme case-lambda))
 
-  m4_include(pipchix/abstract-syntax-tree.m4)
+  ;; The following is necessary for Gambit (version 4.9.7) and quiets
+  ;; warnings from CHICKEN.
+  (cond-expand
+    ((or gambit chicken)
+     (export handle-record-interface-variety-rule%%%%))
+    (else))
 
-  )
+  (begin
+
+    m4_include(pipchix/define-record-interface.m4)
+
+    ))
 
 ;;; local variables:
 ;;; mode: scheme
-;;; geiser-scheme-implementation: chez
+;;; geiser-scheme-implementation: chibi
 ;;; coding: utf-8
 ;;; end:
