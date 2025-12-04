@@ -613,214 +613,214 @@ at_color=no
 # numerical order.
 at_format='???'
 # Description of all the test groups.
-at_help_all="1;continuation-capture-template.at:25;chez                   continuation-capture;r6rs chez chez-scheme chezscheme continuation continuations continuation-capture continuation-graft continuation-return call/cc;
-2;nix-embedded-node-template.at:25;chez                    <nix-embedded-node>;r6rs chez chez-scheme chezscheme nix-embedded-node;
-3;nix-data-node-template.at:25;chez                        <nix-data-node>;r6rs chez chez-scheme chezscheme nix-data-node;
-4;nix-path-node-template.at:25;chez                        <nix-path-node>;r6rs chez chez-scheme chezscheme nix-path-node;
-5;nix-attributepath-node-template.at:25;chez               <nix-attributepath-node>;r6rs chez chez-scheme chezscheme nix-attributepath-node;
-6;nix-attributebinding-node-template.at:25;chez            <nix-attributebinding-node>;r6rs chez chez-scheme chezscheme nix-attributebinding-node;
-7;nix-inherit-node-template.at:25;chez                     <nix-inherit-node>;r6rs chez chez-scheme chezscheme nix-inherit-node;
-8;nix-attributeset-node-template.at:25;chez                <nix-attributeset-node>;r6rs chez chez-scheme chezscheme nix-attributeset-node;
-9;nix-list-node-template.at:25;chez                        <nix-list-node>;r6rs chez chez-scheme chezscheme nix-list-node;
+at_help_all="1;continuation-capture-template.at:25;chez                   continuation-capture;r6rs chez continuation continuations continuation-capture continuation-graft continuation-return call/cc;
+2;nix-embedded-node-template.at:25;chez                    <nix-embedded-node>;r6rs chez nix-embedded-node;
+3;nix-data-node-template.at:25;chez                        <nix-data-node>;r6rs chez nix-data-node;
+4;nix-path-node-template.at:25;chez                        <nix-path-node>;r6rs chez nix-path-node;
+5;nix-attributepath-node-template.at:25;chez               <nix-attributepath-node>;r6rs chez nix-attributepath-node;
+6;nix-attributebinding-node-template.at:25;chez            <nix-attributebinding-node>;r6rs chez nix-attributebinding-node;
+7;nix-inherit-node-template.at:25;chez                     <nix-inherit-node>;r6rs chez nix-inherit-node;
+8;nix-attributeset-node-template.at:25;chez                <nix-attributeset-node>;r6rs chez nix-attributeset-node;
+9;nix-list-node-template.at:25;chez                        <nix-list-node>;r6rs chez nix-list-node;
 10;ast-nodes-preds-template.at:25;chez                    AST node predicates;;
-11;nix-embed-template.at:25;chez                    (pipchix nix-embed);r6rs chez chez-scheme chezscheme nix-embed;
-12;nix-list-template.at:25;chez                     (pipchix nix-list);r6rs chez chez-scheme chezscheme nix-list;
-13;nix-set-template.at:25;chez                      (pipchix nix-set);r6rs chez chez-scheme chezscheme nix-set nix-setrec;
-14;base64-utf8-template.at:25;chez                            base64-utf8;r6rs chez chez-scheme chezscheme string-manipulation string strings base64 base64-utf8 utf8;
-15;escaped-utf8-template.at:25;chez                           escaped-utf8;r6rs chez chez-scheme chezscheme string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
-16;shell-print-template.at:25;chez                            shell-print;r6rs chez chez-scheme chezscheme string-manipulation string strings print shell utf8 shell-print;
-17;continuation-capture-template.at:25;chibi                  continuation-capture;r7rs chibi chibi-scheme chibischeme continuation continuations continuation-capture continuation-graft continuation-return call/cc;
-18;nix-embedded-node-template.at:25;chibi                   <nix-embedded-node>;r7rs chibi chibi-scheme chibischeme nix-embedded-node;
-19;nix-data-node-template.at:25;chibi                       <nix-data-node>;r7rs chibi chibi-scheme chibischeme nix-data-node;
-20;nix-path-node-template.at:25;chibi                       <nix-path-node>;r7rs chibi chibi-scheme chibischeme nix-path-node;
-21;nix-attributepath-node-template.at:25;chibi              <nix-attributepath-node>;r7rs chibi chibi-scheme chibischeme nix-attributepath-node;
-22;nix-attributebinding-node-template.at:25;chibi           <nix-attributebinding-node>;r7rs chibi chibi-scheme chibischeme nix-attributebinding-node;
-23;nix-inherit-node-template.at:25;chibi                    <nix-inherit-node>;r7rs chibi chibi-scheme chibischeme nix-inherit-node;
-24;nix-attributeset-node-template.at:25;chibi               <nix-attributeset-node>;r7rs chibi chibi-scheme chibischeme nix-attributeset-node;
-25;nix-list-node-template.at:25;chibi                       <nix-list-node>;r7rs chibi chibi-scheme chibischeme nix-list-node;
+11;nix-embed-template.at:25;chez                    (pipchix nix-embed);r6rs chez nix-embed;
+12;nix-list-template.at:25;chez                     (pipchix nix-list);r6rs chez nix-list;
+13;nix-set-template.at:25;chez                      (pipchix nix-set);r6rs chez nix-set nix-setrec;
+14;base64-utf8-template.at:25;chez                            base64-utf8;r6rs chez string-manipulation string strings base64 base64-utf8 utf8;
+15;escaped-utf8-template.at:25;chez                           escaped-utf8;r6rs chez string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
+16;shell-print-template.at:25;chez                            shell-print;r6rs chez string-manipulation string strings print shell utf8 shell-print;
+17;continuation-capture-template.at:25;chibi                  continuation-capture;r7rs chibi continuation continuations continuation-capture continuation-graft continuation-return call/cc;
+18;nix-embedded-node-template.at:25;chibi                   <nix-embedded-node>;r7rs chibi nix-embedded-node;
+19;nix-data-node-template.at:25;chibi                       <nix-data-node>;r7rs chibi nix-data-node;
+20;nix-path-node-template.at:25;chibi                       <nix-path-node>;r7rs chibi nix-path-node;
+21;nix-attributepath-node-template.at:25;chibi              <nix-attributepath-node>;r7rs chibi nix-attributepath-node;
+22;nix-attributebinding-node-template.at:25;chibi           <nix-attributebinding-node>;r7rs chibi nix-attributebinding-node;
+23;nix-inherit-node-template.at:25;chibi                    <nix-inherit-node>;r7rs chibi nix-inherit-node;
+24;nix-attributeset-node-template.at:25;chibi               <nix-attributeset-node>;r7rs chibi nix-attributeset-node;
+25;nix-list-node-template.at:25;chibi                       <nix-list-node>;r7rs chibi nix-list-node;
 26;ast-nodes-preds-template.at:25;chibi                   AST node predicates;;
-27;nix-embed-template.at:25;chibi                   (pipchix nix-embed);r7rs chibi chibi-scheme chibischeme nix-embed;
-28;nix-list-template.at:25;chibi                    (pipchix nix-list);r7rs chibi chibi-scheme chibischeme nix-list;
-29;nix-set-template.at:25;chibi                     (pipchix nix-set);r7rs chibi chibi-scheme chibischeme nix-set nix-setrec;
-30;base64-utf8-template.at:25;chibi                           base64-utf8;r7rs chibi chibi-scheme chibischeme string-manipulation string strings base64 base64-utf8 utf8;
-31;escaped-utf8-template.at:25;chibi                          escaped-utf8;r7rs chibi chibi-scheme chibischeme string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
-32;shell-print-template.at:25;chibi                           shell-print;r7rs chibi chibi-scheme chibischeme string-manipulation string strings print shell utf8 shell-print;
-33;continuation-capture-template.at:25;csc-5                  continuation-capture;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler continuation continuations continuation-capture continuation-graft continuation-return call/cc;
-34;nix-embedded-node-template.at:25;csc-5                   <nix-embedded-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler nix-embedded-node;
-35;nix-data-node-template.at:25;csc-5                       <nix-data-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler nix-data-node;
-36;nix-path-node-template.at:25;csc-5                       <nix-path-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler nix-path-node;
-37;nix-attributepath-node-template.at:25;csc-5              <nix-attributepath-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler nix-attributepath-node;
-38;nix-attributebinding-node-template.at:25;csc-5           <nix-attributebinding-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler nix-attributebinding-node;
-39;nix-inherit-node-template.at:25;csc-5                    <nix-inherit-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler nix-inherit-node;
-40;nix-attributeset-node-template.at:25;csc-5               <nix-attributeset-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler nix-attributeset-node;
-41;nix-list-node-template.at:25;csc-5                       <nix-list-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler nix-list-node;
+27;nix-embed-template.at:25;chibi                   (pipchix nix-embed);r7rs chibi nix-embed;
+28;nix-list-template.at:25;chibi                    (pipchix nix-list);r7rs chibi nix-list;
+29;nix-set-template.at:25;chibi                     (pipchix nix-set);r7rs chibi nix-set nix-setrec;
+30;base64-utf8-template.at:25;chibi                           base64-utf8;r7rs chibi string-manipulation string strings base64 base64-utf8 utf8;
+31;escaped-utf8-template.at:25;chibi                          escaped-utf8;r7rs chibi string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
+32;shell-print-template.at:25;chibi                           shell-print;r7rs chibi string-manipulation string strings print shell utf8 shell-print;
+33;continuation-capture-template.at:25;csc-5                  continuation-capture;r7rs chicken chicken-5 csc csc-5 compiler continuation continuations continuation-capture continuation-graft continuation-return call/cc;
+34;nix-embedded-node-template.at:25;csc-5                   <nix-embedded-node>;r7rs chicken chicken-5 csc csc-5 compiler nix-embedded-node;
+35;nix-data-node-template.at:25;csc-5                       <nix-data-node>;r7rs chicken chicken-5 csc csc-5 compiler nix-data-node;
+36;nix-path-node-template.at:25;csc-5                       <nix-path-node>;r7rs chicken chicken-5 csc csc-5 compiler nix-path-node;
+37;nix-attributepath-node-template.at:25;csc-5              <nix-attributepath-node>;r7rs chicken chicken-5 csc csc-5 compiler nix-attributepath-node;
+38;nix-attributebinding-node-template.at:25;csc-5           <nix-attributebinding-node>;r7rs chicken chicken-5 csc csc-5 compiler nix-attributebinding-node;
+39;nix-inherit-node-template.at:25;csc-5                    <nix-inherit-node>;r7rs chicken chicken-5 csc csc-5 compiler nix-inherit-node;
+40;nix-attributeset-node-template.at:25;csc-5               <nix-attributeset-node>;r7rs chicken chicken-5 csc csc-5 compiler nix-attributeset-node;
+41;nix-list-node-template.at:25;csc-5                       <nix-list-node>;r7rs chicken chicken-5 csc csc-5 compiler nix-list-node;
 42;ast-nodes-preds-template.at:25;csc-5                   AST node predicates;;
-43;nix-embed-template.at:25;csc-5                   (pipchix nix-embed);r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler nix-embed;
-44;nix-list-template.at:25;csc-5                    (pipchix nix-list);r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler nix-list;
-45;nix-set-template.at:25;csc-5                     (pipchix nix-set);r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler nix-set nix-setrec;
-46;base64-utf8-template.at:25;csc-5                           base64-utf8;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler string-manipulation string strings base64 base64-utf8 utf8;
-47;escaped-utf8-template.at:25;csc-5                          escaped-utf8;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
-48;shell-print-template.at:25;csc-5                           shell-print;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5 compiler string-manipulation string strings print shell utf8 shell-print;
-49;continuation-capture-template.at:25;csi-5                  continuation-capture;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter continuation continuations continuation-capture continuation-graft continuation-return call/cc;
-50;nix-embedded-node-template.at:25;csi-5                   <nix-embedded-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter nix-embedded-node;
-51;nix-data-node-template.at:25;csi-5                       <nix-data-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter nix-data-node;
-52;nix-path-node-template.at:25;csi-5                       <nix-path-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter nix-path-node;
-53;nix-attributepath-node-template.at:25;csi-5              <nix-attributepath-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter nix-attributepath-node;
-54;nix-attributebinding-node-template.at:25;csi-5           <nix-attributebinding-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter nix-attributebinding-node;
-55;nix-inherit-node-template.at:25;csi-5                    <nix-inherit-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter nix-inherit-node;
-56;nix-attributeset-node-template.at:25;csi-5               <nix-attributeset-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter nix-attributeset-node;
-57;nix-list-node-template.at:25;csi-5                       <nix-list-node>;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter nix-list-node;
+43;nix-embed-template.at:25;csc-5                   (pipchix nix-embed);r7rs chicken chicken-5 csc csc-5 compiler nix-embed;
+44;nix-list-template.at:25;csc-5                    (pipchix nix-list);r7rs chicken chicken-5 csc csc-5 compiler nix-list;
+45;nix-set-template.at:25;csc-5                     (pipchix nix-set);r7rs chicken chicken-5 csc csc-5 compiler nix-set nix-setrec;
+46;base64-utf8-template.at:25;csc-5                           base64-utf8;r7rs chicken chicken-5 csc csc-5 compiler string-manipulation string strings base64 base64-utf8 utf8;
+47;escaped-utf8-template.at:25;csc-5                          escaped-utf8;r7rs chicken chicken-5 csc csc-5 compiler string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
+48;shell-print-template.at:25;csc-5                           shell-print;r7rs chicken chicken-5 csc csc-5 compiler string-manipulation string strings print shell utf8 shell-print;
+49;continuation-capture-template.at:25;csi-5                  continuation-capture;r7rs chicken chicken-5 csi csi-5 interpreter continuation continuations continuation-capture continuation-graft continuation-return call/cc;
+50;nix-embedded-node-template.at:25;csi-5                   <nix-embedded-node>;r7rs chicken chicken-5 csi csi-5 interpreter nix-embedded-node;
+51;nix-data-node-template.at:25;csi-5                       <nix-data-node>;r7rs chicken chicken-5 csi csi-5 interpreter nix-data-node;
+52;nix-path-node-template.at:25;csi-5                       <nix-path-node>;r7rs chicken chicken-5 csi csi-5 interpreter nix-path-node;
+53;nix-attributepath-node-template.at:25;csi-5              <nix-attributepath-node>;r7rs chicken chicken-5 csi csi-5 interpreter nix-attributepath-node;
+54;nix-attributebinding-node-template.at:25;csi-5           <nix-attributebinding-node>;r7rs chicken chicken-5 csi csi-5 interpreter nix-attributebinding-node;
+55;nix-inherit-node-template.at:25;csi-5                    <nix-inherit-node>;r7rs chicken chicken-5 csi csi-5 interpreter nix-inherit-node;
+56;nix-attributeset-node-template.at:25;csi-5               <nix-attributeset-node>;r7rs chicken chicken-5 csi csi-5 interpreter nix-attributeset-node;
+57;nix-list-node-template.at:25;csi-5                       <nix-list-node>;r7rs chicken chicken-5 csi csi-5 interpreter nix-list-node;
 58;ast-nodes-preds-template.at:25;csi-5                   AST node predicates;;
-59;nix-embed-template.at:25;csi-5                   (pipchix nix-embed);r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter nix-embed;
-60;nix-list-template.at:25;csi-5                    (pipchix nix-list);r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter nix-list;
-61;nix-set-template.at:25;csi-5                     (pipchix nix-set);r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter nix-set nix-setrec;
-62;base64-utf8-template.at:25;csi-5                           base64-utf8;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter string-manipulation string strings base64 base64-utf8 utf8;
-63;escaped-utf8-template.at:25;csi-5                          escaped-utf8;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
-64;shell-print-template.at:25;csi-5                           shell-print;r7rs chicken chicken-5 chicken-scheme chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5 interpreter string-manipulation string strings print shell utf8 shell-print;
-65;continuation-capture-template.at:25;gsi                    continuation-capture;r7rs gambit gambit-scheme gambitscheme gsi interpreter continuation continuations continuation-capture continuation-graft continuation-return call/cc;
-66;nix-embedded-node-template.at:25;gsi                     <nix-embedded-node>;r7rs gambit gambit-scheme gambitscheme gsi interpreter nix-embedded-node;
-67;nix-data-node-template.at:25;gsi                         <nix-data-node>;r7rs gambit gambit-scheme gambitscheme gsi interpreter nix-data-node;
-68;nix-path-node-template.at:25;gsi                         <nix-path-node>;r7rs gambit gambit-scheme gambitscheme gsi interpreter nix-path-node;
-69;nix-attributepath-node-template.at:25;gsi                <nix-attributepath-node>;r7rs gambit gambit-scheme gambitscheme gsi interpreter nix-attributepath-node;
-70;nix-attributebinding-node-template.at:25;gsi             <nix-attributebinding-node>;r7rs gambit gambit-scheme gambitscheme gsi interpreter nix-attributebinding-node;
-71;nix-inherit-node-template.at:25;gsi                      <nix-inherit-node>;r7rs gambit gambit-scheme gambitscheme gsi interpreter nix-inherit-node;
-72;nix-attributeset-node-template.at:25;gsi                 <nix-attributeset-node>;r7rs gambit gambit-scheme gambitscheme gsi interpreter nix-attributeset-node;
-73;nix-list-node-template.at:25;gsi                         <nix-list-node>;r7rs gambit gambit-scheme gambitscheme gsi interpreter nix-list-node;
+59;nix-embed-template.at:25;csi-5                   (pipchix nix-embed);r7rs chicken chicken-5 csi csi-5 interpreter nix-embed;
+60;nix-list-template.at:25;csi-5                    (pipchix nix-list);r7rs chicken chicken-5 csi csi-5 interpreter nix-list;
+61;nix-set-template.at:25;csi-5                     (pipchix nix-set);r7rs chicken chicken-5 csi csi-5 interpreter nix-set nix-setrec;
+62;base64-utf8-template.at:25;csi-5                           base64-utf8;r7rs chicken chicken-5 csi csi-5 interpreter string-manipulation string strings base64 base64-utf8 utf8;
+63;escaped-utf8-template.at:25;csi-5                          escaped-utf8;r7rs chicken chicken-5 csi csi-5 interpreter string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
+64;shell-print-template.at:25;csi-5                           shell-print;r7rs chicken chicken-5 csi csi-5 interpreter string-manipulation string strings print shell utf8 shell-print;
+65;continuation-capture-template.at:25;gsi                    continuation-capture;r7rs gambit gsi interpreter continuation continuations continuation-capture continuation-graft continuation-return call/cc;
+66;nix-embedded-node-template.at:25;gsi                     <nix-embedded-node>;r7rs gambit gsi interpreter nix-embedded-node;
+67;nix-data-node-template.at:25;gsi                         <nix-data-node>;r7rs gambit gsi interpreter nix-data-node;
+68;nix-path-node-template.at:25;gsi                         <nix-path-node>;r7rs gambit gsi interpreter nix-path-node;
+69;nix-attributepath-node-template.at:25;gsi                <nix-attributepath-node>;r7rs gambit gsi interpreter nix-attributepath-node;
+70;nix-attributebinding-node-template.at:25;gsi             <nix-attributebinding-node>;r7rs gambit gsi interpreter nix-attributebinding-node;
+71;nix-inherit-node-template.at:25;gsi                      <nix-inherit-node>;r7rs gambit gsi interpreter nix-inherit-node;
+72;nix-attributeset-node-template.at:25;gsi                 <nix-attributeset-node>;r7rs gambit gsi interpreter nix-attributeset-node;
+73;nix-list-node-template.at:25;gsi                         <nix-list-node>;r7rs gambit gsi interpreter nix-list-node;
 74;ast-nodes-preds-template.at:25;gsi                     AST node predicates;;
-75;nix-embed-template.at:25;gsi                     (pipchix nix-embed);r7rs gambit gambit-scheme gambitscheme gsi interpreter nix-embed;
-76;nix-list-template.at:25;gsi                      (pipchix nix-list);r7rs gambit gambit-scheme gambitscheme gsi interpreter nix-list;
-77;nix-set-template.at:25;gsi                       (pipchix nix-set);r7rs gambit gambit-scheme gambitscheme gsi interpreter nix-set nix-setrec;
-78;base64-utf8-template.at:25;gsi                             base64-utf8;r7rs gambit gambit-scheme gambitscheme gsi interpreter string-manipulation string strings base64 base64-utf8 utf8;
-79;escaped-utf8-template.at:25;gsi                            escaped-utf8;r7rs gambit gambit-scheme gambitscheme gsi interpreter string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
-80;shell-print-template.at:25;gsi                             shell-print;r7rs gambit gambit-scheme gambitscheme gsi interpreter string-manipulation string strings print shell utf8 shell-print;
-81;continuation-capture-template.at:25;gauche                 continuation-capture;r7rs gauche gauche-scheme gauchescheme gosh gosh-scheme goshscheme continuation continuations continuation-capture continuation-graft continuation-return call/cc;
-82;nix-embedded-node-template.at:25;gauche                  <nix-embedded-node>;r7rs gauche gauche-scheme gauchescheme gosh gosh-scheme goshscheme nix-embedded-node;
-83;nix-data-node-template.at:25;gauche                      <nix-data-node>;r7rs gauche gauche-scheme gauchescheme gosh gosh-scheme goshscheme nix-data-node;
-84;nix-path-node-template.at:25;gauche                      <nix-path-node>;r7rs gauche gauche-scheme gauchescheme gosh gosh-scheme goshscheme nix-path-node;
-85;nix-attributepath-node-template.at:25;gauche             <nix-attributepath-node>;r7rs gauche gauche-scheme gauchescheme gosh gosh-scheme goshscheme nix-attributepath-node;
-86;nix-attributebinding-node-template.at:25;gauche          <nix-attributebinding-node>;r7rs gauche gauche-scheme gauchescheme gosh gosh-scheme goshscheme nix-attributebinding-node;
-87;nix-inherit-node-template.at:25;gauche                   <nix-inherit-node>;r7rs gauche gauche-scheme gauchescheme gosh gosh-scheme goshscheme nix-inherit-node;
-88;nix-attributeset-node-template.at:25;gauche              <nix-attributeset-node>;r7rs gauche gauche-scheme gauchescheme gosh gosh-scheme goshscheme nix-attributeset-node;
-89;nix-list-node-template.at:25;gauche                      <nix-list-node>;r7rs gauche gauche-scheme gauchescheme gosh gosh-scheme goshscheme nix-list-node;
+75;nix-embed-template.at:25;gsi                     (pipchix nix-embed);r7rs gambit gsi interpreter nix-embed;
+76;nix-list-template.at:25;gsi                      (pipchix nix-list);r7rs gambit gsi interpreter nix-list;
+77;nix-set-template.at:25;gsi                       (pipchix nix-set);r7rs gambit gsi interpreter nix-set nix-setrec;
+78;base64-utf8-template.at:25;gsi                             base64-utf8;r7rs gambit gsi interpreter string-manipulation string strings base64 base64-utf8 utf8;
+79;escaped-utf8-template.at:25;gsi                            escaped-utf8;r7rs gambit gsi interpreter string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
+80;shell-print-template.at:25;gsi                             shell-print;r7rs gambit gsi interpreter string-manipulation string strings print shell utf8 shell-print;
+81;continuation-capture-template.at:25;gauche                 continuation-capture;r7rs gauche gosh continuation continuations continuation-capture continuation-graft continuation-return call/cc;
+82;nix-embedded-node-template.at:25;gauche                  <nix-embedded-node>;r7rs gauche gosh nix-embedded-node;
+83;nix-data-node-template.at:25;gauche                      <nix-data-node>;r7rs gauche gosh nix-data-node;
+84;nix-path-node-template.at:25;gauche                      <nix-path-node>;r7rs gauche gosh nix-path-node;
+85;nix-attributepath-node-template.at:25;gauche             <nix-attributepath-node>;r7rs gauche gosh nix-attributepath-node;
+86;nix-attributebinding-node-template.at:25;gauche          <nix-attributebinding-node>;r7rs gauche gosh nix-attributebinding-node;
+87;nix-inherit-node-template.at:25;gauche                   <nix-inherit-node>;r7rs gauche gosh nix-inherit-node;
+88;nix-attributeset-node-template.at:25;gauche              <nix-attributeset-node>;r7rs gauche gosh nix-attributeset-node;
+89;nix-list-node-template.at:25;gauche                      <nix-list-node>;r7rs gauche gosh nix-list-node;
 90;ast-nodes-preds-template.at:25;gauche                  AST node predicates;;
-91;nix-embed-template.at:25;gauche                  (pipchix nix-embed);r7rs gauche gauche-scheme gauchescheme gosh gosh-scheme goshscheme nix-embed;
-92;nix-list-template.at:25;gauche                   (pipchix nix-list);r7rs gauche gauche-scheme gauchescheme gosh gosh-scheme goshscheme nix-list;
-93;nix-set-template.at:25;gauche                    (pipchix nix-set);r7rs gauche gauche-scheme gauchescheme gosh gosh-scheme goshscheme nix-set nix-setrec;
-94;base64-utf8-template.at:25;gauche                          base64-utf8;r7rs gauche gauche-scheme gauchescheme gosh gosh-scheme goshscheme string-manipulation string strings base64 base64-utf8 utf8;
-95;escaped-utf8-template.at:25;gauche                         escaped-utf8;r7rs gauche gauche-scheme gauchescheme gosh gosh-scheme goshscheme string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
-96;shell-print-template.at:25;gauche                          shell-print;r7rs gauche gauche-scheme gauchescheme gosh gosh-scheme goshscheme string-manipulation string strings print shell utf8 shell-print;
-97;continuation-capture-template.at:25;guile(r6rs)            continuation-capture;r6rs guile guile-scheme guilescheme continuation continuations continuation-capture continuation-graft continuation-return call/cc;
-98;nix-embedded-node-template.at:25;guile(r6rs)             <nix-embedded-node>;r6rs guile guile-scheme guilescheme nix-embedded-node;
-99;nix-data-node-template.at:25;guile(r6rs)                 <nix-data-node>;r6rs guile guile-scheme guilescheme nix-data-node;
-100;nix-path-node-template.at:25;guile(r6rs)                 <nix-path-node>;r6rs guile guile-scheme guilescheme nix-path-node;
-101;nix-attributepath-node-template.at:25;guile(r6rs)        <nix-attributepath-node>;r6rs guile guile-scheme guilescheme nix-attributepath-node;
-102;nix-attributebinding-node-template.at:25;guile(r6rs)     <nix-attributebinding-node>;r6rs guile guile-scheme guilescheme nix-attributebinding-node;
-103;nix-inherit-node-template.at:25;guile(r6rs)              <nix-inherit-node>;r6rs guile guile-scheme guilescheme nix-inherit-node;
-104;nix-attributeset-node-template.at:25;guile(r6rs)         <nix-attributeset-node>;r6rs guile guile-scheme guilescheme nix-attributeset-node;
-105;nix-list-node-template.at:25;guile(r6rs)                 <nix-list-node>;r6rs guile guile-scheme guilescheme nix-list-node;
+91;nix-embed-template.at:25;gauche                  (pipchix nix-embed);r7rs gauche gosh nix-embed;
+92;nix-list-template.at:25;gauche                   (pipchix nix-list);r7rs gauche gosh nix-list;
+93;nix-set-template.at:25;gauche                    (pipchix nix-set);r7rs gauche gosh nix-set nix-setrec;
+94;base64-utf8-template.at:25;gauche                          base64-utf8;r7rs gauche gosh string-manipulation string strings base64 base64-utf8 utf8;
+95;escaped-utf8-template.at:25;gauche                         escaped-utf8;r7rs gauche gosh string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
+96;shell-print-template.at:25;gauche                          shell-print;r7rs gauche gosh string-manipulation string strings print shell utf8 shell-print;
+97;continuation-capture-template.at:25;guile(r6rs)            continuation-capture;r6rs guile guile-3 continuation continuations continuation-capture continuation-graft continuation-return call/cc;
+98;nix-embedded-node-template.at:25;guile(r6rs)             <nix-embedded-node>;r6rs guile guile-3 nix-embedded-node;
+99;nix-data-node-template.at:25;guile(r6rs)                 <nix-data-node>;r6rs guile guile-3 nix-data-node;
+100;nix-path-node-template.at:25;guile(r6rs)                 <nix-path-node>;r6rs guile guile-3 nix-path-node;
+101;nix-attributepath-node-template.at:25;guile(r6rs)        <nix-attributepath-node>;r6rs guile guile-3 nix-attributepath-node;
+102;nix-attributebinding-node-template.at:25;guile(r6rs)     <nix-attributebinding-node>;r6rs guile guile-3 nix-attributebinding-node;
+103;nix-inherit-node-template.at:25;guile(r6rs)              <nix-inherit-node>;r6rs guile guile-3 nix-inherit-node;
+104;nix-attributeset-node-template.at:25;guile(r6rs)         <nix-attributeset-node>;r6rs guile guile-3 nix-attributeset-node;
+105;nix-list-node-template.at:25;guile(r6rs)                 <nix-list-node>;r6rs guile guile-3 nix-list-node;
 106;ast-nodes-preds-template.at:25;guile(r6rs)             AST node predicates;;
-107;nix-embed-template.at:25;guile(r6rs)             (pipchix nix-embed);r6rs guile guile-scheme guilescheme nix-embed;
-108;nix-list-template.at:25;guile(r6rs)              (pipchix nix-list);r6rs guile guile-scheme guilescheme nix-list;
-109;nix-set-template.at:25;guile(r6rs)               (pipchix nix-set);r6rs guile guile-scheme guilescheme nix-set nix-setrec;
-110;base64-utf8-template.at:25;guile(r6rs)                     base64-utf8;r6rs guile guile-scheme guilescheme string-manipulation string strings base64 base64-utf8 utf8;
-111;escaped-utf8-template.at:25;guile(r6rs)                    escaped-utf8;r6rs guile guile-scheme guilescheme string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
-112;shell-print-template.at:25;guile(r6rs)                     shell-print;r6rs guile guile-scheme guilescheme string-manipulation string strings print shell utf8 shell-print;
-113;continuation-capture-template.at:25;guile(r7rs)            continuation-capture;r7rs guile guile-scheme guilescheme continuation continuations continuation-capture continuation-graft continuation-return call/cc;
-114;nix-embedded-node-template.at:25;guile(r7rs)             <nix-embedded-node>;r7rs guile guile-scheme guilescheme nix-embedded-node;
-115;nix-data-node-template.at:25;guile(r7rs)                 <nix-data-node>;r7rs guile guile-scheme guilescheme nix-data-node;
-116;nix-path-node-template.at:25;guile(r7rs)                 <nix-path-node>;r7rs guile guile-scheme guilescheme nix-path-node;
-117;nix-attributepath-node-template.at:25;guile(r7rs)        <nix-attributepath-node>;r7rs guile guile-scheme guilescheme nix-attributepath-node;
-118;nix-attributebinding-node-template.at:25;guile(r7rs)     <nix-attributebinding-node>;r7rs guile guile-scheme guilescheme nix-attributebinding-node;
-119;nix-inherit-node-template.at:25;guile(r7rs)              <nix-inherit-node>;r7rs guile guile-scheme guilescheme nix-inherit-node;
-120;nix-attributeset-node-template.at:25;guile(r7rs)         <nix-attributeset-node>;r7rs guile guile-scheme guilescheme nix-attributeset-node;
-121;nix-list-node-template.at:25;guile(r7rs)                 <nix-list-node>;r7rs guile guile-scheme guilescheme nix-list-node;
+107;nix-embed-template.at:25;guile(r6rs)             (pipchix nix-embed);r6rs guile guile-3 nix-embed;
+108;nix-list-template.at:25;guile(r6rs)              (pipchix nix-list);r6rs guile guile-3 nix-list;
+109;nix-set-template.at:25;guile(r6rs)               (pipchix nix-set);r6rs guile guile-3 nix-set nix-setrec;
+110;base64-utf8-template.at:25;guile(r6rs)                     base64-utf8;r6rs guile guile-3 string-manipulation string strings base64 base64-utf8 utf8;
+111;escaped-utf8-template.at:25;guile(r6rs)                    escaped-utf8;r6rs guile guile-3 string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
+112;shell-print-template.at:25;guile(r6rs)                     shell-print;r6rs guile guile-3 string-manipulation string strings print shell utf8 shell-print;
+113;continuation-capture-template.at:25;guile(r7rs)            continuation-capture;r7rs guile guile-3 continuation continuations continuation-capture continuation-graft continuation-return call/cc;
+114;nix-embedded-node-template.at:25;guile(r7rs)             <nix-embedded-node>;r7rs guile guile-3 nix-embedded-node;
+115;nix-data-node-template.at:25;guile(r7rs)                 <nix-data-node>;r7rs guile guile-3 nix-data-node;
+116;nix-path-node-template.at:25;guile(r7rs)                 <nix-path-node>;r7rs guile guile-3 nix-path-node;
+117;nix-attributepath-node-template.at:25;guile(r7rs)        <nix-attributepath-node>;r7rs guile guile-3 nix-attributepath-node;
+118;nix-attributebinding-node-template.at:25;guile(r7rs)     <nix-attributebinding-node>;r7rs guile guile-3 nix-attributebinding-node;
+119;nix-inherit-node-template.at:25;guile(r7rs)              <nix-inherit-node>;r7rs guile guile-3 nix-inherit-node;
+120;nix-attributeset-node-template.at:25;guile(r7rs)         <nix-attributeset-node>;r7rs guile guile-3 nix-attributeset-node;
+121;nix-list-node-template.at:25;guile(r7rs)                 <nix-list-node>;r7rs guile guile-3 nix-list-node;
 122;ast-nodes-preds-template.at:25;guile(r7rs)             AST node predicates;;
-123;nix-embed-template.at:25;guile(r7rs)             (pipchix nix-embed);r7rs guile guile-scheme guilescheme nix-embed;
-124;nix-list-template.at:25;guile(r7rs)              (pipchix nix-list);r7rs guile guile-scheme guilescheme nix-list;
-125;nix-set-template.at:25;guile(r7rs)               (pipchix nix-set);r7rs guile guile-scheme guilescheme nix-set nix-setrec;
-126;base64-utf8-template.at:25;guile(r7rs)                     base64-utf8;r7rs guile guile-scheme guilescheme string-manipulation string strings base64 base64-utf8 utf8;
-127;escaped-utf8-template.at:25;guile(r7rs)                    escaped-utf8;r7rs guile guile-scheme guilescheme string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
-128;shell-print-template.at:25;guile(r7rs)                     shell-print;r7rs guile guile-scheme guilescheme string-manipulation string strings print shell utf8 shell-print;
-129;continuation-capture-template.at:25;loko(r6rs)             continuation-capture;r6rs loko loko-scheme lokoscheme continuation continuations continuation-capture continuation-graft continuation-return call/cc;
-130;nix-embedded-node-template.at:25;loko(r6rs)              <nix-embedded-node>;r6rs loko loko-scheme lokoscheme nix-embedded-node;
-131;nix-data-node-template.at:25;loko(r6rs)                  <nix-data-node>;r6rs loko loko-scheme lokoscheme nix-data-node;
-132;nix-path-node-template.at:25;loko(r6rs)                  <nix-path-node>;r6rs loko loko-scheme lokoscheme nix-path-node;
-133;nix-attributepath-node-template.at:25;loko(r6rs)         <nix-attributepath-node>;r6rs loko loko-scheme lokoscheme nix-attributepath-node;
-134;nix-attributebinding-node-template.at:25;loko(r6rs)      <nix-attributebinding-node>;r6rs loko loko-scheme lokoscheme nix-attributebinding-node;
-135;nix-inherit-node-template.at:25;loko(r6rs)               <nix-inherit-node>;r6rs loko loko-scheme lokoscheme nix-inherit-node;
-136;nix-attributeset-node-template.at:25;loko(r6rs)          <nix-attributeset-node>;r6rs loko loko-scheme lokoscheme nix-attributeset-node;
-137;nix-list-node-template.at:25;loko(r6rs)                  <nix-list-node>;r6rs loko loko-scheme lokoscheme nix-list-node;
+123;nix-embed-template.at:25;guile(r7rs)             (pipchix nix-embed);r7rs guile guile-3 nix-embed;
+124;nix-list-template.at:25;guile(r7rs)              (pipchix nix-list);r7rs guile guile-3 nix-list;
+125;nix-set-template.at:25;guile(r7rs)               (pipchix nix-set);r7rs guile guile-3 nix-set nix-setrec;
+126;base64-utf8-template.at:25;guile(r7rs)                     base64-utf8;r7rs guile guile-3 string-manipulation string strings base64 base64-utf8 utf8;
+127;escaped-utf8-template.at:25;guile(r7rs)                    escaped-utf8;r7rs guile guile-3 string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
+128;shell-print-template.at:25;guile(r7rs)                     shell-print;r7rs guile guile-3 string-manipulation string strings print shell utf8 shell-print;
+129;continuation-capture-template.at:25;loko(r6rs)             continuation-capture;r6rs loko continuation continuations continuation-capture continuation-graft continuation-return call/cc;
+130;nix-embedded-node-template.at:25;loko(r6rs)              <nix-embedded-node>;r6rs loko nix-embedded-node;
+131;nix-data-node-template.at:25;loko(r6rs)                  <nix-data-node>;r6rs loko nix-data-node;
+132;nix-path-node-template.at:25;loko(r6rs)                  <nix-path-node>;r6rs loko nix-path-node;
+133;nix-attributepath-node-template.at:25;loko(r6rs)         <nix-attributepath-node>;r6rs loko nix-attributepath-node;
+134;nix-attributebinding-node-template.at:25;loko(r6rs)      <nix-attributebinding-node>;r6rs loko nix-attributebinding-node;
+135;nix-inherit-node-template.at:25;loko(r6rs)               <nix-inherit-node>;r6rs loko nix-inherit-node;
+136;nix-attributeset-node-template.at:25;loko(r6rs)          <nix-attributeset-node>;r6rs loko nix-attributeset-node;
+137;nix-list-node-template.at:25;loko(r6rs)                  <nix-list-node>;r6rs loko nix-list-node;
 138;ast-nodes-preds-template.at:25;loko(r6rs)              AST node predicates;;
-139;nix-embed-template.at:25;loko(r6rs)              (pipchix nix-embed);r6rs loko loko-scheme lokoscheme nix-embed;
-140;nix-list-template.at:25;loko(r6rs)               (pipchix nix-list);r6rs loko loko-scheme lokoscheme nix-list;
-141;nix-set-template.at:25;loko(r6rs)                (pipchix nix-set);r6rs loko loko-scheme lokoscheme nix-set nix-setrec;
-142;base64-utf8-template.at:25;loko(r6rs)                      base64-utf8;r6rs loko loko-scheme lokoscheme string-manipulation string strings base64 base64-utf8 utf8;
-143;escaped-utf8-template.at:25;loko(r6rs)                     escaped-utf8;r6rs loko loko-scheme lokoscheme string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
-144;shell-print-template.at:25;loko(r6rs)                      shell-print;r6rs loko loko-scheme lokoscheme string-manipulation string strings print shell utf8 shell-print;
-145;continuation-capture-template.at:25;loko(r7rs)             continuation-capture;r7rs loko loko-scheme lokoscheme continuation continuations continuation-capture continuation-graft continuation-return call/cc;
-146;nix-embedded-node-template.at:25;loko(r7rs)              <nix-embedded-node>;r7rs loko loko-scheme lokoscheme nix-embedded-node;
-147;nix-data-node-template.at:25;loko(r7rs)                  <nix-data-node>;r7rs loko loko-scheme lokoscheme nix-data-node;
-148;nix-path-node-template.at:25;loko(r7rs)                  <nix-path-node>;r7rs loko loko-scheme lokoscheme nix-path-node;
-149;nix-attributepath-node-template.at:25;loko(r7rs)         <nix-attributepath-node>;r7rs loko loko-scheme lokoscheme nix-attributepath-node;
-150;nix-attributebinding-node-template.at:25;loko(r7rs)      <nix-attributebinding-node>;r7rs loko loko-scheme lokoscheme nix-attributebinding-node;
-151;nix-inherit-node-template.at:25;loko(r7rs)               <nix-inherit-node>;r7rs loko loko-scheme lokoscheme nix-inherit-node;
-152;nix-attributeset-node-template.at:25;loko(r7rs)          <nix-attributeset-node>;r7rs loko loko-scheme lokoscheme nix-attributeset-node;
-153;nix-list-node-template.at:25;loko(r7rs)                  <nix-list-node>;r7rs loko loko-scheme lokoscheme nix-list-node;
+139;nix-embed-template.at:25;loko(r6rs)              (pipchix nix-embed);r6rs loko nix-embed;
+140;nix-list-template.at:25;loko(r6rs)               (pipchix nix-list);r6rs loko nix-list;
+141;nix-set-template.at:25;loko(r6rs)                (pipchix nix-set);r6rs loko nix-set nix-setrec;
+142;base64-utf8-template.at:25;loko(r6rs)                      base64-utf8;r6rs loko string-manipulation string strings base64 base64-utf8 utf8;
+143;escaped-utf8-template.at:25;loko(r6rs)                     escaped-utf8;r6rs loko string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
+144;shell-print-template.at:25;loko(r6rs)                      shell-print;r6rs loko string-manipulation string strings print shell utf8 shell-print;
+145;continuation-capture-template.at:25;loko(r7rs)             continuation-capture;r7rs loko continuation continuations continuation-capture continuation-graft continuation-return call/cc;
+146;nix-embedded-node-template.at:25;loko(r7rs)              <nix-embedded-node>;r7rs loko nix-embedded-node;
+147;nix-data-node-template.at:25;loko(r7rs)                  <nix-data-node>;r7rs loko nix-data-node;
+148;nix-path-node-template.at:25;loko(r7rs)                  <nix-path-node>;r7rs loko nix-path-node;
+149;nix-attributepath-node-template.at:25;loko(r7rs)         <nix-attributepath-node>;r7rs loko nix-attributepath-node;
+150;nix-attributebinding-node-template.at:25;loko(r7rs)      <nix-attributebinding-node>;r7rs loko nix-attributebinding-node;
+151;nix-inherit-node-template.at:25;loko(r7rs)               <nix-inherit-node>;r7rs loko nix-inherit-node;
+152;nix-attributeset-node-template.at:25;loko(r7rs)          <nix-attributeset-node>;r7rs loko nix-attributeset-node;
+153;nix-list-node-template.at:25;loko(r7rs)                  <nix-list-node>;r7rs loko nix-list-node;
 154;ast-nodes-preds-template.at:25;loko(r7rs)              AST node predicates;;
-155;nix-embed-template.at:25;loko(r7rs)              (pipchix nix-embed);r7rs loko loko-scheme lokoscheme nix-embed;
-156;nix-list-template.at:25;loko(r7rs)               (pipchix nix-list);r7rs loko loko-scheme lokoscheme nix-list;
-157;nix-set-template.at:25;loko(r7rs)                (pipchix nix-set);r7rs loko loko-scheme lokoscheme nix-set nix-setrec;
-158;base64-utf8-template.at:25;loko(r7rs)                      base64-utf8;r7rs loko loko-scheme lokoscheme string-manipulation string strings base64 base64-utf8 utf8;
-159;escaped-utf8-template.at:25;loko(r7rs)                     escaped-utf8;r7rs loko loko-scheme lokoscheme string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
-160;shell-print-template.at:25;loko(r7rs)                      shell-print;r7rs loko loko-scheme lokoscheme string-manipulation string strings print shell utf8 shell-print;
-161;continuation-capture-template.at:25;racket                 continuation-capture;r6rs racket plt plt-scheme plt-r6rs continuation continuations continuation-capture continuation-graft continuation-return call/cc;
-162;nix-embedded-node-template.at:25;racket                  <nix-embedded-node>;r6rs racket plt plt-scheme plt-r6rs nix-embedded-node;
-163;nix-data-node-template.at:25;racket                      <nix-data-node>;r6rs racket plt plt-scheme plt-r6rs nix-data-node;
-164;nix-path-node-template.at:25;racket                      <nix-path-node>;r6rs racket plt plt-scheme plt-r6rs nix-path-node;
-165;nix-attributepath-node-template.at:25;racket             <nix-attributepath-node>;r6rs racket plt plt-scheme plt-r6rs nix-attributepath-node;
-166;nix-attributebinding-node-template.at:25;racket          <nix-attributebinding-node>;r6rs racket plt plt-scheme plt-r6rs nix-attributebinding-node;
-167;nix-inherit-node-template.at:25;racket                   <nix-inherit-node>;r6rs racket plt plt-scheme plt-r6rs nix-inherit-node;
-168;nix-attributeset-node-template.at:25;racket              <nix-attributeset-node>;r6rs racket plt plt-scheme plt-r6rs nix-attributeset-node;
-169;nix-list-node-template.at:25;racket                      <nix-list-node>;r6rs racket plt plt-scheme plt-r6rs nix-list-node;
+155;nix-embed-template.at:25;loko(r7rs)              (pipchix nix-embed);r7rs loko nix-embed;
+156;nix-list-template.at:25;loko(r7rs)               (pipchix nix-list);r7rs loko nix-list;
+157;nix-set-template.at:25;loko(r7rs)                (pipchix nix-set);r7rs loko nix-set nix-setrec;
+158;base64-utf8-template.at:25;loko(r7rs)                      base64-utf8;r7rs loko string-manipulation string strings base64 base64-utf8 utf8;
+159;escaped-utf8-template.at:25;loko(r7rs)                     escaped-utf8;r7rs loko string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
+160;shell-print-template.at:25;loko(r7rs)                      shell-print;r7rs loko string-manipulation string strings print shell utf8 shell-print;
+161;continuation-capture-template.at:25;racket                 continuation-capture;r6rs racket plt plt-r6rs continuation continuations continuation-capture continuation-graft continuation-return call/cc;
+162;nix-embedded-node-template.at:25;racket                  <nix-embedded-node>;r6rs racket plt plt-r6rs nix-embedded-node;
+163;nix-data-node-template.at:25;racket                      <nix-data-node>;r6rs racket plt plt-r6rs nix-data-node;
+164;nix-path-node-template.at:25;racket                      <nix-path-node>;r6rs racket plt plt-r6rs nix-path-node;
+165;nix-attributepath-node-template.at:25;racket             <nix-attributepath-node>;r6rs racket plt plt-r6rs nix-attributepath-node;
+166;nix-attributebinding-node-template.at:25;racket          <nix-attributebinding-node>;r6rs racket plt plt-r6rs nix-attributebinding-node;
+167;nix-inherit-node-template.at:25;racket                   <nix-inherit-node>;r6rs racket plt plt-r6rs nix-inherit-node;
+168;nix-attributeset-node-template.at:25;racket              <nix-attributeset-node>;r6rs racket plt plt-r6rs nix-attributeset-node;
+169;nix-list-node-template.at:25;racket                      <nix-list-node>;r6rs racket plt plt-r6rs nix-list-node;
 170;ast-nodes-preds-template.at:25;racket                  AST node predicates;;
-171;nix-embed-template.at:25;racket                  (pipchix nix-embed);r6rs racket plt plt-scheme plt-r6rs nix-embed;
-172;nix-list-template.at:25;racket                   (pipchix nix-list);r6rs racket plt plt-scheme plt-r6rs nix-list;
-173;nix-set-template.at:25;racket                    (pipchix nix-set);r6rs racket plt plt-scheme plt-r6rs nix-set nix-setrec;
-174;base64-utf8-template.at:25;racket                          base64-utf8;r6rs racket plt plt-scheme plt-r6rs string-manipulation string strings base64 base64-utf8 utf8;
-175;escaped-utf8-template.at:25;racket                         escaped-utf8;r6rs racket plt plt-scheme plt-r6rs string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
-176;shell-print-template.at:25;racket                          shell-print;r6rs racket plt plt-scheme plt-r6rs string-manipulation string strings print shell utf8 shell-print;
-177;continuation-capture-template.at:25;sagitt(r6rs)           continuation-capture;r6rs sagittarius sagittarius-scheme sagittariusscheme sash continuation continuations continuation-capture continuation-graft continuation-return call/cc;
-178;nix-embedded-node-template.at:25;sagitt(r6rs)            <nix-embedded-node>;r6rs sagittarius sagittarius-scheme sagittariusscheme sash nix-embedded-node;
-179;nix-data-node-template.at:25;sagitt(r6rs)                <nix-data-node>;r6rs sagittarius sagittarius-scheme sagittariusscheme sash nix-data-node;
-180;nix-path-node-template.at:25;sagitt(r6rs)                <nix-path-node>;r6rs sagittarius sagittarius-scheme sagittariusscheme sash nix-path-node;
-181;nix-attributepath-node-template.at:25;sagitt(r6rs)       <nix-attributepath-node>;r6rs sagittarius sagittarius-scheme sagittariusscheme sash nix-attributepath-node;
-182;nix-attributebinding-node-template.at:25;sagitt(r6rs)    <nix-attributebinding-node>;r6rs sagittarius sagittarius-scheme sagittariusscheme sash nix-attributebinding-node;
-183;nix-inherit-node-template.at:25;sagitt(r6rs)             <nix-inherit-node>;r6rs sagittarius sagittarius-scheme sagittariusscheme sash nix-inherit-node;
-184;nix-attributeset-node-template.at:25;sagitt(r6rs)        <nix-attributeset-node>;r6rs sagittarius sagittarius-scheme sagittariusscheme sash nix-attributeset-node;
-185;nix-list-node-template.at:25;sagitt(r6rs)                <nix-list-node>;r6rs sagittarius sagittarius-scheme sagittariusscheme sash nix-list-node;
+171;nix-embed-template.at:25;racket                  (pipchix nix-embed);r6rs racket plt plt-r6rs nix-embed;
+172;nix-list-template.at:25;racket                   (pipchix nix-list);r6rs racket plt plt-r6rs nix-list;
+173;nix-set-template.at:25;racket                    (pipchix nix-set);r6rs racket plt plt-r6rs nix-set nix-setrec;
+174;base64-utf8-template.at:25;racket                          base64-utf8;r6rs racket plt plt-r6rs string-manipulation string strings base64 base64-utf8 utf8;
+175;escaped-utf8-template.at:25;racket                         escaped-utf8;r6rs racket plt plt-r6rs string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
+176;shell-print-template.at:25;racket                          shell-print;r6rs racket plt plt-r6rs string-manipulation string strings print shell utf8 shell-print;
+177;continuation-capture-template.at:25;sagitt(r6rs)           continuation-capture;r6rs sagittarius sash continuation continuations continuation-capture continuation-graft continuation-return call/cc;
+178;nix-embedded-node-template.at:25;sagitt(r6rs)            <nix-embedded-node>;r6rs sagittarius sash nix-embedded-node;
+179;nix-data-node-template.at:25;sagitt(r6rs)                <nix-data-node>;r6rs sagittarius sash nix-data-node;
+180;nix-path-node-template.at:25;sagitt(r6rs)                <nix-path-node>;r6rs sagittarius sash nix-path-node;
+181;nix-attributepath-node-template.at:25;sagitt(r6rs)       <nix-attributepath-node>;r6rs sagittarius sash nix-attributepath-node;
+182;nix-attributebinding-node-template.at:25;sagitt(r6rs)    <nix-attributebinding-node>;r6rs sagittarius sash nix-attributebinding-node;
+183;nix-inherit-node-template.at:25;sagitt(r6rs)             <nix-inherit-node>;r6rs sagittarius sash nix-inherit-node;
+184;nix-attributeset-node-template.at:25;sagitt(r6rs)        <nix-attributeset-node>;r6rs sagittarius sash nix-attributeset-node;
+185;nix-list-node-template.at:25;sagitt(r6rs)                <nix-list-node>;r6rs sagittarius sash nix-list-node;
 186;ast-nodes-preds-template.at:25;sagitt(r6rs)            AST node predicates;;
-187;nix-embed-template.at:25;sagitt(r6rs)            (pipchix nix-embed);r6rs sagittarius sagittarius-scheme sagittariusscheme sash nix-embed;
-188;nix-list-template.at:25;sagitt(r6rs)             (pipchix nix-list);r6rs sagittarius sagittarius-scheme sagittariusscheme sash nix-list;
-189;nix-set-template.at:25;sagitt(r6rs)              (pipchix nix-set);r6rs sagittarius sagittarius-scheme sagittariusscheme sash nix-set nix-setrec;
-190;base64-utf8-template.at:25;sagitt(r6rs)                    base64-utf8;r6rs sagittarius sagittarius-scheme sagittariusscheme sash string-manipulation string strings base64 base64-utf8 utf8;
-191;escaped-utf8-template.at:25;sagitt(r6rs)                   escaped-utf8;r6rs sagittarius sagittarius-scheme sagittariusscheme sash string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
-192;shell-print-template.at:25;sagitt(r6rs)                    shell-print;r6rs sagittarius sagittarius-scheme sagittariusscheme sash string-manipulation string strings print shell utf8 shell-print;
-193;continuation-capture-template.at:25;sagitt(r7rs)           continuation-capture;r7rs sagittarius sagittarius-scheme sagittariusscheme sash continuation continuations continuation-capture continuation-graft continuation-return call/cc;
-194;nix-embedded-node-template.at:25;sagitt(r7rs)            <nix-embedded-node>;r7rs sagittarius sagittarius-scheme sagittariusscheme sash nix-embedded-node;
-195;nix-data-node-template.at:25;sagitt(r7rs)                <nix-data-node>;r7rs sagittarius sagittarius-scheme sagittariusscheme sash nix-data-node;
-196;nix-path-node-template.at:25;sagitt(r7rs)                <nix-path-node>;r7rs sagittarius sagittarius-scheme sagittariusscheme sash nix-path-node;
-197;nix-attributepath-node-template.at:25;sagitt(r7rs)       <nix-attributepath-node>;r7rs sagittarius sagittarius-scheme sagittariusscheme sash nix-attributepath-node;
-198;nix-attributebinding-node-template.at:25;sagitt(r7rs)    <nix-attributebinding-node>;r7rs sagittarius sagittarius-scheme sagittariusscheme sash nix-attributebinding-node;
-199;nix-inherit-node-template.at:25;sagitt(r7rs)             <nix-inherit-node>;r7rs sagittarius sagittarius-scheme sagittariusscheme sash nix-inherit-node;
-200;nix-attributeset-node-template.at:25;sagitt(r7rs)        <nix-attributeset-node>;r7rs sagittarius sagittarius-scheme sagittariusscheme sash nix-attributeset-node;
-201;nix-list-node-template.at:25;sagitt(r7rs)                <nix-list-node>;r7rs sagittarius sagittarius-scheme sagittariusscheme sash nix-list-node;
+187;nix-embed-template.at:25;sagitt(r6rs)            (pipchix nix-embed);r6rs sagittarius sash nix-embed;
+188;nix-list-template.at:25;sagitt(r6rs)             (pipchix nix-list);r6rs sagittarius sash nix-list;
+189;nix-set-template.at:25;sagitt(r6rs)              (pipchix nix-set);r6rs sagittarius sash nix-set nix-setrec;
+190;base64-utf8-template.at:25;sagitt(r6rs)                    base64-utf8;r6rs sagittarius sash string-manipulation string strings base64 base64-utf8 utf8;
+191;escaped-utf8-template.at:25;sagitt(r6rs)                   escaped-utf8;r6rs sagittarius sash string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
+192;shell-print-template.at:25;sagitt(r6rs)                    shell-print;r6rs sagittarius sash string-manipulation string strings print shell utf8 shell-print;
+193;continuation-capture-template.at:25;sagitt(r7rs)           continuation-capture;r7rs sagittarius sash continuation continuations continuation-capture continuation-graft continuation-return call/cc;
+194;nix-embedded-node-template.at:25;sagitt(r7rs)            <nix-embedded-node>;r7rs sagittarius sash nix-embedded-node;
+195;nix-data-node-template.at:25;sagitt(r7rs)                <nix-data-node>;r7rs sagittarius sash nix-data-node;
+196;nix-path-node-template.at:25;sagitt(r7rs)                <nix-path-node>;r7rs sagittarius sash nix-path-node;
+197;nix-attributepath-node-template.at:25;sagitt(r7rs)       <nix-attributepath-node>;r7rs sagittarius sash nix-attributepath-node;
+198;nix-attributebinding-node-template.at:25;sagitt(r7rs)    <nix-attributebinding-node>;r7rs sagittarius sash nix-attributebinding-node;
+199;nix-inherit-node-template.at:25;sagitt(r7rs)             <nix-inherit-node>;r7rs sagittarius sash nix-inherit-node;
+200;nix-attributeset-node-template.at:25;sagitt(r7rs)        <nix-attributeset-node>;r7rs sagittarius sash nix-attributeset-node;
+201;nix-list-node-template.at:25;sagitt(r7rs)                <nix-list-node>;r7rs sagittarius sash nix-list-node;
 202;ast-nodes-preds-template.at:25;sagitt(r7rs)            AST node predicates;;
-203;nix-embed-template.at:25;sagitt(r7rs)            (pipchix nix-embed);r7rs sagittarius sagittarius-scheme sagittariusscheme sash nix-embed;
-204;nix-list-template.at:25;sagitt(r7rs)             (pipchix nix-list);r7rs sagittarius sagittarius-scheme sagittariusscheme sash nix-list;
-205;nix-set-template.at:25;sagitt(r7rs)              (pipchix nix-set);r7rs sagittarius sagittarius-scheme sagittariusscheme sash nix-set nix-setrec;
-206;base64-utf8-template.at:25;sagitt(r7rs)                    base64-utf8;r7rs sagittarius sagittarius-scheme sagittariusscheme sash string-manipulation string strings base64 base64-utf8 utf8;
-207;escaped-utf8-template.at:25;sagitt(r7rs)                   escaped-utf8;r7rs sagittarius sagittarius-scheme sagittariusscheme sash string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
-208;shell-print-template.at:25;sagitt(r7rs)                    shell-print;r7rs sagittarius sagittarius-scheme sagittariusscheme sash string-manipulation string strings print shell utf8 shell-print;
+203;nix-embed-template.at:25;sagitt(r7rs)            (pipchix nix-embed);r7rs sagittarius sash nix-embed;
+204;nix-list-template.at:25;sagitt(r7rs)             (pipchix nix-list);r7rs sagittarius sash nix-list;
+205;nix-set-template.at:25;sagitt(r7rs)              (pipchix nix-set);r7rs sagittarius sash nix-set nix-setrec;
+206;base64-utf8-template.at:25;sagitt(r7rs)                    base64-utf8;r7rs sagittarius sash string-manipulation string strings base64 base64-utf8 utf8;
+207;escaped-utf8-template.at:25;sagitt(r7rs)                   escaped-utf8;r7rs sagittarius sash string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
+208;shell-print-template.at:25;sagitt(r7rs)                    shell-print;r7rs sagittarius sash string-manipulation string strings print shell utf8 shell-print;
 "
 # List of the all the test groups.
 at_groups_all=`printf "%s\n" "$at_help_all" | sed 's/;.*//'`
@@ -1200,34 +1200,34 @@ at_banner_text_2="Chibi Scheme (R⁷RS)"
 # Banner 3. testsuite.at:65
 # Category starts at test group 33.
 at_banner_text_3="CHICKEN 5 compiler (R⁷RS)"
-# Banner 4. testsuite.at:74
+# Banner 4. testsuite.at:72
 # Category starts at test group 49.
 at_banner_text_4="CHICKEN 5 interpreter (R⁷RS)"
-# Banner 5. testsuite.at:83
+# Banner 5. testsuite.at:79
 # Category starts at test group 65.
 at_banner_text_5="Gambit Scheme interpreter (R⁷RS)"
-# Banner 6. testsuite.at:99
+# Banner 6. testsuite.at:93
 # Category starts at test group 81.
 at_banner_text_6="Gauche Scheme (R⁷RS)"
-# Banner 7. testsuite.at:107
+# Banner 7. testsuite.at:100
 # Category starts at test group 97.
 at_banner_text_7="Guile (R⁶RS)"
-# Banner 8. testsuite.at:114
+# Banner 8. testsuite.at:107
 # Category starts at test group 113.
 at_banner_text_8="Guile (R⁷RS)"
-# Banner 9. testsuite.at:121
+# Banner 9. testsuite.at:114
 # Category starts at test group 129.
 at_banner_text_9="Loko Scheme (R⁶RS)"
-# Banner 10. testsuite.at:128
+# Banner 10. testsuite.at:121
 # Category starts at test group 145.
 at_banner_text_10="Loko Scheme (R⁷RS)"
-# Banner 11. testsuite.at:135
+# Banner 11. testsuite.at:128
 # Category starts at test group 161.
 at_banner_text_11="Racket (R⁶RS)"
-# Banner 12. testsuite.at:142
+# Banner 12. testsuite.at:135
 # Category starts at test group 177.
 at_banner_text_12="Sagittarius Scheme (R⁶RS)"
-# Banner 13. testsuite.at:150
+# Banner 13. testsuite.at:142
 # Category starts at test group 193.
 at_banner_text_13="Sagittarius Scheme (R⁷RS)"
 

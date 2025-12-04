@@ -25,62 +25,96 @@
 
 m4_string_reverse_concatenate
 
-(define %%the-nix-null '#(nix-null))    ; An arbitrary unique object.
+(define the-nix-null%% '#(nix-null))    ; An arbitrary unique object.
 
-(define-record-type <nix-node>
-  (%%make-nix-node subtype fields)
-  %%nix-node?
-  (subtype %%nix-node-subtype)
-  (fields %%nix-node-fields))
-
-(define (%%nix-node-constructor subtype)
-  (lambda fields
-    (%%make-nix-node subtype (list->vector fields))))
-
-(define (%%nix-node-predicate subtype)
-  (lambda (obj)
-    (and (%%nix-node? obj)
-         (eq? subtype (%%nix-node-subtype obj)))))
-
-(define (%%nix-node-getter subtype i)
-  (let ((i (- i 1)))
-    (lambda (obj)
-      (vector-ref (%%nix-node-fields obj) i))))
-
-(define (%%nix-node-setter subtype i)
-  (let ((i (- i 1)))
-    (lambda (obj value)
-      (vector-set! (%%nix-node-fields obj) i value))))
-
-(define-syntax handle-nix-node-type-rule
-  (syntax-rules (constructor>
-                 predicate>
-                 getter> setter>)
-    ((_ subtype (constructor> name proc))
-     (define name (proc (%%nix-node-constructor 'subtype))))
-    ((_ subtype (constructor> name))
-     (define name (%%nix-node-constructor 'subtype)))
-    ((_ subtype (predicate> name))
-     (define name (%%nix-node-predicate 'subtype)))
-    ((_ subtype (getter> i name))
-     (define name (%%nix-node-getter 'subtype i)))
-    ((_ subtype (setter> i name))
-     (define name (%%nix-node-setter 'subtype i)))))
-
-(define-syntax define-nix-node-type
+(define-syntax define-record-interface
   (syntax-rules ()
-    ((_ subtype rule ...)
-     (begin (handle-nix-node-type-rule subtype rule) ...))))
+    ((_ type-name type-name? constructor predicate access)
+     (begin
+       (define-record-type type-name
+         (make-type-name variety fields)
+         type-name?
+         (variety variety-ref)
+         (fields access))
+       (define (constructor variety)
+         (lambda fields
+           (make-type-name variety (list->vector fields))))
+       (define predicate
+         (case-lambda
+           ((variety)
+            ;; The default ‘eq?’ assumes the most common type for
+            ;; ‘variety’ is a symbol.
+            (lambda (obj)
+              (and (type-name? obj)
+                   (eq? (variety-ref obj) variety))))
+           ((variety equiv?)
+            (lambda (obj)
+              (and (type-name? obj)
+                   (equiv? (variety-ref obj) variety))))
+           ((variety obj check?)
+            (and (type-name? obj)
+                 (check? (variety-ref obj) obj variety)))))))))
 
-(define-nix-node-type <nix-embedded-node>
+(define-syntax handle-record-interface-variety-rule
+  (syntax-rules ( constructor>
+                  predicate>
+                  getter> setter> )
+    ((_ variety constructor predicate access
+        (constructor> name proc))
+     (define name (proc (constructor 'variety))))
+    ((_ variety constructor predicate access
+        (constructor> name))
+     (define name (constructor 'variety)))
+    ((_ variety constructor predicate access
+        (predicate> name))
+     (define name (predicate 'variety)))
+    ((_ variety constructor predicate access
+        (getter> i name))
+     (define name
+       (lambda (obj)
+         (vector-ref (access obj) (- i 1)))))
+    ((_ variety constructor predicate access
+        (setter> i name))
+     (define name
+       (lambda (obj value)
+         (vector-set! (access obj) (- i 1) value))))))
+
+(define-syntax define-record-interface-variety
+  (syntax-rules ()
+    ((_ variety constructor predicate access
+        rule
+        ...)
+     (begin
+       (handle-record-interface-variety-rule
+        variety constructor predicate access
+        rule)
+       ...))))
+
+(define-record-interface <nix-node>
+  nix-node?
+  nix-node-constructor
+  nix-node-predicate
+  nix-node-access)
+
+(define-syntax define-nix-node-variety
+  (syntax-rules ()
+    ((_ variety rule ...)
+     (define-record-interface-variety
+       variety 
+       nix-node-constructor
+       nix-node-predicate
+       nix-node-access
+       rule ...))))
+
+(define-nix-node-variety <nix-embedded-node>
   (constructor> make-nix-embedded-node)
   (predicate> nix-embedded-node?)
   (getter> 1 nix-embedded-node-ref))
 
-(define-nix-node-type <nix-data-node>
+(define-nix-node-variety <nix-data-node>
   ;; A node whose content is boolean, number, string, or
-  ;; %%the-nix-null.
-  (constructor> %%make-nix-data-node)
+  ;; the-nix-null%%.
+  (constructor> make-nix-data-node%%)
   (constructor>
    make-nix-data-node
    (lambda (construct)
@@ -88,10 +122,10 @@ m4_string_reverse_concatenate
        (cond ((nix-null? data)
               ;; This is a convenience. It lets you treat nix-null the
               ;; same as a boolean, number, or string.
-              (construct %%the-nix-null))
+              (construct the-nix-null%%))
              ((or (eq? #f data)
                   (eq? #t data)
-                  (eq? %%the-nix-null data)
+                  (eq? the-nix-null%% data)
                   (string? data)
                   (number? data))
               (construct data))
@@ -99,9 +133,9 @@ m4_string_reverse_concatenate
   (predicate> nix-data-node?)
   (getter> 1 nix-data-node-ref))
 
-(define nix-false (%%make-nix-data-node #f))
-(define nix-true (%%make-nix-data-node #t))
-(define nix-null (%%make-nix-data-node %%the-nix-null))
+(define nix-false (make-nix-data-node%% #f))
+(define nix-true (make-nix-data-node%% #t))
+(define nix-null (make-nix-data-node%% the-nix-null%%))
 
 (define (nix-false? obj)
   (and (nix-data-node? obj)
@@ -118,14 +152,14 @@ m4_string_reverse_concatenate
 
 (define (nix-null? obj)
   (and (nix-data-node? obj)
-       (eq? %%the-nix-null (nix-data-node-ref obj))))
+       (eq? the-nix-null%% (nix-data-node-ref obj))))
 
-(define-nix-node-type <nix-path-node>
+(define-nix-node-variety <nix-path-node>
   (constructor> make-nix-path-node)
   (predicate> nix-path-node?)
   (getter> 1 nix-path-node-ref))
 
-(define-nix-node-type <nix-attributeset-node>
+(define-nix-node-variety <nix-attributeset-node>
   (constructor>
    make-nix-attributeset-node
    (lambda (construct)
@@ -143,7 +177,7 @@ m4_string_reverse_concatenate
   (let ((bag (nix-attributeset-node-bag attrset)))
     (for-each proc (reverse bag))))
 
-(define-nix-node-type <nix-attributepath-node>
+(define-nix-node-variety <nix-attributepath-node>
   (constructor>
    list->nix-attributepath-node
    (let ((sym->str
@@ -155,13 +189,13 @@ m4_string_reverse_concatenate
   (predicate> nix-attributepath-node?)
   (getter> 1 nix-attributepath-node->list))
 
-(define-nix-node-type <nix-attributebinding-node>
+(define-nix-node-variety <nix-attributebinding-node>
   (constructor> make-nix-attributebinding-node)
   (predicate> nix-attributebinding-node?)
   (getter> 1 nix-attributebinding-node-key)
   (getter> 2 nix-attributebinding-node-value))
 
-(define-nix-node-type <nix-inherit-node>
+(define-nix-node-variety <nix-inherit-node>
   (constructor>
    list->nix-inherit-node
    (lambda (construct)
@@ -172,19 +206,19 @@ m4_string_reverse_concatenate
   (getter> 1 nix-inherit-node->list)
   (getter> 2 nix-inherit-node-attributeset))
 
-(define-nix-node-type <nix-list-node>
+(define-nix-node-variety <nix-list-node>
   (constructor> list->nix-list-node)
   (predicate> nix-list-node?)
   (getter> 1 nix-list-node->list))
 
-(define nix-abstract-syntax-tree? %%nix-node?)
+(define nix-abstract-syntax-tree? nix-node?)
 
 (define (scheme->nix value)
   ;; Convert Scheme values to Nix AST.
   (cond ((or (string? value)
              (number? value)
              (boolean? value)
-             (eq? %%the-nix-null value))
+             (eq? the-nix-null%% value))
          (make-nix-data-node value))
         ((symbol? value)
          (make-nix-data-node (symbol->string value)))
@@ -227,7 +261,7 @@ m4_string_reverse_concatenate
 
 (define (%%output-nix-data-node ast outp)
   (let ((data (nix-data-node-ref ast)))
-    (cond ((eq? %%the-nix-null data)
+    (cond ((eq? the-nix-null%% data)
            (outp "(builtins.null)\n"))
           ((eq? #f data)
            (outp "(builtins.false)\n"))

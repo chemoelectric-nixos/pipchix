@@ -49,107 +49,98 @@ m4_define([implementation],[chez])
 m4_define([rnrs_version],[6])
 m4_define([u8_bytevec],[u8_bytevec_r6rs])
 tests_template([chez        ],[Chez Scheme (R⁶RS)],
-  [R6RS r6rs Chez chez chez-scheme chezscheme],
+  [r6rs chez],
   [${enable_check_r6rs_chez}],[run_r6rs_chez])
 
 m4_define([implementation],[chibi])
 m4_define([rnrs_version],[7])
 m4_define([u8_bytevec],[u8_bytevec_r7rs])
 tests_template([chibi       ],[Chibi Scheme (R⁷RS)],
-  [R7RS r7rs Chibi chibi chibi-scheme chibischeme],
+  [r7rs chibi],
   [${enable_check_r7rs_chibi}],[run_r7rs_chibi])
 
 m4_define([implementation],[csc-5])
 m4_define([rnrs_version],[7])
 m4_define([u8_bytevec],[u8_bytevec_r7rs])
 tests_template([csc-5       ],[CHICKEN 5 compiler (R⁷RS)],
-  [R7RS r7rs CHICKEN CHICKEN-5 chicken chicken-5 chicken-scheme
-   chickenscheme chicken-scheme-5 chickenscheme-5 csc csc-5
-   compiler],
+  [r7rs chicken chicken-5 csc csc-5 compiler],
   [${enable_check_r7rs_csc_5}],[run_r7rs_csc_5])
 
 m4_define([implementation],[csi-5])
 m4_define([rnrs_version],[7])
 m4_define([u8_bytevec],[u8_bytevec_r7rs])
 tests_template([csi-5       ],[CHICKEN 5 interpreter (R⁷RS)],
-  [R7RS r7rs CHICKEN CHICKEN-5 chicken chicken-5 chicken-scheme
-   chickenscheme chicken-scheme-5 chickenscheme-5 csi csi-5
-   interpreter],
+  [r7rs chicken chicken-5 csi csi-5 interpreter],
   [${enable_check_r7rs_csi_5}],[run_r7rs_csi_5])
 
 m4_define([implementation],[gsi])
 m4_define([rnrs_version],[7])
 m4_define([u8_bytevec],[u8_bytevec_r7rs])
 tests_template([gsi         ],[Gambit Scheme interpreter (R⁷RS)],
-  [R7RS r7rs Gambit gambit gambit-scheme gambitscheme gsi
-   interpreter],
+  [r7rs gambit gsi interpreter],
   [${enable_check_r7rs_gsi}],[run_r7rs_gsi])
 
 dnl m4_define([implementation],[gsc])
 dnl m4_define([rnrs_version],[7])
 dnl m4_define([u8_bytevec],[u8_bytevec_r7rs])
 dnl tests_template([gsc         ],[Gambit Scheme compiler (R⁷RS)],
-dnl   [R7RS r7rs Gambit gambit gambit-scheme gambitscheme gsc
-dnl    compiler],
+dnl   [r7rs Gambit gambit gsc compiler],
 dnl   [${enable_check_r7rs_gsc}],[run_r7rs_gsc])
 
 m4_define([implementation],[gauche])
 m4_define([rnrs_version],[7])
 m4_define([u8_bytevec],[u8_bytevec_r7rs])
 tests_template([gauche      ],[Gauche Scheme (R⁷RS)],
-  [R7RS r7rs Gauche gauche gauche-scheme gauchescheme
-   gosh gosh-scheme goshscheme],
+  [r7rs gauche gosh],
   [${enable_check_r7rs_gauche}],[run_r7rs_gauche])
 
 m4_define([implementation],[guile])
 m4_define([rnrs_version],[6])
 m4_define([u8_bytevec],[u8_bytevec_r6rs])
 tests_template([guile(r6rs) ],[Guile (R⁶RS)],
-  [R6RS r6rs Guile guile guile-scheme guilescheme],
+  [r6rs guile guile-3],
   [${enable_check_r6rs_guile}],[run_r6rs_guile])
 
 m4_define([implementation],[guile])
 m4_define([rnrs_version],[7])
 m4_define([u8_bytevec],[u8_bytevec_r7rs])
 tests_template([guile(r7rs) ],[Guile (R⁷RS)],
-  [R7RS r7rs Guile guile guile-scheme guilescheme],
+  [r7rs guile guile-3],
   [${enable_check_r7rs_guile}],[run_r7rs_guile])
 
 m4_define([implementation],[loko])
 m4_define([rnrs_version],[6])
 m4_define([u8_bytevec],[u8_bytevec_r6rs])
 tests_template([loko(r6rs)  ],[Loko Scheme (R⁶RS)],
-  [R6RS r6rs Loko loko loko-scheme lokoscheme],
+  [r6rs loko],
   [${enable_check_r6rs_loko}],[run_r6rs_loko])
 
 m4_define([implementation],[loko])
 m4_define([rnrs_version],[7])
 m4_define([u8_bytevec],[u8_bytevec_r7rs])
 tests_template([loko(r7rs)  ],[Loko Scheme (R⁷RS)],
-  [R7RS r7rs Loko loko loko-scheme lokoscheme],
+  [r7rs loko],
   [${enable_check_r7rs_loko}],[run_r7rs_loko])
 
 m4_define([implementation],[racket])
 m4_define([rnrs_version],[6])
 m4_define([u8_bytevec],[u8_bytevec_r6rs])
 tests_template([racket      ],[Racket (R⁶RS)],
-  [R6RS r6rs Racket racket PLT plt plt-scheme plt-r6rs],
+  [r6rs racket plt plt-r6rs],
   [${enable_check_r6rs_racket}],[run_r6rs_racket])
 
 m4_define([implementation],[sagittarius])
 m4_define([rnrs_version],[6])
 m4_define([u8_bytevec],[u8_bytevec_r6rs])
 tests_template([sagitt(r6rs)],[Sagittarius Scheme (R⁶RS)],
-  [R6RS r6rs Sagittarius sagittarius sagittarius-scheme
-   sagittariusscheme sash],
+  [r6rs sagittarius sash],
   [${enable_check_r6rs_sagittarius}],[run_r6rs_sagittarius])
 
 m4_define([implementation],[sagittarius])
 m4_define([rnrs_version],[7])
 m4_define([u8_bytevec],[u8_bytevec_r7rs])
 tests_template([sagitt(r7rs)],[Sagittarius Scheme (R⁷RS)],
-  [R7RS r7rs Sagittarius sagittarius sagittarius-scheme
-   sagittariusscheme sash],
+  [r7rs sagittarius sash],
   [${enable_check_r7rs_sagittarius}],[run_r7rs_sagittarius])
 
 # local variables:
