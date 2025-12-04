@@ -73,6 +73,26 @@ m4_define([sexpr],
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([({·inherit·a·b·;·c·=·("d")·;·})·])],[])
 
+m4_define([sexpr], dnl  A test of string interpolation on the left side of ==>
+  [(nix-setrec ((nix-embed "a + b") ==> (nix-embed "c + d")))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl((rec{·"\@S|@{a + b}"·=·c + d;·})·)],[])
+
+m4_define([sexpr], dnl  A test of string interpolation on the right side of <==
+  [(nix-setrec ((nix-embed "a + b") <== (nix-embed "c + d")))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl((rec{·"\@S|@{c + d}"·=·a + b;·})·)],[])
+
+m4_define([sexpr], dnl  A test of string interpolation on the left side of ==>
+  [(nix-setrec ((scheme->nix "a + b") ==> (scheme->nix "c + d")))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl((rec{·"\@S|@{("a + b")·}"·=·("c + d")·;·})·)],[])
+
+m4_define([sexpr], dnl  A test of string interpolation on the right side of <==
+  [(nix-setrec ((scheme->nix "a + b") <== (scheme->nix "c + d")))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl((rec{·"\@S|@{("c + d")·}"·=·("a + b")·;·})·)],[])
+
 AT_CLEANUP
 
 # local variables:
