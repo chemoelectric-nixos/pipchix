@@ -34,5 +34,5 @@ list->nix-list-node
 nix-list-node?
 
 scheme->nix
-
+nix-abstract-syntax-tree?
 output-nix-abstract-syntax-tree

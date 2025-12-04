@@ -176,6 +176,28 @@ m4_define([sexpr], dnl  Test of scheme->nix for lists.
      (scheme->nix `(1 2 3))))])
 check_unquoted([run_scheme 'sexpr'],[0],[nix_true],[])
 
+m4_define([sexpr],
+  [(make-nix-data-node
+    (nix-abstract-syntax-tree?
+     (list->nix-list-node (map scheme->nix `(1 2 3)))))])
+check_unquoted([run_scheme 'sexpr'],[0],[nix_true],[])
+
+m4_define([sexpr],
+  [(make-nix-data-node (nix-abstract-syntax-tree? 1234))])
+check_unquoted([run_scheme 'sexpr'],[0],[nix_false],[])
+
+m4_define([sexpr],
+  [(make-nix-data-node (nix-abstract-syntax-tree? nix-false))])
+check_unquoted([run_scheme 'sexpr'],[0],[nix_true],[])
+
+m4_define([sexpr],
+  [(make-nix-data-node (nix-abstract-syntax-tree? nix-true))])
+check_unquoted([run_scheme 'sexpr'],[0],[nix_true],[])
+
+m4_define([sexpr],
+  [(make-nix-data-node (nix-abstract-syntax-tree? nix-null))])
+check_unquoted([run_scheme 'sexpr'],[0],[nix_true],[])
+
 AT_CLEANUP
 
 # local variables:

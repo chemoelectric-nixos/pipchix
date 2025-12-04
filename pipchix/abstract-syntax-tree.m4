@@ -129,6 +129,25 @@ m4_string_reverse_concatenate
   nix-list-node?
   (lst nix-list-node->list))
 
+(define %%the-ast-node-predicates
+  (vector nix-data-node?
+          nix-attributeset-node?
+          nix-list-node?
+          nix-embedded-node?
+          nix-path-node?
+          nix-attributepath-node?
+          nix-attributebinding-node?
+          nix-inherit-node?))
+
+(define nix-abstract-syntax-tree?
+  (let* ((preds %%the-ast-node-predicates)
+         (n (vector-length preds)))
+    (lambda (obj)
+      (let loop ((i 0))
+        (and (not (= i n))
+             (or ((vector-ref preds i) obj)
+                 (loop (+ i 1))))))))
+
 (define (scheme->nix value)
   ;; Convert Scheme values to Nix AST.
   (cond ((or (string? value)
@@ -140,10 +159,9 @@ m4_string_reverse_concatenate
          (make-nix-data-node (symbol->string value)))
         ((list? value)
          (list->nix-list-node (map scheme->nix value)))
-        (else
-         ;; FIXME FIXME FIXME: Recognize Nix AST nodes and let
-         ;; them through. Otherwise treat as an error.
-         value)))
+        ((nix-abstract-syntax-tree? value)
+         value)
+        (else (error "incorrect type" value))))
 
 (define output-nix-abstract-syntax-tree
   (let ((outp-default

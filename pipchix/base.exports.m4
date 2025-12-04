@@ -23,6 +23,9 @@
 ;;; WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ;;;
 
+;;; Is an object a Nix AST node?
+nix-abstract-syntax-tree?
+
 ;;; Output Nix AST to a procedure, and by default to
 ;;; (current-output-port).
 output-nix-abstract-syntax-tree
