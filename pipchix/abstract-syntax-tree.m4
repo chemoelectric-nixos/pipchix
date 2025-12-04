@@ -27,16 +27,58 @@ m4_string_reverse_concatenate
 
 (define %%the-nix-null '#(nix-null))    ; An arbitrary unique object.
 
-(define-record-type <nix-embedded-node> ; Embedded Nix code.
-  (make-nix-embedded-node code)
-  nix-embedded-node?
-  (code nix-embedded-node-ref))
+(define-record-type <nix-node>
+  (%%make-nix-node subtype fields)
+  %%nix-node?
+  (subtype %%nix-node-subtype)
+  (fields %%nix-node-fields))
 
-(define-record-type <nix-data-node>
+(define (%%nix-node-constructor subtype)
+  (lambda fields
+    (%%make-nix-node subtype (list->vector fields))))
+
+(define (%%nix-node-predicate subtype)
+  (lambda (obj)
+    (and (%%nix-node? obj)
+         (eq? subtype (%%nix-node-subtype obj)))))
+
+(define (%%nix-node-getter subtype i)
+  (let ((i (- i 1)))
+    (lambda (obj)
+      (vector-ref (%%nix-node-fields obj) i))))
+
+(define (%%nix-node-setter subtype i)
+  (let ((i (- i 1)))
+    (lambda (obj value)
+      (vector-set! (%%nix-node-fields obj) i value))))
+
+(define-syntax define-field-procedure
+  (syntax-rules (getter setter)
+    ((define-field-procedure (getter i name))
+     (define name (%%nix-node-getter 'subtype i)))
+    ((define-field-procedure (setter i name))
+     (define name (%%nix-node-setter 'subtype i)))))
+
+(define-syntax define-nix-node-type
+  (syntax-rules ()
+    ((define-nix-node-type subtype
+       constructor predicate?
+       field-rule ...)
+     (begin
+       (define constructor (%%nix-node-constructor 'subtype))
+       (define predicate? (%%nix-node-predicate 'subtype))
+       (define-field-procedure field-rule) ...))))
+
+(define-nix-node-type <nix-embedded-node>
+  make-nix-embedded-node
+  nix-embedded-node?
+  (getter 1 nix-embedded-node-ref))
+
+(define-nix-node-type <nix-data-node>
   ;; boolean, number, string, %%the-nix-null
-  (%%make-nix-data-node data)
+  %%make-nix-data-node
   nix-data-node?
-  (data nix-data-node-ref))
+  (getter 1 nix-data-node-ref))
 
 (define (make-nix-data-node data)
   ;; This is a convenience. It lets you treat nix-null the same was as
@@ -70,17 +112,17 @@ m4_string_reverse_concatenate
   (and (nix-data-node? obj)
        (eq? %%the-nix-null (nix-data-node-ref obj))))
 
-(define-record-type <nix-path-node>
-  (make-nix-path-node path)
+(define-nix-node-type <nix-path-node>
+  make-nix-path-node
   nix-path-node?
-  (path nix-path-node-ref))
+  (getter 1 nix-path-node-ref))
 
-(define-record-type <nix-attributeset-node>
-  (%%make-nix-attributeset-node recursive? bag)
+(define-nix-node-type <nix-attributeset-node>
+  %%make-nix-attributeset-node
   nix-attributeset-node?
-  (recursive? nix-attributeset-node-recursive?)
-  (bag nix-attributeset-node-bag
-       set-nix-attributeset-node-bag!))
+  (getter 1 nix-attributeset-node-recursive?)
+  (getter 2 nix-attributeset-node-bag)
+  (setter 2 set-nix-attributeset-node-bag!))
 
 (define (make-nix-attributeset-node recursive?)
   (%%make-nix-attributeset-node recursive? '()))
@@ -93,10 +135,10 @@ m4_string_reverse_concatenate
   (let ((bag (nix-attributeset-node-bag attrset)))
     (for-each proc (reverse bag))))
 
-(define-record-type <nix-attributepath-node>
-  (%%list->nix-attributepath-node names)
+(define-nix-node-type <nix-attributepath-node>
+  %%list->nix-attributepath-node
   nix-attributepath-node?
-  (names nix-attributepath-node->list))
+  (getter 1 nix-attributepath-node->list))
 
 (define list->nix-attributepath-node
   ;; Let symbols be used as if they were strings.
@@ -105,17 +147,17 @@ m4_string_reverse_concatenate
     (lambda (names)
       (%%list->nix-attributepath-node (map proc names)))))
 
-(define-record-type <nix-attributebinding-node>
-  (make-nix-attributebinding-node key value)
+(define-nix-node-type <nix-attributebinding-node>
+  make-nix-attributebinding-node
   nix-attributebinding-node?
-  (key nix-attributebinding-node-key)
-  (value nix-attributebinding-node-value))
+  (getter 1 nix-attributebinding-node-key)
+  (getter 2 nix-attributebinding-node-value))
 
-(define-record-type <nix-inherit-node>
-  (%%list->nix-inherit-node lst attrset)
+(define-nix-node-type <nix-inherit-node>
+  %%list->nix-inherit-node
   nix-inherit-node?
-  (lst nix-inherit-node->list)
-  (attrset nix-inherit-node-attributeset))
+  (getter 1 nix-inherit-node->list)
+  (getter 2 nix-inherit-node-attributeset))
 
 (define list->nix-inherit-node
   (case-lambda
@@ -124,29 +166,12 @@ m4_string_reverse_concatenate
     ((lst attrset)
      (%%list->nix-inherit-node lst attrset))))
 
-(define-record-type <nix-list-node>
-  (list->nix-list-node lst)
+(define-nix-node-type <nix-list-node>
+  list->nix-list-node
   nix-list-node?
-  (lst nix-list-node->list))
+  (getter 1 nix-list-node->list))
 
-(define %%the-ast-node-predicates
-  (vector nix-data-node?
-          nix-attributeset-node?
-          nix-list-node?
-          nix-embedded-node?
-          nix-path-node?
-          nix-attributepath-node?
-          nix-attributebinding-node?
-          nix-inherit-node?))
-
-(define nix-abstract-syntax-tree?
-  (let* ((preds %%the-ast-node-predicates)
-         (n (vector-length preds)))
-    (lambda (obj)
-      (let loop ((i 0))
-        (and (not (= i n))
-             (or ((vector-ref preds i) obj)
-                 (loop (+ i 1))))))))
+(define nix-abstract-syntax-tree? %%nix-node?)
 
 (define (scheme->nix value)
   ;; Convert Scheme values to Nix AST.
@@ -239,7 +264,10 @@ m4_string_reverse_concatenate
               (set! lst (cons "\\\"" lst)))
              ((char=? c #\')
               (set! lst (cons "\\'" lst)))
-             (else ;; FIXME: WE SHOULD HANDLE CONTROL CHARACTERS AND NUL CHARACTERS.
+             (else
+              ;; BEWARE: Nix cannot handle many strings that are legal
+              ;;         in Scheme. THERE IS NO ATTEMPT HERE TO CHECK
+              ;;         FOR LEGALITY IN NIX.
               (set! lst (cons (string c) lst)))))
      str)
     (%%string-reverse-concatenate lst)))
