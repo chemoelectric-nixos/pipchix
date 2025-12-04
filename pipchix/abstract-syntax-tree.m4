@@ -53,10 +53,10 @@ m4_string_reverse_concatenate
       (vector-set! (%%nix-node-fields obj) i value))))
 
 (define-syntax define-field-procedure
-  (syntax-rules (getter setter)
-    ((define-field-procedure (getter i name))
+  (syntax-rules (getter> setter>)
+    ((define-field-procedure (getter> i name))
      (define name (%%nix-node-getter 'subtype i)))
-    ((define-field-procedure (setter i name))
+    ((define-field-procedure (setter> i name))
      (define name (%%nix-node-setter 'subtype i)))))
 
 (define-syntax define-nix-node-type
@@ -72,13 +72,13 @@ m4_string_reverse_concatenate
 (define-nix-node-type <nix-embedded-node>
   make-nix-embedded-node
   nix-embedded-node?
-  (getter 1 nix-embedded-node-ref))
+  (getter> 1 nix-embedded-node-ref))
 
 (define-nix-node-type <nix-data-node>
   ;; boolean, number, string, %%the-nix-null
   %%make-nix-data-node
   nix-data-node?
-  (getter 1 nix-data-node-ref))
+  (getter> 1 nix-data-node-ref))
 
 (define (make-nix-data-node data)
   ;; This is a convenience. It lets you treat nix-null the same was as
@@ -115,14 +115,14 @@ m4_string_reverse_concatenate
 (define-nix-node-type <nix-path-node>
   make-nix-path-node
   nix-path-node?
-  (getter 1 nix-path-node-ref))
+  (getter> 1 nix-path-node-ref))
 
 (define-nix-node-type <nix-attributeset-node>
   %%make-nix-attributeset-node
   nix-attributeset-node?
-  (getter 1 nix-attributeset-node-recursive?)
-  (getter 2 nix-attributeset-node-bag)
-  (setter 2 set-nix-attributeset-node-bag!))
+  (getter> 1 nix-attributeset-node-recursive?)
+  (getter> 2 nix-attributeset-node-bag)
+  (setter> 2 set-nix-attributeset-node-bag!))
 
 (define (make-nix-attributeset-node recursive?)
   (%%make-nix-attributeset-node recursive? '()))
@@ -138,7 +138,7 @@ m4_string_reverse_concatenate
 (define-nix-node-type <nix-attributepath-node>
   %%list->nix-attributepath-node
   nix-attributepath-node?
-  (getter 1 nix-attributepath-node->list))
+  (getter> 1 nix-attributepath-node->list))
 
 (define list->nix-attributepath-node
   ;; Let symbols be used as if they were strings.
@@ -150,14 +150,14 @@ m4_string_reverse_concatenate
 (define-nix-node-type <nix-attributebinding-node>
   make-nix-attributebinding-node
   nix-attributebinding-node?
-  (getter 1 nix-attributebinding-node-key)
-  (getter 2 nix-attributebinding-node-value))
+  (getter> 1 nix-attributebinding-node-key)
+  (getter> 2 nix-attributebinding-node-value))
 
 (define-nix-node-type <nix-inherit-node>
   %%list->nix-inherit-node
   nix-inherit-node?
-  (getter 1 nix-inherit-node->list)
-  (getter 2 nix-inherit-node-attributeset))
+  (getter> 1 nix-inherit-node->list)
+  (getter> 2 nix-inherit-node-attributeset))
 
 (define list->nix-inherit-node
   (case-lambda
@@ -169,7 +169,7 @@ m4_string_reverse_concatenate
 (define-nix-node-type <nix-list-node>
   list->nix-list-node
   nix-list-node?
-  (getter 1 nix-list-node->list))
+  (getter> 1 nix-list-node->list))
 
 (define nix-abstract-syntax-tree? %%nix-node?)
 
