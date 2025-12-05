@@ -22,6 +22,7 @@ EOF
 
 env LC_ALL="@TEST_LOCALE@" \
     LANG="@TEST_LOCALE@" \
+    GERBIL_PATH= \
     GERBIL_LOADPATH='@abs_top_builddir@/r7rs' \
     @GXI@ -l r7rs -e '(include "'${prog_scm}'")'
 

@@ -79,6 +79,16 @@ AC_SUBST(enable_check_[$1]_[]m4_translit([$2],[-],[_]))
 AM_CONDITIONAL(ENABLE_CHECK_[]m4_toupper([$1])_[]m4_toupper(m4_translit([$2],[-],[_])),
                [test "${enable_check_[$1]_[]m4_translit([$2],[-],[_])}" != no])])
 
+m4_define([offer_enable_of_check],
+[AC_ARG_ENABLE([check-[$1]-[$2]],
+  [AS_HELP_STRING([--enable-check-[$1]-[]m4_translit([$2],[-],[_])],
+        [$3 (disabled by default, due to difficulties of the tests)])],
+  [eval enable_check_[$1]_[]m4_translit([$2],[-],[_])="${enableval}"],
+  [eval enable_check_[$1]_[]m4_translit([$2],[-],[_])=no])
+AC_SUBST(enable_check_[$1]_[]m4_translit([$2],[-],[_]))
+AM_CONDITIONAL(ENABLE_CHECK_[]m4_toupper([$1])_[]m4_toupper(m4_translit([$2],[-],[_])),
+               [test "${enable_check_[$1]_[]m4_translit([$2],[-],[_])}" != no])])
+
 offer_disable_of_check([r6rs],[chez],
   [disable tests with Chez Scheme])
 
@@ -103,8 +113,10 @@ offer_disable_of_check([r7rs],[gauche],
 offer_disable_of_check([r7rs],[gxi],
   [disable tests with Gerbil Scheme interpreter])
 
-offer_disable_of_check([r7rs],[gxc],
-  [disable tests with Gerbil Scheme compiler])
+# The current gxc tests are slow, do not run in parallel, and do not
+# run in distcheck.
+offer_enable_of_check([r7rs],[gxc],
+  [enable tests with Gerbil Scheme compiler])
 
 offer_disable_of_check([r6rs],[guile],
   [disable R⁶RS tests with Guile])

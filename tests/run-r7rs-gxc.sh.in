@@ -3,9 +3,10 @@
 # Compile a tiny R⁷RS program with the Gerbil Scheme compiler.
 #
 
-exit 77
-
 prog_scm=`basename $(TMPDIR=. mktemp 2>/dev/null) 2>/dev/null || echo tmp."${RANDOM}"`.scm
+prog_exe=`echo ${prog_scm} | sed 's|scm$|exe|'`
+
+printf '(prelude: :scheme/r7rs)' > gerbil.pkg
 
 cat > "${prog_scm}" <<EOF
 (import (scheme base))
@@ -18,16 +19,22 @@ cat > "${prog_scm}" <<EOF
 (import (pipchix nix-list))
 (import (pipchix nix-set))
 (import (pipchix string-manipulation))
-(output-nix-abstract-syntax-tree $1)
-(exit 0)
+(define (main . args)
+  (output-nix-abstract-syntax-tree $1)
+  (exit 0))
+(export main)
 EOF
 
 env LC_ALL="@TEST_LOCALE@" \
     LANG="@TEST_LOCALE@" \
+    GERBIL_PATH='@abs_builddir@/gerbil' \
     GERBIL_LOADPATH='@abs_top_builddir@/r7rs' \
-    @GXI@ -l r7rs -e '(include "'${prog_scm}'")'
+    @GXC@ -no-ssxi -o "${prog_exe}" -exe "${prog_scm}" \
+    1>/dev/null 2>/dev/null
 
-rm "${prog_scm}"
+./"${prog_exe}"
+
+rm -f "${prog_scm}" "${prog_exe}" gerbil.pkg
 
 exit 0
 

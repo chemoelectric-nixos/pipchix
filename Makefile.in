@@ -591,9 +591,6 @@ CHICKEN_5_EGGSPEC = ' \
 
 
 #---------------------------------------------------------------------
-@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@GERBIL_PX = r7rs/gerbil/lib/pipchix
-
-#---------------------------------------------------------------------
 TINYSCHEME_DIR = tinyscheme-1.42
 TINYSCHEME_EXE = $(TINYSCHEME_DIR)/tinyscheme-exe$(EXEEXT)
 
@@ -1122,8 +1119,6 @@ maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
 	@echo "it deletes files that may require special tools to rebuild."
 	-$(am__rm_f) $(BUILT_SOURCES)
-@ENABLE_CHECK_R7RS_GXC_FALSE@distclean-local:
-@GXC_FALSE@distclean-local:
 clean: clean-recursive
 
 clean-am: clean-generic mostlyclean-am
@@ -1133,7 +1128,7 @@ distclean: distclean-recursive
 	-rm -f ./$(DEPDIR)/is-older.Po
 	-rm -f GNUmakefile
 distclean-am: clean-am distclean-compile distclean-generic \
-	distclean-local distclean-tags
+	distclean-tags
 
 dvi: dvi-recursive
 
@@ -1207,12 +1202,12 @@ uninstall-am: uninstall-nodist_chickeneggs5pipchixDATA \
 	clean-generic cscope cscopelist-am ctags ctags-am dist \
 	dist-all dist-bzip2 dist-bzip3 dist-gzip dist-lzip dist-shar \
 	dist-tarZ dist-xz dist-zip dist-zstd distcheck distclean \
-	distclean-compile distclean-generic distclean-local \
-	distclean-tags distcleancheck distdir distuninstallcheck dvi \
-	dvi-am html html-am info info-am install install-am \
-	install-data install-data-am install-dvi install-dvi-am \
-	install-exec install-exec-am install-html install-html-am \
-	install-info install-info-am install-man \
+	distclean-compile distclean-generic distclean-tags \
+	distcleancheck distdir distuninstallcheck dvi dvi-am html \
+	html-am info info-am install install-am install-data \
+	install-data-am install-dvi install-dvi-am install-exec \
+	install-exec-am install-html install-html-am install-info \
+	install-info-am install-man \
 	install-nodist_chickeneggs5pipchixDATA \
 	install-nodist_r6rspipchixDATA install-nodist_r7rspipchixDATA \
 	install-pdf install-pdf-am install-ps install-ps-am \
@@ -1251,7 +1246,7 @@ $(builddir)/r7rs/pipchix/%.sld: $(srcdir)/r7rs/pipchix/%.sld.m4 \
 		$(M4_PREPROCESS) $(<) > $(@).tmp && \
 		mv $(@){.tmp,}
 
-r7rs/gerbil.pkg: Makefile.am # Gerbil has to be told the Scheme dialect.
+r7rs/gerbil.pkg: Makefile.am	# Gerbil has to be told to be R⁷RS.
 	$(call v,PRINTF) \
 	    $(MKDIR_P) $(@D) && \
 	    printf '(prelude: :scheme/r7rs)' > $(@).tmp && \
@@ -1329,37 +1324,6 @@ chicken-5-egg-stamp: $(CHICKEN_5_EGGFILES)
 	  ); \
 	  touch $(@); \
 	fi
-
-#BUILT_SOURCES += $(R7RS_SCHEME:r7rs/pipchix/%.sld=$(GERBIL_PX)/%.o1)
-
-@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@$(GERBIL_PX)/%.o1: r7rs/pipchix/%.sld
-@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@	$(call v,GXC)$(MKDIR_P) r7rs/gerbil/lib && \
-@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@	( \
-@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@	  cd r7rs && \
-@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@	  if ! test -e gerbil.pkg; then \
-@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@	    echo '(prelude: :scheme/r7rs)' > gerbil.pkg; \
-@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@	  fi && \
-@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@	  env \
-@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@	    GERBIL_PATH=gerbil \
-@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@	    GERBIL_LOADPATH=. \
-@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@	    $(GXC) -O pipchix/$(<F) \
-@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@	)
-
-@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@$(GERBIL_PX)/%.o1: $(srcdir)/r7rs/pipchix/%.sld.m4 \
-@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@                   $(srcdir)/pipchix/%.m4 \
-@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@                   $(srcdir)/pipchix/pipchix-includes.m4
-@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@$(GERBIL_PX)/abstract-syntax-tree.o1: $(GERBIL_PX)/define-record-interface.o1
-@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@$(GERBIL_PX)/nix-embed.o1: $(GERBIL_PX)/abstract-syntax-tree.o1
-@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@$(GERBIL_PX)/nix-list.o1: $(GERBIL_PX)/abstract-syntax-tree.o1
-@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@$(GERBIL_PX)/nix-set.o1: $(GERBIL_PX)/abstract-syntax-tree.o1
-@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@$(GERBIL_PX)/base.o1: $(GERBIL_PX)/string-manipulation.o1 \
-@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@                      $(GERBIL_PX)/abstract-syntax-tree.o1 \
-@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@                      $(GERBIL_PX)/nix-list.o1 \
-@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@                      $(GERBIL_PX)/nix-set.o1
-
-@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@distclean-local:
-@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@	-rm -R -f r7rs/gerbil
-@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@	-rm -f r7rs/gerbil.pkg
 @CHICKEN_INSTALL_5_TRUE@@CSI_5_TRUE@@ENABLE_CHECK_R7RS_CSI_5_TRUE@check: chicken-5-egg-stamp
 @CHICKEN_INSTALL_5_TRUE@@CSC_5_TRUE@@ENABLE_CHECK_R7RS_CSC_5_TRUE@check: chicken-5-egg-stamp
 #

@@ -114,6 +114,7 @@ POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
 check_PROGRAMS =
+@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@am__append_1 = $(GERBIL_O)
 subdir = tests
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/ax_check_compile_flag.m4 \
@@ -326,7 +327,16 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-EXTRA_DIST = testsuite.at $(srcdir)/package.m4 $(TESTSUITE) atlocal.in
+EXTRA_DIST = testsuite.at $(srcdir)/package.m4 $(TESTSUITE) atlocal.in \
+	tests-template.at ast-nodes-preds-template.at \
+	base64-utf8-template.at continuation-capture-template.at \
+	escaped-utf8-template.at nix-attributebinding-node-template.at \
+	nix-attributepath-node-template.at \
+	nix-attributeset-node-template.at nix-data-node-template.at \
+	nix-embedded-node-template.at nix-embed-template.at \
+	nix-inherit-node-template.at nix-list-node-template.at \
+	nix-list-template.at nix-path-node-template.at \
+	nix-set-template.at shell-print-template.at
 BUILT_SOURCES = 
 CLEANFILES = *.tmp tmp.*
 DISTCLEANFILES = Makefile GNUmakefile atconfig
@@ -351,7 +361,25 @@ TESTSUITE_DEPS = $(srcdir)/atlocal.in $(srcdir)/package.m4 \
 	$(srcdir)/nix-list-node-template.at \
 	$(srcdir)/nix-path-node-template.at \
 	$(srcdir)/nix-embed-template.at $(srcdir)/nix-list-template.at \
-	$(srcdir)/nix-set-template.at $(srcdir)/testsuite.at
+	$(srcdir)/nix-set-template.at $(srcdir)/testsuite.at \
+	$(am__append_1)
+
+#---------------------------------------------------------------------
+@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@GERBIL_PLACE = $(abs_builddir)/gerbil
+@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@GERBIL_PX = $(GERBIL_PLACE)/lib/pipchix
+@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@GERBIL_O = \
+@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@  $(addprefix $(GERBIL_PX)/, \
+@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@      $(addsuffix .scm, \
+@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@	  srfi-111 \
+@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@	  continuation-capture \
+@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@	  define-record-interface \
+@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@	  base \
+@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@	  nix-embed \
+@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@	  nix-list \
+@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@	  nix-set \
+@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@	  abstract-syntax-tree \
+@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@	  string-manipulation))
+
 all: $(BUILT_SOURCES)
 	$(MAKE) $(AM_MAKEFLAGS) all-am
 
@@ -365,9 +393,9 @@ $(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am  $(am__confi
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu tests/GNUmakefile:tests/Makefile.in'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign tests/GNUmakefile:tests/Makefile.in'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu tests/GNUmakefile:tests/Makefile.in
+	  $(AUTOMAKE) --foreign tests/GNUmakefile:tests/Makefile.in
 GNUmakefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
 	  *config.status*) \
@@ -502,13 +530,15 @@ maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
 	@echo "it deletes files that may require special tools to rebuild."
 	-$(am__rm_f) $(BUILT_SOURCES)
+@ENABLE_CHECK_R7RS_GXC_FALSE@distclean-local:
+@GXC_FALSE@distclean-local:
 clean: clean-am
 
 clean-am: clean-checkPROGRAMS clean-generic clean-local mostlyclean-am
 
 distclean: distclean-am
 	-rm -f GNUmakefile
-distclean-am: clean-am distclean-generic
+distclean-am: clean-am distclean-generic distclean-local
 
 dvi: dvi-am
 
@@ -573,13 +603,13 @@ uninstall-am:
 
 .PHONY: all all-am check check-am check-local clean \
 	clean-checkPROGRAMS clean-generic clean-local cscopelist-am \
-	ctags-am distclean distclean-generic distdir dvi dvi-am html \
-	html-am info info-am install install-am install-data \
-	install-data-am install-dvi install-dvi-am install-exec \
-	install-exec-am install-html install-html-am install-info \
-	install-info-am install-man install-pdf install-pdf-am \
-	install-ps install-ps-am install-strip installcheck \
-	installcheck-am installcheck-local installdirs \
+	ctags-am distclean distclean-generic distclean-local distdir \
+	dvi dvi-am html html-am info info-am install install-am \
+	install-data install-data-am install-dvi install-dvi-am \
+	install-exec install-exec-am install-html install-html-am \
+	install-info install-info-am install-man install-pdf \
+	install-pdf-am install-ps install-ps-am install-strip \
+	installcheck installcheck-am installcheck-local installdirs \
 	maintainer-clean maintainer-clean-generic mostlyclean \
 	mostlyclean-generic pdf pdf-am ps ps-am tags-am uninstall \
 	uninstall-am
@@ -588,6 +618,8 @@ uninstall-am:
 
 
 .DELETE_ON_ERROR:
+
+@GNU@ include $(top_srcdir)/silent-rules.mk
 
 $(srcdir)/package.m4: $(top_srcdir)/configure.ac $(srcdir)/Makefile.am
 	$(AWK) \
@@ -632,6 +664,33 @@ clean-local:
 $(TESTSUITE): $(TESTSUITE_DEPS)
 	$(AUTOTEST) -I '$(srcdir)' -o $(@).tmp $(srcdir)/testsuite.at \
 	    && mv $(@){.tmp,}
+
+@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@distclean-local:
+@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@	-rm -R -f $(GERBIL_PLACE)
+
+@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@$(GERBIL_PX)/%.scm: $(top_builddir)/r7rs/pipchix/%.sld
+@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@	$(call v,GXC) $(MKDIR_P) '$(GERBIL_PX)'/lib && \
+@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@	( \
+@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@	  cd $(top_builddir)/r7rs && \
+@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@	  env \
+@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@	    GERBIL_PATH='$(GERBIL_PLACE)' \
+@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@	    GERBIL_LOADPATH=. \
+@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@	    $(GXC) -no-ssxi pipchix/$(<F) \
+@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@	)
+
+@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@$(GERBIL_PX)/%.scm: $(top_srcdir)/r7rs/pipchix/%.sld.m4 \
+@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@                   $(top_srcdir)/pipchix/%.m4 \
+@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@                   $(top_srcdir)/pipchix/pipchix-includes.m4
+@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@$(GERBIL_PX)/abstract-syntax-tree.scm: $(GERBIL_PX)/define-record-interface.scm
+@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@$(GERBIL_PX)/nix-embed.scm: $(GERBIL_PX)/abstract-syntax-tree.scm
+@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@$(GERBIL_PX)/nix-list.scm: $(GERBIL_PX)/abstract-syntax-tree.scm
+@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@$(GERBIL_PX)/nix-set.scm: $(GERBIL_PX)/abstract-syntax-tree.scm
+@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@$(GERBIL_PX)/base.scm: $(GERBIL_PX)/string-manipulation.scm \
+@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@                      $(GERBIL_PX)/abstract-syntax-tree.scm \
+@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@                      $(GERBIL_PX)/nix-list.scm \
+@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@                      $(GERBIL_PX)/nix-set.scm
+
+#---------------------------------------------------------------------
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

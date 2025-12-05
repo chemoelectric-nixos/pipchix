@@ -24,6 +24,8 @@
 
 .DELETE_ON_ERROR:
 
+@GNU@ include $(top_srcdir)/silent-rules.mk
+
 EXTRA_DIST =
 BUILT_SOURCES =
 CLEANFILES =
@@ -60,6 +62,23 @@ EXTRA_DIST += testsuite.at
 EXTRA_DIST += $(srcdir)/package.m4
 EXTRA_DIST += $(TESTSUITE)
 EXTRA_DIST += atlocal.in
+EXTRA_DIST += tests-template.at
+EXTRA_DIST += ast-nodes-preds-template.at
+EXTRA_DIST += base64-utf8-template.at
+EXTRA_DIST += continuation-capture-template.at
+EXTRA_DIST += escaped-utf8-template.at
+EXTRA_DIST += nix-attributebinding-node-template.at
+EXTRA_DIST += nix-attributepath-node-template.at
+EXTRA_DIST += nix-attributeset-node-template.at
+EXTRA_DIST += nix-data-node-template.at
+EXTRA_DIST += nix-embedded-node-template.at
+EXTRA_DIST += nix-embed-template.at
+EXTRA_DIST += nix-inherit-node-template.at
+EXTRA_DIST += nix-list-node-template.at
+EXTRA_DIST += nix-list-template.at
+EXTRA_DIST += nix-path-node-template.at
+EXTRA_DIST += nix-set-template.at
+EXTRA_DIST += shell-print-template.at
 
 @GNU@ define jobs-flag
 @GNU@ $(filter -j%,$(MAKEFLAGS))
@@ -123,3 +142,57 @@ TESTSUITE_DEPS += $(srcdir)/testsuite.at
 $(TESTSUITE): $(TESTSUITE_DEPS)
 	$(AUTOTEST) -I '$(srcdir)' -o $(@).tmp $(srcdir)/testsuite.at \
 	    && mv $(@){.tmp,}
+
+#---------------------------------------------------------------------
+
+if GXC
+if ENABLE_CHECK_R7RS_GXC
+
+GERBIL_PLACE = $(abs_builddir)/gerbil
+
+distclean-local:
+	-rm -R -f $(GERBIL_PLACE)
+
+GERBIL_PX = $(GERBIL_PLACE)/lib/pipchix
+
+GERBIL_O = \
+  $(addprefix $(GERBIL_PX)/, \
+      $(addsuffix .scm, \
+	  srfi-111 \
+	  continuation-capture \
+	  define-record-interface \
+	  base \
+	  nix-embed \
+	  nix-list \
+	  nix-set \
+	  abstract-syntax-tree \
+	  string-manipulation))
+
+TESTSUITE_DEPS += $(GERBIL_O)
+
+$(GERBIL_PX)/%.scm: $(top_builddir)/r7rs/pipchix/%.sld
+	$(call v,GXC) $(MKDIR_P) '$(GERBIL_PX)'/lib && \
+	( \
+	  cd $(top_builddir)/r7rs && \
+	  env \
+	    GERBIL_PATH='$(GERBIL_PLACE)' \
+	    GERBIL_LOADPATH=. \
+	    $(GXC) -no-ssxi pipchix/$(<F) \
+	)
+
+$(GERBIL_PX)/%.scm: $(top_srcdir)/r7rs/pipchix/%.sld.m4 \
+                   $(top_srcdir)/pipchix/%.m4 \
+                   $(top_srcdir)/pipchix/pipchix-includes.m4
+$(GERBIL_PX)/abstract-syntax-tree.scm: $(GERBIL_PX)/define-record-interface.scm
+$(GERBIL_PX)/nix-embed.scm: $(GERBIL_PX)/abstract-syntax-tree.scm
+$(GERBIL_PX)/nix-list.scm: $(GERBIL_PX)/abstract-syntax-tree.scm
+$(GERBIL_PX)/nix-set.scm: $(GERBIL_PX)/abstract-syntax-tree.scm
+$(GERBIL_PX)/base.scm: $(GERBIL_PX)/string-manipulation.scm \
+                      $(GERBIL_PX)/abstract-syntax-tree.scm \
+                      $(GERBIL_PX)/nix-list.scm \
+                      $(GERBIL_PX)/nix-set.scm
+
+endif ENABLE_CHECK_R7RS_GXC
+endif GXC
+
+#---------------------------------------------------------------------

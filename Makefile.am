@@ -122,7 +122,7 @@ $(builddir)/r7rs/pipchix/%.sld: $(srcdir)/r7rs/pipchix/%.sld.m4 \
 		$(M4_PREPROCESS) $(<) > $(@).tmp && \
 		mv $(@){.tmp,}
 
-r7rs/gerbil.pkg: Makefile.am # Gerbil has to be told the Scheme dialect.
+r7rs/gerbil.pkg: Makefile.am	# Gerbil has to be told to be R⁷RS.
 	$(call v,PRINTF) \
 	    $(MKDIR_P) $(@D) && \
 	    printf '(prelude: :scheme/r7rs)' > $(@).tmp && \
@@ -284,47 +284,6 @@ chicken-5-egg-stamp: $(CHICKEN_5_EGGFILES)
 	fi
 
 CLEANFILES += chicken-5-egg-stamp
-
-#---------------------------------------------------------------------
-
-if GXC
-if ENABLE_CHECK_R7RS_GXC
-
-GERBIL_PX = r7rs/gerbil/lib/pipchix
-
-#BUILT_SOURCES += $(R7RS_SCHEME:r7rs/pipchix/%.sld=$(GERBIL_PX)/%.o1)
-
-$(GERBIL_PX)/%.o1: r7rs/pipchix/%.sld
-	$(call v,GXC)$(MKDIR_P) r7rs/gerbil/lib && \
-	( \
-	  cd r7rs && \
-	  if ! test -e gerbil.pkg; then \
-	    echo '(prelude: :scheme/r7rs)' > gerbil.pkg; \
-	  fi && \
-	  env \
-	    GERBIL_PATH=gerbil \
-	    GERBIL_LOADPATH=. \
-	    $(GXC) -O pipchix/$(<F) \
-	)
-
-$(GERBIL_PX)/%.o1: $(srcdir)/r7rs/pipchix/%.sld.m4 \
-                   $(srcdir)/pipchix/%.m4 \
-                   $(srcdir)/pipchix/pipchix-includes.m4
-$(GERBIL_PX)/abstract-syntax-tree.o1: $(GERBIL_PX)/define-record-interface.o1
-$(GERBIL_PX)/nix-embed.o1: $(GERBIL_PX)/abstract-syntax-tree.o1
-$(GERBIL_PX)/nix-list.o1: $(GERBIL_PX)/abstract-syntax-tree.o1
-$(GERBIL_PX)/nix-set.o1: $(GERBIL_PX)/abstract-syntax-tree.o1
-$(GERBIL_PX)/base.o1: $(GERBIL_PX)/string-manipulation.o1 \
-                      $(GERBIL_PX)/abstract-syntax-tree.o1 \
-                      $(GERBIL_PX)/nix-list.o1 \
-                      $(GERBIL_PX)/nix-set.o1
-
-distclean-local:
-	-rm -R -f r7rs/gerbil
-	-rm -f r7rs/gerbil.pkg
-
-endif ENABLE_CHECK_R7RS_GXC
-endif GXC
 
 #---------------------------------------------------------------------
 

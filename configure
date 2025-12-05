@@ -1580,9 +1580,8 @@ Optional Features:
                           disable tests with Gerbil Scheme interpreter
                           (enabled by default if the Scheme implementation is
                           found)
-  --disable-check-r7rs-gxc
-                          disable tests with Gerbil Scheme compiler (enabled
-                          by default if the Scheme implementation is found)
+  --enable-check-r7rs-gxc enable tests with Gerbil Scheme compiler (disabled
+                          by default, due to difficulties of the tests)
   --disable-check-r6rs-guile
                           disable R⁶RS tests with Guile (enabled by default
                           if the Scheme implementation is found)
@@ -6595,6 +6594,8 @@ fi
 
 
 
+
+
 # Check whether --enable-check-r6rs-chez was given.
 if test ${enable_check_r6rs_chez+y}
 then :
@@ -6729,12 +6730,14 @@ else
 fi
 
 
+# The current gxc tests are slow, do not run in parallel, and do not
+# run in distcheck.
 # Check whether --enable-check-r7rs-gxc was given.
 if test ${enable_check_r7rs_gxc+y}
 then :
   enableval=$enable_check_r7rs_gxc; eval enable_check_r7rs_gxc="${enableval}"
 else case e in #(
-  e) eval enable_check_r7rs_gxc=yes ;;
+  e) eval enable_check_r7rs_gxc=no ;;
 esac
 fi
 
