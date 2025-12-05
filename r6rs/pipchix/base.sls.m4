@@ -1,6 +1,8 @@
 #!r6rs
 ;;;
 ;;; Copyright © 2025 Barry Schwartz
+;;;
+;;; This file is part of Pipchix.
 ;;; 
 ;;; Permission is hereby granted, free of charge, to any person obtaining
 ;;; a copy of Pipchix and associated documentation files (the

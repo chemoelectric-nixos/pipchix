@@ -660,6 +660,12 @@ LOKO
 GUILE_FALSE
 GUILE_TRUE
 GUILE
+GXC_FALSE
+GXC_TRUE
+GXC
+GXI_FALSE
+GXI_TRUE
+GXI
 GAUCHE_FALSE
 GAUCHE_TRUE
 GAUCHE
@@ -707,6 +713,12 @@ enable_check_r7rs_guile
 ENABLE_CHECK_R6RS_GUILE_FALSE
 ENABLE_CHECK_R6RS_GUILE_TRUE
 enable_check_r6rs_guile
+ENABLE_CHECK_R7RS_GXC_FALSE
+ENABLE_CHECK_R7RS_GXC_TRUE
+enable_check_r7rs_gxc
+ENABLE_CHECK_R7RS_GXI_FALSE
+ENABLE_CHECK_R7RS_GXI_TRUE
+enable_check_r7rs_gxi
 ENABLE_CHECK_R7RS_GAUCHE_FALSE
 ENABLE_CHECK_R7RS_GAUCHE_TRUE
 enable_check_r7rs_gauche
@@ -860,6 +872,8 @@ enable_check_r7rs_csi_5
 enable_check_r7rs_csc_5
 enable_check_r7rs_gsi
 enable_check_r7rs_gauche
+enable_check_r7rs_gxi
+enable_check_r7rs_gxc
 enable_check_r6rs_guile
 enable_check_r7rs_guile
 enable_check_r6rs_loko
@@ -885,6 +899,8 @@ CSC_5
 CHIBI_SCHEME
 GSI
 GAUCHE
+GXI
+GXC
 GUILE
 LOKO
 PLT_R6RS
@@ -1560,6 +1576,13 @@ Optional Features:
   --disable-check-r7rs-gauche
                           disable tests with Gauche Scheme (enabled by default
                           if the Scheme implementation is found)
+  --disable-check-r7rs-gxi
+                          disable tests with Gerbil Scheme interpreter
+                          (enabled by default if the Scheme implementation is
+                          found)
+  --disable-check-r7rs-gxc
+                          disable tests with Gerbil Scheme compiler (enabled
+                          by default if the Scheme implementation is found)
   --disable-check-r6rs-guile
                           disable R⁶RS tests with Guile (enabled by default
                           if the Scheme implementation is found)
@@ -1602,6 +1625,8 @@ Some influential environment variables:
               Chibi Scheme
   GSI         Gambit Scheme interpreter
   GAUCHE      Gauche Scheme
+  GXI         Gerbil Scheme interpreter (R⁷RS)
+  GXC         Gerbil Scheme compiler (R⁷RS)
   GUILE       Guile Scheme version 3
   LOKO        Loko Scheme
   PLT_R6RS    Racket (R⁶RS)
@@ -6685,6 +6710,44 @@ else
 fi
 
 
+# Check whether --enable-check-r7rs-gxi was given.
+if test ${enable_check_r7rs_gxi+y}
+then :
+  enableval=$enable_check_r7rs_gxi; eval enable_check_r7rs_gxi="${enableval}"
+else case e in #(
+  e) eval enable_check_r7rs_gxi=yes ;;
+esac
+fi
+
+
+ if test "${enable_check_r7rs_gxi}" != no; then
+  ENABLE_CHECK_R7RS_GXI_TRUE=
+  ENABLE_CHECK_R7RS_GXI_FALSE='#'
+else
+  ENABLE_CHECK_R7RS_GXI_TRUE='#'
+  ENABLE_CHECK_R7RS_GXI_FALSE=
+fi
+
+
+# Check whether --enable-check-r7rs-gxc was given.
+if test ${enable_check_r7rs_gxc+y}
+then :
+  enableval=$enable_check_r7rs_gxc; eval enable_check_r7rs_gxc="${enableval}"
+else case e in #(
+  e) eval enable_check_r7rs_gxc=yes ;;
+esac
+fi
+
+
+ if test "${enable_check_r7rs_gxc}" != no; then
+  ENABLE_CHECK_R7RS_GXC_TRUE=
+  ENABLE_CHECK_R7RS_GXC_FALSE='#'
+else
+  ENABLE_CHECK_R7RS_GXC_TRUE='#'
+  ENABLE_CHECK_R7RS_GXC_FALSE=
+fi
+
+
 # Check whether --enable-check-r6rs-guile was given.
 if test ${enable_check_r6rs_guile+y}
 then :
@@ -7794,6 +7857,202 @@ fi
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #
+# Gerbil Scheme configuration.
+#
+
+{ :;
+
+# Override the cache if the precious variable GXI is set.
+test -n "${GXI}" && unset ac_cv_path_GXI
+chem_cv_path_GXI_found=yes
+{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for gxi" >&5
+printf %s "checking for gxi... " >&6; }
+if test ${ac_cv_path_GXI+y}
+then :
+  printf %s "(cached) " >&6
+else case e in #(
+  e) if test -z "$GXI"; then
+  ac_path_GXI_found=false
+  # Loop through the user's path and test for each of PROGNAME-LIST
+  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
+for as_dir in $PATH
+do
+  IFS=$as_save_IFS
+  case $as_dir in #(((
+    '') as_dir=./ ;;
+    */) ;;
+    *) as_dir=$as_dir/ ;;
+  esac
+    for ac_prog in gxi
+   do
+    for ac_exec_ext in '' $ac_executable_extensions; do
+      ac_path_GXI="$as_dir$ac_prog$ac_exec_ext"
+      as_fn_executable_p "$ac_path_GXI" || continue
+
+      if test -n "${GXI}"; then
+         # Bypass the test if the precious variable GXI is set.
+         ac_cv_path_GXI="${GXI}"
+         ac_path_GXI_found=:
+      else
+         # Run the test.
+
+    if LC_ALL=C LANG=C ${ac_path_GXI} -v 2>&1 | \
+      LC_ALL=C LANG=C ${GREP} '^Gerbil .* on Gambit' \
+               2> /dev/null > /dev/null; then
+        ac_cv_path_GXI="${ac_path_GXI}"
+        ac_path_GXI_found=:
+    fi
+
+      fi
+      $ac_path_GXI_found && break 3
+    done
+  done
+  done
+IFS=$as_save_IFS
+  if test -z "$ac_cv_path_GXI"; then
+    :
+  fi
+else
+  ac_cv_path_GXI=$GXI
+fi
+
+      if test -z "${ac_cv_path_GXI}"; then
+         ac_cv_path_GXI="not found"
+         chem_cv_path_GXI_found=no
+      fi
+    ;;
+esac
+fi
+{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $ac_cv_path_GXI" >&5
+printf "%s\n" "$ac_cv_path_GXI" >&6; }
+if test x"${chem_cv_path_GXI_found}" = x"yes"; then
+   GXI="${ac_cv_path_GXI}"
+else
+   GXI=""
+   # Do not cache the negative result. That way someone can install
+   # the program and have it be discovered, even though they did not
+   # clear a cache entry.
+   unset ac_cv_path_GXI
+fi
+}
+ if test "${chem_cv_path_GXI_found}" != no; then
+  GXI_TRUE=
+  GXI_FALSE='#'
+else
+  GXI_TRUE='#'
+  GXI_FALSE=
+fi
+
+
+{ :;
+
+# Override the cache if the precious variable GXC is set.
+test -n "${GXC}" && unset ac_cv_path_GXC
+chem_cv_path_GXC_found=yes
+{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for gxc" >&5
+printf %s "checking for gxc... " >&6; }
+if test ${ac_cv_path_GXC+y}
+then :
+  printf %s "(cached) " >&6
+else case e in #(
+  e) if test -z "$GXC"; then
+  ac_path_GXC_found=false
+  # Loop through the user's path and test for each of PROGNAME-LIST
+  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
+for as_dir in $PATH
+do
+  IFS=$as_save_IFS
+  case $as_dir in #(((
+    '') as_dir=./ ;;
+    */) ;;
+    *) as_dir=$as_dir/ ;;
+  esac
+    for ac_prog in gxc
+   do
+    for ac_exec_ext in '' $ac_executable_extensions; do
+      ac_path_GXC="$as_dir$ac_prog$ac_exec_ext"
+      as_fn_executable_p "$ac_path_GXC" || continue
+
+      if test -n "${GXC}"; then
+         # Bypass the test if the precious variable GXC is set.
+         ac_cv_path_GXC="${GXC}"
+         ac_path_GXC_found=:
+      else
+         # Run the test.
+
+    if LC_ALL=C LANG=C ${ac_path_GXC} -v 2>&1 | \
+      LC_ALL=C LANG=C ${GREP} '^Gerbil .* on Gambit' \
+               2> /dev/null > /dev/null; then
+        ac_cv_path_GXC="${ac_path_GXC}"
+        ac_path_GXC_found=:
+    fi
+
+      fi
+      $ac_path_GXC_found && break 3
+    done
+  done
+  done
+IFS=$as_save_IFS
+  if test -z "$ac_cv_path_GXC"; then
+    :
+  fi
+else
+  ac_cv_path_GXC=$GXC
+fi
+
+      if test -z "${ac_cv_path_GXC}"; then
+         ac_cv_path_GXC="not found"
+         chem_cv_path_GXC_found=no
+      fi
+    ;;
+esac
+fi
+{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $ac_cv_path_GXC" >&5
+printf "%s\n" "$ac_cv_path_GXC" >&6; }
+if test x"${chem_cv_path_GXC_found}" = x"yes"; then
+   GXC="${ac_cv_path_GXC}"
+else
+   GXC=""
+   # Do not cache the negative result. That way someone can install
+   # the program and have it be discovered, even though they did not
+   # clear a cache entry.
+   unset ac_cv_path_GXC
+fi
+}
+ if test "${chem_cv_path_GXC_found}" != no; then
+  GXC_TRUE=
+  GXC_FALSE='#'
+else
+  GXC_TRUE='#'
+  GXC_FALSE=
+fi
+
+
+
+# Copyright © 2025 Barry Schwartz
+#
+# This file is part of Pipchix.
+#
+# Permission is hereby granted, free of charge, to any person obtaining
+# a copy of Pipchix and associated documentation files (the
+# "Software"), to deal in the Software without restriction, including
+# without limitation the rights to use, copy, modify, merge, publish,
+# distribute, sublicense, and/or sell copies of the Software, and to
+# permit persons to whom the Software is furnished to do so, subject to
+# the following conditions:
+#
+# The above copyright notice and this permission notice shall be
+# included in all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+# LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+# OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+# WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+#
 # Guile Scheme configuration.
 #
 
@@ -8412,6 +8671,10 @@ ac_config_files="$ac_config_files tests/run-r7rs-gsi.sh"
 
 ac_config_files="$ac_config_files tests/run-r7rs-gauche.sh"
 
+ac_config_files="$ac_config_files tests/run-r7rs-gxi.sh"
+
+ac_config_files="$ac_config_files tests/run-r7rs-gxc.sh"
+
 ac_config_files="$ac_config_files tests/run-r6rs-guile.sh"
 
 ac_config_files="$ac_config_files tests/run-r7rs-guile.sh"
@@ -8658,6 +8921,14 @@ if test -z "${ENABLE_CHECK_R7RS_GAUCHE_TRUE}" && test -z "${ENABLE_CHECK_R7RS_GA
   as_fn_error $? "conditional \"ENABLE_CHECK_R7RS_GAUCHE\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
+if test -z "${ENABLE_CHECK_R7RS_GXI_TRUE}" && test -z "${ENABLE_CHECK_R7RS_GXI_FALSE}"; then
+  as_fn_error $? "conditional \"ENABLE_CHECK_R7RS_GXI\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${ENABLE_CHECK_R7RS_GXC_TRUE}" && test -z "${ENABLE_CHECK_R7RS_GXC_FALSE}"; then
+  as_fn_error $? "conditional \"ENABLE_CHECK_R7RS_GXC\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
 if test -z "${ENABLE_CHECK_R6RS_GUILE_TRUE}" && test -z "${ENABLE_CHECK_R6RS_GUILE_FALSE}"; then
   as_fn_error $? "conditional \"ENABLE_CHECK_R6RS_GUILE\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
@@ -8716,6 +8987,14 @@ Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${GAUCHE_TRUE}" && test -z "${GAUCHE_FALSE}"; then
   as_fn_error $? "conditional \"GAUCHE\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${GXI_TRUE}" && test -z "${GXI_FALSE}"; then
+  as_fn_error $? "conditional \"GXI\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${GXC_TRUE}" && test -z "${GXC_FALSE}"; then
+  as_fn_error $? "conditional \"GXC\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${GUILE_TRUE}" && test -z "${GUILE_FALSE}"; then
@@ -9334,6 +9613,8 @@ do
     "tests/run-r7rs-csi-5.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r7rs-csi-5.sh" ;;
     "tests/run-r7rs-gsi.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r7rs-gsi.sh" ;;
     "tests/run-r7rs-gauche.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r7rs-gauche.sh" ;;
+    "tests/run-r7rs-gxi.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r7rs-gxi.sh" ;;
+    "tests/run-r7rs-gxc.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r7rs-gxc.sh" ;;
     "tests/run-r6rs-guile.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r6rs-guile.sh" ;;
     "tests/run-r7rs-guile.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r7rs-guile.sh" ;;
     "tests/run-r6rs-loko.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r6rs-loko.sh" ;;
@@ -9978,6 +10259,8 @@ EOF
     "tests/run-r7rs-csi-5.sh":F) chmod +x tests/run-r7rs-csi-5.sh ;;
     "tests/run-r7rs-gsi.sh":F) chmod +x tests/run-r7rs-gsi.sh ;;
     "tests/run-r7rs-gauche.sh":F) chmod +x tests/run-r7rs-gauche.sh ;;
+    "tests/run-r7rs-gxi.sh":F) chmod +x tests/run-r7rs-gxi.sh ;;
+    "tests/run-r7rs-gxc.sh":F) chmod +x tests/run-r7rs-gxc.sh ;;
     "tests/run-r6rs-guile.sh":F) chmod +x tests/run-r6rs-guile.sh ;;
     "tests/run-r7rs-guile.sh":F) chmod +x tests/run-r7rs-guile.sh ;;
     "tests/run-r6rs-loko.sh":F) chmod +x tests/run-r6rs-loko.sh ;;
@@ -10086,6 +10369,14 @@ fi
 if test "${chem_cv_path_GAUCHE_found}" != no; then
   { printf "%s\n" "$as_me:${as_lineno-$LINENO}: Gauche Scheme: ${GAUCHE}" >&5
 printf "%s\n" "$as_me: Gauche Scheme: ${GAUCHE}" >&6;}
+fi
+if test "${chem_cv_path_GXI_found}" != no; then
+  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: Gerbil Scheme interpreter (R⁷RS): ${GXI}" >&5
+printf "%s\n" "$as_me: Gerbil Scheme interpreter (R⁷RS): ${GXI}" >&6;}
+fi
+if test "${chem_cv_path_GXC_found}" != no; then
+  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: Gerbil Scheme compiler (R⁷RS): ${GXC}" >&5
+printf "%s\n" "$as_me: Gerbil Scheme compiler (R⁷RS): ${GXC}" >&6;}
 fi
 if test "${chem_cv_path_GUILE_found}" != no; then
   { printf "%s\n" "$as_me:${as_lineno-$LINENO}: Guile version 3: ${GUILE}" >&5

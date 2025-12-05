@@ -103,6 +103,7 @@ CLEANFILES += $(R7RS_SCHEME)
 CLEANFILES += $(R7RS_SCHEME:%=%.tmp)
 if INSTALL_R7RS_SOURCE
 nodist_r7rspipchix_DATA += $(R7RS_SCHEME)
+nodist_r7rspipchix_DATA += r7rs/gerbil.pkg
 endif
 
 $(builddir)/r6rs/pipchix/%.sls: $(srcdir)/r6rs/pipchix/%.sls.m4 \
@@ -121,10 +122,19 @@ $(builddir)/r7rs/pipchix/%.sld: $(srcdir)/r7rs/pipchix/%.sld.m4 \
 		$(M4_PREPROCESS) $(<) > $(@).tmp && \
 		mv $(@){.tmp,}
 
+r7rs/gerbil.pkg: Makefile.am # Gerbil has to be told the Scheme dialect.
+	$(call v,PRINTF) \
+	    $(MKDIR_P) $(@D) && \
+	    printf '(prelude: :scheme/r7rs)' > $(@).tmp && \
+	    mv $(@){.tmp,}
+
+check: r7rs/gerbil.pkg
+DISTCLEANFILES += r7rs/gerbil.pkg
+
 #
 # A way to get names for temporary files.
 #
-MKTEMP=$(shell TMPDIR=. mktemp 2>/dev/null || echo tmp.$${RANDOM})
+MKTEMP=$(shell basename $(TMPDIR=. mktemp 2>/dev/null) 2>/dev/null || echo tmp.$${RANDOM})
 
 #---------------------------------------------------------------------
 #
@@ -277,6 +287,47 @@ CLEANFILES += chicken-5-egg-stamp
 
 #---------------------------------------------------------------------
 
+if GXC
+if ENABLE_CHECK_R7RS_GXC
+
+GERBIL_PX = r7rs/gerbil/lib/pipchix
+
+#BUILT_SOURCES += $(R7RS_SCHEME:r7rs/pipchix/%.sld=$(GERBIL_PX)/%.o1)
+
+$(GERBIL_PX)/%.o1: r7rs/pipchix/%.sld
+	$(call v,GXC)$(MKDIR_P) r7rs/gerbil/lib && \
+	( \
+	  cd r7rs && \
+	  if ! test -e gerbil.pkg; then \
+	    echo '(prelude: :scheme/r7rs)' > gerbil.pkg; \
+	  fi && \
+	  env \
+	    GERBIL_PATH=gerbil \
+	    GERBIL_LOADPATH=. \
+	    $(GXC) -O pipchix/$(<F) \
+	)
+
+$(GERBIL_PX)/%.o1: $(srcdir)/r7rs/pipchix/%.sld.m4 \
+                   $(srcdir)/pipchix/%.m4 \
+                   $(srcdir)/pipchix/pipchix-includes.m4
+$(GERBIL_PX)/abstract-syntax-tree.o1: $(GERBIL_PX)/define-record-interface.o1
+$(GERBIL_PX)/nix-embed.o1: $(GERBIL_PX)/abstract-syntax-tree.o1
+$(GERBIL_PX)/nix-list.o1: $(GERBIL_PX)/abstract-syntax-tree.o1
+$(GERBIL_PX)/nix-set.o1: $(GERBIL_PX)/abstract-syntax-tree.o1
+$(GERBIL_PX)/base.o1: $(GERBIL_PX)/string-manipulation.o1 \
+                      $(GERBIL_PX)/abstract-syntax-tree.o1 \
+                      $(GERBIL_PX)/nix-list.o1 \
+                      $(GERBIL_PX)/nix-set.o1
+
+distclean-local:
+	-rm -R -f r7rs/gerbil
+	-rm -f r7rs/gerbil.pkg
+
+endif ENABLE_CHECK_R7RS_GXC
+endif GXC
+
+#---------------------------------------------------------------------
+
 include tests-preparations.am
 
 tests/run-r6rs-%.sh: tests/run-r6rs-%.sh.in
@@ -293,6 +344,9 @@ config.status: tests/run-r7rs-csi-5.sh.in
 config.status: tests/run-r7rs-gsi.sh.in
 
 config.status: tests/run-r7rs-gauche.sh.in
+
+config.status: tests/run-r7rs-gxi.sh.in
+config.status: tests/run-r7rs-gxc.sh.in
 
 config.status: tests/run-r6rs-guile.sh.in
 config.status: tests/run-r7rs-guile.sh.in

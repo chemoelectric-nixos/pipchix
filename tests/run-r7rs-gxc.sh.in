@@ -1,0 +1,37 @@
+#!@SHELL@
+#
+# Compile a tiny R⁷RS program with the Gerbil Scheme compiler.
+#
+
+exit 77
+
+prog_scm=`basename $(TMPDIR=. mktemp 2>/dev/null) 2>/dev/null || echo tmp."${RANDOM}"`.scm
+
+cat > "${prog_scm}" <<EOF
+(import (scheme base))
+(import (scheme process-context))
+(import (scheme write))
+(import (pipchix base))
+(import (pipchix continuation-capture))
+(import (pipchix abstract-syntax-tree))
+(import (pipchix nix-embed))
+(import (pipchix nix-list))
+(import (pipchix nix-set))
+(import (pipchix string-manipulation))
+(output-nix-abstract-syntax-tree $1)
+(exit 0)
+EOF
+
+env LC_ALL="@TEST_LOCALE@" \
+    LANG="@TEST_LOCALE@" \
+    GERBIL_LOADPATH='@abs_top_builddir@/r7rs' \
+    @GXI@ -l r7rs -e '(include "'${prog_scm}'")'
+
+rm "${prog_scm}"
+
+exit 0
+
+# local variables:
+# mode: shell-script
+# sh-shell: sh
+# end:
