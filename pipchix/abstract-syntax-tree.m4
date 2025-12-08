@@ -27,30 +27,15 @@ m4_string_reverse_concatenate
 
 (define the-nix-null%% '#(nix-null))    ; An arbitrary unique object.
 
-(define-record-interface <nix-node>
-  nix-node?
-  nix-node-constructor
-  nix-node-predicate
-  nix-node-access)
-
-(define-syntax define-nix-node-variety
-  (syntax-rules ()
-    ((_ variety rule ...)
-     (define-record-interface-variety
-       variety 
-       nix-node-constructor
-       nix-node-predicate
-       nix-node-access
-       rule ...))))
-
-(define-nix-node-variety <nix-embedded-node>
-  (constructor> make-nix-embedded-node)
+(define-record-factory <nix-embedded-node>
   (predicate> nix-embedded-node?)
+  (constructor> make-nix-embedded-node)
   (getter> 1 nix-embedded-node-ref))
 
-(define-nix-node-variety <nix-data-node>
+(define-record-factory <nix-data-node>
   ;; A node whose content is boolean, number, string, or
   ;; the-nix-null%%.
+  (predicate> nix-data-node?)
   (constructor> make-nix-data-node%%)
   (constructor>
    make-nix-data-node
@@ -67,7 +52,6 @@ m4_string_reverse_concatenate
                   (number? data))
               (construct data))
              (else (error "incorrect type" data))))))
-  (predicate> nix-data-node?)
   (getter> 1 nix-data-node-ref))
 
 (define nix-false (make-nix-data-node%% #f))
@@ -91,17 +75,17 @@ m4_string_reverse_concatenate
   (and (nix-data-node? obj)
        (eq? the-nix-null%% (nix-data-node-ref obj))))
 
-(define-nix-node-variety <nix-path-node>
-  (constructor> make-nix-path-node)
+(define-record-factory <nix-path-node>
   (predicate> nix-path-node?)
+  (constructor> make-nix-path-node)
   (getter> 1 nix-path-node-ref))
 
-(define-nix-node-variety <nix-attributeset-node>
+(define-record-factory <nix-attributeset-node>
+  (predicate> nix-attributeset-node?)
   (constructor>
    make-nix-attributeset-node
    (lambda (construct)
      (lambda (recursive?) (construct recursive? '()))))
-  (predicate> nix-attributeset-node?)
   (getter> 1 nix-attributeset-node-recursive?)
   (getter> 2 nix-attributeset-node-bag)
   (setter> 2 set-nix-attributeset-node-bag!))
@@ -114,7 +98,8 @@ m4_string_reverse_concatenate
   (let ((bag (nix-attributeset-node-bag attrset)))
     (for-each proc (reverse bag))))
 
-(define-nix-node-variety <nix-attributepath-node>
+(define-record-factory <nix-attributepath-node>
+  (predicate> nix-attributepath-node?)
   (constructor>
    list->nix-attributepath-node
    (let ((sym->str
@@ -123,32 +108,39 @@ m4_string_reverse_concatenate
      (lambda (construct)
        (lambda (names)
          (construct (map sym->str names))))))
-  (predicate> nix-attributepath-node?)
   (getter> 1 nix-attributepath-node->list))
 
-(define-nix-node-variety <nix-attributebinding-node>
-  (constructor> make-nix-attributebinding-node)
+(define-record-factory <nix-attributebinding-node>
   (predicate> nix-attributebinding-node?)
+  (constructor> make-nix-attributebinding-node)
   (getter> 1 nix-attributebinding-node-key)
   (getter> 2 nix-attributebinding-node-value))
 
-(define-nix-node-variety <nix-inherit-node>
+(define-record-factory <nix-inherit-node>
+  (predicate> nix-inherit-node?)
   (constructor>
    list->nix-inherit-node
    (lambda (construct)
      (case-lambda
        ((lst) (construct lst #f))
        ((lst attrset) (construct lst attrset)))))
-  (predicate> nix-inherit-node?)
   (getter> 1 nix-inherit-node->list)
   (getter> 2 nix-inherit-node-attributeset))
 
-(define-nix-node-variety <nix-list-node>
-  (constructor> list->nix-list-node)
+(define-record-factory <nix-list-node>
   (predicate> nix-list-node?)
+  (constructor> list->nix-list-node)
   (getter> 1 nix-list-node->list))
 
-(define nix-abstract-syntax-tree? nix-node?)
+(define (nix-abstract-syntax-tree? obj)
+  (or (nix-embedded-node? obj)
+      (nix-data-node? obj)
+      (nix-path-node? obj)
+      (nix-attributeset-node? obj)
+      (nix-attributepath-node? obj)
+      (nix-attributebinding-node? obj)
+      (nix-inherit-node? obj)
+      (nix-list-node? obj)))
 
 (define (scheme->nix value)
   ;; Convert Scheme values to Nix AST.

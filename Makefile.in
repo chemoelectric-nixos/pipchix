@@ -146,6 +146,29 @@ EXTRA_PROGRAMS = is-older$(EXEEXT)
 @CHICKEN_INSTALL_5_TRUE@@CSI_5_TRUE@@ENABLE_CHECK_R7RS_CSI_5_TRUE@am__append_4 = chicken-5-egg-stamp
 #
 @CHICKEN_INSTALL_5_TRUE@@CSC_5_TRUE@@ENABLE_CHECK_R7RS_CSC_5_TRUE@am__append_5 = chicken-5-egg-stamp
+#
+@CHEZ_SCHEME_TRUE@@ENABLE_CHECK_R6RS_CHEZ_TRUE@am__append_6 = $(R6RS_SCHEME)
+@CHIBI_SCHEME_TRUE@@ENABLE_CHECK_R7RS_CHIBI_TRUE@am__append_7 = $(R7RS_SCHEME)
+@ENABLE_CHECK_R7RS_GSI_TRUE@@GSI_TRUE@am__append_8 = $(R7RS_SCHEME)
+
+# if GSC
+# if ENABLE_CHECK_R7RS_GSC
+# BUILT_SOURCES += $(R7RS_SCHEME)
+# endif ENABLE_CHECK_R7RS_GSC
+# endif GSC
+@ENABLE_CHECK_R7RS_GAUCHE_TRUE@@GAUCHE_TRUE@am__append_9 = $(R7RS_SCHEME)
+@ENABLE_CHECK_R7RS_GXI_TRUE@@GXI_TRUE@am__append_10 = $(R7RS_SCHEME)
+@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@am__append_11 = $(R7RS_SCHEME)
+@ENABLE_CHECK_R6RS_GUILE_TRUE@@GUILE_TRUE@am__append_12 = $(R6RS_SCHEME)
+#
+@ENABLE_CHECK_R7RS_GUILE_TRUE@@GUILE_TRUE@am__append_13 = $(R7RS_SCHEME)
+@ENABLE_CHECK_R6RS_LOKO_TRUE@@LOKO_TRUE@am__append_14 = $(R6RS_SCHEME)
+#
+@ENABLE_CHECK_R7RS_LOKO_TRUE@@LOKO_TRUE@am__append_15 = $(R7RS_SCHEME)
+@ENABLE_CHECK_R6RS_RACKET_TRUE@@PLT_R6RS_TRUE@am__append_16 = $(R6RS_SCHEME)
+@ENABLE_CHECK_R6RS_SAGITTARIUS_TRUE@@SAGITTARIUS_TRUE@am__append_17 = $(R6RS_SCHEME)
+#
+@ENABLE_CHECK_R7RS_SAGITTARIUS_TRUE@@SAGITTARIUS_TRUE@am__append_18 = $(R7RS_SCHEME)
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/ax_check_compile_flag.m4 \
@@ -154,6 +177,7 @@ am__aclocal_m4_deps = $(top_srcdir)/m4/ax_check_compile_flag.m4 \
 	$(top_srcdir)/m4/chem_path_progs_cached_and_precious.m4 \
 	$(top_srcdir)/m4/chem_prog_gnu_make.m4 \
 	$(top_srcdir)/m4/chem_prog_m4.m4 \
+	$(top_srcdir)/m4/chem_unique_id.m4 \
 	$(top_srcdir)/ac-chicken-install-options.m4 \
 	$(top_srcdir)/ac-r6rs-install-options.m4 \
 	$(top_srcdir)/ac-r7rs-install-options.m4 \
@@ -405,6 +429,7 @@ SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
 STRIP = @STRIP@
 TEST_LOCALE = @TEST_LOCALE@
+UNIQUE_ID = @UNIQUE_ID@
 VERSION = @VERSION@
 abs_builddir = @abs_builddir@
 abs_srcdir = @abs_srcdir@
@@ -492,7 +517,8 @@ CLEANFILES = tmp.* $(R6RS_SCHEME) $(R6RS_SCHEME:%=%.tmp) \
 	$(CHICKEN_5_EGGDIR)/*.{$(OBJEXT),so,link,import.scm} \
 	$(CHICKEN_5_EGGDIR)/pipchix.{build,install}.sh \
 	chicken-5-egg-stamp
-DISTCLEANFILES = Makefile GNUmakefile r7rs/gerbil.pkg is-older
+DISTCLEANFILES = Makefile GNUmakefile r7rs/gerbil.pkg \
+	${top_builddir}/tempname is-older
 EXTRA_DIST = silent-rules.mk COPYING README.adoc INSTALL AUTHORS \
 	pipchix/pipchix-includes.m4 $(R6RS_SCHEME:%=%.m4) \
 	$(R6RS_SCHEME:r6rs/pipchix/%.sls=pipchix/%.m4) \
@@ -501,7 +527,11 @@ EXTRA_DIST = silent-rules.mk COPYING README.adoc INSTALL AUTHORS \
 	$(R7RS_SCHEME:r7rs/pipchix/%.sld=pipchix/%.m4) \
 	$(R7RS_SCHEME:r7rs/pipchix/%.sld=pipchix/%.exports.m4)
 EXTRA_SCRIPTS = 
-BUILT_SOURCES = $(am__append_4) $(am__append_5) is-older
+BUILT_SOURCES = $(am__append_4) $(am__append_5) $(am__append_6) \
+	$(am__append_7) $(am__append_8) $(am__append_9) \
+	$(am__append_10) $(am__append_11) $(am__append_12) \
+	$(am__append_13) $(am__append_14) $(am__append_15) \
+	$(am__append_16) $(am__append_17) $(am__append_18) is-older
 nodist_r6rspipchix_DATA = $(am__append_2)
 nodist_r7rspipchix_DATA = $(am__append_3)
 nodist_chickeneggs5pipchix_DATA = $(am__append_1)
@@ -509,21 +539,22 @@ M4_PREPROCESS = $(GNU_M4) -P -I '$(srcdir)'
 R6RS_SCHEME = r6rs/pipchix/srfi-9.sls r6rs/pipchix/srfi-39.sls \
 	r6rs/pipchix/srfi-111.sls \
 	r6rs/pipchix/continuation-capture.sls \
-	r6rs/pipchix/define-record-interface.sls r6rs/pipchix/base.sls \
+	r6rs/pipchix/define-record-factory.sls r6rs/pipchix/base.sls \
 	r6rs/pipchix/nix-embed.sls r6rs/pipchix/nix-list.sls \
 	r6rs/pipchix/nix-set.sls r6rs/pipchix/abstract-syntax-tree.sls \
 	r6rs/pipchix/string-manipulation.sls
 R7RS_SCHEME = r7rs/pipchix/srfi-111.sld \
 	r7rs/pipchix/continuation-capture.sld \
-	r7rs/pipchix/define-record-interface.sld r7rs/pipchix/base.sld \
+	r7rs/pipchix/define-record-factory.sld r7rs/pipchix/base.sld \
 	r7rs/pipchix/nix-embed.sld r7rs/pipchix/nix-list.sld \
 	r7rs/pipchix/nix-set.sld r7rs/pipchix/abstract-syntax-tree.sld \
 	r7rs/pipchix/string-manipulation.sld
 
 #
-# A way to get names for temporary files.
+# A way to get names for temporary files within the build directories.
+# This is NOT for use in place of mktemp.
 #
-MKTEMP = $(shell basename $(TMPDIR=. mktemp 2>/dev/null) 2>/dev/null || echo tmp.$${RANDOM})
+TEMPNAME = $(shell ${top_builddir}/tempname)
 
 #---------------------------------------------------------------------
 #
@@ -540,11 +571,11 @@ CHICKEN_EGGSPEC_BOTTOM = ' \
    (components \
     (extension pipchix.srfi-111) \
     (extension pipchix.continuation-capture) \
-    (extension pipchix.define-record-interface) \
+    (extension pipchix.define-record-factory) \
     (extension pipchix.string-manipulation) \
     (extension pipchix.abstract-syntax-tree \
       (component-dependencies \
-       pipchix.define-record-interface)) \
+       pipchix.define-record-factory)) \
     (extension pipchix.nix-embed \
       (component-dependencies \
        pipchix.abstract-syntax-tree)) \
@@ -568,7 +599,7 @@ CHICKEN_5_EGGFILES = \
     pipchix.egg \
     pipchix.srfi-111.scm \
     pipchix.continuation-capture.scm \
-    pipchix.define-record-interface.scm \
+    pipchix.define-record-factory.scm \
     pipchix.string-manipulation.scm \
     pipchix.abstract-syntax-tree.scm \
     pipchix.nix-embed.scm \
@@ -1257,9 +1288,9 @@ check: r7rs/gerbil.pkg
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 $(builddir)/$(CHICKEN_5_EGGDIR)/pipchix.%.scm: \
-	                           $(srcdir)/r7rs/pipchix/%.sld.m4 \
-	                           $(srcdir)/pipchix/%.m4 \
-	                           $(srcdir)/pipchix/pipchix-includes.m4
+	                   $(srcdir)/r7rs/pipchix/%.sld.m4 \
+	                   $(srcdir)/pipchix/%.m4 \
+	                   $(srcdir)/pipchix/pipchix-includes.m4
 	$(call v,SCM.M4) $(MKDIR_P) $(@D) && \
 		$(M4_PREPROCESS) $(<) > $(@).tmp && \
 		mv $(@){.tmp,}
@@ -1272,7 +1303,7 @@ $(CHICKEN_5_EGGDIR)/README.adoc: README.adoc
 
 $(CHICKEN_5_EGGDIR)/pipchix.egg: GNUmakefile $(TINYSCHEME_EXE)
 	$(call v,SEXP) \
-	script=$(MKTEMP) && \
+	script=$(TEMPNAME) && \
 	$(MKDIR_P) $(@D) && \
 	if true; then \
 	  printf '%s' $(DEFINE_NICELY_PRINT); \
@@ -1324,41 +1355,6 @@ chicken-5-egg-stamp: $(CHICKEN_5_EGGFILES)
 	  ); \
 	  touch $(@); \
 	fi
-@CHICKEN_INSTALL_5_TRUE@@CSI_5_TRUE@@ENABLE_CHECK_R7RS_CSI_5_TRUE@check: chicken-5-egg-stamp
-@CHICKEN_INSTALL_5_TRUE@@CSC_5_TRUE@@ENABLE_CHECK_R7RS_CSC_5_TRUE@check: chicken-5-egg-stamp
-#
-
-@CHEZ_SCHEME_TRUE@@ENABLE_CHECK_R6RS_CHEZ_TRUE@check: $(R6RS_SCHEME)
-
-@CHIBI_SCHEME_TRUE@@ENABLE_CHECK_R7RS_CHIBI_TRUE@check: $(R7RS_SCHEME)
-
-@ENABLE_CHECK_R7RS_GSI_TRUE@@GSI_TRUE@check: $(R7RS_SCHEME)
-
-# if GSC
-# if ENABLE_CHECK_R7RS_GSC
-# check: $(R7RS_SCHEME)
-# endif ENABLE_CHECK_R7RS_GSC
-# endif GSC
-
-@ENABLE_CHECK_R7RS_GAUCHE_TRUE@@GAUCHE_TRUE@check: $(R7RS_SCHEME)
-
-@ENABLE_CHECK_R7RS_GXI_TRUE@@GXI_TRUE@check: $(R7RS_SCHEME)
-
-@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@check: $(R7RS_SCHEME)
-
-@ENABLE_CHECK_R6RS_GUILE_TRUE@@GUILE_TRUE@check: $(R6RS_SCHEME)
-#
-@ENABLE_CHECK_R7RS_GUILE_TRUE@@GUILE_TRUE@check: $(R7RS_SCHEME)
-
-@ENABLE_CHECK_R6RS_LOKO_TRUE@@LOKO_TRUE@check: $(R6RS_SCHEME)
-#
-@ENABLE_CHECK_R7RS_LOKO_TRUE@@LOKO_TRUE@check: $(R7RS_SCHEME)
-
-@ENABLE_CHECK_R6RS_RACKET_TRUE@@PLT_R6RS_TRUE@check: $(R6RS_SCHEME)
-
-@ENABLE_CHECK_R6RS_SAGITTARIUS_TRUE@@SAGITTARIUS_TRUE@check: $(R6RS_SCHEME)
-#
-@ENABLE_CHECK_R7RS_SAGITTARIUS_TRUE@@SAGITTARIUS_TRUE@check: $(R7RS_SCHEME)
 
 #---------------------------------------------------------------------
 

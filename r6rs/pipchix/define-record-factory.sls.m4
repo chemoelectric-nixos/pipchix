@@ -25,18 +25,17 @@
 ;;;
 m4_include(pipchix/pipchix-includes.m4)
 
-(library (pipchix abstract-syntax-tree)
+(library (pipchix define-record-factory)
 
-  (export m4_include(pipchix/abstract-syntax-tree.exports.m4))
+  (export m4_include(pipchix/define-record-factory.exports.m4))
 
   (import (rnrs base (6))
           (rnrs control (6))
-          (rnrs io simple (6))
-          (rnrs mutable-strings (6))
-          (rnrs unicode (6))
-          (pipchix define-record-factory))
+          (pipchix srfi-9))
 
-  m4_include(pipchix/abstract-syntax-tree.m4)
+  m4_define(«implementation_of_define_record_factory»,
+            «syntax-rules»)
+  m4_include(pipchix/define-record-factory.m4)
 
   )
 

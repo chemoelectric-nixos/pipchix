@@ -160,7 +160,6 @@ GERBIL_O = \
       $(addsuffix .scm, \
 	  srfi-111 \
 	  continuation-capture \
-	  define-record-interface \
 	  base \
 	  nix-embed \
 	  nix-list \
@@ -183,7 +182,7 @@ $(GERBIL_PX)/%.scm: $(top_builddir)/r7rs/pipchix/%.sld
 $(GERBIL_PX)/%.scm: $(top_srcdir)/r7rs/pipchix/%.sld.m4 \
                    $(top_srcdir)/pipchix/%.m4 \
                    $(top_srcdir)/pipchix/pipchix-includes.m4
-$(GERBIL_PX)/abstract-syntax-tree.scm: $(GERBIL_PX)/define-record-interface.scm
+$(GERBIL_PX)/abstract-syntax-tree.scm: $(GERBIL_PX)/define-record-factory.scm
 $(GERBIL_PX)/nix-embed.scm: $(GERBIL_PX)/abstract-syntax-tree.scm
 $(GERBIL_PX)/nix-list.scm: $(GERBIL_PX)/abstract-syntax-tree.scm
 $(GERBIL_PX)/nix-set.scm: $(GERBIL_PX)/abstract-syntax-tree.scm

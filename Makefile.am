@@ -70,7 +70,7 @@ R6RS_SCHEME += r6rs/pipchix/srfi-9.sls
 R6RS_SCHEME += r6rs/pipchix/srfi-39.sls
 R6RS_SCHEME += r6rs/pipchix/srfi-111.sls
 R6RS_SCHEME += r6rs/pipchix/continuation-capture.sls
-R6RS_SCHEME += r6rs/pipchix/define-record-interface.sls
+R6RS_SCHEME += r6rs/pipchix/define-record-factory.sls
 R6RS_SCHEME += r6rs/pipchix/base.sls
 R6RS_SCHEME += r6rs/pipchix/nix-embed.sls
 R6RS_SCHEME += r6rs/pipchix/nix-list.sls
@@ -89,7 +89,7 @@ endif
 R7RS_SCHEME =
 R7RS_SCHEME += r7rs/pipchix/srfi-111.sld
 R7RS_SCHEME += r7rs/pipchix/continuation-capture.sld
-R7RS_SCHEME += r7rs/pipchix/define-record-interface.sld
+R7RS_SCHEME += r7rs/pipchix/define-record-factory.sld
 R7RS_SCHEME += r7rs/pipchix/base.sld
 R7RS_SCHEME += r7rs/pipchix/nix-embed.sld
 R7RS_SCHEME += r7rs/pipchix/nix-list.sld
@@ -132,9 +132,11 @@ check: r7rs/gerbil.pkg
 DISTCLEANFILES += r7rs/gerbil.pkg
 
 #
-# A way to get names for temporary files.
+# A way to get names for temporary files within the build directories.
+# This is NOT for use in place of mktemp.
 #
-MKTEMP=$(shell basename $(TMPDIR=. mktemp 2>/dev/null) 2>/dev/null || echo tmp.$${RANDOM})
+TEMPNAME=$(shell ${top_builddir}/tempname)
+DISTCLEANFILES += ${top_builddir}/tempname
 
 #---------------------------------------------------------------------
 #
@@ -152,11 +154,11 @@ CHICKEN_EGGSPEC_BOTTOM = ' \
    (components \
     (extension pipchix.srfi-111) \
     (extension pipchix.continuation-capture) \
-    (extension pipchix.define-record-interface) \
+    (extension pipchix.define-record-factory) \
     (extension pipchix.string-manipulation) \
     (extension pipchix.abstract-syntax-tree \
       (component-dependencies \
-       pipchix.define-record-interface)) \
+       pipchix.define-record-factory)) \
     (extension pipchix.nix-embed \
       (component-dependencies \
        pipchix.abstract-syntax-tree)) \
@@ -176,9 +178,9 @@ CHICKEN_EGGSPEC_BOTTOM = ' \
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 $(builddir)/$(CHICKEN_5_EGGDIR)/pipchix.%.scm: \
-	                           $(srcdir)/r7rs/pipchix/%.sld.m4 \
-	                           $(srcdir)/pipchix/%.m4 \
-	                           $(srcdir)/pipchix/pipchix-includes.m4
+	                   $(srcdir)/r7rs/pipchix/%.sld.m4 \
+	                   $(srcdir)/pipchix/%.m4 \
+	                   $(srcdir)/pipchix/pipchix-includes.m4
 	$(call v,SCM.M4) $(MKDIR_P) $(@D) && \
 		$(M4_PREPROCESS) $(<) > $(@).tmp && \
 		mv $(@){.tmp,}
@@ -190,7 +192,7 @@ CHICKEN_5_EGGFILES = \
     pipchix.egg \
     pipchix.srfi-111.scm \
     pipchix.continuation-capture.scm \
-    pipchix.define-record-interface.scm \
+    pipchix.define-record-factory.scm \
     pipchix.string-manipulation.scm \
     pipchix.abstract-syntax-tree.scm \
     pipchix.nix-embed.scm \
@@ -208,7 +210,7 @@ $(CHICKEN_5_EGGDIR)/README.adoc: README.adoc
 
 $(CHICKEN_5_EGGDIR)/pipchix.egg: GNUmakefile $(TINYSCHEME_EXE)
 	$(call v,SEXP) \
-	script=$(MKTEMP) && \
+	script=$(TEMPNAME) && \
 	$(MKDIR_P) $(@D) && \
 	if true; then \
 	  printf '%s' $(DEFINE_NICELY_PRINT); \

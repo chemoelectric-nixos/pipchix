@@ -3,7 +3,7 @@
 # Compile a tiny R⁷RS program with the Gerbil Scheme compiler.
 #
 
-prog_scm=`basename $(TMPDIR=. mktemp 2>/dev/null) 2>/dev/null || echo tmp."${RANDOM}"`.scm
+prog_scm=`@abs_top_builddir@/tempname`.scm
 prog_exe=`echo ${prog_scm} | sed 's|scm$|exe|'`
 
 printf '(prelude: :scheme/r7rs)' > gerbil.pkg

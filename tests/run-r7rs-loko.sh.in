@@ -3,7 +3,7 @@
 # Run a tiny R⁷RS program in Loko Scheme.
 #
 
-prog_scm=`TMPDIR=. mktemp 2>/dev/null || echo tmp."${RANDOM}"`.scm
+prog_scm=`@abs_top_builddir@/tempname`.scm
 
 cat > "${prog_scm}" <<EOF
 (import (scheme base))

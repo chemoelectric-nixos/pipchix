@@ -45,8 +45,12 @@ m4_include(pipchix/pipchix-includes.m4)
        ;; of symbols between different definitions, so it might be
        ;; unsurprising that syntax-rules implementations for R⁵RS have
        ;; trouble.)
-       m4_include(pipchix/define-record-factory-ermactrans.m4))
+       m4_define(«implementation_of_define_record_factory»,
+                 «er-macro-transformer»)
+       m4_include(pipchix/define-record-factory.m4))
       (else
+       m4_define(«implementation_of_define_record_factory»,
+                 «syntax-rules»)
        m4_include(pipchix/define-record-factory.m4)))
 
     ))

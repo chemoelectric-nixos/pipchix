@@ -123,6 +123,7 @@ am__aclocal_m4_deps = $(top_srcdir)/m4/ax_check_compile_flag.m4 \
 	$(top_srcdir)/m4/chem_path_progs_cached_and_precious.m4 \
 	$(top_srcdir)/m4/chem_prog_gnu_make.m4 \
 	$(top_srcdir)/m4/chem_prog_m4.m4 \
+	$(top_srcdir)/m4/chem_unique_id.m4 \
 	$(top_srcdir)/ac-chicken-install-options.m4 \
 	$(top_srcdir)/ac-r6rs-install-options.m4 \
 	$(top_srcdir)/ac-r7rs-install-options.m4 \
@@ -248,6 +249,7 @@ SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
 STRIP = @STRIP@
 TEST_LOCALE = @TEST_LOCALE@
+UNIQUE_ID = @UNIQUE_ID@
 VERSION = @VERSION@
 abs_builddir = @abs_builddir@
 abs_srcdir = @abs_srcdir@
@@ -372,7 +374,6 @@ TESTSUITE_DEPS = $(srcdir)/atlocal.in $(srcdir)/package.m4 \
 @ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@      $(addsuffix .scm, \
 @ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@	  srfi-111 \
 @ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@	  continuation-capture \
-@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@	  define-record-interface \
 @ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@	  base \
 @ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@	  nix-embed \
 @ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@	  nix-list \
@@ -393,9 +394,9 @@ $(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am  $(am__confi
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign tests/GNUmakefile:tests/Makefile.in'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu tests/GNUmakefile:tests/Makefile.in'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --foreign tests/GNUmakefile:tests/Makefile.in
+	  $(AUTOMAKE) --gnu tests/GNUmakefile:tests/Makefile.in
 GNUmakefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
 	  *config.status*) \
@@ -681,7 +682,7 @@ $(TESTSUITE): $(TESTSUITE_DEPS)
 @ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@$(GERBIL_PX)/%.scm: $(top_srcdir)/r7rs/pipchix/%.sld.m4 \
 @ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@                   $(top_srcdir)/pipchix/%.m4 \
 @ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@                   $(top_srcdir)/pipchix/pipchix-includes.m4
-@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@$(GERBIL_PX)/abstract-syntax-tree.scm: $(GERBIL_PX)/define-record-interface.scm
+@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@$(GERBIL_PX)/abstract-syntax-tree.scm: $(GERBIL_PX)/define-record-factory.scm
 @ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@$(GERBIL_PX)/nix-embed.scm: $(GERBIL_PX)/abstract-syntax-tree.scm
 @ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@$(GERBIL_PX)/nix-list.scm: $(GERBIL_PX)/abstract-syntax-tree.scm
 @ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@$(GERBIL_PX)/nix-set.scm: $(GERBIL_PX)/abstract-syntax-tree.scm

@@ -55,6 +55,8 @@ if test -z "${GNU_M4}"; then
    AC_MSG_ERROR([GNU m4 not found. Perhaps set GNU_M4 to OpenBSD m4.])
 fi
 
+CHEM_UNIQUE_ID([UNIQUE_ID])
+
 AC_ARG_ENABLE([color],
   [AS_HELP_STRING([--disable-color],
     [disable color in configure and test outputs (enabled by default)])],
@@ -206,6 +208,16 @@ m4_foreach([f],
    [tinyscheme-1.42/scheme-private.h],
    [tinyscheme-1.42/opdefines.h]],
   [AC_CONFIG_LINKS(f:f)])
+
+AC_CONFIG_COMMANDS([tempname],
+[
+  printf '@%:@!%s\nprintf '\''tmp.'\''; %s\n' "${SHELL}" "${UNIQUE_ID}" > tempname
+  chmod +x tempname
+],
+[
+  UNIQUE_ID="$(echo "${UNIQUE_ID}" | sed 's/\$/\\\$/g;s/\"/\\\"/g')"
+  SHELL="${SHELL}"
+])
 
 TEST_LOCALE=C.utf8
 AC_ARG_VAR([TEST_LOCALE],

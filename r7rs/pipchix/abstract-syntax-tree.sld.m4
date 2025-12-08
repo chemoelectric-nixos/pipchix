@@ -32,7 +32,7 @@ m4_include(pipchix/pipchix-includes.m4)
   (import (scheme case-lambda))
   (import (scheme char))
   (import (scheme write))
-  (import (pipchix define-record-interface))
+  (import (pipchix define-record-factory))
 
   (cond-expand
     (chicken-5

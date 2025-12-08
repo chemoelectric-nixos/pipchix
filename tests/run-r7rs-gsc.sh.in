@@ -7,7 +7,7 @@
 # FIXME: FIGURE OUT HOW TO COMPILE R7RS CODE WITH GAMBIT.
 #
 
-tmpnam=`basename $(TMPDIR=. mktemp) 2>/dev/null || echo tmp."${RANDOM}"`
+tmpnam=`@abs_top_builddir@/tempname`
 
 export LC_ALL="@TEST_LOCALE@"
 export LC_CTYPE="@TEST_LOCALE@"

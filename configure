@@ -751,6 +751,7 @@ INSTALL_CHICKEN_5_EGG_SOURCE_TRUE
 install_chicken_5_egg_source
 chickeneggsdir
 enable_color
+UNIQUE_ID
 GNU_M4
 EGREP
 FGREP
@@ -891,6 +892,7 @@ LDFLAGS
 LIBS
 CPPFLAGS
 GNU_M4
+UNIQUE_ID
 CHEZ_SCHEME
 CHICKEN_INSTALL_5
 CHICKEN_UNINSTALL_5
@@ -1613,6 +1615,7 @@ Some influential environment variables:
   CPPFLAGS    (Objective) C/C++ preprocessor flags, e.g. -I<include dir> if
               you have headers in a nonstandard directory <include dir>
   GNU_M4      GNU m4 macro processor
+  UNIQUE_ID   shell code to create a unique identifier without spaces
   CHEZ_SCHEME Chez Scheme
   CHICKEN_INSTALL_5
               chicken-install version 5
@@ -6437,6 +6440,68 @@ if test -z "${GNU_M4}"; then
    as_fn_error $? "GNU m4 not found. Perhaps set GNU_M4 to OpenBSD m4." "$LINENO" 5
 fi
 
+
+if test -n "${UNIQUE_ID}"; then chem_cv_unique_id="${UNIQUE_ID}"; fi
+{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for shell code to create a unique identifier without spaces or newline" >&5
+printf %s "checking for shell code to create a unique identifier without spaces or newline... " >&6; }
+if test ${chem_cv_unique_id+y}
+then :
+  printf %s "(cached) " >&6
+else case e in #(
+  e) if true; then
+     # Using awk to chop a final newline is more portable than "head
+     # -c-1", which is a GNU coreutils extension. The only option
+     # POSIX requires of head is -n.
+     __chop='awk '\''{printf "%s",$0}'\'
+     __os=`uname -s`
+     if test "${__os}" = Linux &&
+             test -r /proc/sys/kernel/random/uuid; then
+         # Use the Linux proc filesystem.
+         chem_cv_unique_id='if :;then cat /proc/sys/kernel/random/uuid|'${__chop}';fi'
+     elif test "${__os}" = Linux &&
+             uuidgen -V 2>&1 | grep -q 'uuidgen from util-linux'; then
+         # Using the util-linux command uuidgen.
+         chem_cv_unique_id='if :;then uuidgen|'${__chop}';fi'
+     elif ruby -e 'require "securerandom";print SecureRandom.uuid' 1>/dev/null 2>/dev/null; then
+         # Use Ruby.
+         chem_cv_unique_id='ruby -e '\''require "securerandom";print SecureRandom.uuid'\'
+     elif python -c 'import uuid; print (uuid.uuid4().urn)' 1>/dev/null 2>/dev/null; then
+         # Use Python.
+         chem_cv_unique_id='if :;then python -c '\''import uuid;print(uuid.uuid4().urn,end="")'\''|sed '\''s/^urn:uuid://'\'';fi'
+     elif perl -e 'use Data::UUID;print Data::UUID->new()->create_str();' 1>/dev/null 2>/dev/null; then
+         # Use Perl.
+         chem_cv_unique_id='perl -e '\''use Data::UUID;print Data::UUID->new()->create_str();'\'
+     elif node -e 'console.log(crypto.randomUUID())' 1>/dev/null 2>/dev/null; then
+         # Use nodejs.
+         chem_cv_unique_id='if :;then node -e '\''console.log(crypto.randomUUID())'\''|'${__chop}';fi'
+     elif openssl rand -hex 16 1>/dev/null 2>/dev/null; then
+         # Use OpenSSL to generate a random 16-digit hex number. Then
+         # use someone's magical combination of POSIX commands to put that
+         # number into UUID format.
+         chem_cv_unique_id='if :;then openssl rand -hex 16|tr '\''[:lower:]'\'' '\''[:upper:]'\''|sed '\''s/\(..\)\(..\)\(..\)\(..\)\(..\)\(..\)\(..\)\(..\)\(..\)\(..\)\(..\)\(..\)\(..\)\(..\)\(..\)\(..\)/\1\2\3\4-\5\6-\7\8-\9\10-\11\12\13\14\15\16/'\''|awk '\''{uuid=$0;sub("-..-","-4!-",uuid);sub("-..-","-8!-",uuid);gsub("!","-",uuid);printf uuid}'\'';fi'
+     else
+         # As a last resort, use ${RANDOM} and issue a warning.
+         chem_cv_unique_id='printf "%04x%s" ${RANDOM} `date +%Y%j%H%M%S`'
+         { printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: " >&5
+printf "%s\n" "$as_me: WARNING: " >&2;}
+         { printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: " >&5
+printf "%s\n" "$as_me: WARNING: " >&2;}
+         { printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: No good unique-identifier method found. Using \"\${RANDOM}\" and \"date\"." >&5
+printf "%s\n" "$as_me: WARNING: No good unique-identifier method found. Using \"\${RANDOM}\" and \"date\"." >&2;}
+         { printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: " >&5
+printf "%s\n" "$as_me: WARNING: " >&2;}
+         { printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: " >&5
+printf "%s\n" "$as_me: WARNING: " >&2;}
+     fi
+ fi ;;
+esac
+fi
+{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $chem_cv_unique_id" >&5
+printf "%s\n" "$chem_cv_unique_id" >&6; }
+ UNIQUE_ID="${chem_cv_unique_id}"
+
+
+
 # Check whether --enable-color was given.
 if test ${enable_color+y}
 then :
@@ -8702,6 +8767,9 @@ ac_config_links="$ac_config_links tinyscheme-1.42/scheme-private.h:tinyscheme-1.
 ac_config_links="$ac_config_links tinyscheme-1.42/opdefines.h:tinyscheme-1.42/opdefines.h"
 
 
+ac_config_commands="$ac_config_commands tempname"
+
+
 TEST_LOCALE=C.utf8
 
 
@@ -9593,6 +9661,10 @@ AMDEP_TRUE="$AMDEP_TRUE" MAKE="${MAKE-make}"
       chem_config_makefiles_make_command="${ax_cv_gnu_make_command}"
 
 
+  UNIQUE_ID="$(echo "${UNIQUE_ID}" | sed 's/\$/\\\$/g;s/\"/\\\"/g')"
+  SHELL="${SHELL}"
+
+
 _ACEOF
 
 cat >>$CONFIG_STATUS <<\_ACEOF || ac_write_fail=1
@@ -9632,6 +9704,7 @@ do
     "tinyscheme-1.42/scheme.h") CONFIG_LINKS="$CONFIG_LINKS tinyscheme-1.42/scheme.h:tinyscheme-1.42/scheme.h" ;;
     "tinyscheme-1.42/scheme-private.h") CONFIG_LINKS="$CONFIG_LINKS tinyscheme-1.42/scheme-private.h:tinyscheme-1.42/scheme-private.h" ;;
     "tinyscheme-1.42/opdefines.h") CONFIG_LINKS="$CONFIG_LINKS tinyscheme-1.42/opdefines.h:tinyscheme-1.42/opdefines.h" ;;
+    "tempname") CONFIG_COMMANDS="$CONFIG_COMMANDS tempname" ;;
 
   *) as_fn_error $? "invalid argument: '$ac_config_target'" "$LINENO" 5;;
   esac
@@ -10271,6 +10344,10 @@ EOF
     "tests/run-r6rs-racket.sh":F) chmod +x tests/run-r6rs-racket.sh ;;
     "tests/run-r6rs-sagittarius.sh":F) chmod +x tests/run-r6rs-sagittarius.sh ;;
     "tests/run-r7rs-sagittarius.sh":F) chmod +x tests/run-r7rs-sagittarius.sh ;;
+    "tempname":C)
+  printf '#!%s\nprintf '\''tmp.'\''; %s\n' "${SHELL}" "${UNIQUE_ID}" > tempname
+  chmod +x tempname
+ ;;
 
   esac
 done # for ac_tag

@@ -4,8 +4,8 @@
 # program.
 #
 
-prog_scm=`TMPDIR=. mktemp 2>/dev/null || echo tmp."${RANDOM}"`.scm
-prog_exe=`TMPDIR=. mktemp 2>/dev/null || echo tmp."${RANDOM}"`.exe
+prog_scm=`@abs_top_builddir@/tempname`.scm
+prog_exe=`echo ${prog_scm} | sed 's/scm$/exe/'`
 
 cat > "${prog_scm}" <<EOF
 (import (scheme base))
@@ -42,7 +42,7 @@ env LC_ALL="@TEST_LOCALE@" \
 env LC_ALL="@TEST_LOCALE@" \
     LANG="@TEST_LOCALE@" \
     CHICKEN_REPOSITORY_PATH=`new_repository_path` \
-    ${prog_exe}
+    ./${prog_exe}
 
 rm "${prog_scm}" "${prog_exe}"
 
