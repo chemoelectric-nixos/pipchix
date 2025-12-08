@@ -132,7 +132,11 @@ m4_ifelse(implementation_of_define_record_factory,«er-macro-transformer»,«
 
      (let ((n (length form)))
        (cond
-        ((= n 1) (error "record type designation is missing" form))
+        ((= n 1)
+         (error "record type designation is missing" form))
+        ((not (symbol? (cadr form)))
+         (error "record type designation is not a symbol"
+                (cadr form)))
         (else
          (let* ((designation (cadr form))
                 (original-constructor% (gensym))
