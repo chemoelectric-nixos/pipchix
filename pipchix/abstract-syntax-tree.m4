@@ -37,14 +37,13 @@ m4_string_reverse_concatenate
   pred)
 
 (define-record-factory <nix-embedded-node>
-  (predicate> nix-embedded-node? register-nix-node-predicate)
   (constructor> make-nix-embedded-node)
+  (predicate> nix-embedded-node? register-nix-node-predicate)
   (getter> 1 nix-embedded-node-ref))
 
 (define-record-factory <nix-data-node>
   ;; A node whose content is boolean, number, string, or
   ;; the-nix-null%%.
-  (predicate> nix-data-node? register-nix-node-predicate)
   (constructor> make-nix-data-node%%)
   (constructor>
    make-nix-data-node
@@ -61,6 +60,7 @@ m4_string_reverse_concatenate
                   (number? data))
               (construct data))
              (else (error "incorrect type" data))))))
+  (predicate> nix-data-node? register-nix-node-predicate)
   (getter> 1 nix-data-node-ref))
 
 (define nix-false (make-nix-data-node%% #f))
@@ -85,19 +85,73 @@ m4_string_reverse_concatenate
        (eq? the-nix-null%% (nix-data-node-ref obj))))
 
 (define-record-factory <nix-path-node>
-  (predicate> nix-path-node? register-nix-node-predicate)
   (constructor> make-nix-path-node)
+  (predicate> nix-path-node? register-nix-node-predicate)
   (getter> 1 nix-path-node-ref))
 
-(define-record-factory <nix-attributeset-node>
-  (predicate> nix-attributeset-node? register-nix-node-predicate)
+(define-record-factory <nix-attributeset-or-letrec-node>
   (constructor>
    make-nix-attributeset-node
    (lambda (construct)
-     (lambda (recursive?) (construct recursive? '()))))
-  (getter> 1 nix-attributeset-node-recursive?)
+     (lambda (recursive?)
+       (let ((kind (if recursive? 'nix-setrec 'nix-set)))
+         (construct kind '())))))
+  (constructor>
+   make-nix-letrec-node
+   (let ((filler
+          ;; Fill the in-clause with something that cannot be
+          ;; converted to a Nix object.
+          (lambda () #f)))
+     (lambda (construct)
+       (lambda ()
+         (construct 'nix-letrec '() filler)))))
+  (predicate>
+   nix-attributeset-node?
+   (lambda (pred)
+     (define-syntax kind%%%
+       (syntax-rules ()
+         ((_ obj)
+          (nix-attributeset-or-letrec-node-kind%%% obj))))
+     (let ((new-pred
+            (lambda (obj)
+               (and (pred obj)
+                    (let ((kind (kind%%% obj)))
+                      (or (eq? kind 'nix-set)
+                          (eq? kind 'nix-setrec)))))))
+       (register-nix-node-predicate new-pred))))
+  (predicate>
+   nix-letrec-node?
+   (lambda (pred)
+     (define-syntax kind%%%
+       (syntax-rules ()
+         ((_ obj)
+          (nix-attributeset-or-letrec-node-kind%%% obj))))
+     (let* ((new-pred
+             (lambda (obj)
+               (and (pred obj)
+                    (eq? (kind%%% obj) 'nix-letrec)))))
+       (register-nix-node-predicate new-pred))))
+  (getter> 1 nix-attributeset-or-letrec-node-kind%%%)
+  (getter> 1 nix-attributeset-node-recursive?
+           (lambda (getter)
+             (lambda (obj)
+               (unless (nix-attributeset-node? obj)
+                 (error "not a <nix-attributeset-node>" obj))
+               (let ((kind (getter obj)))
+                 (eq? kind 'nix-setrec)))))
+  (getter> 1 nix-letrec-node-recursive?
+           (lambda (getter)
+             (lambda (obj)
+               (unless (nix-letrec-node? obj)
+                 (error "not a <nix-letrec-node>" obj))
+               (let ((kind (getter obj)))
+                 (eq? kind 'nix-letrec)))))
   (getter> 2 nix-attributeset-node-bag)
-  (setter> 2 set-nix-attributeset-node-bag!))
+  (getter> 2 nix-letrec-node-bag)
+  (setter> 2 set-nix-attributeset-node-bag!)
+  (setter> 2 set-nix-letrec-node-bag!)
+  (getter> 3 nix-letrec-node-in-clause)
+  (getter> 3 set-nix-letrec-node-in-clause!))
 
 (define (nix-attributeset-node-set! attrset elem)
   (let ((bag (nix-attributeset-node-bag attrset)))
@@ -108,7 +162,6 @@ m4_string_reverse_concatenate
     (for-each proc (reverse bag))))
 
 (define-record-factory <nix-attributepath-node>
-  (predicate> nix-attributepath-node? register-nix-node-predicate)
   (constructor>
    list->nix-attributepath-node
    (let ((sym->str
@@ -117,28 +170,29 @@ m4_string_reverse_concatenate
      (lambda (construct)
        (lambda (names)
          (construct (map sym->str names))))))
+  (predicate> nix-attributepath-node? register-nix-node-predicate)
   (getter> 1 nix-attributepath-node->list))
 
 (define-record-factory <nix-attributebinding-node>
-  (predicate> nix-attributebinding-node? register-nix-node-predicate)
   (constructor> make-nix-attributebinding-node)
+  (predicate> nix-attributebinding-node? register-nix-node-predicate)
   (getter> 1 nix-attributebinding-node-key)
   (getter> 2 nix-attributebinding-node-value))
 
 (define-record-factory <nix-inherit-node>
-  (predicate> nix-inherit-node? register-nix-node-predicate)
   (constructor>
    list->nix-inherit-node
    (lambda (construct)
      (case-lambda
        ((lst) (construct lst #f))
        ((lst attrset) (construct lst attrset)))))
+  (predicate> nix-inherit-node? register-nix-node-predicate)
   (getter> 1 nix-inherit-node->list)
   (getter> 2 nix-inherit-node-attributeset))
 
 (define-record-factory <nix-list-node>
-  (predicate> nix-list-node? register-nix-node-predicate)
   (constructor> list->nix-list-node)
+  (predicate> nix-list-node? register-nix-node-predicate)
   (getter> 1 nix-list-node->list))
 
 (define (nix-abstract-syntax-tree? obj)

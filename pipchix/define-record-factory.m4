@@ -57,10 +57,22 @@ m4_ifelse(implementation_of_define_record_factory,«syntax-rules»,«
              ((_ constructor predicate access (predicate> name))
               (define name predicate))
 
+             ((_ constructor predicate access (getter> i name proc))
+              (define name
+                (proc
+                 (lambda (obj)
+                   (vector-ref (access obj) (- i 1))))))
+
              ((_ constructor predicate access (getter> i name))
               (define name
                 (lambda (obj)
                   (vector-ref (access obj) (- i 1)))))
+
+             ((_ constructor predicate access (setter> i name proc))
+               (define name
+                 (proc
+                  (lambda (obj value)
+                    (vector-set! (access obj) (- i 1) value)))))
 
              ((_ constructor predicate access (setter> i name))
               (define name
@@ -89,6 +101,7 @@ m4_ifelse(implementation_of_define_record_factory,«er-macro-transformer»,«
      (define rn rename)
 
      (define (caddr x) (cadr (cdr x)))
+     (define (cadddr x) (cadr (cddr x)))
 
      (define one-arg?
        (lambda (rule*)
@@ -102,8 +115,15 @@ m4_ifelse(implementation_of_define_record_factory,«er-macro-transformer»,«
               (list? (car rule*))
               (= (length (car rule*)) 3))))
 
+     (define three-arg?
+       (lambda (rule*)
+         (and (pair? rule*)
+              (list? (car rule*))
+              (= (length (car rule*)) 4))))
+
      (define arg1 (lambda (rule*) (cadr (car rule*))))
      (define arg2 (lambda (rule*) (caddr (car rule*))))
+     (define arg3 (lambda (rule*) (cadddr (car rule*))))
 
      (define (rule-match? symb)
        (lambda (rule*)
@@ -197,6 +217,34 @@ m4_ifelse(implementation_of_define_record_factory,«er-macro-transformer»,«
                                              value)))))
                    (loop (cons definition code) (cdr rule*))))
                 (else (error-in-rule rule*))))
+              ((three-arg? rule*)
+               (cond
+                ((getter>? rule*)
+                 (let* ((i (arg1 rule*))
+                        (name (arg2 rule*))
+                        (proc (arg3 rule*))
+                        (definition
+                          `(,define% ,name
+                             (,proc
+                              (,lambda%
+                               (obj)
+                               (,vector-ref% (,access% obj)
+                                             (,minus% ,i 1)))))))
+                   (loop (cons definition code) (cdr rule*))))
+                ((setter>? rule*)
+                 (let* ((i (arg1 rule*))
+                        (name (arg2 rule*))
+                        (proc (arg3 rule*))
+                        (definition
+                          `(,define% ,name
+                             (,proc
+                              (,lambda%
+                               (obj value)
+                               (,vector-set!% (,access% obj)
+                                              (,minus% ,i 1)
+                                              value))))))
+                   (loop (cons definition code) (cdr rule*))))
+                (else (error-in-rule rule*))))
               (else
                (let ((heading
                       `(,begin%
@@ -268,10 +316,22 @@ m4_ifelse(implementation_of_define_record_factory,«gambit-syntax-case»,«
                  ((_ constructor predicate access (predicate> name))
                   (define name predicate))
 
+                 ((_ constructor predicate access (getter> i name proc))
+                  (define name
+                    (proc
+                     (lambda (obj)
+                       (vector-ref (access obj) (- i 1))))))
+
                  ((_ constructor predicate access (getter> i name))
                   (define name
                     (lambda (obj)
                       (vector-ref (access obj) (- i 1)))))
+
+                 ((_ constructor predicate access (setter> i name proc))
+                  (define name
+                    (proc
+                     (lambda (obj value)
+                       (vector-set! (access obj) (- i 1) value)))))
 
                  ((_ constructor predicate access (setter> i name))
                   (define name
