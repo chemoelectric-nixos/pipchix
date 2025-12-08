@@ -47,11 +47,19 @@ m4_include(pipchix/pipchix-includes.m4)
        ;; trouble.)
        m4_define(«implementation_of_define_record_factory»,
                  «er-macro-transformer»)
-       m4_include(pipchix/define-record-factory.m4))
+       m4_include(pipchix/define-record-factory.m4)
+       m4_undefine(«implementation_of_define_record_factory»))
+      (gambit
+       ;; The macro apparently cannot be exported and imported in the
+       ;; usual way. Therefore it is not included here. It is
+       ;; available in the m4 source code of Pipchix, and there is a
+       ;; copy of it in (pipchix abstract-syntax-tree).
+       #f)
       (else
        m4_define(«implementation_of_define_record_factory»,
                  «syntax-rules»)
-       m4_include(pipchix/define-record-factory.m4)))
+       m4_include(pipchix/define-record-factory.m4)
+       m4_undefine(«implementation_of_define_record_factory»)))
 
     ))
 

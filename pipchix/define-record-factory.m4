@@ -213,6 +213,77 @@ m4_ifelse(implementation_of_define_record_factory,«er-macro-transformer»,«
 
 »)
 
+m4_ifelse(implementation_of_define_record_factory,«gambit-syntax-case»,«
+
+(define-syntax define-record-factory
+  (lambda (stx)
+
+    (define (insert-identifiers . x*)
+      ;; Create a list of gensym-generated identifiers within the
+      ;; syntactic context. (This is not the same datum->syntax as
+      ;; that of R⁶RS, and this gensym is not the same as in the
+      ;; (chezscheme) library of Chez Scheme.)
+      (datum->syntax stx (map gensym x*)))
+
+    (syntax-case stx ()
+      ((_ designation rule ...)
+       (syntax-case
+           (insert-identifiers
+            'original-constructor%
+            'constructor%
+            'original-predicate%
+            'predicate%
+            'fields%
+            'access%) ()
+         ((original-constructor%
+           constructor%
+           original-predicate%
+           predicate%
+           fields%
+           access%)
+          (syntax ;; Avoid #' because many readers cannot handle it.
+           (begin
+             (define-record-type designation
+               (original-constructor% fields%)
+               original-predicate%
+               (fields% access%))
+             (define (constructor% . obj)
+               (original-constructor% (list->vector obj)))
+             (define (predicate% obj)
+               (original-predicate% obj))
+             (define-syntax record-rule
+               (syntax-rules ( constructor>
+                               predicate>
+                               getter> setter> )
+
+                 ((_ constructor predicate access (constructor> name proc))
+                  (define name (proc constructor)))
+
+                 ((_ constructor predicate access (constructor> name))
+                  (define name constructor))
+
+                 ((_ constructor predicate access (predicate> name proc))
+                  (define name (proc predicate)))
+
+                 ((_ constructor predicate access (predicate> name))
+                  (define name predicate))
+
+                 ((_ constructor predicate access (getter> i name))
+                  (define name
+                    (lambda (obj)
+                      (vector-ref (access obj) (- i 1)))))
+
+                 ((_ constructor predicate access (setter> i name))
+                  (define name
+                    (lambda (obj value)
+                      (vector-set! (access obj) (- i 1) value))))))
+
+             (record-rule constructor% predicate% access%
+                          rule)
+             ...))))))))
+
+»)
+
 m4_divert(-1)
 ;;; local variables:
 ;;; mode: scheme

@@ -38,9 +38,20 @@ m4_include(pipchix/pipchix-includes.m4)
     (chicken-5
      (import (utf8))
      (import (utf8-srfi-13)))
+    (gambit
+     (import (only (gambit prim)
+                   gensym)))
     (else))
 
   (begin
+
+    (cond-expand
+      (gambit
+       m4_define(«implementation_of_define_record_factory»,
+                 «gambit-syntax-case»)
+       m4_include(pipchix/define-record-factory.m4)
+       m4_undefine(«implementation_of_define_record_factory»))
+      (else))
 
     m4_include(pipchix/abstract-syntax-tree.m4)
 
