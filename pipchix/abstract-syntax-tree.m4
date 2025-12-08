@@ -27,15 +27,24 @@ m4_string_reverse_concatenate
 
 (define the-nix-null%% '#(nix-null))    ; An arbitrary unique object.
 
+(define nix-node-predicates '())
+
+(define (register-nix-node-predicate pred)
+  (unless (procedure? pred)
+    (error "not a procedure" pred))
+  (set! nix-node-predicates
+    (cons pred nix-node-predicates))
+  pred)
+
 (define-record-factory <nix-embedded-node>
-  (predicate> nix-embedded-node?)
+  (predicate> nix-embedded-node? register-nix-node-predicate)
   (constructor> make-nix-embedded-node)
   (getter> 1 nix-embedded-node-ref))
 
 (define-record-factory <nix-data-node>
   ;; A node whose content is boolean, number, string, or
   ;; the-nix-null%%.
-  (predicate> nix-data-node?)
+  (predicate> nix-data-node? register-nix-node-predicate)
   (constructor> make-nix-data-node%%)
   (constructor>
    make-nix-data-node
@@ -76,12 +85,12 @@ m4_string_reverse_concatenate
        (eq? the-nix-null%% (nix-data-node-ref obj))))
 
 (define-record-factory <nix-path-node>
-  (predicate> nix-path-node?)
+  (predicate> nix-path-node? register-nix-node-predicate)
   (constructor> make-nix-path-node)
   (getter> 1 nix-path-node-ref))
 
 (define-record-factory <nix-attributeset-node>
-  (predicate> nix-attributeset-node?)
+  (predicate> nix-attributeset-node? register-nix-node-predicate)
   (constructor>
    make-nix-attributeset-node
    (lambda (construct)
@@ -99,7 +108,7 @@ m4_string_reverse_concatenate
     (for-each proc (reverse bag))))
 
 (define-record-factory <nix-attributepath-node>
-  (predicate> nix-attributepath-node?)
+  (predicate> nix-attributepath-node? register-nix-node-predicate)
   (constructor>
    list->nix-attributepath-node
    (let ((sym->str
@@ -111,13 +120,13 @@ m4_string_reverse_concatenate
   (getter> 1 nix-attributepath-node->list))
 
 (define-record-factory <nix-attributebinding-node>
-  (predicate> nix-attributebinding-node?)
+  (predicate> nix-attributebinding-node? register-nix-node-predicate)
   (constructor> make-nix-attributebinding-node)
   (getter> 1 nix-attributebinding-node-key)
   (getter> 2 nix-attributebinding-node-value))
 
 (define-record-factory <nix-inherit-node>
-  (predicate> nix-inherit-node?)
+  (predicate> nix-inherit-node? register-nix-node-predicate)
   (constructor>
    list->nix-inherit-node
    (lambda (construct)
@@ -128,19 +137,15 @@ m4_string_reverse_concatenate
   (getter> 2 nix-inherit-node-attributeset))
 
 (define-record-factory <nix-list-node>
-  (predicate> nix-list-node?)
+  (predicate> nix-list-node? register-nix-node-predicate)
   (constructor> list->nix-list-node)
   (getter> 1 nix-list-node->list))
 
 (define (nix-abstract-syntax-tree? obj)
-  (or (nix-embedded-node? obj)
-      (nix-data-node? obj)
-      (nix-path-node? obj)
-      (nix-attributeset-node? obj)
-      (nix-attributepath-node? obj)
-      (nix-attributebinding-node? obj)
-      (nix-inherit-node? obj)
-      (nix-list-node? obj)))
+  (let loop ((p nix-node-predicates))
+    (and (pair? p)
+         (or ((car p) obj)
+             (loop (cdr p))))))
 
 (define (scheme->nix value)
   ;; Convert Scheme values to Nix AST.
