@@ -140,7 +140,7 @@ EXTRA_PROGRAMS = is-older$(EXEEXT)
 @INSTALL_CHICKEN_5_EGG_SOURCE_TRUE@am__append_1 = $(CHICKEN_5_EGGFILES)
 @INSTALL_R6RS_SOURCE_TRUE@am__append_2 = $(R6RS_SCHEME)
 @INSTALL_R7RS_SOURCE_TRUE@am__append_3 = $(R7RS_SCHEME) \
-@INSTALL_R7RS_SOURCE_TRUE@	r7rs/gerbil.pkg
+@INSTALL_R7RS_SOURCE_TRUE@	$(GAMBIT_MACROS) r7rs/gerbil.pkg
 
 #
 @CHICKEN_INSTALL_5_TRUE@@CSI_5_TRUE@@ENABLE_CHECK_R7RS_CSI_5_TRUE@am__append_4 = chicken-5-egg-stamp
@@ -149,11 +149,13 @@ EXTRA_PROGRAMS = is-older$(EXEEXT)
 #
 @CHEZ_SCHEME_TRUE@@ENABLE_CHECK_R6RS_CHEZ_TRUE@am__append_6 = $(R6RS_SCHEME)
 @CHIBI_SCHEME_TRUE@@ENABLE_CHECK_R7RS_CHIBI_TRUE@am__append_7 = $(R7RS_SCHEME)
-@ENABLE_CHECK_R7RS_GSI_TRUE@@GSI_TRUE@am__append_8 = $(R7RS_SCHEME)
+@ENABLE_CHECK_R7RS_GSI_TRUE@@GSI_TRUE@am__append_8 = $(R7RS_SCHEME) \
+@ENABLE_CHECK_R7RS_GSI_TRUE@@GSI_TRUE@	$(GAMBIT_MACROS)
 
 # if GSC
 # if ENABLE_CHECK_R7RS_GSC
 # BUILT_SOURCES += $(R7RS_SCHEME)
+# BUILT_SOURCES += $(GAMBIT_MACROS)
 # endif ENABLE_CHECK_R7RS_GSC
 # endif GSC
 @ENABLE_CHECK_R7RS_GAUCHE_TRUE@@GAUCHE_TRUE@am__append_9 = $(R7RS_SCHEME)
@@ -513,7 +515,8 @@ SUBDIRS = tinyscheme-1.42 . tests
 ACLOCAL_AMFLAGS = -I m4 --install
 AUTOMAKE_OPTIONS = foreign
 CLEANFILES = tmp.* $(R6RS_SCHEME) $(R6RS_SCHEME:%=%.tmp) \
-	$(R7RS_SCHEME) $(R7RS_SCHEME:%=%.tmp) $(CHICKEN_5_EGGFILES) \
+	$(R7RS_SCHEME) $(R7RS_SCHEME:%=%.tmp) $(GAMBIT_MACROS) \
+	$(GAMBIT_MACROS:%=%.tmp) $(CHICKEN_5_EGGFILES) \
 	$(CHICKEN_5_EGGDIR)/*.{$(OBJEXT),so,link,import.scm} \
 	$(CHICKEN_5_EGGDIR)/pipchix.{build,install}.sh \
 	chicken-5-egg-stamp
@@ -525,7 +528,8 @@ EXTRA_DIST = silent-rules.mk COPYING README.adoc INSTALL AUTHORS \
 	$(R6RS_SCHEME:r6rs/pipchix/%.sls=pipchix/%.exports.m4) \
 	$(R7RS_SCHEME:%=%.m4) \
 	$(R7RS_SCHEME:r7rs/pipchix/%.sld=pipchix/%.m4) \
-	$(R7RS_SCHEME:r7rs/pipchix/%.sld=pipchix/%.exports.m4)
+	$(R7RS_SCHEME:r7rs/pipchix/%.sld=pipchix/%.exports.m4) \
+	$(GAMBIT_MACROS:r7rs/pipchix/gambit/%=r7rs/pipchix/gambit/%.m4)
 EXTRA_SCRIPTS = 
 BUILT_SOURCES = $(am__append_4) $(am__append_5) $(am__append_6) \
 	$(am__append_7) $(am__append_8) $(am__append_9) \
@@ -541,14 +545,19 @@ R6RS_SCHEME = r6rs/pipchix/srfi-9.sls r6rs/pipchix/srfi-39.sls \
 	r6rs/pipchix/continuation-capture.sls \
 	r6rs/pipchix/define-record-factory.sls r6rs/pipchix/base.sls \
 	r6rs/pipchix/nix-embed.sls r6rs/pipchix/nix-list.sls \
-	r6rs/pipchix/nix-set.sls r6rs/pipchix/abstract-syntax-tree.sls \
+	r6rs/pipchix/nix-set.sls r6rs/pipchix/nix-letrec.sls \
+	r6rs/pipchix/abstract-syntax-tree.sls \
 	r6rs/pipchix/string-manipulation.sls
 R7RS_SCHEME = r7rs/pipchix/srfi-111.sld \
 	r7rs/pipchix/continuation-capture.sld \
 	r7rs/pipchix/define-record-factory.sld r7rs/pipchix/base.sld \
 	r7rs/pipchix/nix-embed.sld r7rs/pipchix/nix-list.sld \
-	r7rs/pipchix/nix-set.sld r7rs/pipchix/abstract-syntax-tree.sld \
+	r7rs/pipchix/nix-set.sld r7rs/pipchix/nix-letrec.sld \
+	r7rs/pipchix/abstract-syntax-tree.sld \
 	r7rs/pipchix/string-manipulation.sld
+GAMBIT_MACROS = r7rs/pipchix/gambit/base.scm \
+	r7rs/pipchix/gambit/nix-set.scm \
+	r7rs/pipchix/gambit/nix-letrec.scm
 
 #
 # A way to get names for temporary files within the build directories.
@@ -585,12 +594,16 @@ CHICKEN_EGGSPEC_BOTTOM = ' \
     (extension pipchix.nix-set \
       (component-dependencies \
        pipchix.abstract-syntax-tree)) \
+    (extension pipchix.nix-letrec \
+      (component-dependencies \
+       pipchix.abstract-syntax-tree)) \
     (extension pipchix.base \
       (component-dependencies \
        pipchix.string-manipulation \
        pipchix.abstract-syntax-tree \
        pipchix.nix-list \
-       pipchix.nix-set))))'
+       pipchix.nix-set \
+       pipchix.nix-letrec))))'
 
 CHICKEN_5_EGGS = chicken/eggs/5
 CHICKEN_5_EGGDIR = $(CHICKEN_5_EGGS)/pipchix
@@ -605,6 +618,7 @@ CHICKEN_5_EGGFILES = \
     pipchix.nix-embed.scm \
     pipchix.nix-list.scm \
     pipchix.nix-set.scm \
+    pipchix.nix-letrec.scm \
     pipchix.base.scm \
     COPYING README.adoc)
 
@@ -1274,6 +1288,24 @@ $(builddir)/r7rs/pipchix/%.sld: $(srcdir)/r7rs/pipchix/%.sld.m4 \
 	                        $(srcdir)/pipchix/%.exports.m4 \
 	                        $(srcdir)/pipchix/pipchix-includes.m4
 	$(call v,SLD.M4)$(MKDIR_P) $(@D) && \
+		$(M4_PREPROCESS) $(<) > $(@).tmp && \
+		mv $(@){.tmp,}
+
+# For macros to be included rather than imported, when one is using
+# Gambit:
+$(builddir)/r7rs/pipchix/gambit/%.scm: \
+	                        $(srcdir)/r7rs/pipchix/gambit/%.scm.m4 \
+	                        $(srcdir)/pipchix/%.m4 \
+	                        $(srcdir)/pipchix/pipchix-includes.m4
+	$(call v,SCM.M4)$(MKDIR_P) $(@D) && \
+		$(M4_PREPROCESS) $(<) > $(@).tmp && \
+		mv $(@){.tmp,}
+
+$(builddir)/r7rs/pipchix/gambit/base.scm: \
+	                        $(srcdir)/r7rs/pipchix/gambit/base.scm.m4 \
+	                        $(srcdir)/pipchix/base.m4 \
+	                        $(srcdir)/pipchix/pipchix-includes.m4
+	$(call v,SCM.M4)$(MKDIR_P) $(@D) && \
 		$(M4_PREPROCESS) $(<) > $(@).tmp && \
 		mv $(@){.tmp,}
 

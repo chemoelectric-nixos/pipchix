@@ -22,12 +22,23 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
-AT_SETUP([setup_message(<nix-embedded-node>)])
+AT_SETUP([setup_message((pipchix nix-letrec))])
 
-AT_KEYWORDS([default_keywords nix-embedded-node])
+AT_KEYWORDS([default_keywords nix-letrec])
 
-m4_define([sexpr],[(make-nix-embedded-node "let a = 4; b = a + 5; in b")])
-check_unquoted([run_scheme 'sexpr'],[0],[let a = 4; b = a + 5; in b],[])
+m4_define([sexpr],[(nix-letrec ((`a `b `c ==> @%:@f)) nix-true)])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(let·a·.·b·.·c·=·nix_false;·in(·nix_true))·])],[])
+
+m4_define([sexpr],
+  [(nix-letrec
+       ((`a ==> 3)
+        (4 <== `b)
+        (inherit "c")
+        (inherit-from `builtins `fromJSON `toJSON))
+     (nix-set (`x ==> (nix-embed "a + b + c"))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(let·a·=·(3)·;·b·=·(4)·;·inherit·c·;·inherit·(·builtins·)·fromJSON·toJSON·;·in(·({·x·=·a + b + c;·})·))·])],[])
 
 AT_CLEANUP
 

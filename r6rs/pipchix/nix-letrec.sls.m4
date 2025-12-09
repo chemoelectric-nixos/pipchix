@@ -1,7 +1,6 @@
+#!r6rs
 ;;;
 ;;; Copyright © 2025 Barry Schwartz
-;;;
-;;; This file is part of Pipchix.
 ;;; 
 ;;; Permission is hereby granted, free of charge, to any person obtaining
 ;;; a copy of Pipchix and associated documentation files (the
@@ -24,32 +23,19 @@
 ;;;
 m4_include(pipchix/pipchix-includes.m4)
 
-(define-library (pipchix nix-set)
+(library (pipchix nix-letrec)
 
-  (export m4_include(pipchix/nix-set.exports.m4))
+  (export m4_include(pipchix/nix-letrec.exports.m4))
 
-  (import (scheme base))
-  (import (pipchix abstract-syntax-tree))
+  (import (rnrs base (6))
+          (pipchix abstract-syntax-tree))
 
-  (begin
+  m4_include(pipchix/nix-letrec.m4)
 
-    (cond-expand
-      (gambit
-       ;; The macros for Gambit should be included rather than
-       ;; imported. But Guile is broken in numerous ways, and for
-       ;; instance might complain if we do not export the symbols. Let
-       ;; us not take the chance.
-       (define %%nix-set%%nix-set #f)
-       (define %%nix-set%%nix-set-insert-entry #f)
-       (define %%nix-set%%nix-attributebinding #f)
-       (define %%nix-set%%add-binding #f))
-      (else
-       m4_include(pipchix/nix-set.m4)))
-
-    ))
+  )
 
 ;;; local variables:
 ;;; mode: scheme
-;;; geiser-scheme-implementation: chibi
+;;; geiser-scheme-implementation: chez
 ;;; coding: utf-8
 ;;; end:

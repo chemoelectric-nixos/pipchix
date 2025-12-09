@@ -24,7 +24,7 @@
 
 AT_SETUP([setup_message(<nix-letrec-node>)])
 
-AT_KEYWORDS([default_keywords nix-letrec-node nix-letrec])
+AT_KEYWORDS([default_keywords nix-letrec-node])
 
 m4_define([sexpr],
   [(make-nix-data-node

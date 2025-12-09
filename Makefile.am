@@ -75,6 +75,7 @@ R6RS_SCHEME += r6rs/pipchix/base.sls
 R6RS_SCHEME += r6rs/pipchix/nix-embed.sls
 R6RS_SCHEME += r6rs/pipchix/nix-list.sls
 R6RS_SCHEME += r6rs/pipchix/nix-set.sls
+R6RS_SCHEME += r6rs/pipchix/nix-letrec.sls
 R6RS_SCHEME += r6rs/pipchix/abstract-syntax-tree.sls
 R6RS_SCHEME += r6rs/pipchix/string-manipulation.sls
 EXTRA_DIST += $(R6RS_SCHEME:%=%.m4)
@@ -94,6 +95,7 @@ R7RS_SCHEME += r7rs/pipchix/base.sld
 R7RS_SCHEME += r7rs/pipchix/nix-embed.sld
 R7RS_SCHEME += r7rs/pipchix/nix-list.sld
 R7RS_SCHEME += r7rs/pipchix/nix-set.sld
+R7RS_SCHEME += r7rs/pipchix/nix-letrec.sld
 R7RS_SCHEME += r7rs/pipchix/abstract-syntax-tree.sld
 R7RS_SCHEME += r7rs/pipchix/string-manipulation.sld
 EXTRA_DIST += $(R7RS_SCHEME:%=%.m4)
@@ -103,8 +105,17 @@ CLEANFILES += $(R7RS_SCHEME)
 CLEANFILES += $(R7RS_SCHEME:%=%.tmp)
 if INSTALL_R7RS_SOURCE
 nodist_r7rspipchix_DATA += $(R7RS_SCHEME)
+nodist_r7rspipchix_DATA += $(GAMBIT_MACROS)
 nodist_r7rspipchix_DATA += r7rs/gerbil.pkg
 endif
+
+GAMBIT_MACROS =
+GAMBIT_MACROS += r7rs/pipchix/gambit/base.scm
+GAMBIT_MACROS += r7rs/pipchix/gambit/nix-set.scm
+GAMBIT_MACROS += r7rs/pipchix/gambit/nix-letrec.scm
+EXTRA_DIST += $(GAMBIT_MACROS:r7rs/pipchix/gambit/%=r7rs/pipchix/gambit/%.m4)
+CLEANFILES += $(GAMBIT_MACROS)
+CLEANFILES += $(GAMBIT_MACROS:%=%.tmp)
 
 $(builddir)/r6rs/pipchix/%.sls: $(srcdir)/r6rs/pipchix/%.sls.m4 \
 	                        $(srcdir)/pipchix/%.m4 \
@@ -119,6 +130,24 @@ $(builddir)/r7rs/pipchix/%.sld: $(srcdir)/r7rs/pipchix/%.sld.m4 \
 	                        $(srcdir)/pipchix/%.exports.m4 \
 	                        $(srcdir)/pipchix/pipchix-includes.m4
 	$(call v,SLD.M4)$(MKDIR_P) $(@D) && \
+		$(M4_PREPROCESS) $(<) > $(@).tmp && \
+		mv $(@){.tmp,}
+
+# For macros to be included rather than imported, when one is using
+# Gambit:
+$(builddir)/r7rs/pipchix/gambit/%.scm: \
+	                        $(srcdir)/r7rs/pipchix/gambit/%.scm.m4 \
+	                        $(srcdir)/pipchix/%.m4 \
+	                        $(srcdir)/pipchix/pipchix-includes.m4
+	$(call v,SCM.M4)$(MKDIR_P) $(@D) && \
+		$(M4_PREPROCESS) $(<) > $(@).tmp && \
+		mv $(@){.tmp,}
+
+$(builddir)/r7rs/pipchix/gambit/base.scm: \
+	                        $(srcdir)/r7rs/pipchix/gambit/base.scm.m4 \
+	                        $(srcdir)/pipchix/base.m4 \
+	                        $(srcdir)/pipchix/pipchix-includes.m4
+	$(call v,SCM.M4)$(MKDIR_P) $(@D) && \
 		$(M4_PREPROCESS) $(<) > $(@).tmp && \
 		mv $(@){.tmp,}
 
@@ -168,12 +197,16 @@ CHICKEN_EGGSPEC_BOTTOM = ' \
     (extension pipchix.nix-set \
       (component-dependencies \
        pipchix.abstract-syntax-tree)) \
+    (extension pipchix.nix-letrec \
+      (component-dependencies \
+       pipchix.abstract-syntax-tree)) \
     (extension pipchix.base \
       (component-dependencies \
        pipchix.string-manipulation \
        pipchix.abstract-syntax-tree \
        pipchix.nix-list \
-       pipchix.nix-set))))'
+       pipchix.nix-set \
+       pipchix.nix-letrec))))'
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -198,6 +231,7 @@ CHICKEN_5_EGGFILES = \
     pipchix.nix-embed.scm \
     pipchix.nix-list.scm \
     pipchix.nix-set.scm \
+    pipchix.nix-letrec.scm \
     pipchix.base.scm \
     COPYING README.adoc)
 CLEANFILES += $(CHICKEN_5_EGGFILES)

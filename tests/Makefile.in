@@ -339,7 +339,7 @@ EXTRA_DIST = testsuite.at $(srcdir)/package.m4 $(TESTSUITE) atlocal.in \
 	nix-embed-template.at nix-inherit-node-template.at \
 	nix-list-node-template.at nix-list-template.at \
 	nix-path-node-template.at nix-set-template.at \
-	shell-print-template.at
+	nix-letrec-template.at shell-print-template.at
 BUILT_SOURCES = 
 CLEANFILES = *.tmp tmp.*
 DISTCLEANFILES = Makefile GNUmakefile atconfig
@@ -365,8 +365,8 @@ TESTSUITE_DEPS = $(srcdir)/atlocal.in $(srcdir)/package.m4 \
 	$(srcdir)/nix-list-node-template.at \
 	$(srcdir)/nix-path-node-template.at \
 	$(srcdir)/nix-embed-template.at $(srcdir)/nix-list-template.at \
-	$(srcdir)/nix-set-template.at $(srcdir)/testsuite.at \
-	$(am__append_1)
+	$(srcdir)/nix-set-template.at $(srcdir)/nix-letrec-template.at \
+	$(srcdir)/testsuite.at $(am__append_1)
 
 #---------------------------------------------------------------------
 @ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@GERBIL_PLACE = $(abs_builddir)/gerbil
@@ -380,6 +380,7 @@ TESTSUITE_DEPS = $(srcdir)/atlocal.in $(srcdir)/package.m4 \
 @ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@	  nix-embed \
 @ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@	  nix-list \
 @ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@	  nix-set \
+@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@	  nix-letrec \
 @ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@	  abstract-syntax-tree \
 @ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@	  string-manipulation))
 
@@ -688,10 +689,12 @@ $(TESTSUITE): $(TESTSUITE_DEPS)
 @ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@$(GERBIL_PX)/nix-embed.scm: $(GERBIL_PX)/abstract-syntax-tree.scm
 @ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@$(GERBIL_PX)/nix-list.scm: $(GERBIL_PX)/abstract-syntax-tree.scm
 @ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@$(GERBIL_PX)/nix-set.scm: $(GERBIL_PX)/abstract-syntax-tree.scm
+@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@$(GERBIL_PX)/nix-letrec.scm: $(GERBIL_PX)/abstract-syntax-tree.scm
 @ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@$(GERBIL_PX)/base.scm: $(GERBIL_PX)/string-manipulation.scm \
 @ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@                      $(GERBIL_PX)/abstract-syntax-tree.scm \
 @ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@                      $(GERBIL_PX)/nix-list.scm \
-@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@                      $(GERBIL_PX)/nix-set.scm
+@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@                      $(GERBIL_PX)/nix-set.scm \
+@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@                      $(GERBIL_PX)/nix-letrec.scm
 
 #---------------------------------------------------------------------
 

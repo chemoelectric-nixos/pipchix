@@ -57,30 +57,24 @@
       attrset (attr-name2 attr-name1 ...) (unknown ...)))))
 
 (define-syntax %%nix-set%%nix-set-insert-entry
-  (syntax-rules ( <== inherit begin )
+  (syntax-rules ( <== inherit inherit-from begin )
     ((_                                 ; Binding by <== arrow.
       attrset (attr-value <== attr-name ...))
      (%%nix-set%%add-binding attrset (list attr-name ...) attr-value))
     ;;
-    ((_                                 ; ‘inherit ()’
-      attrset (inherit () identifier ...))
+    ((_                                 ; ‘inherit’
+      attrset (inherit identifier ...))
      (let ((inherit-node (list->nix-inherit-node
                           (list (scheme->nix identifier) ...))))
        (nix-attributeset-node-set! attrset inherit-node)))
     ;;
-    ((_                                 ; ‘inherit (attribute-set)’
-      attrset (inherit (attrset2) identifier ...))
+    ((_                                 ; ‘inherit-from attribute-set’
+      attrset (inherit-from attrset2 identifier ...))
      (let* ((attrset-node (scheme->nix attrset2))
             (inherit-node (list->nix-inherit-node
                            (list (scheme->nix identifier) ...)
                            attrset-node)))
        (nix-attributeset-node-set! attrset inherit-node)))
-    ;;
-    ((_                                 ; ‘inherit ...’
-      attrset (inherit identifier ...))
-     (syntax-error
-      "did you forget the ‘()’ in ‘inherit ()’?"
-      identifier ...))
     ;;
     ((_                                 ; (begin ...)
       attrset (begin entry ...))

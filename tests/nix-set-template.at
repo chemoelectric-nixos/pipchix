@@ -56,8 +56,8 @@ check_unquoted([run_scheme 'sexpr'],[0],
 
 m4_define([sexpr],
   [(nix-set (`a ==> 123)
-            (inherit () `hummingbirds `bluejays "robins" "ducks" `turkeys)
-            (inherit ("bees") "bumble" `honey)
+            (inherit `hummingbirds `bluejays "robins" "ducks" `turkeys)
+            (inherit-from "bees" "bumble" `honey)
             (123 <== "b"))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([({·a·=·(123)·;·inherit·hummingbirds·bluejays·robins·ducks·turkeys·;·inherit·(·bees·)·bumble·honey·;·b·=·(123)·;·})·])],[])
@@ -68,7 +68,7 @@ dnl check_unquoted([run_scheme 'sexpr'],[ignore],[ignore],[ignore])
 m4_define([sexpr],
   [(nix-set
     (begin)
-    (begin (inherit () "a" "b")
+    (begin (inherit "a" "b")
            (`c ==> `d)))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([({·inherit·a·b·;·c·=·("d")·;·})·])],[])

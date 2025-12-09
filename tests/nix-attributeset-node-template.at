@@ -24,7 +24,7 @@
 
 AT_SETUP([setup_message(<nix-attributeset-node>)])
 
-AT_KEYWORDS([default_keywords nix-attributeset-node nix-set nix-setrec])
+AT_KEYWORDS([default_keywords nix-attributeset-node])
 
 m4_define([sexpr],
   [(make-nix-data-node

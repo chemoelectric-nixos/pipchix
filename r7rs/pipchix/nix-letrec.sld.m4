@@ -24,9 +24,9 @@
 ;;;
 m4_include(pipchix/pipchix-includes.m4)
 
-(define-library (pipchix nix-set)
+(define-library (pipchix nix-letrec)
 
-  (export m4_include(pipchix/nix-set.exports.m4))
+  (export m4_include(pipchix/nix-letrec.exports.m4))
 
   (import (scheme base))
   (import (pipchix abstract-syntax-tree))
@@ -39,12 +39,10 @@ m4_include(pipchix/pipchix-includes.m4)
        ;; imported. But Guile is broken in numerous ways, and for
        ;; instance might complain if we do not export the symbols. Let
        ;; us not take the chance.
-       (define %%nix-set%%nix-set #f)
-       (define %%nix-set%%nix-set-insert-entry #f)
-       (define %%nix-set%%nix-attributebinding #f)
-       (define %%nix-set%%add-binding #f))
+       (define find==>%%for-nix-letrec%% #f)
+       (define expand-bindings%%for-nix-letrec%% #f))
       (else
-       m4_include(pipchix/nix-set.m4)))
+       m4_include(pipchix/nix-letrec.m4)))
 
     ))
 

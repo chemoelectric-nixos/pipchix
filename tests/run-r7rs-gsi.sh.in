@@ -5,6 +5,8 @@
 
 prog_scm=`@abs_top_builddir@/tempname`.scm
 
+macros="@abs_top_builddir@/r7rs/pipchix/gambit/base.scm"
+
 cat > "${prog_scm}" <<EOF
 (import (scheme base))
 (import (scheme process-context))
@@ -15,6 +17,7 @@ cat > "${prog_scm}" <<EOF
 (import (pipchix nix-embed))
 (import (pipchix nix-list))
 (import (pipchix string-manipulation))
+(include "${macros}")
 (output-nix-abstract-syntax-tree $1)
 (exit 0)
 EOF

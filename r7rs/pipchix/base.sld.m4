@@ -31,6 +31,7 @@ m4_include(pipchix/pipchix-includes.m4)
   (import (scheme base))
   (import (pipchix nix-list))
   (import (pipchix nix-set))
+  (import (pipchix nix-letrec))
   (import (pipchix abstract-syntax-tree))
   (import (pipchix string-manipulation))
 

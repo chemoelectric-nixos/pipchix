@@ -79,6 +79,7 @@ EXTRA_DIST += nix-list-node-template.at
 EXTRA_DIST += nix-list-template.at
 EXTRA_DIST += nix-path-node-template.at
 EXTRA_DIST += nix-set-template.at
+EXTRA_DIST += nix-letrec-template.at
 EXTRA_DIST += shell-print-template.at
 
 @GNU@ define jobs-flag
@@ -138,6 +139,7 @@ TESTSUITE_DEPS += $(srcdir)/nix-path-node-template.at
 TESTSUITE_DEPS += $(srcdir)/nix-embed-template.at
 TESTSUITE_DEPS += $(srcdir)/nix-list-template.at
 TESTSUITE_DEPS += $(srcdir)/nix-set-template.at
+TESTSUITE_DEPS += $(srcdir)/nix-letrec-template.at
 
 TESTSUITE_DEPS += $(srcdir)/testsuite.at
 
@@ -166,6 +168,7 @@ GERBIL_O = \
 	  nix-embed \
 	  nix-list \
 	  nix-set \
+	  nix-letrec \
 	  abstract-syntax-tree \
 	  string-manipulation))
 
@@ -188,10 +191,13 @@ $(GERBIL_PX)/abstract-syntax-tree.scm: $(GERBIL_PX)/define-record-factory.scm
 $(GERBIL_PX)/nix-embed.scm: $(GERBIL_PX)/abstract-syntax-tree.scm
 $(GERBIL_PX)/nix-list.scm: $(GERBIL_PX)/abstract-syntax-tree.scm
 $(GERBIL_PX)/nix-set.scm: $(GERBIL_PX)/abstract-syntax-tree.scm
+$(GERBIL_PX)/nix-letrec.scm: $(GERBIL_PX)/abstract-syntax-tree.scm
 $(GERBIL_PX)/base.scm: $(GERBIL_PX)/string-manipulation.scm \
                       $(GERBIL_PX)/abstract-syntax-tree.scm \
                       $(GERBIL_PX)/nix-list.scm \
-                      $(GERBIL_PX)/nix-set.scm
+                      $(GERBIL_PX)/nix-set.scm \
+                      $(GERBIL_PX)/nix-letrec.scm
+
 
 endif ENABLE_CHECK_R7RS_GXC
 endif GXC
