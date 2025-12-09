@@ -144,6 +144,8 @@ m4_string_reverse_concatenate
              (lambda (obj)
                (unless (nix-letrec-node? obj)
                  (error "not a <nix-letrec-node>" obj))
+               ;; This should always be true, because Nix has only the
+               ;; recursive ‘let’.
                (let ((kind (getter obj)))
                  (eq? kind 'nix-letrec)))))
   (getter> 2 nix-attributeset-node-bag)
@@ -151,7 +153,7 @@ m4_string_reverse_concatenate
   (setter> 2 set-nix-attributeset-node-bag!)
   (setter> 2 set-nix-letrec-node-bag!)
   (getter> 3 nix-letrec-node-in-clause)
-  (getter> 3 set-nix-letrec-node-in-clause!))
+  (setter> 3 set-nix-letrec-node-in-clause!))
 
 (define (nix-attributeset-node-set! attrset elem)
   (let ((bag (nix-attributeset-node-bag attrset)))
@@ -160,6 +162,9 @@ m4_string_reverse_concatenate
 (define (nix-attributeset-node-for-each proc attrset)
   (let ((bag (nix-attributeset-node-bag attrset)))
     (for-each proc (reverse bag))))
+
+(define nix-letrec-node-set! nix-attributeset-node-set!)
+(define nix-letrec-node-for-each nix-attributeset-node-for-each)
 
 (define-record-factory <nix-attributepath-node>
   (constructor>
@@ -233,6 +238,8 @@ m4_string_reverse_concatenate
          (%%output-nix-path-node ast outp))
         ((nix-attributeset-node? ast)
          (%%output-nix-attributeset-node ast outp))
+        ((nix-letrec-node? ast)
+         (%%output-nix-letrec-node ast outp))
         ((nix-attributepath-node? ast)
          (%%output-nix-attributepath-node ast outp))
         ((nix-attributebinding-node? ast)
@@ -327,6 +334,15 @@ m4_string_reverse_concatenate
     (nix-attributeset-node-for-each
      output-nix-abstract-syntax-tree ast)
     (outp "})\n")))
+
+(define (%%output-nix-letrec-node ast outp)
+    (outp "(let\n")
+    (nix-letrec-node-for-each
+     output-nix-abstract-syntax-tree ast)
+    (outp "in(\n")
+    (output-nix-abstract-syntax-tree
+     (nix-letrec-node-in-clause ast))
+    (outp "))\n"))
 
 (define (%%output-nix-attributebinding-node ast outp)
   (let ((key (nix-attributebinding-node-key ast))

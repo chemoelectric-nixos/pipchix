@@ -24,7 +24,7 @@
 
 AT_SETUP([setup_message(<nix-embedded-node>)])
 
-AT_KEYWORDS([default_keywords nix-embedded-node])
+AT_KEYWORDS([default_keywords nix-embedded-node nix-embedded])
 
 m4_define([sexpr],[(make-nix-embedded-node "let a = 4; b = a + 5; in b")])
 check_unquoted([run_scheme 'sexpr'],[0],[let a = 4; b = a + 5; in b],[])

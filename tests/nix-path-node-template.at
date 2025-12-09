@@ -24,7 +24,7 @@
 
 AT_SETUP([setup_message(<nix-path-node>)])
 
-AT_KEYWORDS([default_keywords nix-path-node])
+AT_KEYWORDS([default_keywords nix-path-node nix-path])
 
 m4_define([sexpr],[(make-nix-path-node ".")])
 check_unquoted([run_scheme 'sexpr'],[0],[( ./. )

@@ -21,6 +21,12 @@ nix-attributeset-node?
 nix-attributeset-node-recursive?
 nix-attributeset-node-set!
 
+make-nix-letrec-node
+nix-letrec-node?
+nix-letrec-node-recursive?
+nix-letrec-node-set!
+set-nix-letrec-node-in-clause!
+
 list->nix-attributepath-node
 nix-attributepath-node?
 

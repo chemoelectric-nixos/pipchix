@@ -1,0 +1,64 @@
+# Copyright © 2025 Barry Schwartz
+#
+# This file is part of Pipchix.
+#
+# Permission is hereby granted, free of charge, to any person obtaining
+# a copy of Pipchix and associated documentation files (the
+# "Software"), to deal in the Software without restriction, including
+# without limitation the rights to use, copy, modify, merge, publish,
+# distribute, sublicense, and/or sell copies of the Software, and to
+# permit persons to whom the Software is furnished to do so, subject to
+# the following conditions:
+# 
+# The above copyright notice and this permission notice shall be
+# included in all copies or substantial portions of the Software.
+# 
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+# LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+# OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+# WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+#
+
+AT_SETUP([setup_message(<nix-letrec-node>)])
+
+AT_KEYWORDS([default_keywords nix-letrec-node nix-letrec])
+
+m4_define([sexpr],
+  [(make-nix-data-node
+    (nix-letrec-node-recursive?
+     (make-nix-letrec-node)))])
+check_unquoted([run_scheme 'sexpr'],[0],[nix_true],[])
+
+m4_define([sexpr],
+  [(let ((lrnode (make-nix-letrec-node)))
+     (set-nix-letrec-node-in-clause!
+      lrnode (scheme->nix (list "a" "b" "c")))
+     lrnode)])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl((let·in(·@<:@·("a")·("b")·("c")·@:>@·))·)],[])
+
+m4_define([sexpr],
+  [(let ((lrnode (make-nix-letrec-node)))
+     (nix-letrec-node-set!
+      lrnode (let ((key (list->nix-attributepath-node `(x)))
+                   (value (make-nix-data-node 2)))
+               (make-nix-attributebinding-node key value)))
+     (nix-letrec-node-set!
+      lrnode (let ((key (list->nix-attributepath-node `(y)))
+                   (value (make-nix-data-node 3)))
+               (make-nix-attributebinding-node key value)))
+     (set-nix-letrec-node-in-clause!
+      lrnode (make-nix-embedded-node "x + y"))
+     lrnode)])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl((let·x·=·(2)·;·y·=·(3)·;·in(·x + y))·)],[])
+
+AT_CLEANUP
+
+# local variables:
+# mode: autoconf
+# coding: utf-8
+# end:
