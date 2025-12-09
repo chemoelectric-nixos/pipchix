@@ -26,16 +26,14 @@
 ;;;
 ;;; THESE MACROS USE ONLY TRAILING ELLIPSES.
 ;;;
-;;; Do not require the extensions of SRFI-46 and R⁷RS. They seem not
-;;; to be available in Gambit 4.9.7, despite the claim that it
-;;; supports R⁷RS. Gambit 4.9.7 also seems unable to export macros
-;;; from libraries, so let us make the macros available as a file for
-;;; inclusion.
+;;; Do not require the extensions of SRFI-46 and R⁷RS. They are not
+;;; available in Gambit 4.9.7, which has only an old version of
+;;; syntax-case/syntax-rules.
 ;;;
 
 (define-syntax %%nix-set%%add-binding
   (syntax-rules ()
-    ((%%nix-set%%add-binding attrset key value)
+    ((_ attrset key value)
      (let* ((path-node (list->nix-attributepath-node key))
             (binding (make-nix-attributebinding-node
                       path-node (scheme->nix value))))
@@ -50,30 +48,27 @@
   ;;
   (syntax-rules ( ==> )
     ;;
-    ((%%nix-set%%nix-attributebinding
-      attrset (attr-name ...) (==> attr-value))
+    ((_ attrset (attr-name ...) (==> attr-value))
      (%%nix-set%%add-binding attrset (reverse (list attr-name ...))
-                    attr-value))
+                             attr-value))
     ;;
-    ((%%nix-set%%nix-attributebinding
-      attrset (attr-name1 ...) (attr-name2 unknown ...))
+    ((_ attrset (attr-name1 ...) (attr-name2 unknown ...))
      (%%nix-set%%nix-attributebinding
       attrset (attr-name2 attr-name1 ...) (unknown ...)))))
 
 (define-syntax %%nix-set%%nix-set-insert-entry
   (syntax-rules ( <== inherit begin )
-    ((%%nix-set%%nix-set-insert-entry   ; Binding by <== arrow.
+    ((_                                 ; Binding by <== arrow.
       attrset (attr-value <== attr-name ...))
      (%%nix-set%%add-binding attrset (list attr-name ...) attr-value))
     ;;
-    ((%%nix-set%%nix-set-insert-entry   ; ‘inherit ()’
+    ((_                                 ; ‘inherit ()’
       attrset (inherit () identifier ...))
      (let ((inherit-node (list->nix-inherit-node
                           (list (scheme->nix identifier) ...))))
        (nix-attributeset-node-set! attrset inherit-node)))
     ;;
-    ((%%nix-set%%nix-set-insert-entry   ; ‘inherit (attribute-set)’
-
+    ((_                                 ; ‘inherit (attribute-set)’
       attrset (inherit (attrset2) identifier ...))
      (let* ((attrset-node (scheme->nix attrset2))
             (inherit-node (list->nix-inherit-node
@@ -81,14 +76,13 @@
                            attrset-node)))
        (nix-attributeset-node-set! attrset inherit-node)))
     ;;
-    ((%%nix-set%%nix-set-insert-entry   ; ‘inherit ...’
-
+    ((_                                 ; ‘inherit ...’
       attrset (inherit identifier ...))
      (syntax-error
       "did you forget the ‘()’ in ‘inherit ()’?"
       identifier ...))
     ;;
-    ((%%nix-set%%nix-set-insert-entry   ; (begin ...)
+    ((_                                 ; (begin ...)
       attrset (begin entry ...))
      ;; Being able to group multiple entries into a single
      ;; s-expression is potentially useful, particularly with
@@ -97,14 +91,14 @@
        (%%nix-set%%nix-set-insert-entry attrset entry)
        ...))
     ;;
-    ((%%nix-set%%nix-set-insert-entry   ; Binding by ==> arrow.
+    ((_                                 ; Binding by ==> arrow.
       attrset (attr-name unknown ...))
      (%%nix-set%%nix-attributebinding
       attrset (attr-name) (unknown ...)))))
 
 (define-syntax %%nix-set%%nix-set
   (syntax-rules ()
-    ((%%nix-set%%nix-set recursive? entry ...)
+    ((_ recursive? entry ...)
      (let ((attrset (make-nix-attributeset-node recursive?)))
        (begin
          (%%nix-set%%nix-set-insert-entry attrset entry)
@@ -113,12 +107,12 @@
 
 (define-syntax nix-set ;; Set attributes.
   (syntax-rules ()
-    ((nix-setrec entry ...)
+    ((_ entry ...)
      (%%nix-set%%nix-set #f entry ...))))
 
 (define-syntax nix-setrec ;; Set attributes recursively.
   (syntax-rules ()
-    ((nix-setrec entry ...)
+    ((_ entry ...)
      (%%nix-set%%nix-set #t entry ...))))
 
 m4_divert(-1)
