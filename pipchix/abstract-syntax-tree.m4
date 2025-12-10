@@ -23,7 +23,7 @@
 ;;; WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ;;;
 
-m4_string_reverse_concatenate
+define_string_reverse_concatenate
 
 (define the-nix-null%% '#(nix-null))    ; An arbitrary unique object.
 
