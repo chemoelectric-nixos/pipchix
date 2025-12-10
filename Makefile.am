@@ -70,6 +70,7 @@ R6RS_SCHEME += r6rs/pipchix/srfi-9.sls
 R6RS_SCHEME += r6rs/pipchix/srfi-39.sls
 R6RS_SCHEME += r6rs/pipchix/srfi-111.sls
 R6RS_SCHEME += r6rs/pipchix/continuation-capture.sls
+R6RS_SCHEME += r6rs/pipchix/generate-identifier.sls
 R6RS_SCHEME += r6rs/pipchix/define-record-factory.sls
 R6RS_SCHEME += r6rs/pipchix/base.sls
 R6RS_SCHEME += r6rs/pipchix/nix-embed.sls
@@ -90,6 +91,7 @@ endif
 R7RS_SCHEME =
 R7RS_SCHEME += r7rs/pipchix/srfi-111.sld
 R7RS_SCHEME += r7rs/pipchix/continuation-capture.sld
+R7RS_SCHEME += r7rs/pipchix/generate-identifier.sld
 R7RS_SCHEME += r7rs/pipchix/define-record-factory.sld
 R7RS_SCHEME += r7rs/pipchix/base.sld
 R7RS_SCHEME += r7rs/pipchix/nix-embed.sld
@@ -184,6 +186,7 @@ CHICKEN_EGGSPEC_BOTTOM = ' \
    (components \
     (extension pipchix.srfi-111) \
     (extension pipchix.continuation-capture) \
+    (extension pipchix.generate-identifier) \
     (extension pipchix.define-record-factory) \
     (extension pipchix.string-manipulation) \
     (extension pipchix.abstract-syntax-tree \
@@ -226,6 +229,7 @@ CHICKEN_5_EGGFILES = \
     pipchix.egg \
     pipchix.srfi-111.scm \
     pipchix.continuation-capture.scm \
+    pipchix.generate-identifier.scm \
     pipchix.define-record-factory.scm \
     pipchix.string-manipulation.scm \
     pipchix.abstract-syntax-tree.scm \

@@ -1,8 +1,7 @@
-define_nix_set_setrec_letrec(«nix-letrec»)
-
-;;;-------------------------------------------------------------------
 ;;;
 ;;; Copyright © 2025 Barry Schwartz
+;;;
+;;; This file is part of Pipchix.
 ;;; 
 ;;; Permission is hereby granted, free of charge, to any person obtaining
 ;;; a copy of Pipchix and associated documentation files (the
@@ -23,12 +22,22 @@ define_nix_set_setrec_letrec(«nix-letrec»)
 ;;; OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 ;;; WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ;;;
-;;;-------------------------------------------------------------------
+m4_include(pipchix/pipchix-includes.m4)
 
+(define-library (pipchix generate-identifier)
 
-;;;;;(define-syntax
+  (export m4_include(pipchix/generate-identifier.exports.m4))
 
-;;;-------------------------------------------------------------------
+  (import (scheme base))
+  (import (scheme char))
+  (import (scheme file))
+
+  (begin
+
+    m4_include(pipchix/generate-identifier.m4)
+
+    ))
+
 ;;; local variables:
 ;;; mode: scheme
 ;;; geiser-scheme-implementation: chibi

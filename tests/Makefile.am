@@ -160,15 +160,17 @@ GERBIL_PX = $(GERBIL_PLACE)/lib/pipchix
 GERBIL_O = \
   $(addprefix $(GERBIL_PX)/, \
       $(addsuffix .scm, \
-	  srfi-111 \
-	  continuation-capture \
-	  base \
-	  nix-embed \
-	  nix-list \
-	  nix-set \
-	  nix-letrec \
-	  abstract-syntax-tree \
-	  string-manipulation))
+          srfi-111 \
+          continuation-capture \
+          generate-identifier \
+          define-record-factory \
+          base \
+          nix-embed \
+          nix-list \
+          nix-set \
+          nix-letrec \
+          abstract-syntax-tree \
+          string-manipulation))
 
 TESTSUITE_DEPS += $(GERBIL_O)
 
