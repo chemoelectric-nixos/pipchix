@@ -60,7 +60,7 @@ m4_define([sexpr],
             (inherit-from "bees" "bumble" `honey)
             (123 <== "b"))])
 check_unquoted([run_scheme 'sexpr'],[0],
-  [interpunct_nl([({·a·=·(123)·;·inherit·hummingbirds·bluejays·robins·ducks·turkeys·;·inherit·(·bees·)·bumble·honey·;·b·=·(123)·;·})·])],[])
+  [interpunct_nl([({·a·=·(123)·;·hummingbirds·=·hummingbirds·;·bluejays·=·bluejays·;·robins·=·robins·;·ducks·=·ducks·;·turkeys·=·turkeys·;·bumble·=·bees·.·bumble·;·honey·=·bees·.·honey·;·b·=·(123)·;·})·])],[])
 
 dnl m4_define([sexpr],[(nix-set (inherit "a" "b"))]) dnl  I do not know how to test this.
 dnl check_unquoted([run_scheme 'sexpr'],[ignore],[ignore],[ignore])
@@ -71,7 +71,7 @@ m4_define([sexpr],
     (begin (inherit "a" "b")
            (`c ==> `d)))])
 check_unquoted([run_scheme 'sexpr'],[0],
-  [interpunct_nl([({·inherit·a·b·;·c·=·("d")·;·})·])],[])
+  [interpunct_nl([({·a·=·a·;·b·=·b·;·c·=·("d")·;·})·])],[])
 
 m4_define([sexpr], dnl  A test of string interpolation on the left side of ==>
   [(nix-setrec ((nix-embed "a + b") ==> (nix-embed "c + d")))])

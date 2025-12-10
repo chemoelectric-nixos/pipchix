@@ -33,11 +33,11 @@ nix-attributepath-node?
 make-nix-attributebinding-node
 nix-attributebinding-node?
 
-list->nix-inherit-node
-nix-inherit-node?
-
 list->nix-list-node
 nix-list-node?
+
+make-nix-get-node
+nix-get-node?
 
 scheme->nix
 nix-abstract-syntax-tree?

@@ -184,21 +184,16 @@ define_string_reverse_concatenate
   (getter> 1 nix-attributebinding-node-key)
   (getter> 2 nix-attributebinding-node-value))
 
-(define-record-factory <nix-inherit-node>
-  (constructor>
-   list->nix-inherit-node
-   (lambda (construct)
-     (case-lambda
-       ((lst) (construct lst #f))
-       ((lst attrset) (construct lst attrset)))))
-  (predicate> nix-inherit-node? register-nix-node-predicate)
-  (getter> 1 nix-inherit-node->list)
-  (getter> 2 nix-inherit-node-attributeset))
-
 (define-record-factory <nix-list-node>
   (constructor> list->nix-list-node)
   (predicate> nix-list-node? register-nix-node-predicate)
   (getter> 1 nix-list-node->list))
+
+(define-record-factory <nix-get-node>
+  (constructor> make-nix-get-node)
+  (predicate> nix-get-node? register-nix-node-predicate)
+  (getter> 1 nix-get-node-attributeset)
+  (getter> 2 nix-get-node-attributepath))
 
 (define (nix-abstract-syntax-tree? obj)
   (let loop ((p nix-node-predicates))
@@ -244,10 +239,10 @@ define_string_reverse_concatenate
          (%%output-nix-attributepath-node ast outp))
         ((nix-attributebinding-node? ast)
          (%%output-nix-attributebinding-node ast outp))
-        ((nix-inherit-node? ast)
-         (%%output-nix-inherit-node ast outp))
         ((nix-list-node? ast)
          (%%output-nix-list-node ast outp))
+        ((nix-get-node? ast)
+         (%%output-nix-get-node ast outp))
         (else (error "not an abstract syntax tree" ast)))))))
 
 (define (%%output-nix-embedded-node ast outp)
@@ -374,23 +369,6 @@ define_string_reverse_concatenate
                (outp "\"\n")))
         (loop (cdr lst) #t)))))
 
-(define (%%output-nix-inherit-node ast outp)
-  (let ((attrset (nix-inherit-node-attributeset ast))
-        (lst (nix-inherit-node->list ast)))
-    (outp "inherit\n")
-    (when attrset
-      (outp "(\n")
-      (cond ((nix-attributeset-node? attrset)
-             (output-nix-abstract-syntax-tree attrset outp))
-            (else
-             (%%output-nix-identifier attrset outp)))
-      (outp ")\n"))
-    (let loop ((lst lst))
-      (when (pair? lst)
-        (%%output-nix-identifier (car lst) outp)
-        (loop (cdr lst))))
-    (outp ";\n")))
-
 (define (%%output-nix-identifier ast outp)
   (let ((data (nix-data-node-ref ast)))
     (cond ((symbol? data)
@@ -412,6 +390,14 @@ define_string_reverse_concatenate
     (outp "[\n")
     (for-each output-elem lst)
     (outp "]\n")))
+
+(define (%%output-nix-get-node ast outp)
+  (let ((attrset (nix-get-node-attributeset ast))
+        (attrpath (nix-get-node-attributepath ast)))
+    (when attrset
+      (%%output-nix-identifier attrset outp)
+      (outp ".\n"))
+    (output-nix-abstract-syntax-tree attrpath outp)))
 
 (define (%%string-contains-slash? str)
   (%%string-contains? (lambda (c) (char=? c #\/))

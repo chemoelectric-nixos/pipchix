@@ -44,32 +44,6 @@ check_unquoted([run_scheme 'sexpr'],[0],[interpunct_nl(({·})·)],[])
 m4_define([sexpr],[(make-nix-attributeset-node @%:@t)])
 check_unquoted([run_scheme 'sexpr'],[0],[interpunct_nl((rec{·})·)],[])
 
-m4_define([sexpr],
-  [(let ((attrset (make-nix-attributeset-node @%:@f)))
-     (nix-attributeset-node-set!
-      attrset (let ((key (list->nix-attributepath-node `(a b c)))
-                    (value (make-nix-data-node 1234)))
-                (make-nix-attributebinding-node key value)))
-     (nix-attributeset-node-set!
-      attrset (list->nix-inherit-node (map scheme->nix `("a" b "c"))
-                                      (scheme->nix "set1")))
-     attrset)])
-check_unquoted([run_scheme 'sexpr'],[0],
-[interpunct_nl(({·a·.·b·.·c·=·(1234)·;·inherit·(·set1·)·a·b·c·;·})·)],[])
-
-m4_define([sexpr],
-  [(let ((attrset (make-nix-attributeset-node @%:@t)))
-     (nix-attributeset-node-set!
-      attrset (let ((key (list->nix-attributepath-node `(a b c)))
-                    (value (make-nix-data-node 1234)))
-                (make-nix-attributebinding-node key value)))
-     (nix-attributeset-node-set!
-      attrset (list->nix-inherit-node (map scheme->nix `("a" b "c"))
-                                      (scheme->nix "set1")))
-     attrset)])
-check_unquoted([run_scheme 'sexpr'],[0],
-[interpunct_nl((rec{·a·.·b·.·c·=·(1234)·;·inherit·(·set1·)·a·b·c·;·})·)],[])
-
 AT_CLEANUP
 
 # local variables:

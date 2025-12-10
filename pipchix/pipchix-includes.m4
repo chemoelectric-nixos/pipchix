@@ -64,7 +64,7 @@ m4_pushdef(«who»,«$1»)m4_dnl
 ;;; of SRFI-46 and R⁷RS, which may not be available in Gambit Scheme.
 ;;;
 
-(define-syntax find==>%%for-«»who«»%%
+(define-syntax find==>%%who%%
   (syntax-rules ( ==> )
 
     ((_ node ((key ...) (==> value)))
@@ -75,10 +75,26 @@ m4_pushdef(«who»,«$1»)m4_dnl
        («»who«»-node-set! node binding)))
 
     ((_ node ((key* ...) (key unknown ...)))
-     (find==>%%for-«»who«»%%
+     (find==>%%who%%
       node ((key key* ...) (unknown ...))))))
 
-(define-syntax expand-binding%%for-«»who«»%%
+(define-syntax expand-get%%who%%
+  (syntax-rules ()
+    ((_ attrset identifier)
+     (make-nix-get-node (if attrset (scheme->nix attrset) #f)
+                        (list->nix-attributepath-node
+                         (list identifier))))))
+
+(define-syntax expand-inherit%%who%%
+  (syntax-rules ()
+    ((_ node attrset (identifier ...))
+     (begin
+       (expand-binding%%who%%
+        node ((expand-get%%who%% attrset identifier)
+              <== identifier))
+       ...))))
+
+(define-syntax expand-binding%%who%%
   (syntax-rules ( <== inherit inherit-from begin )
 
     ((_ node (value <== key ...))
@@ -89,28 +105,22 @@ m4_pushdef(«who»,«$1»)m4_dnl
        («»who«»-node-set! node binding)))
 
     ((_ node (inherit identifier ...))
-     (let ((inherit-node (list->nix-inherit-node
-                          (list (scheme->nix identifier) ...))))
-       («»who«»-node-set! node inherit-node)))
+     (expand-inherit%%who%% node #f (identifier ...)))
 
     ((_ node (inherit-from attrset identifier ...))
-     (let* ((attrset-node (scheme->nix attrset))
-            (inherit-node (list->nix-inherit-node
-                           (list (scheme->nix identifier) ...)
-                           attrset-node)))
-       («»who«»-node-set! node inherit-node)))
+     (expand-inherit%%who%% node attrset (identifier ...)))
 
     ((_ node (begin entry ...))
      ;; Being able to group multiple entries into a single
      ;; s-expression is potentially useful, particularly with
      ;; advanced inclusion and macro systems.
-     (begin (expand-binding%%for-«»who«»%% node entry) ...))
+     (begin (expand-binding%%who%% node entry) ...))
 
     ((_ node (begin))          ; This is a no-operation.
      #f)
 
     ((_ node (key unknown ...)) ; Binding by ==> arrow.
-     (find==>%%for-«»who«»%% node ((key) (unknown ...))))))
+     (find==>%%who%% node ((key) (unknown ...))))))
 
 m4_ifelse(who,«nix-letrec»,«
 (define-syntax «»who«»
@@ -123,13 +133,13 @@ m4_ifelse(who,«nix-letrec»,«
 
     ((_ (binding ...) in-clause)
      (let ((node (make-«»who«»-node)))
-       (begin (expand-binding%%for-«»who«»%% node binding) ...)
+       (begin (expand-binding%%who%% node binding) ...)
        (set-«»who«»-node-in-clause! node in-clause)
        node))))
 »)
 
 m4_ifelse(who,«nix-attributeset»,«
-(define-syntax nix-set%%for-«»who«»%%
+(define-syntax nix-set%%who%%
   (syntax-rules ()
 
     ((_ () recursive?)
@@ -138,18 +148,18 @@ m4_ifelse(who,«nix-attributeset»,«
 
     ((_ recursive? binding ...)
      (let ((node (make-«»who«»-node recursive?)))
-       (begin (expand-binding%%for-«»who«»%% node binding) ...)
+       (begin (expand-binding%%who%% node binding) ...)
        node))))
 
 (define-syntax nix-set ;; Set attributes.
   (syntax-rules ()
     ((_ binding ...)
-     (nix-set%%for-«»who«»%% #f binding ...))))
+     (nix-set%%who%% #f binding ...))))
 
 (define-syntax nix-setrec ;; Set attributes recursively.
   (syntax-rules ()
     ((_ binding ...)
-     (nix-set%%for-«»who«»%% #t binding ...))))
+     (nix-set%%who%% #t binding ...))))
 »)
 
 m4_popdef(«who»)m4_dnl
@@ -160,5 +170,4 @@ m4_popdef(«who»)m4_dnl
 ;;; geiser-scheme-implementation: chibi
 ;;; coding: utf-8
 ;;; end:
-
 m4_divert«»m4_dnl

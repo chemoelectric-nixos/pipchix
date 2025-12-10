@@ -38,7 +38,7 @@ m4_define([sexpr],
         (inherit-from `builtins `fromJSON `toJSON))
      (nix-set (`x ==> (nix-embed "a + b + c"))))])
 check_unquoted([run_scheme 'sexpr'],[0],
-  [interpunct_nl([(let·a·=·(3)·;·b·=·(4)·;·inherit·c·;·inherit·(·builtins·)·fromJSON·toJSON·;·in(·({·x·=·a + b + c;·})·))·])],[])
+  [interpunct_nl([(let·a·=·(3)·;·b·=·(4)·;·c·=·c·;·fromJSON·=·builtins·.·fromJSON·;·toJSON·=·builtins·.·toJSON·;·in(·({·x·=·a + b + c;·})·))·])],[])
 
 AT_CLEANUP
 
