@@ -35,16 +35,6 @@ m4_include(pipchix/pipchix-includes.m4)
   (import (pipchix abstract-syntax-tree))
   (import (pipchix string-manipulation))
 
-  ;; The following is necessary for Gambit (version 4.9.7) and quiets
-  ;; warnings from CHICKEN.
-  (cond-expand
-    ((or gambit chicken)
-     (export %%nix-set%%nix-set
-             %%nix-set%%nix-set-insert-entry
-             %%nix-set%%nix-attributebinding
-             %%nix-set%%add-binding))
-    (else))
-
   (begin
 
     m4_include(pipchix/base.m4)

@@ -110,6 +110,7 @@ nodist_r7rspipchix_DATA += r7rs/gerbil.pkg
 endif
 
 GAMBIT_MACROS =
+GAMBIT_MACROS += r7rs/pipchix/gambit/define-record-factory.scm
 GAMBIT_MACROS += r7rs/pipchix/gambit/base.scm
 GAMBIT_MACROS += r7rs/pipchix/gambit/nix-set.scm
 GAMBIT_MACROS += r7rs/pipchix/gambit/nix-letrec.scm

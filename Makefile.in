@@ -555,8 +555,8 @@ R7RS_SCHEME = r7rs/pipchix/srfi-111.sld \
 	r7rs/pipchix/nix-set.sld r7rs/pipchix/nix-letrec.sld \
 	r7rs/pipchix/abstract-syntax-tree.sld \
 	r7rs/pipchix/string-manipulation.sld
-GAMBIT_MACROS = r7rs/pipchix/gambit/base.scm \
-	r7rs/pipchix/gambit/nix-set.scm \
+GAMBIT_MACROS = r7rs/pipchix/gambit/define-record-factory.scm \
+	r7rs/pipchix/gambit/base.scm r7rs/pipchix/gambit/nix-set.scm \
 	r7rs/pipchix/gambit/nix-letrec.scm
 
 #
