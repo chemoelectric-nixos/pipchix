@@ -336,10 +336,10 @@ EXTRA_DIST = testsuite.at $(srcdir)/package.m4 $(TESTSUITE) atlocal.in \
 	nix-attributepath-node-template.at \
 	nix-attributeset-node-template.at nix-letrec-node-template.at \
 	nix-data-node-template.at nix-embedded-node-template.at \
-	nix-embed-template.at nix-inherit-node-template.at \
-	nix-list-node-template.at nix-list-template.at \
-	nix-path-node-template.at nix-set-template.at \
-	nix-letrec-template.at shell-print-template.at
+	nix-embed-template.at nix-list-node-template.at \
+	nix-list-template.at nix-path-node-template.at \
+	nix-set-template.at nix-letrec-template.at \
+	shell-print-template.at
 BUILT_SOURCES = 
 CLEANFILES = *.tmp tmp.*
 DISTCLEANFILES = Makefile GNUmakefile atconfig
@@ -361,7 +361,6 @@ TESTSUITE_DEPS = $(srcdir)/atlocal.in $(srcdir)/package.m4 \
 	$(srcdir)/nix-letrec-node-template.at \
 	$(srcdir)/nix-data-node-template.at \
 	$(srcdir)/nix-embedded-node-template.at \
-	$(srcdir)/nix-inherit-node-template.at \
 	$(srcdir)/nix-list-node-template.at \
 	$(srcdir)/nix-path-node-template.at \
 	$(srcdir)/nix-embed-template.at $(srcdir)/nix-list-template.at \

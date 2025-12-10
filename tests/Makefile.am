@@ -74,7 +74,6 @@ EXTRA_DIST += nix-letrec-node-template.at
 EXTRA_DIST += nix-data-node-template.at
 EXTRA_DIST += nix-embedded-node-template.at
 EXTRA_DIST += nix-embed-template.at
-EXTRA_DIST += nix-inherit-node-template.at
 EXTRA_DIST += nix-list-node-template.at
 EXTRA_DIST += nix-list-template.at
 EXTRA_DIST += nix-path-node-template.at
@@ -132,7 +131,6 @@ TESTSUITE_DEPS += $(srcdir)/nix-attributeset-node-template.at
 TESTSUITE_DEPS += $(srcdir)/nix-letrec-node-template.at
 TESTSUITE_DEPS += $(srcdir)/nix-data-node-template.at
 TESTSUITE_DEPS += $(srcdir)/nix-embedded-node-template.at
-TESTSUITE_DEPS += $(srcdir)/nix-inherit-node-template.at
 TESTSUITE_DEPS += $(srcdir)/nix-list-node-template.at
 TESTSUITE_DEPS += $(srcdir)/nix-path-node-template.at
 
