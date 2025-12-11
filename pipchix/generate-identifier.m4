@@ -91,20 +91,19 @@
   ;; Choose an identifier generator and install it as a new
   ;; ‘random-partial-identifier’ procedure.
   ;;
-  (let ((cc (current-continuation)))
-    (if (continuation? cc)
-        (with-exception-handler
-            (lambda (c)
-              (set! random-partial-identifier
-                random-partial-identifier--general)
-              (continuation-return cc
-                (random-partial-identifier--general)))
-          (lambda ()
-            (set! random-partial-identifier
-              random-partial-identifier--linux)
-            (continuation-return cc
-              (random-partial-identifier--linux))))
-        cc)))
+  (continuation-capture
+   (lambda (cc)
+     (with-exception-handler
+         (lambda (c)
+           (set! random-partial-identifier
+             random-partial-identifier--general)
+           (continuation-return cc
+             (random-partial-identifier--general)))
+       (lambda ()
+         (set! random-partial-identifier
+           random-partial-identifier--linux)
+         (continuation-return cc
+           (random-partial-identifier--linux)))))))
 
 (define (full-identifier i extra)
   (let ((extra (if (symbol? extra) (symbol->string extra) extra)))
