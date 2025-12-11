@@ -40,11 +40,71 @@
          (id (list->string lst)))
     id))
 
-(define (random-identifier)
-  ;; FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME: For Linux,
-  ;; this is good. For non-Linux, we need something else.
+(define random-number-generator
+  ;; A linear congruential generator.
+  (let (
+        ;; The multiplier lcg_a comes from Steele, Guy; Vigna,
+        ;; Sebastiano (28 September 2021). ‘Computationally easy,
+        ;; spectrally good multipliers for congruential pseudorandom
+        ;; number generators’. arXiv:2001.05304v3 [cs.DS]
+
+        (lcg_a #xF1357AEA2E62A9C5)
+
+        ;; The value of lcg_c is not critical, but should be odd.
+
+        (lcg_c 1)
+
+        (seed 602214076))               ; Avogadro’s number (scaled).
+    (lambda ()
+      ;; Usually I would use only the high 48 bits of the seed for the
+      ;; random number, but in this case it does not matter very much.
+      ;; I will just update the seed (by arithmetic modulo 2**64) and
+      ;; use the result as the random value.
+      (let* ((x (* lcg_a seed))
+             (x (+ x lcg_c))
+             (x (truncate-remainder x 18446744073709551616)))
+        (set! seed x)
+        x))))
+
+(define (uinteger64->bytevector u)
+  (let ((bv (make-bytevector 8)))
+    (let loop ((i 0)
+               (q u))
+      (unless (= i 8)
+        (let-values (((q r) (truncate/ q 256)))
+          (bytevector-u8-set! bv i r)
+          (loop (+ i 1) q))))
+    bv))
+
+(define (uinteger64->base64 u)
+  (bytevector->base64 (uinteger64->bytevector u)))
+
+(define (random-partial-identifier--general)
+  (uinteger64->base64 (random-number-generator)))
+
+(define (random-partial-identifier--linux)
   (with-input-from-file "/proc/sys/kernel/random/uuid"
     (lambda () (read-string 36))))
+
+(define (random-partial-identifier)
+  ;;
+  ;; Choose an identifier generator and install it as a new
+  ;; ‘random-partial-identifier’ procedure.
+  ;;
+  (let ((cc (current-continuation)))
+    (if (continuation? cc)
+        (with-exception-handler
+            (lambda (c)
+              (set! random-partial-identifier
+                random-partial-identifier--general)
+              (continuation-return cc
+                (random-partial-identifier--general)))
+          (lambda ()
+            (set! random-partial-identifier
+              random-partial-identifier--linux)
+            (continuation-return cc
+              (random-partial-identifier--linux))))
+        cc)))
 
 (define (full-identifier i extra)
   (let ((extra (if (symbol? extra) (symbol->string extra) extra)))
@@ -52,7 +112,7 @@
      (string-append "g" (if (string=? extra "")
                             extra
                             (string-append "-" extra "-"))
-                    (random-identifier)
+                    (random-partial-identifier)
                     (number->string i)))))
 
 (define generate-identifier
@@ -81,4 +141,5 @@
 ;;; mode: scheme
 ;;; geiser-scheme-implementation: chibi
 ;;; coding: utf-8
+;;; eval: (put 'continuation-return 'scheme-indent-function 1)
 ;;; end:

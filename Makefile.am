@@ -186,9 +186,12 @@ CHICKEN_EGGSPEC_BOTTOM = ' \
    (components \
     (extension pipchix.srfi-111) \
     (extension pipchix.continuation-capture) \
-    (extension pipchix.generate-identifier) \
     (extension pipchix.define-record-factory) \
     (extension pipchix.string-manipulation) \
+    (extension pipchix.generate-identifier \
+      (component-dependencies \
+       pipchix.continuation-capture \
+       pipchix.string-manipulation)) \
     (extension pipchix.abstract-syntax-tree \
       (component-dependencies \
        pipchix.define-record-factory)) \
