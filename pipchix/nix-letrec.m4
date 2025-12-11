@@ -25,8 +25,10 @@ define_nix_set_setrec_letrec(«nix-letrec»)
 ;;;
 ;;;-------------------------------------------------------------------
 
-
-;;;;;(define-syntax
+(define-syntax nix-let*
+  (syntax-rules ()
+    ((_ () in-clause)
+     (nix-letrec () in-clause))))
 
 ;;;-------------------------------------------------------------------
 ;;; local variables:

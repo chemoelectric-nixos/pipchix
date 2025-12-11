@@ -318,7 +318,11 @@ endif !CSI_5
 # The following may require that you have installed the eggs needed by
 # Pipchix.
 chicken-5-egg-stamp: $(CHICKEN_5_EGGFILES)
-	@if ! test -e chicken-5-egg-stamp; then \
+	@if ! test -e chicken-5-egg-stamp || \
+	     ./is-older $(@) $(R7RS_SCHEME:%=${srcdir}/%.m4) \
+	         $(R7RS_SCHEME:r7rs/pipchix/%.sld=${srcdir}/pipchix/%.m4) \
+                 $(R7RS_SCHEME:r7rs/pipchix/%.sld=${srcdir}/pipchix/%.exports.m4) \
+	         ${srcdir}/pipchix/pipchix-includes.m4; then \
 	  ( \
 	    $(MKDIR_P) $(CHICKEN_5_EGGDIR) && \
 	    cd $(CHICKEN_5_EGGDIR) && \
@@ -421,15 +425,6 @@ DEFINE_NICELY_PRINT = ' \
 #
 # ‘is-older’ is a program that augments Make itself in checking for
 # whether files need rebuilding.
-#
-# FIXME: FIGURE OUT HOW TO USE THIS! CURRENTLY I AM NOT USING IT FOR
-#        ANYTHING. I TRIED BUT COULD NOT FIGURE OUT HOW TO MAKE IT
-#        WORK. THE PROBLEM IS THAT THE CHICKEN EGG IS NOT REBUILT WHEN
-#        TESTS ARE MODIFIED. PROBABLY is-older IS NOT NECESSARY, BUT
-#        MAYBE IT WOULD BE HELPFUL.
-#
-#        In any case, what one must do to deal with the problem is do
-#        a ‘make clean’ before running tests on the CHICKEN egg.
 #
 
 EXTRA_PROGRAMS += is-older

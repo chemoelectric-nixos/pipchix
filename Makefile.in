@@ -1386,7 +1386,11 @@ dist-chicken-egg-5: $(PACKAGE_TARNAME)-$(PACKAGE_VERSION).egg-5.tar.xz
 # The following may require that you have installed the eggs needed by
 # Pipchix.
 chicken-5-egg-stamp: $(CHICKEN_5_EGGFILES)
-	@if ! test -e chicken-5-egg-stamp; then \
+	@if ! test -e chicken-5-egg-stamp || \
+	     ./is-older $(@) $(R7RS_SCHEME:%=${srcdir}/%.m4) \
+	         $(R7RS_SCHEME:r7rs/pipchix/%.sld=${srcdir}/pipchix/%.m4) \
+                 $(R7RS_SCHEME:r7rs/pipchix/%.sld=${srcdir}/pipchix/%.exports.m4) \
+	         ${srcdir}/pipchix/pipchix-includes.m4; then \
 	  ( \
 	    $(MKDIR_P) $(CHICKEN_5_EGGDIR) && \
 	    cd $(CHICKEN_5_EGGDIR) && \

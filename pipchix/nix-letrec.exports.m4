@@ -1,1 +1,2 @@
 nix-letrec
+nix-let*
