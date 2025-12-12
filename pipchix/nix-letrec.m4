@@ -33,8 +33,37 @@ define_nix_set_setrec_letrec(«nix-letrec»)
        (set-nix-letrec-node-in-clause! node in-clause)
        node))))
 
+(define-syntax nix-let*
+  (syntax-rules ( inherit inherit-from )
+
+    ((_ () in-clause)
+     (nix-letrec ()
+       in-clause))
+
+    ((_ ((inherit-from s a) binding ...) in-clause)
+     (nix-letrec ((inherit-from s a))
+       (nix-let* (binding ...)
+         in-clause)))
+
+    ((_ ((inherit-from s a b ...) binding ...) in-clause)
+     (nix-letrec ((inherit-from s a))
+       (nix-let* ((inherit-from s b ...) binding ...)
+         in-clause)))
+
+    ((_ ((inherit a b ...) binding ...) in-clause)
+     (nix-let* ((inherit-from #f a b ...) binding ...)
+       in-clause))
+
+    ((_ (binding1 binding2 ...) in-clause)
+     (nix-letrec (binding1)
+       (nix-let* (binding2 ...)
+         in-clause)))))
+
 ;;; local variables:
 ;;; mode: scheme
 ;;; geiser-scheme-implementation: chibi
 ;;; coding: utf-8
+;;; eval: (put 'nix-letrec 'scheme-indent-function 1)
+;;; eval: (put 'nix-let* 'scheme-indent-function 1)
+;;; eval: (put 'nix-let 'scheme-indent-function 1)
 ;;; end:
