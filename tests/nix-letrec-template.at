@@ -56,7 +56,7 @@ check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([(let·in(·nix_null))·])],[])
 
 m4_define([sexpr],
-  [(nix-let* (("a" ==> 1)("b" ==> (nix-get "a"))("c" ==> (nix-get "b"))) (nix-get "c"))])
+  [(nix-let* (("a" ==> 1)("b" ==> (© "a"))("c" ==> (nix-get "b"))) (© "c"))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([(let·a·=·(1)·;·in(·(let·b·=·a·;·in(·(let·c·=·b·;·in(·c·))·))·))·])],[])
 

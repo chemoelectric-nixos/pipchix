@@ -33,6 +33,8 @@
       (scheme->nix attrset)
       (list->nix-attributepath-node attrpath)))))
 
+(define © nix-get) ;; A synonym.
+
 m4_divert(-1)
 ;;; local variables:
 ;;; mode: scheme

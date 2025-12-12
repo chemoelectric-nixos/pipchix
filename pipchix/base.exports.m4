@@ -62,6 +62,7 @@ nix-let*
 
 ;;; The value of an attribute or identifier.
 nix-get
+© ;; U+00A9 COPYRIGHT SIGN is a synonym for nix-get.
 
 ;;; Encode a string in base64, for printing with the base64(1) command
 ;;; (which is included in GNU coreutils).

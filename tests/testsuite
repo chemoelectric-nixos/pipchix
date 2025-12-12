@@ -4520,9 +4520,9 @@ printf "%s\n" "nix-letrec-template.at:60" >"$at_check_line_file"
 (test ${enable_check_r6rs_chez} = no) \
   && at_fn_check_skip 77 "$at_srcdir/nix-letrec-template.at:60"
 { set +x
-printf "%s\n" "$at_srcdir/nix-letrec-template.at:60: \"\${abs_builddir}\"/run-r6rs-chez.sh '(nix-let* ((\"a\" ==> 1)(\"b\" ==> (nix-get \"a\"))(\"c\" ==> (nix-get \"b\"))) (nix-get \"c\"))'"
+printf "%s\n" "$at_srcdir/nix-letrec-template.at:60: \"\${abs_builddir}\"/run-r6rs-chez.sh '(nix-let* ((\"a\" ==> 1)(\"b\" ==> (© \"a\"))(\"c\" ==> (nix-get \"b\"))) (© \"c\"))'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-letrec-template.at:60"
-( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '(nix-let* (("a" ==> 1)("b" ==> (nix-get "a"))("c" ==> (nix-get "b"))) (nix-get "c"))'
+( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '(nix-let* (("a" ==> 1)("b" ==> (© "a"))("c" ==> (nix-get "b"))) (© "c"))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
@@ -7606,9 +7606,9 @@ printf "%s\n" "nix-letrec-template.at:60" >"$at_check_line_file"
 (test ${enable_check_r7rs_chibi} = no) \
   && at_fn_check_skip 77 "$at_srcdir/nix-letrec-template.at:60"
 { set +x
-printf "%s\n" "$at_srcdir/nix-letrec-template.at:60: \"\${abs_builddir}\"/run-r7rs-chibi.sh '(nix-let* ((\"a\" ==> 1)(\"b\" ==> (nix-get \"a\"))(\"c\" ==> (nix-get \"b\"))) (nix-get \"c\"))'"
+printf "%s\n" "$at_srcdir/nix-letrec-template.at:60: \"\${abs_builddir}\"/run-r7rs-chibi.sh '(nix-let* ((\"a\" ==> 1)(\"b\" ==> (© \"a\"))(\"c\" ==> (nix-get \"b\"))) (© \"c\"))'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-letrec-template.at:60"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-chibi.sh '(nix-let* (("a" ==> 1)("b" ==> (nix-get "a"))("c" ==> (nix-get "b"))) (nix-get "c"))'
+( $at_check_trace; "${abs_builddir}"/run-r7rs-chibi.sh '(nix-let* (("a" ==> 1)("b" ==> (© "a"))("c" ==> (nix-get "b"))) (© "c"))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
@@ -10648,9 +10648,9 @@ printf "%s\n" "nix-letrec-template.at:60" >"$at_check_line_file"
 (test ${enable_check_r7rs_csc_5} = no) \
   && at_fn_check_skip 77 "$at_srcdir/nix-letrec-template.at:60"
 { set +x
-printf "%s\n" "$at_srcdir/nix-letrec-template.at:60: \"\${abs_builddir}\"/run-r7rs-csc-5.sh '(nix-let* ((\"a\" ==> 1)(\"b\" ==> (nix-get \"a\"))(\"c\" ==> (nix-get \"b\"))) (nix-get \"c\"))'"
+printf "%s\n" "$at_srcdir/nix-letrec-template.at:60: \"\${abs_builddir}\"/run-r7rs-csc-5.sh '(nix-let* ((\"a\" ==> 1)(\"b\" ==> (© \"a\"))(\"c\" ==> (nix-get \"b\"))) (© \"c\"))'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-letrec-template.at:60"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-csc-5.sh '(nix-let* (("a" ==> 1)("b" ==> (nix-get "a"))("c" ==> (nix-get "b"))) (nix-get "c"))'
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csc-5.sh '(nix-let* (("a" ==> 1)("b" ==> (© "a"))("c" ==> (nix-get "b"))) (© "c"))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
@@ -13690,9 +13690,9 @@ printf "%s\n" "nix-letrec-template.at:60" >"$at_check_line_file"
 (test ${enable_check_r7rs_csi_5} = no) \
   && at_fn_check_skip 77 "$at_srcdir/nix-letrec-template.at:60"
 { set +x
-printf "%s\n" "$at_srcdir/nix-letrec-template.at:60: \"\${abs_builddir}\"/run-r7rs-csi-5.sh '(nix-let* ((\"a\" ==> 1)(\"b\" ==> (nix-get \"a\"))(\"c\" ==> (nix-get \"b\"))) (nix-get \"c\"))'"
+printf "%s\n" "$at_srcdir/nix-letrec-template.at:60: \"\${abs_builddir}\"/run-r7rs-csi-5.sh '(nix-let* ((\"a\" ==> 1)(\"b\" ==> (© \"a\"))(\"c\" ==> (nix-get \"b\"))) (© \"c\"))'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-letrec-template.at:60"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-csi-5.sh '(nix-let* (("a" ==> 1)("b" ==> (nix-get "a"))("c" ==> (nix-get "b"))) (nix-get "c"))'
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csi-5.sh '(nix-let* (("a" ==> 1)("b" ==> (© "a"))("c" ==> (nix-get "b"))) (© "c"))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
@@ -16776,9 +16776,9 @@ printf "%s\n" "nix-letrec-template.at:60" >"$at_check_line_file"
 (test ${enable_check_r7rs_gauche} = no) \
   && at_fn_check_skip 77 "$at_srcdir/nix-letrec-template.at:60"
 { set +x
-printf "%s\n" "$at_srcdir/nix-letrec-template.at:60: \"\${abs_builddir}\"/run-r7rs-gauche.sh '(nix-let* ((\"a\" ==> 1)(\"b\" ==> (nix-get \"a\"))(\"c\" ==> (nix-get \"b\"))) (nix-get \"c\"))'"
+printf "%s\n" "$at_srcdir/nix-letrec-template.at:60: \"\${abs_builddir}\"/run-r7rs-gauche.sh '(nix-let* ((\"a\" ==> 1)(\"b\" ==> (© \"a\"))(\"c\" ==> (nix-get \"b\"))) (© \"c\"))'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-letrec-template.at:60"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-gauche.sh '(nix-let* (("a" ==> 1)("b" ==> (nix-get "a"))("c" ==> (nix-get "b"))) (nix-get "c"))'
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gauche.sh '(nix-let* (("a" ==> 1)("b" ==> (© "a"))("c" ==> (nix-get "b"))) (© "c"))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
@@ -19862,9 +19862,9 @@ printf "%s\n" "nix-letrec-template.at:60" >"$at_check_line_file"
 (test ${enable_check_r7rs_gxi} = no) \
   && at_fn_check_skip 77 "$at_srcdir/nix-letrec-template.at:60"
 { set +x
-printf "%s\n" "$at_srcdir/nix-letrec-template.at:60: \"\${abs_builddir}\"/run-r7rs-gxi.sh '(nix-let* ((\"a\" ==> 1)(\"b\" ==> (nix-get \"a\"))(\"c\" ==> (nix-get \"b\"))) (nix-get \"c\"))'"
+printf "%s\n" "$at_srcdir/nix-letrec-template.at:60: \"\${abs_builddir}\"/run-r7rs-gxi.sh '(nix-let* ((\"a\" ==> 1)(\"b\" ==> (© \"a\"))(\"c\" ==> (nix-get \"b\"))) (© \"c\"))'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-letrec-template.at:60"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-gxi.sh '(nix-let* (("a" ==> 1)("b" ==> (nix-get "a"))("c" ==> (nix-get "b"))) (nix-get "c"))'
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gxi.sh '(nix-let* (("a" ==> 1)("b" ==> (© "a"))("c" ==> (nix-get "b"))) (© "c"))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
@@ -22948,9 +22948,9 @@ printf "%s\n" "nix-letrec-template.at:60" >"$at_check_line_file"
 (test ${enable_check_r7rs_gxc} = no) \
   && at_fn_check_skip 77 "$at_srcdir/nix-letrec-template.at:60"
 { set +x
-printf "%s\n" "$at_srcdir/nix-letrec-template.at:60: \"\${abs_builddir}\"/run-r7rs-gxc.sh '(nix-let* ((\"a\" ==> 1)(\"b\" ==> (nix-get \"a\"))(\"c\" ==> (nix-get \"b\"))) (nix-get \"c\"))'"
+printf "%s\n" "$at_srcdir/nix-letrec-template.at:60: \"\${abs_builddir}\"/run-r7rs-gxc.sh '(nix-let* ((\"a\" ==> 1)(\"b\" ==> (© \"a\"))(\"c\" ==> (nix-get \"b\"))) (© \"c\"))'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-letrec-template.at:60"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-gxc.sh '(nix-let* (("a" ==> 1)("b" ==> (nix-get "a"))("c" ==> (nix-get "b"))) (nix-get "c"))'
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gxc.sh '(nix-let* (("a" ==> 1)("b" ==> (© "a"))("c" ==> (nix-get "b"))) (© "c"))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
@@ -25990,9 +25990,9 @@ printf "%s\n" "nix-letrec-template.at:60" >"$at_check_line_file"
 (test ${enable_check_r6rs_guile} = no) \
   && at_fn_check_skip 77 "$at_srcdir/nix-letrec-template.at:60"
 { set +x
-printf "%s\n" "$at_srcdir/nix-letrec-template.at:60: \"\${abs_builddir}\"/run-r6rs-guile.sh '(nix-let* ((\"a\" ==> 1)(\"b\" ==> (nix-get \"a\"))(\"c\" ==> (nix-get \"b\"))) (nix-get \"c\"))'"
+printf "%s\n" "$at_srcdir/nix-letrec-template.at:60: \"\${abs_builddir}\"/run-r6rs-guile.sh '(nix-let* ((\"a\" ==> 1)(\"b\" ==> (© \"a\"))(\"c\" ==> (nix-get \"b\"))) (© \"c\"))'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-letrec-template.at:60"
-( $at_check_trace; "${abs_builddir}"/run-r6rs-guile.sh '(nix-let* (("a" ==> 1)("b" ==> (nix-get "a"))("c" ==> (nix-get "b"))) (nix-get "c"))'
+( $at_check_trace; "${abs_builddir}"/run-r6rs-guile.sh '(nix-let* (("a" ==> 1)("b" ==> (© "a"))("c" ==> (nix-get "b"))) (© "c"))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
@@ -29076,9 +29076,9 @@ printf "%s\n" "nix-letrec-template.at:60" >"$at_check_line_file"
 (test ${enable_check_r7rs_guile} = no) \
   && at_fn_check_skip 77 "$at_srcdir/nix-letrec-template.at:60"
 { set +x
-printf "%s\n" "$at_srcdir/nix-letrec-template.at:60: \"\${abs_builddir}\"/run-r7rs-guile.sh '(nix-let* ((\"a\" ==> 1)(\"b\" ==> (nix-get \"a\"))(\"c\" ==> (nix-get \"b\"))) (nix-get \"c\"))'"
+printf "%s\n" "$at_srcdir/nix-letrec-template.at:60: \"\${abs_builddir}\"/run-r7rs-guile.sh '(nix-let* ((\"a\" ==> 1)(\"b\" ==> (© \"a\"))(\"c\" ==> (nix-get \"b\"))) (© \"c\"))'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-letrec-template.at:60"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-guile.sh '(nix-let* (("a" ==> 1)("b" ==> (nix-get "a"))("c" ==> (nix-get "b"))) (nix-get "c"))'
+( $at_check_trace; "${abs_builddir}"/run-r7rs-guile.sh '(nix-let* (("a" ==> 1)("b" ==> (© "a"))("c" ==> (nix-get "b"))) (© "c"))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
@@ -32118,9 +32118,9 @@ printf "%s\n" "nix-letrec-template.at:60" >"$at_check_line_file"
 (test ${enable_check_r6rs_loko} = no) \
   && at_fn_check_skip 77 "$at_srcdir/nix-letrec-template.at:60"
 { set +x
-printf "%s\n" "$at_srcdir/nix-letrec-template.at:60: \"\${abs_builddir}\"/run-r6rs-loko.sh '(nix-let* ((\"a\" ==> 1)(\"b\" ==> (nix-get \"a\"))(\"c\" ==> (nix-get \"b\"))) (nix-get \"c\"))'"
+printf "%s\n" "$at_srcdir/nix-letrec-template.at:60: \"\${abs_builddir}\"/run-r6rs-loko.sh '(nix-let* ((\"a\" ==> 1)(\"b\" ==> (© \"a\"))(\"c\" ==> (nix-get \"b\"))) (© \"c\"))'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-letrec-template.at:60"
-( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '(nix-let* (("a" ==> 1)("b" ==> (nix-get "a"))("c" ==> (nix-get "b"))) (nix-get "c"))'
+( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '(nix-let* (("a" ==> 1)("b" ==> (© "a"))("c" ==> (nix-get "b"))) (© "c"))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
@@ -35204,9 +35204,9 @@ printf "%s\n" "nix-letrec-template.at:60" >"$at_check_line_file"
 (test ${enable_check_r7rs_loko} = no) \
   && at_fn_check_skip 77 "$at_srcdir/nix-letrec-template.at:60"
 { set +x
-printf "%s\n" "$at_srcdir/nix-letrec-template.at:60: \"\${abs_builddir}\"/run-r7rs-loko.sh '(nix-let* ((\"a\" ==> 1)(\"b\" ==> (nix-get \"a\"))(\"c\" ==> (nix-get \"b\"))) (nix-get \"c\"))'"
+printf "%s\n" "$at_srcdir/nix-letrec-template.at:60: \"\${abs_builddir}\"/run-r7rs-loko.sh '(nix-let* ((\"a\" ==> 1)(\"b\" ==> (© \"a\"))(\"c\" ==> (nix-get \"b\"))) (© \"c\"))'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-letrec-template.at:60"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(nix-let* (("a" ==> 1)("b" ==> (nix-get "a"))("c" ==> (nix-get "b"))) (nix-get "c"))'
+( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(nix-let* (("a" ==> 1)("b" ==> (© "a"))("c" ==> (nix-get "b"))) (© "c"))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
@@ -38246,9 +38246,9 @@ printf "%s\n" "nix-letrec-template.at:60" >"$at_check_line_file"
 (test ${enable_check_r6rs_racket} = no) \
   && at_fn_check_skip 77 "$at_srcdir/nix-letrec-template.at:60"
 { set +x
-printf "%s\n" "$at_srcdir/nix-letrec-template.at:60: \"\${abs_builddir}\"/run-r6rs-racket.sh '(nix-let* ((\"a\" ==> 1)(\"b\" ==> (nix-get \"a\"))(\"c\" ==> (nix-get \"b\"))) (nix-get \"c\"))'"
+printf "%s\n" "$at_srcdir/nix-letrec-template.at:60: \"\${abs_builddir}\"/run-r6rs-racket.sh '(nix-let* ((\"a\" ==> 1)(\"b\" ==> (© \"a\"))(\"c\" ==> (nix-get \"b\"))) (© \"c\"))'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-letrec-template.at:60"
-( $at_check_trace; "${abs_builddir}"/run-r6rs-racket.sh '(nix-let* (("a" ==> 1)("b" ==> (nix-get "a"))("c" ==> (nix-get "b"))) (nix-get "c"))'
+( $at_check_trace; "${abs_builddir}"/run-r6rs-racket.sh '(nix-let* (("a" ==> 1)("b" ==> (© "a"))("c" ==> (nix-get "b"))) (© "c"))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
@@ -41288,9 +41288,9 @@ printf "%s\n" "nix-letrec-template.at:60" >"$at_check_line_file"
 (test ${enable_check_r6rs_sagittarius} = no) \
   && at_fn_check_skip 77 "$at_srcdir/nix-letrec-template.at:60"
 { set +x
-printf "%s\n" "$at_srcdir/nix-letrec-template.at:60: \"\${abs_builddir}\"/run-r6rs-sagittarius.sh '(nix-let* ((\"a\" ==> 1)(\"b\" ==> (nix-get \"a\"))(\"c\" ==> (nix-get \"b\"))) (nix-get \"c\"))'"
+printf "%s\n" "$at_srcdir/nix-letrec-template.at:60: \"\${abs_builddir}\"/run-r6rs-sagittarius.sh '(nix-let* ((\"a\" ==> 1)(\"b\" ==> (© \"a\"))(\"c\" ==> (nix-get \"b\"))) (© \"c\"))'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-letrec-template.at:60"
-( $at_check_trace; "${abs_builddir}"/run-r6rs-sagittarius.sh '(nix-let* (("a" ==> 1)("b" ==> (nix-get "a"))("c" ==> (nix-get "b"))) (nix-get "c"))'
+( $at_check_trace; "${abs_builddir}"/run-r6rs-sagittarius.sh '(nix-let* (("a" ==> 1)("b" ==> (© "a"))("c" ==> (nix-get "b"))) (© "c"))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
@@ -44374,9 +44374,9 @@ printf "%s\n" "nix-letrec-template.at:60" >"$at_check_line_file"
 (test ${enable_check_r7rs_sagittarius} = no) \
   && at_fn_check_skip 77 "$at_srcdir/nix-letrec-template.at:60"
 { set +x
-printf "%s\n" "$at_srcdir/nix-letrec-template.at:60: \"\${abs_builddir}\"/run-r7rs-sagittarius.sh '(nix-let* ((\"a\" ==> 1)(\"b\" ==> (nix-get \"a\"))(\"c\" ==> (nix-get \"b\"))) (nix-get \"c\"))'"
+printf "%s\n" "$at_srcdir/nix-letrec-template.at:60: \"\${abs_builddir}\"/run-r7rs-sagittarius.sh '(nix-let* ((\"a\" ==> 1)(\"b\" ==> (© \"a\"))(\"c\" ==> (nix-get \"b\"))) (© \"c\"))'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-letrec-template.at:60"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-sagittarius.sh '(nix-let* (("a" ==> 1)("b" ==> (nix-get "a"))("c" ==> (nix-get "b"))) (nix-get "c"))'
+( $at_check_trace; "${abs_builddir}"/run-r7rs-sagittarius.sh '(nix-let* (("a" ==> 1)("b" ==> (© "a"))("c" ==> (nix-get "b"))) (© "c"))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
