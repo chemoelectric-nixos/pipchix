@@ -125,7 +125,6 @@ am__aclocal_m4_deps = $(top_srcdir)/m4/ax_check_compile_flag.m4 \
 	$(top_srcdir)/ac-tinyscheme.m4 $(top_srcdir)/ac-chez-scheme.m4 \
 	$(top_srcdir)/ac-chicken-scheme.m4 \
 	$(top_srcdir)/ac-chibi-scheme.m4 \
-	$(top_srcdir)/ac-gambit-scheme.m4 \
 	$(top_srcdir)/ac-gauche-scheme.m4 \
 	$(top_srcdir)/ac-gerbil-scheme.m4 \
 	$(top_srcdir)/ac-guile-scheme.m4 \
@@ -200,7 +199,6 @@ GNU = @GNU@
 GNU_M4 = @GNU_M4@
 GNU_MAKE = @GNU_MAKE@
 GREP = @GREP@
-GSI = @GSI@
 GUILE = @GUILE@
 GXC = @GXC@
 GXI = @GXI@
@@ -270,7 +268,6 @@ enable_check_r7rs_chibi = @enable_check_r7rs_chibi@
 enable_check_r7rs_csc_5 = @enable_check_r7rs_csc_5@
 enable_check_r7rs_csi_5 = @enable_check_r7rs_csi_5@
 enable_check_r7rs_gauche = @enable_check_r7rs_gauche@
-enable_check_r7rs_gsi = @enable_check_r7rs_gsi@
 enable_check_r7rs_guile = @enable_check_r7rs_guile@
 enable_check_r7rs_gxc = @enable_check_r7rs_gxc@
 enable_check_r7rs_gxi = @enable_check_r7rs_gxi@

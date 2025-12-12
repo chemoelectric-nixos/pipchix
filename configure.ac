@@ -103,12 +103,6 @@ offer_disable_of_check([r7rs],[csi-5],
 offer_disable_of_check([r7rs],[csc-5],
   [disable tests with CHICKEN 5 compiler])
 
-offer_disable_of_check([r7rs],[gsi],
-  [disable tests with Gambit Scheme interpreter])
-
-dnl offer_disable_of_check([r7rs],[gsc],
-dnl   [disable tests with Gambit Scheme compiler])
-
 offer_disable_of_check([r7rs],[gauche],
   [disable tests with Gauche Scheme])
 
@@ -145,7 +139,6 @@ m4_include([ac-tinyscheme.m4])
 m4_include([ac-chez-scheme.m4])
 m4_include([ac-chicken-scheme.m4])
 m4_include([ac-chibi-scheme.m4])
-m4_include([ac-gambit-scheme.m4])
 m4_include([ac-gauche-scheme.m4])
 m4_include([ac-gerbil-scheme.m4])
 m4_include([ac-guile-scheme.m4])
@@ -174,10 +167,6 @@ AC_CONFIG_FILES([tests/run-r7rs-csc-5.sh],
                 [chmod +x tests/run-r7rs-csc-5.sh])
 AC_CONFIG_FILES([tests/run-r7rs-csi-5.sh],
                 [chmod +x tests/run-r7rs-csi-5.sh])
-AC_CONFIG_FILES([tests/run-r7rs-gsi.sh],
-                [chmod +x tests/run-r7rs-gsi.sh])
-dnl AC_CONFIG_FILES([tests/run-r7rs-gsc.sh],
-dnl                 [chmod +x tests/run-r7rs-gsc.sh])
 AC_CONFIG_FILES([tests/run-r7rs-gauche.sh],
                 [chmod +x tests/run-r7rs-gauche.sh])
 AC_CONFIG_FILES([tests/run-r7rs-gxi.sh],

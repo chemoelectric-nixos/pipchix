@@ -49,12 +49,6 @@ m4_include(pipchix/pipchix-includes.m4)
                  «er-macro-transformer»)
        m4_include(pipchix/define-record-factory.m4)
        m4_undefine(«implementation_of_define_record_factory»))
-      (gambit
-       ;; The macro apparently cannot be exported and imported in the
-       ;; usual way. Therefore it is not placed here. It is available
-       ;; for ‘include’. However, Guile is broken in many ways and the
-       ;; following is here to work around its breakage.
-       (define define-record-factory #f))
       (else
        m4_define(«implementation_of_define_record_factory»,
                  «syntax-rules»)

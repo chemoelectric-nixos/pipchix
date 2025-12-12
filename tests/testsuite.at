@@ -29,8 +29,6 @@ m4_define([run_r6rs_chez],["${abs_builddir}"/run-r6rs-chez.sh])
 m4_define([run_r7rs_chibi],["${abs_builddir}"/run-r7rs-chibi.sh])
 m4_define([run_r7rs_csc_5],["${abs_builddir}"/run-r7rs-csc-5.sh])
 m4_define([run_r7rs_csi_5],["${abs_builddir}"/run-r7rs-csi-5.sh])
-m4_define([run_r7rs_gsi],["${abs_builddir}"/run-r7rs-gsi.sh])
-dnl m4_define([run_r7rs_gsc],["${abs_builddir}"/run-r7rs-gsc.sh])
 m4_define([run_r7rs_gauche],["${abs_builddir}"/run-r7rs-gauche.sh])
 m4_define([run_r7rs_gxi],["${abs_builddir}"/run-r7rs-gxi.sh])
 m4_define([run_r7rs_gxc],["${abs_builddir}"/run-r7rs-gxc.sh])
@@ -74,20 +72,6 @@ m4_define([u8_bytevec],[u8_bytevec_r7rs])
 tests_template([csi-5       ],[CHICKEN 5 interpreter (R⁷RS)],
   [r7rs chicken chicken-5 csi csi-5 interpreter],
   [${enable_check_r7rs_csi_5}],[run_r7rs_csi_5])
-
-m4_define([implementation],[gsi])
-m4_define([rnrs_version],[7])
-m4_define([u8_bytevec],[u8_bytevec_r7rs])
-tests_template([gsi         ],[Gambit Scheme interpreter (R⁷RS)],
-  [r7rs gambit gsi interpreter],
-  [${enable_check_r7rs_gsi}],[run_r7rs_gsi])
-
-dnl m4_define([implementation],[gsc])
-dnl m4_define([rnrs_version],[7])
-dnl m4_define([u8_bytevec],[u8_bytevec_r7rs])
-dnl tests_template([gsc         ],[Gambit Scheme compiler (R⁷RS)],
-dnl   [r7rs Gambit gambit gsc compiler],
-dnl   [${enable_check_r7rs_gsc}],[run_r7rs_gsc])
 
 m4_define([implementation],[gauche])
 m4_define([rnrs_version],[7])

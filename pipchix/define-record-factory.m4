@@ -263,6 +263,11 @@ m4_ifelse(implementation_of_define_record_factory,«er-macro-transformer»,«
 
 m4_ifelse(implementation_of_define_record_factory,«gambit-syntax-case»,«
 
+;;;
+;;; We no longer attempt Gambit Scheme support for Pipchix, but for
+;;; reference we keep this implementation of define-record-factory.
+;;;
+
 (define-syntax define-record-factory
   (lambda (stx)
 

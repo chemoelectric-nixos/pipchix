@@ -33,16 +33,7 @@ m4_include(pipchix/pipchix-includes.m4)
 
   (begin
 
-    (cond-expand
-      (gambit
-       ;; The macros for Gambit should be included rather than
-       ;; imported. But Guile is broken in numerous ways, and for
-       ;; instance might complain if we do not export the symbols. Let
-       ;; us not take the chance.
-       (define find==>%%for-nix-letrec%% #f)
-       (define expand-bindings%%for-nix-letrec%% #f))
-      (else
-       m4_include(pipchix/nix-letrec.m4)))
+    m4_include(pipchix/nix-letrec.m4)
 
     ))
 

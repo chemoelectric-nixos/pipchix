@@ -669,9 +669,6 @@ GXI
 GAUCHE_FALSE
 GAUCHE_TRUE
 GAUCHE
-GSI_FALSE
-GSI_TRUE
-GSI
 CHIBI_SCHEME_FALSE
 CHIBI_SCHEME_TRUE
 CHIBI_SCHEME
@@ -722,9 +719,6 @@ enable_check_r7rs_gxi
 ENABLE_CHECK_R7RS_GAUCHE_FALSE
 ENABLE_CHECK_R7RS_GAUCHE_TRUE
 enable_check_r7rs_gauche
-ENABLE_CHECK_R7RS_GSI_FALSE
-ENABLE_CHECK_R7RS_GSI_TRUE
-enable_check_r7rs_gsi
 ENABLE_CHECK_R7RS_CSC_5_FALSE
 ENABLE_CHECK_R7RS_CSC_5_TRUE
 enable_check_r7rs_csc_5
@@ -871,7 +865,6 @@ enable_check_r6rs_chez
 enable_check_r7rs_chibi
 enable_check_r7rs_csi_5
 enable_check_r7rs_csc_5
-enable_check_r7rs_gsi
 enable_check_r7rs_gauche
 enable_check_r7rs_gxi
 enable_check_r7rs_gxc
@@ -899,7 +892,6 @@ CHICKEN_UNINSTALL_5
 CSI_5
 CSC_5
 CHIBI_SCHEME
-GSI
 GAUCHE
 GXI
 GXC
@@ -1571,10 +1563,6 @@ Optional Features:
   --disable-check-r7rs-csc_5
                           disable tests with CHICKEN 5 compiler (enabled by
                           default if the Scheme implementation is found)
-  --disable-check-r7rs-gsi
-                          disable tests with Gambit Scheme interpreter
-                          (enabled by default if the Scheme implementation is
-                          found)
   --disable-check-r7rs-gauche
                           disable tests with Gauche Scheme (enabled by default
                           if the Scheme implementation is found)
@@ -1625,7 +1613,6 @@ Some influential environment variables:
   CSC_5       CHICKEN compiler version 5
   CHIBI_SCHEME
               Chibi Scheme
-  GSI         Gambit Scheme interpreter
   GAUCHE      Gauche Scheme
   GXI         Gerbil Scheme interpreter (R⁷RS)
   GXC         Gerbil Scheme compiler (R⁷RS)
@@ -6737,26 +6724,6 @@ else
 fi
 
 
-# Check whether --enable-check-r7rs-gsi was given.
-if test ${enable_check_r7rs_gsi+y}
-then :
-  enableval=$enable_check_r7rs_gsi; eval enable_check_r7rs_gsi="${enableval}"
-else case e in #(
-  e) eval enable_check_r7rs_gsi=yes ;;
-esac
-fi
-
-
- if test "${enable_check_r7rs_gsi}" != no; then
-  ENABLE_CHECK_R7RS_GSI_TRUE=
-  ENABLE_CHECK_R7RS_GSI_FALSE='#'
-else
-  ENABLE_CHECK_R7RS_GSI_TRUE='#'
-  ENABLE_CHECK_R7RS_GSI_FALSE=
-fi
-
-
-
 # Check whether --enable-check-r7rs-gauche was given.
 if test ${enable_check_r7rs_gauche+y}
 then :
@@ -7676,118 +7643,6 @@ else
   CHIBI_SCHEME_TRUE='#'
   CHIBI_SCHEME_FALSE=
 fi
-
-
-# Copyright © 2025 Barry Schwartz
-#
-# This file is part of Pipchix.
-#
-# Permission is hereby granted, free of charge, to any person obtaining
-# a copy of Pipchix and associated documentation files (the
-# "Software"), to deal in the Software without restriction, including
-# without limitation the rights to use, copy, modify, merge, publish,
-# distribute, sublicense, and/or sell copies of the Software, and to
-# permit persons to whom the Software is furnished to do so, subject to
-# the following conditions:
-#
-# The above copyright notice and this permission notice shall be
-# included in all copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-# LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-# OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-# WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-#
-# Gambit Scheme configuration.
-#
-
-{ :;
-
-# Override the cache if the precious variable GSI is set.
-test -n "${GSI}" && unset ac_cv_path_GSI
-chem_cv_path_GSI_found=yes
-{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for gsi" >&5
-printf %s "checking for gsi... " >&6; }
-if test ${ac_cv_path_GSI+y}
-then :
-  printf %s "(cached) " >&6
-else case e in #(
-  e) if test -z "$GSI"; then
-  ac_path_GSI_found=false
-  # Loop through the user's path and test for each of PROGNAME-LIST
-  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-for as_dir in $PATH
-do
-  IFS=$as_save_IFS
-  case $as_dir in #(((
-    '') as_dir=./ ;;
-    */) ;;
-    *) as_dir=$as_dir/ ;;
-  esac
-    for ac_prog in gsi
-   do
-    for ac_exec_ext in '' $ac_executable_extensions; do
-      ac_path_GSI="$as_dir$ac_prog$ac_exec_ext"
-      as_fn_executable_p "$ac_path_GSI" || continue
-
-      if test -n "${GSI}"; then
-         # Bypass the test if the precious variable GSI is set.
-         ac_cv_path_GSI="${GSI}"
-         ac_path_GSI_found=:
-      else
-         # Run the test.
-
-    if LC_ALL=C LANG=C ${ac_path_GSI} -h 2>&1 | \
-      LC_ALL=C LANG=C ${GREP} '^This is the Gambit Scheme interpreter' \
-               2> /dev/null > /dev/null; then
-        ac_cv_path_GSI="${ac_path_GSI}"
-        ac_path_GSI_found=:
-    fi
-
-      fi
-      $ac_path_GSI_found && break 3
-    done
-  done
-  done
-IFS=$as_save_IFS
-  if test -z "$ac_cv_path_GSI"; then
-    :
-  fi
-else
-  ac_cv_path_GSI=$GSI
-fi
-
-      if test -z "${ac_cv_path_GSI}"; then
-         ac_cv_path_GSI="not found"
-         chem_cv_path_GSI_found=no
-      fi
-    ;;
-esac
-fi
-{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $ac_cv_path_GSI" >&5
-printf "%s\n" "$ac_cv_path_GSI" >&6; }
-if test x"${chem_cv_path_GSI_found}" = x"yes"; then
-   GSI="${ac_cv_path_GSI}"
-else
-   GSI=""
-   # Do not cache the negative result. That way someone can install
-   # the program and have it be discovered, even though they did not
-   # clear a cache entry.
-   unset ac_cv_path_GSI
-fi
-}
- if test "${chem_cv_path_GSI_found}" != no; then
-  GSI_TRUE=
-  GSI_FALSE='#'
-else
-  GSI_TRUE='#'
-  GSI_FALSE=
-fi
-
 
 
 # Copyright © 2025 Barry Schwartz
@@ -8735,8 +8590,6 @@ ac_config_files="$ac_config_files tests/run-r7rs-csc-5.sh"
 
 ac_config_files="$ac_config_files tests/run-r7rs-csi-5.sh"
 
-ac_config_files="$ac_config_files tests/run-r7rs-gsi.sh"
-
 ac_config_files="$ac_config_files tests/run-r7rs-gauche.sh"
 
 ac_config_files="$ac_config_files tests/run-r7rs-gxi.sh"
@@ -8984,10 +8837,6 @@ if test -z "${ENABLE_CHECK_R7RS_CSC_5_TRUE}" && test -z "${ENABLE_CHECK_R7RS_CSC
   as_fn_error $? "conditional \"ENABLE_CHECK_R7RS_CSC_5\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
-if test -z "${ENABLE_CHECK_R7RS_GSI_TRUE}" && test -z "${ENABLE_CHECK_R7RS_GSI_FALSE}"; then
-  as_fn_error $? "conditional \"ENABLE_CHECK_R7RS_GSI\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
 if test -z "${ENABLE_CHECK_R7RS_GAUCHE_TRUE}" && test -z "${ENABLE_CHECK_R7RS_GAUCHE_FALSE}"; then
   as_fn_error $? "conditional \"ENABLE_CHECK_R7RS_GAUCHE\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
@@ -9050,10 +8899,6 @@ Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${CHIBI_SCHEME_TRUE}" && test -z "${CHIBI_SCHEME_FALSE}"; then
   as_fn_error $? "conditional \"CHIBI_SCHEME\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
-if test -z "${GSI_TRUE}" && test -z "${GSI_FALSE}"; then
-  as_fn_error $? "conditional \"GSI\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${GAUCHE_TRUE}" && test -z "${GAUCHE_FALSE}"; then
@@ -9686,7 +9531,6 @@ do
     "tests/run-r7rs-chibi.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r7rs-chibi.sh" ;;
     "tests/run-r7rs-csc-5.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r7rs-csc-5.sh" ;;
     "tests/run-r7rs-csi-5.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r7rs-csi-5.sh" ;;
-    "tests/run-r7rs-gsi.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r7rs-gsi.sh" ;;
     "tests/run-r7rs-gauche.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r7rs-gauche.sh" ;;
     "tests/run-r7rs-gxi.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r7rs-gxi.sh" ;;
     "tests/run-r7rs-gxc.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r7rs-gxc.sh" ;;
@@ -10333,7 +10177,6 @@ EOF
     "tests/run-r7rs-chibi.sh":F) chmod +x tests/run-r7rs-chibi.sh ;;
     "tests/run-r7rs-csc-5.sh":F) chmod +x tests/run-r7rs-csc-5.sh ;;
     "tests/run-r7rs-csi-5.sh":F) chmod +x tests/run-r7rs-csi-5.sh ;;
-    "tests/run-r7rs-gsi.sh":F) chmod +x tests/run-r7rs-gsi.sh ;;
     "tests/run-r7rs-gauche.sh":F) chmod +x tests/run-r7rs-gauche.sh ;;
     "tests/run-r7rs-gxi.sh":F) chmod +x tests/run-r7rs-gxi.sh ;;
     "tests/run-r7rs-gxc.sh":F) chmod +x tests/run-r7rs-gxc.sh ;;
@@ -10441,10 +10284,6 @@ printf "%s\n" "$as_me: `if test "${enable_color}" = no; then echo ⬤; else echo
     { printf "%s\n" "$as_me:${as_lineno-$LINENO}:      to uninstall the ‘pipchix’ egg." >&5
 printf "%s\n" "$as_me:      to uninstall the ‘pipchix’ egg." >&6;}
   fi
-fi
-if test "${chem_cv_path_GSI_found}" != no; then
-  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: Gambit Scheme interpreter: ${GSI}" >&5
-printf "%s\n" "$as_me: Gambit Scheme interpreter: ${GSI}" >&6;}
 fi
 if test "${chem_cv_path_GAUCHE_found}" != no; then
   { printf "%s\n" "$as_me:${as_lineno-$LINENO}: Gauche Scheme: ${GAUCHE}" >&5
