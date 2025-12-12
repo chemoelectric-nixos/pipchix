@@ -29,6 +29,7 @@ m4_include(pipchix/pipchix-includes.m4)
   (export m4_include(pipchix/base.exports.m4))
 
   (import (scheme base))
+  (import (scheme case-lambda))
   (import (pipchix nix-list))
   (import (pipchix nix-set))
   (import (pipchix nix-letrec))

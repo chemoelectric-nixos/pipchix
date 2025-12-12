@@ -25,10 +25,12 @@
 
 ;;; Is an object a Nix AST node?
 nix-abstract-syntax-tree?
+nix-ast? ;; A synonym?
 
 ;;; Output Nix AST to a procedure, and by default to
 ;;; (current-output-port).
 output-nix-abstract-syntax-tree
+output-nix-ast ;; A synonym.
 
 ;;; Transform Scheme objects to Nix AST.
 scheme->nix
@@ -57,6 +59,9 @@ nix-letrec
 
 ;;; One-after-another let.
 nix-let*
+
+;;; The value of an attribute or identifier.
+nix-get
 
 ;;; Encode a string in base64, for printing with the base64(1) command
 ;;; (which is included in GNU coreutils).

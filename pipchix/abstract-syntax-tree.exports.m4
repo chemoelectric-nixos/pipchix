@@ -41,4 +41,6 @@ nix-get-node?
 
 scheme->nix
 nix-abstract-syntax-tree?
+nix-ast?
 output-nix-abstract-syntax-tree
+output-nix-ast

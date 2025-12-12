@@ -26,6 +26,8 @@ m4_divert(-1)
 
 m4_changequote(«,»)
 m4_changecom(«#|»,«|#»)
+m4_define(«semicolon»,«;»)
+m4_define(«backslash»,«\»)
 
 ;;;m4_define(«define_string_reverse_concatenate»,«
 (define (%%string-reverse-concatenate lst)

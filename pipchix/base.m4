@@ -23,7 +23,15 @@
 ;;; WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ;;;
 
-#f
+(define nix-get
+  (case-lambda
+    ((identifier)
+     (make-nix-get-node
+      #f (list->nix-attributepath-node (list identifier))))
+    ((attrset . attrpath)
+     (make-nix-get-node
+      (scheme->nix attrset)
+      (list->nix-attributepath-node attrpath)))))
 
 m4_divert(-1)
 ;;; local variables:

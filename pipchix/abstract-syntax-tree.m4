@@ -201,6 +201,9 @@ define_string_reverse_concatenate
          (or ((car p) obj)
              (loop (cdr p))))))
 
+;;; A synonym.
+(define nix-ast? nix-abstract-syntax-tree?)
+
 (define (scheme->nix value)
   ;; Convert Scheme values to Nix AST.
   (cond ((or (string? value)
@@ -244,6 +247,9 @@ define_string_reverse_concatenate
         ((nix-get-node? ast)
          (%%output-nix-get-node ast outp))
         (else (error "not an abstract syntax tree" ast)))))))
+
+;;; A synonym.
+(define output-nix-ast output-nix-abstract-syntax-tree)
 
 (define (%%output-nix-embedded-node ast outp)
   (let ((code (nix-embedded-node-ref ast)))
