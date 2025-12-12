@@ -65,14 +65,6 @@ check_unquoted([run_scheme 'sexpr'],[0],
 dnl m4_define([sexpr],[(nix-set (inherit "a" "b"))]) dnl  I do not know how to test this.
 dnl check_unquoted([run_scheme 'sexpr'],[ignore],[ignore],[ignore])
 
-m4_define([sexpr],
-  [(nix-set
-    (begin)
-    (begin (inherit "a" "b")
-           (`c ==> `d)))])
-check_unquoted([run_scheme 'sexpr'],[0],
-  [interpunct_nl([({·a·=·a·;·b·=·b·;·c·=·("d")·;·})·])],[])
-
 m4_define([sexpr], dnl  A test of string interpolation on the left side of ==>
   [(nix-setrec ((nix-embed "a + b") ==> (nix-embed "c + d")))])
 check_unquoted([run_scheme 'sexpr'],[0],

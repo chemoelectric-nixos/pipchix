@@ -4210,53 +4210,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "nix-set-template.at:73" >"$at_check_line_file"
+printf "%s\n" "nix-set-template.at:70" >"$at_check_line_file"
 (test ${enable_check_r6rs_chez} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:73"
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:70"
 { set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:73: \"\${abs_builddir}\"/run-r6rs-chez.sh '(nix-set
-    (begin)
-    (begin (inherit \"a\" \"b\")
-           (\`c ==> \`d)))'"
-at_fn_check_prepare_notrace 'a `...` command substitution' "nix-set-template.at:73"
-( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '(nix-set
-    (begin)
-    (begin (inherit "a" "b")
-           (`c ==> `d)))'
-) >>"$at_stdout" 2>>"$at_stderr" 5>&-
-at_status=$? at_failed=false
-$at_check_filter
-at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "({
-a
-=
-a
-;
-b
-=
-b
-;
-c
-=
-(\"d\")
-;
-})
-" | \
-  $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:73"
-$at_failed && at_fn_log_failure
-$at_traceon; }
-
-
-
-
-
-printf "%s\n" "nix-set-template.at:78" >"$at_check_line_file"
-(test ${enable_check_r6rs_chez} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:78"
-{ set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:78: \"\${abs_builddir}\"/run-r6rs-chez.sh '  (nix-setrec ((nix-embed \"a + b\") ==> (nix-embed \"c + d\")))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:78"
+printf "%s\n" "$at_srcdir/nix-set-template.at:70: \"\${abs_builddir}\"/run-r6rs-chez.sh '  (nix-setrec ((nix-embed \"a + b\") ==> (nix-embed \"c + d\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:70"
 ( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '  (nix-setrec ((nix-embed "a + b") ==> (nix-embed "c + d")))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -4269,7 +4228,7 @@ c + d;
 })
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:78"
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:70"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -4277,12 +4236,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "nix-set-template.at:83" >"$at_check_line_file"
+printf "%s\n" "nix-set-template.at:75" >"$at_check_line_file"
 (test ${enable_check_r6rs_chez} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:83"
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:75"
 { set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:83: \"\${abs_builddir}\"/run-r6rs-chez.sh '  (nix-setrec ((nix-embed \"a + b\") <== (nix-embed \"c + d\")))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:83"
+printf "%s\n" "$at_srcdir/nix-set-template.at:75: \"\${abs_builddir}\"/run-r6rs-chez.sh '  (nix-setrec ((nix-embed \"a + b\") <== (nix-embed \"c + d\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:75"
 ( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '  (nix-setrec ((nix-embed "a + b") <== (nix-embed "c + d")))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -4295,7 +4254,7 @@ a + b;
 })
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:83"
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:75"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -4303,12 +4262,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "nix-set-template.at:88" >"$at_check_line_file"
+printf "%s\n" "nix-set-template.at:80" >"$at_check_line_file"
 (test ${enable_check_r6rs_chez} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:88"
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:80"
 { set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:88: \"\${abs_builddir}\"/run-r6rs-chez.sh '  (nix-setrec ((scheme->nix \"a + b\") ==> (scheme->nix \"c + d\")))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:88"
+printf "%s\n" "$at_srcdir/nix-set-template.at:80: \"\${abs_builddir}\"/run-r6rs-chez.sh '  (nix-setrec ((scheme->nix \"a + b\") ==> (scheme->nix \"c + d\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:80"
 ( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '  (nix-setrec ((scheme->nix "a + b") ==> (scheme->nix "c + d")))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -4323,7 +4282,7 @@ echo >>"$at_stdout"; printf "%s\n" "(rec{
 })
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:88"
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:80"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -4331,12 +4290,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "nix-set-template.at:93" >"$at_check_line_file"
+printf "%s\n" "nix-set-template.at:85" >"$at_check_line_file"
 (test ${enable_check_r6rs_chez} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:93"
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:85"
 { set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:93: \"\${abs_builddir}\"/run-r6rs-chez.sh '  (nix-setrec ((scheme->nix \"a + b\") <== (scheme->nix \"c + d\")))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:93"
+printf "%s\n" "$at_srcdir/nix-set-template.at:85: \"\${abs_builddir}\"/run-r6rs-chez.sh '  (nix-setrec ((scheme->nix \"a + b\") <== (scheme->nix \"c + d\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:85"
 ( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '  (nix-setrec ((scheme->nix "a + b") <== (scheme->nix "c + d")))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -4351,7 +4310,7 @@ echo >>"$at_stdout"; printf "%s\n" "(rec{
 })
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:93"
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:85"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -7187,53 +7146,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "nix-set-template.at:73" >"$at_check_line_file"
+printf "%s\n" "nix-set-template.at:70" >"$at_check_line_file"
 (test ${enable_check_r7rs_chibi} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:73"
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:70"
 { set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:73: \"\${abs_builddir}\"/run-r7rs-chibi.sh '(nix-set
-    (begin)
-    (begin (inherit \"a\" \"b\")
-           (\`c ==> \`d)))'"
-at_fn_check_prepare_notrace 'a `...` command substitution' "nix-set-template.at:73"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-chibi.sh '(nix-set
-    (begin)
-    (begin (inherit "a" "b")
-           (`c ==> `d)))'
-) >>"$at_stdout" 2>>"$at_stderr" 5>&-
-at_status=$? at_failed=false
-$at_check_filter
-at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "({
-a
-=
-a
-;
-b
-=
-b
-;
-c
-=
-(\"d\")
-;
-})
-" | \
-  $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:73"
-$at_failed && at_fn_log_failure
-$at_traceon; }
-
-
-
-
-
-printf "%s\n" "nix-set-template.at:78" >"$at_check_line_file"
-(test ${enable_check_r7rs_chibi} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:78"
-{ set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:78: \"\${abs_builddir}\"/run-r7rs-chibi.sh '  (nix-setrec ((nix-embed \"a + b\") ==> (nix-embed \"c + d\")))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:78"
+printf "%s\n" "$at_srcdir/nix-set-template.at:70: \"\${abs_builddir}\"/run-r7rs-chibi.sh '  (nix-setrec ((nix-embed \"a + b\") ==> (nix-embed \"c + d\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:70"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-chibi.sh '  (nix-setrec ((nix-embed "a + b") ==> (nix-embed "c + d")))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -7246,7 +7164,7 @@ c + d;
 })
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:78"
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:70"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -7254,12 +7172,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "nix-set-template.at:83" >"$at_check_line_file"
+printf "%s\n" "nix-set-template.at:75" >"$at_check_line_file"
 (test ${enable_check_r7rs_chibi} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:83"
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:75"
 { set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:83: \"\${abs_builddir}\"/run-r7rs-chibi.sh '  (nix-setrec ((nix-embed \"a + b\") <== (nix-embed \"c + d\")))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:83"
+printf "%s\n" "$at_srcdir/nix-set-template.at:75: \"\${abs_builddir}\"/run-r7rs-chibi.sh '  (nix-setrec ((nix-embed \"a + b\") <== (nix-embed \"c + d\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:75"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-chibi.sh '  (nix-setrec ((nix-embed "a + b") <== (nix-embed "c + d")))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -7272,7 +7190,7 @@ a + b;
 })
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:83"
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:75"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -7280,12 +7198,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "nix-set-template.at:88" >"$at_check_line_file"
+printf "%s\n" "nix-set-template.at:80" >"$at_check_line_file"
 (test ${enable_check_r7rs_chibi} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:88"
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:80"
 { set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:88: \"\${abs_builddir}\"/run-r7rs-chibi.sh '  (nix-setrec ((scheme->nix \"a + b\") ==> (scheme->nix \"c + d\")))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:88"
+printf "%s\n" "$at_srcdir/nix-set-template.at:80: \"\${abs_builddir}\"/run-r7rs-chibi.sh '  (nix-setrec ((scheme->nix \"a + b\") ==> (scheme->nix \"c + d\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:80"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-chibi.sh '  (nix-setrec ((scheme->nix "a + b") ==> (scheme->nix "c + d")))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -7300,7 +7218,7 @@ echo >>"$at_stdout"; printf "%s\n" "(rec{
 })
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:88"
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:80"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -7308,12 +7226,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "nix-set-template.at:93" >"$at_check_line_file"
+printf "%s\n" "nix-set-template.at:85" >"$at_check_line_file"
 (test ${enable_check_r7rs_chibi} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:93"
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:85"
 { set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:93: \"\${abs_builddir}\"/run-r7rs-chibi.sh '  (nix-setrec ((scheme->nix \"a + b\") <== (scheme->nix \"c + d\")))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:93"
+printf "%s\n" "$at_srcdir/nix-set-template.at:85: \"\${abs_builddir}\"/run-r7rs-chibi.sh '  (nix-setrec ((scheme->nix \"a + b\") <== (scheme->nix \"c + d\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:85"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-chibi.sh '  (nix-setrec ((scheme->nix "a + b") <== (scheme->nix "c + d")))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -7328,7 +7246,7 @@ echo >>"$at_stdout"; printf "%s\n" "(rec{
 })
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:93"
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:85"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -10120,53 +10038,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "nix-set-template.at:73" >"$at_check_line_file"
+printf "%s\n" "nix-set-template.at:70" >"$at_check_line_file"
 (test ${enable_check_r7rs_csc_5} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:73"
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:70"
 { set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:73: \"\${abs_builddir}\"/run-r7rs-csc-5.sh '(nix-set
-    (begin)
-    (begin (inherit \"a\" \"b\")
-           (\`c ==> \`d)))'"
-at_fn_check_prepare_notrace 'a `...` command substitution' "nix-set-template.at:73"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-csc-5.sh '(nix-set
-    (begin)
-    (begin (inherit "a" "b")
-           (`c ==> `d)))'
-) >>"$at_stdout" 2>>"$at_stderr" 5>&-
-at_status=$? at_failed=false
-$at_check_filter
-at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "({
-a
-=
-a
-;
-b
-=
-b
-;
-c
-=
-(\"d\")
-;
-})
-" | \
-  $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:73"
-$at_failed && at_fn_log_failure
-$at_traceon; }
-
-
-
-
-
-printf "%s\n" "nix-set-template.at:78" >"$at_check_line_file"
-(test ${enable_check_r7rs_csc_5} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:78"
-{ set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:78: \"\${abs_builddir}\"/run-r7rs-csc-5.sh '  (nix-setrec ((nix-embed \"a + b\") ==> (nix-embed \"c + d\")))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:78"
+printf "%s\n" "$at_srcdir/nix-set-template.at:70: \"\${abs_builddir}\"/run-r7rs-csc-5.sh '  (nix-setrec ((nix-embed \"a + b\") ==> (nix-embed \"c + d\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:70"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-csc-5.sh '  (nix-setrec ((nix-embed "a + b") ==> (nix-embed "c + d")))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -10179,7 +10056,7 @@ c + d;
 })
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:78"
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:70"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -10187,12 +10064,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "nix-set-template.at:83" >"$at_check_line_file"
+printf "%s\n" "nix-set-template.at:75" >"$at_check_line_file"
 (test ${enable_check_r7rs_csc_5} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:83"
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:75"
 { set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:83: \"\${abs_builddir}\"/run-r7rs-csc-5.sh '  (nix-setrec ((nix-embed \"a + b\") <== (nix-embed \"c + d\")))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:83"
+printf "%s\n" "$at_srcdir/nix-set-template.at:75: \"\${abs_builddir}\"/run-r7rs-csc-5.sh '  (nix-setrec ((nix-embed \"a + b\") <== (nix-embed \"c + d\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:75"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-csc-5.sh '  (nix-setrec ((nix-embed "a + b") <== (nix-embed "c + d")))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -10205,7 +10082,7 @@ a + b;
 })
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:83"
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:75"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -10213,12 +10090,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "nix-set-template.at:88" >"$at_check_line_file"
+printf "%s\n" "nix-set-template.at:80" >"$at_check_line_file"
 (test ${enable_check_r7rs_csc_5} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:88"
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:80"
 { set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:88: \"\${abs_builddir}\"/run-r7rs-csc-5.sh '  (nix-setrec ((scheme->nix \"a + b\") ==> (scheme->nix \"c + d\")))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:88"
+printf "%s\n" "$at_srcdir/nix-set-template.at:80: \"\${abs_builddir}\"/run-r7rs-csc-5.sh '  (nix-setrec ((scheme->nix \"a + b\") ==> (scheme->nix \"c + d\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:80"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-csc-5.sh '  (nix-setrec ((scheme->nix "a + b") ==> (scheme->nix "c + d")))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -10233,7 +10110,7 @@ echo >>"$at_stdout"; printf "%s\n" "(rec{
 })
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:88"
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:80"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -10241,12 +10118,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "nix-set-template.at:93" >"$at_check_line_file"
+printf "%s\n" "nix-set-template.at:85" >"$at_check_line_file"
 (test ${enable_check_r7rs_csc_5} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:93"
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:85"
 { set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:93: \"\${abs_builddir}\"/run-r7rs-csc-5.sh '  (nix-setrec ((scheme->nix \"a + b\") <== (scheme->nix \"c + d\")))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:93"
+printf "%s\n" "$at_srcdir/nix-set-template.at:85: \"\${abs_builddir}\"/run-r7rs-csc-5.sh '  (nix-setrec ((scheme->nix \"a + b\") <== (scheme->nix \"c + d\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:85"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-csc-5.sh '  (nix-setrec ((scheme->nix "a + b") <== (scheme->nix "c + d")))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -10261,7 +10138,7 @@ echo >>"$at_stdout"; printf "%s\n" "(rec{
 })
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:93"
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:85"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -13053,53 +12930,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "nix-set-template.at:73" >"$at_check_line_file"
+printf "%s\n" "nix-set-template.at:70" >"$at_check_line_file"
 (test ${enable_check_r7rs_csi_5} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:73"
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:70"
 { set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:73: \"\${abs_builddir}\"/run-r7rs-csi-5.sh '(nix-set
-    (begin)
-    (begin (inherit \"a\" \"b\")
-           (\`c ==> \`d)))'"
-at_fn_check_prepare_notrace 'a `...` command substitution' "nix-set-template.at:73"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-csi-5.sh '(nix-set
-    (begin)
-    (begin (inherit "a" "b")
-           (`c ==> `d)))'
-) >>"$at_stdout" 2>>"$at_stderr" 5>&-
-at_status=$? at_failed=false
-$at_check_filter
-at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "({
-a
-=
-a
-;
-b
-=
-b
-;
-c
-=
-(\"d\")
-;
-})
-" | \
-  $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:73"
-$at_failed && at_fn_log_failure
-$at_traceon; }
-
-
-
-
-
-printf "%s\n" "nix-set-template.at:78" >"$at_check_line_file"
-(test ${enable_check_r7rs_csi_5} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:78"
-{ set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:78: \"\${abs_builddir}\"/run-r7rs-csi-5.sh '  (nix-setrec ((nix-embed \"a + b\") ==> (nix-embed \"c + d\")))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:78"
+printf "%s\n" "$at_srcdir/nix-set-template.at:70: \"\${abs_builddir}\"/run-r7rs-csi-5.sh '  (nix-setrec ((nix-embed \"a + b\") ==> (nix-embed \"c + d\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:70"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-csi-5.sh '  (nix-setrec ((nix-embed "a + b") ==> (nix-embed "c + d")))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -13112,7 +12948,7 @@ c + d;
 })
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:78"
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:70"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -13120,12 +12956,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "nix-set-template.at:83" >"$at_check_line_file"
+printf "%s\n" "nix-set-template.at:75" >"$at_check_line_file"
 (test ${enable_check_r7rs_csi_5} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:83"
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:75"
 { set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:83: \"\${abs_builddir}\"/run-r7rs-csi-5.sh '  (nix-setrec ((nix-embed \"a + b\") <== (nix-embed \"c + d\")))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:83"
+printf "%s\n" "$at_srcdir/nix-set-template.at:75: \"\${abs_builddir}\"/run-r7rs-csi-5.sh '  (nix-setrec ((nix-embed \"a + b\") <== (nix-embed \"c + d\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:75"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-csi-5.sh '  (nix-setrec ((nix-embed "a + b") <== (nix-embed "c + d")))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -13138,7 +12974,7 @@ a + b;
 })
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:83"
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:75"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -13146,12 +12982,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "nix-set-template.at:88" >"$at_check_line_file"
+printf "%s\n" "nix-set-template.at:80" >"$at_check_line_file"
 (test ${enable_check_r7rs_csi_5} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:88"
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:80"
 { set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:88: \"\${abs_builddir}\"/run-r7rs-csi-5.sh '  (nix-setrec ((scheme->nix \"a + b\") ==> (scheme->nix \"c + d\")))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:88"
+printf "%s\n" "$at_srcdir/nix-set-template.at:80: \"\${abs_builddir}\"/run-r7rs-csi-5.sh '  (nix-setrec ((scheme->nix \"a + b\") ==> (scheme->nix \"c + d\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:80"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-csi-5.sh '  (nix-setrec ((scheme->nix "a + b") ==> (scheme->nix "c + d")))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -13166,7 +13002,7 @@ echo >>"$at_stdout"; printf "%s\n" "(rec{
 })
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:88"
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:80"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -13174,12 +13010,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "nix-set-template.at:93" >"$at_check_line_file"
+printf "%s\n" "nix-set-template.at:85" >"$at_check_line_file"
 (test ${enable_check_r7rs_csi_5} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:93"
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:85"
 { set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:93: \"\${abs_builddir}\"/run-r7rs-csi-5.sh '  (nix-setrec ((scheme->nix \"a + b\") <== (scheme->nix \"c + d\")))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:93"
+printf "%s\n" "$at_srcdir/nix-set-template.at:85: \"\${abs_builddir}\"/run-r7rs-csi-5.sh '  (nix-setrec ((scheme->nix \"a + b\") <== (scheme->nix \"c + d\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:85"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-csi-5.sh '  (nix-setrec ((scheme->nix "a + b") <== (scheme->nix "c + d")))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -13194,7 +13030,7 @@ echo >>"$at_stdout"; printf "%s\n" "(rec{
 })
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:93"
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:85"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -16030,53 +15866,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "nix-set-template.at:73" >"$at_check_line_file"
+printf "%s\n" "nix-set-template.at:70" >"$at_check_line_file"
 (test ${enable_check_r7rs_gsi} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:73"
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:70"
 { set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:73: \"\${abs_builddir}\"/run-r7rs-gsi.sh '(nix-set
-    (begin)
-    (begin (inherit \"a\" \"b\")
-           (\`c ==> \`d)))'"
-at_fn_check_prepare_notrace 'a `...` command substitution' "nix-set-template.at:73"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-gsi.sh '(nix-set
-    (begin)
-    (begin (inherit "a" "b")
-           (`c ==> `d)))'
-) >>"$at_stdout" 2>>"$at_stderr" 5>&-
-at_status=$? at_failed=false
-$at_check_filter
-at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "({
-a
-=
-a
-;
-b
-=
-b
-;
-c
-=
-(\"d\")
-;
-})
-" | \
-  $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:73"
-$at_failed && at_fn_log_failure
-$at_traceon; }
-
-
-
-
-
-printf "%s\n" "nix-set-template.at:78" >"$at_check_line_file"
-(test ${enable_check_r7rs_gsi} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:78"
-{ set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:78: \"\${abs_builddir}\"/run-r7rs-gsi.sh '  (nix-setrec ((nix-embed \"a + b\") ==> (nix-embed \"c + d\")))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:78"
+printf "%s\n" "$at_srcdir/nix-set-template.at:70: \"\${abs_builddir}\"/run-r7rs-gsi.sh '  (nix-setrec ((nix-embed \"a + b\") ==> (nix-embed \"c + d\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:70"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-gsi.sh '  (nix-setrec ((nix-embed "a + b") ==> (nix-embed "c + d")))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -16089,7 +15884,7 @@ c + d;
 })
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:78"
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:70"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -16097,12 +15892,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "nix-set-template.at:83" >"$at_check_line_file"
+printf "%s\n" "nix-set-template.at:75" >"$at_check_line_file"
 (test ${enable_check_r7rs_gsi} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:83"
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:75"
 { set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:83: \"\${abs_builddir}\"/run-r7rs-gsi.sh '  (nix-setrec ((nix-embed \"a + b\") <== (nix-embed \"c + d\")))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:83"
+printf "%s\n" "$at_srcdir/nix-set-template.at:75: \"\${abs_builddir}\"/run-r7rs-gsi.sh '  (nix-setrec ((nix-embed \"a + b\") <== (nix-embed \"c + d\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:75"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-gsi.sh '  (nix-setrec ((nix-embed "a + b") <== (nix-embed "c + d")))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -16115,7 +15910,7 @@ a + b;
 })
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:83"
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:75"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -16123,12 +15918,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "nix-set-template.at:88" >"$at_check_line_file"
+printf "%s\n" "nix-set-template.at:80" >"$at_check_line_file"
 (test ${enable_check_r7rs_gsi} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:88"
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:80"
 { set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:88: \"\${abs_builddir}\"/run-r7rs-gsi.sh '  (nix-setrec ((scheme->nix \"a + b\") ==> (scheme->nix \"c + d\")))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:88"
+printf "%s\n" "$at_srcdir/nix-set-template.at:80: \"\${abs_builddir}\"/run-r7rs-gsi.sh '  (nix-setrec ((scheme->nix \"a + b\") ==> (scheme->nix \"c + d\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:80"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-gsi.sh '  (nix-setrec ((scheme->nix "a + b") ==> (scheme->nix "c + d")))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -16143,7 +15938,7 @@ echo >>"$at_stdout"; printf "%s\n" "(rec{
 })
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:88"
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:80"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -16151,12 +15946,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "nix-set-template.at:93" >"$at_check_line_file"
+printf "%s\n" "nix-set-template.at:85" >"$at_check_line_file"
 (test ${enable_check_r7rs_gsi} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:93"
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:85"
 { set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:93: \"\${abs_builddir}\"/run-r7rs-gsi.sh '  (nix-setrec ((scheme->nix \"a + b\") <== (scheme->nix \"c + d\")))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:93"
+printf "%s\n" "$at_srcdir/nix-set-template.at:85: \"\${abs_builddir}\"/run-r7rs-gsi.sh '  (nix-setrec ((scheme->nix \"a + b\") <== (scheme->nix \"c + d\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:85"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-gsi.sh '  (nix-setrec ((scheme->nix "a + b") <== (scheme->nix "c + d")))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -16171,7 +15966,7 @@ echo >>"$at_stdout"; printf "%s\n" "(rec{
 })
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:93"
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:85"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -19007,53 +18802,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "nix-set-template.at:73" >"$at_check_line_file"
+printf "%s\n" "nix-set-template.at:70" >"$at_check_line_file"
 (test ${enable_check_r7rs_gauche} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:73"
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:70"
 { set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:73: \"\${abs_builddir}\"/run-r7rs-gauche.sh '(nix-set
-    (begin)
-    (begin (inherit \"a\" \"b\")
-           (\`c ==> \`d)))'"
-at_fn_check_prepare_notrace 'a `...` command substitution' "nix-set-template.at:73"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-gauche.sh '(nix-set
-    (begin)
-    (begin (inherit "a" "b")
-           (`c ==> `d)))'
-) >>"$at_stdout" 2>>"$at_stderr" 5>&-
-at_status=$? at_failed=false
-$at_check_filter
-at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "({
-a
-=
-a
-;
-b
-=
-b
-;
-c
-=
-(\"d\")
-;
-})
-" | \
-  $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:73"
-$at_failed && at_fn_log_failure
-$at_traceon; }
-
-
-
-
-
-printf "%s\n" "nix-set-template.at:78" >"$at_check_line_file"
-(test ${enable_check_r7rs_gauche} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:78"
-{ set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:78: \"\${abs_builddir}\"/run-r7rs-gauche.sh '  (nix-setrec ((nix-embed \"a + b\") ==> (nix-embed \"c + d\")))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:78"
+printf "%s\n" "$at_srcdir/nix-set-template.at:70: \"\${abs_builddir}\"/run-r7rs-gauche.sh '  (nix-setrec ((nix-embed \"a + b\") ==> (nix-embed \"c + d\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:70"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-gauche.sh '  (nix-setrec ((nix-embed "a + b") ==> (nix-embed "c + d")))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -19066,7 +18820,7 @@ c + d;
 })
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:78"
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:70"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -19074,12 +18828,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "nix-set-template.at:83" >"$at_check_line_file"
+printf "%s\n" "nix-set-template.at:75" >"$at_check_line_file"
 (test ${enable_check_r7rs_gauche} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:83"
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:75"
 { set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:83: \"\${abs_builddir}\"/run-r7rs-gauche.sh '  (nix-setrec ((nix-embed \"a + b\") <== (nix-embed \"c + d\")))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:83"
+printf "%s\n" "$at_srcdir/nix-set-template.at:75: \"\${abs_builddir}\"/run-r7rs-gauche.sh '  (nix-setrec ((nix-embed \"a + b\") <== (nix-embed \"c + d\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:75"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-gauche.sh '  (nix-setrec ((nix-embed "a + b") <== (nix-embed "c + d")))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -19092,7 +18846,7 @@ a + b;
 })
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:83"
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:75"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -19100,12 +18854,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "nix-set-template.at:88" >"$at_check_line_file"
+printf "%s\n" "nix-set-template.at:80" >"$at_check_line_file"
 (test ${enable_check_r7rs_gauche} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:88"
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:80"
 { set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:88: \"\${abs_builddir}\"/run-r7rs-gauche.sh '  (nix-setrec ((scheme->nix \"a + b\") ==> (scheme->nix \"c + d\")))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:88"
+printf "%s\n" "$at_srcdir/nix-set-template.at:80: \"\${abs_builddir}\"/run-r7rs-gauche.sh '  (nix-setrec ((scheme->nix \"a + b\") ==> (scheme->nix \"c + d\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:80"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-gauche.sh '  (nix-setrec ((scheme->nix "a + b") ==> (scheme->nix "c + d")))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -19120,7 +18874,7 @@ echo >>"$at_stdout"; printf "%s\n" "(rec{
 })
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:88"
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:80"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -19128,12 +18882,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "nix-set-template.at:93" >"$at_check_line_file"
+printf "%s\n" "nix-set-template.at:85" >"$at_check_line_file"
 (test ${enable_check_r7rs_gauche} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:93"
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:85"
 { set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:93: \"\${abs_builddir}\"/run-r7rs-gauche.sh '  (nix-setrec ((scheme->nix \"a + b\") <== (scheme->nix \"c + d\")))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:93"
+printf "%s\n" "$at_srcdir/nix-set-template.at:85: \"\${abs_builddir}\"/run-r7rs-gauche.sh '  (nix-setrec ((scheme->nix \"a + b\") <== (scheme->nix \"c + d\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:85"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-gauche.sh '  (nix-setrec ((scheme->nix "a + b") <== (scheme->nix "c + d")))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -19148,7 +18902,7 @@ echo >>"$at_stdout"; printf "%s\n" "(rec{
 })
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:93"
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:85"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -21984,53 +21738,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "nix-set-template.at:73" >"$at_check_line_file"
+printf "%s\n" "nix-set-template.at:70" >"$at_check_line_file"
 (test ${enable_check_r7rs_gxi} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:73"
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:70"
 { set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:73: \"\${abs_builddir}\"/run-r7rs-gxi.sh '(nix-set
-    (begin)
-    (begin (inherit \"a\" \"b\")
-           (\`c ==> \`d)))'"
-at_fn_check_prepare_notrace 'a `...` command substitution' "nix-set-template.at:73"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-gxi.sh '(nix-set
-    (begin)
-    (begin (inherit "a" "b")
-           (`c ==> `d)))'
-) >>"$at_stdout" 2>>"$at_stderr" 5>&-
-at_status=$? at_failed=false
-$at_check_filter
-at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "({
-a
-=
-a
-;
-b
-=
-b
-;
-c
-=
-(\"d\")
-;
-})
-" | \
-  $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:73"
-$at_failed && at_fn_log_failure
-$at_traceon; }
-
-
-
-
-
-printf "%s\n" "nix-set-template.at:78" >"$at_check_line_file"
-(test ${enable_check_r7rs_gxi} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:78"
-{ set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:78: \"\${abs_builddir}\"/run-r7rs-gxi.sh '  (nix-setrec ((nix-embed \"a + b\") ==> (nix-embed \"c + d\")))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:78"
+printf "%s\n" "$at_srcdir/nix-set-template.at:70: \"\${abs_builddir}\"/run-r7rs-gxi.sh '  (nix-setrec ((nix-embed \"a + b\") ==> (nix-embed \"c + d\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:70"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-gxi.sh '  (nix-setrec ((nix-embed "a + b") ==> (nix-embed "c + d")))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -22043,7 +21756,7 @@ c + d;
 })
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:78"
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:70"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -22051,12 +21764,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "nix-set-template.at:83" >"$at_check_line_file"
+printf "%s\n" "nix-set-template.at:75" >"$at_check_line_file"
 (test ${enable_check_r7rs_gxi} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:83"
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:75"
 { set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:83: \"\${abs_builddir}\"/run-r7rs-gxi.sh '  (nix-setrec ((nix-embed \"a + b\") <== (nix-embed \"c + d\")))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:83"
+printf "%s\n" "$at_srcdir/nix-set-template.at:75: \"\${abs_builddir}\"/run-r7rs-gxi.sh '  (nix-setrec ((nix-embed \"a + b\") <== (nix-embed \"c + d\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:75"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-gxi.sh '  (nix-setrec ((nix-embed "a + b") <== (nix-embed "c + d")))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -22069,7 +21782,7 @@ a + b;
 })
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:83"
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:75"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -22077,12 +21790,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "nix-set-template.at:88" >"$at_check_line_file"
+printf "%s\n" "nix-set-template.at:80" >"$at_check_line_file"
 (test ${enable_check_r7rs_gxi} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:88"
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:80"
 { set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:88: \"\${abs_builddir}\"/run-r7rs-gxi.sh '  (nix-setrec ((scheme->nix \"a + b\") ==> (scheme->nix \"c + d\")))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:88"
+printf "%s\n" "$at_srcdir/nix-set-template.at:80: \"\${abs_builddir}\"/run-r7rs-gxi.sh '  (nix-setrec ((scheme->nix \"a + b\") ==> (scheme->nix \"c + d\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:80"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-gxi.sh '  (nix-setrec ((scheme->nix "a + b") ==> (scheme->nix "c + d")))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -22097,7 +21810,7 @@ echo >>"$at_stdout"; printf "%s\n" "(rec{
 })
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:88"
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:80"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -22105,12 +21818,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "nix-set-template.at:93" >"$at_check_line_file"
+printf "%s\n" "nix-set-template.at:85" >"$at_check_line_file"
 (test ${enable_check_r7rs_gxi} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:93"
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:85"
 { set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:93: \"\${abs_builddir}\"/run-r7rs-gxi.sh '  (nix-setrec ((scheme->nix \"a + b\") <== (scheme->nix \"c + d\")))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:93"
+printf "%s\n" "$at_srcdir/nix-set-template.at:85: \"\${abs_builddir}\"/run-r7rs-gxi.sh '  (nix-setrec ((scheme->nix \"a + b\") <== (scheme->nix \"c + d\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:85"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-gxi.sh '  (nix-setrec ((scheme->nix "a + b") <== (scheme->nix "c + d")))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -22125,7 +21838,7 @@ echo >>"$at_stdout"; printf "%s\n" "(rec{
 })
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:93"
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:85"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -24961,53 +24674,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "nix-set-template.at:73" >"$at_check_line_file"
+printf "%s\n" "nix-set-template.at:70" >"$at_check_line_file"
 (test ${enable_check_r7rs_gxc} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:73"
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:70"
 { set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:73: \"\${abs_builddir}\"/run-r7rs-gxc.sh '(nix-set
-    (begin)
-    (begin (inherit \"a\" \"b\")
-           (\`c ==> \`d)))'"
-at_fn_check_prepare_notrace 'a `...` command substitution' "nix-set-template.at:73"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-gxc.sh '(nix-set
-    (begin)
-    (begin (inherit "a" "b")
-           (`c ==> `d)))'
-) >>"$at_stdout" 2>>"$at_stderr" 5>&-
-at_status=$? at_failed=false
-$at_check_filter
-at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "({
-a
-=
-a
-;
-b
-=
-b
-;
-c
-=
-(\"d\")
-;
-})
-" | \
-  $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:73"
-$at_failed && at_fn_log_failure
-$at_traceon; }
-
-
-
-
-
-printf "%s\n" "nix-set-template.at:78" >"$at_check_line_file"
-(test ${enable_check_r7rs_gxc} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:78"
-{ set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:78: \"\${abs_builddir}\"/run-r7rs-gxc.sh '  (nix-setrec ((nix-embed \"a + b\") ==> (nix-embed \"c + d\")))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:78"
+printf "%s\n" "$at_srcdir/nix-set-template.at:70: \"\${abs_builddir}\"/run-r7rs-gxc.sh '  (nix-setrec ((nix-embed \"a + b\") ==> (nix-embed \"c + d\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:70"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-gxc.sh '  (nix-setrec ((nix-embed "a + b") ==> (nix-embed "c + d")))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -25020,7 +24692,7 @@ c + d;
 })
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:78"
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:70"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -25028,12 +24700,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "nix-set-template.at:83" >"$at_check_line_file"
+printf "%s\n" "nix-set-template.at:75" >"$at_check_line_file"
 (test ${enable_check_r7rs_gxc} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:83"
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:75"
 { set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:83: \"\${abs_builddir}\"/run-r7rs-gxc.sh '  (nix-setrec ((nix-embed \"a + b\") <== (nix-embed \"c + d\")))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:83"
+printf "%s\n" "$at_srcdir/nix-set-template.at:75: \"\${abs_builddir}\"/run-r7rs-gxc.sh '  (nix-setrec ((nix-embed \"a + b\") <== (nix-embed \"c + d\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:75"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-gxc.sh '  (nix-setrec ((nix-embed "a + b") <== (nix-embed "c + d")))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -25046,7 +24718,7 @@ a + b;
 })
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:83"
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:75"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -25054,12 +24726,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "nix-set-template.at:88" >"$at_check_line_file"
+printf "%s\n" "nix-set-template.at:80" >"$at_check_line_file"
 (test ${enable_check_r7rs_gxc} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:88"
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:80"
 { set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:88: \"\${abs_builddir}\"/run-r7rs-gxc.sh '  (nix-setrec ((scheme->nix \"a + b\") ==> (scheme->nix \"c + d\")))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:88"
+printf "%s\n" "$at_srcdir/nix-set-template.at:80: \"\${abs_builddir}\"/run-r7rs-gxc.sh '  (nix-setrec ((scheme->nix \"a + b\") ==> (scheme->nix \"c + d\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:80"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-gxc.sh '  (nix-setrec ((scheme->nix "a + b") ==> (scheme->nix "c + d")))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -25074,7 +24746,7 @@ echo >>"$at_stdout"; printf "%s\n" "(rec{
 })
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:88"
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:80"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -25082,12 +24754,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "nix-set-template.at:93" >"$at_check_line_file"
+printf "%s\n" "nix-set-template.at:85" >"$at_check_line_file"
 (test ${enable_check_r7rs_gxc} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:93"
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:85"
 { set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:93: \"\${abs_builddir}\"/run-r7rs-gxc.sh '  (nix-setrec ((scheme->nix \"a + b\") <== (scheme->nix \"c + d\")))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:93"
+printf "%s\n" "$at_srcdir/nix-set-template.at:85: \"\${abs_builddir}\"/run-r7rs-gxc.sh '  (nix-setrec ((scheme->nix \"a + b\") <== (scheme->nix \"c + d\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:85"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-gxc.sh '  (nix-setrec ((scheme->nix "a + b") <== (scheme->nix "c + d")))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -25102,7 +24774,7 @@ echo >>"$at_stdout"; printf "%s\n" "(rec{
 })
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:93"
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:85"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -27894,53 +27566,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "nix-set-template.at:73" >"$at_check_line_file"
+printf "%s\n" "nix-set-template.at:70" >"$at_check_line_file"
 (test ${enable_check_r6rs_guile} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:73"
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:70"
 { set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:73: \"\${abs_builddir}\"/run-r6rs-guile.sh '(nix-set
-    (begin)
-    (begin (inherit \"a\" \"b\")
-           (\`c ==> \`d)))'"
-at_fn_check_prepare_notrace 'a `...` command substitution' "nix-set-template.at:73"
-( $at_check_trace; "${abs_builddir}"/run-r6rs-guile.sh '(nix-set
-    (begin)
-    (begin (inherit "a" "b")
-           (`c ==> `d)))'
-) >>"$at_stdout" 2>>"$at_stderr" 5>&-
-at_status=$? at_failed=false
-$at_check_filter
-at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "({
-a
-=
-a
-;
-b
-=
-b
-;
-c
-=
-(\"d\")
-;
-})
-" | \
-  $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:73"
-$at_failed && at_fn_log_failure
-$at_traceon; }
-
-
-
-
-
-printf "%s\n" "nix-set-template.at:78" >"$at_check_line_file"
-(test ${enable_check_r6rs_guile} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:78"
-{ set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:78: \"\${abs_builddir}\"/run-r6rs-guile.sh '  (nix-setrec ((nix-embed \"a + b\") ==> (nix-embed \"c + d\")))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:78"
+printf "%s\n" "$at_srcdir/nix-set-template.at:70: \"\${abs_builddir}\"/run-r6rs-guile.sh '  (nix-setrec ((nix-embed \"a + b\") ==> (nix-embed \"c + d\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:70"
 ( $at_check_trace; "${abs_builddir}"/run-r6rs-guile.sh '  (nix-setrec ((nix-embed "a + b") ==> (nix-embed "c + d")))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -27953,7 +27584,7 @@ c + d;
 })
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:78"
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:70"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -27961,12 +27592,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "nix-set-template.at:83" >"$at_check_line_file"
+printf "%s\n" "nix-set-template.at:75" >"$at_check_line_file"
 (test ${enable_check_r6rs_guile} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:83"
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:75"
 { set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:83: \"\${abs_builddir}\"/run-r6rs-guile.sh '  (nix-setrec ((nix-embed \"a + b\") <== (nix-embed \"c + d\")))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:83"
+printf "%s\n" "$at_srcdir/nix-set-template.at:75: \"\${abs_builddir}\"/run-r6rs-guile.sh '  (nix-setrec ((nix-embed \"a + b\") <== (nix-embed \"c + d\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:75"
 ( $at_check_trace; "${abs_builddir}"/run-r6rs-guile.sh '  (nix-setrec ((nix-embed "a + b") <== (nix-embed "c + d")))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -27979,7 +27610,7 @@ a + b;
 })
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:83"
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:75"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -27987,12 +27618,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "nix-set-template.at:88" >"$at_check_line_file"
+printf "%s\n" "nix-set-template.at:80" >"$at_check_line_file"
 (test ${enable_check_r6rs_guile} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:88"
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:80"
 { set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:88: \"\${abs_builddir}\"/run-r6rs-guile.sh '  (nix-setrec ((scheme->nix \"a + b\") ==> (scheme->nix \"c + d\")))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:88"
+printf "%s\n" "$at_srcdir/nix-set-template.at:80: \"\${abs_builddir}\"/run-r6rs-guile.sh '  (nix-setrec ((scheme->nix \"a + b\") ==> (scheme->nix \"c + d\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:80"
 ( $at_check_trace; "${abs_builddir}"/run-r6rs-guile.sh '  (nix-setrec ((scheme->nix "a + b") ==> (scheme->nix "c + d")))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -28007,7 +27638,7 @@ echo >>"$at_stdout"; printf "%s\n" "(rec{
 })
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:88"
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:80"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -28015,12 +27646,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "nix-set-template.at:93" >"$at_check_line_file"
+printf "%s\n" "nix-set-template.at:85" >"$at_check_line_file"
 (test ${enable_check_r6rs_guile} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:93"
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:85"
 { set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:93: \"\${abs_builddir}\"/run-r6rs-guile.sh '  (nix-setrec ((scheme->nix \"a + b\") <== (scheme->nix \"c + d\")))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:93"
+printf "%s\n" "$at_srcdir/nix-set-template.at:85: \"\${abs_builddir}\"/run-r6rs-guile.sh '  (nix-setrec ((scheme->nix \"a + b\") <== (scheme->nix \"c + d\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:85"
 ( $at_check_trace; "${abs_builddir}"/run-r6rs-guile.sh '  (nix-setrec ((scheme->nix "a + b") <== (scheme->nix "c + d")))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -28035,7 +27666,7 @@ echo >>"$at_stdout"; printf "%s\n" "(rec{
 })
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:93"
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:85"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -30871,53 +30502,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "nix-set-template.at:73" >"$at_check_line_file"
+printf "%s\n" "nix-set-template.at:70" >"$at_check_line_file"
 (test ${enable_check_r7rs_guile} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:73"
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:70"
 { set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:73: \"\${abs_builddir}\"/run-r7rs-guile.sh '(nix-set
-    (begin)
-    (begin (inherit \"a\" \"b\")
-           (\`c ==> \`d)))'"
-at_fn_check_prepare_notrace 'a `...` command substitution' "nix-set-template.at:73"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-guile.sh '(nix-set
-    (begin)
-    (begin (inherit "a" "b")
-           (`c ==> `d)))'
-) >>"$at_stdout" 2>>"$at_stderr" 5>&-
-at_status=$? at_failed=false
-$at_check_filter
-at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "({
-a
-=
-a
-;
-b
-=
-b
-;
-c
-=
-(\"d\")
-;
-})
-" | \
-  $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:73"
-$at_failed && at_fn_log_failure
-$at_traceon; }
-
-
-
-
-
-printf "%s\n" "nix-set-template.at:78" >"$at_check_line_file"
-(test ${enable_check_r7rs_guile} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:78"
-{ set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:78: \"\${abs_builddir}\"/run-r7rs-guile.sh '  (nix-setrec ((nix-embed \"a + b\") ==> (nix-embed \"c + d\")))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:78"
+printf "%s\n" "$at_srcdir/nix-set-template.at:70: \"\${abs_builddir}\"/run-r7rs-guile.sh '  (nix-setrec ((nix-embed \"a + b\") ==> (nix-embed \"c + d\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:70"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-guile.sh '  (nix-setrec ((nix-embed "a + b") ==> (nix-embed "c + d")))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -30930,7 +30520,7 @@ c + d;
 })
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:78"
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:70"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -30938,12 +30528,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "nix-set-template.at:83" >"$at_check_line_file"
+printf "%s\n" "nix-set-template.at:75" >"$at_check_line_file"
 (test ${enable_check_r7rs_guile} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:83"
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:75"
 { set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:83: \"\${abs_builddir}\"/run-r7rs-guile.sh '  (nix-setrec ((nix-embed \"a + b\") <== (nix-embed \"c + d\")))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:83"
+printf "%s\n" "$at_srcdir/nix-set-template.at:75: \"\${abs_builddir}\"/run-r7rs-guile.sh '  (nix-setrec ((nix-embed \"a + b\") <== (nix-embed \"c + d\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:75"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-guile.sh '  (nix-setrec ((nix-embed "a + b") <== (nix-embed "c + d")))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -30956,7 +30546,7 @@ a + b;
 })
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:83"
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:75"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -30964,12 +30554,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "nix-set-template.at:88" >"$at_check_line_file"
+printf "%s\n" "nix-set-template.at:80" >"$at_check_line_file"
 (test ${enable_check_r7rs_guile} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:88"
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:80"
 { set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:88: \"\${abs_builddir}\"/run-r7rs-guile.sh '  (nix-setrec ((scheme->nix \"a + b\") ==> (scheme->nix \"c + d\")))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:88"
+printf "%s\n" "$at_srcdir/nix-set-template.at:80: \"\${abs_builddir}\"/run-r7rs-guile.sh '  (nix-setrec ((scheme->nix \"a + b\") ==> (scheme->nix \"c + d\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:80"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-guile.sh '  (nix-setrec ((scheme->nix "a + b") ==> (scheme->nix "c + d")))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -30984,7 +30574,7 @@ echo >>"$at_stdout"; printf "%s\n" "(rec{
 })
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:88"
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:80"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -30992,12 +30582,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "nix-set-template.at:93" >"$at_check_line_file"
+printf "%s\n" "nix-set-template.at:85" >"$at_check_line_file"
 (test ${enable_check_r7rs_guile} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:93"
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:85"
 { set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:93: \"\${abs_builddir}\"/run-r7rs-guile.sh '  (nix-setrec ((scheme->nix \"a + b\") <== (scheme->nix \"c + d\")))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:93"
+printf "%s\n" "$at_srcdir/nix-set-template.at:85: \"\${abs_builddir}\"/run-r7rs-guile.sh '  (nix-setrec ((scheme->nix \"a + b\") <== (scheme->nix \"c + d\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:85"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-guile.sh '  (nix-setrec ((scheme->nix "a + b") <== (scheme->nix "c + d")))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -31012,7 +30602,7 @@ echo >>"$at_stdout"; printf "%s\n" "(rec{
 })
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:93"
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:85"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -33804,53 +33394,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "nix-set-template.at:73" >"$at_check_line_file"
+printf "%s\n" "nix-set-template.at:70" >"$at_check_line_file"
 (test ${enable_check_r6rs_loko} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:73"
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:70"
 { set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:73: \"\${abs_builddir}\"/run-r6rs-loko.sh '(nix-set
-    (begin)
-    (begin (inherit \"a\" \"b\")
-           (\`c ==> \`d)))'"
-at_fn_check_prepare_notrace 'a `...` command substitution' "nix-set-template.at:73"
-( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '(nix-set
-    (begin)
-    (begin (inherit "a" "b")
-           (`c ==> `d)))'
-) >>"$at_stdout" 2>>"$at_stderr" 5>&-
-at_status=$? at_failed=false
-$at_check_filter
-at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "({
-a
-=
-a
-;
-b
-=
-b
-;
-c
-=
-(\"d\")
-;
-})
-" | \
-  $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:73"
-$at_failed && at_fn_log_failure
-$at_traceon; }
-
-
-
-
-
-printf "%s\n" "nix-set-template.at:78" >"$at_check_line_file"
-(test ${enable_check_r6rs_loko} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:78"
-{ set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:78: \"\${abs_builddir}\"/run-r6rs-loko.sh '  (nix-setrec ((nix-embed \"a + b\") ==> (nix-embed \"c + d\")))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:78"
+printf "%s\n" "$at_srcdir/nix-set-template.at:70: \"\${abs_builddir}\"/run-r6rs-loko.sh '  (nix-setrec ((nix-embed \"a + b\") ==> (nix-embed \"c + d\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:70"
 ( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '  (nix-setrec ((nix-embed "a + b") ==> (nix-embed "c + d")))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -33863,7 +33412,7 @@ c + d;
 })
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:78"
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:70"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -33871,12 +33420,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "nix-set-template.at:83" >"$at_check_line_file"
+printf "%s\n" "nix-set-template.at:75" >"$at_check_line_file"
 (test ${enable_check_r6rs_loko} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:83"
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:75"
 { set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:83: \"\${abs_builddir}\"/run-r6rs-loko.sh '  (nix-setrec ((nix-embed \"a + b\") <== (nix-embed \"c + d\")))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:83"
+printf "%s\n" "$at_srcdir/nix-set-template.at:75: \"\${abs_builddir}\"/run-r6rs-loko.sh '  (nix-setrec ((nix-embed \"a + b\") <== (nix-embed \"c + d\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:75"
 ( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '  (nix-setrec ((nix-embed "a + b") <== (nix-embed "c + d")))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -33889,7 +33438,7 @@ a + b;
 })
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:83"
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:75"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -33897,12 +33446,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "nix-set-template.at:88" >"$at_check_line_file"
+printf "%s\n" "nix-set-template.at:80" >"$at_check_line_file"
 (test ${enable_check_r6rs_loko} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:88"
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:80"
 { set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:88: \"\${abs_builddir}\"/run-r6rs-loko.sh '  (nix-setrec ((scheme->nix \"a + b\") ==> (scheme->nix \"c + d\")))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:88"
+printf "%s\n" "$at_srcdir/nix-set-template.at:80: \"\${abs_builddir}\"/run-r6rs-loko.sh '  (nix-setrec ((scheme->nix \"a + b\") ==> (scheme->nix \"c + d\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:80"
 ( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '  (nix-setrec ((scheme->nix "a + b") ==> (scheme->nix "c + d")))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -33917,7 +33466,7 @@ echo >>"$at_stdout"; printf "%s\n" "(rec{
 })
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:88"
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:80"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -33925,12 +33474,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "nix-set-template.at:93" >"$at_check_line_file"
+printf "%s\n" "nix-set-template.at:85" >"$at_check_line_file"
 (test ${enable_check_r6rs_loko} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:93"
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:85"
 { set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:93: \"\${abs_builddir}\"/run-r6rs-loko.sh '  (nix-setrec ((scheme->nix \"a + b\") <== (scheme->nix \"c + d\")))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:93"
+printf "%s\n" "$at_srcdir/nix-set-template.at:85: \"\${abs_builddir}\"/run-r6rs-loko.sh '  (nix-setrec ((scheme->nix \"a + b\") <== (scheme->nix \"c + d\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:85"
 ( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '  (nix-setrec ((scheme->nix "a + b") <== (scheme->nix "c + d")))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -33945,7 +33494,7 @@ echo >>"$at_stdout"; printf "%s\n" "(rec{
 })
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:93"
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:85"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -36781,53 +36330,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "nix-set-template.at:73" >"$at_check_line_file"
+printf "%s\n" "nix-set-template.at:70" >"$at_check_line_file"
 (test ${enable_check_r7rs_loko} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:73"
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:70"
 { set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:73: \"\${abs_builddir}\"/run-r7rs-loko.sh '(nix-set
-    (begin)
-    (begin (inherit \"a\" \"b\")
-           (\`c ==> \`d)))'"
-at_fn_check_prepare_notrace 'a `...` command substitution' "nix-set-template.at:73"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(nix-set
-    (begin)
-    (begin (inherit "a" "b")
-           (`c ==> `d)))'
-) >>"$at_stdout" 2>>"$at_stderr" 5>&-
-at_status=$? at_failed=false
-$at_check_filter
-at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "({
-a
-=
-a
-;
-b
-=
-b
-;
-c
-=
-(\"d\")
-;
-})
-" | \
-  $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:73"
-$at_failed && at_fn_log_failure
-$at_traceon; }
-
-
-
-
-
-printf "%s\n" "nix-set-template.at:78" >"$at_check_line_file"
-(test ${enable_check_r7rs_loko} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:78"
-{ set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:78: \"\${abs_builddir}\"/run-r7rs-loko.sh '  (nix-setrec ((nix-embed \"a + b\") ==> (nix-embed \"c + d\")))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:78"
+printf "%s\n" "$at_srcdir/nix-set-template.at:70: \"\${abs_builddir}\"/run-r7rs-loko.sh '  (nix-setrec ((nix-embed \"a + b\") ==> (nix-embed \"c + d\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:70"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '  (nix-setrec ((nix-embed "a + b") ==> (nix-embed "c + d")))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -36840,7 +36348,7 @@ c + d;
 })
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:78"
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:70"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -36848,12 +36356,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "nix-set-template.at:83" >"$at_check_line_file"
+printf "%s\n" "nix-set-template.at:75" >"$at_check_line_file"
 (test ${enable_check_r7rs_loko} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:83"
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:75"
 { set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:83: \"\${abs_builddir}\"/run-r7rs-loko.sh '  (nix-setrec ((nix-embed \"a + b\") <== (nix-embed \"c + d\")))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:83"
+printf "%s\n" "$at_srcdir/nix-set-template.at:75: \"\${abs_builddir}\"/run-r7rs-loko.sh '  (nix-setrec ((nix-embed \"a + b\") <== (nix-embed \"c + d\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:75"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '  (nix-setrec ((nix-embed "a + b") <== (nix-embed "c + d")))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -36866,7 +36374,7 @@ a + b;
 })
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:83"
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:75"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -36874,12 +36382,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "nix-set-template.at:88" >"$at_check_line_file"
+printf "%s\n" "nix-set-template.at:80" >"$at_check_line_file"
 (test ${enable_check_r7rs_loko} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:88"
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:80"
 { set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:88: \"\${abs_builddir}\"/run-r7rs-loko.sh '  (nix-setrec ((scheme->nix \"a + b\") ==> (scheme->nix \"c + d\")))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:88"
+printf "%s\n" "$at_srcdir/nix-set-template.at:80: \"\${abs_builddir}\"/run-r7rs-loko.sh '  (nix-setrec ((scheme->nix \"a + b\") ==> (scheme->nix \"c + d\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:80"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '  (nix-setrec ((scheme->nix "a + b") ==> (scheme->nix "c + d")))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -36894,7 +36402,7 @@ echo >>"$at_stdout"; printf "%s\n" "(rec{
 })
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:88"
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:80"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -36902,12 +36410,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "nix-set-template.at:93" >"$at_check_line_file"
+printf "%s\n" "nix-set-template.at:85" >"$at_check_line_file"
 (test ${enable_check_r7rs_loko} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:93"
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:85"
 { set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:93: \"\${abs_builddir}\"/run-r7rs-loko.sh '  (nix-setrec ((scheme->nix \"a + b\") <== (scheme->nix \"c + d\")))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:93"
+printf "%s\n" "$at_srcdir/nix-set-template.at:85: \"\${abs_builddir}\"/run-r7rs-loko.sh '  (nix-setrec ((scheme->nix \"a + b\") <== (scheme->nix \"c + d\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:85"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '  (nix-setrec ((scheme->nix "a + b") <== (scheme->nix "c + d")))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -36922,7 +36430,7 @@ echo >>"$at_stdout"; printf "%s\n" "(rec{
 })
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:93"
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:85"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -39714,53 +39222,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "nix-set-template.at:73" >"$at_check_line_file"
+printf "%s\n" "nix-set-template.at:70" >"$at_check_line_file"
 (test ${enable_check_r6rs_racket} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:73"
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:70"
 { set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:73: \"\${abs_builddir}\"/run-r6rs-racket.sh '(nix-set
-    (begin)
-    (begin (inherit \"a\" \"b\")
-           (\`c ==> \`d)))'"
-at_fn_check_prepare_notrace 'a `...` command substitution' "nix-set-template.at:73"
-( $at_check_trace; "${abs_builddir}"/run-r6rs-racket.sh '(nix-set
-    (begin)
-    (begin (inherit "a" "b")
-           (`c ==> `d)))'
-) >>"$at_stdout" 2>>"$at_stderr" 5>&-
-at_status=$? at_failed=false
-$at_check_filter
-at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "({
-a
-=
-a
-;
-b
-=
-b
-;
-c
-=
-(\"d\")
-;
-})
-" | \
-  $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:73"
-$at_failed && at_fn_log_failure
-$at_traceon; }
-
-
-
-
-
-printf "%s\n" "nix-set-template.at:78" >"$at_check_line_file"
-(test ${enable_check_r6rs_racket} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:78"
-{ set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:78: \"\${abs_builddir}\"/run-r6rs-racket.sh '  (nix-setrec ((nix-embed \"a + b\") ==> (nix-embed \"c + d\")))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:78"
+printf "%s\n" "$at_srcdir/nix-set-template.at:70: \"\${abs_builddir}\"/run-r6rs-racket.sh '  (nix-setrec ((nix-embed \"a + b\") ==> (nix-embed \"c + d\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:70"
 ( $at_check_trace; "${abs_builddir}"/run-r6rs-racket.sh '  (nix-setrec ((nix-embed "a + b") ==> (nix-embed "c + d")))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -39773,7 +39240,7 @@ c + d;
 })
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:78"
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:70"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -39781,12 +39248,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "nix-set-template.at:83" >"$at_check_line_file"
+printf "%s\n" "nix-set-template.at:75" >"$at_check_line_file"
 (test ${enable_check_r6rs_racket} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:83"
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:75"
 { set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:83: \"\${abs_builddir}\"/run-r6rs-racket.sh '  (nix-setrec ((nix-embed \"a + b\") <== (nix-embed \"c + d\")))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:83"
+printf "%s\n" "$at_srcdir/nix-set-template.at:75: \"\${abs_builddir}\"/run-r6rs-racket.sh '  (nix-setrec ((nix-embed \"a + b\") <== (nix-embed \"c + d\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:75"
 ( $at_check_trace; "${abs_builddir}"/run-r6rs-racket.sh '  (nix-setrec ((nix-embed "a + b") <== (nix-embed "c + d")))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -39799,7 +39266,7 @@ a + b;
 })
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:83"
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:75"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -39807,12 +39274,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "nix-set-template.at:88" >"$at_check_line_file"
+printf "%s\n" "nix-set-template.at:80" >"$at_check_line_file"
 (test ${enable_check_r6rs_racket} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:88"
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:80"
 { set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:88: \"\${abs_builddir}\"/run-r6rs-racket.sh '  (nix-setrec ((scheme->nix \"a + b\") ==> (scheme->nix \"c + d\")))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:88"
+printf "%s\n" "$at_srcdir/nix-set-template.at:80: \"\${abs_builddir}\"/run-r6rs-racket.sh '  (nix-setrec ((scheme->nix \"a + b\") ==> (scheme->nix \"c + d\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:80"
 ( $at_check_trace; "${abs_builddir}"/run-r6rs-racket.sh '  (nix-setrec ((scheme->nix "a + b") ==> (scheme->nix "c + d")))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -39827,7 +39294,7 @@ echo >>"$at_stdout"; printf "%s\n" "(rec{
 })
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:88"
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:80"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -39835,12 +39302,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "nix-set-template.at:93" >"$at_check_line_file"
+printf "%s\n" "nix-set-template.at:85" >"$at_check_line_file"
 (test ${enable_check_r6rs_racket} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:93"
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:85"
 { set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:93: \"\${abs_builddir}\"/run-r6rs-racket.sh '  (nix-setrec ((scheme->nix \"a + b\") <== (scheme->nix \"c + d\")))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:93"
+printf "%s\n" "$at_srcdir/nix-set-template.at:85: \"\${abs_builddir}\"/run-r6rs-racket.sh '  (nix-setrec ((scheme->nix \"a + b\") <== (scheme->nix \"c + d\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:85"
 ( $at_check_trace; "${abs_builddir}"/run-r6rs-racket.sh '  (nix-setrec ((scheme->nix "a + b") <== (scheme->nix "c + d")))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -39855,7 +39322,7 @@ echo >>"$at_stdout"; printf "%s\n" "(rec{
 })
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:93"
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:85"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -42647,53 +42114,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "nix-set-template.at:73" >"$at_check_line_file"
+printf "%s\n" "nix-set-template.at:70" >"$at_check_line_file"
 (test ${enable_check_r6rs_sagittarius} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:73"
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:70"
 { set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:73: \"\${abs_builddir}\"/run-r6rs-sagittarius.sh '(nix-set
-    (begin)
-    (begin (inherit \"a\" \"b\")
-           (\`c ==> \`d)))'"
-at_fn_check_prepare_notrace 'a `...` command substitution' "nix-set-template.at:73"
-( $at_check_trace; "${abs_builddir}"/run-r6rs-sagittarius.sh '(nix-set
-    (begin)
-    (begin (inherit "a" "b")
-           (`c ==> `d)))'
-) >>"$at_stdout" 2>>"$at_stderr" 5>&-
-at_status=$? at_failed=false
-$at_check_filter
-at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "({
-a
-=
-a
-;
-b
-=
-b
-;
-c
-=
-(\"d\")
-;
-})
-" | \
-  $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:73"
-$at_failed && at_fn_log_failure
-$at_traceon; }
-
-
-
-
-
-printf "%s\n" "nix-set-template.at:78" >"$at_check_line_file"
-(test ${enable_check_r6rs_sagittarius} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:78"
-{ set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:78: \"\${abs_builddir}\"/run-r6rs-sagittarius.sh '  (nix-setrec ((nix-embed \"a + b\") ==> (nix-embed \"c + d\")))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:78"
+printf "%s\n" "$at_srcdir/nix-set-template.at:70: \"\${abs_builddir}\"/run-r6rs-sagittarius.sh '  (nix-setrec ((nix-embed \"a + b\") ==> (nix-embed \"c + d\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:70"
 ( $at_check_trace; "${abs_builddir}"/run-r6rs-sagittarius.sh '  (nix-setrec ((nix-embed "a + b") ==> (nix-embed "c + d")))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -42706,7 +42132,7 @@ c + d;
 })
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:78"
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:70"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -42714,12 +42140,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "nix-set-template.at:83" >"$at_check_line_file"
+printf "%s\n" "nix-set-template.at:75" >"$at_check_line_file"
 (test ${enable_check_r6rs_sagittarius} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:83"
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:75"
 { set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:83: \"\${abs_builddir}\"/run-r6rs-sagittarius.sh '  (nix-setrec ((nix-embed \"a + b\") <== (nix-embed \"c + d\")))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:83"
+printf "%s\n" "$at_srcdir/nix-set-template.at:75: \"\${abs_builddir}\"/run-r6rs-sagittarius.sh '  (nix-setrec ((nix-embed \"a + b\") <== (nix-embed \"c + d\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:75"
 ( $at_check_trace; "${abs_builddir}"/run-r6rs-sagittarius.sh '  (nix-setrec ((nix-embed "a + b") <== (nix-embed "c + d")))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -42732,7 +42158,7 @@ a + b;
 })
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:83"
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:75"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -42740,12 +42166,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "nix-set-template.at:88" >"$at_check_line_file"
+printf "%s\n" "nix-set-template.at:80" >"$at_check_line_file"
 (test ${enable_check_r6rs_sagittarius} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:88"
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:80"
 { set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:88: \"\${abs_builddir}\"/run-r6rs-sagittarius.sh '  (nix-setrec ((scheme->nix \"a + b\") ==> (scheme->nix \"c + d\")))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:88"
+printf "%s\n" "$at_srcdir/nix-set-template.at:80: \"\${abs_builddir}\"/run-r6rs-sagittarius.sh '  (nix-setrec ((scheme->nix \"a + b\") ==> (scheme->nix \"c + d\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:80"
 ( $at_check_trace; "${abs_builddir}"/run-r6rs-sagittarius.sh '  (nix-setrec ((scheme->nix "a + b") ==> (scheme->nix "c + d")))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -42760,7 +42186,7 @@ echo >>"$at_stdout"; printf "%s\n" "(rec{
 })
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:88"
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:80"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -42768,12 +42194,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "nix-set-template.at:93" >"$at_check_line_file"
+printf "%s\n" "nix-set-template.at:85" >"$at_check_line_file"
 (test ${enable_check_r6rs_sagittarius} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:93"
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:85"
 { set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:93: \"\${abs_builddir}\"/run-r6rs-sagittarius.sh '  (nix-setrec ((scheme->nix \"a + b\") <== (scheme->nix \"c + d\")))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:93"
+printf "%s\n" "$at_srcdir/nix-set-template.at:85: \"\${abs_builddir}\"/run-r6rs-sagittarius.sh '  (nix-setrec ((scheme->nix \"a + b\") <== (scheme->nix \"c + d\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:85"
 ( $at_check_trace; "${abs_builddir}"/run-r6rs-sagittarius.sh '  (nix-setrec ((scheme->nix "a + b") <== (scheme->nix "c + d")))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -42788,7 +42214,7 @@ echo >>"$at_stdout"; printf "%s\n" "(rec{
 })
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:93"
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:85"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -45624,53 +45050,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "nix-set-template.at:73" >"$at_check_line_file"
+printf "%s\n" "nix-set-template.at:70" >"$at_check_line_file"
 (test ${enable_check_r7rs_sagittarius} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:73"
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:70"
 { set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:73: \"\${abs_builddir}\"/run-r7rs-sagittarius.sh '(nix-set
-    (begin)
-    (begin (inherit \"a\" \"b\")
-           (\`c ==> \`d)))'"
-at_fn_check_prepare_notrace 'a `...` command substitution' "nix-set-template.at:73"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-sagittarius.sh '(nix-set
-    (begin)
-    (begin (inherit "a" "b")
-           (`c ==> `d)))'
-) >>"$at_stdout" 2>>"$at_stderr" 5>&-
-at_status=$? at_failed=false
-$at_check_filter
-at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "({
-a
-=
-a
-;
-b
-=
-b
-;
-c
-=
-(\"d\")
-;
-})
-" | \
-  $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:73"
-$at_failed && at_fn_log_failure
-$at_traceon; }
-
-
-
-
-
-printf "%s\n" "nix-set-template.at:78" >"$at_check_line_file"
-(test ${enable_check_r7rs_sagittarius} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:78"
-{ set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:78: \"\${abs_builddir}\"/run-r7rs-sagittarius.sh '  (nix-setrec ((nix-embed \"a + b\") ==> (nix-embed \"c + d\")))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:78"
+printf "%s\n" "$at_srcdir/nix-set-template.at:70: \"\${abs_builddir}\"/run-r7rs-sagittarius.sh '  (nix-setrec ((nix-embed \"a + b\") ==> (nix-embed \"c + d\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:70"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-sagittarius.sh '  (nix-setrec ((nix-embed "a + b") ==> (nix-embed "c + d")))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -45683,7 +45068,7 @@ c + d;
 })
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:78"
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:70"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -45691,12 +45076,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "nix-set-template.at:83" >"$at_check_line_file"
+printf "%s\n" "nix-set-template.at:75" >"$at_check_line_file"
 (test ${enable_check_r7rs_sagittarius} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:83"
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:75"
 { set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:83: \"\${abs_builddir}\"/run-r7rs-sagittarius.sh '  (nix-setrec ((nix-embed \"a + b\") <== (nix-embed \"c + d\")))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:83"
+printf "%s\n" "$at_srcdir/nix-set-template.at:75: \"\${abs_builddir}\"/run-r7rs-sagittarius.sh '  (nix-setrec ((nix-embed \"a + b\") <== (nix-embed \"c + d\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:75"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-sagittarius.sh '  (nix-setrec ((nix-embed "a + b") <== (nix-embed "c + d")))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -45709,7 +45094,7 @@ a + b;
 })
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:83"
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:75"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -45717,12 +45102,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "nix-set-template.at:88" >"$at_check_line_file"
+printf "%s\n" "nix-set-template.at:80" >"$at_check_line_file"
 (test ${enable_check_r7rs_sagittarius} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:88"
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:80"
 { set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:88: \"\${abs_builddir}\"/run-r7rs-sagittarius.sh '  (nix-setrec ((scheme->nix \"a + b\") ==> (scheme->nix \"c + d\")))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:88"
+printf "%s\n" "$at_srcdir/nix-set-template.at:80: \"\${abs_builddir}\"/run-r7rs-sagittarius.sh '  (nix-setrec ((scheme->nix \"a + b\") ==> (scheme->nix \"c + d\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:80"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-sagittarius.sh '  (nix-setrec ((scheme->nix "a + b") ==> (scheme->nix "c + d")))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -45737,7 +45122,7 @@ echo >>"$at_stdout"; printf "%s\n" "(rec{
 })
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:88"
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:80"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -45745,12 +45130,12 @@ $at_traceon; }
 
 
 
-printf "%s\n" "nix-set-template.at:93" >"$at_check_line_file"
+printf "%s\n" "nix-set-template.at:85" >"$at_check_line_file"
 (test ${enable_check_r7rs_sagittarius} = no) \
-  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:93"
+  && at_fn_check_skip 77 "$at_srcdir/nix-set-template.at:85"
 { set +x
-printf "%s\n" "$at_srcdir/nix-set-template.at:93: \"\${abs_builddir}\"/run-r7rs-sagittarius.sh '  (nix-setrec ((scheme->nix \"a + b\") <== (scheme->nix \"c + d\")))'"
-at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:93"
+printf "%s\n" "$at_srcdir/nix-set-template.at:85: \"\${abs_builddir}\"/run-r7rs-sagittarius.sh '  (nix-setrec ((scheme->nix \"a + b\") <== (scheme->nix \"c + d\")))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-set-template.at:85"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-sagittarius.sh '  (nix-setrec ((scheme->nix "a + b") <== (scheme->nix "c + d")))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -45765,7 +45150,7 @@ echo >>"$at_stdout"; printf "%s\n" "(rec{
 })
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:93"
+at_fn_check_status 0 $at_status "$at_srcdir/nix-set-template.at:85"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
