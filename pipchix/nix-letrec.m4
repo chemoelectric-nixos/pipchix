@@ -1,8 +1,7 @@
-define_nix_set_setrec_letrec(«nix-letrec»)
-
-;;;-------------------------------------------------------------------
 ;;;
 ;;; Copyright © 2025 Barry Schwartz
+;;;
+;;; This file is part of Pipchix.
 ;;; 
 ;;; Permission is hereby granted, free of charge, to any person obtaining
 ;;; a copy of Pipchix and associated documentation files (the
@@ -23,15 +22,17 @@ define_nix_set_setrec_letrec(«nix-letrec»)
 ;;; OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 ;;; WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ;;;
-;;;-------------------------------------------------------------------
 
-;;;;;;;   (define-syntax nix-let*
-;;;;;;;     (syntax-rules ()
-;;;;;;;       ((_ () in-clause)
-;;;;;;;        (nix-letrec () in-clause))
-;;;;;;;       FIXME))
+define_nix_set_setrec_letrec(«nix-letrec»)
 
-;;;-------------------------------------------------------------------
+(define-syntax nix-letrec
+  (syntax-rules ()
+    ((_ (binding ...) in-clause)
+     (let ((node (make-nix-letrec-node)))
+       (expand-%%nix-letrec%%-bindings node binding ...)
+       (set-nix-letrec-node-in-clause! node in-clause)
+       node))))
+
 ;;; local variables:
 ;;; mode: scheme
 ;;; geiser-scheme-implementation: chibi
