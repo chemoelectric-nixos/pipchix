@@ -40,6 +40,21 @@ m4_define([sexpr],
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([(let·a·=·(3)·;·b·=·(4)·;·c·=·c·;·fromJSON·=·builtins·.·fromJSON·;·toJSON·=·builtins·.·toJSON·;·in(·({·x·=·a + b + c;·})·))·])],[])
 
+m4_define([sexpr],
+  [(nix-let*
+       ((`a ==> 3)
+        ("a" <== `b)
+        (inherit "a")
+        (inherit-from `builtins `fromJSON `toJSON)
+        ("x" ==> "fromJSON"))
+     (nix-list))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(let·a·=·(3)·;·in(·(let·b·=·("a")·;·in(·(let·a·=·a·;·in(·(let·fromJSON·=·builtins·.·fromJSON·;·in(·(let·toJSON·=·builtins·.·toJSON·;·in(·(let·x·=·("fromJSON")·;·in(·@<:@·@:>@·))·))·))·))·))·))·])],[])
+
+m4_define([sexpr],[(nix-let* () nix-null)])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(let·in(·nix_null))·])],[])
+
 AT_CLEANUP
 
 # local variables:

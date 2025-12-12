@@ -36,10 +36,6 @@ define_nix_set_setrec_letrec(«nix-letrec»)
 (define-syntax nix-let*
   (syntax-rules ( inherit inherit-from )
 
-    ((_ () in-clause)
-     (nix-letrec ()
-       in-clause))
-
     ((_ ((inherit-from s a) binding ...) in-clause)
      (nix-letrec ((inherit-from s a))
        (nix-let* (binding ...)
@@ -54,10 +50,18 @@ define_nix_set_setrec_letrec(«nix-letrec»)
      (nix-let* ((inherit-from #f a b ...) binding ...)
        in-clause))
 
+    ((_ (binding) in-clause)
+     (nix-letrec (binding)
+       in-clause))
+
     ((_ (binding1 binding2 ...) in-clause)
      (nix-letrec (binding1)
        (nix-let* (binding2 ...)
-         in-clause)))))
+         in-clause)))
+
+    ((_ () in-clause)
+     (nix-letrec ()
+       in-clause))))
 
 ;;; local variables:
 ;;; mode: scheme

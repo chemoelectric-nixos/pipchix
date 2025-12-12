@@ -55,6 +55,9 @@ nix-setrec
 ;;; Recursive let (that is, the ‘let’ built into Nix).
 nix-letrec
 
+;;; One-after-another let.
+nix-let*
+
 ;;; Encode a string in base64, for printing with the base64(1) command
 ;;; (which is included in GNU coreutils).
 base64-utf8
