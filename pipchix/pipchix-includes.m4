@@ -46,10 +46,6 @@ m4_pushdef(«who»,«$1»)m4_dnl
 (define-syntax expand-%%who%%-bindings
   (syntax-rules ( inherit inherit-from <== ==> )
 
-    ;;
-    ;; The following does not require SRFI-46 extensions.
-    ;;
-
     ((_ node) #t)
 
     ((_ node (inherit-from s a) binding ...)
@@ -75,19 +71,11 @@ m4_pushdef(«who»,«$1»)m4_dnl
         node (list a b ...) value)
        (expand-%%who%%-bindings node binding ...)))
 
-    ((_ node ((a ...) (==> value)) binding ...)
+    ((_ node (a b ... ==> value) binding ...)
      (begin
        (insert-%%who%%-binding
-        node (reverse (list a ...)) value)
-       (expand-%%who%%-bindings node binding ...)))
-
-    ((_ node ((a ...) (b unknown ...)) binding ...)
-     (expand-%%who%%-bindings
-      node ((b a ...) (unknown ...)) binding ...))
-
-    ((_ node (a unknown ...) binding ...) ;; (a b ... ==> value)
-     (expand-%%who%%-bindings
-      node ((a) (unknown ...)) binding ...))))
+        node (list a b ...) value)
+       (expand-%%who%%-bindings node binding ...)))))
 
 (define-syntax insert-%%who%%-binding
   (syntax-rules ()
