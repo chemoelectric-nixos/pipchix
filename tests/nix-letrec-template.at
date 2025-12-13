@@ -24,7 +24,7 @@
 
 AT_SETUP([setup_message((pipchix nix-letrec))])
 
-AT_KEYWORDS([default_keywords nix-letrec])
+AT_KEYWORDS([default_keywords nix-letrec nix-let nix-let*])
 
 m4_define([sexpr],[(nix-letrec ((`a `b `c ==> @%:@f)) nix-true)])
 check_unquoted([run_scheme 'sexpr'],[0],
@@ -60,6 +60,14 @@ m4_define([sexpr],
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([(let·a·=·(1)·;·in(·(let·b·=·a·;·in(·(let·c·=·b·;·in(·c·))·))·))·])],[])
 
+m4_define([sexpr],[(nix-let () nix-null)])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(let·in(·(let·in(·nix_null))·))·])],[])
+
+m4_define([sexpr],
+  [(nix-let (("a" ==> 1)("b" ==> (© "a"))("c" ==> (nix-get "b"))) (© "c"))])
+check_unquoted([run_scheme 'sexpr' | sed 's/^g\(....................................\|............\)\(.\)/g--RANDOM--\2/'],[0],
+  [interpunct_nl([(let·g--RANDOM--1·=·(1)·;·g--RANDOM--2·=·a·;·g--RANDOM--3·=·b·;·in(·(let·a·=·g--RANDOM--1·;·b·=·g--RANDOM--2·;·c·=·g--RANDOM--3·;·in(·c·))·))·])],[])
 
 AT_CLEANUP
 

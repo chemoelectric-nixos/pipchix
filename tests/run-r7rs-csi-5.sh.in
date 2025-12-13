@@ -11,11 +11,12 @@ cat > "${prog_scm}" <<EOF
 (import (scheme process-context))
 (import (pipchix base))
 (import (pipchix continuation-capture))
+(import (pipchix string-manipulation))
+(import (pipchix generate-identifier))
 (import (pipchix abstract-syntax-tree))
 (import (pipchix nix-embed))
 (import (pipchix nix-list))
 (import (pipchix nix-set))
-(import (pipchix string-manipulation))
 (output-nix-abstract-syntax-tree $1)
 (exit 0)
 EOF

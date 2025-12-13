@@ -626,7 +626,7 @@ at_help_all="1;continuation-capture-template.at:25;chez                   contin
 11;nix-embed-template.at:25;chez                    (pipchix nix-embed);r6rs chez nix-embed;
 12;nix-list-template.at:25;chez                     (pipchix nix-list);r6rs chez nix-list;
 13;nix-set-template.at:25;chez                      (pipchix nix-set);r6rs chez nix-set nix-setrec;
-14;nix-letrec-template.at:25;chez                   (pipchix nix-letrec);r6rs chez nix-letrec;
+14;nix-letrec-template.at:25;chez                   (pipchix nix-letrec);r6rs chez nix-letrec nix-let nix-let*;
 15;base64-utf8-template.at:25;chez                            base64-utf8;r6rs chez string-manipulation string strings base64 base64-utf8 utf8;
 16;escaped-utf8-template.at:25;chez                           escaped-utf8;r6rs chez string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
 17;shell-print-template.at:25;chez                            shell-print;r6rs chez string-manipulation string strings print shell utf8 shell-print;
@@ -643,7 +643,7 @@ at_help_all="1;continuation-capture-template.at:25;chez                   contin
 28;nix-embed-template.at:25;chibi                   (pipchix nix-embed);r7rs chibi nix-embed;
 29;nix-list-template.at:25;chibi                    (pipchix nix-list);r7rs chibi nix-list;
 30;nix-set-template.at:25;chibi                     (pipchix nix-set);r7rs chibi nix-set nix-setrec;
-31;nix-letrec-template.at:25;chibi                  (pipchix nix-letrec);r7rs chibi nix-letrec;
+31;nix-letrec-template.at:25;chibi                  (pipchix nix-letrec);r7rs chibi nix-letrec nix-let nix-let*;
 32;base64-utf8-template.at:25;chibi                           base64-utf8;r7rs chibi string-manipulation string strings base64 base64-utf8 utf8;
 33;escaped-utf8-template.at:25;chibi                          escaped-utf8;r7rs chibi string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
 34;shell-print-template.at:25;chibi                           shell-print;r7rs chibi string-manipulation string strings print shell utf8 shell-print;
@@ -660,7 +660,7 @@ at_help_all="1;continuation-capture-template.at:25;chez                   contin
 45;nix-embed-template.at:25;csc-5                   (pipchix nix-embed);r7rs chicken chicken-5 csc csc-5 compiler nix-embed;
 46;nix-list-template.at:25;csc-5                    (pipchix nix-list);r7rs chicken chicken-5 csc csc-5 compiler nix-list;
 47;nix-set-template.at:25;csc-5                     (pipchix nix-set);r7rs chicken chicken-5 csc csc-5 compiler nix-set nix-setrec;
-48;nix-letrec-template.at:25;csc-5                  (pipchix nix-letrec);r7rs chicken chicken-5 csc csc-5 compiler nix-letrec;
+48;nix-letrec-template.at:25;csc-5                  (pipchix nix-letrec);r7rs chicken chicken-5 csc csc-5 compiler nix-letrec nix-let nix-let*;
 49;base64-utf8-template.at:25;csc-5                           base64-utf8;r7rs chicken chicken-5 csc csc-5 compiler string-manipulation string strings base64 base64-utf8 utf8;
 50;escaped-utf8-template.at:25;csc-5                          escaped-utf8;r7rs chicken chicken-5 csc csc-5 compiler string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
 51;shell-print-template.at:25;csc-5                           shell-print;r7rs chicken chicken-5 csc csc-5 compiler string-manipulation string strings print shell utf8 shell-print;
@@ -677,7 +677,7 @@ at_help_all="1;continuation-capture-template.at:25;chez                   contin
 62;nix-embed-template.at:25;csi-5                   (pipchix nix-embed);r7rs chicken chicken-5 csi csi-5 interpreter nix-embed;
 63;nix-list-template.at:25;csi-5                    (pipchix nix-list);r7rs chicken chicken-5 csi csi-5 interpreter nix-list;
 64;nix-set-template.at:25;csi-5                     (pipchix nix-set);r7rs chicken chicken-5 csi csi-5 interpreter nix-set nix-setrec;
-65;nix-letrec-template.at:25;csi-5                  (pipchix nix-letrec);r7rs chicken chicken-5 csi csi-5 interpreter nix-letrec;
+65;nix-letrec-template.at:25;csi-5                  (pipchix nix-letrec);r7rs chicken chicken-5 csi csi-5 interpreter nix-letrec nix-let nix-let*;
 66;base64-utf8-template.at:25;csi-5                           base64-utf8;r7rs chicken chicken-5 csi csi-5 interpreter string-manipulation string strings base64 base64-utf8 utf8;
 67;escaped-utf8-template.at:25;csi-5                          escaped-utf8;r7rs chicken chicken-5 csi csi-5 interpreter string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
 68;shell-print-template.at:25;csi-5                           shell-print;r7rs chicken chicken-5 csi csi-5 interpreter string-manipulation string strings print shell utf8 shell-print;
@@ -694,7 +694,7 @@ at_help_all="1;continuation-capture-template.at:25;chez                   contin
 79;nix-embed-template.at:25;gauche                  (pipchix nix-embed);r7rs gauche gosh nix-embed;
 80;nix-list-template.at:25;gauche                   (pipchix nix-list);r7rs gauche gosh nix-list;
 81;nix-set-template.at:25;gauche                    (pipchix nix-set);r7rs gauche gosh nix-set nix-setrec;
-82;nix-letrec-template.at:25;gauche                 (pipchix nix-letrec);r7rs gauche gosh nix-letrec;
+82;nix-letrec-template.at:25;gauche                 (pipchix nix-letrec);r7rs gauche gosh nix-letrec nix-let nix-let*;
 83;base64-utf8-template.at:25;gauche                          base64-utf8;r7rs gauche gosh string-manipulation string strings base64 base64-utf8 utf8;
 84;escaped-utf8-template.at:25;gauche                         escaped-utf8;r7rs gauche gosh string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
 85;shell-print-template.at:25;gauche                          shell-print;r7rs gauche gosh string-manipulation string strings print shell utf8 shell-print;
@@ -711,7 +711,7 @@ at_help_all="1;continuation-capture-template.at:25;chez                   contin
 96;nix-embed-template.at:25;gxi                     (pipchix nix-embed);r7rs gerbil gxi interpreter nix-embed;
 97;nix-list-template.at:25;gxi                      (pipchix nix-list);r7rs gerbil gxi interpreter nix-list;
 98;nix-set-template.at:25;gxi                       (pipchix nix-set);r7rs gerbil gxi interpreter nix-set nix-setrec;
-99;nix-letrec-template.at:25;gxi                    (pipchix nix-letrec);r7rs gerbil gxi interpreter nix-letrec;
+99;nix-letrec-template.at:25;gxi                    (pipchix nix-letrec);r7rs gerbil gxi interpreter nix-letrec nix-let nix-let*;
 100;base64-utf8-template.at:25;gxi                             base64-utf8;r7rs gerbil gxi interpreter string-manipulation string strings base64 base64-utf8 utf8;
 101;escaped-utf8-template.at:25;gxi                            escaped-utf8;r7rs gerbil gxi interpreter string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
 102;shell-print-template.at:25;gxi                             shell-print;r7rs gerbil gxi interpreter string-manipulation string strings print shell utf8 shell-print;
@@ -728,7 +728,7 @@ at_help_all="1;continuation-capture-template.at:25;chez                   contin
 113;nix-embed-template.at:25;gxc                     (pipchix nix-embed);r7rs gerbil gxc compiler nix-embed;
 114;nix-list-template.at:25;gxc                      (pipchix nix-list);r7rs gerbil gxc compiler nix-list;
 115;nix-set-template.at:25;gxc                       (pipchix nix-set);r7rs gerbil gxc compiler nix-set nix-setrec;
-116;nix-letrec-template.at:25;gxc                    (pipchix nix-letrec);r7rs gerbil gxc compiler nix-letrec;
+116;nix-letrec-template.at:25;gxc                    (pipchix nix-letrec);r7rs gerbil gxc compiler nix-letrec nix-let nix-let*;
 117;base64-utf8-template.at:25;gxc                             base64-utf8;r7rs gerbil gxc compiler string-manipulation string strings base64 base64-utf8 utf8;
 118;escaped-utf8-template.at:25;gxc                            escaped-utf8;r7rs gerbil gxc compiler string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
 119;shell-print-template.at:25;gxc                             shell-print;r7rs gerbil gxc compiler string-manipulation string strings print shell utf8 shell-print;
@@ -745,7 +745,7 @@ at_help_all="1;continuation-capture-template.at:25;chez                   contin
 130;nix-embed-template.at:25;guile(r6rs)             (pipchix nix-embed);r6rs guile guile-3 nix-embed;
 131;nix-list-template.at:25;guile(r6rs)              (pipchix nix-list);r6rs guile guile-3 nix-list;
 132;nix-set-template.at:25;guile(r6rs)               (pipchix nix-set);r6rs guile guile-3 nix-set nix-setrec;
-133;nix-letrec-template.at:25;guile(r6rs)            (pipchix nix-letrec);r6rs guile guile-3 nix-letrec;
+133;nix-letrec-template.at:25;guile(r6rs)            (pipchix nix-letrec);r6rs guile guile-3 nix-letrec nix-let nix-let*;
 134;base64-utf8-template.at:25;guile(r6rs)                     base64-utf8;r6rs guile guile-3 string-manipulation string strings base64 base64-utf8 utf8;
 135;escaped-utf8-template.at:25;guile(r6rs)                    escaped-utf8;r6rs guile guile-3 string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
 136;shell-print-template.at:25;guile(r6rs)                     shell-print;r6rs guile guile-3 string-manipulation string strings print shell utf8 shell-print;
@@ -762,7 +762,7 @@ at_help_all="1;continuation-capture-template.at:25;chez                   contin
 147;nix-embed-template.at:25;guile(r7rs)             (pipchix nix-embed);r7rs guile guile-3 nix-embed;
 148;nix-list-template.at:25;guile(r7rs)              (pipchix nix-list);r7rs guile guile-3 nix-list;
 149;nix-set-template.at:25;guile(r7rs)               (pipchix nix-set);r7rs guile guile-3 nix-set nix-setrec;
-150;nix-letrec-template.at:25;guile(r7rs)            (pipchix nix-letrec);r7rs guile guile-3 nix-letrec;
+150;nix-letrec-template.at:25;guile(r7rs)            (pipchix nix-letrec);r7rs guile guile-3 nix-letrec nix-let nix-let*;
 151;base64-utf8-template.at:25;guile(r7rs)                     base64-utf8;r7rs guile guile-3 string-manipulation string strings base64 base64-utf8 utf8;
 152;escaped-utf8-template.at:25;guile(r7rs)                    escaped-utf8;r7rs guile guile-3 string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
 153;shell-print-template.at:25;guile(r7rs)                     shell-print;r7rs guile guile-3 string-manipulation string strings print shell utf8 shell-print;
@@ -779,7 +779,7 @@ at_help_all="1;continuation-capture-template.at:25;chez                   contin
 164;nix-embed-template.at:25;loko(r6rs)              (pipchix nix-embed);r6rs loko nix-embed;
 165;nix-list-template.at:25;loko(r6rs)               (pipchix nix-list);r6rs loko nix-list;
 166;nix-set-template.at:25;loko(r6rs)                (pipchix nix-set);r6rs loko nix-set nix-setrec;
-167;nix-letrec-template.at:25;loko(r6rs)             (pipchix nix-letrec);r6rs loko nix-letrec;
+167;nix-letrec-template.at:25;loko(r6rs)             (pipchix nix-letrec);r6rs loko nix-letrec nix-let nix-let*;
 168;base64-utf8-template.at:25;loko(r6rs)                      base64-utf8;r6rs loko string-manipulation string strings base64 base64-utf8 utf8;
 169;escaped-utf8-template.at:25;loko(r6rs)                     escaped-utf8;r6rs loko string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
 170;shell-print-template.at:25;loko(r6rs)                      shell-print;r6rs loko string-manipulation string strings print shell utf8 shell-print;
@@ -796,7 +796,7 @@ at_help_all="1;continuation-capture-template.at:25;chez                   contin
 181;nix-embed-template.at:25;loko(r7rs)              (pipchix nix-embed);r7rs loko nix-embed;
 182;nix-list-template.at:25;loko(r7rs)               (pipchix nix-list);r7rs loko nix-list;
 183;nix-set-template.at:25;loko(r7rs)                (pipchix nix-set);r7rs loko nix-set nix-setrec;
-184;nix-letrec-template.at:25;loko(r7rs)             (pipchix nix-letrec);r7rs loko nix-letrec;
+184;nix-letrec-template.at:25;loko(r7rs)             (pipchix nix-letrec);r7rs loko nix-letrec nix-let nix-let*;
 185;base64-utf8-template.at:25;loko(r7rs)                      base64-utf8;r7rs loko string-manipulation string strings base64 base64-utf8 utf8;
 186;escaped-utf8-template.at:25;loko(r7rs)                     escaped-utf8;r7rs loko string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
 187;shell-print-template.at:25;loko(r7rs)                      shell-print;r7rs loko string-manipulation string strings print shell utf8 shell-print;
@@ -813,7 +813,7 @@ at_help_all="1;continuation-capture-template.at:25;chez                   contin
 198;nix-embed-template.at:25;racket                  (pipchix nix-embed);r6rs racket plt plt-r6rs nix-embed;
 199;nix-list-template.at:25;racket                   (pipchix nix-list);r6rs racket plt plt-r6rs nix-list;
 200;nix-set-template.at:25;racket                    (pipchix nix-set);r6rs racket plt plt-r6rs nix-set nix-setrec;
-201;nix-letrec-template.at:25;racket                 (pipchix nix-letrec);r6rs racket plt plt-r6rs nix-letrec;
+201;nix-letrec-template.at:25;racket                 (pipchix nix-letrec);r6rs racket plt plt-r6rs nix-letrec nix-let nix-let*;
 202;base64-utf8-template.at:25;racket                          base64-utf8;r6rs racket plt plt-r6rs string-manipulation string strings base64 base64-utf8 utf8;
 203;escaped-utf8-template.at:25;racket                         escaped-utf8;r6rs racket plt plt-r6rs string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
 204;shell-print-template.at:25;racket                          shell-print;r6rs racket plt plt-r6rs string-manipulation string strings print shell utf8 shell-print;
@@ -830,7 +830,7 @@ at_help_all="1;continuation-capture-template.at:25;chez                   contin
 215;nix-embed-template.at:25;sagitt(r6rs)            (pipchix nix-embed);r6rs sagittarius sash nix-embed;
 216;nix-list-template.at:25;sagitt(r6rs)             (pipchix nix-list);r6rs sagittarius sash nix-list;
 217;nix-set-template.at:25;sagitt(r6rs)              (pipchix nix-set);r6rs sagittarius sash nix-set nix-setrec;
-218;nix-letrec-template.at:25;sagitt(r6rs)           (pipchix nix-letrec);r6rs sagittarius sash nix-letrec;
+218;nix-letrec-template.at:25;sagitt(r6rs)           (pipchix nix-letrec);r6rs sagittarius sash nix-letrec nix-let nix-let*;
 219;base64-utf8-template.at:25;sagitt(r6rs)                    base64-utf8;r6rs sagittarius sash string-manipulation string strings base64 base64-utf8 utf8;
 220;escaped-utf8-template.at:25;sagitt(r6rs)                   escaped-utf8;r6rs sagittarius sash string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
 221;shell-print-template.at:25;sagitt(r6rs)                    shell-print;r6rs sagittarius sash string-manipulation string strings print shell utf8 shell-print;
@@ -847,7 +847,7 @@ at_help_all="1;continuation-capture-template.at:25;chez                   contin
 232;nix-embed-template.at:25;sagitt(r7rs)            (pipchix nix-embed);r7rs sagittarius sash nix-embed;
 233;nix-list-template.at:25;sagitt(r7rs)             (pipchix nix-list);r7rs sagittarius sash nix-list;
 234;nix-set-template.at:25;sagitt(r7rs)              (pipchix nix-set);r7rs sagittarius sash nix-set nix-setrec;
-235;nix-letrec-template.at:25;sagitt(r7rs)           (pipchix nix-letrec);r7rs sagittarius sash nix-letrec;
+235;nix-letrec-template.at:25;sagitt(r7rs)           (pipchix nix-letrec);r7rs sagittarius sash nix-letrec nix-let nix-let*;
 236;base64-utf8-template.at:25;sagitt(r7rs)                    base64-utf8;r7rs sagittarius sash string-manipulation string strings base64 base64-utf8 utf8;
 237;escaped-utf8-template.at:25;sagitt(r7rs)                   escaped-utf8;r7rs sagittarius sash string-manipulation string strings escaped utf8 escaped-utf8 8bit escaped-8bit;
 238;shell-print-template.at:25;sagitt(r7rs)                    shell-print;r7rs sagittarius sash string-manipulation string strings print shell utf8 shell-print;
@@ -4620,6 +4620,85 @@ $at_traceon; }
 
 
 
+
+printf "%s\n" "nix-letrec-template.at:64" >"$at_check_line_file"
+(test ${enable_check_r6rs_chez} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-letrec-template.at:64"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-letrec-template.at:64: \"\${abs_builddir}\"/run-r6rs-chez.sh '(nix-let () nix-null)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-letrec-template.at:64"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '(nix-let () nix-null)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(let
+in(
+(let
+in(
+(builtins.null)
+))
+))
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-letrec-template.at:64"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "nix-letrec-template.at:69" >"$at_check_line_file"
+(test ${enable_check_r6rs_chez} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-letrec-template.at:69"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-letrec-template.at:69: \"\${abs_builddir}\"/run-r6rs-chez.sh '(nix-let ((\"a\" ==> 1)(\"b\" ==> (© \"a\"))(\"c\" ==> (nix-get \"b\"))) (© \"c\"))' | sed 's/^g\\(....................................\\|............\\)\\(.\\)/g--RANDOM--\\2/'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-letrec-template.at:69"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '(nix-let (("a" ==> 1)("b" ==> (© "a"))("c" ==> (nix-get "b"))) (© "c"))' | sed 's/^g\(....................................\|............\)\(.\)/g--RANDOM--\2/'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(let
+g--RANDOM--1
+=
+(1)
+;
+g--RANDOM--2
+=
+a
+;
+g--RANDOM--3
+=
+b
+;
+in(
+(let
+a
+=
+g--RANDOM--1
+;
+b
+=
+g--RANDOM--2
+;
+c
+=
+g--RANDOM--3
+;
+in(
+c
+))
+))
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-letrec-template.at:69"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
@@ -7768,6 +7847,85 @@ $at_traceon; }
 
 
 
+
+printf "%s\n" "nix-letrec-template.at:64" >"$at_check_line_file"
+(test ${enable_check_r7rs_chibi} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-letrec-template.at:64"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-letrec-template.at:64: \"\${abs_builddir}\"/run-r7rs-chibi.sh '(nix-let () nix-null)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-letrec-template.at:64"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-chibi.sh '(nix-let () nix-null)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(let
+in(
+(let
+in(
+(builtins.null)
+))
+))
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-letrec-template.at:64"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "nix-letrec-template.at:69" >"$at_check_line_file"
+(test ${enable_check_r7rs_chibi} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-letrec-template.at:69"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-letrec-template.at:69: \"\${abs_builddir}\"/run-r7rs-chibi.sh '(nix-let ((\"a\" ==> 1)(\"b\" ==> (© \"a\"))(\"c\" ==> (nix-get \"b\"))) (© \"c\"))' | sed 's/^g\\(....................................\\|............\\)\\(.\\)/g--RANDOM--\\2/'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-letrec-template.at:69"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-chibi.sh '(nix-let (("a" ==> 1)("b" ==> (© "a"))("c" ==> (nix-get "b"))) (© "c"))' | sed 's/^g\(....................................\|............\)\(.\)/g--RANDOM--\2/'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(let
+g--RANDOM--1
+=
+(1)
+;
+g--RANDOM--2
+=
+a
+;
+g--RANDOM--3
+=
+b
+;
+in(
+(let
+a
+=
+g--RANDOM--1
+;
+b
+=
+g--RANDOM--2
+;
+c
+=
+g--RANDOM--3
+;
+in(
+c
+))
+))
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-letrec-template.at:69"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
@@ -10872,6 +11030,85 @@ $at_traceon; }
 
 
 
+
+printf "%s\n" "nix-letrec-template.at:64" >"$at_check_line_file"
+(test ${enable_check_r7rs_csc_5} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-letrec-template.at:64"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-letrec-template.at:64: \"\${abs_builddir}\"/run-r7rs-csc-5.sh '(nix-let () nix-null)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-letrec-template.at:64"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csc-5.sh '(nix-let () nix-null)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(let
+in(
+(let
+in(
+(builtins.null)
+))
+))
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-letrec-template.at:64"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "nix-letrec-template.at:69" >"$at_check_line_file"
+(test ${enable_check_r7rs_csc_5} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-letrec-template.at:69"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-letrec-template.at:69: \"\${abs_builddir}\"/run-r7rs-csc-5.sh '(nix-let ((\"a\" ==> 1)(\"b\" ==> (© \"a\"))(\"c\" ==> (nix-get \"b\"))) (© \"c\"))' | sed 's/^g\\(....................................\\|............\\)\\(.\\)/g--RANDOM--\\2/'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-letrec-template.at:69"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csc-5.sh '(nix-let (("a" ==> 1)("b" ==> (© "a"))("c" ==> (nix-get "b"))) (© "c"))' | sed 's/^g\(....................................\|............\)\(.\)/g--RANDOM--\2/'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(let
+g--RANDOM--1
+=
+(1)
+;
+g--RANDOM--2
+=
+a
+;
+g--RANDOM--3
+=
+b
+;
+in(
+(let
+a
+=
+g--RANDOM--1
+;
+b
+=
+g--RANDOM--2
+;
+c
+=
+g--RANDOM--3
+;
+in(
+c
+))
+))
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-letrec-template.at:69"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
@@ -13973,6 +14210,85 @@ at_fn_check_status 0 $at_status "$at_srcdir/nix-letrec-template.at:60"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
+
+
+
+
+printf "%s\n" "nix-letrec-template.at:64" >"$at_check_line_file"
+(test ${enable_check_r7rs_csi_5} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-letrec-template.at:64"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-letrec-template.at:64: \"\${abs_builddir}\"/run-r7rs-csi-5.sh '(nix-let () nix-null)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-letrec-template.at:64"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csi-5.sh '(nix-let () nix-null)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(let
+in(
+(let
+in(
+(builtins.null)
+))
+))
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-letrec-template.at:64"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "nix-letrec-template.at:69" >"$at_check_line_file"
+(test ${enable_check_r7rs_csi_5} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-letrec-template.at:69"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-letrec-template.at:69: \"\${abs_builddir}\"/run-r7rs-csi-5.sh '(nix-let ((\"a\" ==> 1)(\"b\" ==> (© \"a\"))(\"c\" ==> (nix-get \"b\"))) (© \"c\"))' | sed 's/^g\\(....................................\\|............\\)\\(.\\)/g--RANDOM--\\2/'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-letrec-template.at:69"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csi-5.sh '(nix-let (("a" ==> 1)("b" ==> (© "a"))("c" ==> (nix-get "b"))) (© "c"))' | sed 's/^g\(....................................\|............\)\(.\)/g--RANDOM--\2/'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(let
+g--RANDOM--1
+=
+(1)
+;
+g--RANDOM--2
+=
+a
+;
+g--RANDOM--3
+=
+b
+;
+in(
+(let
+a
+=
+g--RANDOM--1
+;
+b
+=
+g--RANDOM--2
+;
+c
+=
+g--RANDOM--3
+;
+in(
+c
+))
+))
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-letrec-template.at:69"
+$at_failed && at_fn_log_failure
+$at_traceon; }
 
 
 
@@ -17124,6 +17440,85 @@ $at_traceon; }
 
 
 
+
+printf "%s\n" "nix-letrec-template.at:64" >"$at_check_line_file"
+(test ${enable_check_r7rs_gauche} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-letrec-template.at:64"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-letrec-template.at:64: \"\${abs_builddir}\"/run-r7rs-gauche.sh '(nix-let () nix-null)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-letrec-template.at:64"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gauche.sh '(nix-let () nix-null)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(let
+in(
+(let
+in(
+(builtins.null)
+))
+))
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-letrec-template.at:64"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "nix-letrec-template.at:69" >"$at_check_line_file"
+(test ${enable_check_r7rs_gauche} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-letrec-template.at:69"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-letrec-template.at:69: \"\${abs_builddir}\"/run-r7rs-gauche.sh '(nix-let ((\"a\" ==> 1)(\"b\" ==> (© \"a\"))(\"c\" ==> (nix-get \"b\"))) (© \"c\"))' | sed 's/^g\\(....................................\\|............\\)\\(.\\)/g--RANDOM--\\2/'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-letrec-template.at:69"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gauche.sh '(nix-let (("a" ==> 1)("b" ==> (© "a"))("c" ==> (nix-get "b"))) (© "c"))' | sed 's/^g\(....................................\|............\)\(.\)/g--RANDOM--\2/'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(let
+g--RANDOM--1
+=
+(1)
+;
+g--RANDOM--2
+=
+a
+;
+g--RANDOM--3
+=
+b
+;
+in(
+(let
+a
+=
+g--RANDOM--1
+;
+b
+=
+g--RANDOM--2
+;
+c
+=
+g--RANDOM--3
+;
+in(
+c
+))
+))
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-letrec-template.at:69"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
@@ -20269,6 +20664,85 @@ at_fn_check_status 0 $at_status "$at_srcdir/nix-letrec-template.at:60"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
+
+
+
+
+printf "%s\n" "nix-letrec-template.at:64" >"$at_check_line_file"
+(test ${enable_check_r7rs_gxi} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-letrec-template.at:64"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-letrec-template.at:64: \"\${abs_builddir}\"/run-r7rs-gxi.sh '(nix-let () nix-null)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-letrec-template.at:64"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gxi.sh '(nix-let () nix-null)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(let
+in(
+(let
+in(
+(builtins.null)
+))
+))
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-letrec-template.at:64"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "nix-letrec-template.at:69" >"$at_check_line_file"
+(test ${enable_check_r7rs_gxi} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-letrec-template.at:69"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-letrec-template.at:69: \"\${abs_builddir}\"/run-r7rs-gxi.sh '(nix-let ((\"a\" ==> 1)(\"b\" ==> (© \"a\"))(\"c\" ==> (nix-get \"b\"))) (© \"c\"))' | sed 's/^g\\(....................................\\|............\\)\\(.\\)/g--RANDOM--\\2/'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-letrec-template.at:69"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gxi.sh '(nix-let (("a" ==> 1)("b" ==> (© "a"))("c" ==> (nix-get "b"))) (© "c"))' | sed 's/^g\(....................................\|............\)\(.\)/g--RANDOM--\2/'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(let
+g--RANDOM--1
+=
+(1)
+;
+g--RANDOM--2
+=
+a
+;
+g--RANDOM--3
+=
+b
+;
+in(
+(let
+a
+=
+g--RANDOM--1
+;
+b
+=
+g--RANDOM--2
+;
+c
+=
+g--RANDOM--3
+;
+in(
+c
+))
+))
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-letrec-template.at:69"
+$at_failed && at_fn_log_failure
+$at_traceon; }
 
 
 
@@ -23420,6 +23894,85 @@ $at_traceon; }
 
 
 
+
+printf "%s\n" "nix-letrec-template.at:64" >"$at_check_line_file"
+(test ${enable_check_r7rs_gxc} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-letrec-template.at:64"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-letrec-template.at:64: \"\${abs_builddir}\"/run-r7rs-gxc.sh '(nix-let () nix-null)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-letrec-template.at:64"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gxc.sh '(nix-let () nix-null)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(let
+in(
+(let
+in(
+(builtins.null)
+))
+))
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-letrec-template.at:64"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "nix-letrec-template.at:69" >"$at_check_line_file"
+(test ${enable_check_r7rs_gxc} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-letrec-template.at:69"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-letrec-template.at:69: \"\${abs_builddir}\"/run-r7rs-gxc.sh '(nix-let ((\"a\" ==> 1)(\"b\" ==> (© \"a\"))(\"c\" ==> (nix-get \"b\"))) (© \"c\"))' | sed 's/^g\\(....................................\\|............\\)\\(.\\)/g--RANDOM--\\2/'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-letrec-template.at:69"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gxc.sh '(nix-let (("a" ==> 1)("b" ==> (© "a"))("c" ==> (nix-get "b"))) (© "c"))' | sed 's/^g\(....................................\|............\)\(.\)/g--RANDOM--\2/'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(let
+g--RANDOM--1
+=
+(1)
+;
+g--RANDOM--2
+=
+a
+;
+g--RANDOM--3
+=
+b
+;
+in(
+(let
+a
+=
+g--RANDOM--1
+;
+b
+=
+g--RANDOM--2
+;
+c
+=
+g--RANDOM--3
+;
+in(
+c
+))
+))
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-letrec-template.at:69"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
@@ -26521,6 +27074,85 @@ at_fn_check_status 0 $at_status "$at_srcdir/nix-letrec-template.at:60"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
+
+
+
+
+printf "%s\n" "nix-letrec-template.at:64" >"$at_check_line_file"
+(test ${enable_check_r6rs_guile} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-letrec-template.at:64"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-letrec-template.at:64: \"\${abs_builddir}\"/run-r6rs-guile.sh '(nix-let () nix-null)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-letrec-template.at:64"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-guile.sh '(nix-let () nix-null)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(let
+in(
+(let
+in(
+(builtins.null)
+))
+))
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-letrec-template.at:64"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "nix-letrec-template.at:69" >"$at_check_line_file"
+(test ${enable_check_r6rs_guile} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-letrec-template.at:69"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-letrec-template.at:69: \"\${abs_builddir}\"/run-r6rs-guile.sh '(nix-let ((\"a\" ==> 1)(\"b\" ==> (© \"a\"))(\"c\" ==> (nix-get \"b\"))) (© \"c\"))' | sed 's/^g\\(....................................\\|............\\)\\(.\\)/g--RANDOM--\\2/'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-letrec-template.at:69"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-guile.sh '(nix-let (("a" ==> 1)("b" ==> (© "a"))("c" ==> (nix-get "b"))) (© "c"))' | sed 's/^g\(....................................\|............\)\(.\)/g--RANDOM--\2/'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(let
+g--RANDOM--1
+=
+(1)
+;
+g--RANDOM--2
+=
+a
+;
+g--RANDOM--3
+=
+b
+;
+in(
+(let
+a
+=
+g--RANDOM--1
+;
+b
+=
+g--RANDOM--2
+;
+c
+=
+g--RANDOM--3
+;
+in(
+c
+))
+))
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-letrec-template.at:69"
+$at_failed && at_fn_log_failure
+$at_traceon; }
 
 
 
@@ -29672,6 +30304,85 @@ $at_traceon; }
 
 
 
+
+printf "%s\n" "nix-letrec-template.at:64" >"$at_check_line_file"
+(test ${enable_check_r7rs_guile} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-letrec-template.at:64"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-letrec-template.at:64: \"\${abs_builddir}\"/run-r7rs-guile.sh '(nix-let () nix-null)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-letrec-template.at:64"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-guile.sh '(nix-let () nix-null)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(let
+in(
+(let
+in(
+(builtins.null)
+))
+))
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-letrec-template.at:64"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "nix-letrec-template.at:69" >"$at_check_line_file"
+(test ${enable_check_r7rs_guile} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-letrec-template.at:69"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-letrec-template.at:69: \"\${abs_builddir}\"/run-r7rs-guile.sh '(nix-let ((\"a\" ==> 1)(\"b\" ==> (© \"a\"))(\"c\" ==> (nix-get \"b\"))) (© \"c\"))' | sed 's/^g\\(....................................\\|............\\)\\(.\\)/g--RANDOM--\\2/'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-letrec-template.at:69"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-guile.sh '(nix-let (("a" ==> 1)("b" ==> (© "a"))("c" ==> (nix-get "b"))) (© "c"))' | sed 's/^g\(....................................\|............\)\(.\)/g--RANDOM--\2/'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(let
+g--RANDOM--1
+=
+(1)
+;
+g--RANDOM--2
+=
+a
+;
+g--RANDOM--3
+=
+b
+;
+in(
+(let
+a
+=
+g--RANDOM--1
+;
+b
+=
+g--RANDOM--2
+;
+c
+=
+g--RANDOM--3
+;
+in(
+c
+))
+))
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-letrec-template.at:69"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
@@ -32773,6 +33484,85 @@ at_fn_check_status 0 $at_status "$at_srcdir/nix-letrec-template.at:60"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
+
+
+
+
+printf "%s\n" "nix-letrec-template.at:64" >"$at_check_line_file"
+(test ${enable_check_r6rs_loko} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-letrec-template.at:64"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-letrec-template.at:64: \"\${abs_builddir}\"/run-r6rs-loko.sh '(nix-let () nix-null)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-letrec-template.at:64"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '(nix-let () nix-null)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(let
+in(
+(let
+in(
+(builtins.null)
+))
+))
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-letrec-template.at:64"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "nix-letrec-template.at:69" >"$at_check_line_file"
+(test ${enable_check_r6rs_loko} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-letrec-template.at:69"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-letrec-template.at:69: \"\${abs_builddir}\"/run-r6rs-loko.sh '(nix-let ((\"a\" ==> 1)(\"b\" ==> (© \"a\"))(\"c\" ==> (nix-get \"b\"))) (© \"c\"))' | sed 's/^g\\(....................................\\|............\\)\\(.\\)/g--RANDOM--\\2/'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-letrec-template.at:69"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '(nix-let (("a" ==> 1)("b" ==> (© "a"))("c" ==> (nix-get "b"))) (© "c"))' | sed 's/^g\(....................................\|............\)\(.\)/g--RANDOM--\2/'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(let
+g--RANDOM--1
+=
+(1)
+;
+g--RANDOM--2
+=
+a
+;
+g--RANDOM--3
+=
+b
+;
+in(
+(let
+a
+=
+g--RANDOM--1
+;
+b
+=
+g--RANDOM--2
+;
+c
+=
+g--RANDOM--3
+;
+in(
+c
+))
+))
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-letrec-template.at:69"
+$at_failed && at_fn_log_failure
+$at_traceon; }
 
 
 
@@ -35924,6 +36714,85 @@ $at_traceon; }
 
 
 
+
+printf "%s\n" "nix-letrec-template.at:64" >"$at_check_line_file"
+(test ${enable_check_r7rs_loko} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-letrec-template.at:64"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-letrec-template.at:64: \"\${abs_builddir}\"/run-r7rs-loko.sh '(nix-let () nix-null)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-letrec-template.at:64"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(nix-let () nix-null)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(let
+in(
+(let
+in(
+(builtins.null)
+))
+))
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-letrec-template.at:64"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "nix-letrec-template.at:69" >"$at_check_line_file"
+(test ${enable_check_r7rs_loko} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-letrec-template.at:69"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-letrec-template.at:69: \"\${abs_builddir}\"/run-r7rs-loko.sh '(nix-let ((\"a\" ==> 1)(\"b\" ==> (© \"a\"))(\"c\" ==> (nix-get \"b\"))) (© \"c\"))' | sed 's/^g\\(....................................\\|............\\)\\(.\\)/g--RANDOM--\\2/'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-letrec-template.at:69"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(nix-let (("a" ==> 1)("b" ==> (© "a"))("c" ==> (nix-get "b"))) (© "c"))' | sed 's/^g\(....................................\|............\)\(.\)/g--RANDOM--\2/'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(let
+g--RANDOM--1
+=
+(1)
+;
+g--RANDOM--2
+=
+a
+;
+g--RANDOM--3
+=
+b
+;
+in(
+(let
+a
+=
+g--RANDOM--1
+;
+b
+=
+g--RANDOM--2
+;
+c
+=
+g--RANDOM--3
+;
+in(
+c
+))
+))
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-letrec-template.at:69"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
@@ -39028,6 +39897,85 @@ $at_traceon; }
 
 
 
+
+printf "%s\n" "nix-letrec-template.at:64" >"$at_check_line_file"
+(test ${enable_check_r6rs_racket} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-letrec-template.at:64"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-letrec-template.at:64: \"\${abs_builddir}\"/run-r6rs-racket.sh '(nix-let () nix-null)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-letrec-template.at:64"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-racket.sh '(nix-let () nix-null)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(let
+in(
+(let
+in(
+(builtins.null)
+))
+))
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-letrec-template.at:64"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "nix-letrec-template.at:69" >"$at_check_line_file"
+(test ${enable_check_r6rs_racket} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-letrec-template.at:69"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-letrec-template.at:69: \"\${abs_builddir}\"/run-r6rs-racket.sh '(nix-let ((\"a\" ==> 1)(\"b\" ==> (© \"a\"))(\"c\" ==> (nix-get \"b\"))) (© \"c\"))' | sed 's/^g\\(....................................\\|............\\)\\(.\\)/g--RANDOM--\\2/'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-letrec-template.at:69"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-racket.sh '(nix-let (("a" ==> 1)("b" ==> (© "a"))("c" ==> (nix-get "b"))) (© "c"))' | sed 's/^g\(....................................\|............\)\(.\)/g--RANDOM--\2/'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(let
+g--RANDOM--1
+=
+(1)
+;
+g--RANDOM--2
+=
+a
+;
+g--RANDOM--3
+=
+b
+;
+in(
+(let
+a
+=
+g--RANDOM--1
+;
+b
+=
+g--RANDOM--2
+;
+c
+=
+g--RANDOM--3
+;
+in(
+c
+))
+))
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-letrec-template.at:69"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
@@ -42129,6 +43077,85 @@ at_fn_check_status 0 $at_status "$at_srcdir/nix-letrec-template.at:60"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
+
+
+
+
+printf "%s\n" "nix-letrec-template.at:64" >"$at_check_line_file"
+(test ${enable_check_r6rs_sagittarius} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-letrec-template.at:64"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-letrec-template.at:64: \"\${abs_builddir}\"/run-r6rs-sagittarius.sh '(nix-let () nix-null)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-letrec-template.at:64"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-sagittarius.sh '(nix-let () nix-null)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(let
+in(
+(let
+in(
+(builtins.null)
+))
+))
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-letrec-template.at:64"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "nix-letrec-template.at:69" >"$at_check_line_file"
+(test ${enable_check_r6rs_sagittarius} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-letrec-template.at:69"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-letrec-template.at:69: \"\${abs_builddir}\"/run-r6rs-sagittarius.sh '(nix-let ((\"a\" ==> 1)(\"b\" ==> (© \"a\"))(\"c\" ==> (nix-get \"b\"))) (© \"c\"))' | sed 's/^g\\(....................................\\|............\\)\\(.\\)/g--RANDOM--\\2/'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-letrec-template.at:69"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-sagittarius.sh '(nix-let (("a" ==> 1)("b" ==> (© "a"))("c" ==> (nix-get "b"))) (© "c"))' | sed 's/^g\(....................................\|............\)\(.\)/g--RANDOM--\2/'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(let
+g--RANDOM--1
+=
+(1)
+;
+g--RANDOM--2
+=
+a
+;
+g--RANDOM--3
+=
+b
+;
+in(
+(let
+a
+=
+g--RANDOM--1
+;
+b
+=
+g--RANDOM--2
+;
+c
+=
+g--RANDOM--3
+;
+in(
+c
+))
+))
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-letrec-template.at:69"
+$at_failed && at_fn_log_failure
+$at_traceon; }
 
 
 
@@ -45277,6 +46304,85 @@ at_fn_check_status 0 $at_status "$at_srcdir/nix-letrec-template.at:60"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
+
+
+
+
+printf "%s\n" "nix-letrec-template.at:64" >"$at_check_line_file"
+(test ${enable_check_r7rs_sagittarius} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-letrec-template.at:64"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-letrec-template.at:64: \"\${abs_builddir}\"/run-r7rs-sagittarius.sh '(nix-let () nix-null)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-letrec-template.at:64"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-sagittarius.sh '(nix-let () nix-null)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(let
+in(
+(let
+in(
+(builtins.null)
+))
+))
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-letrec-template.at:64"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "nix-letrec-template.at:69" >"$at_check_line_file"
+(test ${enable_check_r7rs_sagittarius} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/nix-letrec-template.at:69"
+{ set +x
+printf "%s\n" "$at_srcdir/nix-letrec-template.at:69: \"\${abs_builddir}\"/run-r7rs-sagittarius.sh '(nix-let ((\"a\" ==> 1)(\"b\" ==> (© \"a\"))(\"c\" ==> (nix-get \"b\"))) (© \"c\"))' | sed 's/^g\\(....................................\\|............\\)\\(.\\)/g--RANDOM--\\2/'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nix-letrec-template.at:69"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-sagittarius.sh '(nix-let (("a" ==> 1)("b" ==> (© "a"))("c" ==> (nix-get "b"))) (© "c"))' | sed 's/^g\(....................................\|............\)\(.\)/g--RANDOM--\2/'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(let
+g--RANDOM--1
+=
+(1)
+;
+g--RANDOM--2
+=
+a
+;
+g--RANDOM--3
+=
+b
+;
+in(
+(let
+a
+=
+g--RANDOM--1
+;
+b
+=
+g--RANDOM--2
+;
+c
+=
+g--RANDOM--3
+;
+in(
+c
+))
+))
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/nix-letrec-template.at:69"
+$at_failed && at_fn_log_failure
+$at_traceon; }
 
 
 

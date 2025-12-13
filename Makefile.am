@@ -178,7 +178,8 @@ CHICKEN_EGGSPEC_BOTTOM = ' \
        pipchix.abstract-syntax-tree)) \
     (extension pipchix.nix-letrec \
       (component-dependencies \
-       pipchix.abstract-syntax-tree)) \
+       pipchix.abstract-syntax-tree \
+       pipchix.generate-identifier)) \
     (extension pipchix.base \
       (component-dependencies \
        pipchix.string-manipulation \
