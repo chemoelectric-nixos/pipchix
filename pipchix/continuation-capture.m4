@@ -39,7 +39,8 @@
 ;;; ‘continuations’, that reëxports (chicken continuation) with the
 ;;; procedure names changed. It includes some small corollary
 ;;; procedures that are duplicated here, but implemented with our
-;;; stuff and sometimes with different names.
+;;; stuff and sometimes with different names. I have implemented
+;;; further corollaries.
 ;;;
 ;;; Obviously it would be better to have these operations as
 ;;; primitives rather than implementing them as wrappers around
@@ -56,23 +57,40 @@
   ((call/cc (lambda (proc)
               (receiver (%%make-continuation proc))))))
 
-(define (continuation-graft cont thunk)
-  ((%%continuation-proc cont) thunk))
+(define (continuation-graft cc thunk)
+  ((%%continuation-proc cc) thunk))
 
-(define (continuation-return cont . returned-values)
+(define (continuation-return cc . returned-values)
   (continuation-graft
-   cont
+   cc
    (lambda () (apply values returned-values))))
 
-(define (continuation->procedure cont)
+(define (continuation->procedure cc)
   ;; A better name might be ‘wrap-continuation-in-procedure’, but a
   ;; primitive implementation might not use a wrapper.
   (lambda args
-    (apply continuation-return cont args)))
+    (apply continuation-return cc args)))
 
 (define (current-continuation)
+  ;;
+  ;; Returns a snapshot of the current continuation into itself. You
+  ;; can use this thus:
+  ;;
+  ;;  (let ((cc (current-continuation)))
+  ;;    (if (continuation? cc)
+  ;;      (begin (do-stuff) (continuation-return cc result))
+  ;;      (use-result cc)))
+  ;;
+  ;; This is like doing:
+  ;;
+  ;;  (let ((result (continuation-capture
+  ;;                  (lambda (cc)
+  ;;                    (do-stuff)
+  ;;                    (continuation-return cc result)))))
+  ;;    (use-result result))
+  ;;
   (continuation-capture
-   (lambda (cont) (continuation-return cont cont))))
+   (lambda (cc) (continuation-return cc cc))))
 
 ;;;
 ;;; The following is called GOTO. As if tail calls were not GOTOs!
@@ -100,8 +118,23 @@
 ;;; than if we were writing in Ada or C. I do not have a general rule,
 ;;; as I do for ordinary procedural languages.
 ;;;
-(define (goto-continuation cont)
-  (continuation-return cont cont))
+(define (goto-continuation cc)
+  (continuation-return cc cc))
+
+(define (continuation-capture-call-with-values
+         continuation-receiver
+         values-receiver)
+  ;;
+  ;; Use continuation-capture-call-with-values similarly to
+  ;; call-with-values:
+  ;;
+  ;;   (continuation-capture-call-with-values
+  ;;       (lambda (cc) ...)
+  ;;     (lambda results ...))
+  ;;
+  (call-with-values
+      (lambda () (continuation-capture continuation-receiver))
+    values-receiver))
 
 m4_divert(-1)
 ;;; local variables:

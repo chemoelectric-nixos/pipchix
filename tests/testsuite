@@ -2436,6 +2436,68 @@ $at_traceon; }
 
 
 
+
+
+printf "%s\n" "continuation-capture-template.at:94" >"$at_check_line_file"
+(test ${enable_check_r6rs_chez} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/continuation-capture-template.at:94"
+{ set +x
+printf "%s\n" "$at_srcdir/continuation-capture-template.at:94: \"\${abs_builddir}\"/run-r6rs-chez.sh '(continuation-capture-call-with-values
+       (lambda (cc) (continuation-return cc (scheme->nix 1234)))
+     (lambda (x) x))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "continuation-capture-template.at:94"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '(continuation-capture-call-with-values
+       (lambda (cc) (continuation-return cc (scheme->nix 1234)))
+     (lambda (x) x))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(1234)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/continuation-capture-template.at:94"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "continuation-capture-template.at:104" >"$at_check_line_file"
+(test ${enable_check_r6rs_chez} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/continuation-capture-template.at:104"
+{ set +x
+printf "%s\n" "$at_srcdir/continuation-capture-template.at:104: \"\${abs_builddir}\"/run-r6rs-chez.sh '(continuation-capture-call-with-values
+       (lambda (cc)
+         (continuation-return cc (scheme->nix 1234)
+                                 (scheme->nix 2345)
+                                 (scheme->nix 3456)))
+     (lambda (x y z) (nix-list x y z)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "continuation-capture-template.at:104"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '(continuation-capture-call-with-values
+       (lambda (cc)
+         (continuation-return cc (scheme->nix 1234)
+                                 (scheme->nix 2345)
+                                 (scheme->nix 3456)))
+     (lambda (x y z) (nix-list x y z)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(1234)
+(2345)
+(3456)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/continuation-capture-template.at:104"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
@@ -5473,6 +5535,68 @@ at_fn_diff_devnull "$at_stderr" || at_failed=:
 echo >>"$at_stdout"; printf "%s\n" "3 44" | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/continuation-capture-template.at:88"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "continuation-capture-template.at:94" >"$at_check_line_file"
+(test ${enable_check_r7rs_chibi} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/continuation-capture-template.at:94"
+{ set +x
+printf "%s\n" "$at_srcdir/continuation-capture-template.at:94: \"\${abs_builddir}\"/run-r7rs-chibi.sh '(continuation-capture-call-with-values
+       (lambda (cc) (continuation-return cc (scheme->nix 1234)))
+     (lambda (x) x))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "continuation-capture-template.at:94"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-chibi.sh '(continuation-capture-call-with-values
+       (lambda (cc) (continuation-return cc (scheme->nix 1234)))
+     (lambda (x) x))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(1234)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/continuation-capture-template.at:94"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "continuation-capture-template.at:104" >"$at_check_line_file"
+(test ${enable_check_r7rs_chibi} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/continuation-capture-template.at:104"
+{ set +x
+printf "%s\n" "$at_srcdir/continuation-capture-template.at:104: \"\${abs_builddir}\"/run-r7rs-chibi.sh '(continuation-capture-call-with-values
+       (lambda (cc)
+         (continuation-return cc (scheme->nix 1234)
+                                 (scheme->nix 2345)
+                                 (scheme->nix 3456)))
+     (lambda (x y z) (nix-list x y z)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "continuation-capture-template.at:104"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-chibi.sh '(continuation-capture-call-with-values
+       (lambda (cc)
+         (continuation-return cc (scheme->nix 1234)
+                                 (scheme->nix 2345)
+                                 (scheme->nix 3456)))
+     (lambda (x y z) (nix-list x y z)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(1234)
+(2345)
+(3456)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/continuation-capture-template.at:104"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -8564,6 +8688,68 @@ $at_traceon; }
 
 
 
+
+
+printf "%s\n" "continuation-capture-template.at:94" >"$at_check_line_file"
+(test ${enable_check_r7rs_csc_5} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/continuation-capture-template.at:94"
+{ set +x
+printf "%s\n" "$at_srcdir/continuation-capture-template.at:94: \"\${abs_builddir}\"/run-r7rs-csc-5.sh '(continuation-capture-call-with-values
+       (lambda (cc) (continuation-return cc (scheme->nix 1234)))
+     (lambda (x) x))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "continuation-capture-template.at:94"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csc-5.sh '(continuation-capture-call-with-values
+       (lambda (cc) (continuation-return cc (scheme->nix 1234)))
+     (lambda (x) x))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(1234)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/continuation-capture-template.at:94"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "continuation-capture-template.at:104" >"$at_check_line_file"
+(test ${enable_check_r7rs_csc_5} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/continuation-capture-template.at:104"
+{ set +x
+printf "%s\n" "$at_srcdir/continuation-capture-template.at:104: \"\${abs_builddir}\"/run-r7rs-csc-5.sh '(continuation-capture-call-with-values
+       (lambda (cc)
+         (continuation-return cc (scheme->nix 1234)
+                                 (scheme->nix 2345)
+                                 (scheme->nix 3456)))
+     (lambda (x y z) (nix-list x y z)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "continuation-capture-template.at:104"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csc-5.sh '(continuation-capture-call-with-values
+       (lambda (cc)
+         (continuation-return cc (scheme->nix 1234)
+                                 (scheme->nix 2345)
+                                 (scheme->nix 3456)))
+     (lambda (x y z) (nix-list x y z)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(1234)
+(2345)
+(3456)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/continuation-capture-template.at:104"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
@@ -11606,6 +11792,68 @@ $at_traceon; }
 
 
 
+
+
+printf "%s\n" "continuation-capture-template.at:94" >"$at_check_line_file"
+(test ${enable_check_r7rs_csi_5} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/continuation-capture-template.at:94"
+{ set +x
+printf "%s\n" "$at_srcdir/continuation-capture-template.at:94: \"\${abs_builddir}\"/run-r7rs-csi-5.sh '(continuation-capture-call-with-values
+       (lambda (cc) (continuation-return cc (scheme->nix 1234)))
+     (lambda (x) x))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "continuation-capture-template.at:94"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csi-5.sh '(continuation-capture-call-with-values
+       (lambda (cc) (continuation-return cc (scheme->nix 1234)))
+     (lambda (x) x))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(1234)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/continuation-capture-template.at:94"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "continuation-capture-template.at:104" >"$at_check_line_file"
+(test ${enable_check_r7rs_csi_5} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/continuation-capture-template.at:104"
+{ set +x
+printf "%s\n" "$at_srcdir/continuation-capture-template.at:104: \"\${abs_builddir}\"/run-r7rs-csi-5.sh '(continuation-capture-call-with-values
+       (lambda (cc)
+         (continuation-return cc (scheme->nix 1234)
+                                 (scheme->nix 2345)
+                                 (scheme->nix 3456)))
+     (lambda (x y z) (nix-list x y z)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "continuation-capture-template.at:104"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csi-5.sh '(continuation-capture-call-with-values
+       (lambda (cc)
+         (continuation-return cc (scheme->nix 1234)
+                                 (scheme->nix 2345)
+                                 (scheme->nix 3456)))
+     (lambda (x y z) (nix-list x y z)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(1234)
+(2345)
+(3456)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/continuation-capture-template.at:104"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
@@ -14643,6 +14891,68 @@ at_fn_diff_devnull "$at_stderr" || at_failed=:
 echo >>"$at_stdout"; printf "%s\n" "3 44" | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/continuation-capture-template.at:88"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "continuation-capture-template.at:94" >"$at_check_line_file"
+(test ${enable_check_r7rs_gauche} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/continuation-capture-template.at:94"
+{ set +x
+printf "%s\n" "$at_srcdir/continuation-capture-template.at:94: \"\${abs_builddir}\"/run-r7rs-gauche.sh '(continuation-capture-call-with-values
+       (lambda (cc) (continuation-return cc (scheme->nix 1234)))
+     (lambda (x) x))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "continuation-capture-template.at:94"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gauche.sh '(continuation-capture-call-with-values
+       (lambda (cc) (continuation-return cc (scheme->nix 1234)))
+     (lambda (x) x))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(1234)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/continuation-capture-template.at:94"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "continuation-capture-template.at:104" >"$at_check_line_file"
+(test ${enable_check_r7rs_gauche} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/continuation-capture-template.at:104"
+{ set +x
+printf "%s\n" "$at_srcdir/continuation-capture-template.at:104: \"\${abs_builddir}\"/run-r7rs-gauche.sh '(continuation-capture-call-with-values
+       (lambda (cc)
+         (continuation-return cc (scheme->nix 1234)
+                                 (scheme->nix 2345)
+                                 (scheme->nix 3456)))
+     (lambda (x y z) (nix-list x y z)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "continuation-capture-template.at:104"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gauche.sh '(continuation-capture-call-with-values
+       (lambda (cc)
+         (continuation-return cc (scheme->nix 1234)
+                                 (scheme->nix 2345)
+                                 (scheme->nix 3456)))
+     (lambda (x y z) (nix-list x y z)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(1234)
+(2345)
+(3456)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/continuation-capture-template.at:104"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -17734,6 +18044,68 @@ $at_traceon; }
 
 
 
+
+
+printf "%s\n" "continuation-capture-template.at:94" >"$at_check_line_file"
+(test ${enable_check_r7rs_gxi} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/continuation-capture-template.at:94"
+{ set +x
+printf "%s\n" "$at_srcdir/continuation-capture-template.at:94: \"\${abs_builddir}\"/run-r7rs-gxi.sh '(continuation-capture-call-with-values
+       (lambda (cc) (continuation-return cc (scheme->nix 1234)))
+     (lambda (x) x))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "continuation-capture-template.at:94"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gxi.sh '(continuation-capture-call-with-values
+       (lambda (cc) (continuation-return cc (scheme->nix 1234)))
+     (lambda (x) x))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(1234)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/continuation-capture-template.at:94"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "continuation-capture-template.at:104" >"$at_check_line_file"
+(test ${enable_check_r7rs_gxi} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/continuation-capture-template.at:104"
+{ set +x
+printf "%s\n" "$at_srcdir/continuation-capture-template.at:104: \"\${abs_builddir}\"/run-r7rs-gxi.sh '(continuation-capture-call-with-values
+       (lambda (cc)
+         (continuation-return cc (scheme->nix 1234)
+                                 (scheme->nix 2345)
+                                 (scheme->nix 3456)))
+     (lambda (x y z) (nix-list x y z)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "continuation-capture-template.at:104"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gxi.sh '(continuation-capture-call-with-values
+       (lambda (cc)
+         (continuation-return cc (scheme->nix 1234)
+                                 (scheme->nix 2345)
+                                 (scheme->nix 3456)))
+     (lambda (x y z) (nix-list x y z)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(1234)
+(2345)
+(3456)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/continuation-capture-template.at:104"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
@@ -20815,6 +21187,68 @@ at_fn_diff_devnull "$at_stderr" || at_failed=:
 echo >>"$at_stdout"; printf "%s\n" "3 44" | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/continuation-capture-template.at:88"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "continuation-capture-template.at:94" >"$at_check_line_file"
+(test ${enable_check_r7rs_gxc} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/continuation-capture-template.at:94"
+{ set +x
+printf "%s\n" "$at_srcdir/continuation-capture-template.at:94: \"\${abs_builddir}\"/run-r7rs-gxc.sh '(continuation-capture-call-with-values
+       (lambda (cc) (continuation-return cc (scheme->nix 1234)))
+     (lambda (x) x))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "continuation-capture-template.at:94"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gxc.sh '(continuation-capture-call-with-values
+       (lambda (cc) (continuation-return cc (scheme->nix 1234)))
+     (lambda (x) x))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(1234)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/continuation-capture-template.at:94"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "continuation-capture-template.at:104" >"$at_check_line_file"
+(test ${enable_check_r7rs_gxc} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/continuation-capture-template.at:104"
+{ set +x
+printf "%s\n" "$at_srcdir/continuation-capture-template.at:104: \"\${abs_builddir}\"/run-r7rs-gxc.sh '(continuation-capture-call-with-values
+       (lambda (cc)
+         (continuation-return cc (scheme->nix 1234)
+                                 (scheme->nix 2345)
+                                 (scheme->nix 3456)))
+     (lambda (x y z) (nix-list x y z)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "continuation-capture-template.at:104"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gxc.sh '(continuation-capture-call-with-values
+       (lambda (cc)
+         (continuation-return cc (scheme->nix 1234)
+                                 (scheme->nix 2345)
+                                 (scheme->nix 3456)))
+     (lambda (x y z) (nix-list x y z)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(1234)
+(2345)
+(3456)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/continuation-capture-template.at:104"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -23906,6 +24340,68 @@ $at_traceon; }
 
 
 
+
+
+printf "%s\n" "continuation-capture-template.at:94" >"$at_check_line_file"
+(test ${enable_check_r6rs_guile} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/continuation-capture-template.at:94"
+{ set +x
+printf "%s\n" "$at_srcdir/continuation-capture-template.at:94: \"\${abs_builddir}\"/run-r6rs-guile.sh '(continuation-capture-call-with-values
+       (lambda (cc) (continuation-return cc (scheme->nix 1234)))
+     (lambda (x) x))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "continuation-capture-template.at:94"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-guile.sh '(continuation-capture-call-with-values
+       (lambda (cc) (continuation-return cc (scheme->nix 1234)))
+     (lambda (x) x))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(1234)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/continuation-capture-template.at:94"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "continuation-capture-template.at:104" >"$at_check_line_file"
+(test ${enable_check_r6rs_guile} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/continuation-capture-template.at:104"
+{ set +x
+printf "%s\n" "$at_srcdir/continuation-capture-template.at:104: \"\${abs_builddir}\"/run-r6rs-guile.sh '(continuation-capture-call-with-values
+       (lambda (cc)
+         (continuation-return cc (scheme->nix 1234)
+                                 (scheme->nix 2345)
+                                 (scheme->nix 3456)))
+     (lambda (x y z) (nix-list x y z)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "continuation-capture-template.at:104"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-guile.sh '(continuation-capture-call-with-values
+       (lambda (cc)
+         (continuation-return cc (scheme->nix 1234)
+                                 (scheme->nix 2345)
+                                 (scheme->nix 3456)))
+     (lambda (x y z) (nix-list x y z)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(1234)
+(2345)
+(3456)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/continuation-capture-template.at:104"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
@@ -26943,6 +27439,68 @@ at_fn_diff_devnull "$at_stderr" || at_failed=:
 echo >>"$at_stdout"; printf "%s\n" "3 44" | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/continuation-capture-template.at:88"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "continuation-capture-template.at:94" >"$at_check_line_file"
+(test ${enable_check_r7rs_guile} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/continuation-capture-template.at:94"
+{ set +x
+printf "%s\n" "$at_srcdir/continuation-capture-template.at:94: \"\${abs_builddir}\"/run-r7rs-guile.sh '(continuation-capture-call-with-values
+       (lambda (cc) (continuation-return cc (scheme->nix 1234)))
+     (lambda (x) x))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "continuation-capture-template.at:94"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-guile.sh '(continuation-capture-call-with-values
+       (lambda (cc) (continuation-return cc (scheme->nix 1234)))
+     (lambda (x) x))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(1234)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/continuation-capture-template.at:94"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "continuation-capture-template.at:104" >"$at_check_line_file"
+(test ${enable_check_r7rs_guile} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/continuation-capture-template.at:104"
+{ set +x
+printf "%s\n" "$at_srcdir/continuation-capture-template.at:104: \"\${abs_builddir}\"/run-r7rs-guile.sh '(continuation-capture-call-with-values
+       (lambda (cc)
+         (continuation-return cc (scheme->nix 1234)
+                                 (scheme->nix 2345)
+                                 (scheme->nix 3456)))
+     (lambda (x y z) (nix-list x y z)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "continuation-capture-template.at:104"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-guile.sh '(continuation-capture-call-with-values
+       (lambda (cc)
+         (continuation-return cc (scheme->nix 1234)
+                                 (scheme->nix 2345)
+                                 (scheme->nix 3456)))
+     (lambda (x y z) (nix-list x y z)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(1234)
+(2345)
+(3456)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/continuation-capture-template.at:104"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -30034,6 +30592,68 @@ $at_traceon; }
 
 
 
+
+
+printf "%s\n" "continuation-capture-template.at:94" >"$at_check_line_file"
+(test ${enable_check_r6rs_loko} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/continuation-capture-template.at:94"
+{ set +x
+printf "%s\n" "$at_srcdir/continuation-capture-template.at:94: \"\${abs_builddir}\"/run-r6rs-loko.sh '(continuation-capture-call-with-values
+       (lambda (cc) (continuation-return cc (scheme->nix 1234)))
+     (lambda (x) x))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "continuation-capture-template.at:94"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '(continuation-capture-call-with-values
+       (lambda (cc) (continuation-return cc (scheme->nix 1234)))
+     (lambda (x) x))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(1234)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/continuation-capture-template.at:94"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "continuation-capture-template.at:104" >"$at_check_line_file"
+(test ${enable_check_r6rs_loko} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/continuation-capture-template.at:104"
+{ set +x
+printf "%s\n" "$at_srcdir/continuation-capture-template.at:104: \"\${abs_builddir}\"/run-r6rs-loko.sh '(continuation-capture-call-with-values
+       (lambda (cc)
+         (continuation-return cc (scheme->nix 1234)
+                                 (scheme->nix 2345)
+                                 (scheme->nix 3456)))
+     (lambda (x y z) (nix-list x y z)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "continuation-capture-template.at:104"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '(continuation-capture-call-with-values
+       (lambda (cc)
+         (continuation-return cc (scheme->nix 1234)
+                                 (scheme->nix 2345)
+                                 (scheme->nix 3456)))
+     (lambda (x y z) (nix-list x y z)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(1234)
+(2345)
+(3456)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/continuation-capture-template.at:104"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
@@ -33071,6 +33691,68 @@ at_fn_diff_devnull "$at_stderr" || at_failed=:
 echo >>"$at_stdout"; printf "%s\n" "3 44" | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/continuation-capture-template.at:88"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "continuation-capture-template.at:94" >"$at_check_line_file"
+(test ${enable_check_r7rs_loko} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/continuation-capture-template.at:94"
+{ set +x
+printf "%s\n" "$at_srcdir/continuation-capture-template.at:94: \"\${abs_builddir}\"/run-r7rs-loko.sh '(continuation-capture-call-with-values
+       (lambda (cc) (continuation-return cc (scheme->nix 1234)))
+     (lambda (x) x))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "continuation-capture-template.at:94"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(continuation-capture-call-with-values
+       (lambda (cc) (continuation-return cc (scheme->nix 1234)))
+     (lambda (x) x))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(1234)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/continuation-capture-template.at:94"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "continuation-capture-template.at:104" >"$at_check_line_file"
+(test ${enable_check_r7rs_loko} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/continuation-capture-template.at:104"
+{ set +x
+printf "%s\n" "$at_srcdir/continuation-capture-template.at:104: \"\${abs_builddir}\"/run-r7rs-loko.sh '(continuation-capture-call-with-values
+       (lambda (cc)
+         (continuation-return cc (scheme->nix 1234)
+                                 (scheme->nix 2345)
+                                 (scheme->nix 3456)))
+     (lambda (x y z) (nix-list x y z)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "continuation-capture-template.at:104"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(continuation-capture-call-with-values
+       (lambda (cc)
+         (continuation-return cc (scheme->nix 1234)
+                                 (scheme->nix 2345)
+                                 (scheme->nix 3456)))
+     (lambda (x y z) (nix-list x y z)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(1234)
+(2345)
+(3456)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/continuation-capture-template.at:104"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -36162,6 +36844,68 @@ $at_traceon; }
 
 
 
+
+
+printf "%s\n" "continuation-capture-template.at:94" >"$at_check_line_file"
+(test ${enable_check_r6rs_racket} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/continuation-capture-template.at:94"
+{ set +x
+printf "%s\n" "$at_srcdir/continuation-capture-template.at:94: \"\${abs_builddir}\"/run-r6rs-racket.sh '(continuation-capture-call-with-values
+       (lambda (cc) (continuation-return cc (scheme->nix 1234)))
+     (lambda (x) x))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "continuation-capture-template.at:94"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-racket.sh '(continuation-capture-call-with-values
+       (lambda (cc) (continuation-return cc (scheme->nix 1234)))
+     (lambda (x) x))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(1234)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/continuation-capture-template.at:94"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "continuation-capture-template.at:104" >"$at_check_line_file"
+(test ${enable_check_r6rs_racket} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/continuation-capture-template.at:104"
+{ set +x
+printf "%s\n" "$at_srcdir/continuation-capture-template.at:104: \"\${abs_builddir}\"/run-r6rs-racket.sh '(continuation-capture-call-with-values
+       (lambda (cc)
+         (continuation-return cc (scheme->nix 1234)
+                                 (scheme->nix 2345)
+                                 (scheme->nix 3456)))
+     (lambda (x y z) (nix-list x y z)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "continuation-capture-template.at:104"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-racket.sh '(continuation-capture-call-with-values
+       (lambda (cc)
+         (continuation-return cc (scheme->nix 1234)
+                                 (scheme->nix 2345)
+                                 (scheme->nix 3456)))
+     (lambda (x y z) (nix-list x y z)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(1234)
+(2345)
+(3456)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/continuation-capture-template.at:104"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
@@ -39204,6 +39948,68 @@ $at_traceon; }
 
 
 
+
+
+printf "%s\n" "continuation-capture-template.at:94" >"$at_check_line_file"
+(test ${enable_check_r6rs_sagittarius} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/continuation-capture-template.at:94"
+{ set +x
+printf "%s\n" "$at_srcdir/continuation-capture-template.at:94: \"\${abs_builddir}\"/run-r6rs-sagittarius.sh '(continuation-capture-call-with-values
+       (lambda (cc) (continuation-return cc (scheme->nix 1234)))
+     (lambda (x) x))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "continuation-capture-template.at:94"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-sagittarius.sh '(continuation-capture-call-with-values
+       (lambda (cc) (continuation-return cc (scheme->nix 1234)))
+     (lambda (x) x))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(1234)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/continuation-capture-template.at:94"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "continuation-capture-template.at:104" >"$at_check_line_file"
+(test ${enable_check_r6rs_sagittarius} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/continuation-capture-template.at:104"
+{ set +x
+printf "%s\n" "$at_srcdir/continuation-capture-template.at:104: \"\${abs_builddir}\"/run-r6rs-sagittarius.sh '(continuation-capture-call-with-values
+       (lambda (cc)
+         (continuation-return cc (scheme->nix 1234)
+                                 (scheme->nix 2345)
+                                 (scheme->nix 3456)))
+     (lambda (x y z) (nix-list x y z)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "continuation-capture-template.at:104"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-sagittarius.sh '(continuation-capture-call-with-values
+       (lambda (cc)
+         (continuation-return cc (scheme->nix 1234)
+                                 (scheme->nix 2345)
+                                 (scheme->nix 3456)))
+     (lambda (x y z) (nix-list x y z)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(1234)
+(2345)
+(3456)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/continuation-capture-template.at:104"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
@@ -42241,6 +43047,68 @@ at_fn_diff_devnull "$at_stderr" || at_failed=:
 echo >>"$at_stdout"; printf "%s\n" "3 44" | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/continuation-capture-template.at:88"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "continuation-capture-template.at:94" >"$at_check_line_file"
+(test ${enable_check_r7rs_sagittarius} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/continuation-capture-template.at:94"
+{ set +x
+printf "%s\n" "$at_srcdir/continuation-capture-template.at:94: \"\${abs_builddir}\"/run-r7rs-sagittarius.sh '(continuation-capture-call-with-values
+       (lambda (cc) (continuation-return cc (scheme->nix 1234)))
+     (lambda (x) x))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "continuation-capture-template.at:94"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-sagittarius.sh '(continuation-capture-call-with-values
+       (lambda (cc) (continuation-return cc (scheme->nix 1234)))
+     (lambda (x) x))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(1234)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/continuation-capture-template.at:94"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "continuation-capture-template.at:104" >"$at_check_line_file"
+(test ${enable_check_r7rs_sagittarius} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/continuation-capture-template.at:104"
+{ set +x
+printf "%s\n" "$at_srcdir/continuation-capture-template.at:104: \"\${abs_builddir}\"/run-r7rs-sagittarius.sh '(continuation-capture-call-with-values
+       (lambda (cc)
+         (continuation-return cc (scheme->nix 1234)
+                                 (scheme->nix 2345)
+                                 (scheme->nix 3456)))
+     (lambda (x y z) (nix-list x y z)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "continuation-capture-template.at:104"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-sagittarius.sh '(continuation-capture-call-with-values
+       (lambda (cc)
+         (continuation-return cc (scheme->nix 1234)
+                                 (scheme->nix 2345)
+                                 (scheme->nix 3456)))
+     (lambda (x y z) (nix-list x y z)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(1234)
+(2345)
+(3456)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/continuation-capture-template.at:104"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 

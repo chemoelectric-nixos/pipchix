@@ -87,6 +87,23 @@ m4_define([sexpr],
               (goto-continuation loop)))))])
 check_unquoted([run_scheme 'sexpr'],[0],[3 44],[])
 
+m4_define([sexpr],
+  [(continuation-capture-call-with-values
+       (lambda (cc) (continuation-return cc (scheme->nix 1234)))
+     (lambda (x) x))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl((1234)·)],[])
+
+m4_define([sexpr],
+  [(continuation-capture-call-with-values
+       (lambda (cc)
+         (continuation-return cc (scheme->nix 1234)
+                                 (scheme->nix 2345)
+                                 (scheme->nix 3456)))
+     (lambda (x y z) (nix-list x y z)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl(@<:@·(1234)·(2345)·(3456)·@:>@·)],[])
+
 AT_CLEANUP
 
 ])
