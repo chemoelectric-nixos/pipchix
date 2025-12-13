@@ -28,7 +28,9 @@ m4_include(pipchix/pipchix-includes.m4)
   (export m4_include(pipchix/nix-letrec.exports.m4))
 
   (import (rnrs base (6))
-          (pipchix abstract-syntax-tree))
+          (rnrs control (6))
+          (pipchix abstract-syntax-tree)
+          (pipchix generate-identifier))
 
   m4_include(pipchix/nix-letrec.m4)
 

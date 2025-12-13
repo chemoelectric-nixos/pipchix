@@ -25,6 +25,8 @@
 
 define_nix_set_setrec_letrec(«nix-letrec»)
 
+;;; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 (define-syntax nix-letrec
   (syntax-rules ()
     ((_ (binding ...) in-clause)
@@ -32,6 +34,8 @@ define_nix_set_setrec_letrec(«nix-letrec»)
        (expand-%%nix-letrec%%-bindings node binding ...)
        (set-nix-letrec-node-in-clause! node in-clause)
        node))))
+
+;;; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 (define-syntax nix-let*
   (syntax-rules ( inherit inherit-from )
@@ -63,10 +67,68 @@ define_nix_set_setrec_letrec(«nix-letrec»)
      (nix-letrec ()
        in-clause))))
 
+;;; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+(define-syntax nix-let
+  (syntax-rules ()
+    ((_ (binding ...) in-clause)
+     (let ((bdgs '()))
+       (collect-%%nix-let%%-bindings! bdgs binding ...)
+       (let ((node1 (make-nix-letrec-node))
+             (node2 (make-nix-letrec-node)))
+         (let loop ((p (reverse bdgs)))
+           (when (pair? p)
+             (let ((tmp (generate-identifier))
+                   (attrpath (caar p))
+                   (value (cadar p)))
+               (insert-%%nix-letrec%%-binding
+                node1 (list tmp) value)
+               (insert-%%nix-letrec%%-binding
+                node2 attrpath (make-nix-get-node
+                                #f (list->nix-attributepath-node
+                                    (list tmp))))
+               (loop (cdr p)))))
+         (set-nix-letrec-node-in-clause! node1 node2)
+         (set-nix-letrec-node-in-clause! node2 in-clause)
+         node1)))))
+
+(define-syntax collect-%%nix-let%%-bindings!
+  (syntax-rules ( inherit inherit-from <== ==> )
+
+    ((_ bdgs (inherit-from s a) binding ...)
+     (let ((value (expand-%%nix-letrec%%-get-node s a)))
+       (set! bdgs `((,(list a) ,value) . ,bdgs))
+       (collect-%%nix-let%%-bindings! bdgs binding ...)))
+
+    ((_ bdgs (inherit-from s a b ...) binding ...)
+     (let ((value (expand-%%nix-letrec%%-get-node s a)))
+       (set! bdgs `((,(list a) ,value) . ,bdgs))
+       (collect-%%nix-let%%-bindings!
+        bdgs (inherit-from s b ...) binding ...)))
+
+    ((_ bdgs (inherit a b ...) binding ...)
+     (collect-%%nix-let%%-bindings!
+      bdgs (inherit-from #f a b ...) binding ...))
+
+    ((_ bdgs (value <== a b ...) binding ...)
+     (begin
+       (set! bdgs `((,(list a b ...) ,value) . ,bdgs))
+       (collect-%%nix-let%%-bindings! bdgs binding ...)))
+
+    ((_ bdgs (a b ... ==> value) binding ...)
+     (begin
+       (set! bdgs `((,(list a b ...) ,value) . ,bdgs))
+       (collect-%%nix-let%%-bindings! bdgs binding ...)))
+
+    ((_ bdgs) #t)))
+
+;;; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 ;;; local variables:
 ;;; mode: scheme
 ;;; geiser-scheme-implementation: chibi
 ;;; coding: utf-8
+;;; eval: (put 'if 'scheme-indent-function 1)
 ;;; eval: (put 'nix-letrec 'scheme-indent-function 1)
 ;;; eval: (put 'nix-let* 'scheme-indent-function 1)
 ;;; eval: (put 'nix-let 'scheme-indent-function 1)

@@ -46,8 +46,6 @@ m4_pushdef(«who»,«$1»)m4_dnl
 (define-syntax expand-%%who%%-bindings
   (syntax-rules ( inherit inherit-from <== ==> )
 
-    ((_ node) #t)
-
     ((_ node (inherit-from s a) binding ...)
      (begin
        (insert-%%who%%-binding
@@ -75,7 +73,9 @@ m4_pushdef(«who»,«$1»)m4_dnl
      (begin
        (insert-%%who%%-binding
         node (list a b ...) value)
-       (expand-%%who%%-bindings node binding ...)))))
+       (expand-%%who%%-bindings node binding ...)))
+
+    ((_ node) #t)))
 
 (define-syntax insert-%%who%%-binding
   (syntax-rules ()

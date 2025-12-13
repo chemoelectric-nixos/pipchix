@@ -57,6 +57,9 @@ nix-setrec
 ;;; Recursive let (that is, the ‘let’ built into Nix).
 nix-letrec
 
+;;; Non-recursive let.
+nix-let
+
 ;;; One-after-another let.
 nix-let*
 
