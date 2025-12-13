@@ -26,12 +26,9 @@
 (define nix-get
   (case-lambda
     ((identifier)
-     (make-nix-get-node
-      #f (list->nix-attributepath-node (list identifier))))
+     (make-nix-get-node #f identifier))
     ((attrset . attrpath)
-     (make-nix-get-node
-      (scheme->nix attrset)
-      (list->nix-attributepath-node attrpath)))))
+     (make-nix-get-node attrset attrpath))))
 
 (define © nix-get) ;; A synonym.
 

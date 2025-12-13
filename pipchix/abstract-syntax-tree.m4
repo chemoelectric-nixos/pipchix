@@ -190,7 +190,20 @@ define_string_reverse_concatenate
   (getter> 1 nix-list-node->list))
 
 (define-record-factory <nix-get-node>
-  (constructor> make-nix-get-node)
+  (constructor>
+   make-nix-get-node
+   (lambda (construct)
+     (lambda (attrset attrpath)
+       (let ((attrset (and attrset (scheme->nix attrset)))
+             (attrpath (cond
+                        ((nix-attributepath-node? attrpath)
+                         attrpath)
+                        ((pair? attrpath)
+                         (list->nix-attributepath-node attrpath))
+                        (else
+                         (list->nix-attributepath-node
+                          (list attrpath))))))
+         (construct attrset attrpath)))))         
   (predicate> nix-get-node? register-nix-node-predicate)
   (getter> 1 nix-get-node-attributeset)
   (getter> 2 nix-get-node-attributepath))

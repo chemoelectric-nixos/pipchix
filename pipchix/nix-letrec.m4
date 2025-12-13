@@ -84,9 +84,7 @@ define_nix_set_setrec_letrec(«nix-letrec»)
                (insert-%%nix-letrec%%-binding
                 node1 (list tmp) value)
                (insert-%%nix-letrec%%-binding
-                node2 attrpath (make-nix-get-node
-                                #f (list->nix-attributepath-node
-                                    (list tmp))))
+                node2 attrpath (make-nix-get-node #f tmp))
                (loop (cdr p)))))
          (set-nix-letrec-node-in-clause! node1 node2)
          (set-nix-letrec-node-in-clause! node2 in-clause)
