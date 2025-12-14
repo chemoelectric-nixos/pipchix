@@ -23,14 +23,7 @@
 ;;; WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ;;;
 
-(define nix-get
-  (case-lambda
-    ((identifier)
-     (make-nix-get-node #f identifier))
-    ((attrset . attrpath)
-     (make-nix-get-node attrset attrpath))))
-
-(define © nix-get) ;; A synonym.
+#f
 
 m4_divert(-1)
 ;;; local variables:

@@ -1,4 +1,3 @@
-#!r6rs
 ;;;
 ;;; Copyright © 2025 Barry Schwartz
 ;;;
@@ -17,36 +16,26 @@
 ;;; 
 ;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 ;;; EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-;;; MERCHANTABILITY, FITNESS FOR A PART/ICULAR PURPOSE AND
+;;; MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
 ;;; NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
 ;;; LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 ;;; OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 ;;; WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ;;;
-m4_include(pipchix/pipchix-includes.m4)
 
-(library (pipchix essentials)
+(define nix-get
+  (case-lambda
+    ((identifier)
+     (make-nix-get-node #f identifier))
+    ((attrset . attrpath)
+     (make-nix-get-node attrset attrpath))))
 
-  (export
-   m4_include(pipchix/essentials.exports.m4))
+(define © nix-get) ;; A synonym.
 
-  (import (rnrs base (6))
-          (rnrs control (6))
-          (pipchix abstract-syntax-tree)
-          (pipchix expressions)
-          (pipchix nix-embed)
-          (pipchix nix-list)
-          (pipchix nix-set)
-          (pipchix nix-letrec)
-          (pipchix string-manipulation)
-          (pipchix srfi-39))
-
-  m4_include(pipchix/essentials.m4)
-
-  )
-
+m4_divert(-1)
 ;;; local variables:
 ;;; mode: scheme
-;;; geiser-scheme-implementation: chez
+;;; geiser-scheme-implementation: chibi
 ;;; coding: utf-8
 ;;; end:
+m4_divert«»m4_dnl

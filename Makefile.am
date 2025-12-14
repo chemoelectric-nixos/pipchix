@@ -73,6 +73,7 @@ R6RS_SCHEME += r6rs/pipchix/continuation-capture.sls
 R6RS_SCHEME += r6rs/pipchix/generate-identifier.sls
 R6RS_SCHEME += r6rs/pipchix/define-record-factory.sls
 R6RS_SCHEME += r6rs/pipchix/essentials.sls
+R6RS_SCHEME += r6rs/pipchix/expressions.sls
 R6RS_SCHEME += r6rs/pipchix/nix-embed.sls
 R6RS_SCHEME += r6rs/pipchix/nix-list.sls
 R6RS_SCHEME += r6rs/pipchix/nix-set.sls
@@ -94,6 +95,7 @@ R7RS_SCHEME += r7rs/pipchix/continuation-capture.sld
 R7RS_SCHEME += r7rs/pipchix/generate-identifier.sld
 R7RS_SCHEME += r7rs/pipchix/define-record-factory.sld
 R7RS_SCHEME += r7rs/pipchix/essentials.sld
+R7RS_SCHEME += r7rs/pipchix/expressions.sld
 R7RS_SCHEME += r7rs/pipchix/nix-embed.sld
 R7RS_SCHEME += r7rs/pipchix/nix-list.sld
 R7RS_SCHEME += r7rs/pipchix/nix-set.sld
@@ -167,6 +169,9 @@ CHICKEN_EGGSPEC_BOTTOM = ' \
     (extension pipchix.abstract-syntax-tree \
       (component-dependencies \
        pipchix.define-record-factory)) \
+    (extension pipchix.expressions \
+      (component-dependencies \
+       pipchix.abstract-syntax-tree)) \
     (extension pipchix.nix-embed \
       (component-dependencies \
        pipchix.abstract-syntax-tree)) \
@@ -184,6 +189,8 @@ CHICKEN_EGGSPEC_BOTTOM = ' \
       (component-dependencies \
        pipchix.string-manipulation \
        pipchix.abstract-syntax-tree \
+       pipchix.expressions \
+       pipchix.nix-embed \
        pipchix.nix-list \
        pipchix.nix-set \
        pipchix.nix-letrec))))'
@@ -214,6 +221,7 @@ CHICKEN_5_EGGFILES = \
     pipchix.nix-set.scm \
     pipchix.nix-letrec.scm \
     pipchix.essentials.scm \
+    pipchix.expressions.scm \
     COPYING README.adoc)
 CLEANFILES += $(CHICKEN_5_EGGFILES)
 
