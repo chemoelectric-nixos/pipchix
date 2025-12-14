@@ -24,12 +24,13 @@
 ;;;
 m4_include(pipchix/pipchix-includes.m4)
 
-(define-library (pipchix base)
+(define-library (pipchix essentials)
 
-  (export m4_include(pipchix/base.exports.m4))
+  (export m4_include(pipchix/essentials.exports.m4))
 
   (import (scheme base))
   (import (scheme case-lambda))
+  (import (pipchix nix-embed))
   (import (pipchix nix-list))
   (import (pipchix nix-set))
   (import (pipchix nix-letrec))
@@ -38,7 +39,7 @@ m4_include(pipchix/pipchix-includes.m4)
 
   (begin
 
-    m4_include(pipchix/base.m4)
+    m4_include(pipchix/essentials.m4)
 
     ))
 

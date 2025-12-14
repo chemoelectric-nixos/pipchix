@@ -164,7 +164,7 @@ GERBIL_O = \
           continuation-capture \
           generate-identifier \
           define-record-factory \
-          base \
+          essentials \
           nix-embed \
           nix-list \
           nix-set \
@@ -192,7 +192,7 @@ $(GERBIL_PX)/nix-embed.scm: $(GERBIL_PX)/abstract-syntax-tree.scm
 $(GERBIL_PX)/nix-list.scm: $(GERBIL_PX)/abstract-syntax-tree.scm
 $(GERBIL_PX)/nix-set.scm: $(GERBIL_PX)/abstract-syntax-tree.scm
 $(GERBIL_PX)/nix-letrec.scm: $(GERBIL_PX)/abstract-syntax-tree.scm
-$(GERBIL_PX)/base.scm: $(GERBIL_PX)/string-manipulation.scm \
+$(GERBIL_PX)/essentials.scm: $(GERBIL_PX)/string-manipulation.scm \
                       $(GERBIL_PX)/abstract-syntax-tree.scm \
                       $(GERBIL_PX)/nix-list.scm \
                       $(GERBIL_PX)/nix-set.scm \

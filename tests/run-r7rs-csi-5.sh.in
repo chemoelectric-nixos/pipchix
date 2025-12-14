@@ -9,7 +9,7 @@ cat > "${prog_scm}" <<EOF
 (import (scheme base))
 (import (scheme write))
 (import (scheme process-context))
-(import (pipchix base))
+(import (pipchix essentials))
 (import (pipchix continuation-capture))
 (import (pipchix string-manipulation))
 (import (pipchix generate-identifier))

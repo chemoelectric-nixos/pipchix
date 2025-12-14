@@ -373,7 +373,7 @@ TESTSUITE_DEPS = $(srcdir)/atlocal.in $(srcdir)/package.m4 \
 @ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@          continuation-capture \
 @ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@          generate-identifier \
 @ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@          define-record-factory \
-@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@          base \
+@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@          essentials \
 @ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@          nix-embed \
 @ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@          nix-list \
 @ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@          nix-set \
@@ -685,7 +685,7 @@ $(TESTSUITE): $(TESTSUITE_DEPS)
 @ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@$(GERBIL_PX)/nix-list.scm: $(GERBIL_PX)/abstract-syntax-tree.scm
 @ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@$(GERBIL_PX)/nix-set.scm: $(GERBIL_PX)/abstract-syntax-tree.scm
 @ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@$(GERBIL_PX)/nix-letrec.scm: $(GERBIL_PX)/abstract-syntax-tree.scm
-@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@$(GERBIL_PX)/base.scm: $(GERBIL_PX)/string-manipulation.scm \
+@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@$(GERBIL_PX)/essentials.scm: $(GERBIL_PX)/string-manipulation.scm \
 @ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@                      $(GERBIL_PX)/abstract-syntax-tree.scm \
 @ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@                      $(GERBIL_PX)/nix-list.scm \
 @ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@                      $(GERBIL_PX)/nix-set.scm \

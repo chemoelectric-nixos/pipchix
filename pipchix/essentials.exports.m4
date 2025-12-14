@@ -45,6 +45,9 @@ nix-true?    ;; Is an object nix-true ?
 nix-boolean? ;; Is an object nix-false or nix-true ?
 nix-null?    ;; Is an object nix-null ?
 
+;;; Embed literal Nix code.
+nix-embed
+
 ;;; Nix list from elements.
 nix-list
 
