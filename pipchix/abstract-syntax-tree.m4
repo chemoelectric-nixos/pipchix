@@ -208,6 +208,19 @@ define_string_reverse_concatenate
   (getter> 1 nix-get-node-attributeset)
   (getter> 2 nix-get-node-attributepath))
 
+(define-record-factory <nix-binaryoperator-node>
+  (constructor>
+   make-nix-binaryoperator-node
+   (lambda (construct)
+     (lambda (op arg1 arg2)
+       (construct (if (symbol? op) (symbol->string op) op)
+                  (scheme->nix arg1)
+                  (scheme->nix arg2)))))
+  (predicate> nix-binaryoperator-node? register-nix-node-predicate)
+  (getter> 1 nix-binaryoperator-node-op)
+  (getter> 2 nix-binaryoperator-node-arg1)
+  (getter> 3 nix-binaryoperator-node-arg2))
+
 (define (nix-abstract-syntax-tree? obj)
   (let loop ((p nix-node-predicates))
     (and (pair? p)
@@ -259,6 +272,8 @@ define_string_reverse_concatenate
          (%%output-nix-list-node ast outp))
         ((nix-get-node? ast)
          (%%output-nix-get-node ast outp))
+        ((nix-binaryoperator-node? ast)
+         (%%output-nix-binaryoperator-node ast outp))
         (else (error "not an abstract syntax tree" ast)))))))
 
 ;;; A synonym.
@@ -417,6 +432,16 @@ define_string_reverse_concatenate
       (%%output-nix-identifier attrset outp)
       (outp ".\n"))
     (output-nix-abstract-syntax-tree attrpath outp)))
+
+(define (%%output-nix-binaryoperator-node ast outp)
+  (outp "(\n")
+  (output-nix-abstract-syntax-tree
+   (nix-binaryoperator-node-arg1 ast) outp)
+  (outp (nix-binaryoperator-node-op ast))
+  (outp "\n")
+  (output-nix-abstract-syntax-tree
+   (nix-binaryoperator-node-arg2 ast) outp)
+  (outp ")\n"))
 
 (define (%%string-contains-slash? str)
   (%%string-contains? (lambda (c) (char=? c #\/))

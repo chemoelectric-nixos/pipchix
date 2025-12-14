@@ -39,6 +39,9 @@ nix-list-node?
 make-nix-get-node
 nix-get-node?
 
+make-nix-binaryoperator-node
+nix-binaryoperator-node?
+
 scheme->nix
 nix-abstract-syntax-tree?
 nix-ast?

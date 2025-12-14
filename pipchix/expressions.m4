@@ -32,6 +32,13 @@
 
 (define © nix-get) ;; A synonym.
 
+(define (nix+ a b) (make-nix-binaryoperator-node "+" a b))
+(define (nix- a b) (make-nix-binaryoperator-node "-" a b))
+(define (nix* a b) (make-nix-binaryoperator-node "*" a b))
+(define (nix/ a b) (make-nix-binaryoperator-node "/" a b))
+(define (nix// a b) (make-nix-binaryoperator-node "//" a b))
+(define (nix++ a b) (make-nix-binaryoperator-node "++" a b))
+
 m4_divert(-1)
 ;;; local variables:
 ;;; mode: scheme
