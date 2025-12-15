@@ -23,6 +23,10 @@
 ;;; WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ;;;
 
+;;;;;;;;;;;
+;;;;;;;;;;; FIXME: implement nix-case once function calls are ready.
+;;;;;;;;;;;
+
 (define-syntax nix-cond
   ;;
   ;; Unlike Scheme’s cond, nix-cond cannot have empty branches, nor
@@ -60,6 +64,18 @@
                ...
                (else else-clause)))))
 
+(define-syntax nix-with
+  (syntax-rules ()
+
+    ((_ (attrset) clause)
+     (make-nix-with-node attrset clause))
+
+    ((_ (attrset1 attrset2 . attrset*) clause)
+     (nix-with (attrset1)
+       (nix-with (attrset2 . attrset*) clause)))
+
+    ((_ () clause) (scheme->nix clause))))
+
 m4_divert(-1)
 ;;; local variables:
 ;;; mode: scheme
@@ -67,5 +83,6 @@ m4_divert(-1)
 ;;; coding: utf-8
 ;;; eval: (put 'if 'scheme-indent-function 1)
 ;;; eval: (put 'nix-if 'scheme-indent-function 1)
+;;; eval: (put 'nix-with 'scheme-indent-function 1)
 ;;; end:
 m4_divert«»m4_dnl

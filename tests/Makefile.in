@@ -691,7 +691,8 @@ $(TESTSUITE): $(TESTSUITE_DEPS)
 @ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@$(GERBIL_PX)/nix-letrec.scm: $(GERBIL_PX)/abstract-syntax-tree.scm
 @ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@$(GERBIL_PX)/expressions.scm: $(GERBIL_PX)/abstract-syntax-tree.scm \
 @ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@                      $(GERBIL_PX)/nix-list.scm
-@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@$(GERBIL_PX)/macros.scm: $(GERBIL_PX)/expressions.scm
+@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@$(GERBIL_PX)/macros.scm: $(GERBIL_PX)/abstract-syntax-tree.scm \
+@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@                      $(GERBIL_PX)/expressions.scm
 @ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@$(GERBIL_PX)/essentials.scm: $(GERBIL_PX)/string-manipulation.scm \
 @ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@                      $(GERBIL_PX)/abstract-syntax-tree.scm \
 @ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@                      $(GERBIL_PX)/expressions.scm \

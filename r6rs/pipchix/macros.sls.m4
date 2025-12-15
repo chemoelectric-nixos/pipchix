@@ -31,6 +31,7 @@ m4_include(pipchix/pipchix-includes.m4)
    m4_include(pipchix/macros.exports.m4))
 
   (import (rnrs base (6))
+          (pipchix abstract-syntax-tree)
           (pipchix expressions))
 
   m4_include(pipchix/macros.m4)

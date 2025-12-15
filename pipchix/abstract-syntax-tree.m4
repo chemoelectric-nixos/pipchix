@@ -204,10 +204,7 @@ define_string_reverse_concatenate
                          (list->nix-attributepath-node
                           (list attrpath))))))
          (when attrset
-           (unless (or (%%nix-identifier? attrset)
-                       (nix-attributeset-node? attrset))
-             (err "expected an identifier or attribute set"
-                  attrset)))
+           (%%check-attrset attrset))
          (construct attrset attrpath)))))
   (predicate> nix-get-node? register-nix-node-predicate)
   (getter> 1 nix-get-node-attributeset)
@@ -227,10 +224,7 @@ define_string_reverse_concatenate
                         (else
                          (list->nix-attributepath-node
                           (list attrpath))))))
-         (unless (or (%%nix-identifier? attrset)
-                     (nix-attributeset-node? attrset))
-           (err "expected an identifier or attribute set"
-                attrset))
+         (%%check-attrset attrset)
          (construct attrset attrpath)))))         
   (predicate> nix-has?-node? register-nix-node-predicate)
   (getter> 1 nix-has?-node-attributeset)
@@ -243,20 +237,26 @@ define_string_reverse_concatenate
      (lambda (attrset1 attrset2)
        (let ((attrset1 (and attrset1 (scheme->nix attrset1)))
              (attrset2 (and attrset2 (scheme->nix attrset2))))
-         (unless (or (%%nix-identifier? attrset1)
-                     (nix-attributeset-node? attrset1)
-                     (nix-//-node? attrset1))
-           (err "expected an identifier or attribute set"
-                attrset1))
-         (unless (or (%%nix-identifier? attrset2)
-                     (nix-attributeset-node? attrset2)
-                     (nix-//-node? attrset2))
-           (err "expected an identifier or attribute set"
-                attrset2))
+         (unless (nix-//-node? attrset1)
+           (%%check-attrset attrset1))
+         (unless (nix-//-node? attrset2)
+           (%%check-attrset attrset2))
          (construct attrset1 attrset2)))))
   (predicate> nix-//-node? register-nix-node-predicate)
   (getter> 1 nix-//-node-attributeset1)
   (getter> 2 nix-//-node-attributeset2))
+
+(define-record-factory <nix-with-node>
+  (constructor>
+   make-nix-with-node
+   (lambda (construct)
+     (lambda (attrset clause)
+       (let ((attrset (and attrset (scheme->nix attrset))))
+         (%%check-attrset attrset)
+         (construct attrset (scheme->nix clause))))))
+  (predicate> nix-with-node? register-nix-node-predicate)
+  (getter> 1 nix-with-node-attributeset)
+  (getter> 2 nix-with-node-clause))
 
 (define-record-factory <nix-unaryoperator-node>
   (constructor>
@@ -350,6 +350,8 @@ define_string_reverse_concatenate
          (%%output-nix-has?-node ast outp))
         ((nix-//-node? ast)
          (%%output-nix-//-node ast outp))
+        ((nix-with-node? ast)
+         (%%output-nix-with-node ast outp))
         ((nix-unaryoperator-node? ast)
          (%%output-nix-unaryoperator-node ast outp))
         ((nix-binaryoperator-node? ast)
@@ -533,6 +535,15 @@ define_string_reverse_concatenate
     (%%output-attrset attrset2 outp)
     (outp ")\n")))
 
+(define (%%output-nix-with-node ast outp)
+  (let ((attrset (nix-with-node-attributeset ast))
+        (clause (nix-with-node-clause ast)))
+    (outp "(with\n")
+    (%%output-attrset attrset outp)
+    (outp ";\n")
+    (output-nix-abstract-syntax-tree clause outp)
+    (outp ")\n")))
+
 (define (%%output-nix-unaryoperator-node ast outp)
   (outp "(\n")
   (outp (nix-unaryoperator-node-op ast))
@@ -614,6 +625,14 @@ define_string_reverse_concatenate
   (if (%%nix-identifier? attrset)
     (%%output-nix-identifier attrset outp)
     (output-nix-abstract-syntax-tree attrset outp)))
+
+(define (%%check-attrset attrset)
+  (unless (or (%%nix-identifier? attrset)
+              (and (nix-get-node? attrset)
+                   (not (nix-get-node-attributeset attrset)))
+              (nix-attributeset-node? attrset))
+    (err "expected an identifier or attribute set"
+         attrset)))
 
 m4_divert(-1)
 ;;; local variables:

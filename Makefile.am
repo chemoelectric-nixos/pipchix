@@ -190,6 +190,7 @@ CHICKEN_EGGSPEC_BOTTOM = ' \
        pipchix.nix-list)) \
     (extension pipchix.macros \
       (component-dependencies \
+       pipchix.abstract-syntax-tree \
        pipchix.expressions)) \
     (extension pipchix.essentials \
       (component-dependencies \

@@ -200,7 +200,8 @@ $(GERBIL_PX)/nix-set.scm: $(GERBIL_PX)/abstract-syntax-tree.scm
 $(GERBIL_PX)/nix-letrec.scm: $(GERBIL_PX)/abstract-syntax-tree.scm
 $(GERBIL_PX)/expressions.scm: $(GERBIL_PX)/abstract-syntax-tree.scm \
                       $(GERBIL_PX)/nix-list.scm
-$(GERBIL_PX)/macros.scm: $(GERBIL_PX)/expressions.scm
+$(GERBIL_PX)/macros.scm: $(GERBIL_PX)/abstract-syntax-tree.scm \
+                      $(GERBIL_PX)/expressions.scm
 $(GERBIL_PX)/essentials.scm: $(GERBIL_PX)/string-manipulation.scm \
                       $(GERBIL_PX)/abstract-syntax-tree.scm \
                       $(GERBIL_PX)/expressions.scm \

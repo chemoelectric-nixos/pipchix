@@ -45,6 +45,9 @@ nix-has?-node?
 make-nix-//-node
 nix-//-node?
 
+make-nix-with-node
+nix-with-node?
+
 make-nix-unaryoperator-node
 nix-unaryoperator-node?
 
