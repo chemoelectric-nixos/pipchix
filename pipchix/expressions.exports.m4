@@ -17,4 +17,6 @@ nix>=
 nix-and
 nix-or
 nix->
+nix-not
 
+nix-if

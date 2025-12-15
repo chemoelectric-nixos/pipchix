@@ -120,6 +120,14 @@ m4_define([sexpr],[(nix-> nix-true nix-false)])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([(·nix_true->·nix_false)·])],[])
 
+m4_define([sexpr],[(nix-not nix-true)])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(·!·nix_true)·])],[])
+
+m4_define([sexpr],[(nix-if nix-true 3 4)])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(if·nix_true[]then·(3)·else·(4)·)·])],[])
+
 AT_CLEANUP
 
 # local variables:

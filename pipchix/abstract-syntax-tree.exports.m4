@@ -51,6 +51,9 @@ nix-unaryoperator-node?
 make-nix-binaryoperator-node
 nix-binaryoperator-node?
 
+make-nix-ifthenelse-node
+nix-ifthenelse-node?
+
 scheme->nix
 nix-abstract-syntax-tree?
 nix-ast?

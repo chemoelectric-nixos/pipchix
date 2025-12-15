@@ -89,12 +89,16 @@ nix++
 nix-and  ;; &&
 nix-or   ;; ||
 nix->    ;; ->
+nix-not  ;; !
 nix-not= ;; !=
 nix=     ;; ==
 nix<
 nix<=
 nix>
 nix>=
+
+;;; Branching.
+nix-if ;; nix-if is implemented as a Scheme procedure.
 
 ;;; Encode a string in base64, for printing with the base64(1) command
 ;;; (which is included in GNU coreutils).

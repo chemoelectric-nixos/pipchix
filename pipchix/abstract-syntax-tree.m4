@@ -282,6 +282,19 @@ define_string_reverse_concatenate
   (getter> 2 nix-binaryoperator-node-arg1)
   (getter> 3 nix-binaryoperator-node-arg2))
 
+(define-record-factory <nix-ifthenelse-node>
+  (constructor>
+   make-nix-ifthenelse-node
+   (lambda (construct)
+     (lambda (if-clause then-clause else-clause)
+       (construct (scheme->nix if-clause)
+                  (scheme->nix then-clause)
+                  (scheme->nix else-clause)))))
+  (predicate> nix-ifthenelse-node? register-nix-node-predicate)
+  (getter> 1 nix-ifthenelse-node-if-clause)
+  (getter> 2 nix-ifthenelse-node-then-clause)
+  (getter> 3 nix-ifthenelse-node-else-clause))
+
 (define (nix-abstract-syntax-tree? obj)
   (let loop ((p nix-node-predicates))
     (and (pair? p)
@@ -341,6 +354,8 @@ define_string_reverse_concatenate
          (%%output-nix-unaryoperator-node ast outp))
         ((nix-binaryoperator-node? ast)
          (%%output-nix-binaryoperator-node ast outp))
+        ((nix-ifthenelse-node? ast)
+         (%%output-nix-ifthenelse-node ast outp))
         (else (err "not an abstract syntax tree" ast)))))))
 
 ;;; A synonym.
@@ -535,6 +550,18 @@ define_string_reverse_concatenate
   (output-nix-abstract-syntax-tree
    (nix-binaryoperator-node-arg2 ast) outp)
   (outp ")\n"))
+
+(define (%%output-nix-ifthenelse-node ast outp)
+  (let ((if-clause (nix-ifthenelse-node-if-clause ast))
+        (then-clause (nix-ifthenelse-node-then-clause ast))
+        (else-clause (nix-ifthenelse-node-else-clause ast)))
+    (outp "(if\n")
+    (output-nix-abstract-syntax-tree if-clause outp)
+    (outp "then\n")
+    (output-nix-abstract-syntax-tree then-clause outp)
+    (outp "else\n")
+    (output-nix-abstract-syntax-tree else-clause outp)
+    (outp ")\n")))
 
 (define (%%string-contains-slash? str)
   (%%string-contains? (lambda (c) (char=? c #\/))

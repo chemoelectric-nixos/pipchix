@@ -50,6 +50,7 @@
 (define (nix-and a b) (make-nix-binaryoperator-node "&&" a b))
 (define (nix-or a b) (make-nix-binaryoperator-node "||" a b))
 (define (nix-> a b) (make-nix-binaryoperator-node "->" a b))
+(define (nix-not a) (make-nix-unaryoperator-node "!" a))
 
 (define nix++
   (case-lambda
@@ -100,6 +101,10 @@
                   (if (pair? p)
                     (loop (nix/ a (car p)) (cdr p))
                     a)))))
+
+(define (nix-if if-clause then-clause else-clause)
+  (make-nix-ifthenelse-node
+   if-clause then-clause else-clause))
 
 m4_divert(-1)
 ;;; local variables:
