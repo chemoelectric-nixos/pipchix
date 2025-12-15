@@ -35,7 +35,10 @@
 (define (nix-has? attrset attrpath)
   (make-nix-has?-node attrset attrpath))
 
-(define (nix// a b) (make-nix-binaryoperator-node "//" a b))
+(define nix//
+  (case-lambda
+    ((a b) (make-nix-//-node a b))
+    ((a . args) (nix// a (apply nix// args)))))
 
 (define (nix-not= a b) (make-nix-binaryoperator-node "!=" a b))
 (define (nix= a b) (make-nix-binaryoperator-node "==" a b))

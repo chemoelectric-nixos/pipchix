@@ -236,6 +236,28 @@ define_string_reverse_concatenate
   (getter> 1 nix-has?-node-attributeset)
   (getter> 2 nix-has?-node-attributepath))
 
+(define-record-factory <nix-//-node>
+  (constructor>
+   make-nix-//-node
+   (lambda (construct)
+     (lambda (attrset1 attrset2)
+       (let ((attrset1 (and attrset1 (scheme->nix attrset1)))
+             (attrset2 (and attrset2 (scheme->nix attrset2))))
+         (unless (or (%%nix-identifier? attrset1)
+                     (nix-attributeset-node? attrset1)
+                     (nix-//-node? attrset1))
+           (err "expected an identifier or attribute set"
+                attrset1))
+         (unless (or (%%nix-identifier? attrset2)
+                     (nix-attributeset-node? attrset2)
+                     (nix-//-node? attrset2))
+           (err "expected an identifier or attribute set"
+                attrset2))
+         (construct attrset1 attrset2)))))
+  (predicate> nix-//-node? register-nix-node-predicate)
+  (getter> 1 nix-//-node-attributeset1)
+  (getter> 2 nix-//-node-attributeset2))
+
 (define-record-factory <nix-unaryoperator-node>
   (constructor>
    make-nix-unaryoperator-node
@@ -313,6 +335,8 @@ define_string_reverse_concatenate
          (%%output-nix-get-node ast outp))
         ((nix-has?-node? ast)
          (%%output-nix-has?-node ast outp))
+        ((nix-//-node? ast)
+         (%%output-nix-//-node ast outp))
         ((nix-unaryoperator-node? ast)
          (%%output-nix-unaryoperator-node ast outp))
         ((nix-binaryoperator-node? ast)
@@ -472,9 +496,7 @@ define_string_reverse_concatenate
   (let ((attrset (nix-get-node-attributeset ast))
         (attrpath (nix-get-node-attributepath ast)))
     (when attrset
-      (if (%%nix-identifier? attrset)
-        (%%output-nix-identifier attrset outp)
-        (output-nix-abstract-syntax-tree attrset outp))
+      (%%output-attrset attrset outp)
       (outp ".\n"))
     (output-nix-abstract-syntax-tree attrpath outp)))
 
@@ -482,11 +504,18 @@ define_string_reverse_concatenate
   (let ((attrset (nix-has?-node-attributeset ast))
         (attrpath (nix-has?-node-attributepath ast)))
     (outp "(\n")
-    (if (%%nix-identifier? attrset)
-      (%%output-nix-identifier attrset outp)
-      (output-nix-abstract-syntax-tree attrset outp))
+    (%%output-attrset attrset outp)
     (outp "?\n")
     (output-nix-abstract-syntax-tree attrpath outp)
+    (outp ")\n")))
+
+(define (%%output-nix-//-node ast outp)
+  (let ((attrset1 (nix-//-node-attributeset1 ast))
+        (attrset2 (nix-//-node-attributeset2 ast)))
+    (outp "(\n")
+    (%%output-attrset attrset1 outp)
+    (outp "//\n")
+    (%%output-attrset attrset2 outp)
     (outp ")\n")))
 
 (define (%%output-nix-unaryoperator-node ast outp)
@@ -553,6 +582,11 @@ define_string_reverse_concatenate
       (and (<= (char->integer c) #x7F)
            (or (char-alphabetic? c)
                (char-numeric? c)))))
+
+(define (%%output-attrset attrset outp)
+  (if (%%nix-identifier? attrset)
+    (%%output-nix-identifier attrset outp)
+    (output-nix-abstract-syntax-tree attrset outp)))
 
 m4_divert(-1)
 ;;; local variables:

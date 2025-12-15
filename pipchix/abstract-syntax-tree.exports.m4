@@ -42,6 +42,9 @@ nix-get-node?
 make-nix-has?-node
 nix-has?-node?
 
+make-nix-//-node
+nix-//-node?
+
 make-nix-unaryoperator-node
 nix-unaryoperator-node?
 

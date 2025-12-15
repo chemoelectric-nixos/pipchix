@@ -34,6 +34,18 @@ m4_define([sexpr],[(nix-has? (nix-set (`a ==> 3)) `(a b c))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([(·({·a·=·(3)·;·})·?·a·.·b·.·c·)·])],[])
 
+m4_define([sexpr],[(nix// `a `b)])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(·a·//·b·)·])],[])
+
+m4_define([sexpr],[(nix// `a `b (nix-set (`x ==> 3)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(·a·//·(·b·//·({·x·=·(3)·;·})·)·)·])],[])
+
+m4_define([sexpr],[(nix// "a" "b" "c" "d")])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(·a·//·(·b·//·(·c·//·d·)·)·)·])],[])
+
 m4_define([sexpr],[(nix++)])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([@<:@·@:>@·])],[])
