@@ -26,6 +26,14 @@ AT_SETUP([setup_message((pipchix expressions))])
 
 AT_KEYWORDS([default_keywords expressions])
 
+m4_define([sexpr],[(nix-has? (nix-set (`a ==> 3)) `a)])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(·({·a·=·(3)·;·})·?·a·)·])],[])
+
+m4_define([sexpr],[(nix-has? (nix-set (`a ==> 3)) `(a b c))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(·({·a·=·(3)·;·})·?·a·.·b·.·c·)·])],[])
+
 m4_define([sexpr],[(nix++)])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([@<:@·@:>@·])],[])

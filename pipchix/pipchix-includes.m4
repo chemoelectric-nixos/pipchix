@@ -24,10 +24,13 @@ m4_divert(-1)
 ;;; WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ;;;
 
-m4_changequote(«,»)
-m4_changecom(«#|»,«|#»)
-m4_define(«semicolon»,«;»)
-m4_define(«backslash»,«\»)
+;;;m4_changequote(«,»)
+;;;m4_changecom(«#|»,«|#»)
+;;;m4_define(«semicolon»,«;»)
+;;;m4_define(«backslash»,«\»)
+
+;;;m4_define(«define_err_r6rs»,«(define (err . args) (apply error #f args))»)
+;;;m4_define(«define_err_r7rs»,«(define err error)»)
 
 ;;;m4_define(«define_string_reverse_concatenate»,«
 (define (%%string-reverse-concatenate lst)

@@ -70,28 +70,31 @@ nix-let*
 nix-get
 © ;; U+00A9 COPYRIGHT SIGN is a synonym for nix-get.
 
+;;; Does an attribute set have a given attribute path?
+nix-has?
+
 ;;; Nix operators. In Pipchix these may take arguments according to
 ;;; Scheme conventions. For instance, (nix++) is a way to obtain an
 ;;; empty list, and (nix/ 3) is a way to write 1.0 / 3. However,
 ;;; (nix+) does not behave like Scheme (+), which returns 0. Instead
 ;;; (nix+) is illegal, because we would not know what type of object
-;;; to return.
-nix-has? ;; ?
+;;; to return. (Transitive implementations of nix=, nix<, etc., are
+;;; not yet available.)
 nix+
 nix-
 nix*
 nix/
 nix//
 nix++
-nix=     ;; ==
+nix-and  ;; &&
+nix-or   ;; ||
+nix->    ;; ->
 nix-not= ;; !=
+nix=     ;; ==
 nix<
 nix<=
 nix>
 nix>=
-nix-and ;; &&
-nix-or  ;; ||
-nix->   ;; ->
 
 ;;; Encode a string in base64, for printing with the base64(1) command
 ;;; (which is included in GNU coreutils).

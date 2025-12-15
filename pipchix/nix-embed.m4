@@ -27,7 +27,7 @@
   (cond ((string? str)
          (make-nix-embedded-node str))
         (else
-         (error "not a string" str))))
+         (err "not a string" str))))
 
 m4_divert(-1)
 ;;; local variables:

@@ -41,6 +41,7 @@ m4_include(pipchix/pipchix-includes.m4)
 
   (begin
 
+    define_err_r7rs
     (define integer-division truncate/)
 
     m4_include(pipchix/string-manipulation.m4)

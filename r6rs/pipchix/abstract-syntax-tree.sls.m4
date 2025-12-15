@@ -36,6 +36,7 @@ m4_include(pipchix/pipchix-includes.m4)
           (rnrs unicode (6))
           (pipchix define-record-factory))
 
+  define_err_r6rs
   m4_include(pipchix/abstract-syntax-tree.m4)
 
   )

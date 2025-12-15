@@ -32,14 +32,18 @@
 
 (define © nix-get) ;; A synonym.
 
-(define (nix-has? a b) (make-nix-binaryoperator-node "?" a b))
+(define (nix-has? attrset attrpath)
+  (make-nix-has?-node attrset attrpath))
+
 (define (nix// a b) (make-nix-binaryoperator-node "//" a b))
-(define (nix= a b) (make-nix-binaryoperator-node "==" a b))
+
 (define (nix-not= a b) (make-nix-binaryoperator-node "!=" a b))
+(define (nix= a b) (make-nix-binaryoperator-node "==" a b))
 (define (nix< a b) (make-nix-binaryoperator-node "<" a b))
 (define (nix<= a b) (make-nix-binaryoperator-node "<=" a b))
 (define (nix> a b) (make-nix-binaryoperator-node ">" a b))
 (define (nix>= a b) (make-nix-binaryoperator-node ">=" a b))
+
 (define (nix-and a b) (make-nix-binaryoperator-node "&&" a b))
 (define (nix-or a b) (make-nix-binaryoperator-node "||" a b))
 (define (nix-> a b) (make-nix-binaryoperator-node "->" a b))

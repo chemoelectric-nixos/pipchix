@@ -148,15 +148,15 @@ m4_ifelse(implementation_of_define_record_factory,«er-macro-transformer»,«
        ;; FIXME: Do a more precise analysis. (It is better to analyze
        ;; here than to force the code below to follow a particular
        ;; order, just to get the best error messages.)
-       (error "syntax error in rule" (car rule*)))
+       (err "syntax error in rule" (car rule*)))
 
      (let ((n (length form)))
        (cond
         ((= n 1)
-         (error "record type designation is missing" form))
+         (err "record type designation is missing" form))
         ((not (symbol? (cadr form)))
-         (error "record type designation is not a symbol"
-                (cadr form)))
+         (err "record type designation is not a symbol"
+              (cadr form)))
         (else
          (let* ((designation (cadr form))
                 (original-constructor% (gensym))

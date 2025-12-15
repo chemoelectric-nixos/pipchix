@@ -38,6 +38,7 @@ m4_include(pipchix/pipchix-includes.m4)
           (pipchix srfi-39)
           (pipchix srfi-111))
 
+  define_err_r6rs
   (define integer-division div-and-mod)
 
   (define (string-copy! to at from)

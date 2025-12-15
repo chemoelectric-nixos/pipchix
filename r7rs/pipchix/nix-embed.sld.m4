@@ -33,6 +33,7 @@ m4_include(pipchix/pipchix-includes.m4)
 
   (begin
 
+    define_err_r7rs
     m4_include(pipchix/nix-embed.m4)
 
     ))

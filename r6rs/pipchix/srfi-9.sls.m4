@@ -144,7 +144,7 @@ m4_include(pipchix/pipchix-includes.m4)
     (let loop ((i 1)
                (tags (srfi-9:record-type-field-tags type)))
       (cond ((null? tags)
-             (error "record type has no such field" type tag))
+             (error #f "record type has no such field" type tag))
             ((eq? tag (car tags))
              i)
             (else
@@ -168,7 +168,7 @@ m4_include(pipchix/pipchix-includes.m4)
 			  (srfi-9:record-set! new i arg))
                         args indexes)
               new)
-            (error "wrong number of arguments to constructor"
+            (error #f "wrong number of arguments to constructor"
                    type args)))))
 
   (define (srfi-9:record-predicate type)
@@ -182,7 +182,7 @@ m4_include(pipchix/pipchix-includes.m4)
         (if (and (srfi-9:record? thing)
                  (eq? (srfi-9:record-type thing) type))
             (srfi-9:record-ref thing index)
-            (error "accessor applied to bad value"
+            (error #f "accessor applied to bad value"
                    type tag thing)))))
   
   (define (srfi-9:record-modifier type tag)
@@ -191,7 +191,7 @@ m4_include(pipchix/pipchix-includes.m4)
         (if (and (srfi-9:record? thing)
                  (eq? (srfi-9:record-type thing) type))
             (srfi-9:record-set! thing index value)
-            (error "modifier applied to bad value"
+            (error #f "modifier applied to bad value"
                    type tag thing)))))
 
   ;; Definition of define-record-type

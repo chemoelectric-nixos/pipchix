@@ -39,6 +39,8 @@ m4_include(pipchix/pipchix-includes.m4)
 
   (begin
 
+    define_err_r7rs
+
     (cond-expand
       (chicken-5
        ;; Use er-macro-transformer. (There is complicated coördination

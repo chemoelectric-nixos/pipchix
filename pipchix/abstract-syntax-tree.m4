@@ -31,7 +31,7 @@ define_string_reverse_concatenate
 
 (define (register-nix-node-predicate pred)
   (unless (procedure? pred)
-    (error "not a procedure" pred))
+    (err "not a procedure" pred))
   (set! nix-node-predicates
     (cons pred nix-node-predicates))
   pred)
@@ -59,7 +59,7 @@ define_string_reverse_concatenate
                   (string? data)
                   (number? data))
               (construct data))
-             (else (error "incorrect type" data))))))
+             (else (err "incorrect type" data))))))
   (predicate> nix-data-node? register-nix-node-predicate)
   (getter> 1 nix-data-node-ref))
 
@@ -114,10 +114,10 @@ define_string_reverse_concatenate
           (nix-attributeset-or-letrec-node-kind%%% obj))))
      (let ((new-pred
             (lambda (obj)
-               (and (pred obj)
-                    (let ((kind (kind%%% obj)))
-                      (or (eq? kind 'nix-set)
-                          (eq? kind 'nix-setrec)))))))
+              (and (pred obj)
+                   (let ((kind (kind%%% obj)))
+                     (or (eq? kind 'nix-set)
+                         (eq? kind 'nix-setrec)))))))
        (register-nix-node-predicate new-pred))))
   (predicate>
    nix-letrec-node?
@@ -136,14 +136,14 @@ define_string_reverse_concatenate
            (lambda (getter)
              (lambda (obj)
                (unless (nix-attributeset-node? obj)
-                 (error "not a <nix-attributeset-node>" obj))
+                 (err "not a <nix-attributeset-node>" obj))
                (let ((kind (getter obj)))
                  (eq? kind 'nix-setrec)))))
   (getter> 1 nix-letrec-node-recursive?
            (lambda (getter)
              (lambda (obj)
                (unless (nix-letrec-node? obj)
-                 (error "not a <nix-letrec-node>" obj))
+                 (err "not a <nix-letrec-node>" obj))
                ;; This should always be true, because Nix has only the
                ;; recursive ‘let’.
                (let ((kind (getter obj)))
@@ -203,10 +203,38 @@ define_string_reverse_concatenate
                         (else
                          (list->nix-attributepath-node
                           (list attrpath))))))
-         (construct attrset attrpath)))))         
+         (when attrset
+           (unless (or (%%nix-identifier? attrset)
+                       (nix-attributeset-node? attrset))
+             (err "expected an identifier or attribute set"
+                  attrset)))
+         (construct attrset attrpath)))))
   (predicate> nix-get-node? register-nix-node-predicate)
   (getter> 1 nix-get-node-attributeset)
   (getter> 2 nix-get-node-attributepath))
+
+(define-record-factory <nix-has?-node>
+  (constructor>
+   make-nix-has?-node
+   (lambda (construct)
+     (lambda (attrset attrpath)
+       (let ((attrset (and attrset (scheme->nix attrset)))
+             (attrpath (cond
+                        ((nix-attributepath-node? attrpath)
+                         attrpath)
+                        ((pair? attrpath)
+                         (list->nix-attributepath-node attrpath))
+                        (else
+                         (list->nix-attributepath-node
+                          (list attrpath))))))
+         (unless (or (%%nix-identifier? attrset)
+                     (nix-attributeset-node? attrset))
+           (err "expected an identifier or attribute set"
+                attrset))
+         (construct attrset attrpath)))))         
+  (predicate> nix-has?-node? register-nix-node-predicate)
+  (getter> 1 nix-has?-node-attributeset)
+  (getter> 2 nix-has?-node-attributepath))
 
 (define-record-factory <nix-unaryoperator-node>
   (constructor>
@@ -254,7 +282,7 @@ define_string_reverse_concatenate
          (list->nix-list-node (map scheme->nix value)))
         ((nix-abstract-syntax-tree? value)
          value)
-        (else (error "incorrect type" value))))
+        (else (err "incorrect type" value))))
 
 (define output-nix-abstract-syntax-tree
   (let ((outp-default
@@ -283,11 +311,13 @@ define_string_reverse_concatenate
          (%%output-nix-list-node ast outp))
         ((nix-get-node? ast)
          (%%output-nix-get-node ast outp))
+        ((nix-has?-node? ast)
+         (%%output-nix-has?-node ast outp))
         ((nix-unaryoperator-node? ast)
          (%%output-nix-unaryoperator-node ast outp))
         ((nix-binaryoperator-node? ast)
          (%%output-nix-binaryoperator-node ast outp))
-        (else (error "not an abstract syntax tree" ast)))))))
+        (else (err "not an abstract syntax tree" ast)))))))
 
 ;;; A synonym.
 (define output-nix-ast output-nix-abstract-syntax-tree)
@@ -311,7 +341,7 @@ define_string_reverse_concatenate
           ((string? data)
            (%%output-string data outp)
            (outp "\n"))
-          (else (error "bad <nix-data-node>" ast)))))
+          (else (err "bad <nix-data-node>" ast)))))
 
 (define (%%output-string str outp)
   (cond ((%%string-needs-escaping? str)
@@ -378,13 +408,13 @@ define_string_reverse_concatenate
     (outp "})\n")))
 
 (define (%%output-nix-letrec-node ast outp)
-    (outp "(let\n")
-    (nix-letrec-node-for-each
-     output-nix-abstract-syntax-tree ast)
-    (outp "in(\n")
-    (output-nix-abstract-syntax-tree
-     (nix-letrec-node-in-clause ast))
-    (outp "))\n"))
+  (outp "(let\n")
+  (nix-letrec-node-for-each
+   output-nix-abstract-syntax-tree ast)
+  (outp "in(\n")
+  (output-nix-abstract-syntax-tree
+   (nix-letrec-node-in-clause ast))
+  (outp "))\n"))
 
 (define (%%output-nix-attributebinding-node ast outp)
   (let ((key (nix-attributebinding-node-key ast))
@@ -422,9 +452,9 @@ define_string_reverse_concatenate
            (%%output-nix-identifier
             (make-nix-data-node (symbol->string data)) outp))
           ((not (string? data))
-           (error "not a symbol or string" data))
+           (err "not a symbol or string" data))
           ((not (%%string-is-nix-identifier? data))
-           (error "not a Nix identifier" data))
+           (err "not a Nix identifier" data))
           (else
            (outp data)
            (outp "\n")))))
@@ -442,9 +472,22 @@ define_string_reverse_concatenate
   (let ((attrset (nix-get-node-attributeset ast))
         (attrpath (nix-get-node-attributepath ast)))
     (when attrset
-      (%%output-nix-identifier attrset outp)
+      (if (%%nix-identifier? attrset)
+        (%%output-nix-identifier attrset outp)
+        (output-nix-abstract-syntax-tree attrset outp))
       (outp ".\n"))
     (output-nix-abstract-syntax-tree attrpath outp)))
+
+(define (%%output-nix-has?-node ast outp)
+  (let ((attrset (nix-has?-node-attributeset ast))
+        (attrpath (nix-has?-node-attributepath ast)))
+    (outp "(\n")
+    (if (%%nix-identifier? attrset)
+      (%%output-nix-identifier attrset outp)
+      (output-nix-abstract-syntax-tree attrset outp))
+    (outp "?\n")
+    (output-nix-abstract-syntax-tree attrpath outp)
+    (outp ")\n")))
 
 (define (%%output-nix-unaryoperator-node ast outp)
   (outp "(\n")
@@ -475,19 +518,28 @@ define_string_reverse_concatenate
             ((pred (string-ref str i)) #t)
             (else (loop (+ i 1)))))))
 
+(define (%%nix-identifier? obj)
+  (and (nix-data-node? obj)
+       (let ((data (nix-data-node-ref obj)))
+         (or (and (string? data)
+                  (%%string-is-nix-identifier? data))
+             (and (symbol? data)
+                  (%%string-is-nix-identifier?
+                   (symbol->string data)))))))
+
 (define (%%string-is-nix-identifier? str)
   (let ((n (string-length str)))
     (if (zero? n)
+      #f
+      (if (not (%%char-is-nix-identifier-start?
+                (string-ref str 0)))
         #f
-        (if (not (%%char-is-nix-identifier-start?
-                  (string-ref str 0)))
-            #f
-            (let loop ((i 1))
-              (cond ((= i n) #t)
-                    ((%%char-is-nix-identifier-rest?
-                      (string-ref str i))
-                     (loop (+ i 1)))
-                    (else #f)))))))
+        (let loop ((i 1))
+          (cond ((= i n) #t)
+                ((%%char-is-nix-identifier-rest?
+                  (string-ref str i))
+                 (loop (+ i 1)))
+                (else #f)))))))
 
 (define (%%char-is-nix-identifier-start? c)
   (or (char=? c #\_)
@@ -507,5 +559,6 @@ m4_divert(-1)
 ;;; mode: scheme
 ;;; geiser-scheme-implementation: chibi
 ;;; coding: utf-8
+;;; eval: (put 'if 'scheme-indent-function 1)
 ;;; end:
 m4_divert«»m4_dnl
