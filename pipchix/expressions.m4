@@ -47,16 +47,39 @@
 (define (nix> a b) (make-nix-binaryoperator-node ">" a b))
 (define (nix>= a b) (make-nix-binaryoperator-node ">=" a b))
 
-(define (nix-and a b) (make-nix-binaryoperator-node "&&" a b))
-(define (nix-or a b) (make-nix-binaryoperator-node "||" a b))
-(define (nix-> a b) (make-nix-binaryoperator-node "->" a b))
 (define (nix-not a) (make-nix-unaryoperator-node "!" a))
+
+(define nix-and
+  (case-lambda
+    ((a b) (make-nix-binaryoperator-node "&&" a b))
+    ((a . args) (let loop ((a (scheme->nix a))
+                           (p args))
+                  (if (pair? p)
+                    (loop (nix-and a (car p)) (cdr p))
+                    a)))
+    (() nix-true)))
+
+(define nix-or
+  (case-lambda
+    ((a b) (make-nix-binaryoperator-node "||" a b))
+    ((a . args) (let loop ((a (scheme->nix a))
+                           (p args))
+                  (if (pair? p)
+                    (loop (nix-or a (car p)) (cdr p))
+                    a)))
+    (() nix-false)))
+
+(define nix->
+  (case-lambda
+    ((a b) (make-nix-binaryoperator-node "->" a b))
+    ((a b . args)
+     (nix-> a (apply nix-> (cons b args))))))
 
 (define nix++
   (case-lambda
     ((a b) (make-nix-binaryoperator-node "++" a b))
     ((a) (scheme->nix a))
-    ((a . args) (nix++ (scheme->nix a) (apply nix++ args)))
+    ((a . args) (nix++ a (apply nix++ args)))
     (() (nix-list)))) ;; An empty Nix list.
 
 (define nix+

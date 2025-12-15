@@ -108,13 +108,47 @@ m4_define([sexpr],[(nix-not= 1 2)])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([(·(1)·!=·(2)·)·])],[])
 
-m4_define([sexpr],[(nix-and nix-true nix-false)])
-check_unquoted([run_scheme 'sexpr'],[0],
-  [interpunct_nl([(·nix_true&&·nix_false)·])],[])
+m4_foreach([op],[and,or],[
 
-m4_define([sexpr],[(nix-or nix-true nix-false)])
+m4_pushdef([nix_op],m4_if(op,[and],[&&],op,[or],[||]))
+
+m4_define([sexpr],[(nix-m4_car(op) nix-true)])
 check_unquoted([run_scheme 'sexpr'],[0],
-  [interpunct_nl([(·nix_true||·nix_false)·])],[])
+  [interpunct_nl([nix_true])],[])
+
+m4_define([sexpr],[(nix-m4_car(op) nix-true nix-false)])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(·nix_true[]nix_op·nix_false)·])],[])
+
+m4_define([sexpr],[(nix-m4_car(op) nix-true nix-false (© `a))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(·(·nix_true[]nix_op·nix_false)·nix_op·a·)·])],[])
+
+m4_define([sexpr],[(nix-m4_car(op) nix-true nix-false (© `a) (© "b"))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(·(·(·nix_true[]nix_op·nix_false)·nix_op·a·)·nix_op·b·)·])],[])
+
+m4_popdef([nix_op])
+
+])
+
+m4_define([sexpr],[(nix-and)])
+check_unquoted([run_scheme 'sexpr'],[0],[interpunct_nl([nix_true])],[])
+
+m4_define([sexpr],[(nix-or)])
+check_unquoted([run_scheme 'sexpr'],[0],[interpunct_nl([nix_false])],[])
+
+m4_define([sexpr],[(nix-> nix-true nix-false)])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(·nix_true->·nix_false)·])],[])
+
+m4_define([sexpr],[(nix-> nix-true nix-false (© `a))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(·nix_true->·(·nix_false->·a·)·)·])],[])
+
+m4_define([sexpr],[(nix-> nix-true nix-false (© `a) (© "b"))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(·nix_true->·(·nix_false->·(·a·->·b·)·)·)·])],[])
 
 m4_define([sexpr],[(nix-> nix-true nix-false)])
 check_unquoted([run_scheme 'sexpr'],[0],
