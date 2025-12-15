@@ -4945,18 +4945,14 @@ printf "%s\n" "expressions-template.at:36" >"$at_check_line_file"
 (test ${enable_check_r6rs_chez} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:36"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:36: \"\${abs_builddir}\"/run-r6rs-chez.sh '(nix= 1 2)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:36: \"\${abs_builddir}\"/run-r6rs-chez.sh '(nix+)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:36"
-( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '(nix= 1 2)'
+( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '(nix+)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "(
-(1)
-==
-(2)
-)
+echo >>"$at_stdout"; printf "%s\n" "(0)
 " | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:36"
@@ -4971,18 +4967,14 @@ printf "%s\n" "expressions-template.at:40" >"$at_check_line_file"
 (test ${enable_check_r6rs_chez} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:40"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:40: \"\${abs_builddir}\"/run-r6rs-chez.sh '(nix-not= 1 2)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:40: \"\${abs_builddir}\"/run-r6rs-chez.sh '(nix+ 1)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:40"
-( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '(nix-not= 1 2)'
+( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '(nix+ 1)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "(
-(1)
-!=
-(2)
-)
+echo >>"$at_stdout"; printf "%s\n" "(1)
 " | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:40"
@@ -4997,17 +4989,21 @@ printf "%s\n" "expressions-template.at:44" >"$at_check_line_file"
 (test ${enable_check_r6rs_chez} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:44"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:44: \"\${abs_builddir}\"/run-r6rs-chez.sh '(nix-and nix-true nix-false)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:44: \"\${abs_builddir}\"/run-r6rs-chez.sh '(nix+ 1 2 3)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:44"
-( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '(nix-and nix-true nix-false)'
+( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '(nix+ 1 2 3)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
 echo >>"$at_stdout"; printf "%s\n" "(
-(builtins.true)
-&&
-(builtins.false)
+(
+(1)
++
+(2)
+)
++
+(3)
 )
 " | \
   $at_diff - "$at_stdout" || at_failed=:
@@ -5023,17 +5019,25 @@ printf "%s\n" "expressions-template.at:48" >"$at_check_line_file"
 (test ${enable_check_r6rs_chez} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:48"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:48: \"\${abs_builddir}\"/run-r6rs-chez.sh '(nix-or nix-true nix-false)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:48: \"\${abs_builddir}\"/run-r6rs-chez.sh '(nix+ 1 2 3 4)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:48"
-( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '(nix-or nix-true nix-false)'
+( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '(nix+ 1 2 3 4)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
 echo >>"$at_stdout"; printf "%s\n" "(
-(builtins.true)
-||
-(builtins.false)
+(
+(
+(1)
++
+(2)
+)
++
+(3)
+)
++
+(4)
 )
 " | \
   $at_diff - "$at_stdout" || at_failed=:
@@ -5049,8 +5053,112 @@ printf "%s\n" "expressions-template.at:52" >"$at_check_line_file"
 (test ${enable_check_r6rs_chez} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:52"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:52: \"\${abs_builddir}\"/run-r6rs-chez.sh '(nix-> nix-true nix-false)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:52: \"\${abs_builddir}\"/run-r6rs-chez.sh '(nix= 1 2)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:52"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '(nix= 1 2)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+(1)
+==
+(2)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:52"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "expressions-template.at:56" >"$at_check_line_file"
+(test ${enable_check_r6rs_chez} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:56"
+{ set +x
+printf "%s\n" "$at_srcdir/expressions-template.at:56: \"\${abs_builddir}\"/run-r6rs-chez.sh '(nix-not= 1 2)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:56"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '(nix-not= 1 2)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+(1)
+!=
+(2)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:56"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "expressions-template.at:60" >"$at_check_line_file"
+(test ${enable_check_r6rs_chez} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:60"
+{ set +x
+printf "%s\n" "$at_srcdir/expressions-template.at:60: \"\${abs_builddir}\"/run-r6rs-chez.sh '(nix-and nix-true nix-false)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:60"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '(nix-and nix-true nix-false)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+(builtins.true)
+&&
+(builtins.false)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:60"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "expressions-template.at:64" >"$at_check_line_file"
+(test ${enable_check_r6rs_chez} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:64"
+{ set +x
+printf "%s\n" "$at_srcdir/expressions-template.at:64: \"\${abs_builddir}\"/run-r6rs-chez.sh '(nix-or nix-true nix-false)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:64"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '(nix-or nix-true nix-false)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+(builtins.true)
+||
+(builtins.false)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:64"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "expressions-template.at:68" >"$at_check_line_file"
+(test ${enable_check_r6rs_chez} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:68"
+{ set +x
+printf "%s\n" "$at_srcdir/expressions-template.at:68: \"\${abs_builddir}\"/run-r6rs-chez.sh '(nix-> nix-true nix-false)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:68"
 ( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '(nix-> nix-true nix-false)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -5063,7 +5171,7 @@ echo >>"$at_stdout"; printf "%s\n" "(
 )
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:52"
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:68"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -8528,18 +8636,14 @@ printf "%s\n" "expressions-template.at:36" >"$at_check_line_file"
 (test ${enable_check_r7rs_chibi} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:36"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:36: \"\${abs_builddir}\"/run-r7rs-chibi.sh '(nix= 1 2)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:36: \"\${abs_builddir}\"/run-r7rs-chibi.sh '(nix+)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:36"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-chibi.sh '(nix= 1 2)'
+( $at_check_trace; "${abs_builddir}"/run-r7rs-chibi.sh '(nix+)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "(
-(1)
-==
-(2)
-)
+echo >>"$at_stdout"; printf "%s\n" "(0)
 " | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:36"
@@ -8554,18 +8658,14 @@ printf "%s\n" "expressions-template.at:40" >"$at_check_line_file"
 (test ${enable_check_r7rs_chibi} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:40"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:40: \"\${abs_builddir}\"/run-r7rs-chibi.sh '(nix-not= 1 2)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:40: \"\${abs_builddir}\"/run-r7rs-chibi.sh '(nix+ 1)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:40"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-chibi.sh '(nix-not= 1 2)'
+( $at_check_trace; "${abs_builddir}"/run-r7rs-chibi.sh '(nix+ 1)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "(
-(1)
-!=
-(2)
-)
+echo >>"$at_stdout"; printf "%s\n" "(1)
 " | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:40"
@@ -8580,17 +8680,21 @@ printf "%s\n" "expressions-template.at:44" >"$at_check_line_file"
 (test ${enable_check_r7rs_chibi} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:44"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:44: \"\${abs_builddir}\"/run-r7rs-chibi.sh '(nix-and nix-true nix-false)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:44: \"\${abs_builddir}\"/run-r7rs-chibi.sh '(nix+ 1 2 3)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:44"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-chibi.sh '(nix-and nix-true nix-false)'
+( $at_check_trace; "${abs_builddir}"/run-r7rs-chibi.sh '(nix+ 1 2 3)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
 echo >>"$at_stdout"; printf "%s\n" "(
-(builtins.true)
-&&
-(builtins.false)
+(
+(1)
++
+(2)
+)
++
+(3)
 )
 " | \
   $at_diff - "$at_stdout" || at_failed=:
@@ -8606,17 +8710,25 @@ printf "%s\n" "expressions-template.at:48" >"$at_check_line_file"
 (test ${enable_check_r7rs_chibi} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:48"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:48: \"\${abs_builddir}\"/run-r7rs-chibi.sh '(nix-or nix-true nix-false)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:48: \"\${abs_builddir}\"/run-r7rs-chibi.sh '(nix+ 1 2 3 4)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:48"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-chibi.sh '(nix-or nix-true nix-false)'
+( $at_check_trace; "${abs_builddir}"/run-r7rs-chibi.sh '(nix+ 1 2 3 4)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
 echo >>"$at_stdout"; printf "%s\n" "(
-(builtins.true)
-||
-(builtins.false)
+(
+(
+(1)
++
+(2)
+)
++
+(3)
+)
++
+(4)
 )
 " | \
   $at_diff - "$at_stdout" || at_failed=:
@@ -8632,8 +8744,112 @@ printf "%s\n" "expressions-template.at:52" >"$at_check_line_file"
 (test ${enable_check_r7rs_chibi} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:52"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:52: \"\${abs_builddir}\"/run-r7rs-chibi.sh '(nix-> nix-true nix-false)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:52: \"\${abs_builddir}\"/run-r7rs-chibi.sh '(nix= 1 2)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:52"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-chibi.sh '(nix= 1 2)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+(1)
+==
+(2)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:52"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "expressions-template.at:56" >"$at_check_line_file"
+(test ${enable_check_r7rs_chibi} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:56"
+{ set +x
+printf "%s\n" "$at_srcdir/expressions-template.at:56: \"\${abs_builddir}\"/run-r7rs-chibi.sh '(nix-not= 1 2)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:56"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-chibi.sh '(nix-not= 1 2)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+(1)
+!=
+(2)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:56"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "expressions-template.at:60" >"$at_check_line_file"
+(test ${enable_check_r7rs_chibi} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:60"
+{ set +x
+printf "%s\n" "$at_srcdir/expressions-template.at:60: \"\${abs_builddir}\"/run-r7rs-chibi.sh '(nix-and nix-true nix-false)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:60"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-chibi.sh '(nix-and nix-true nix-false)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+(builtins.true)
+&&
+(builtins.false)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:60"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "expressions-template.at:64" >"$at_check_line_file"
+(test ${enable_check_r7rs_chibi} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:64"
+{ set +x
+printf "%s\n" "$at_srcdir/expressions-template.at:64: \"\${abs_builddir}\"/run-r7rs-chibi.sh '(nix-or nix-true nix-false)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:64"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-chibi.sh '(nix-or nix-true nix-false)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+(builtins.true)
+||
+(builtins.false)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:64"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "expressions-template.at:68" >"$at_check_line_file"
+(test ${enable_check_r7rs_chibi} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:68"
+{ set +x
+printf "%s\n" "$at_srcdir/expressions-template.at:68: \"\${abs_builddir}\"/run-r7rs-chibi.sh '(nix-> nix-true nix-false)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:68"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-chibi.sh '(nix-> nix-true nix-false)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -8646,7 +8862,7 @@ echo >>"$at_stdout"; printf "%s\n" "(
 )
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:52"
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:68"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -12067,18 +12283,14 @@ printf "%s\n" "expressions-template.at:36" >"$at_check_line_file"
 (test ${enable_check_r7rs_csc_5} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:36"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:36: \"\${abs_builddir}\"/run-r7rs-csc-5.sh '(nix= 1 2)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:36: \"\${abs_builddir}\"/run-r7rs-csc-5.sh '(nix+)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:36"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-csc-5.sh '(nix= 1 2)'
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csc-5.sh '(nix+)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "(
-(1)
-==
-(2)
-)
+echo >>"$at_stdout"; printf "%s\n" "(0)
 " | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:36"
@@ -12093,18 +12305,14 @@ printf "%s\n" "expressions-template.at:40" >"$at_check_line_file"
 (test ${enable_check_r7rs_csc_5} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:40"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:40: \"\${abs_builddir}\"/run-r7rs-csc-5.sh '(nix-not= 1 2)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:40: \"\${abs_builddir}\"/run-r7rs-csc-5.sh '(nix+ 1)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:40"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-csc-5.sh '(nix-not= 1 2)'
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csc-5.sh '(nix+ 1)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "(
-(1)
-!=
-(2)
-)
+echo >>"$at_stdout"; printf "%s\n" "(1)
 " | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:40"
@@ -12119,17 +12327,21 @@ printf "%s\n" "expressions-template.at:44" >"$at_check_line_file"
 (test ${enable_check_r7rs_csc_5} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:44"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:44: \"\${abs_builddir}\"/run-r7rs-csc-5.sh '(nix-and nix-true nix-false)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:44: \"\${abs_builddir}\"/run-r7rs-csc-5.sh '(nix+ 1 2 3)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:44"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-csc-5.sh '(nix-and nix-true nix-false)'
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csc-5.sh '(nix+ 1 2 3)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
 echo >>"$at_stdout"; printf "%s\n" "(
-(builtins.true)
-&&
-(builtins.false)
+(
+(1)
++
+(2)
+)
++
+(3)
 )
 " | \
   $at_diff - "$at_stdout" || at_failed=:
@@ -12145,17 +12357,25 @@ printf "%s\n" "expressions-template.at:48" >"$at_check_line_file"
 (test ${enable_check_r7rs_csc_5} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:48"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:48: \"\${abs_builddir}\"/run-r7rs-csc-5.sh '(nix-or nix-true nix-false)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:48: \"\${abs_builddir}\"/run-r7rs-csc-5.sh '(nix+ 1 2 3 4)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:48"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-csc-5.sh '(nix-or nix-true nix-false)'
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csc-5.sh '(nix+ 1 2 3 4)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
 echo >>"$at_stdout"; printf "%s\n" "(
-(builtins.true)
-||
-(builtins.false)
+(
+(
+(1)
++
+(2)
+)
++
+(3)
+)
++
+(4)
 )
 " | \
   $at_diff - "$at_stdout" || at_failed=:
@@ -12171,8 +12391,112 @@ printf "%s\n" "expressions-template.at:52" >"$at_check_line_file"
 (test ${enable_check_r7rs_csc_5} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:52"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:52: \"\${abs_builddir}\"/run-r7rs-csc-5.sh '(nix-> nix-true nix-false)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:52: \"\${abs_builddir}\"/run-r7rs-csc-5.sh '(nix= 1 2)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:52"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csc-5.sh '(nix= 1 2)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+(1)
+==
+(2)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:52"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "expressions-template.at:56" >"$at_check_line_file"
+(test ${enable_check_r7rs_csc_5} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:56"
+{ set +x
+printf "%s\n" "$at_srcdir/expressions-template.at:56: \"\${abs_builddir}\"/run-r7rs-csc-5.sh '(nix-not= 1 2)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:56"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csc-5.sh '(nix-not= 1 2)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+(1)
+!=
+(2)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:56"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "expressions-template.at:60" >"$at_check_line_file"
+(test ${enable_check_r7rs_csc_5} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:60"
+{ set +x
+printf "%s\n" "$at_srcdir/expressions-template.at:60: \"\${abs_builddir}\"/run-r7rs-csc-5.sh '(nix-and nix-true nix-false)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:60"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csc-5.sh '(nix-and nix-true nix-false)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+(builtins.true)
+&&
+(builtins.false)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:60"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "expressions-template.at:64" >"$at_check_line_file"
+(test ${enable_check_r7rs_csc_5} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:64"
+{ set +x
+printf "%s\n" "$at_srcdir/expressions-template.at:64: \"\${abs_builddir}\"/run-r7rs-csc-5.sh '(nix-or nix-true nix-false)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:64"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csc-5.sh '(nix-or nix-true nix-false)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+(builtins.true)
+||
+(builtins.false)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:64"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "expressions-template.at:68" >"$at_check_line_file"
+(test ${enable_check_r7rs_csc_5} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:68"
+{ set +x
+printf "%s\n" "$at_srcdir/expressions-template.at:68: \"\${abs_builddir}\"/run-r7rs-csc-5.sh '(nix-> nix-true nix-false)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:68"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-csc-5.sh '(nix-> nix-true nix-false)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -12185,7 +12509,7 @@ echo >>"$at_stdout"; printf "%s\n" "(
 )
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:52"
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:68"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -15606,18 +15930,14 @@ printf "%s\n" "expressions-template.at:36" >"$at_check_line_file"
 (test ${enable_check_r7rs_csi_5} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:36"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:36: \"\${abs_builddir}\"/run-r7rs-csi-5.sh '(nix= 1 2)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:36: \"\${abs_builddir}\"/run-r7rs-csi-5.sh '(nix+)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:36"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-csi-5.sh '(nix= 1 2)'
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csi-5.sh '(nix+)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "(
-(1)
-==
-(2)
-)
+echo >>"$at_stdout"; printf "%s\n" "(0)
 " | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:36"
@@ -15632,18 +15952,14 @@ printf "%s\n" "expressions-template.at:40" >"$at_check_line_file"
 (test ${enable_check_r7rs_csi_5} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:40"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:40: \"\${abs_builddir}\"/run-r7rs-csi-5.sh '(nix-not= 1 2)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:40: \"\${abs_builddir}\"/run-r7rs-csi-5.sh '(nix+ 1)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:40"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-csi-5.sh '(nix-not= 1 2)'
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csi-5.sh '(nix+ 1)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "(
-(1)
-!=
-(2)
-)
+echo >>"$at_stdout"; printf "%s\n" "(1)
 " | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:40"
@@ -15658,17 +15974,21 @@ printf "%s\n" "expressions-template.at:44" >"$at_check_line_file"
 (test ${enable_check_r7rs_csi_5} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:44"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:44: \"\${abs_builddir}\"/run-r7rs-csi-5.sh '(nix-and nix-true nix-false)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:44: \"\${abs_builddir}\"/run-r7rs-csi-5.sh '(nix+ 1 2 3)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:44"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-csi-5.sh '(nix-and nix-true nix-false)'
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csi-5.sh '(nix+ 1 2 3)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
 echo >>"$at_stdout"; printf "%s\n" "(
-(builtins.true)
-&&
-(builtins.false)
+(
+(1)
++
+(2)
+)
++
+(3)
 )
 " | \
   $at_diff - "$at_stdout" || at_failed=:
@@ -15684,17 +16004,25 @@ printf "%s\n" "expressions-template.at:48" >"$at_check_line_file"
 (test ${enable_check_r7rs_csi_5} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:48"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:48: \"\${abs_builddir}\"/run-r7rs-csi-5.sh '(nix-or nix-true nix-false)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:48: \"\${abs_builddir}\"/run-r7rs-csi-5.sh '(nix+ 1 2 3 4)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:48"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-csi-5.sh '(nix-or nix-true nix-false)'
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csi-5.sh '(nix+ 1 2 3 4)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
 echo >>"$at_stdout"; printf "%s\n" "(
-(builtins.true)
-||
-(builtins.false)
+(
+(
+(1)
++
+(2)
+)
++
+(3)
+)
++
+(4)
 )
 " | \
   $at_diff - "$at_stdout" || at_failed=:
@@ -15710,8 +16038,112 @@ printf "%s\n" "expressions-template.at:52" >"$at_check_line_file"
 (test ${enable_check_r7rs_csi_5} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:52"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:52: \"\${abs_builddir}\"/run-r7rs-csi-5.sh '(nix-> nix-true nix-false)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:52: \"\${abs_builddir}\"/run-r7rs-csi-5.sh '(nix= 1 2)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:52"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csi-5.sh '(nix= 1 2)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+(1)
+==
+(2)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:52"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "expressions-template.at:56" >"$at_check_line_file"
+(test ${enable_check_r7rs_csi_5} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:56"
+{ set +x
+printf "%s\n" "$at_srcdir/expressions-template.at:56: \"\${abs_builddir}\"/run-r7rs-csi-5.sh '(nix-not= 1 2)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:56"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csi-5.sh '(nix-not= 1 2)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+(1)
+!=
+(2)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:56"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "expressions-template.at:60" >"$at_check_line_file"
+(test ${enable_check_r7rs_csi_5} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:60"
+{ set +x
+printf "%s\n" "$at_srcdir/expressions-template.at:60: \"\${abs_builddir}\"/run-r7rs-csi-5.sh '(nix-and nix-true nix-false)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:60"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csi-5.sh '(nix-and nix-true nix-false)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+(builtins.true)
+&&
+(builtins.false)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:60"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "expressions-template.at:64" >"$at_check_line_file"
+(test ${enable_check_r7rs_csi_5} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:64"
+{ set +x
+printf "%s\n" "$at_srcdir/expressions-template.at:64: \"\${abs_builddir}\"/run-r7rs-csi-5.sh '(nix-or nix-true nix-false)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:64"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csi-5.sh '(nix-or nix-true nix-false)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+(builtins.true)
+||
+(builtins.false)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:64"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "expressions-template.at:68" >"$at_check_line_file"
+(test ${enable_check_r7rs_csi_5} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:68"
+{ set +x
+printf "%s\n" "$at_srcdir/expressions-template.at:68: \"\${abs_builddir}\"/run-r7rs-csi-5.sh '(nix-> nix-true nix-false)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:68"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-csi-5.sh '(nix-> nix-true nix-false)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -15724,7 +16156,7 @@ echo >>"$at_stdout"; printf "%s\n" "(
 )
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:52"
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:68"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -19189,18 +19621,14 @@ printf "%s\n" "expressions-template.at:36" >"$at_check_line_file"
 (test ${enable_check_r7rs_gauche} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:36"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:36: \"\${abs_builddir}\"/run-r7rs-gauche.sh '(nix= 1 2)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:36: \"\${abs_builddir}\"/run-r7rs-gauche.sh '(nix+)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:36"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-gauche.sh '(nix= 1 2)'
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gauche.sh '(nix+)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "(
-(1)
-==
-(2)
-)
+echo >>"$at_stdout"; printf "%s\n" "(0)
 " | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:36"
@@ -19215,18 +19643,14 @@ printf "%s\n" "expressions-template.at:40" >"$at_check_line_file"
 (test ${enable_check_r7rs_gauche} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:40"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:40: \"\${abs_builddir}\"/run-r7rs-gauche.sh '(nix-not= 1 2)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:40: \"\${abs_builddir}\"/run-r7rs-gauche.sh '(nix+ 1)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:40"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-gauche.sh '(nix-not= 1 2)'
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gauche.sh '(nix+ 1)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "(
-(1)
-!=
-(2)
-)
+echo >>"$at_stdout"; printf "%s\n" "(1)
 " | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:40"
@@ -19241,17 +19665,21 @@ printf "%s\n" "expressions-template.at:44" >"$at_check_line_file"
 (test ${enable_check_r7rs_gauche} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:44"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:44: \"\${abs_builddir}\"/run-r7rs-gauche.sh '(nix-and nix-true nix-false)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:44: \"\${abs_builddir}\"/run-r7rs-gauche.sh '(nix+ 1 2 3)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:44"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-gauche.sh '(nix-and nix-true nix-false)'
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gauche.sh '(nix+ 1 2 3)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
 echo >>"$at_stdout"; printf "%s\n" "(
-(builtins.true)
-&&
-(builtins.false)
+(
+(1)
++
+(2)
+)
++
+(3)
 )
 " | \
   $at_diff - "$at_stdout" || at_failed=:
@@ -19267,17 +19695,25 @@ printf "%s\n" "expressions-template.at:48" >"$at_check_line_file"
 (test ${enable_check_r7rs_gauche} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:48"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:48: \"\${abs_builddir}\"/run-r7rs-gauche.sh '(nix-or nix-true nix-false)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:48: \"\${abs_builddir}\"/run-r7rs-gauche.sh '(nix+ 1 2 3 4)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:48"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-gauche.sh '(nix-or nix-true nix-false)'
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gauche.sh '(nix+ 1 2 3 4)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
 echo >>"$at_stdout"; printf "%s\n" "(
-(builtins.true)
-||
-(builtins.false)
+(
+(
+(1)
++
+(2)
+)
++
+(3)
+)
++
+(4)
 )
 " | \
   $at_diff - "$at_stdout" || at_failed=:
@@ -19293,8 +19729,112 @@ printf "%s\n" "expressions-template.at:52" >"$at_check_line_file"
 (test ${enable_check_r7rs_gauche} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:52"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:52: \"\${abs_builddir}\"/run-r7rs-gauche.sh '(nix-> nix-true nix-false)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:52: \"\${abs_builddir}\"/run-r7rs-gauche.sh '(nix= 1 2)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:52"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gauche.sh '(nix= 1 2)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+(1)
+==
+(2)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:52"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "expressions-template.at:56" >"$at_check_line_file"
+(test ${enable_check_r7rs_gauche} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:56"
+{ set +x
+printf "%s\n" "$at_srcdir/expressions-template.at:56: \"\${abs_builddir}\"/run-r7rs-gauche.sh '(nix-not= 1 2)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:56"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gauche.sh '(nix-not= 1 2)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+(1)
+!=
+(2)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:56"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "expressions-template.at:60" >"$at_check_line_file"
+(test ${enable_check_r7rs_gauche} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:60"
+{ set +x
+printf "%s\n" "$at_srcdir/expressions-template.at:60: \"\${abs_builddir}\"/run-r7rs-gauche.sh '(nix-and nix-true nix-false)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:60"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gauche.sh '(nix-and nix-true nix-false)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+(builtins.true)
+&&
+(builtins.false)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:60"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "expressions-template.at:64" >"$at_check_line_file"
+(test ${enable_check_r7rs_gauche} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:64"
+{ set +x
+printf "%s\n" "$at_srcdir/expressions-template.at:64: \"\${abs_builddir}\"/run-r7rs-gauche.sh '(nix-or nix-true nix-false)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:64"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gauche.sh '(nix-or nix-true nix-false)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+(builtins.true)
+||
+(builtins.false)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:64"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "expressions-template.at:68" >"$at_check_line_file"
+(test ${enable_check_r7rs_gauche} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:68"
+{ set +x
+printf "%s\n" "$at_srcdir/expressions-template.at:68: \"\${abs_builddir}\"/run-r7rs-gauche.sh '(nix-> nix-true nix-false)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:68"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-gauche.sh '(nix-> nix-true nix-false)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -19307,7 +19847,7 @@ echo >>"$at_stdout"; printf "%s\n" "(
 )
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:52"
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:68"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -22772,18 +23312,14 @@ printf "%s\n" "expressions-template.at:36" >"$at_check_line_file"
 (test ${enable_check_r7rs_gxi} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:36"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:36: \"\${abs_builddir}\"/run-r7rs-gxi.sh '(nix= 1 2)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:36: \"\${abs_builddir}\"/run-r7rs-gxi.sh '(nix+)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:36"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-gxi.sh '(nix= 1 2)'
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gxi.sh '(nix+)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "(
-(1)
-==
-(2)
-)
+echo >>"$at_stdout"; printf "%s\n" "(0)
 " | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:36"
@@ -22798,18 +23334,14 @@ printf "%s\n" "expressions-template.at:40" >"$at_check_line_file"
 (test ${enable_check_r7rs_gxi} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:40"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:40: \"\${abs_builddir}\"/run-r7rs-gxi.sh '(nix-not= 1 2)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:40: \"\${abs_builddir}\"/run-r7rs-gxi.sh '(nix+ 1)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:40"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-gxi.sh '(nix-not= 1 2)'
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gxi.sh '(nix+ 1)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "(
-(1)
-!=
-(2)
-)
+echo >>"$at_stdout"; printf "%s\n" "(1)
 " | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:40"
@@ -22824,17 +23356,21 @@ printf "%s\n" "expressions-template.at:44" >"$at_check_line_file"
 (test ${enable_check_r7rs_gxi} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:44"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:44: \"\${abs_builddir}\"/run-r7rs-gxi.sh '(nix-and nix-true nix-false)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:44: \"\${abs_builddir}\"/run-r7rs-gxi.sh '(nix+ 1 2 3)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:44"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-gxi.sh '(nix-and nix-true nix-false)'
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gxi.sh '(nix+ 1 2 3)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
 echo >>"$at_stdout"; printf "%s\n" "(
-(builtins.true)
-&&
-(builtins.false)
+(
+(1)
++
+(2)
+)
++
+(3)
 )
 " | \
   $at_diff - "$at_stdout" || at_failed=:
@@ -22850,17 +23386,25 @@ printf "%s\n" "expressions-template.at:48" >"$at_check_line_file"
 (test ${enable_check_r7rs_gxi} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:48"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:48: \"\${abs_builddir}\"/run-r7rs-gxi.sh '(nix-or nix-true nix-false)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:48: \"\${abs_builddir}\"/run-r7rs-gxi.sh '(nix+ 1 2 3 4)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:48"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-gxi.sh '(nix-or nix-true nix-false)'
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gxi.sh '(nix+ 1 2 3 4)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
 echo >>"$at_stdout"; printf "%s\n" "(
-(builtins.true)
-||
-(builtins.false)
+(
+(
+(1)
++
+(2)
+)
++
+(3)
+)
++
+(4)
 )
 " | \
   $at_diff - "$at_stdout" || at_failed=:
@@ -22876,8 +23420,112 @@ printf "%s\n" "expressions-template.at:52" >"$at_check_line_file"
 (test ${enable_check_r7rs_gxi} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:52"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:52: \"\${abs_builddir}\"/run-r7rs-gxi.sh '(nix-> nix-true nix-false)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:52: \"\${abs_builddir}\"/run-r7rs-gxi.sh '(nix= 1 2)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:52"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gxi.sh '(nix= 1 2)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+(1)
+==
+(2)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:52"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "expressions-template.at:56" >"$at_check_line_file"
+(test ${enable_check_r7rs_gxi} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:56"
+{ set +x
+printf "%s\n" "$at_srcdir/expressions-template.at:56: \"\${abs_builddir}\"/run-r7rs-gxi.sh '(nix-not= 1 2)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:56"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gxi.sh '(nix-not= 1 2)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+(1)
+!=
+(2)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:56"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "expressions-template.at:60" >"$at_check_line_file"
+(test ${enable_check_r7rs_gxi} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:60"
+{ set +x
+printf "%s\n" "$at_srcdir/expressions-template.at:60: \"\${abs_builddir}\"/run-r7rs-gxi.sh '(nix-and nix-true nix-false)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:60"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gxi.sh '(nix-and nix-true nix-false)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+(builtins.true)
+&&
+(builtins.false)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:60"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "expressions-template.at:64" >"$at_check_line_file"
+(test ${enable_check_r7rs_gxi} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:64"
+{ set +x
+printf "%s\n" "$at_srcdir/expressions-template.at:64: \"\${abs_builddir}\"/run-r7rs-gxi.sh '(nix-or nix-true nix-false)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:64"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gxi.sh '(nix-or nix-true nix-false)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+(builtins.true)
+||
+(builtins.false)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:64"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "expressions-template.at:68" >"$at_check_line_file"
+(test ${enable_check_r7rs_gxi} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:68"
+{ set +x
+printf "%s\n" "$at_srcdir/expressions-template.at:68: \"\${abs_builddir}\"/run-r7rs-gxi.sh '(nix-> nix-true nix-false)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:68"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-gxi.sh '(nix-> nix-true nix-false)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -22890,7 +23538,7 @@ echo >>"$at_stdout"; printf "%s\n" "(
 )
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:52"
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:68"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -26355,18 +27003,14 @@ printf "%s\n" "expressions-template.at:36" >"$at_check_line_file"
 (test ${enable_check_r7rs_gxc} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:36"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:36: \"\${abs_builddir}\"/run-r7rs-gxc.sh '(nix= 1 2)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:36: \"\${abs_builddir}\"/run-r7rs-gxc.sh '(nix+)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:36"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-gxc.sh '(nix= 1 2)'
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gxc.sh '(nix+)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "(
-(1)
-==
-(2)
-)
+echo >>"$at_stdout"; printf "%s\n" "(0)
 " | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:36"
@@ -26381,18 +27025,14 @@ printf "%s\n" "expressions-template.at:40" >"$at_check_line_file"
 (test ${enable_check_r7rs_gxc} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:40"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:40: \"\${abs_builddir}\"/run-r7rs-gxc.sh '(nix-not= 1 2)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:40: \"\${abs_builddir}\"/run-r7rs-gxc.sh '(nix+ 1)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:40"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-gxc.sh '(nix-not= 1 2)'
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gxc.sh '(nix+ 1)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "(
-(1)
-!=
-(2)
-)
+echo >>"$at_stdout"; printf "%s\n" "(1)
 " | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:40"
@@ -26407,17 +27047,21 @@ printf "%s\n" "expressions-template.at:44" >"$at_check_line_file"
 (test ${enable_check_r7rs_gxc} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:44"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:44: \"\${abs_builddir}\"/run-r7rs-gxc.sh '(nix-and nix-true nix-false)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:44: \"\${abs_builddir}\"/run-r7rs-gxc.sh '(nix+ 1 2 3)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:44"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-gxc.sh '(nix-and nix-true nix-false)'
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gxc.sh '(nix+ 1 2 3)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
 echo >>"$at_stdout"; printf "%s\n" "(
-(builtins.true)
-&&
-(builtins.false)
+(
+(1)
++
+(2)
+)
++
+(3)
 )
 " | \
   $at_diff - "$at_stdout" || at_failed=:
@@ -26433,17 +27077,25 @@ printf "%s\n" "expressions-template.at:48" >"$at_check_line_file"
 (test ${enable_check_r7rs_gxc} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:48"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:48: \"\${abs_builddir}\"/run-r7rs-gxc.sh '(nix-or nix-true nix-false)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:48: \"\${abs_builddir}\"/run-r7rs-gxc.sh '(nix+ 1 2 3 4)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:48"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-gxc.sh '(nix-or nix-true nix-false)'
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gxc.sh '(nix+ 1 2 3 4)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
 echo >>"$at_stdout"; printf "%s\n" "(
-(builtins.true)
-||
-(builtins.false)
+(
+(
+(1)
++
+(2)
+)
++
+(3)
+)
++
+(4)
 )
 " | \
   $at_diff - "$at_stdout" || at_failed=:
@@ -26459,8 +27111,112 @@ printf "%s\n" "expressions-template.at:52" >"$at_check_line_file"
 (test ${enable_check_r7rs_gxc} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:52"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:52: \"\${abs_builddir}\"/run-r7rs-gxc.sh '(nix-> nix-true nix-false)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:52: \"\${abs_builddir}\"/run-r7rs-gxc.sh '(nix= 1 2)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:52"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gxc.sh '(nix= 1 2)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+(1)
+==
+(2)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:52"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "expressions-template.at:56" >"$at_check_line_file"
+(test ${enable_check_r7rs_gxc} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:56"
+{ set +x
+printf "%s\n" "$at_srcdir/expressions-template.at:56: \"\${abs_builddir}\"/run-r7rs-gxc.sh '(nix-not= 1 2)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:56"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gxc.sh '(nix-not= 1 2)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+(1)
+!=
+(2)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:56"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "expressions-template.at:60" >"$at_check_line_file"
+(test ${enable_check_r7rs_gxc} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:60"
+{ set +x
+printf "%s\n" "$at_srcdir/expressions-template.at:60: \"\${abs_builddir}\"/run-r7rs-gxc.sh '(nix-and nix-true nix-false)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:60"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gxc.sh '(nix-and nix-true nix-false)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+(builtins.true)
+&&
+(builtins.false)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:60"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "expressions-template.at:64" >"$at_check_line_file"
+(test ${enable_check_r7rs_gxc} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:64"
+{ set +x
+printf "%s\n" "$at_srcdir/expressions-template.at:64: \"\${abs_builddir}\"/run-r7rs-gxc.sh '(nix-or nix-true nix-false)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:64"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gxc.sh '(nix-or nix-true nix-false)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+(builtins.true)
+||
+(builtins.false)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:64"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "expressions-template.at:68" >"$at_check_line_file"
+(test ${enable_check_r7rs_gxc} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:68"
+{ set +x
+printf "%s\n" "$at_srcdir/expressions-template.at:68: \"\${abs_builddir}\"/run-r7rs-gxc.sh '(nix-> nix-true nix-false)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:68"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-gxc.sh '(nix-> nix-true nix-false)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -26473,7 +27229,7 @@ echo >>"$at_stdout"; printf "%s\n" "(
 )
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:52"
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:68"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -29894,18 +30650,14 @@ printf "%s\n" "expressions-template.at:36" >"$at_check_line_file"
 (test ${enable_check_r6rs_guile} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:36"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:36: \"\${abs_builddir}\"/run-r6rs-guile.sh '(nix= 1 2)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:36: \"\${abs_builddir}\"/run-r6rs-guile.sh '(nix+)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:36"
-( $at_check_trace; "${abs_builddir}"/run-r6rs-guile.sh '(nix= 1 2)'
+( $at_check_trace; "${abs_builddir}"/run-r6rs-guile.sh '(nix+)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "(
-(1)
-==
-(2)
-)
+echo >>"$at_stdout"; printf "%s\n" "(0)
 " | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:36"
@@ -29920,18 +30672,14 @@ printf "%s\n" "expressions-template.at:40" >"$at_check_line_file"
 (test ${enable_check_r6rs_guile} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:40"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:40: \"\${abs_builddir}\"/run-r6rs-guile.sh '(nix-not= 1 2)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:40: \"\${abs_builddir}\"/run-r6rs-guile.sh '(nix+ 1)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:40"
-( $at_check_trace; "${abs_builddir}"/run-r6rs-guile.sh '(nix-not= 1 2)'
+( $at_check_trace; "${abs_builddir}"/run-r6rs-guile.sh '(nix+ 1)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "(
-(1)
-!=
-(2)
-)
+echo >>"$at_stdout"; printf "%s\n" "(1)
 " | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:40"
@@ -29946,17 +30694,21 @@ printf "%s\n" "expressions-template.at:44" >"$at_check_line_file"
 (test ${enable_check_r6rs_guile} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:44"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:44: \"\${abs_builddir}\"/run-r6rs-guile.sh '(nix-and nix-true nix-false)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:44: \"\${abs_builddir}\"/run-r6rs-guile.sh '(nix+ 1 2 3)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:44"
-( $at_check_trace; "${abs_builddir}"/run-r6rs-guile.sh '(nix-and nix-true nix-false)'
+( $at_check_trace; "${abs_builddir}"/run-r6rs-guile.sh '(nix+ 1 2 3)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
 echo >>"$at_stdout"; printf "%s\n" "(
-(builtins.true)
-&&
-(builtins.false)
+(
+(1)
++
+(2)
+)
++
+(3)
 )
 " | \
   $at_diff - "$at_stdout" || at_failed=:
@@ -29972,17 +30724,25 @@ printf "%s\n" "expressions-template.at:48" >"$at_check_line_file"
 (test ${enable_check_r6rs_guile} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:48"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:48: \"\${abs_builddir}\"/run-r6rs-guile.sh '(nix-or nix-true nix-false)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:48: \"\${abs_builddir}\"/run-r6rs-guile.sh '(nix+ 1 2 3 4)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:48"
-( $at_check_trace; "${abs_builddir}"/run-r6rs-guile.sh '(nix-or nix-true nix-false)'
+( $at_check_trace; "${abs_builddir}"/run-r6rs-guile.sh '(nix+ 1 2 3 4)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
 echo >>"$at_stdout"; printf "%s\n" "(
-(builtins.true)
-||
-(builtins.false)
+(
+(
+(1)
++
+(2)
+)
++
+(3)
+)
++
+(4)
 )
 " | \
   $at_diff - "$at_stdout" || at_failed=:
@@ -29998,8 +30758,112 @@ printf "%s\n" "expressions-template.at:52" >"$at_check_line_file"
 (test ${enable_check_r6rs_guile} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:52"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:52: \"\${abs_builddir}\"/run-r6rs-guile.sh '(nix-> nix-true nix-false)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:52: \"\${abs_builddir}\"/run-r6rs-guile.sh '(nix= 1 2)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:52"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-guile.sh '(nix= 1 2)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+(1)
+==
+(2)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:52"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "expressions-template.at:56" >"$at_check_line_file"
+(test ${enable_check_r6rs_guile} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:56"
+{ set +x
+printf "%s\n" "$at_srcdir/expressions-template.at:56: \"\${abs_builddir}\"/run-r6rs-guile.sh '(nix-not= 1 2)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:56"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-guile.sh '(nix-not= 1 2)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+(1)
+!=
+(2)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:56"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "expressions-template.at:60" >"$at_check_line_file"
+(test ${enable_check_r6rs_guile} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:60"
+{ set +x
+printf "%s\n" "$at_srcdir/expressions-template.at:60: \"\${abs_builddir}\"/run-r6rs-guile.sh '(nix-and nix-true nix-false)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:60"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-guile.sh '(nix-and nix-true nix-false)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+(builtins.true)
+&&
+(builtins.false)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:60"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "expressions-template.at:64" >"$at_check_line_file"
+(test ${enable_check_r6rs_guile} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:64"
+{ set +x
+printf "%s\n" "$at_srcdir/expressions-template.at:64: \"\${abs_builddir}\"/run-r6rs-guile.sh '(nix-or nix-true nix-false)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:64"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-guile.sh '(nix-or nix-true nix-false)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+(builtins.true)
+||
+(builtins.false)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:64"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "expressions-template.at:68" >"$at_check_line_file"
+(test ${enable_check_r6rs_guile} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:68"
+{ set +x
+printf "%s\n" "$at_srcdir/expressions-template.at:68: \"\${abs_builddir}\"/run-r6rs-guile.sh '(nix-> nix-true nix-false)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:68"
 ( $at_check_trace; "${abs_builddir}"/run-r6rs-guile.sh '(nix-> nix-true nix-false)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -30012,7 +30876,7 @@ echo >>"$at_stdout"; printf "%s\n" "(
 )
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:52"
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:68"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -33477,18 +34341,14 @@ printf "%s\n" "expressions-template.at:36" >"$at_check_line_file"
 (test ${enable_check_r7rs_guile} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:36"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:36: \"\${abs_builddir}\"/run-r7rs-guile.sh '(nix= 1 2)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:36: \"\${abs_builddir}\"/run-r7rs-guile.sh '(nix+)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:36"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-guile.sh '(nix= 1 2)'
+( $at_check_trace; "${abs_builddir}"/run-r7rs-guile.sh '(nix+)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "(
-(1)
-==
-(2)
-)
+echo >>"$at_stdout"; printf "%s\n" "(0)
 " | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:36"
@@ -33503,18 +34363,14 @@ printf "%s\n" "expressions-template.at:40" >"$at_check_line_file"
 (test ${enable_check_r7rs_guile} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:40"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:40: \"\${abs_builddir}\"/run-r7rs-guile.sh '(nix-not= 1 2)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:40: \"\${abs_builddir}\"/run-r7rs-guile.sh '(nix+ 1)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:40"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-guile.sh '(nix-not= 1 2)'
+( $at_check_trace; "${abs_builddir}"/run-r7rs-guile.sh '(nix+ 1)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "(
-(1)
-!=
-(2)
-)
+echo >>"$at_stdout"; printf "%s\n" "(1)
 " | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:40"
@@ -33529,17 +34385,21 @@ printf "%s\n" "expressions-template.at:44" >"$at_check_line_file"
 (test ${enable_check_r7rs_guile} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:44"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:44: \"\${abs_builddir}\"/run-r7rs-guile.sh '(nix-and nix-true nix-false)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:44: \"\${abs_builddir}\"/run-r7rs-guile.sh '(nix+ 1 2 3)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:44"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-guile.sh '(nix-and nix-true nix-false)'
+( $at_check_trace; "${abs_builddir}"/run-r7rs-guile.sh '(nix+ 1 2 3)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
 echo >>"$at_stdout"; printf "%s\n" "(
-(builtins.true)
-&&
-(builtins.false)
+(
+(1)
++
+(2)
+)
++
+(3)
 )
 " | \
   $at_diff - "$at_stdout" || at_failed=:
@@ -33555,17 +34415,25 @@ printf "%s\n" "expressions-template.at:48" >"$at_check_line_file"
 (test ${enable_check_r7rs_guile} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:48"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:48: \"\${abs_builddir}\"/run-r7rs-guile.sh '(nix-or nix-true nix-false)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:48: \"\${abs_builddir}\"/run-r7rs-guile.sh '(nix+ 1 2 3 4)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:48"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-guile.sh '(nix-or nix-true nix-false)'
+( $at_check_trace; "${abs_builddir}"/run-r7rs-guile.sh '(nix+ 1 2 3 4)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
 echo >>"$at_stdout"; printf "%s\n" "(
-(builtins.true)
-||
-(builtins.false)
+(
+(
+(1)
++
+(2)
+)
++
+(3)
+)
++
+(4)
 )
 " | \
   $at_diff - "$at_stdout" || at_failed=:
@@ -33581,8 +34449,112 @@ printf "%s\n" "expressions-template.at:52" >"$at_check_line_file"
 (test ${enable_check_r7rs_guile} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:52"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:52: \"\${abs_builddir}\"/run-r7rs-guile.sh '(nix-> nix-true nix-false)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:52: \"\${abs_builddir}\"/run-r7rs-guile.sh '(nix= 1 2)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:52"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-guile.sh '(nix= 1 2)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+(1)
+==
+(2)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:52"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "expressions-template.at:56" >"$at_check_line_file"
+(test ${enable_check_r7rs_guile} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:56"
+{ set +x
+printf "%s\n" "$at_srcdir/expressions-template.at:56: \"\${abs_builddir}\"/run-r7rs-guile.sh '(nix-not= 1 2)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:56"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-guile.sh '(nix-not= 1 2)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+(1)
+!=
+(2)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:56"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "expressions-template.at:60" >"$at_check_line_file"
+(test ${enable_check_r7rs_guile} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:60"
+{ set +x
+printf "%s\n" "$at_srcdir/expressions-template.at:60: \"\${abs_builddir}\"/run-r7rs-guile.sh '(nix-and nix-true nix-false)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:60"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-guile.sh '(nix-and nix-true nix-false)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+(builtins.true)
+&&
+(builtins.false)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:60"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "expressions-template.at:64" >"$at_check_line_file"
+(test ${enable_check_r7rs_guile} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:64"
+{ set +x
+printf "%s\n" "$at_srcdir/expressions-template.at:64: \"\${abs_builddir}\"/run-r7rs-guile.sh '(nix-or nix-true nix-false)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:64"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-guile.sh '(nix-or nix-true nix-false)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+(builtins.true)
+||
+(builtins.false)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:64"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "expressions-template.at:68" >"$at_check_line_file"
+(test ${enable_check_r7rs_guile} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:68"
+{ set +x
+printf "%s\n" "$at_srcdir/expressions-template.at:68: \"\${abs_builddir}\"/run-r7rs-guile.sh '(nix-> nix-true nix-false)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:68"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-guile.sh '(nix-> nix-true nix-false)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -33595,7 +34567,7 @@ echo >>"$at_stdout"; printf "%s\n" "(
 )
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:52"
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:68"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -37016,18 +37988,14 @@ printf "%s\n" "expressions-template.at:36" >"$at_check_line_file"
 (test ${enable_check_r6rs_loko} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:36"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:36: \"\${abs_builddir}\"/run-r6rs-loko.sh '(nix= 1 2)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:36: \"\${abs_builddir}\"/run-r6rs-loko.sh '(nix+)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:36"
-( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '(nix= 1 2)'
+( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '(nix+)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "(
-(1)
-==
-(2)
-)
+echo >>"$at_stdout"; printf "%s\n" "(0)
 " | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:36"
@@ -37042,18 +38010,14 @@ printf "%s\n" "expressions-template.at:40" >"$at_check_line_file"
 (test ${enable_check_r6rs_loko} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:40"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:40: \"\${abs_builddir}\"/run-r6rs-loko.sh '(nix-not= 1 2)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:40: \"\${abs_builddir}\"/run-r6rs-loko.sh '(nix+ 1)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:40"
-( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '(nix-not= 1 2)'
+( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '(nix+ 1)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "(
-(1)
-!=
-(2)
-)
+echo >>"$at_stdout"; printf "%s\n" "(1)
 " | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:40"
@@ -37068,17 +38032,21 @@ printf "%s\n" "expressions-template.at:44" >"$at_check_line_file"
 (test ${enable_check_r6rs_loko} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:44"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:44: \"\${abs_builddir}\"/run-r6rs-loko.sh '(nix-and nix-true nix-false)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:44: \"\${abs_builddir}\"/run-r6rs-loko.sh '(nix+ 1 2 3)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:44"
-( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '(nix-and nix-true nix-false)'
+( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '(nix+ 1 2 3)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
 echo >>"$at_stdout"; printf "%s\n" "(
-(builtins.true)
-&&
-(builtins.false)
+(
+(1)
++
+(2)
+)
++
+(3)
 )
 " | \
   $at_diff - "$at_stdout" || at_failed=:
@@ -37094,17 +38062,25 @@ printf "%s\n" "expressions-template.at:48" >"$at_check_line_file"
 (test ${enable_check_r6rs_loko} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:48"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:48: \"\${abs_builddir}\"/run-r6rs-loko.sh '(nix-or nix-true nix-false)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:48: \"\${abs_builddir}\"/run-r6rs-loko.sh '(nix+ 1 2 3 4)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:48"
-( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '(nix-or nix-true nix-false)'
+( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '(nix+ 1 2 3 4)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
 echo >>"$at_stdout"; printf "%s\n" "(
-(builtins.true)
-||
-(builtins.false)
+(
+(
+(1)
++
+(2)
+)
++
+(3)
+)
++
+(4)
 )
 " | \
   $at_diff - "$at_stdout" || at_failed=:
@@ -37120,8 +38096,112 @@ printf "%s\n" "expressions-template.at:52" >"$at_check_line_file"
 (test ${enable_check_r6rs_loko} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:52"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:52: \"\${abs_builddir}\"/run-r6rs-loko.sh '(nix-> nix-true nix-false)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:52: \"\${abs_builddir}\"/run-r6rs-loko.sh '(nix= 1 2)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:52"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '(nix= 1 2)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+(1)
+==
+(2)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:52"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "expressions-template.at:56" >"$at_check_line_file"
+(test ${enable_check_r6rs_loko} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:56"
+{ set +x
+printf "%s\n" "$at_srcdir/expressions-template.at:56: \"\${abs_builddir}\"/run-r6rs-loko.sh '(nix-not= 1 2)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:56"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '(nix-not= 1 2)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+(1)
+!=
+(2)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:56"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "expressions-template.at:60" >"$at_check_line_file"
+(test ${enable_check_r6rs_loko} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:60"
+{ set +x
+printf "%s\n" "$at_srcdir/expressions-template.at:60: \"\${abs_builddir}\"/run-r6rs-loko.sh '(nix-and nix-true nix-false)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:60"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '(nix-and nix-true nix-false)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+(builtins.true)
+&&
+(builtins.false)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:60"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "expressions-template.at:64" >"$at_check_line_file"
+(test ${enable_check_r6rs_loko} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:64"
+{ set +x
+printf "%s\n" "$at_srcdir/expressions-template.at:64: \"\${abs_builddir}\"/run-r6rs-loko.sh '(nix-or nix-true nix-false)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:64"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '(nix-or nix-true nix-false)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+(builtins.true)
+||
+(builtins.false)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:64"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "expressions-template.at:68" >"$at_check_line_file"
+(test ${enable_check_r6rs_loko} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:68"
+{ set +x
+printf "%s\n" "$at_srcdir/expressions-template.at:68: \"\${abs_builddir}\"/run-r6rs-loko.sh '(nix-> nix-true nix-false)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:68"
 ( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '(nix-> nix-true nix-false)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -37134,7 +38214,7 @@ echo >>"$at_stdout"; printf "%s\n" "(
 )
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:52"
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:68"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -40599,18 +41679,14 @@ printf "%s\n" "expressions-template.at:36" >"$at_check_line_file"
 (test ${enable_check_r7rs_loko} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:36"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:36: \"\${abs_builddir}\"/run-r7rs-loko.sh '(nix= 1 2)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:36: \"\${abs_builddir}\"/run-r7rs-loko.sh '(nix+)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:36"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(nix= 1 2)'
+( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(nix+)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "(
-(1)
-==
-(2)
-)
+echo >>"$at_stdout"; printf "%s\n" "(0)
 " | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:36"
@@ -40625,18 +41701,14 @@ printf "%s\n" "expressions-template.at:40" >"$at_check_line_file"
 (test ${enable_check_r7rs_loko} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:40"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:40: \"\${abs_builddir}\"/run-r7rs-loko.sh '(nix-not= 1 2)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:40: \"\${abs_builddir}\"/run-r7rs-loko.sh '(nix+ 1)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:40"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(nix-not= 1 2)'
+( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(nix+ 1)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "(
-(1)
-!=
-(2)
-)
+echo >>"$at_stdout"; printf "%s\n" "(1)
 " | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:40"
@@ -40651,17 +41723,21 @@ printf "%s\n" "expressions-template.at:44" >"$at_check_line_file"
 (test ${enable_check_r7rs_loko} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:44"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:44: \"\${abs_builddir}\"/run-r7rs-loko.sh '(nix-and nix-true nix-false)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:44: \"\${abs_builddir}\"/run-r7rs-loko.sh '(nix+ 1 2 3)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:44"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(nix-and nix-true nix-false)'
+( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(nix+ 1 2 3)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
 echo >>"$at_stdout"; printf "%s\n" "(
-(builtins.true)
-&&
-(builtins.false)
+(
+(1)
++
+(2)
+)
++
+(3)
 )
 " | \
   $at_diff - "$at_stdout" || at_failed=:
@@ -40677,17 +41753,25 @@ printf "%s\n" "expressions-template.at:48" >"$at_check_line_file"
 (test ${enable_check_r7rs_loko} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:48"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:48: \"\${abs_builddir}\"/run-r7rs-loko.sh '(nix-or nix-true nix-false)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:48: \"\${abs_builddir}\"/run-r7rs-loko.sh '(nix+ 1 2 3 4)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:48"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(nix-or nix-true nix-false)'
+( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(nix+ 1 2 3 4)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
 echo >>"$at_stdout"; printf "%s\n" "(
-(builtins.true)
-||
-(builtins.false)
+(
+(
+(1)
++
+(2)
+)
++
+(3)
+)
++
+(4)
 )
 " | \
   $at_diff - "$at_stdout" || at_failed=:
@@ -40703,8 +41787,112 @@ printf "%s\n" "expressions-template.at:52" >"$at_check_line_file"
 (test ${enable_check_r7rs_loko} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:52"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:52: \"\${abs_builddir}\"/run-r7rs-loko.sh '(nix-> nix-true nix-false)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:52: \"\${abs_builddir}\"/run-r7rs-loko.sh '(nix= 1 2)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:52"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(nix= 1 2)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+(1)
+==
+(2)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:52"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "expressions-template.at:56" >"$at_check_line_file"
+(test ${enable_check_r7rs_loko} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:56"
+{ set +x
+printf "%s\n" "$at_srcdir/expressions-template.at:56: \"\${abs_builddir}\"/run-r7rs-loko.sh '(nix-not= 1 2)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:56"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(nix-not= 1 2)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+(1)
+!=
+(2)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:56"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "expressions-template.at:60" >"$at_check_line_file"
+(test ${enable_check_r7rs_loko} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:60"
+{ set +x
+printf "%s\n" "$at_srcdir/expressions-template.at:60: \"\${abs_builddir}\"/run-r7rs-loko.sh '(nix-and nix-true nix-false)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:60"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(nix-and nix-true nix-false)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+(builtins.true)
+&&
+(builtins.false)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:60"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "expressions-template.at:64" >"$at_check_line_file"
+(test ${enable_check_r7rs_loko} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:64"
+{ set +x
+printf "%s\n" "$at_srcdir/expressions-template.at:64: \"\${abs_builddir}\"/run-r7rs-loko.sh '(nix-or nix-true nix-false)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:64"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(nix-or nix-true nix-false)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+(builtins.true)
+||
+(builtins.false)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:64"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "expressions-template.at:68" >"$at_check_line_file"
+(test ${enable_check_r7rs_loko} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:68"
+{ set +x
+printf "%s\n" "$at_srcdir/expressions-template.at:68: \"\${abs_builddir}\"/run-r7rs-loko.sh '(nix-> nix-true nix-false)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:68"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(nix-> nix-true nix-false)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -40717,7 +41905,7 @@ echo >>"$at_stdout"; printf "%s\n" "(
 )
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:52"
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:68"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -44138,18 +45326,14 @@ printf "%s\n" "expressions-template.at:36" >"$at_check_line_file"
 (test ${enable_check_r6rs_racket} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:36"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:36: \"\${abs_builddir}\"/run-r6rs-racket.sh '(nix= 1 2)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:36: \"\${abs_builddir}\"/run-r6rs-racket.sh '(nix+)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:36"
-( $at_check_trace; "${abs_builddir}"/run-r6rs-racket.sh '(nix= 1 2)'
+( $at_check_trace; "${abs_builddir}"/run-r6rs-racket.sh '(nix+)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "(
-(1)
-==
-(2)
-)
+echo >>"$at_stdout"; printf "%s\n" "(0)
 " | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:36"
@@ -44164,18 +45348,14 @@ printf "%s\n" "expressions-template.at:40" >"$at_check_line_file"
 (test ${enable_check_r6rs_racket} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:40"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:40: \"\${abs_builddir}\"/run-r6rs-racket.sh '(nix-not= 1 2)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:40: \"\${abs_builddir}\"/run-r6rs-racket.sh '(nix+ 1)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:40"
-( $at_check_trace; "${abs_builddir}"/run-r6rs-racket.sh '(nix-not= 1 2)'
+( $at_check_trace; "${abs_builddir}"/run-r6rs-racket.sh '(nix+ 1)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "(
-(1)
-!=
-(2)
-)
+echo >>"$at_stdout"; printf "%s\n" "(1)
 " | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:40"
@@ -44190,17 +45370,21 @@ printf "%s\n" "expressions-template.at:44" >"$at_check_line_file"
 (test ${enable_check_r6rs_racket} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:44"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:44: \"\${abs_builddir}\"/run-r6rs-racket.sh '(nix-and nix-true nix-false)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:44: \"\${abs_builddir}\"/run-r6rs-racket.sh '(nix+ 1 2 3)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:44"
-( $at_check_trace; "${abs_builddir}"/run-r6rs-racket.sh '(nix-and nix-true nix-false)'
+( $at_check_trace; "${abs_builddir}"/run-r6rs-racket.sh '(nix+ 1 2 3)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
 echo >>"$at_stdout"; printf "%s\n" "(
-(builtins.true)
-&&
-(builtins.false)
+(
+(1)
++
+(2)
+)
++
+(3)
 )
 " | \
   $at_diff - "$at_stdout" || at_failed=:
@@ -44216,17 +45400,25 @@ printf "%s\n" "expressions-template.at:48" >"$at_check_line_file"
 (test ${enable_check_r6rs_racket} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:48"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:48: \"\${abs_builddir}\"/run-r6rs-racket.sh '(nix-or nix-true nix-false)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:48: \"\${abs_builddir}\"/run-r6rs-racket.sh '(nix+ 1 2 3 4)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:48"
-( $at_check_trace; "${abs_builddir}"/run-r6rs-racket.sh '(nix-or nix-true nix-false)'
+( $at_check_trace; "${abs_builddir}"/run-r6rs-racket.sh '(nix+ 1 2 3 4)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
 echo >>"$at_stdout"; printf "%s\n" "(
-(builtins.true)
-||
-(builtins.false)
+(
+(
+(1)
++
+(2)
+)
++
+(3)
+)
++
+(4)
 )
 " | \
   $at_diff - "$at_stdout" || at_failed=:
@@ -44242,8 +45434,112 @@ printf "%s\n" "expressions-template.at:52" >"$at_check_line_file"
 (test ${enable_check_r6rs_racket} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:52"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:52: \"\${abs_builddir}\"/run-r6rs-racket.sh '(nix-> nix-true nix-false)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:52: \"\${abs_builddir}\"/run-r6rs-racket.sh '(nix= 1 2)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:52"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-racket.sh '(nix= 1 2)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+(1)
+==
+(2)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:52"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "expressions-template.at:56" >"$at_check_line_file"
+(test ${enable_check_r6rs_racket} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:56"
+{ set +x
+printf "%s\n" "$at_srcdir/expressions-template.at:56: \"\${abs_builddir}\"/run-r6rs-racket.sh '(nix-not= 1 2)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:56"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-racket.sh '(nix-not= 1 2)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+(1)
+!=
+(2)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:56"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "expressions-template.at:60" >"$at_check_line_file"
+(test ${enable_check_r6rs_racket} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:60"
+{ set +x
+printf "%s\n" "$at_srcdir/expressions-template.at:60: \"\${abs_builddir}\"/run-r6rs-racket.sh '(nix-and nix-true nix-false)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:60"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-racket.sh '(nix-and nix-true nix-false)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+(builtins.true)
+&&
+(builtins.false)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:60"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "expressions-template.at:64" >"$at_check_line_file"
+(test ${enable_check_r6rs_racket} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:64"
+{ set +x
+printf "%s\n" "$at_srcdir/expressions-template.at:64: \"\${abs_builddir}\"/run-r6rs-racket.sh '(nix-or nix-true nix-false)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:64"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-racket.sh '(nix-or nix-true nix-false)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+(builtins.true)
+||
+(builtins.false)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:64"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "expressions-template.at:68" >"$at_check_line_file"
+(test ${enable_check_r6rs_racket} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:68"
+{ set +x
+printf "%s\n" "$at_srcdir/expressions-template.at:68: \"\${abs_builddir}\"/run-r6rs-racket.sh '(nix-> nix-true nix-false)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:68"
 ( $at_check_trace; "${abs_builddir}"/run-r6rs-racket.sh '(nix-> nix-true nix-false)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -44256,7 +45552,7 @@ echo >>"$at_stdout"; printf "%s\n" "(
 )
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:52"
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:68"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -47677,18 +48973,14 @@ printf "%s\n" "expressions-template.at:36" >"$at_check_line_file"
 (test ${enable_check_r6rs_sagittarius} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:36"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:36: \"\${abs_builddir}\"/run-r6rs-sagittarius.sh '(nix= 1 2)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:36: \"\${abs_builddir}\"/run-r6rs-sagittarius.sh '(nix+)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:36"
-( $at_check_trace; "${abs_builddir}"/run-r6rs-sagittarius.sh '(nix= 1 2)'
+( $at_check_trace; "${abs_builddir}"/run-r6rs-sagittarius.sh '(nix+)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "(
-(1)
-==
-(2)
-)
+echo >>"$at_stdout"; printf "%s\n" "(0)
 " | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:36"
@@ -47703,18 +48995,14 @@ printf "%s\n" "expressions-template.at:40" >"$at_check_line_file"
 (test ${enable_check_r6rs_sagittarius} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:40"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:40: \"\${abs_builddir}\"/run-r6rs-sagittarius.sh '(nix-not= 1 2)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:40: \"\${abs_builddir}\"/run-r6rs-sagittarius.sh '(nix+ 1)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:40"
-( $at_check_trace; "${abs_builddir}"/run-r6rs-sagittarius.sh '(nix-not= 1 2)'
+( $at_check_trace; "${abs_builddir}"/run-r6rs-sagittarius.sh '(nix+ 1)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "(
-(1)
-!=
-(2)
-)
+echo >>"$at_stdout"; printf "%s\n" "(1)
 " | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:40"
@@ -47729,17 +49017,21 @@ printf "%s\n" "expressions-template.at:44" >"$at_check_line_file"
 (test ${enable_check_r6rs_sagittarius} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:44"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:44: \"\${abs_builddir}\"/run-r6rs-sagittarius.sh '(nix-and nix-true nix-false)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:44: \"\${abs_builddir}\"/run-r6rs-sagittarius.sh '(nix+ 1 2 3)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:44"
-( $at_check_trace; "${abs_builddir}"/run-r6rs-sagittarius.sh '(nix-and nix-true nix-false)'
+( $at_check_trace; "${abs_builddir}"/run-r6rs-sagittarius.sh '(nix+ 1 2 3)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
 echo >>"$at_stdout"; printf "%s\n" "(
-(builtins.true)
-&&
-(builtins.false)
+(
+(1)
++
+(2)
+)
++
+(3)
 )
 " | \
   $at_diff - "$at_stdout" || at_failed=:
@@ -47755,17 +49047,25 @@ printf "%s\n" "expressions-template.at:48" >"$at_check_line_file"
 (test ${enable_check_r6rs_sagittarius} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:48"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:48: \"\${abs_builddir}\"/run-r6rs-sagittarius.sh '(nix-or nix-true nix-false)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:48: \"\${abs_builddir}\"/run-r6rs-sagittarius.sh '(nix+ 1 2 3 4)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:48"
-( $at_check_trace; "${abs_builddir}"/run-r6rs-sagittarius.sh '(nix-or nix-true nix-false)'
+( $at_check_trace; "${abs_builddir}"/run-r6rs-sagittarius.sh '(nix+ 1 2 3 4)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
 echo >>"$at_stdout"; printf "%s\n" "(
-(builtins.true)
-||
-(builtins.false)
+(
+(
+(1)
++
+(2)
+)
++
+(3)
+)
++
+(4)
 )
 " | \
   $at_diff - "$at_stdout" || at_failed=:
@@ -47781,8 +49081,112 @@ printf "%s\n" "expressions-template.at:52" >"$at_check_line_file"
 (test ${enable_check_r6rs_sagittarius} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:52"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:52: \"\${abs_builddir}\"/run-r6rs-sagittarius.sh '(nix-> nix-true nix-false)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:52: \"\${abs_builddir}\"/run-r6rs-sagittarius.sh '(nix= 1 2)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:52"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-sagittarius.sh '(nix= 1 2)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+(1)
+==
+(2)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:52"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "expressions-template.at:56" >"$at_check_line_file"
+(test ${enable_check_r6rs_sagittarius} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:56"
+{ set +x
+printf "%s\n" "$at_srcdir/expressions-template.at:56: \"\${abs_builddir}\"/run-r6rs-sagittarius.sh '(nix-not= 1 2)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:56"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-sagittarius.sh '(nix-not= 1 2)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+(1)
+!=
+(2)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:56"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "expressions-template.at:60" >"$at_check_line_file"
+(test ${enable_check_r6rs_sagittarius} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:60"
+{ set +x
+printf "%s\n" "$at_srcdir/expressions-template.at:60: \"\${abs_builddir}\"/run-r6rs-sagittarius.sh '(nix-and nix-true nix-false)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:60"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-sagittarius.sh '(nix-and nix-true nix-false)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+(builtins.true)
+&&
+(builtins.false)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:60"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "expressions-template.at:64" >"$at_check_line_file"
+(test ${enable_check_r6rs_sagittarius} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:64"
+{ set +x
+printf "%s\n" "$at_srcdir/expressions-template.at:64: \"\${abs_builddir}\"/run-r6rs-sagittarius.sh '(nix-or nix-true nix-false)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:64"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-sagittarius.sh '(nix-or nix-true nix-false)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+(builtins.true)
+||
+(builtins.false)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:64"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "expressions-template.at:68" >"$at_check_line_file"
+(test ${enable_check_r6rs_sagittarius} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:68"
+{ set +x
+printf "%s\n" "$at_srcdir/expressions-template.at:68: \"\${abs_builddir}\"/run-r6rs-sagittarius.sh '(nix-> nix-true nix-false)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:68"
 ( $at_check_trace; "${abs_builddir}"/run-r6rs-sagittarius.sh '(nix-> nix-true nix-false)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -47795,7 +49199,7 @@ echo >>"$at_stdout"; printf "%s\n" "(
 )
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:52"
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:68"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -51260,18 +52664,14 @@ printf "%s\n" "expressions-template.at:36" >"$at_check_line_file"
 (test ${enable_check_r7rs_sagittarius} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:36"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:36: \"\${abs_builddir}\"/run-r7rs-sagittarius.sh '(nix= 1 2)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:36: \"\${abs_builddir}\"/run-r7rs-sagittarius.sh '(nix+)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:36"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-sagittarius.sh '(nix= 1 2)'
+( $at_check_trace; "${abs_builddir}"/run-r7rs-sagittarius.sh '(nix+)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "(
-(1)
-==
-(2)
-)
+echo >>"$at_stdout"; printf "%s\n" "(0)
 " | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:36"
@@ -51286,18 +52686,14 @@ printf "%s\n" "expressions-template.at:40" >"$at_check_line_file"
 (test ${enable_check_r7rs_sagittarius} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:40"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:40: \"\${abs_builddir}\"/run-r7rs-sagittarius.sh '(nix-not= 1 2)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:40: \"\${abs_builddir}\"/run-r7rs-sagittarius.sh '(nix+ 1)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:40"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-sagittarius.sh '(nix-not= 1 2)'
+( $at_check_trace; "${abs_builddir}"/run-r7rs-sagittarius.sh '(nix+ 1)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
-echo >>"$at_stdout"; printf "%s\n" "(
-(1)
-!=
-(2)
-)
+echo >>"$at_stdout"; printf "%s\n" "(1)
 " | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:40"
@@ -51312,17 +52708,21 @@ printf "%s\n" "expressions-template.at:44" >"$at_check_line_file"
 (test ${enable_check_r7rs_sagittarius} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:44"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:44: \"\${abs_builddir}\"/run-r7rs-sagittarius.sh '(nix-and nix-true nix-false)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:44: \"\${abs_builddir}\"/run-r7rs-sagittarius.sh '(nix+ 1 2 3)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:44"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-sagittarius.sh '(nix-and nix-true nix-false)'
+( $at_check_trace; "${abs_builddir}"/run-r7rs-sagittarius.sh '(nix+ 1 2 3)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
 echo >>"$at_stdout"; printf "%s\n" "(
-(builtins.true)
-&&
-(builtins.false)
+(
+(1)
++
+(2)
+)
++
+(3)
 )
 " | \
   $at_diff - "$at_stdout" || at_failed=:
@@ -51338,17 +52738,25 @@ printf "%s\n" "expressions-template.at:48" >"$at_check_line_file"
 (test ${enable_check_r7rs_sagittarius} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:48"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:48: \"\${abs_builddir}\"/run-r7rs-sagittarius.sh '(nix-or nix-true nix-false)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:48: \"\${abs_builddir}\"/run-r7rs-sagittarius.sh '(nix+ 1 2 3 4)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:48"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-sagittarius.sh '(nix-or nix-true nix-false)'
+( $at_check_trace; "${abs_builddir}"/run-r7rs-sagittarius.sh '(nix+ 1 2 3 4)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
 echo >>"$at_stdout"; printf "%s\n" "(
-(builtins.true)
-||
-(builtins.false)
+(
+(
+(1)
++
+(2)
+)
++
+(3)
+)
++
+(4)
 )
 " | \
   $at_diff - "$at_stdout" || at_failed=:
@@ -51364,8 +52772,112 @@ printf "%s\n" "expressions-template.at:52" >"$at_check_line_file"
 (test ${enable_check_r7rs_sagittarius} = no) \
   && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:52"
 { set +x
-printf "%s\n" "$at_srcdir/expressions-template.at:52: \"\${abs_builddir}\"/run-r7rs-sagittarius.sh '(nix-> nix-true nix-false)'"
+printf "%s\n" "$at_srcdir/expressions-template.at:52: \"\${abs_builddir}\"/run-r7rs-sagittarius.sh '(nix= 1 2)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:52"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-sagittarius.sh '(nix= 1 2)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+(1)
+==
+(2)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:52"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "expressions-template.at:56" >"$at_check_line_file"
+(test ${enable_check_r7rs_sagittarius} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:56"
+{ set +x
+printf "%s\n" "$at_srcdir/expressions-template.at:56: \"\${abs_builddir}\"/run-r7rs-sagittarius.sh '(nix-not= 1 2)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:56"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-sagittarius.sh '(nix-not= 1 2)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+(1)
+!=
+(2)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:56"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "expressions-template.at:60" >"$at_check_line_file"
+(test ${enable_check_r7rs_sagittarius} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:60"
+{ set +x
+printf "%s\n" "$at_srcdir/expressions-template.at:60: \"\${abs_builddir}\"/run-r7rs-sagittarius.sh '(nix-and nix-true nix-false)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:60"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-sagittarius.sh '(nix-and nix-true nix-false)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+(builtins.true)
+&&
+(builtins.false)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:60"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "expressions-template.at:64" >"$at_check_line_file"
+(test ${enable_check_r7rs_sagittarius} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:64"
+{ set +x
+printf "%s\n" "$at_srcdir/expressions-template.at:64: \"\${abs_builddir}\"/run-r7rs-sagittarius.sh '(nix-or nix-true nix-false)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:64"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-sagittarius.sh '(nix-or nix-true nix-false)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+(builtins.true)
+||
+(builtins.false)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:64"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "expressions-template.at:68" >"$at_check_line_file"
+(test ${enable_check_r7rs_sagittarius} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/expressions-template.at:68"
+{ set +x
+printf "%s\n" "$at_srcdir/expressions-template.at:68: \"\${abs_builddir}\"/run-r7rs-sagittarius.sh '(nix-> nix-true nix-false)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "expressions-template.at:68"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-sagittarius.sh '(nix-> nix-true nix-false)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -51378,7 +52890,7 @@ echo >>"$at_stdout"; printf "%s\n" "(
 )
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:52"
+at_fn_check_status 0 $at_status "$at_srcdir/expressions-template.at:68"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
