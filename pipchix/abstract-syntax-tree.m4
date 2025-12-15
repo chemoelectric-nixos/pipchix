@@ -208,6 +208,17 @@ define_string_reverse_concatenate
   (getter> 1 nix-get-node-attributeset)
   (getter> 2 nix-get-node-attributepath))
 
+(define-record-factory <nix-unaryoperator-node>
+  (constructor>
+   make-nix-unaryoperator-node
+   (lambda (construct)
+     (lambda (op arg)
+       (construct (if (symbol? op) (symbol->string op) op)
+                  (scheme->nix arg)))))
+  (predicate> nix-unaryoperator-node? register-nix-node-predicate)
+  (getter> 1 nix-unaryoperator-node-op)
+  (getter> 2 nix-unaryoperator-node-arg))
+
 (define-record-factory <nix-binaryoperator-node>
   (constructor>
    make-nix-binaryoperator-node
@@ -272,6 +283,8 @@ define_string_reverse_concatenate
          (%%output-nix-list-node ast outp))
         ((nix-get-node? ast)
          (%%output-nix-get-node ast outp))
+        ((nix-unaryoperator-node? ast)
+         (%%output-nix-unaryoperator-node ast outp))
         ((nix-binaryoperator-node? ast)
          (%%output-nix-binaryoperator-node ast outp))
         (else (error "not an abstract syntax tree" ast)))))))
@@ -432,6 +445,14 @@ define_string_reverse_concatenate
       (%%output-nix-identifier attrset outp)
       (outp ".\n"))
     (output-nix-abstract-syntax-tree attrpath outp)))
+
+(define (%%output-nix-unaryoperator-node ast outp)
+  (outp "(\n")
+  (outp (nix-unaryoperator-node-op ast))
+  (outp "\n")
+  (output-nix-abstract-syntax-tree
+   (nix-unaryoperator-node-arg ast) outp)
+  (outp ")\n"))
 
 (define (%%output-nix-binaryoperator-node ast outp)
   (outp "(\n")

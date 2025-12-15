@@ -31,6 +31,7 @@ m4_include(pipchix/pipchix-includes.m4)
   (import (scheme base))
   (import (scheme case-lambda))
   (import (pipchix abstract-syntax-tree))
+  (import (pipchix nix-list))
 
   (begin
 

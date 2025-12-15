@@ -39,6 +39,9 @@ nix-list-node?
 make-nix-get-node
 nix-get-node?
 
+make-nix-unaryoperator-node
+nix-unaryoperator-node?
+
 make-nix-binaryoperator-node
 nix-binaryoperator-node?
 

@@ -33,11 +33,9 @@
 (define © nix-get) ;; A synonym.
 
 (define (nix-has? a b) (make-nix-binaryoperator-node "?" a b))
-(define (nix- a b) (make-nix-binaryoperator-node "-" a b))
 (define (nix* a b) (make-nix-binaryoperator-node "*" a b))
 (define (nix/ a b) (make-nix-binaryoperator-node "/" a b))
 (define (nix// a b) (make-nix-binaryoperator-node "//" a b))
-(define (nix++ a b) (make-nix-binaryoperator-node "++" a b))
 (define (nix= a b) (make-nix-binaryoperator-node "==" a b))
 (define (nix-not= a b) (make-nix-binaryoperator-node "!=" a b))
 (define (nix< a b) (make-nix-binaryoperator-node "<" a b))
@@ -48,14 +46,37 @@
 (define (nix-or a b) (make-nix-binaryoperator-node "||" a b))
 (define (nix-> a b) (make-nix-binaryoperator-node "->" a b))
 
+(define nix++
+  (case-lambda
+    ((a b) (make-nix-binaryoperator-node "++" a b))
+    (() (nix-list)) ;; An empty Nix list.
+    ((a . args) (let loop ((a (scheme->nix a))
+                           (p args))
+                  (if (pair? p)
+                    (loop (nix++ a (car p)) (cdr p))
+                    a)))))
+
 (define nix+
   (case-lambda
+    ;;
+    ;; Because nix+ operates on more than just numbers, the case of no
+    ;; operands is not handled. In Scheme, by contrast, (+) returns 0.
+    ;;
     ((a b) (make-nix-binaryoperator-node "+" a b))
-    (() (scheme->nix 0))
     ((a . args) (let loop ((a (scheme->nix a))
                            (p args))
                   (if (pair? p)
                     (loop (nix+ a (car p)) (cdr p))
+                    a)))))
+
+(define nix-
+  (case-lambda
+    ((a b) (make-nix-binaryoperator-node "-" a b))
+    ((a) (make-nix-unaryoperator-node "-" a))
+    ((a . args) (let loop ((a (scheme->nix a))
+                           (p args))
+                  (if (pair? p)
+                    (loop (nix- a (car p)) (cdr p))
                     a)))))
 
 m4_divert(-1)

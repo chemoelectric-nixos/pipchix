@@ -32,7 +32,8 @@ m4_include(pipchix/pipchix-includes.m4)
 
   (import (rnrs base (6))
           (rnrs control (6))
-          (pipchix abstract-syntax-tree))
+          (pipchix abstract-syntax-tree)
+          (pipchix nix-list))
 
   m4_include(pipchix/expressions.m4)
 

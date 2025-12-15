@@ -169,9 +169,6 @@ CHICKEN_EGGSPEC_BOTTOM = ' \
     (extension pipchix.abstract-syntax-tree \
       (component-dependencies \
        pipchix.define-record-factory)) \
-    (extension pipchix.expressions \
-      (component-dependencies \
-       pipchix.abstract-syntax-tree)) \
     (extension pipchix.nix-embed \
       (component-dependencies \
        pipchix.abstract-syntax-tree)) \
@@ -185,6 +182,10 @@ CHICKEN_EGGSPEC_BOTTOM = ' \
       (component-dependencies \
        pipchix.abstract-syntax-tree \
        pipchix.generate-identifier)) \
+    (extension pipchix.expressions \
+      (component-dependencies \
+       pipchix.abstract-syntax-tree \
+       pipchix.nix-list)) \
     (extension pipchix.essentials \
       (component-dependencies \
        pipchix.string-manipulation \
