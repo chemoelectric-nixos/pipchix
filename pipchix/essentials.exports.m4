@@ -70,15 +70,19 @@ nix-let*
 nix-get
 © ;; U+00A9 COPYRIGHT SIGN is a synonym for nix-get.
 
-;;; Nix operators. In Pipchix these may take many arguments or none.
-;;; For instance, (nix++) is a way to obtain an empty list.
+;;; Nix operators. In Pipchix these may take arguments according to
+;;; Scheme conventions. For instance, (nix++) is a way to obtain an
+;;; empty list, and (nix/ 3) is a way to write 1.0 / 3. However,
+;;; (nix+) does not behave like Scheme (+), which returns 0. Instead
+;;; (nix+) is illegal, because we would not know what type of object
+;;; to return.
 nix-has? ;; ?
 nix+
 nix-
 nix*
 nix/
 nix//
-nix++    ;; 
+nix++
 nix=     ;; ==
 nix-not= ;; !=
 nix<

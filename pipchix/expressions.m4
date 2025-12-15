@@ -33,8 +33,6 @@
 (define © nix-get) ;; A synonym.
 
 (define (nix-has? a b) (make-nix-binaryoperator-node "?" a b))
-(define (nix* a b) (make-nix-binaryoperator-node "*" a b))
-(define (nix/ a b) (make-nix-binaryoperator-node "/" a b))
 (define (nix// a b) (make-nix-binaryoperator-node "//" a b))
 (define (nix= a b) (make-nix-binaryoperator-node "==" a b))
 (define (nix-not= a b) (make-nix-binaryoperator-node "!=" a b))
@@ -74,6 +72,26 @@
                            (p args))
                   (if (pair? p)
                     (loop (nix- a (car p)) (cdr p))
+                    a)))))
+
+(define nix*
+  (case-lambda
+    ((a b) (make-nix-binaryoperator-node "*" a b))
+    ((a . args) (let loop ((a (scheme->nix a))
+                           (p args))
+                  (if (pair? p)
+                    (loop (nix* a (car p)) (cdr p))
+                    a)))
+    (() (scheme->nix 1))))
+
+(define nix/
+  (case-lambda
+    ((a b) (make-nix-binaryoperator-node "/" a b))
+    ((a) (nix/ (scheme->nix 1.0) a))
+    ((a . args) (let loop ((a (scheme->nix a))
+                           (p args))
+                  (if (pair? p)
+                    (loop (nix/ a (car p)) (cdr p))
                     a)))))
 
 m4_divert(-1)
