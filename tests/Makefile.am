@@ -67,6 +67,7 @@ EXTRA_DIST += ast-nodes-preds-template.at
 EXTRA_DIST += base64-utf8-template.at
 EXTRA_DIST += continuation-capture-template.at
 EXTRA_DIST += escaped-utf8-template.at
+EXTRA_DIST += expressions-template.at
 EXTRA_DIST += nix-attributebinding-node-template.at
 EXTRA_DIST += nix-attributepath-node-template.at
 EXTRA_DIST += nix-attributeset-node-template.at
@@ -138,6 +139,7 @@ TESTSUITE_DEPS += $(srcdir)/nix-embed-template.at
 TESTSUITE_DEPS += $(srcdir)/nix-list-template.at
 TESTSUITE_DEPS += $(srcdir)/nix-set-template.at
 TESTSUITE_DEPS += $(srcdir)/nix-letrec-template.at
+TESTSUITE_DEPS += $(srcdir)/expressions-template.at
 
 TESTSUITE_DEPS += $(srcdir)/testsuite.at
 

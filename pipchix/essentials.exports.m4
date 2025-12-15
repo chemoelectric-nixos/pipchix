@@ -71,12 +71,22 @@ nix-get
 © ;; U+00A9 COPYRIGHT SIGN is a synonym for nix-get.
 
 ;;; Binary operators.
+nix-has?
 nix+
 nix-
 nix*
 nix/
 nix//
 nix++
+nix=
+nix-not=
+nix<
+nix<=
+nix>
+nix>=
+nix-and
+nix-or
+nix->
 
 ;;; Encode a string in base64, for printing with the base64(1) command
 ;;; (which is included in GNU coreutils).

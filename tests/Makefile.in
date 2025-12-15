@@ -328,7 +328,8 @@ top_srcdir = @top_srcdir@
 EXTRA_DIST = testsuite.at $(srcdir)/package.m4 $(TESTSUITE) atlocal.in \
 	tests-template.at ast-nodes-preds-template.at \
 	base64-utf8-template.at continuation-capture-template.at \
-	escaped-utf8-template.at nix-attributebinding-node-template.at \
+	escaped-utf8-template.at expressions-template.at \
+	nix-attributebinding-node-template.at \
 	nix-attributepath-node-template.at \
 	nix-attributeset-node-template.at nix-letrec-node-template.at \
 	nix-data-node-template.at nix-embedded-node-template.at \
@@ -361,7 +362,8 @@ TESTSUITE_DEPS = $(srcdir)/atlocal.in $(srcdir)/package.m4 \
 	$(srcdir)/nix-path-node-template.at \
 	$(srcdir)/nix-embed-template.at $(srcdir)/nix-list-template.at \
 	$(srcdir)/nix-set-template.at $(srcdir)/nix-letrec-template.at \
-	$(srcdir)/testsuite.at $(am__append_1)
+	$(srcdir)/expressions-template.at $(srcdir)/testsuite.at \
+	$(am__append_1)
 
 #---------------------------------------------------------------------
 @ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@GERBIL_PLACE = $(abs_builddir)/gerbil
