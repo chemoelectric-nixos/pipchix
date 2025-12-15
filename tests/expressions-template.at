@@ -40,11 +40,11 @@ check_unquoted([run_scheme 'sexpr'],[0],
 
 m4_define([sexpr],[(nix++ (list 1 2) (nix-list 3 4) (list "a" "b"))])
 check_unquoted([run_scheme 'sexpr'],[0],
-  [interpunct_nl([(·(·@<:@·(1)·(2)·@:>@·++·@<:@·(3)·(4)·@:>@·)·++·@<:@·("a")·("b")·@:>@·)·])],[])
+  [interpunct_nl([(·@<:@·(1)·(2)·@:>@·++·(·@<:@·(3)·(4)·@:>@·++·@<:@·("a")·("b")·@:>@·)·)·])],[])
 
 m4_define([sexpr],[(nix++ (list 1 2) (nix-list 3 4) (list "a" "b") (list "c" "d"))])
 check_unquoted([run_scheme 'sexpr'],[0],
-  [interpunct_nl([(·(·(·@<:@·(1)·(2)·@:>@·++·@<:@·(3)·(4)·@:>@·)·++·@<:@·("a")·("b")·@:>@·)·++·@<:@·("c")·("d")·@:>@·)·])],[])
+  [interpunct_nl([(·@<:@·(1)·(2)·@:>@·++·(·@<:@·(3)·(4)·@:>@·++·(·@<:@·("a")·("b")·@:>@·++·@<:@·("c")·("d")·@:>@·)·)·)·])],[])
 
 m4_foreach([op],[+,-,*,/,<,<=,>,>=],[
 m4_define([sexpr],[(nix[]op 1 2)])

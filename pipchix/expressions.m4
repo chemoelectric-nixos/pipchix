@@ -49,12 +49,9 @@
 (define nix++
   (case-lambda
     ((a b) (make-nix-binaryoperator-node "++" a b))
-    (() (nix-list)) ;; An empty Nix list.
-    ((a . args) (let loop ((a (scheme->nix a))
-                           (p args))
-                  (if (pair? p)
-                    (loop (nix++ a (car p)) (cdr p))
-                    a)))))
+    ((a) (scheme->nix a))
+    ((a . args) (nix++ (scheme->nix a) (apply nix++ args)))
+    (() (nix-list)))) ;; An empty Nix list.
 
 (define nix+
   (case-lambda
