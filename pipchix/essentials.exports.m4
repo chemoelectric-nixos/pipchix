@@ -98,7 +98,8 @@ nix>
 nix>=
 
 ;;; Branching.
-nix-if ;; nix-if is implemented as a Scheme procedure.
+nix-if   ;; nix-if is implemented as a Scheme procedure.
+nix-cond ;; nix-cond is implemented as a Scheme macro.
 
 ;;; Encode a string in base64, for printing with the base64(1) command
 ;;; (which is included in GNU coreutils).

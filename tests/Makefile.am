@@ -68,6 +68,7 @@ EXTRA_DIST += base64-utf8-template.at
 EXTRA_DIST += continuation-capture-template.at
 EXTRA_DIST += escaped-utf8-template.at
 EXTRA_DIST += expressions-template.at
+EXTRA_DIST += macros-template.at
 EXTRA_DIST += nix-attributebinding-node-template.at
 EXTRA_DIST += nix-attributepath-node-template.at
 EXTRA_DIST += nix-attributeset-node-template.at
@@ -140,6 +141,7 @@ TESTSUITE_DEPS += $(srcdir)/nix-list-template.at
 TESTSUITE_DEPS += $(srcdir)/nix-set-template.at
 TESTSUITE_DEPS += $(srcdir)/nix-letrec-template.at
 TESTSUITE_DEPS += $(srcdir)/expressions-template.at
+TESTSUITE_DEPS += $(srcdir)/macros-template.at
 
 TESTSUITE_DEPS += $(srcdir)/testsuite.at
 
@@ -167,6 +169,8 @@ GERBIL_O = \
           generate-identifier \
           define-record-factory \
           essentials \
+          expressions \
+          macros \
           nix-embed \
           nix-list \
           nix-set \
@@ -194,8 +198,14 @@ $(GERBIL_PX)/nix-embed.scm: $(GERBIL_PX)/abstract-syntax-tree.scm
 $(GERBIL_PX)/nix-list.scm: $(GERBIL_PX)/abstract-syntax-tree.scm
 $(GERBIL_PX)/nix-set.scm: $(GERBIL_PX)/abstract-syntax-tree.scm
 $(GERBIL_PX)/nix-letrec.scm: $(GERBIL_PX)/abstract-syntax-tree.scm
+$(GERBIL_PX)/expressions.scm: $(GERBIL_PX)/abstract-syntax-tree.scm \
+                      $(GERBIL_PX)/nix-list.scm
+$(GERBIL_PX)/macros.scm: $(GERBIL_PX)/expressions.scm
 $(GERBIL_PX)/essentials.scm: $(GERBIL_PX)/string-manipulation.scm \
                       $(GERBIL_PX)/abstract-syntax-tree.scm \
+                      $(GERBIL_PX)/expressions.scm \
+                      $(GERBIL_PX)/macros.scm \
+                      $(GERBIL_PX)/nix-embed.scm \
                       $(GERBIL_PX)/nix-list.scm \
                       $(GERBIL_PX)/nix-set.scm \
                       $(GERBIL_PX)/nix-letrec.scm

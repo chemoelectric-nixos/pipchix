@@ -1,4 +1,3 @@
-#!r6rs
 ;;;
 ;;; Copyright © 2025 Barry Schwartz
 ;;;
@@ -17,7 +16,7 @@
 ;;; 
 ;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 ;;; EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-;;; MERCHANTABILITY, FITNESS FOR A PART/ICULAR PURPOSE AND
+;;; MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
 ;;; NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
 ;;; LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 ;;; OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
@@ -25,29 +24,21 @@
 ;;;
 m4_include(pipchix/pipchix-includes.m4)
 
-(library (pipchix essentials)
+(define-library (pipchix macros)
 
-  (export
-   m4_include(pipchix/essentials.exports.m4))
+  (export m4_include(pipchix/macros.exports.m4))
 
-  (import (rnrs base (6))
-          (rnrs control (6))
-          (pipchix abstract-syntax-tree)
-          (pipchix expressions)
-          (pipchix macros)
-          (pipchix nix-embed)
-          (pipchix nix-list)
-          (pipchix nix-set)
-          (pipchix nix-letrec)
-          (pipchix string-manipulation)
-          (pipchix srfi-39))
+  (import (scheme base))
+  (import (pipchix expressions))
 
-  m4_include(pipchix/essentials.m4)
+  (begin
 
-  )
+    m4_include(pipchix/macros.m4)
+
+    ))
 
 ;;; local variables:
 ;;; mode: scheme
-;;; geiser-scheme-implementation: chez
+;;; geiser-scheme-implementation: chibi
 ;;; coding: utf-8
 ;;; end:

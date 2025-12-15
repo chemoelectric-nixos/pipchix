@@ -22,31 +22,50 @@
 ;;; OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 ;;; WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ;;;
-m4_include(pipchix/pipchix-includes.m4)
 
-(define-library (pipchix essentials)
+(define-syntax nix-cond
+  ;;
+  ;; Unlike Scheme’s cond, nix-cond cannot have empty branches, nor
+  ;; procedural branches, nor =>
+  ;;
+  ;; nix-cond could thus safely be written with fewer parentheses than
+  ;; cond. Nevertheless, for familiarity, syntax similar to that of
+  ;; cond will be retained. The syntax is actually much simpler than
+  ;; that of cond.
+  ;;
+  (syntax-rules ( else )
 
-  (export m4_include(pipchix/essentials.exports.m4))
+    ((nix-cond (test clause)
+               (else else-clause))
+     (nix-if test
+       clause
+       else-clause))
+    
+    ((nix-cond (test1 clause1)
+               (test2 clause2)
+               ...
+               (else else-clause))
+     (nix-if test1
+       clause1
+       (nix-cond (test2 clause2)
+                 ...
+                 (else else-clause))))
 
-  (import (scheme base))
-  (import (scheme case-lambda))
-  (import (pipchix abstract-syntax-tree))
-  (import (pipchix expressions))
-  (import (pipchix macros))
-  (import (pipchix nix-embed))
-  (import (pipchix nix-list))
-  (import (pipchix nix-set))
-  (import (pipchix nix-letrec))
-  (import (pipchix string-manipulation))
+    ((nix-cond (test1 clause1)
+               (test2 clause2)
+               ...
+               (else-clause))
+     (nix-cond (test1 clause1)
+               (test2 clause2)
+               ...
+               (else else-clause)))))
 
-  (begin
-
-    m4_include(pipchix/essentials.m4)
-
-    ))
-
+m4_divert(-1)
 ;;; local variables:
 ;;; mode: scheme
 ;;; geiser-scheme-implementation: chibi
 ;;; coding: utf-8
+;;; eval: (put 'if 'scheme-indent-function 1)
+;;; eval: (put 'nix-if 'scheme-indent-function 1)
 ;;; end:
+m4_divert«»m4_dnl

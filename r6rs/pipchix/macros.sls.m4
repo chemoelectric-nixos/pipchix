@@ -25,24 +25,15 @@
 ;;;
 m4_include(pipchix/pipchix-includes.m4)
 
-(library (pipchix essentials)
+(library (pipchix macros)
 
   (export
-   m4_include(pipchix/essentials.exports.m4))
+   m4_include(pipchix/macros.exports.m4))
 
   (import (rnrs base (6))
-          (rnrs control (6))
-          (pipchix abstract-syntax-tree)
-          (pipchix expressions)
-          (pipchix macros)
-          (pipchix nix-embed)
-          (pipchix nix-list)
-          (pipchix nix-set)
-          (pipchix nix-letrec)
-          (pipchix string-manipulation)
-          (pipchix srfi-39))
+          (pipchix expressions))
 
-  m4_include(pipchix/essentials.m4)
+  m4_include(pipchix/macros.m4)
 
   )
 
