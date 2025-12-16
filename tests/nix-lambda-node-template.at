@@ -43,6 +43,16 @@ m4_define([sexpr],
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([(·{·x·,·...·}:·x·)·])],[])
 
+m4_define([sexpr],
+  [(make-nix-lambda-node
+       `((,(scheme->nix `x)
+          (,(scheme->nix `y) ,(scheme->nix 5))
+          . ,(nix-lambda-ellipsis-argument))
+         ,(scheme->nix `z))
+     (nix-list (© `x) (© `y) (© `z)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(·{·x·,·y·?·(5)·,·...·}:·z·:·@<:@·x·y·z·@:>@·)·])],[])
+
 AT_CLEANUP
 
 # local variables:

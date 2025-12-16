@@ -600,17 +600,17 @@ define_string_reverse_concatenate
             (unless (= (length carp) 2)
               (err "expected an argument with default value" carp))
             (%%output-nix-identifier (car carp) outp)
-            (outp "\n?\n")
+            (outp "?\n")
             (output-nix-abstract-syntax-tree
              (scheme->nix (cadr carp)) outp))
            ((%%nix-identifier? carp)
-            (%%output-nix-identifier carp outp)
-            (outp ",\n"))
+            (%%output-nix-identifier carp outp))
            (else
-            (err "malformed nix-lambda arguments" p))))
-        (if (nix-lambda-ellipsis-argument? (cdr p))
-          (outp "...\n") ;; An improper list.
-          (loop (cdr p))))))
+            (err "malformed nix-lambda arguments" p)))
+          (outp ",\n")
+          (if (nix-lambda-ellipsis-argument? (cdr p))
+            (outp "...\n") ;; An improper list.
+            (loop (cdr p)))))))
   (let ((args (nix-lambda-node-args ast))
         (body (nix-lambda-node-body ast)))
     (outp "(\n")
