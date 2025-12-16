@@ -371,7 +371,7 @@ TESTSUITE_DEPS = $(srcdir)/atlocal.in $(srcdir)/package.m4 \
 @ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@GERBIL_O = \
 @ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@  $(addprefix $(GERBIL_PX)/, \
 @ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@      $(addsuffix .scm, \
-@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@          srfi-111 \
+@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@          box \
 @ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@          continuation-capture \
 @ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@          generate-identifier \
 @ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@          define-record-factory \

@@ -35,8 +35,8 @@ m4_include(pipchix/pipchix-includes.m4)
           (rnrs mutable-strings (6))
           (rnrs unicode (6))
           (rnrs bytevectors (6))
-          (pipchix srfi-39)
-          (pipchix srfi-111))
+          (pipchix box)
+          (pipchix srfi-39))
 
   define_err_r6rs
   (define integer-division div-and-mod)

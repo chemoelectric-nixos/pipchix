@@ -166,7 +166,7 @@ GERBIL_PX = $(GERBIL_PLACE)/lib/pipchix
 GERBIL_O = \
   $(addprefix $(GERBIL_PX)/, \
       $(addsuffix .scm, \
-          srfi-111 \
+          box \
           continuation-capture \
           generate-identifier \
           define-record-factory \

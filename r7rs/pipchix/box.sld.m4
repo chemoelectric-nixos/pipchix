@@ -1,4 +1,3 @@
-#!r6rs
 ;;; Copyright © 2013 John Cowan. All Rights Reserved.
 
 ;;; Permission is hereby granted, free of charge, to any person
@@ -21,27 +20,40 @@
 ;;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 ;;; DEALINGS IN THE SOFTWARE.
 
-;;;
-;;; The SRFI-111 reference implementation for R⁶RS.
-;;;
-
-(library (pipchix srfi-111)
+(define-library (pipchix box)
 
   (export box
           box?
           unbox
           set-box!)
 
-  (import (rnrs base (6))
-          (rnrs records syntactic (6)))
-  
-  (define-record-type
-    (box-type box box?)
-    (fields
-     (mutable value unbox set-box!))))
-      
+  (import (scheme base))
+
+  (cond-expand
+    ((or chicken guile)
+     (import (srfi 111))) ;; = (scheme box)
+    ((or chibi gauche gerbil sagittarius)
+     (import (scheme box)))
+    (else))
+
+  (begin
+
+    (cond-expand
+      ((or chibi chicken gauche gerbil guile sagittarius)
+       #f)
+      (else
+       ;;
+       ;; The SRFI-111 reference implementation for R⁷RS.
+       ;;
+       (define-record-type box-type
+         (box value)
+         box?
+         (value unbox set-box!))))
+
+    ))
+
 ;;; local variables:
 ;;; mode: scheme
-;;; geiser-scheme-implementation: chez
+;;; geiser-scheme-implementation: chibi
 ;;; coding: utf-8
 ;;; end:

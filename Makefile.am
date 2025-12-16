@@ -67,7 +67,7 @@ endif
 
 R6RS_SCHEME =
 R6RS_SCHEME += r6rs/pipchix/srfi-39.sls
-R6RS_SCHEME += r6rs/pipchix/srfi-111.sls
+R6RS_SCHEME += r6rs/pipchix/box.sls
 R6RS_SCHEME += r6rs/pipchix/continuation-capture.sls
 R6RS_SCHEME += r6rs/pipchix/generate-identifier.sls
 R6RS_SCHEME += r6rs/pipchix/define-record-factory.sls
@@ -90,7 +90,7 @@ nodist_r6rspipchix_DATA += $(R6RS_SCHEME)
 endif
 
 R7RS_SCHEME =
-R7RS_SCHEME += r7rs/pipchix/srfi-111.sld
+R7RS_SCHEME += r7rs/pipchix/box.sld
 R7RS_SCHEME += r7rs/pipchix/continuation-capture.sld
 R7RS_SCHEME += r7rs/pipchix/generate-identifier.sld
 R7RS_SCHEME += r7rs/pipchix/define-record-factory.sld
@@ -159,7 +159,7 @@ CHICKEN_EGGSPEC_TOP = ' \
 
 CHICKEN_EGGSPEC_BOTTOM = ' \
    (components \
-    (extension pipchix.srfi-111) \
+    (extension pipchix.box) \
     (extension pipchix.continuation-capture) \
     (extension pipchix.define-record-factory) \
     (extension pipchix.string-manipulation) \
@@ -217,7 +217,7 @@ CHICKEN_5_EGGDIR = $(CHICKEN_5_EGGS)/pipchix
 CHICKEN_5_EGGFILES = \
   $(addprefix $(CHICKEN_5_EGGDIR)/, \
     pipchix.egg \
-    pipchix.srfi-111.scm \
+    pipchix.box.scm \
     pipchix.continuation-capture.scm \
     pipchix.generate-identifier.scm \
     pipchix.define-record-factory.scm \
