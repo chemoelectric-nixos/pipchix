@@ -35,7 +35,8 @@
 ;;; CHICKEN includes its own implementation of this interface,
 ;;; (chicken continuation), with continuation?, continuation-capture,
 ;;; continuation-graft, and continuation-return. Our implementation is
-;;; not compatible with it. There is also a CHICKEN egg,
+;;; not compatible with it. [HOWEVER, AT SOME POINT WE MIGHT SWITCH TO
+;;; USING THE CHICKEN IMPLEMENTATION.] There is also a CHICKEN egg,
 ;;; ‘continuations’, that reëxports (chicken continuation) with the
 ;;; procedure names changed. It includes some small corollary
 ;;; procedures that are duplicated here, but implemented with our
@@ -48,10 +49,20 @@
 ;;; efficiency. (If we do, we can offload tasks to Ada programs!)
 ;;;
 
+;;;m4_ifelse(continuation_capture_implementation,«r6rs»,«
+(define-record-type (continuation
+                     %%make-continuation
+                     continuation?)
+  (fields
+   (immutable proc %%continuation-proc)))
+;;;»)
+
+;;;m4_ifelse(continuation_capture_implementation,«r7rs»,«
 (define-record-type <continuation>
   (%%make-continuation proc)
   continuation?
   (proc %%continuation-proc))
+;;;»)
 
 (define (continuation-capture receiver)
   ((call/cc (lambda (proc)
@@ -95,7 +106,7 @@
 ;;;
 ;;; The following is called GOTO. As if tail calls were not GOTOs!
 ;;;
-;;; It is often claimed GOTO is dangerous. This is true! But thisv
+;;; It is often claimed GOTO is dangerous. This is true! But this
 ;;; author believes it is mainly because strictly structured
 ;;; programming in procedural languages makes it easy to monitor the
 ;;; McCabe complexity by eye. There is a simple procedure for this,

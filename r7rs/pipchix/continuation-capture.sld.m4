@@ -32,6 +32,7 @@ m4_include(pipchix/pipchix-includes.m4)
 
   (begin
 
+    m4_define(«continuation_capture_implementation»,«r7rs»)
     m4_include(pipchix/continuation-capture.m4)
 
     ))

@@ -526,8 +526,7 @@ nodist_r6rspipchix_DATA = $(am__append_2)
 nodist_r7rspipchix_DATA = $(am__append_3)
 nodist_chickeneggs5pipchix_DATA = $(am__append_1)
 M4_PREPROCESS = $(GNU_M4) -P -I '$(srcdir)'
-R6RS_SCHEME = r6rs/pipchix/srfi-9.sls r6rs/pipchix/srfi-39.sls \
-	r6rs/pipchix/srfi-111.sls \
+R6RS_SCHEME = r6rs/pipchix/srfi-39.sls r6rs/pipchix/srfi-111.sls \
 	r6rs/pipchix/continuation-capture.sls \
 	r6rs/pipchix/generate-identifier.sls \
 	r6rs/pipchix/define-record-factory.sls \

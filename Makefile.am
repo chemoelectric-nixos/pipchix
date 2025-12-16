@@ -66,7 +66,6 @@ nodist_chickeneggs5pipchix_DATA += $(CHICKEN_5_EGGFILES)
 endif
 
 R6RS_SCHEME =
-R6RS_SCHEME += r6rs/pipchix/srfi-9.sls
 R6RS_SCHEME += r6rs/pipchix/srfi-39.sls
 R6RS_SCHEME += r6rs/pipchix/srfi-111.sls
 R6RS_SCHEME += r6rs/pipchix/continuation-capture.sls
