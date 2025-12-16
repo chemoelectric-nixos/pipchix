@@ -26,6 +26,7 @@
 define_string_reverse_concatenate
 
 (define the-nix-null%% '#(nix-null))    ; An arbitrary unique object.
+(define the-...-%% '#(the-...))     ; Another arbitrary unique object.
 
 (define nix-node-predicates '())
 
@@ -295,6 +296,18 @@ define_string_reverse_concatenate
   (getter> 2 nix-ifthenelse-node-then-clause)
   (getter> 3 nix-ifthenelse-node-else-clause))
 
+(define-record-factory <nix-lambda-node>
+  (constructor> make-nix-lambda-node)
+  (predicate> nix-lambda-node? register-nix-node-predicate)
+  (getter> 1 nix-lambda-node-args)
+  (getter> 2 nix-lambda-node-body))
+
+(define (nix-lambda-ellipsis-argument)
+  the-...-%%)
+
+(define (nix-lambda-ellipsis-argument? obj)
+  (eq? the-...-%% obj))
+
 (define (nix-abstract-syntax-tree? obj)
   (let loop ((p nix-node-predicates))
     (and (pair? p)
@@ -358,6 +371,8 @@ define_string_reverse_concatenate
          (%%output-nix-binaryoperator-node ast outp))
         ((nix-ifthenelse-node? ast)
          (%%output-nix-ifthenelse-node ast outp))
+        ((nix-lambda-node? ast)
+         (%%output-nix-lambda-node ast outp))
         (else (err "not an abstract syntax tree" ast)))))))
 
 ;;; A synonym.
@@ -572,6 +587,47 @@ define_string_reverse_concatenate
     (output-nix-abstract-syntax-tree then-clause outp)
     (outp "else\n")
     (output-nix-abstract-syntax-tree else-clause outp)
+    (outp ")\n")))
+
+(define (%%output-nix-lambda-node ast outp)
+  (define (attrset-arg lst outp)
+    (let loop ((p lst))
+      (when (pair? p)
+        (let ((carp (car p)))
+          (cond
+           ((pair? carp)
+            ;; There is a default value.
+            (unless (= (length carp) 2)
+              (err "expected an argument with default value" carp))
+            (%%output-nix-identifier (car carp) outp)
+            (outp "\n?\n")
+            (output-nix-abstract-syntax-tree
+             (scheme->nix (cadr carp)) outp))
+           ((%%nix-identifier? carp)
+            (%%output-nix-identifier carp outp)
+            (outp ",\n"))
+           (else
+            (err "malformed nix-lambda arguments" p))))
+        (if (nix-lambda-ellipsis-argument? (cdr p))
+          (outp "...\n") ;; An improper list.
+          (loop (cdr p))))))
+  (let ((args (nix-lambda-node-args ast))
+        (body (nix-lambda-node-body ast)))
+    (outp "(\n")
+    (let loop ((p args))
+      (when (pair? p)
+        (let ((carp (car p)))
+          (cond ((pair? carp)
+                 (outp "{\n")
+                 (attrset-arg carp outp)
+                 (outp "}:\n"))
+                ((%%nix-identifier? carp)
+                 (%%output-nix-identifier carp outp)
+                 (outp ":\n"))
+                (else
+                 (err "malformed nix-lambda arguments" p))))
+        (loop (cdr p))))
+    (output-nix-abstract-syntax-tree (scheme->nix body) outp)
     (outp ")\n")))
 
 (define (%%string-contains-slash? str)

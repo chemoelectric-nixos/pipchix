@@ -57,6 +57,11 @@ nix-binaryoperator-node?
 make-nix-ifthenelse-node
 nix-ifthenelse-node?
 
+make-nix-lambda-node
+nix-lambda-node?
+nix-lambda-ellipsis-argument
+nix-lambda-ellipsis-argument?
+
 scheme->nix
 nix-abstract-syntax-tree?
 nix-ast?

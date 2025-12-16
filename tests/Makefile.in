@@ -331,12 +331,12 @@ EXTRA_DIST = testsuite.at $(srcdir)/package.m4 $(TESTSUITE) atlocal.in \
 	escaped-utf8-template.at expressions-template.at \
 	macros-template.at nix-attributebinding-node-template.at \
 	nix-attributepath-node-template.at \
-	nix-attributeset-node-template.at nix-letrec-node-template.at \
-	nix-data-node-template.at nix-embedded-node-template.at \
-	nix-embed-template.at nix-list-node-template.at \
-	nix-list-template.at nix-path-node-template.at \
-	nix-set-template.at nix-letrec-template.at \
-	shell-print-template.at
+	nix-attributeset-node-template.at nix-lambda-node-template.at \
+	nix-letrec-node-template.at nix-data-node-template.at \
+	nix-embedded-node-template.at nix-embed-template.at \
+	nix-list-node-template.at nix-list-template.at \
+	nix-path-node-template.at nix-set-template.at \
+	nix-letrec-template.at shell-print-template.at
 BUILT_SOURCES = 
 CLEANFILES = *.tmp tmp.*
 DISTCLEANFILES = Makefile GNUmakefile atconfig
@@ -355,6 +355,7 @@ TESTSUITE_DEPS = $(srcdir)/atlocal.in $(srcdir)/package.m4 \
 	$(srcdir)/nix-attributebinding-node-template.at \
 	$(srcdir)/nix-attributepath-node-template.at \
 	$(srcdir)/nix-attributeset-node-template.at \
+	$(srcdir)/nix-lambda-node-template.at \
 	$(srcdir)/nix-letrec-node-template.at \
 	$(srcdir)/nix-data-node-template.at \
 	$(srcdir)/nix-embedded-node-template.at \
