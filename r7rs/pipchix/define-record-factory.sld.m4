@@ -52,8 +52,7 @@ m4_include(pipchix/pipchix-includes.m4)
        m4_include(pipchix/define-record-factory.m4)
        m4_undefine(«implementation_of_define_record_factory»))
       (else
-       m4_define(«implementation_of_define_record_factory»,
-                 «syntax-rules»)
+       m4_define(«implementation_of_define_record_factory»,«srfi-9»)
        m4_include(pipchix/define-record-factory.m4)
        m4_undefine(«implementation_of_define_record_factory»)))
 
