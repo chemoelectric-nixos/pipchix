@@ -29,8 +29,13 @@ m4_include(pipchix/pipchix-includes.m4)
   (export if-match-ellipsis)
 
   (import (scheme base))
+  (import (scheme cxr))
 
   (cond-expand
+    (chicken-5
+     (import (only (chicken base)
+                   gensym)
+             (chicken syntax)))
     (loko
      (import (rnrs syntax-case (6))))
     (else))
@@ -38,7 +43,26 @@ m4_include(pipchix/pipchix-includes.m4)
   (begin
 
     (cond-expand
+      (chicken-5
+       ;; CHICKEN 5 is really R⁵RS, and does not have R⁷RS
+       ;; syntax-rules. Use er-macro-transformer.
+       (define-syntax if-match-ellipsis
+         (er-macro-transformer
+          (lambda (form rename compare)
+            (let* ((ellipsis (rename '...))
+                   (ellipsis=? (lambda (id)
+                                 (and (symbol? id)
+                                      (compare id ellipsis)))))
+              (unless (= (length form) 4)
+                (error
+                 "expected (if-match-ellipsis form then-clause else-clause)"
+                 form))
+              (if (ellipsis=? (cadr form))
+                (caddr form)
+                (cadddr form)))))))
       (loko
+       ;; Loko seems to have broken R⁷RS syntax-rules. So instead we
+       ;; use R⁶RS syntax-case
        (define-syntax if-match-ellipsis
          (lambda (stx)
            (syntax-case stx ()
