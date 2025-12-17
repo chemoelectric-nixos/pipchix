@@ -85,14 +85,13 @@
      (nix-lambda (()) clause))
 
     ((_ (arguments ...) clause)
-     (collect-args (arguments ...) clause '()))))
+     (collect-args (arguments ...) (scheme->nix clause) '()))))
 
 (define-syntax collect-args
   (syntax-rules ()
     
     ((_ () clause args)
-     (make-nix-lambda-node (reverse args)
-                           (scheme->nix clause)))
+     (make-nix-lambda-node (reverse args) clause))
 
     ((_ (()) clause args)
      (collect-args () clause (cons '() args)))
