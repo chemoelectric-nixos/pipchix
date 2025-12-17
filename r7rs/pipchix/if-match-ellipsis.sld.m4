@@ -1,4 +1,3 @@
-#!r6rs
 ;;;
 ;;; Copyright © 2025 Barry Schwartz
 ;;;
@@ -17,7 +16,7 @@
 ;;; 
 ;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 ;;; EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-;;; MERCHANTABILITY, FITNESS FOR A PART/ICULAR PURPOSE AND
+;;; MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
 ;;; NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
 ;;; LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 ;;; OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
@@ -25,23 +24,43 @@
 ;;;
 m4_include(pipchix/pipchix-includes.m4)
 
-(library (pipchix macros)
+(define-library (pipchix if-match-ellipsis)
 
-  (export
-   m4_include(pipchix/macros.exports.m4))
+  (export if-match-ellipsis)
 
-  (import (rnrs base (6))
-          (pipchix abstract-syntax-tree)
-          (pipchix nix-list)
-          (pipchix expressions)
-          (pipchix if-match-ellipsis))
+  (import (scheme base))
 
-  m4_include(pipchix/macros.m4)
+  (cond-expand
+    (loko
+     (import (rnrs syntax-case (6))))
+    (else))
 
-  )
+  (begin
+
+    (cond-expand
+      (loko
+       (define-syntax if-match-ellipsis
+         (lambda (stx)
+           (syntax-case stx ()
+             ((_ id then-clause else-clause)
+              (with-syntax ((ellps (syntax (... ...))))
+                (syntax-case stx (ellps)
+                  ((_ ellps then-clause else-clause)
+                   (syntax then-clause))
+                  ((_ other then-clause else-clause)
+                   (syntax else-clause)))))))))
+      (else
+       (define-syntax if-match-ellipsis
+         (syntax-rules ::: ( ... )
+           ((_ ... then-clause else-clause)
+            then-clause)
+           ((_ otherwise then-clause else-clause)
+            else-clause)))))
+
+    ))
 
 ;;; local variables:
 ;;; mode: scheme
-;;; geiser-scheme-implementation: chez
+;;; geiser-scheme-implementation: chibi
 ;;; coding: utf-8
 ;;; end:

@@ -517,7 +517,8 @@ nodist_r6rspipchix_DATA = $(am__append_2)
 nodist_r7rspipchix_DATA = $(am__append_3)
 nodist_chickeneggs5pipchix_DATA = $(am__append_1)
 M4_PREPROCESS = $(GNU_M4) -P -I '$(srcdir)'
-R6RS_SCHEME = r6rs/pipchix/srfi-39.sls r6rs/pipchix/box.sls \
+R6RS_SCHEME = r6rs/pipchix/srfi-39.sls \
+	r6rs/pipchix/if-match-ellipsis.sls r6rs/pipchix/box.sls \
 	r6rs/pipchix/continuation-capture.sls \
 	r6rs/pipchix/generate-identifier.sls \
 	r6rs/pipchix/define-record-factory.sls \
@@ -527,7 +528,7 @@ R6RS_SCHEME = r6rs/pipchix/srfi-39.sls r6rs/pipchix/box.sls \
 	r6rs/pipchix/nix-letrec.sls \
 	r6rs/pipchix/abstract-syntax-tree.sls \
 	r6rs/pipchix/string-manipulation.sls
-R7RS_SCHEME = r7rs/pipchix/box.sld \
+R7RS_SCHEME = r7rs/pipchix/if-match-ellipsis.sld r7rs/pipchix/box.sld \
 	r7rs/pipchix/continuation-capture.sld \
 	r7rs/pipchix/generate-identifier.sld \
 	r7rs/pipchix/define-record-factory.sld \
@@ -561,6 +562,7 @@ CHICKEN_EGGSPEC_BOTTOM = ' \
     (extension pipchix.continuation-capture) \
     (extension pipchix.define-record-factory) \
     (extension pipchix.string-manipulation) \
+    (extension pipchix.if-match-ellipsis) \
     (extension pipchix.generate-identifier \
       (component-dependencies \
        pipchix.continuation-capture \
@@ -589,7 +591,8 @@ CHICKEN_EGGSPEC_BOTTOM = ' \
       (component-dependencies \
        pipchix.abstract-syntax-tree \
        pipchix.nix-list \
-       pipchix.expressions)) \
+       pipchix.expressions \
+       pipchix.if-match-ellipsis)) \
     (extension pipchix.essentials \
       (component-dependencies \
        pipchix.string-manipulation \
@@ -606,6 +609,7 @@ CHICKEN_5_EGGDIR = $(CHICKEN_5_EGGS)/pipchix
 CHICKEN_5_EGGFILES = \
   $(addprefix $(CHICKEN_5_EGGDIR)/, \
     pipchix.egg \
+    pipchix.if-match-ellipsis.scm \
     pipchix.box.scm \
     pipchix.continuation-capture.scm \
     pipchix.generate-identifier.scm \

@@ -107,8 +107,8 @@
 
     ((_ ((id) elem2 ...) clause args '())
      (let ((last-thing
-            (ellipsis-branch id (nix-lambda-ellipsis-argument)
-                             (scheme->nix 'id))))
+            (if-match-ellipsis id (nix-lambda-ellipsis-argument)
+                               (scheme->nix 'id))))
        (parse-args-1 (elem2 ...) clause
                      (cons (list last-thing) args) '())))
 
@@ -135,8 +135,8 @@
 
     ((_ ((id) elem2 ...) clause args attrs)
      (let ((last-thing
-            (ellipsis-branch id (nix-lambda-ellipsis-argument)
-                             (scheme->nix 'id))))
+            (if-match-ellipsis id (nix-lambda-ellipsis-argument)
+                               (scheme->nix 'id))))
        (parse-args-1 (elem2 ...) clause
                      (cons (reverse (cons last-thing attrs)) args)
                      '())))

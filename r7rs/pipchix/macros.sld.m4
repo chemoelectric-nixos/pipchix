@@ -32,33 +32,9 @@ m4_include(pipchix/pipchix-includes.m4)
   (import (pipchix abstract-syntax-tree))
   (import (pipchix nix-list))
   (import (pipchix expressions))
-
-  (cond-expand
-    (loko
-     (import (rnrs syntax-case (6))))
-    (else))
+  (import (pipchix if-match-ellipsis))
   
   (begin
-
-    (cond-expand
-      (loko
-       (define-syntax ellipsis-branch
-         (lambda (stx)
-           (syntax-case stx ()
-             ((_ id then-clause else-clause)
-              (with-syntax ((ellps (syntax (... ...))))
-                (syntax-case stx (ellps)
-                  ((_ ellps then-clause else-clause)
-                   (syntax then-clause))
-                  ((_ other then-clause else-clause)
-                   (syntax else-clause)))))))))
-      (else
-       (define-syntax ellipsis-branch
-         (syntax-rules ::: ( ... )
-           ((_ ... then-clause else-clause)
-            then-clause)
-           ((_ otherwise then-clause else-clause)
-            else-clause)))))
 
     m4_include(pipchix/macros.m4)
 
