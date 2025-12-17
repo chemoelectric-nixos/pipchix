@@ -85,65 +85,65 @@
      (nix-lambda (()) clause))
 
     ((_ (arguments ...) clause)
-     (parse-args-1 (arguments ...) clause '() '()))))
+     (collect-args (arguments ...) clause '() '()))))
 
-(define-syntax parse-args-1
+(define-syntax collect-args
   (syntax-rules ()
-
+    
     ((_ () clause args '())
      (make-nix-lambda-node (reverse args)
                            (scheme->nix clause)))
 
     ((_ (()) clause args '())
-     (parse-args-1 () clause (cons '() args) '()))
+     (collect-args () clause (cons '() args) '()))
 
     ((_ (() elem2 ...) clause args '())
-     (parse-args-1 (elem2 ...) clause (cons '() args) '()))
+     (collect-args (elem2 ...) clause (cons '() args) '()))
 
     ((_ (((id1 val1) el2 ...) elem2 ...) clause args '())
-     (parse-args-2 ((el2 ...) elem2 ...) clause
-                   args (list (list (scheme->nix 'id1)
-                                    (scheme->nix val1)))))
+     (collect-attrs ((el2 ...) elem2 ...) clause
+                    args (list (list (scheme->nix 'id1)
+                                     (scheme->nix val1)))))
 
     ((_ ((id) elem2 ...) clause args '())
      (let ((last-thing
             (if-match-ellipsis id (nix-lambda-ellipsis-argument)
                                (scheme->nix 'id))))
-       (parse-args-1 (elem2 ...) clause
+       (collect-args (elem2 ...) clause
                      (cons (list last-thing) args) '())))
 
     ((_ ((id1 el2 ...) elem2 ...) clause args '())
-     (parse-args-2 ((el2 ...) elem2 ...) clause
-                   args (list (scheme->nix 'id1))))
+     (collect-attrs ((el2 ...) elem2 ...) clause
+                    args (list (scheme->nix 'id1))))
 
     ((_ (ident1 elem2 ...) clause args '())
-     (parse-args-1 (elem2 ...) clause
+     (collect-args (elem2 ...) clause
                    (cons (scheme->nix 'ident1) args) '()))))
 
-(define-syntax parse-args-2
+(define-syntax collect-attrs
   (syntax-rules ()
 
     ((_ (() elem2 ...) clause args attrs)
-     (parse-args-1 (elem2 ...) clause
+     (collect-args (elem2 ...) clause
                    (cons (reverse attrs) args) '()))
 
     ((_ (((id1 val1) el2 ...) elem2 ...) clause args attrs)
-     (parse-args-2 ((el2 ...) elem2 ...) clause
-                   args (cons (list (scheme->nix 'id1)
-                                    (scheme->nix val1))
-                              attrs)))
+     (collect-attrs ((el2 ...) elem2 ...) clause
+                    args (cons (list (scheme->nix 'id1)
+                                     (scheme->nix val1))
+                               attrs)))
 
     ((_ ((id) elem2 ...) clause args attrs)
      (let ((last-thing
             (if-match-ellipsis id (nix-lambda-ellipsis-argument)
                                (scheme->nix 'id))))
-       (parse-args-1 (elem2 ...) clause
+       (collect-args (elem2 ...) clause
                      (cons (reverse (cons last-thing attrs)) args)
                      '())))
     
     ((_ ((id1 el2 ...) elem2 ...) clause args attrs)
-     (parse-args-2 ((el2 ...) elem2 ...) clause
-                   args (cons (scheme->nix 'id1) attrs)))))
+     (collect-attrs ((el2 ...) elem2 ...) clause
+                    args (cons (scheme->nix 'id1) attrs)))))
 
 m4_divert(-1)
 ;;; local variables:

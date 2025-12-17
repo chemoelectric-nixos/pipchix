@@ -96,6 +96,18 @@ m4_define([sexpr],[(nix-lambda ((...)) 5)])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([(·{·...·}:·(5)·)·])],[])
 
+m4_define([sexpr],[(nix-lambda (x) 5)])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(·x·:·(5)·)·])],[])
+
+m4_define([sexpr],[(nix-lambda ((x)) 5)])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(·{·x·}:·(5)·)·])],[])
+
+m4_define([sexpr],[(nix-lambda ((x ...)) 5)])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(·{·x·,·...·}:·(5)·)·])],[])
+
 m4_define([sexpr],[(nix-lambda (x y z) 5)])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([(·x·:·y·:·z·:·(5)·)·])],[])
@@ -103,6 +115,11 @@ check_unquoted([run_scheme 'sexpr'],[0],
 m4_define([sexpr],[(nix-lambda ((x y z)) 5)])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([(·{·x·,·y·,·z·}:·(5)·)·])],[])
+
+m4_define([sexpr],[(nix-lambda (x (y z ...) a b)
+                     (nix-list 1 2 3))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(·x·:·{·y·,·z·,·...·}:·a·:·b·:·@<:@·(1)·(2)·(3)·@:>@·)·])],[])
 
 AT_CLEANUP
 
