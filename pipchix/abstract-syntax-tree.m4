@@ -696,6 +696,5 @@ m4_divert(-1)
 ;;; mode: scheme
 ;;; geiser-scheme-implementation: chibi
 ;;; coding: utf-8
-;;; eval: (put 'if 'scheme-indent-function 1)
 ;;; end:
 m4_divert«»m4_dnl

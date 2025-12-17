@@ -92,6 +92,10 @@ m4_define([sexpr],[(nix-lambda (()) 5)])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([(·{·}:·(5)·)·])],[])
 
+m4_define([sexpr],[(nix-lambda ((...)) 5)])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(·{·...·}:·(5)·)·])],[])
+
 m4_define([sexpr],[(nix-lambda (x y z) 5)])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([(·x·:·y·:·z·:·(5)·)·])],[])

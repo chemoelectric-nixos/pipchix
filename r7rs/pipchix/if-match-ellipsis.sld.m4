@@ -61,27 +61,29 @@ m4_include(pipchix/pipchix-includes.m4)
                 (caddr form)
                 (cadddr form)))))))
       (loko
-       ;; Loko seems to have broken R⁷RS syntax-rules. So instead we
-       ;; use R⁶RS syntax-case
+       ;; Loko seems to have broken R⁷RS syntax-rules. So instead use
+       ;; R⁶RS syntax-case
        (define-syntax if-match-ellipsis
          (lambda (stx)
+           (define ellipsis (string->symbol "..."))
            (syntax-case stx ()
              ((_ id then-clause else-clause)
-              (with-syntax ((ellps (syntax (... ...))))
-                (syntax-case stx (ellps)
-                  ((_ ellps then-clause else-clause)
-                   (syntax then-clause))
-                  ((_ other then-clause else-clause)
+              (syntax-case stx ()
+                ((_ id then-clause else-clause)
+                 (if (free-identifier=?
+                      (syntax id)
+                      (datum->syntax (syntax id) ellipsis))
+                   (syntax then-clause)
                    (syntax else-clause)))))))))
-      (else
-       (define-syntax if-match-ellipsis
-         (syntax-rules ::: ( ... )
-           ((_ ... then-clause else-clause)
-            then-clause)
-           ((_ otherwise then-clause else-clause)
-            else-clause)))))
+       (else
+        (define-syntax if-match-ellipsis
+          (syntax-rules ::: ( ... )
+            ((_ ... then-clause else-clause)
+             then-clause)
+            ((_ otherwise then-clause else-clause)
+             else-clause)))))
 
-    ))
+      ))
 
 ;;; local variables:
 ;;; mode: scheme
