@@ -30,8 +30,6 @@ m4_define([run_r7rs_chibi],["${abs_builddir}"/run-r7rs-chibi.sh])
 m4_define([run_r7rs_csc_5],["${abs_builddir}"/run-r7rs-csc-5.sh])
 m4_define([run_r7rs_csi_5],["${abs_builddir}"/run-r7rs-csi-5.sh])
 m4_define([run_r7rs_gauche],["${abs_builddir}"/run-r7rs-gauche.sh])
-m4_define([run_r7rs_gxi],["${abs_builddir}"/run-r7rs-gxi.sh])
-m4_define([run_r7rs_gxc],["${abs_builddir}"/run-r7rs-gxc.sh])
 m4_define([run_r6rs_guile],["${abs_builddir}"/run-r6rs-guile.sh])
 m4_define([run_r7rs_guile],["${abs_builddir}"/run-r7rs-guile.sh])
 m4_define([run_r6rs_loko],["${abs_builddir}"/run-r6rs-loko.sh])
@@ -79,20 +77,6 @@ m4_define([u8_bytevec],[u8_bytevec_r7rs])
 tests_template([gauche      ],[Gauche Scheme (R⁷RS)],
   [r7rs gauche gosh],
   [${enable_check_r7rs_gauche}],[run_r7rs_gauche])
-
-m4_define([implementation],[gxi])
-m4_define([rnrs_version],[7])
-m4_define([u8_bytevec],[u8_bytevec_r7rs])
-tests_template([gxi         ],[Gerbil Scheme interpreter (R⁷RS)],
-  [r7rs gerbil gxi interpreter],
-  [${enable_check_r7rs_gxi}],[run_r7rs_gxi])
-
-m4_define([implementation],[gxc])
-m4_define([rnrs_version],[7])
-m4_define([u8_bytevec],[u8_bytevec_r7rs])
-tests_template([gxc         ],[Gerbil Scheme compiler (R⁷RS)],
-  [r7rs gerbil gxc compiler],
-  [${enable_check_r7rs_gxc}],[run_r7rs_gxc])
 
 m4_define([implementation],[guile])
 m4_define([rnrs_version],[6])

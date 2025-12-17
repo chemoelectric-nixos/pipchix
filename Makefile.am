@@ -26,6 +26,7 @@
 SUBDIRS = tinyscheme-1.42 . tests
 
 ACLOCAL_AMFLAGS = -I m4 --install
+
 AUTOMAKE_OPTIONS =
 AUTOMAKE_OPTIONS += foreign
 
@@ -110,7 +111,6 @@ CLEANFILES += $(R7RS_SCHEME)
 CLEANFILES += $(R7RS_SCHEME:%=%.tmp)
 if INSTALL_R7RS_SOURCE
 nodist_r7rspipchix_DATA += $(R7RS_SCHEME)
-nodist_r7rspipchix_DATA += r7rs/gerbil.pkg
 endif
 
 $(builddir)/r6rs/pipchix/%.sls: $(srcdir)/r6rs/pipchix/%.sls.m4 \
@@ -128,15 +128,6 @@ $(builddir)/r7rs/pipchix/%.sld: $(srcdir)/r7rs/pipchix/%.sld.m4 \
 	$(call v,SLD.M4)$(MKDIR_P) $(@D) && \
 		$(M4_PREPROCESS) $(<) > $(@).tmp && \
 		mv $(@){.tmp,}
-
-r7rs/gerbil.pkg: Makefile.am	# Gerbil has to be told to be R⁷RS.
-	$(call v,PRINTF) \
-	    $(MKDIR_P) $(@D) && \
-	    printf '(prelude: :scheme/r7rs)' > $(@).tmp && \
-	    mv $(@){.tmp,}
-
-check: r7rs/gerbil.pkg
-DISTCLEANFILES += r7rs/gerbil.pkg
 
 #
 # A way to get names for temporary files within the build directories.
@@ -338,9 +329,6 @@ config.status: tests/run-r7rs-csc-5.sh.in
 config.status: tests/run-r7rs-csi-5.sh.in
 
 config.status: tests/run-r7rs-gauche.sh.in
-
-config.status: tests/run-r7rs-gxi.sh.in
-config.status: tests/run-r7rs-gxc.sh.in
 
 config.status: tests/run-r6rs-guile.sh.in
 config.status: tests/run-r7rs-guile.sh.in

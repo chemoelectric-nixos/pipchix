@@ -32,14 +32,14 @@
   (cond-expand
     ((or chicken guile)
      (import (srfi 111))) ;; = (scheme box)
-    ((or chibi gauche gerbil sagittarius)
+    ((or chibi gauche sagittarius)
      (import (scheme box)))
     (else))
 
   (begin
 
     (cond-expand
-      ((or chibi chicken gauche gerbil guile sagittarius)
+      ((or chibi chicken gauche guile sagittarius)
        #f)
       (else
        ;;

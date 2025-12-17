@@ -139,8 +139,7 @@ host_triplet = @host@
 EXTRA_PROGRAMS = is-older$(EXEEXT)
 @INSTALL_CHICKEN_5_EGG_SOURCE_TRUE@am__append_1 = $(CHICKEN_5_EGGFILES)
 @INSTALL_R6RS_SOURCE_TRUE@am__append_2 = $(R6RS_SCHEME)
-@INSTALL_R7RS_SOURCE_TRUE@am__append_3 = $(R7RS_SCHEME) \
-@INSTALL_R7RS_SOURCE_TRUE@	r7rs/gerbil.pkg
+@INSTALL_R7RS_SOURCE_TRUE@am__append_3 = $(R7RS_SCHEME)
 
 #
 @CHICKEN_INSTALL_5_TRUE@@CSI_5_TRUE@@ENABLE_CHECK_R7RS_CSI_5_TRUE@am__append_4 = chicken-5-egg-stamp
@@ -150,18 +149,16 @@ EXTRA_PROGRAMS = is-older$(EXEEXT)
 @CHEZ_SCHEME_TRUE@@ENABLE_CHECK_R6RS_CHEZ_TRUE@am__append_6 = $(R6RS_SCHEME)
 @CHIBI_SCHEME_TRUE@@ENABLE_CHECK_R7RS_CHIBI_TRUE@am__append_7 = $(R7RS_SCHEME)
 @ENABLE_CHECK_R7RS_GAUCHE_TRUE@@GAUCHE_TRUE@am__append_8 = $(R7RS_SCHEME)
-@ENABLE_CHECK_R7RS_GXI_TRUE@@GXI_TRUE@am__append_9 = $(R7RS_SCHEME)
-@ENABLE_CHECK_R7RS_GXC_TRUE@@GXC_TRUE@am__append_10 = $(R7RS_SCHEME)
-@ENABLE_CHECK_R6RS_GUILE_TRUE@@GUILE_TRUE@am__append_11 = $(R6RS_SCHEME)
+@ENABLE_CHECK_R6RS_GUILE_TRUE@@GUILE_TRUE@am__append_9 = $(R6RS_SCHEME)
 #
-@ENABLE_CHECK_R7RS_GUILE_TRUE@@GUILE_TRUE@am__append_12 = $(R7RS_SCHEME)
-@ENABLE_CHECK_R6RS_LOKO_TRUE@@LOKO_TRUE@am__append_13 = $(R6RS_SCHEME)
+@ENABLE_CHECK_R7RS_GUILE_TRUE@@GUILE_TRUE@am__append_10 = $(R7RS_SCHEME)
+@ENABLE_CHECK_R6RS_LOKO_TRUE@@LOKO_TRUE@am__append_11 = $(R6RS_SCHEME)
 #
-@ENABLE_CHECK_R7RS_LOKO_TRUE@@LOKO_TRUE@am__append_14 = $(R7RS_SCHEME)
-@ENABLE_CHECK_R6RS_RACKET_TRUE@@PLT_R6RS_TRUE@am__append_15 = $(R6RS_SCHEME)
-@ENABLE_CHECK_R6RS_SAGITTARIUS_TRUE@@SAGITTARIUS_TRUE@am__append_16 = $(R6RS_SCHEME)
+@ENABLE_CHECK_R7RS_LOKO_TRUE@@LOKO_TRUE@am__append_12 = $(R7RS_SCHEME)
+@ENABLE_CHECK_R6RS_RACKET_TRUE@@PLT_R6RS_TRUE@am__append_13 = $(R6RS_SCHEME)
+@ENABLE_CHECK_R6RS_SAGITTARIUS_TRUE@@SAGITTARIUS_TRUE@am__append_14 = $(R6RS_SCHEME)
 #
-@ENABLE_CHECK_R7RS_SAGITTARIUS_TRUE@@SAGITTARIUS_TRUE@am__append_17 = $(R7RS_SCHEME)
+@ENABLE_CHECK_R7RS_SAGITTARIUS_TRUE@@SAGITTARIUS_TRUE@am__append_15 = $(R7RS_SCHEME)
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/ax_check_compile_flag.m4 \
@@ -178,7 +175,6 @@ am__aclocal_m4_deps = $(top_srcdir)/m4/ax_check_compile_flag.m4 \
 	$(top_srcdir)/ac-chicken-scheme.m4 \
 	$(top_srcdir)/ac-chibi-scheme.m4 \
 	$(top_srcdir)/ac-gauche-scheme.m4 \
-	$(top_srcdir)/ac-gerbil-scheme.m4 \
 	$(top_srcdir)/ac-guile-scheme.m4 \
 	$(top_srcdir)/ac-loko-scheme.m4 $(top_srcdir)/ac-racket.m4 \
 	$(top_srcdir)/ac-sagittarius-scheme.m4 \
@@ -388,8 +384,6 @@ GNU_M4 = @GNU_M4@
 GNU_MAKE = @GNU_MAKE@
 GREP = @GREP@
 GUILE = @GUILE@
-GXC = @GXC@
-GXI = @GXI@
 INSTALL = @INSTALL@
 INSTALL_DATA = @INSTALL_DATA@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
@@ -457,8 +451,6 @@ enable_check_r7rs_csc_5 = @enable_check_r7rs_csc_5@
 enable_check_r7rs_csi_5 = @enable_check_r7rs_csi_5@
 enable_check_r7rs_gauche = @enable_check_r7rs_gauche@
 enable_check_r7rs_guile = @enable_check_r7rs_guile@
-enable_check_r7rs_gxc = @enable_check_r7rs_gxc@
-enable_check_r7rs_gxi = @enable_check_r7rs_gxi@
 enable_check_r7rs_loko = @enable_check_r7rs_loko@
 enable_check_r7rs_sagittarius = @enable_check_r7rs_sagittarius@
 enable_color = @enable_color@
@@ -507,8 +499,8 @@ CLEANFILES = tmp.* $(R6RS_SCHEME) $(R6RS_SCHEME:%=%.tmp) \
 	$(CHICKEN_5_EGGDIR)/*.{$(OBJEXT),so,link,import.scm} \
 	$(CHICKEN_5_EGGDIR)/pipchix.{build,install}.sh \
 	chicken-5-egg-stamp
-DISTCLEANFILES = Makefile GNUmakefile r7rs/gerbil.pkg \
-	${top_builddir}/tempname is-older
+DISTCLEANFILES = Makefile GNUmakefile ${top_builddir}/tempname \
+	is-older
 EXTRA_DIST = silent-rules.mk COPYING README.adoc INSTALL AUTHORS \
 	pipchix/pipchix-includes.m4 $(R6RS_SCHEME:%=%.m4) \
 	$(R6RS_SCHEME:r6rs/pipchix/%.sls=pipchix/%.m4) \
@@ -520,8 +512,7 @@ EXTRA_SCRIPTS =
 BUILT_SOURCES = $(am__append_4) $(am__append_5) $(am__append_6) \
 	$(am__append_7) $(am__append_8) $(am__append_9) \
 	$(am__append_10) $(am__append_11) $(am__append_12) \
-	$(am__append_13) $(am__append_14) $(am__append_15) \
-	$(am__append_16) $(am__append_17) is-older
+	$(am__append_13) $(am__append_14) $(am__append_15) is-older
 nodist_r6rspipchix_DATA = $(am__append_2)
 nodist_r7rspipchix_DATA = $(am__append_3)
 nodist_chickeneggs5pipchix_DATA = $(am__append_1)
@@ -1299,14 +1290,6 @@ $(builddir)/r7rs/pipchix/%.sld: $(srcdir)/r7rs/pipchix/%.sld.m4 \
 		$(M4_PREPROCESS) $(<) > $(@).tmp && \
 		mv $(@){.tmp,}
 
-r7rs/gerbil.pkg: Makefile.am	# Gerbil has to be told to be R⁷RS.
-	$(call v,PRINTF) \
-	    $(MKDIR_P) $(@D) && \
-	    printf '(prelude: :scheme/r7rs)' > $(@).tmp && \
-	    mv $(@){.tmp,}
-
-check: r7rs/gerbil.pkg
-
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 $(builddir)/$(CHICKEN_5_EGGDIR)/pipchix.%.scm: \
@@ -1395,9 +1378,6 @@ config.status: tests/run-r7rs-csc-5.sh.in
 config.status: tests/run-r7rs-csi-5.sh.in
 
 config.status: tests/run-r7rs-gauche.sh.in
-
-config.status: tests/run-r7rs-gxi.sh.in
-config.status: tests/run-r7rs-gxc.sh.in
 
 config.status: tests/run-r6rs-guile.sh.in
 config.status: tests/run-r7rs-guile.sh.in

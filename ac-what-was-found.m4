@@ -46,12 +46,6 @@ fi
 if test "${chem_cv_path_GAUCHE_found}" != no; then
   AC_MSG_NOTICE([Gauche Scheme: ${GAUCHE}])
 fi
-if test "${chem_cv_path_GXI_found}" != no; then
-  AC_MSG_NOTICE([Gerbil Scheme interpreter (R⁷RS): ${GXI}])
-fi
-if test "${chem_cv_path_GXC_found}" != no; then
-  AC_MSG_NOTICE([Gerbil Scheme compiler (R⁷RS): ${GXC}])
-fi
 if test "${chem_cv_path_GUILE_found}" != no; then
   AC_MSG_NOTICE([Guile version 3: ${GUILE}])
 fi

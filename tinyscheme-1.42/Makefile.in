@@ -126,7 +126,6 @@ am__aclocal_m4_deps = $(top_srcdir)/m4/ax_check_compile_flag.m4 \
 	$(top_srcdir)/ac-chicken-scheme.m4 \
 	$(top_srcdir)/ac-chibi-scheme.m4 \
 	$(top_srcdir)/ac-gauche-scheme.m4 \
-	$(top_srcdir)/ac-gerbil-scheme.m4 \
 	$(top_srcdir)/ac-guile-scheme.m4 \
 	$(top_srcdir)/ac-loko-scheme.m4 $(top_srcdir)/ac-racket.m4 \
 	$(top_srcdir)/ac-sagittarius-scheme.m4 \
@@ -200,8 +199,6 @@ GNU_M4 = @GNU_M4@
 GNU_MAKE = @GNU_MAKE@
 GREP = @GREP@
 GUILE = @GUILE@
-GXC = @GXC@
-GXI = @GXI@
 INSTALL = @INSTALL@
 INSTALL_DATA = @INSTALL_DATA@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
@@ -269,8 +266,6 @@ enable_check_r7rs_csc_5 = @enable_check_r7rs_csc_5@
 enable_check_r7rs_csi_5 = @enable_check_r7rs_csi_5@
 enable_check_r7rs_gauche = @enable_check_r7rs_gauche@
 enable_check_r7rs_guile = @enable_check_r7rs_guile@
-enable_check_r7rs_gxc = @enable_check_r7rs_gxc@
-enable_check_r7rs_gxi = @enable_check_r7rs_gxi@
 enable_check_r7rs_loko = @enable_check_r7rs_loko@
 enable_check_r7rs_sagittarius = @enable_check_r7rs_sagittarius@
 enable_color = @enable_color@

@@ -106,14 +106,6 @@ offer_disable_of_check([r7rs],[csc-5],
 offer_disable_of_check([r7rs],[gauche],
   [disable tests with Gauche Scheme])
 
-offer_disable_of_check([r7rs],[gxi],
-  [disable tests with Gerbil Scheme interpreter])
-
-# The current gxc tests are slow, do not run in parallel, and do not
-# run in distcheck.
-offer_enable_of_check([r7rs],[gxc],
-  [enable tests with Gerbil Scheme compiler])
-
 offer_disable_of_check([r6rs],[guile],
   [disable R⁶RS tests with Guile])
 
@@ -140,7 +132,6 @@ m4_include([ac-chez-scheme.m4])
 m4_include([ac-chicken-scheme.m4])
 m4_include([ac-chibi-scheme.m4])
 m4_include([ac-gauche-scheme.m4])
-m4_include([ac-gerbil-scheme.m4])
 m4_include([ac-guile-scheme.m4])
 m4_include([ac-loko-scheme.m4])
 m4_include([ac-racket.m4])
@@ -169,10 +160,6 @@ AC_CONFIG_FILES([tests/run-r7rs-csi-5.sh],
                 [chmod +x tests/run-r7rs-csi-5.sh])
 AC_CONFIG_FILES([tests/run-r7rs-gauche.sh],
                 [chmod +x tests/run-r7rs-gauche.sh])
-AC_CONFIG_FILES([tests/run-r7rs-gxi.sh],
-                [chmod +x tests/run-r7rs-gxi.sh])
-AC_CONFIG_FILES([tests/run-r7rs-gxc.sh],
-                [chmod +x tests/run-r7rs-gxc.sh])
 AC_CONFIG_FILES([tests/run-r6rs-guile.sh],
                 [chmod +x tests/run-r6rs-guile.sh])
 AC_CONFIG_FILES([tests/run-r7rs-guile.sh],
