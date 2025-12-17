@@ -30,10 +30,21 @@ m4_include(pipchix/pipchix-includes.m4)
   (export
    m4_include(pipchix/macros.exports.m4))
 
-  (import (rnrs base (6))
+  (import (rnrs (6))
           (pipchix abstract-syntax-tree)
           (pipchix nix-list)
           (pipchix expressions))
+
+  (define-syntax ellipsis-branch
+    (lambda (stx)
+      (syntax-case stx ()
+        ((_ id then-clause else-clause)
+         (with-syntax ((ellps #'(... ...)))
+           (syntax-case stx (ellps)
+             ((_ ellps then-clause else-clause)
+              #'then-clause)
+             ((_ other then-clause else-clause)
+              #'else-clause)))))))
 
   m4_include(pipchix/macros.m4)
 

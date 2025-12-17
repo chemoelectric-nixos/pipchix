@@ -79,64 +79,71 @@
 (define-syntax nix-lambda
   (syntax-rules ()
 
-    ((_ (arguments ...) clause)
-     (parse-args-1 (arguments ... #()) clause '() '()))
-
     ((_ () clause)
      ;; Let this be a synonym for a function that takes an empty set
      ;; as argument.
-     (nix-lambda (()) clause))))
+     (nix-lambda (()) clause))
+
+    ((_ (arguments ...) clause)
+     (parse-args-1 (arguments ...) clause '() '()))))
 
 (define-syntax parse-args-1
   (syntax-rules ()
 
-    ((_ (#()) clause args '())
+    ((_ () clause args '())
      (make-nix-lambda-node (reverse args)
                            (scheme->nix clause)))
 
-    ((_ (() #()) clause args '())
-     (parse-args-1 (#()) clause (cons '() args) '()))
+    ((_ (()) clause args '())
+     (parse-args-1 () clause (cons '() args) '()))
 
-    ((_ (() elem2 ... #()) clause args '())
-     (parse-args-1 (elem2 ... #()) clause (cons '() args) '()))
+    ((_ (() elem2 ...) clause args '())
+     (parse-args-1 (elem2 ...) clause (cons '() args) '()))
 
-    ((_ (((id1 val1) el2 ...) elem2 ... #()) clause args '())
-     (parse-args-2 ((el2 ...) elem2 ... #()) clause
-                   args (list (list (scheme->nix id1)
+    ((_ (((id1 val1) el2 ...) elem2 ...) clause args '())
+     (parse-args-2 ((el2 ...) elem2 ...) clause
+                   args (list (list (scheme->nix 'id1)
                                     (scheme->nix val1)))))
 
-;;;;;     ((_ ((id) elem2 ...) clause args '()) ;;;;;;;;;;;;;;;;;;;;;; FIXME: THIS WILL HAVE TO GO FOR ELLIPSIS MATCHING.
-;;;;;      (parse-args-2 (elem2 ...) clause
-;;;;;                    args (list (scheme->nix id1))))
+    ((_ ((id) elem2 ...) clause args '())
+     (let ((last-thing
+            (ellipsis-branch id (nix-lambda-ellipsis-argument)
+                             (scheme->nix 'id))))
+       (parse-args-1 (elem2 ...) clause
+                     (cons (list last-thing) args) '())))
 
-    ((_ ((id1 el2 ...) elem2 ... #()) clause args '())
-     (parse-args-2 ((el2 ...) elem2 ... #()) clause
-                   args (list (scheme->nix id1))))
+    ((_ ((id1 el2 ...) elem2 ...) clause args '())
+     (parse-args-2 ((el2 ...) elem2 ...) clause
+                   args (list (scheme->nix 'id1))))
 
-    ((_ (ident1 elem2 ... #()) clause args '())
-     (parse-args-1 (elem2 ... #()) clause
-                   (cons (scheme->nix ident1) args) '()))))
+    ((_ (ident1 elem2 ...) clause args '())
+     (parse-args-1 (elem2 ...) clause
+                   (cons (scheme->nix 'ident1) args) '()))))
 
 (define-syntax parse-args-2
   (syntax-rules ()
 
-    ((_ (() elem2 ... #()) clause args attrs)
-     (parse-args-1 (elem2 ... #()) clause
+    ((_ (() elem2 ...) clause args attrs)
+     (parse-args-1 (elem2 ...) clause
                    (cons (reverse attrs) args) '()))
 
-    ((_ (((id1 val1) el2 ...) elem2 ... #()) clause args attrs)
-     (parse-args-2 ((el2 ...) elem2 ... #()) clause
-                   args (cons (list (scheme->nix id1)
+    ((_ (((id1 val1) el2 ...) elem2 ...) clause args attrs)
+     (parse-args-2 ((el2 ...) elem2 ...) clause
+                   args (cons (list (scheme->nix 'id1)
                                     (scheme->nix val1))
                               attrs)))
 
-;;;;;     ((_ ((id) elem2 ...) clause args attrs) ;;;;;;;;;;;;;;;;;;;;;; FIXME: THIS WILL HAVE TO GO FOR ELLIPSIS MATCHING.
-;;;;;      (parse-args-2 (elem2 ...) clause
-;;;;;                    args (list (scheme->nix id1))))
+    ((_ ((id) elem2 ...) clause args attrs)
+     (let ((last-thing
+            (ellipsis-branch id (nix-lambda-ellipsis-argument)
+                             (scheme->nix 'id))))
+       (parse-args-1 (elem2 ...) clause
+                     (cons (reverse (cons last-thing attrs)) args)
+                     '())))
     
-    ((_ ((id1 el2 ...) elem2 ... #()) clause args attrs)
-     (parse-args-2 ((el2 ...) elem2 ... #()) clause
-                   args (cons (scheme->nix id1) attrs)))))
+    ((_ ((id1 el2 ...) elem2 ...) clause args attrs)
+     (parse-args-2 ((el2 ...) elem2 ...) clause
+                   args (cons (scheme->nix 'id1) attrs)))))
 
 m4_divert(-1)
 ;;; local variables:

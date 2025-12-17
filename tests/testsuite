@@ -6734,9 +6734,9 @@ printf "%s\n" "macros-template.at:88" >"$at_check_line_file"
 (test ${enable_check_r6rs_chez} = no) \
   && at_fn_check_skip 77 "$at_srcdir/macros-template.at:88"
 { set +x
-printf "%s\n" "$at_srcdir/macros-template.at:88: \"\${abs_builddir}\"/run-r6rs-chez.sh '(nix-lambda (()) 5)'"
+printf "%s\n" "$at_srcdir/macros-template.at:88: \"\${abs_builddir}\"/run-r6rs-chez.sh '(nix-lambda () 5)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "macros-template.at:88"
-( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '(nix-lambda (()) 5)'
+( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '(nix-lambda () 5)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
@@ -6749,6 +6749,93 @@ echo >>"$at_stdout"; printf "%s\n" "(
 " | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/macros-template.at:88"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "macros-template.at:92" >"$at_check_line_file"
+(test ${enable_check_r6rs_chez} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/macros-template.at:92"
+{ set +x
+printf "%s\n" "$at_srcdir/macros-template.at:92: \"\${abs_builddir}\"/run-r6rs-chez.sh '(nix-lambda (()) 5)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "macros-template.at:92"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '(nix-lambda (()) 5)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+{
+}:
+(5)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/macros-template.at:92"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "macros-template.at:96" >"$at_check_line_file"
+(test ${enable_check_r6rs_chez} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/macros-template.at:96"
+{ set +x
+printf "%s\n" "$at_srcdir/macros-template.at:96: \"\${abs_builddir}\"/run-r6rs-chez.sh '(nix-lambda (x y z) 5)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "macros-template.at:96"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '(nix-lambda (x y z) 5)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+x
+:
+y
+:
+z
+:
+(5)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/macros-template.at:96"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "macros-template.at:100" >"$at_check_line_file"
+(test ${enable_check_r6rs_chez} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/macros-template.at:100"
+{ set +x
+printf "%s\n" "$at_srcdir/macros-template.at:100: \"\${abs_builddir}\"/run-r6rs-chez.sh '(nix-lambda ((x y z)) 5)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "macros-template.at:100"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '(nix-lambda ((x y z)) 5)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+{
+x
+,
+y
+,
+z
+}:
+(5)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/macros-template.at:100"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -11974,9 +12061,9 @@ printf "%s\n" "macros-template.at:88" >"$at_check_line_file"
 (test ${enable_check_r7rs_chibi} = no) \
   && at_fn_check_skip 77 "$at_srcdir/macros-template.at:88"
 { set +x
-printf "%s\n" "$at_srcdir/macros-template.at:88: \"\${abs_builddir}\"/run-r7rs-chibi.sh '(nix-lambda (()) 5)'"
+printf "%s\n" "$at_srcdir/macros-template.at:88: \"\${abs_builddir}\"/run-r7rs-chibi.sh '(nix-lambda () 5)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "macros-template.at:88"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-chibi.sh '(nix-lambda (()) 5)'
+( $at_check_trace; "${abs_builddir}"/run-r7rs-chibi.sh '(nix-lambda () 5)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
@@ -11989,6 +12076,93 @@ echo >>"$at_stdout"; printf "%s\n" "(
 " | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/macros-template.at:88"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "macros-template.at:92" >"$at_check_line_file"
+(test ${enable_check_r7rs_chibi} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/macros-template.at:92"
+{ set +x
+printf "%s\n" "$at_srcdir/macros-template.at:92: \"\${abs_builddir}\"/run-r7rs-chibi.sh '(nix-lambda (()) 5)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "macros-template.at:92"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-chibi.sh '(nix-lambda (()) 5)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+{
+}:
+(5)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/macros-template.at:92"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "macros-template.at:96" >"$at_check_line_file"
+(test ${enable_check_r7rs_chibi} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/macros-template.at:96"
+{ set +x
+printf "%s\n" "$at_srcdir/macros-template.at:96: \"\${abs_builddir}\"/run-r7rs-chibi.sh '(nix-lambda (x y z) 5)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "macros-template.at:96"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-chibi.sh '(nix-lambda (x y z) 5)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+x
+:
+y
+:
+z
+:
+(5)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/macros-template.at:96"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "macros-template.at:100" >"$at_check_line_file"
+(test ${enable_check_r7rs_chibi} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/macros-template.at:100"
+{ set +x
+printf "%s\n" "$at_srcdir/macros-template.at:100: \"\${abs_builddir}\"/run-r7rs-chibi.sh '(nix-lambda ((x y z)) 5)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "macros-template.at:100"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-chibi.sh '(nix-lambda ((x y z)) 5)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+{
+x
+,
+y
+,
+z
+}:
+(5)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/macros-template.at:100"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -17170,9 +17344,9 @@ printf "%s\n" "macros-template.at:88" >"$at_check_line_file"
 (test ${enable_check_r7rs_csc_5} = no) \
   && at_fn_check_skip 77 "$at_srcdir/macros-template.at:88"
 { set +x
-printf "%s\n" "$at_srcdir/macros-template.at:88: \"\${abs_builddir}\"/run-r7rs-csc-5.sh '(nix-lambda (()) 5)'"
+printf "%s\n" "$at_srcdir/macros-template.at:88: \"\${abs_builddir}\"/run-r7rs-csc-5.sh '(nix-lambda () 5)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "macros-template.at:88"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-csc-5.sh '(nix-lambda (()) 5)'
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csc-5.sh '(nix-lambda () 5)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
@@ -17185,6 +17359,93 @@ echo >>"$at_stdout"; printf "%s\n" "(
 " | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/macros-template.at:88"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "macros-template.at:92" >"$at_check_line_file"
+(test ${enable_check_r7rs_csc_5} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/macros-template.at:92"
+{ set +x
+printf "%s\n" "$at_srcdir/macros-template.at:92: \"\${abs_builddir}\"/run-r7rs-csc-5.sh '(nix-lambda (()) 5)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "macros-template.at:92"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csc-5.sh '(nix-lambda (()) 5)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+{
+}:
+(5)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/macros-template.at:92"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "macros-template.at:96" >"$at_check_line_file"
+(test ${enable_check_r7rs_csc_5} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/macros-template.at:96"
+{ set +x
+printf "%s\n" "$at_srcdir/macros-template.at:96: \"\${abs_builddir}\"/run-r7rs-csc-5.sh '(nix-lambda (x y z) 5)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "macros-template.at:96"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csc-5.sh '(nix-lambda (x y z) 5)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+x
+:
+y
+:
+z
+:
+(5)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/macros-template.at:96"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "macros-template.at:100" >"$at_check_line_file"
+(test ${enable_check_r7rs_csc_5} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/macros-template.at:100"
+{ set +x
+printf "%s\n" "$at_srcdir/macros-template.at:100: \"\${abs_builddir}\"/run-r7rs-csc-5.sh '(nix-lambda ((x y z)) 5)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "macros-template.at:100"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csc-5.sh '(nix-lambda ((x y z)) 5)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+{
+x
+,
+y
+,
+z
+}:
+(5)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/macros-template.at:100"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -22366,9 +22627,9 @@ printf "%s\n" "macros-template.at:88" >"$at_check_line_file"
 (test ${enable_check_r7rs_csi_5} = no) \
   && at_fn_check_skip 77 "$at_srcdir/macros-template.at:88"
 { set +x
-printf "%s\n" "$at_srcdir/macros-template.at:88: \"\${abs_builddir}\"/run-r7rs-csi-5.sh '(nix-lambda (()) 5)'"
+printf "%s\n" "$at_srcdir/macros-template.at:88: \"\${abs_builddir}\"/run-r7rs-csi-5.sh '(nix-lambda () 5)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "macros-template.at:88"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-csi-5.sh '(nix-lambda (()) 5)'
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csi-5.sh '(nix-lambda () 5)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
@@ -22381,6 +22642,93 @@ echo >>"$at_stdout"; printf "%s\n" "(
 " | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/macros-template.at:88"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "macros-template.at:92" >"$at_check_line_file"
+(test ${enable_check_r7rs_csi_5} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/macros-template.at:92"
+{ set +x
+printf "%s\n" "$at_srcdir/macros-template.at:92: \"\${abs_builddir}\"/run-r7rs-csi-5.sh '(nix-lambda (()) 5)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "macros-template.at:92"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csi-5.sh '(nix-lambda (()) 5)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+{
+}:
+(5)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/macros-template.at:92"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "macros-template.at:96" >"$at_check_line_file"
+(test ${enable_check_r7rs_csi_5} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/macros-template.at:96"
+{ set +x
+printf "%s\n" "$at_srcdir/macros-template.at:96: \"\${abs_builddir}\"/run-r7rs-csi-5.sh '(nix-lambda (x y z) 5)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "macros-template.at:96"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csi-5.sh '(nix-lambda (x y z) 5)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+x
+:
+y
+:
+z
+:
+(5)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/macros-template.at:96"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "macros-template.at:100" >"$at_check_line_file"
+(test ${enable_check_r7rs_csi_5} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/macros-template.at:100"
+{ set +x
+printf "%s\n" "$at_srcdir/macros-template.at:100: \"\${abs_builddir}\"/run-r7rs-csi-5.sh '(nix-lambda ((x y z)) 5)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "macros-template.at:100"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csi-5.sh '(nix-lambda ((x y z)) 5)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+{
+x
+,
+y
+,
+z
+}:
+(5)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/macros-template.at:100"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -27606,9 +27954,9 @@ printf "%s\n" "macros-template.at:88" >"$at_check_line_file"
 (test ${enable_check_r7rs_gauche} = no) \
   && at_fn_check_skip 77 "$at_srcdir/macros-template.at:88"
 { set +x
-printf "%s\n" "$at_srcdir/macros-template.at:88: \"\${abs_builddir}\"/run-r7rs-gauche.sh '(nix-lambda (()) 5)'"
+printf "%s\n" "$at_srcdir/macros-template.at:88: \"\${abs_builddir}\"/run-r7rs-gauche.sh '(nix-lambda () 5)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "macros-template.at:88"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-gauche.sh '(nix-lambda (()) 5)'
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gauche.sh '(nix-lambda () 5)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
@@ -27621,6 +27969,93 @@ echo >>"$at_stdout"; printf "%s\n" "(
 " | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/macros-template.at:88"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "macros-template.at:92" >"$at_check_line_file"
+(test ${enable_check_r7rs_gauche} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/macros-template.at:92"
+{ set +x
+printf "%s\n" "$at_srcdir/macros-template.at:92: \"\${abs_builddir}\"/run-r7rs-gauche.sh '(nix-lambda (()) 5)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "macros-template.at:92"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gauche.sh '(nix-lambda (()) 5)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+{
+}:
+(5)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/macros-template.at:92"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "macros-template.at:96" >"$at_check_line_file"
+(test ${enable_check_r7rs_gauche} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/macros-template.at:96"
+{ set +x
+printf "%s\n" "$at_srcdir/macros-template.at:96: \"\${abs_builddir}\"/run-r7rs-gauche.sh '(nix-lambda (x y z) 5)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "macros-template.at:96"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gauche.sh '(nix-lambda (x y z) 5)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+x
+:
+y
+:
+z
+:
+(5)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/macros-template.at:96"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "macros-template.at:100" >"$at_check_line_file"
+(test ${enable_check_r7rs_gauche} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/macros-template.at:100"
+{ set +x
+printf "%s\n" "$at_srcdir/macros-template.at:100: \"\${abs_builddir}\"/run-r7rs-gauche.sh '(nix-lambda ((x y z)) 5)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "macros-template.at:100"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gauche.sh '(nix-lambda ((x y z)) 5)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+{
+x
+,
+y
+,
+z
+}:
+(5)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/macros-template.at:100"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -32846,9 +33281,9 @@ printf "%s\n" "macros-template.at:88" >"$at_check_line_file"
 (test ${enable_check_r7rs_gxi} = no) \
   && at_fn_check_skip 77 "$at_srcdir/macros-template.at:88"
 { set +x
-printf "%s\n" "$at_srcdir/macros-template.at:88: \"\${abs_builddir}\"/run-r7rs-gxi.sh '(nix-lambda (()) 5)'"
+printf "%s\n" "$at_srcdir/macros-template.at:88: \"\${abs_builddir}\"/run-r7rs-gxi.sh '(nix-lambda () 5)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "macros-template.at:88"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-gxi.sh '(nix-lambda (()) 5)'
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gxi.sh '(nix-lambda () 5)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
@@ -32861,6 +33296,93 @@ echo >>"$at_stdout"; printf "%s\n" "(
 " | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/macros-template.at:88"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "macros-template.at:92" >"$at_check_line_file"
+(test ${enable_check_r7rs_gxi} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/macros-template.at:92"
+{ set +x
+printf "%s\n" "$at_srcdir/macros-template.at:92: \"\${abs_builddir}\"/run-r7rs-gxi.sh '(nix-lambda (()) 5)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "macros-template.at:92"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gxi.sh '(nix-lambda (()) 5)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+{
+}:
+(5)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/macros-template.at:92"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "macros-template.at:96" >"$at_check_line_file"
+(test ${enable_check_r7rs_gxi} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/macros-template.at:96"
+{ set +x
+printf "%s\n" "$at_srcdir/macros-template.at:96: \"\${abs_builddir}\"/run-r7rs-gxi.sh '(nix-lambda (x y z) 5)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "macros-template.at:96"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gxi.sh '(nix-lambda (x y z) 5)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+x
+:
+y
+:
+z
+:
+(5)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/macros-template.at:96"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "macros-template.at:100" >"$at_check_line_file"
+(test ${enable_check_r7rs_gxi} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/macros-template.at:100"
+{ set +x
+printf "%s\n" "$at_srcdir/macros-template.at:100: \"\${abs_builddir}\"/run-r7rs-gxi.sh '(nix-lambda ((x y z)) 5)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "macros-template.at:100"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gxi.sh '(nix-lambda ((x y z)) 5)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+{
+x
+,
+y
+,
+z
+}:
+(5)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/macros-template.at:100"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -38086,9 +38608,9 @@ printf "%s\n" "macros-template.at:88" >"$at_check_line_file"
 (test ${enable_check_r7rs_gxc} = no) \
   && at_fn_check_skip 77 "$at_srcdir/macros-template.at:88"
 { set +x
-printf "%s\n" "$at_srcdir/macros-template.at:88: \"\${abs_builddir}\"/run-r7rs-gxc.sh '(nix-lambda (()) 5)'"
+printf "%s\n" "$at_srcdir/macros-template.at:88: \"\${abs_builddir}\"/run-r7rs-gxc.sh '(nix-lambda () 5)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "macros-template.at:88"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-gxc.sh '(nix-lambda (()) 5)'
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gxc.sh '(nix-lambda () 5)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
@@ -38101,6 +38623,93 @@ echo >>"$at_stdout"; printf "%s\n" "(
 " | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/macros-template.at:88"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "macros-template.at:92" >"$at_check_line_file"
+(test ${enable_check_r7rs_gxc} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/macros-template.at:92"
+{ set +x
+printf "%s\n" "$at_srcdir/macros-template.at:92: \"\${abs_builddir}\"/run-r7rs-gxc.sh '(nix-lambda (()) 5)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "macros-template.at:92"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gxc.sh '(nix-lambda (()) 5)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+{
+}:
+(5)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/macros-template.at:92"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "macros-template.at:96" >"$at_check_line_file"
+(test ${enable_check_r7rs_gxc} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/macros-template.at:96"
+{ set +x
+printf "%s\n" "$at_srcdir/macros-template.at:96: \"\${abs_builddir}\"/run-r7rs-gxc.sh '(nix-lambda (x y z) 5)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "macros-template.at:96"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gxc.sh '(nix-lambda (x y z) 5)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+x
+:
+y
+:
+z
+:
+(5)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/macros-template.at:96"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "macros-template.at:100" >"$at_check_line_file"
+(test ${enable_check_r7rs_gxc} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/macros-template.at:100"
+{ set +x
+printf "%s\n" "$at_srcdir/macros-template.at:100: \"\${abs_builddir}\"/run-r7rs-gxc.sh '(nix-lambda ((x y z)) 5)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "macros-template.at:100"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gxc.sh '(nix-lambda ((x y z)) 5)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+{
+x
+,
+y
+,
+z
+}:
+(5)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/macros-template.at:100"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -43282,9 +43891,9 @@ printf "%s\n" "macros-template.at:88" >"$at_check_line_file"
 (test ${enable_check_r6rs_guile} = no) \
   && at_fn_check_skip 77 "$at_srcdir/macros-template.at:88"
 { set +x
-printf "%s\n" "$at_srcdir/macros-template.at:88: \"\${abs_builddir}\"/run-r6rs-guile.sh '(nix-lambda (()) 5)'"
+printf "%s\n" "$at_srcdir/macros-template.at:88: \"\${abs_builddir}\"/run-r6rs-guile.sh '(nix-lambda () 5)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "macros-template.at:88"
-( $at_check_trace; "${abs_builddir}"/run-r6rs-guile.sh '(nix-lambda (()) 5)'
+( $at_check_trace; "${abs_builddir}"/run-r6rs-guile.sh '(nix-lambda () 5)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
@@ -43297,6 +43906,93 @@ echo >>"$at_stdout"; printf "%s\n" "(
 " | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/macros-template.at:88"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "macros-template.at:92" >"$at_check_line_file"
+(test ${enable_check_r6rs_guile} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/macros-template.at:92"
+{ set +x
+printf "%s\n" "$at_srcdir/macros-template.at:92: \"\${abs_builddir}\"/run-r6rs-guile.sh '(nix-lambda (()) 5)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "macros-template.at:92"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-guile.sh '(nix-lambda (()) 5)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+{
+}:
+(5)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/macros-template.at:92"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "macros-template.at:96" >"$at_check_line_file"
+(test ${enable_check_r6rs_guile} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/macros-template.at:96"
+{ set +x
+printf "%s\n" "$at_srcdir/macros-template.at:96: \"\${abs_builddir}\"/run-r6rs-guile.sh '(nix-lambda (x y z) 5)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "macros-template.at:96"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-guile.sh '(nix-lambda (x y z) 5)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+x
+:
+y
+:
+z
+:
+(5)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/macros-template.at:96"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "macros-template.at:100" >"$at_check_line_file"
+(test ${enable_check_r6rs_guile} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/macros-template.at:100"
+{ set +x
+printf "%s\n" "$at_srcdir/macros-template.at:100: \"\${abs_builddir}\"/run-r6rs-guile.sh '(nix-lambda ((x y z)) 5)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "macros-template.at:100"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-guile.sh '(nix-lambda ((x y z)) 5)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+{
+x
+,
+y
+,
+z
+}:
+(5)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/macros-template.at:100"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -48522,9 +49218,9 @@ printf "%s\n" "macros-template.at:88" >"$at_check_line_file"
 (test ${enable_check_r7rs_guile} = no) \
   && at_fn_check_skip 77 "$at_srcdir/macros-template.at:88"
 { set +x
-printf "%s\n" "$at_srcdir/macros-template.at:88: \"\${abs_builddir}\"/run-r7rs-guile.sh '(nix-lambda (()) 5)'"
+printf "%s\n" "$at_srcdir/macros-template.at:88: \"\${abs_builddir}\"/run-r7rs-guile.sh '(nix-lambda () 5)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "macros-template.at:88"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-guile.sh '(nix-lambda (()) 5)'
+( $at_check_trace; "${abs_builddir}"/run-r7rs-guile.sh '(nix-lambda () 5)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
@@ -48537,6 +49233,93 @@ echo >>"$at_stdout"; printf "%s\n" "(
 " | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/macros-template.at:88"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "macros-template.at:92" >"$at_check_line_file"
+(test ${enable_check_r7rs_guile} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/macros-template.at:92"
+{ set +x
+printf "%s\n" "$at_srcdir/macros-template.at:92: \"\${abs_builddir}\"/run-r7rs-guile.sh '(nix-lambda (()) 5)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "macros-template.at:92"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-guile.sh '(nix-lambda (()) 5)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+{
+}:
+(5)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/macros-template.at:92"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "macros-template.at:96" >"$at_check_line_file"
+(test ${enable_check_r7rs_guile} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/macros-template.at:96"
+{ set +x
+printf "%s\n" "$at_srcdir/macros-template.at:96: \"\${abs_builddir}\"/run-r7rs-guile.sh '(nix-lambda (x y z) 5)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "macros-template.at:96"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-guile.sh '(nix-lambda (x y z) 5)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+x
+:
+y
+:
+z
+:
+(5)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/macros-template.at:96"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "macros-template.at:100" >"$at_check_line_file"
+(test ${enable_check_r7rs_guile} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/macros-template.at:100"
+{ set +x
+printf "%s\n" "$at_srcdir/macros-template.at:100: \"\${abs_builddir}\"/run-r7rs-guile.sh '(nix-lambda ((x y z)) 5)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "macros-template.at:100"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-guile.sh '(nix-lambda ((x y z)) 5)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+{
+x
+,
+y
+,
+z
+}:
+(5)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/macros-template.at:100"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -53718,9 +54501,9 @@ printf "%s\n" "macros-template.at:88" >"$at_check_line_file"
 (test ${enable_check_r6rs_loko} = no) \
   && at_fn_check_skip 77 "$at_srcdir/macros-template.at:88"
 { set +x
-printf "%s\n" "$at_srcdir/macros-template.at:88: \"\${abs_builddir}\"/run-r6rs-loko.sh '(nix-lambda (()) 5)'"
+printf "%s\n" "$at_srcdir/macros-template.at:88: \"\${abs_builddir}\"/run-r6rs-loko.sh '(nix-lambda () 5)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "macros-template.at:88"
-( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '(nix-lambda (()) 5)'
+( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '(nix-lambda () 5)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
@@ -53733,6 +54516,93 @@ echo >>"$at_stdout"; printf "%s\n" "(
 " | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/macros-template.at:88"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "macros-template.at:92" >"$at_check_line_file"
+(test ${enable_check_r6rs_loko} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/macros-template.at:92"
+{ set +x
+printf "%s\n" "$at_srcdir/macros-template.at:92: \"\${abs_builddir}\"/run-r6rs-loko.sh '(nix-lambda (()) 5)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "macros-template.at:92"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '(nix-lambda (()) 5)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+{
+}:
+(5)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/macros-template.at:92"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "macros-template.at:96" >"$at_check_line_file"
+(test ${enable_check_r6rs_loko} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/macros-template.at:96"
+{ set +x
+printf "%s\n" "$at_srcdir/macros-template.at:96: \"\${abs_builddir}\"/run-r6rs-loko.sh '(nix-lambda (x y z) 5)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "macros-template.at:96"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '(nix-lambda (x y z) 5)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+x
+:
+y
+:
+z
+:
+(5)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/macros-template.at:96"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "macros-template.at:100" >"$at_check_line_file"
+(test ${enable_check_r6rs_loko} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/macros-template.at:100"
+{ set +x
+printf "%s\n" "$at_srcdir/macros-template.at:100: \"\${abs_builddir}\"/run-r6rs-loko.sh '(nix-lambda ((x y z)) 5)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "macros-template.at:100"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '(nix-lambda ((x y z)) 5)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+{
+x
+,
+y
+,
+z
+}:
+(5)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/macros-template.at:100"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -58958,9 +59828,9 @@ printf "%s\n" "macros-template.at:88" >"$at_check_line_file"
 (test ${enable_check_r7rs_loko} = no) \
   && at_fn_check_skip 77 "$at_srcdir/macros-template.at:88"
 { set +x
-printf "%s\n" "$at_srcdir/macros-template.at:88: \"\${abs_builddir}\"/run-r7rs-loko.sh '(nix-lambda (()) 5)'"
+printf "%s\n" "$at_srcdir/macros-template.at:88: \"\${abs_builddir}\"/run-r7rs-loko.sh '(nix-lambda () 5)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "macros-template.at:88"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(nix-lambda (()) 5)'
+( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(nix-lambda () 5)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
@@ -58973,6 +59843,93 @@ echo >>"$at_stdout"; printf "%s\n" "(
 " | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/macros-template.at:88"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "macros-template.at:92" >"$at_check_line_file"
+(test ${enable_check_r7rs_loko} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/macros-template.at:92"
+{ set +x
+printf "%s\n" "$at_srcdir/macros-template.at:92: \"\${abs_builddir}\"/run-r7rs-loko.sh '(nix-lambda (()) 5)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "macros-template.at:92"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(nix-lambda (()) 5)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+{
+}:
+(5)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/macros-template.at:92"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "macros-template.at:96" >"$at_check_line_file"
+(test ${enable_check_r7rs_loko} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/macros-template.at:96"
+{ set +x
+printf "%s\n" "$at_srcdir/macros-template.at:96: \"\${abs_builddir}\"/run-r7rs-loko.sh '(nix-lambda (x y z) 5)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "macros-template.at:96"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(nix-lambda (x y z) 5)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+x
+:
+y
+:
+z
+:
+(5)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/macros-template.at:96"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "macros-template.at:100" >"$at_check_line_file"
+(test ${enable_check_r7rs_loko} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/macros-template.at:100"
+{ set +x
+printf "%s\n" "$at_srcdir/macros-template.at:100: \"\${abs_builddir}\"/run-r7rs-loko.sh '(nix-lambda ((x y z)) 5)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "macros-template.at:100"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(nix-lambda ((x y z)) 5)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+{
+x
+,
+y
+,
+z
+}:
+(5)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/macros-template.at:100"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -64154,9 +65111,9 @@ printf "%s\n" "macros-template.at:88" >"$at_check_line_file"
 (test ${enable_check_r6rs_racket} = no) \
   && at_fn_check_skip 77 "$at_srcdir/macros-template.at:88"
 { set +x
-printf "%s\n" "$at_srcdir/macros-template.at:88: \"\${abs_builddir}\"/run-r6rs-racket.sh '(nix-lambda (()) 5)'"
+printf "%s\n" "$at_srcdir/macros-template.at:88: \"\${abs_builddir}\"/run-r6rs-racket.sh '(nix-lambda () 5)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "macros-template.at:88"
-( $at_check_trace; "${abs_builddir}"/run-r6rs-racket.sh '(nix-lambda (()) 5)'
+( $at_check_trace; "${abs_builddir}"/run-r6rs-racket.sh '(nix-lambda () 5)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
@@ -64169,6 +65126,93 @@ echo >>"$at_stdout"; printf "%s\n" "(
 " | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/macros-template.at:88"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "macros-template.at:92" >"$at_check_line_file"
+(test ${enable_check_r6rs_racket} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/macros-template.at:92"
+{ set +x
+printf "%s\n" "$at_srcdir/macros-template.at:92: \"\${abs_builddir}\"/run-r6rs-racket.sh '(nix-lambda (()) 5)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "macros-template.at:92"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-racket.sh '(nix-lambda (()) 5)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+{
+}:
+(5)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/macros-template.at:92"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "macros-template.at:96" >"$at_check_line_file"
+(test ${enable_check_r6rs_racket} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/macros-template.at:96"
+{ set +x
+printf "%s\n" "$at_srcdir/macros-template.at:96: \"\${abs_builddir}\"/run-r6rs-racket.sh '(nix-lambda (x y z) 5)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "macros-template.at:96"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-racket.sh '(nix-lambda (x y z) 5)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+x
+:
+y
+:
+z
+:
+(5)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/macros-template.at:96"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "macros-template.at:100" >"$at_check_line_file"
+(test ${enable_check_r6rs_racket} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/macros-template.at:100"
+{ set +x
+printf "%s\n" "$at_srcdir/macros-template.at:100: \"\${abs_builddir}\"/run-r6rs-racket.sh '(nix-lambda ((x y z)) 5)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "macros-template.at:100"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-racket.sh '(nix-lambda ((x y z)) 5)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+{
+x
+,
+y
+,
+z
+}:
+(5)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/macros-template.at:100"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -69350,9 +70394,9 @@ printf "%s\n" "macros-template.at:88" >"$at_check_line_file"
 (test ${enable_check_r6rs_sagittarius} = no) \
   && at_fn_check_skip 77 "$at_srcdir/macros-template.at:88"
 { set +x
-printf "%s\n" "$at_srcdir/macros-template.at:88: \"\${abs_builddir}\"/run-r6rs-sagittarius.sh '(nix-lambda (()) 5)'"
+printf "%s\n" "$at_srcdir/macros-template.at:88: \"\${abs_builddir}\"/run-r6rs-sagittarius.sh '(nix-lambda () 5)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "macros-template.at:88"
-( $at_check_trace; "${abs_builddir}"/run-r6rs-sagittarius.sh '(nix-lambda (()) 5)'
+( $at_check_trace; "${abs_builddir}"/run-r6rs-sagittarius.sh '(nix-lambda () 5)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
@@ -69365,6 +70409,93 @@ echo >>"$at_stdout"; printf "%s\n" "(
 " | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/macros-template.at:88"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "macros-template.at:92" >"$at_check_line_file"
+(test ${enable_check_r6rs_sagittarius} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/macros-template.at:92"
+{ set +x
+printf "%s\n" "$at_srcdir/macros-template.at:92: \"\${abs_builddir}\"/run-r6rs-sagittarius.sh '(nix-lambda (()) 5)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "macros-template.at:92"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-sagittarius.sh '(nix-lambda (()) 5)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+{
+}:
+(5)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/macros-template.at:92"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "macros-template.at:96" >"$at_check_line_file"
+(test ${enable_check_r6rs_sagittarius} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/macros-template.at:96"
+{ set +x
+printf "%s\n" "$at_srcdir/macros-template.at:96: \"\${abs_builddir}\"/run-r6rs-sagittarius.sh '(nix-lambda (x y z) 5)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "macros-template.at:96"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-sagittarius.sh '(nix-lambda (x y z) 5)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+x
+:
+y
+:
+z
+:
+(5)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/macros-template.at:96"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "macros-template.at:100" >"$at_check_line_file"
+(test ${enable_check_r6rs_sagittarius} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/macros-template.at:100"
+{ set +x
+printf "%s\n" "$at_srcdir/macros-template.at:100: \"\${abs_builddir}\"/run-r6rs-sagittarius.sh '(nix-lambda ((x y z)) 5)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "macros-template.at:100"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-sagittarius.sh '(nix-lambda ((x y z)) 5)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+{
+x
+,
+y
+,
+z
+}:
+(5)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/macros-template.at:100"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -74590,9 +75721,9 @@ printf "%s\n" "macros-template.at:88" >"$at_check_line_file"
 (test ${enable_check_r7rs_sagittarius} = no) \
   && at_fn_check_skip 77 "$at_srcdir/macros-template.at:88"
 { set +x
-printf "%s\n" "$at_srcdir/macros-template.at:88: \"\${abs_builddir}\"/run-r7rs-sagittarius.sh '(nix-lambda (()) 5)'"
+printf "%s\n" "$at_srcdir/macros-template.at:88: \"\${abs_builddir}\"/run-r7rs-sagittarius.sh '(nix-lambda () 5)'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "macros-template.at:88"
-( $at_check_trace; "${abs_builddir}"/run-r7rs-sagittarius.sh '(nix-lambda (()) 5)'
+( $at_check_trace; "${abs_builddir}"/run-r7rs-sagittarius.sh '(nix-lambda () 5)'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter
@@ -74605,6 +75736,93 @@ echo >>"$at_stdout"; printf "%s\n" "(
 " | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/macros-template.at:88"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "macros-template.at:92" >"$at_check_line_file"
+(test ${enable_check_r7rs_sagittarius} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/macros-template.at:92"
+{ set +x
+printf "%s\n" "$at_srcdir/macros-template.at:92: \"\${abs_builddir}\"/run-r7rs-sagittarius.sh '(nix-lambda (()) 5)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "macros-template.at:92"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-sagittarius.sh '(nix-lambda (()) 5)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+{
+}:
+(5)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/macros-template.at:92"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "macros-template.at:96" >"$at_check_line_file"
+(test ${enable_check_r7rs_sagittarius} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/macros-template.at:96"
+{ set +x
+printf "%s\n" "$at_srcdir/macros-template.at:96: \"\${abs_builddir}\"/run-r7rs-sagittarius.sh '(nix-lambda (x y z) 5)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "macros-template.at:96"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-sagittarius.sh '(nix-lambda (x y z) 5)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+x
+:
+y
+:
+z
+:
+(5)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/macros-template.at:96"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "macros-template.at:100" >"$at_check_line_file"
+(test ${enable_check_r7rs_sagittarius} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/macros-template.at:100"
+{ set +x
+printf "%s\n" "$at_srcdir/macros-template.at:100: \"\${abs_builddir}\"/run-r7rs-sagittarius.sh '(nix-lambda ((x y z)) 5)'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "macros-template.at:100"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-sagittarius.sh '(nix-lambda ((x y z)) 5)'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(
+{
+x
+,
+y
+,
+z
+}:
+(5)
+)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/macros-template.at:100"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
