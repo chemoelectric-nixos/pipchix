@@ -34,7 +34,7 @@ m4_include(pipchix/pipchix-includes.m4)
           (pipchix abstract-syntax-tree)
           (pipchix nix-list)
           (pipchix expressions)
-          (pipchix if-match-ellipsis))
+          (pipchix if-syntax-match-ellipsis))
 
   m4_include(pipchix/macros.m4)
 

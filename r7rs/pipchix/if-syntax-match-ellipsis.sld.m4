@@ -24,9 +24,9 @@
 ;;;
 m4_include(pipchix/pipchix-includes.m4)
 
-(define-library (pipchix if-match-ellipsis)
+(define-library (pipchix if-syntax-match-ellipsis)
 
-  (export if-match-ellipsis)
+  (export if-syntax-match-ellipsis)
 
   (import (scheme base))
   (import (scheme cxr))
@@ -46,7 +46,7 @@ m4_include(pipchix/pipchix-includes.m4)
       (chicken-5
        ;; CHICKEN 5 is really R⁵RS, and does not have R⁷RS
        ;; syntax-rules. Use er-macro-transformer.
-       (define-syntax if-match-ellipsis
+       (define-syntax if-syntax-match-ellipsis
          (er-macro-transformer
           (lambda (form rename compare)
             (let* ((ellipsis (rename '...))
@@ -55,7 +55,7 @@ m4_include(pipchix/pipchix-includes.m4)
                                       (compare id ellipsis)))))
               (unless (= (length form) 4)
                 (error
-                 "expected (if-match-ellipsis form then-clause else-clause)"
+                 "expected (if-syntax-match-ellipsis form then-clause else-clause)"
                  form))
               (if (ellipsis=? (cadr form))
                 (caddr form)
@@ -63,7 +63,7 @@ m4_include(pipchix/pipchix-includes.m4)
       (loko
        ;; Loko seems to have broken R⁷RS syntax-rules. So instead use
        ;; R⁶RS syntax-case
-       (define-syntax if-match-ellipsis
+       (define-syntax if-syntax-match-ellipsis
          (lambda (stx)
            (define ellipsis (string->symbol "..."))
            (syntax-case stx ()
@@ -76,7 +76,7 @@ m4_include(pipchix/pipchix-includes.m4)
                    (syntax then-clause)
                    (syntax else-clause)))))))))
        (else
-        (define-syntax if-match-ellipsis
+        (define-syntax if-syntax-match-ellipsis
           (syntax-rules ::: ( ... )
             ((_ ... then-clause else-clause)
              then-clause)

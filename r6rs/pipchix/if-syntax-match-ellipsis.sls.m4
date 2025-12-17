@@ -25,13 +25,13 @@
 ;;;
 m4_include(pipchix/pipchix-includes.m4)
 
-(library (pipchix if-match-ellipsis)
+(library (pipchix if-syntax-match-ellipsis)
 
-  (export if-match-ellipsis)
+  (export if-syntax-match-ellipsis)
   
   (import (rnrs (6)))
 
-  (define-syntax if-match-ellipsis
+  (define-syntax if-syntax-match-ellipsis
     (lambda (stx)
       (syntax-case stx ()
         ((_ id then-clause else-clause)

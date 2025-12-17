@@ -32,7 +32,7 @@ m4_include(pipchix/pipchix-includes.m4)
   (import (pipchix abstract-syntax-tree))
   (import (pipchix nix-list))
   (import (pipchix expressions))
-  (import (pipchix if-match-ellipsis))
+  (import (pipchix if-syntax-match-ellipsis))
   
   (begin
 
