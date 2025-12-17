@@ -84,6 +84,10 @@ m4_define([sexpr],[(nix-with ((© "a") (© "b") (© "c")) "e")])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([(with·a·;·(with·b·;·(with·c·;·("e")·)·)·)·])],[])
 
+m4_define([sexpr],[(nix-lambda (()) 5)])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(·{·}:·(5)·)·])],[])
+
 AT_CLEANUP
 
 # local variables:

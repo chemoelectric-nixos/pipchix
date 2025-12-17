@@ -77,6 +77,9 @@ nix-has?
 ;;; and they will be applied right-to-left. This is a macro.
 nix-with ;; (nix-with (attrset ...) clause)
 
+;;; Nix functions.
+nix-lambda
+
 ;;; Nix operators. In Pipchix these may take arguments according to
 ;;; Scheme conventions. For instance, (nix++) is a way to obtain an
 ;;; empty list, and (nix/ 3) is a way to write 1.0 / 3. However,

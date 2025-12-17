@@ -591,9 +591,11 @@ define_string_reverse_concatenate
 
 (define (%%output-nix-lambda-node ast outp)
   (define (attrset-arg lst outp)
-    (let loop ((p lst))
+    (let loop ((p lst)
+               (separator ""))
       (when (pair? p)
         (let ((carp (car p)))
+          (outp separator)
           (cond
            ((pair? carp)
             ;; There is a default value.
@@ -605,19 +607,18 @@ define_string_reverse_concatenate
              (scheme->nix (cadr carp)) outp))
            ((%%nix-identifier? carp)
             (%%output-nix-identifier carp outp))
+           ((nix-lambda-ellipsis-argument? carp)
+            (outp "...\n"))
            (else
             (err "malformed nix-lambda arguments" p)))
-          (outp ",\n")
-          (if (nix-lambda-ellipsis-argument? (cdr p))
-            (outp "...\n") ;; An improper list.
-            (loop (cdr p)))))))
+          (loop (cdr p) ",\n")))))
   (let ((args (nix-lambda-node-args ast))
         (body (nix-lambda-node-body ast)))
     (outp "(\n")
     (let loop ((p args))
       (when (pair? p)
         (let ((carp (car p)))
-          (cond ((pair? carp)
+          (cond ((or (null? carp) (pair? carp))
                  (outp "{\n")
                  (attrset-arg carp outp)
                  (outp "}:\n"))

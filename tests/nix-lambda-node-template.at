@@ -34,11 +34,11 @@ check_unquoted([run_scheme 'sexpr'],[0],
 m4_define([sexpr],
   [(make-nix-lambda-node `((,(scheme->nix `x))) (© `x))])
 check_unquoted([run_scheme 'sexpr'],[0],
-  [interpunct_nl([(·{·x·,·}:·x·)·])],[])
+  [interpunct_nl([(·{·x·}:·x·)·])],[])
 
 m4_define([sexpr],
   [(make-nix-lambda-node
-       `((,(scheme->nix `x) . ,(nix-lambda-ellipsis-argument)))
+       `((,(scheme->nix `x) ,(nix-lambda-ellipsis-argument)))
      (© `x))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([(·{·x·,·...·}:·x·)·])],[])
@@ -47,7 +47,7 @@ m4_define([sexpr],
   [(make-nix-lambda-node
        `((,(scheme->nix `x)
           (,(scheme->nix `y) ,(scheme->nix 5))
-          . ,(nix-lambda-ellipsis-argument))
+          ,(nix-lambda-ellipsis-argument))
          ,(scheme->nix `z))
      (nix-list (© `x) (© `y) (© `z)))])
 check_unquoted([run_scheme 'sexpr'],[0],

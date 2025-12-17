@@ -29,7 +29,9 @@ m4_include(pipchix/pipchix-includes.m4)
   (export m4_include(pipchix/macros.exports.m4))
 
   (import (scheme base))
+  (import (scheme write));;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME
   (import (pipchix abstract-syntax-tree))
+  (import (pipchix nix-list))
   (import (pipchix expressions))
 
   (begin
