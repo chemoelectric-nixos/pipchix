@@ -85,63 +85,62 @@
      (nix-lambda (()) clause))
 
     ((_ (arguments ...) clause)
-     (collect-args (arguments ...) (scheme->nix clause) '()))))
+     (collect-args (arguments ...) (scheme->nix clause) (list)))))
 
 (define-syntax collect-args
-  (syntax-rules ()
+  (syntax-rules ( list )
     
     ((_ () clause args)
-     (make-nix-lambda-node (reverse args) clause))
+     (make-nix-lambda-node args clause))
 
-    ((_ (()) clause args)
-     (collect-args () clause (cons '() args)))
+    ((_ (()) clause (list args ...))
+     (collect-args () clause (list args ... (quote ()))))
 
-    ((_ (() elem2 ...) clause args)
-     (collect-args (elem2 ...) clause (cons '() args)))
+    ((_ (() elem2 ...) clause (list args ...))
+     (collect-args (elem2 ...) clause (list args ... (quote ()))))
 
-    ((_ (((id1 val1) el2 ...) elem2 ...) clause args)
+    ((_ (((id1 val1) el2 ...) elem2 ...) clause (list args ...))
      (collect-attrs ((el2 ...) elem2 ...) clause
-                    args (list (list (scheme->nix 'id1)
-                                     (scheme->nix val1)))))
+                    (list args ...)
+                    (list (list (scheme->nix 'id1)
+                                (scheme->nix val1)))))
 
-    ((_ ((id) elem2 ...) clause args)
+    ((_ ((id) elem2 ...) clause (list args ...))
      (let ((last-thing (if-syntax-match-ellipsis id
                          (nix-lambda-ellipsis-argument)
                          (scheme->nix 'id))))
        (collect-args (elem2 ...) clause
-                     (cons (list last-thing) args))))
+                     (list args ... (list last-thing)))))
 
-    ((_ ((id1 el2 ...) elem2 ...) clause args)
+    ((_ ((id1 el2 ...) elem2 ...) clause (list args ...))
      (collect-attrs ((el2 ...) elem2 ...) clause
-                    args (list (scheme->nix 'id1))))
+                    (list args ...) (list (scheme->nix 'id1))))
 
-    ((_ (ident1 elem2 ...) clause args)
+    ((_ (ident1 elem2 ...) clause (list args ...))
      (collect-args (elem2 ...) clause
-                   (cons (scheme->nix 'ident1) args)))))
+                   (list args ... (scheme->nix 'ident1))))))
 
 (define-syntax collect-attrs
-  (syntax-rules ()
+  (syntax-rules ( list )
 
-    ((_ (() elem2 ...) clause args attrs)
-     (collect-args (elem2 ...) clause
-                   (cons (reverse attrs) args)))
+    ((_ (() elem2 ...) clause (list args ...) attrs)
+     (collect-args (elem2 ...) clause (list args ... attrs)))
 
-    ((_ (((id1 val1) el2 ...) elem2 ...) clause args attrs)
+    ((_ (((id1 val1) el2 ...) elem2 ...) clause args (list attrs ...))
      (collect-attrs ((el2 ...) elem2 ...) clause
-                    args (cons (list (scheme->nix 'id1)
-                                     (scheme->nix val1))
-                               attrs)))
+                    args (list attrs ... (list (scheme->nix 'id1)
+                                               (scheme->nix val1)))))
 
-    ((_ ((id) elem2 ...) clause args attrs)
+    ((_ ((id) elem2 ...) clause (list args ...) (list attrs ...))
      (let ((last-thing (if-syntax-match-ellipsis id
                          (nix-lambda-ellipsis-argument)
                          (scheme->nix 'id))))
        (collect-args (elem2 ...) clause
-                     (cons (reverse (cons last-thing attrs)) args))))
+                     (list args ... (list attrs ... last-thing)))))
     
-    ((_ ((id1 el2 ...) elem2 ...) clause args attrs)
+    ((_ ((id1 el2 ...) elem2 ...) clause args (list attrs ...))
      (collect-attrs ((el2 ...) elem2 ...) clause
-                    args (cons (scheme->nix 'id1) attrs)))))
+                    args (list attrs ... (scheme->nix 'id1))))))
 
 m4_divert(-1)
 ;;; local variables:
