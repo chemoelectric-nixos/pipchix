@@ -33,7 +33,7 @@ m4_include(pipchix/pipchix-includes.m4)
   (import (scheme char))
   (import (scheme file))
   (import (pipchix string-manipulation))
-  (import (pipchix continuation-capture))
+  (import (pipchix general-purpose continuation-capture))
 
   (begin
 

@@ -37,7 +37,7 @@ m4_include(pipchix/pipchix-includes.m4)
           (rnrs io ports (6))
           (rnrs unicode (6))
           (pipchix string-manipulation)
-          (pipchix continuation-capture))
+          (pipchix general-purpose continuation-capture))
 
   (define read-string
     (case-lambda

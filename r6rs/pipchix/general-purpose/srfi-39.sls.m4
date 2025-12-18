@@ -38,7 +38,7 @@ m4_include(pipchix/pipchix-includes.m4)
 ;;; compatibility with R⁷RS.
 ;;;
 
-(library (pipchix srfi-39)
+(library (pipchix general-purpose srfi-39)
 
   (export make-parameter
           parameterize)

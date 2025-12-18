@@ -1,3 +1,4 @@
+#!r6rs
 ;;;
 ;;; Copyright © 2025 Barry Schwartz
 ;;;
@@ -24,42 +25,22 @@
 ;;;
 m4_include(pipchix/pipchix-includes.m4)
 
-(define-library (pipchix define-record-factory)
+(library (pipchix general-purpose define-record-factory)
 
-  (export m4_include(pipchix/define-record-factory.exports.m4))
+  (export m4_include(pipchix/general-purpose/define-record-factory.exports.m4))
 
-  (import (scheme base))
-  (import (scheme case-lambda))
-  (cond-expand
-    (chicken-5
-     (import (only (chicken base)
-                   gensym)
-             (chicken syntax)))
-    (else))
+  (import (rnrs base (6))
+          (rnrs control (6))
+          (rnrs records syntactic (6)))
 
-  (begin
+  define_err_r6rs
+  m4_define(«implementation_of_define_record_factory»,«r6rs»)
+  m4_include(pipchix/general-purpose/define-record-factory.m4)
 
-    define_err_r7rs
-
-    (cond-expand
-      (chicken-5
-       ;; Use er-macro-transformer. (There is complicated coördination
-       ;; of symbols between different definitions, so it might be
-       ;; unsurprising that syntax-rules implementations for R⁵RS have
-       ;; trouble.)
-       m4_define(«implementation_of_define_record_factory»,
-                 «er-macro-transformer»)
-       m4_include(pipchix/define-record-factory.m4)
-       m4_undefine(«implementation_of_define_record_factory»))
-      (else
-       m4_define(«implementation_of_define_record_factory»,«srfi-9»)
-       m4_include(pipchix/define-record-factory.m4)
-       m4_undefine(«implementation_of_define_record_factory»)))
-
-    ))
+  )
 
 ;;; local variables:
 ;;; mode: scheme
-;;; geiser-scheme-implementation: chibi
+;;; geiser-scheme-implementation: chez
 ;;; coding: utf-8
 ;;; end:

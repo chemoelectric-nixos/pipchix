@@ -25,7 +25,7 @@
 ;;; The SRFI-111 reference implementation for R⁶RS.
 ;;;
 
-(library (pipchix box)
+(library (pipchix general-purpose box)
 
   (export box
           box?

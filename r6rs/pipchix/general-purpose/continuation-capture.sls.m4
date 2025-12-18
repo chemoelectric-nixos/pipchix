@@ -25,15 +25,15 @@
 ;;;
 m4_include(pipchix/pipchix-includes.m4)
 
-(library (pipchix continuation-capture)
+(library (pipchix general-purpose continuation-capture)
 
-  (export m4_include(pipchix/continuation-capture.exports.m4))
+  (export m4_include(pipchix/general-purpose/continuation-capture.exports.m4))
 
   (import (rnrs base (6))
           (rnrs records syntactic (6)))
 
   m4_define(«continuation_capture_implementation»,«r6rs»)
-  m4_include(pipchix/continuation-capture.m4)
+  m4_include(pipchix/general-purpose/continuation-capture.m4)
 
   )
 

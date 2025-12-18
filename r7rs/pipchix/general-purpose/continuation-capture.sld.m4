@@ -1,4 +1,3 @@
-#!r6rs
 ;;;
 ;;; Copyright © 2025 Barry Schwartz
 ;;;
@@ -25,22 +24,21 @@
 ;;;
 m4_include(pipchix/pipchix-includes.m4)
 
-(library (pipchix define-record-factory)
+(define-library (pipchix general-purpose continuation-capture)
 
-  (export m4_include(pipchix/define-record-factory.exports.m4))
+  (export m4_include(pipchix/general-purpose/continuation-capture.exports.m4))
 
-  (import (rnrs base (6))
-          (rnrs control (6))
-          (rnrs records syntactic (6)))
+  (import (scheme base))
 
-  define_err_r6rs
-  m4_define(«implementation_of_define_record_factory»,«r6rs»)
-  m4_include(pipchix/define-record-factory.m4)
+  (begin
 
-  )
+    m4_define(«continuation_capture_implementation»,«r7rs»)
+    m4_include(pipchix/general-purpose/continuation-capture.m4)
+
+    ))
 
 ;;; local variables:
 ;;; mode: scheme
-;;; geiser-scheme-implementation: chez
+;;; geiser-scheme-implementation: chibi
 ;;; coding: utf-8
 ;;; end:

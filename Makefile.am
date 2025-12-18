@@ -67,12 +67,12 @@ nodist_chickeneggs5pipchix_DATA += $(CHICKEN_5_EGGFILES)
 endif
 
 R6RS_SCHEME =
-R6RS_SCHEME += r6rs/pipchix/srfi-39.sls
+R6RS_SCHEME += r6rs/pipchix/general-purpose/srfi-39.sls
+R6RS_SCHEME += r6rs/pipchix/general-purpose/box.sls
+R6RS_SCHEME += r6rs/pipchix/general-purpose/continuation-capture.sls
+R6RS_SCHEME += r6rs/pipchix/general-purpose/define-record-factory.sls
 R6RS_SCHEME += r6rs/pipchix/if-syntax-match-ellipsis.sls
-R6RS_SCHEME += r6rs/pipchix/box.sls
-R6RS_SCHEME += r6rs/pipchix/continuation-capture.sls
 R6RS_SCHEME += r6rs/pipchix/generate-identifier.sls
-R6RS_SCHEME += r6rs/pipchix/define-record-factory.sls
 R6RS_SCHEME += r6rs/pipchix/essentials.sls
 R6RS_SCHEME += r6rs/pipchix/expressions.sls
 R6RS_SCHEME += r6rs/pipchix/macros.sls
@@ -93,11 +93,11 @@ nodist_r6rspipchix_DATA += $(R6RS_SCHEME)
 endif
 
 R7RS_SCHEME =
+R7RS_SCHEME += r7rs/pipchix/general-purpose/box.sld
+R7RS_SCHEME += r7rs/pipchix/general-purpose/continuation-capture.sld
+R7RS_SCHEME += r7rs/pipchix/general-purpose/define-record-factory.sld
 R7RS_SCHEME += r7rs/pipchix/if-syntax-match-ellipsis.sld
-R7RS_SCHEME += r7rs/pipchix/box.sld
-R7RS_SCHEME += r7rs/pipchix/continuation-capture.sld
 R7RS_SCHEME += r7rs/pipchix/generate-identifier.sld
-R7RS_SCHEME += r7rs/pipchix/define-record-factory.sld
 R7RS_SCHEME += r7rs/pipchix/essentials.sld
 R7RS_SCHEME += r7rs/pipchix/expressions.sld
 R7RS_SCHEME += r7rs/pipchix/macros.sld
@@ -154,18 +154,20 @@ CHICKEN_EGGSPEC_TOP = ' \
 
 CHICKEN_EGGSPEC_BOTTOM = ' \
    (components \
-    (extension pipchix.box) \
-    (extension pipchix.continuation-capture) \
-    (extension pipchix.define-record-factory) \
-    (extension pipchix.string-manipulation) \
+    (extension pipchix.general-purpose.box) \
+    (extension pipchix.general-purpose.continuation-capture) \
+    (extension pipchix.general-purpose.define-record-factory) \
+    (extension pipchix.string-manipulation \
+      (component-dependencies \
+       pipchix.general-purpose.box)) \
     (extension pipchix.if-syntax-match-ellipsis) \
     (extension pipchix.generate-identifier \
       (component-dependencies \
-       pipchix.continuation-capture \
+       pipchix.general-purpose.continuation-capture \
        pipchix.string-manipulation)) \
     (extension pipchix.abstract-syntax-tree \
       (component-dependencies \
-       pipchix.define-record-factory)) \
+       pipchix.general-purpose.define-record-factory)) \
     (extension pipchix.nix-embed \
       (component-dependencies \
        pipchix.abstract-syntax-tree)) \
@@ -214,6 +216,14 @@ $(builddir)/$(CHICKEN_5_EGGDIR)/pipchix.%.scm: \
 		$(M4_PREPROCESS) $(<) > $(@).tmp && \
 		mv $(@){.tmp,}
 
+$(builddir)/$(CHICKEN_5_EGGDIR)/pipchix.general-purpose.%.scm: \
+	                   $(srcdir)/r7rs/pipchix/general-purpose/%.sld.m4 \
+	                   $(srcdir)/pipchix/general-purpose/%.m4 \
+	                   $(srcdir)/pipchix/pipchix-includes.m4
+	$(call v,SCM.M4) $(MKDIR_P) $(@D) && \
+		$(M4_PREPROCESS) $(<) > $(@).tmp && \
+		mv $(@){.tmp,}
+
 $(builddir)/$(CHICKEN_5_EGGDIR)/pipchix.macros.%.scm: \
 	                   $(srcdir)/r7rs/pipchix/macros/%.sld.m4 \
 	                   $(srcdir)/pipchix/macros/%.m4 \
@@ -227,11 +237,11 @@ CHICKEN_5_EGGDIR = $(CHICKEN_5_EGGS)/pipchix
 CHICKEN_5_EGGFILES = \
   $(addprefix $(CHICKEN_5_EGGDIR)/, \
     pipchix.egg \
+    pipchix.general-purpose.box.scm \
+    pipchix.general-purpose.continuation-capture.scm \
+    pipchix.general-purpose.define-record-factory.scm \
     pipchix.if-syntax-match-ellipsis.scm \
-    pipchix.box.scm \
-    pipchix.continuation-capture.scm \
     pipchix.generate-identifier.scm \
-    pipchix.define-record-factory.scm \
     pipchix.string-manipulation.scm \
     pipchix.abstract-syntax-tree.scm \
     pipchix.nix-embed.scm \

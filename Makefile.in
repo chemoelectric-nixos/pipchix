@@ -517,11 +517,12 @@ nodist_r6rspipchix_DATA = $(am__append_2)
 nodist_r7rspipchix_DATA = $(am__append_3)
 nodist_chickeneggs5pipchix_DATA = $(am__append_1)
 M4_PREPROCESS = $(GNU_M4) -P -I '$(srcdir)'
-R6RS_SCHEME = r6rs/pipchix/srfi-39.sls \
-	r6rs/pipchix/if-syntax-match-ellipsis.sls r6rs/pipchix/box.sls \
-	r6rs/pipchix/continuation-capture.sls \
+R6RS_SCHEME = r6rs/pipchix/general-purpose/srfi-39.sls \
+	r6rs/pipchix/general-purpose/box.sls \
+	r6rs/pipchix/general-purpose/continuation-capture.sls \
+	r6rs/pipchix/general-purpose/define-record-factory.sls \
+	r6rs/pipchix/if-syntax-match-ellipsis.sls \
 	r6rs/pipchix/generate-identifier.sls \
-	r6rs/pipchix/define-record-factory.sls \
 	r6rs/pipchix/essentials.sls r6rs/pipchix/expressions.sls \
 	r6rs/pipchix/macros.sls r6rs/pipchix/nix-embed.sls \
 	r6rs/pipchix/nix-list.sls r6rs/pipchix/macros/nix-set.sls \
@@ -529,10 +530,11 @@ R6RS_SCHEME = r6rs/pipchix/srfi-39.sls \
 	r6rs/pipchix/macros/nix-lambda.sls \
 	r6rs/pipchix/abstract-syntax-tree.sls \
 	r6rs/pipchix/string-manipulation.sls
-R7RS_SCHEME = r7rs/pipchix/if-syntax-match-ellipsis.sld \
-	r7rs/pipchix/box.sld r7rs/pipchix/continuation-capture.sld \
+R7RS_SCHEME = r7rs/pipchix/general-purpose/box.sld \
+	r7rs/pipchix/general-purpose/continuation-capture.sld \
+	r7rs/pipchix/general-purpose/define-record-factory.sld \
+	r7rs/pipchix/if-syntax-match-ellipsis.sld \
 	r7rs/pipchix/generate-identifier.sld \
-	r7rs/pipchix/define-record-factory.sld \
 	r7rs/pipchix/essentials.sld r7rs/pipchix/expressions.sld \
 	r7rs/pipchix/macros.sld r7rs/pipchix/nix-embed.sld \
 	r7rs/pipchix/nix-list.sld r7rs/pipchix/macros/nix-set.sld \
@@ -560,18 +562,20 @@ CHICKEN_EGGSPEC_TOP = ' \
 
 CHICKEN_EGGSPEC_BOTTOM = ' \
    (components \
-    (extension pipchix.box) \
-    (extension pipchix.continuation-capture) \
-    (extension pipchix.define-record-factory) \
-    (extension pipchix.string-manipulation) \
+    (extension pipchix.general-purpose.box) \
+    (extension pipchix.general-purpose.continuation-capture) \
+    (extension pipchix.general-purpose.define-record-factory) \
+    (extension pipchix.string-manipulation \
+      (component-dependencies \
+       pipchix.general-purpose.box)) \
     (extension pipchix.if-syntax-match-ellipsis) \
     (extension pipchix.generate-identifier \
       (component-dependencies \
-       pipchix.continuation-capture \
+       pipchix.general-purpose.continuation-capture \
        pipchix.string-manipulation)) \
     (extension pipchix.abstract-syntax-tree \
       (component-dependencies \
-       pipchix.define-record-factory)) \
+       pipchix.general-purpose.define-record-factory)) \
     (extension pipchix.nix-embed \
       (component-dependencies \
        pipchix.abstract-syntax-tree)) \
@@ -615,11 +619,11 @@ CHICKEN_5_EGGDIR = $(CHICKEN_5_EGGS)/pipchix
 CHICKEN_5_EGGFILES = \
   $(addprefix $(CHICKEN_5_EGGDIR)/, \
     pipchix.egg \
+    pipchix.general-purpose.box.scm \
+    pipchix.general-purpose.continuation-capture.scm \
+    pipchix.general-purpose.define-record-factory.scm \
     pipchix.if-syntax-match-ellipsis.scm \
-    pipchix.box.scm \
-    pipchix.continuation-capture.scm \
     pipchix.generate-identifier.scm \
-    pipchix.define-record-factory.scm \
     pipchix.string-manipulation.scm \
     pipchix.abstract-syntax-tree.scm \
     pipchix.nix-embed.scm \
@@ -1306,6 +1310,14 @@ $(builddir)/r7rs/pipchix/%.sld: $(srcdir)/r7rs/pipchix/%.sld.m4 \
 $(builddir)/$(CHICKEN_5_EGGDIR)/pipchix.%.scm: \
 	                   $(srcdir)/r7rs/pipchix/%.sld.m4 \
 	                   $(srcdir)/pipchix/%.m4 \
+	                   $(srcdir)/pipchix/pipchix-includes.m4
+	$(call v,SCM.M4) $(MKDIR_P) $(@D) && \
+		$(M4_PREPROCESS) $(<) > $(@).tmp && \
+		mv $(@){.tmp,}
+
+$(builddir)/$(CHICKEN_5_EGGDIR)/pipchix.general-purpose.%.scm: \
+	                   $(srcdir)/r7rs/pipchix/general-purpose/%.sld.m4 \
+	                   $(srcdir)/pipchix/general-purpose/%.m4 \
 	                   $(srcdir)/pipchix/pipchix-includes.m4
 	$(call v,SCM.M4) $(MKDIR_P) $(@D) && \
 		$(M4_PREPROCESS) $(<) > $(@).tmp && \

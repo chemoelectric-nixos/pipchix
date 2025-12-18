@@ -9,7 +9,7 @@ cat > "${prog_scm}" <<EOF
 #!r6rs
 (import (rnrs (6))
         (pipchix essentials)
-        (pipchix continuation-capture)
+        (pipchix general-purpose continuation-capture)
         (pipchix abstract-syntax-tree)
         (pipchix nix-embed)
         (pipchix nix-list)

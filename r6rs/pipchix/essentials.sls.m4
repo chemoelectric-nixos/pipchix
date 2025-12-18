@@ -37,8 +37,7 @@ m4_include(pipchix/pipchix-includes.m4)
           (pipchix macros)
           (pipchix nix-embed)
           (pipchix nix-list)
-          (pipchix string-manipulation)
-          (pipchix srfi-39))
+          (pipchix string-manipulation))
 
   m4_include(pipchix/essentials.m4)
 
