@@ -33,9 +33,7 @@ m4_include(pipchix/pipchix-includes.m4)
 
   (cond-expand
     (chicken-5
-     (import (only (chicken base)
-                   gensym)
-             (chicken syntax)))
+     (import (chicken syntax)))
     (loko
      (import (rnrs syntax-case (6))))
     (else))
