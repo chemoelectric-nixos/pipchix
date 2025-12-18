@@ -32,7 +32,7 @@ m4_include(pipchix/pipchix-includes.m4)
 
   (import (rnrs base (6))
           (pipchix abstract-syntax-tree)
-          (pipchix if-syntax-match-ellipsis))
+          (pipchix general-purpose identifiers-syntax))
 
   m4_include(pipchix/macros/nix-lambda.m4)
 

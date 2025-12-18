@@ -81,7 +81,6 @@ m4_divert(-1)
 ;;; mode: scheme
 ;;; geiser-scheme-implementation: chibi
 ;;; coding: utf-8
-;;; eval: (put 'if-syntax-match-ellipsis 'scheme-indent-function 1)
 ;;; eval: (put 'nix-if 'scheme-indent-function 1)
 ;;; eval: (put 'nix-with 'scheme-indent-function 1)
 ;;; end:

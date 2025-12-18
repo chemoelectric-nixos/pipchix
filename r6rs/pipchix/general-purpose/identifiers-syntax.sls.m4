@@ -1,5 +1,4 @@
 #!r6rs
-;;;
 ;;; Copyright © 2025 Barry Schwartz
 ;;;
 ;;; This file is part of Pipchix.
@@ -23,23 +22,45 @@
 ;;; OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 ;;; WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ;;;
-m4_include(pipchix/pipchix-includes.m4)
 
-(library (pipchix if-syntax-match-ellipsis)
+(library (pipchix general-purpose identifiers-syntax)
 
-  (export if-syntax-match-ellipsis)
-  
+  (export stx-free-identifier=?
+          stx-bound-identifier=?
+          stx-ellipsis=?)
+
   (import (rnrs (6)))
 
-  (define-syntax if-syntax-match-ellipsis
+  (define-syntax stx-free-identifier=?
     (lambda (stx)
       (syntax-case stx ()
-        ((_ id then-clause else-clause)
+        ((_ ident1 ident2 if-true if-false)
          (syntax-case stx ()
-           ((_ id then-clause else-clause)
-            (if (free-identifier=? #'id #'(... ...))
-              #'then-clause
-              #'else-clause)))))))
+           ((_ ident1 ident2 if-true if-false)
+            (if (free-identifier=? (syntax ident1)
+                                   (syntax ident2))
+              (syntax if-true)
+              (syntax if-false))))))))
+
+  (define-syntax stx-bound-identifier=?
+    (lambda (stx)
+      (syntax-case stx ()
+        ((_ ident1 ident2 if-true if-false)
+         (syntax-case stx ()
+           ((_ ident1 ident2 if-true if-false)
+            (if (bound-identifier=? (syntax ident1)
+                                    (syntax ident2))
+              (syntax if-true)
+              (syntax if-false))))))))
+
+  (define-syntax stx-ellipsis=?
+    (lambda (stx)
+      (syntax-case stx ()
+        ((_ ident if-true if-false)
+         (if (free-identifier=? (syntax ident)
+                                (syntax (... ...)))
+           (syntax if-true)
+           (syntax if-false))))))
 
   )
 

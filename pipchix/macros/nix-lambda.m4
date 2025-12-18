@@ -53,7 +53,7 @@
                                 (scheme->nix val1)))))
 
     ((_ ((id) elem2 ...) clause (list args ...))
-     (let ((last-thing (if-syntax-match-ellipsis id
+     (let ((last-thing (stx-ellipsis=? id
                          (nix-lambda-ellipsis-argument)
                          (scheme->nix 'id))))
        (collect-args (elem2 ...) clause
@@ -79,7 +79,7 @@
                                                (scheme->nix val1)))))
 
     ((_ ((id) elem2 ...) clause (list args ...) (list attrs ...))
-     (let ((last-thing (if-syntax-match-ellipsis id
+     (let ((last-thing (stx-ellipsis=? id
                          (nix-lambda-ellipsis-argument)
                          (scheme->nix 'id))))
        (collect-args (elem2 ...) clause
@@ -94,6 +94,6 @@ m4_divert(-1)
 ;;; mode: scheme
 ;;; geiser-scheme-implementation: chibi
 ;;; coding: utf-8
-;;; eval: (put 'if-syntax-match-ellipsis 'scheme-indent-function 1)
+;;; eval: (put 'stx-ellipsis=? 'scheme-indent-function 1)
 ;;; end:
 m4_divert«»m4_dnl

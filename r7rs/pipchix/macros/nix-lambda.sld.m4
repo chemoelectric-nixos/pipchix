@@ -30,7 +30,7 @@ m4_include(pipchix/pipchix-includes.m4)
 
   (import (scheme base))
   (import (pipchix abstract-syntax-tree))
-  (import (pipchix if-syntax-match-ellipsis))
+  (import (pipchix general-purpose identifiers-syntax))
   
   (begin
 
