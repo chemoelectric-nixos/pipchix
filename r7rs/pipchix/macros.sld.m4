@@ -32,7 +32,9 @@ m4_include(pipchix/pipchix-includes.m4)
   (import (pipchix abstract-syntax-tree))
   (import (pipchix nix-list))
   (import (pipchix expressions))
-  (import (pipchix if-syntax-match-ellipsis))
+  (import (pipchix macros nix-set))
+  (import (pipchix macros nix-letrec))
+  (import (pipchix macros nix-lambda))
   
   (begin
 

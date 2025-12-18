@@ -35,8 +35,6 @@ m4_include(pipchix/pipchix-includes.m4)
   (import (pipchix macros))
   (import (pipchix nix-embed))
   (import (pipchix nix-list))
-  (import (pipchix nix-set))
-  (import (pipchix nix-letrec))
   (import (pipchix string-manipulation))
 
   (begin

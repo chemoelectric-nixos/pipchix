@@ -19,7 +19,6 @@ cat > "${prog_scm}" <<EOF
 (import (pipchix abstract-syntax-tree))
 (import (pipchix nix-embed))
 (import (pipchix nix-list))
-(import (pipchix nix-set))
 (output-nix-abstract-syntax-tree $1)
 (exit 0)
 EOF

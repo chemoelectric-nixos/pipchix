@@ -23,16 +23,14 @@
 ;;;
 m4_include(pipchix/pipchix-includes.m4)
 
-(library (pipchix nix-letrec)
+(library (pipchix macros nix-set)
 
-  (export m4_include(pipchix/nix-letrec.exports.m4))
+  (export m4_include(pipchix/macros/nix-set.exports.m4))
 
   (import (rnrs base (6))
-          (rnrs control (6))
-          (pipchix abstract-syntax-tree)
-          (pipchix generate-identifier))
+          (pipchix abstract-syntax-tree))
 
-  m4_include(pipchix/nix-letrec.m4)
+  m4_include(pipchix/macros/nix-set.m4)
 
   )
 

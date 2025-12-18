@@ -1,3 +1,4 @@
+#!r6rs
 ;;;
 ;;; Copyright © 2025 Barry Schwartz
 ;;;
@@ -16,7 +17,7 @@
 ;;; 
 ;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 ;;; EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-;;; MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+;;; MERCHANTABILITY, FITNESS FOR A PART/ICULAR PURPOSE AND
 ;;; NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
 ;;; LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 ;;; OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
@@ -24,23 +25,21 @@
 ;;;
 m4_include(pipchix/pipchix-includes.m4)
 
-(define-library (pipchix nix-letrec)
+(library (pipchix macros nix-lambda)
 
-  (export m4_include(pipchix/nix-letrec.exports.m4))
+  (export
+   m4_include(pipchix/macros/nix-lambda.exports.m4))
 
-  (import (scheme base))
-  (import (scheme cxr))
-  (import (pipchix abstract-syntax-tree))
-  (import (pipchix generate-identifier))
+  (import (rnrs base (6))
+          (pipchix abstract-syntax-tree)
+          (pipchix if-syntax-match-ellipsis))
 
-  (begin
+  m4_include(pipchix/macros/nix-lambda.m4)
 
-    m4_include(pipchix/nix-letrec.m4)
-
-    ))
+  )
 
 ;;; local variables:
 ;;; mode: scheme
-;;; geiser-scheme-implementation: chibi
+;;; geiser-scheme-implementation: chez
 ;;; coding: utf-8
 ;;; end:

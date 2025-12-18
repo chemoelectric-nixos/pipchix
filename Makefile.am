@@ -78,8 +78,9 @@ R6RS_SCHEME += r6rs/pipchix/expressions.sls
 R6RS_SCHEME += r6rs/pipchix/macros.sls
 R6RS_SCHEME += r6rs/pipchix/nix-embed.sls
 R6RS_SCHEME += r6rs/pipchix/nix-list.sls
-R6RS_SCHEME += r6rs/pipchix/nix-set.sls
-R6RS_SCHEME += r6rs/pipchix/nix-letrec.sls
+R6RS_SCHEME += r6rs/pipchix/macros/nix-set.sls
+R6RS_SCHEME += r6rs/pipchix/macros/nix-letrec.sls
+R6RS_SCHEME += r6rs/pipchix/macros/nix-lambda.sls
 R6RS_SCHEME += r6rs/pipchix/abstract-syntax-tree.sls
 R6RS_SCHEME += r6rs/pipchix/string-manipulation.sls
 EXTRA_DIST += $(R6RS_SCHEME:%=%.m4)
@@ -102,8 +103,9 @@ R7RS_SCHEME += r7rs/pipchix/expressions.sld
 R7RS_SCHEME += r7rs/pipchix/macros.sld
 R7RS_SCHEME += r7rs/pipchix/nix-embed.sld
 R7RS_SCHEME += r7rs/pipchix/nix-list.sld
-R7RS_SCHEME += r7rs/pipchix/nix-set.sld
-R7RS_SCHEME += r7rs/pipchix/nix-letrec.sld
+R7RS_SCHEME += r7rs/pipchix/macros/nix-set.sld
+R7RS_SCHEME += r7rs/pipchix/macros/nix-letrec.sld
+R7RS_SCHEME += r7rs/pipchix/macros/nix-lambda.sld
 R7RS_SCHEME += r7rs/pipchix/abstract-syntax-tree.sld
 R7RS_SCHEME += r7rs/pipchix/string-manipulation.sld
 EXTRA_DIST += $(R7RS_SCHEME:%=%.m4)
@@ -170,13 +172,17 @@ CHICKEN_EGGSPEC_BOTTOM = ' \
     (extension pipchix.nix-list \
       (component-dependencies \
        pipchix.abstract-syntax-tree)) \
-    (extension pipchix.nix-set \
+    (extension pipchix.macros.nix-set \
       (component-dependencies \
        pipchix.abstract-syntax-tree)) \
-    (extension pipchix.nix-letrec \
+    (extension pipchix.macros.nix-letrec \
       (component-dependencies \
        pipchix.abstract-syntax-tree \
        pipchix.generate-identifier)) \
+    (extension pipchix.macros.nix-lambda \
+      (component-dependencies \
+       pipchix.abstract-syntax-tree \
+       pipchix.if-syntax-match-ellipsis)) \
     (extension pipchix.expressions \
       (component-dependencies \
        pipchix.abstract-syntax-tree \
@@ -186,7 +192,9 @@ CHICKEN_EGGSPEC_BOTTOM = ' \
        pipchix.abstract-syntax-tree \
        pipchix.nix-list \
        pipchix.expressions \
-       pipchix.if-syntax-match-ellipsis)) \
+       pipchix.macros.nix-set \
+       pipchix.macros.nix-letrec \
+       pipchix.macros.nix-lambda)) \
     (extension pipchix.essentials \
       (component-dependencies \
        pipchix.string-manipulation \
@@ -194,15 +202,21 @@ CHICKEN_EGGSPEC_BOTTOM = ' \
        pipchix.expressions \
        pipchix.macros \
        pipchix.nix-embed \
-       pipchix.nix-list \
-       pipchix.nix-set \
-       pipchix.nix-letrec))))'
+       pipchix.nix-list))))'
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 $(builddir)/$(CHICKEN_5_EGGDIR)/pipchix.%.scm: \
 	                   $(srcdir)/r7rs/pipchix/%.sld.m4 \
 	                   $(srcdir)/pipchix/%.m4 \
+	                   $(srcdir)/pipchix/pipchix-includes.m4
+	$(call v,SCM.M4) $(MKDIR_P) $(@D) && \
+		$(M4_PREPROCESS) $(<) > $(@).tmp && \
+		mv $(@){.tmp,}
+
+$(builddir)/$(CHICKEN_5_EGGDIR)/pipchix.macros.%.scm: \
+	                   $(srcdir)/r7rs/pipchix/macros/%.sld.m4 \
+	                   $(srcdir)/pipchix/macros/%.m4 \
 	                   $(srcdir)/pipchix/pipchix-includes.m4
 	$(call v,SCM.M4) $(MKDIR_P) $(@D) && \
 		$(M4_PREPROCESS) $(<) > $(@).tmp && \
@@ -222,8 +236,9 @@ CHICKEN_5_EGGFILES = \
     pipchix.abstract-syntax-tree.scm \
     pipchix.nix-embed.scm \
     pipchix.nix-list.scm \
-    pipchix.nix-set.scm \
-    pipchix.nix-letrec.scm \
+    pipchix.macros.nix-set.scm \
+    pipchix.macros.nix-letrec.scm \
+    pipchix.macros.nix-lambda.scm \
     pipchix.essentials.scm \
     pipchix.expressions.scm \
     pipchix.macros.scm \

@@ -1,6 +1,7 @@
-#!r6rs
 ;;;
 ;;; Copyright © 2025 Barry Schwartz
+;;;
+;;; This file is part of Pipchix.
 ;;; 
 ;;; Permission is hereby granted, free of charge, to any person obtaining
 ;;; a copy of Pipchix and associated documentation files (the
@@ -23,19 +24,21 @@
 ;;;
 m4_include(pipchix/pipchix-includes.m4)
 
-(library (pipchix nix-set)
+(define-library (pipchix macros nix-set)
 
-  (export m4_include(pipchix/nix-set.exports.m4))
+  (export m4_include(pipchix/macros/nix-set.exports.m4))
 
-  (import (rnrs base (6))
-          (pipchix abstract-syntax-tree))
+  (import (scheme base))
+  (import (pipchix abstract-syntax-tree))
 
-  m4_include(pipchix/nix-set.m4)
+  (begin
 
-  )
+    m4_include(pipchix/macros/nix-set.m4)
+
+    ))
 
 ;;; local variables:
 ;;; mode: scheme
-;;; geiser-scheme-implementation: chez
+;;; geiser-scheme-implementation: chibi
 ;;; coding: utf-8
 ;;; end:
