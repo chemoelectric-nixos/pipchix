@@ -7,12 +7,13 @@ prog_scm=`@abs_top_builddir@/tempname`.scm
 
 cat > "${prog_scm}" <<EOF
 (import (rnrs (6))
-        (pipchix essentials)
+        (pipchix general-purpose syntax)
         (pipchix general-purpose continuation-capture)
         (pipchix abstract-syntax-tree)
         (pipchix nix-embed)
         (pipchix nix-list)
-        (pipchix string-manipulation))
+        (pipchix string-manipulation)
+        (pipchix essentials))
 (output-nix-abstract-syntax-tree $1)
 (exit 0)
 EOF

@@ -22,17 +22,43 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
-AT_SETUP([setup_message(nix-list)])
+AT_SETUP([setup_message(syntax)])
 
-AT_KEYWORDS([default_keywords nix-list])
+AT_KEYWORDS([default_keywords syntax])
 
-m4_define([sexpr],[(nix-list 1 2 3 4 5)])
+m4_define([sexpr],
+  [(let ((proc
+           (lambda ()
+             (define-syntax test
+               (syntax-rules ()
+                 ((_ x)
+                  (stx-number? x
+                    (scheme->nix "yes")
+                    (scheme->nix "no")))))
+             (nix-list (test 4) (test "4")))))
+     (proc))])
 check_unquoted([run_scheme 'sexpr'],[0],
-  [interpunct_nl([@<:@·(1)·(2)·(3)·(4)·(5)·@:>@·])],[])
+  [interpunct_nl([@<:@·("yes")·("no")·@:>@·])],[])
 
-m4_define([sexpr],[(list->nix-list (list "1" "2" "3" "4" "5"))])
+m4_define([sexpr],
+  [(let ((proc
+           (lambda ()
+             (define-syntax test
+               (syntax-rules ()
+                 ((_ x y z)
+                  (stx-number? y
+                    (scheme->nix x)
+                    (scheme->nix z)))))
+             (nix-list
+              (test (scheme->nix "yes")
+                    4
+                    (scheme->nix "no"))
+              (test (scheme->nix "yes")
+                    "4"
+                    (scheme->nix "no"))))))
+     (proc))])
 check_unquoted([run_scheme 'sexpr'],[0],
-  [interpunct_nl([@<:@·("1")·("2")·("3")·("4")·("5")·@:>@·])],[])
+  [interpunct_nl([@<:@·("yes")·("no")·@:>@·])],[])
 
 AT_CLEANUP
 

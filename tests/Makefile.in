@@ -320,9 +320,10 @@ top_srcdir = @top_srcdir@
 AUTOMAKE_OPTIONS = foreign
 EXTRA_DIST = testsuite.at $(srcdir)/package.m4 $(TESTSUITE) atlocal.in \
 	tests-template.at ast-nodes-preds-template.at \
-	base64-utf8-template.at continuation-capture-template.at \
-	escaped-utf8-template.at expressions-template.at \
-	macros-template.at nix-attributebinding-node-template.at \
+	base64-utf8-template.at syntax-template.at \
+	continuation-capture-template.at escaped-utf8-template.at \
+	expressions-template.at macros-template.at \
+	nix-attributebinding-node-template.at \
 	nix-attributepath-node-template.at \
 	nix-attributeset-node-template.at nix-lambda-node-template.at \
 	nix-letrec-node-template.at nix-data-node-template.at \
@@ -339,7 +340,7 @@ AUTOM4TE = $(SHELL) $(top_srcdir)/build-aux/missing --run autom4te
 AUTOTEST = $(AUTOM4TE) --language=autotest
 TESTSUITE = $(srcdir)/testsuite
 TESTSUITE_DEPS = $(srcdir)/atlocal.in $(srcdir)/package.m4 \
-	$(srcdir)/tests-template.at \
+	$(srcdir)/tests-template.at $(srcdir)/syntax-template.at \
 	$(srcdir)/continuation-capture-template.at \
 	$(srcdir)/shell-print-template.at \
 	$(srcdir)/base64-utf8-template.at \
@@ -593,7 +594,7 @@ uninstall-am:
 
 $(srcdir)/package.m4: $(top_srcdir)/configure.ac $(srcdir)/Makefile.am
 	$(AWK) \
-	  'BEGIN{print "# Signature of the current package."; \
+	  'BEGIN{printf "# Signature of the current package.\n"; \
 	         printf "m4_define([AT_PACKAGE_NAME],"; \
 	         printf "[$(PACKAGE_NAME)])\n"; \
 	         printf "m4_define([AT_PACKAGE_TARNAME],"; \

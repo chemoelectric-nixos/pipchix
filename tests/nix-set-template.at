@@ -22,7 +22,7 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
-AT_SETUP([setup_message((pipchix nix-set))])
+AT_SETUP([setup_message(nix-set)])
 
 AT_KEYWORDS([default_keywords nix-set nix-setrec])
 

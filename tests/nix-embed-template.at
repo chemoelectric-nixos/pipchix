@@ -22,7 +22,7 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
-AT_SETUP([setup_message((pipchix nix-embed))])
+AT_SETUP([setup_message(nix-embed)])
 
 AT_KEYWORDS([default_keywords nix-embed])
 

@@ -43,7 +43,7 @@ DISTCLEANFILES += atconfig
 
 $(srcdir)/package.m4: $(top_srcdir)/configure.ac $(srcdir)/Makefile.am
 	$(AWK) \
-	  'BEGIN{print "# Signature of the current package."; \
+	  'BEGIN{printf "# Signature of the current package.\n"; \
 	         printf "m4_define([AT_PACKAGE_NAME],"; \
 	         printf "[$(PACKAGE_NAME)])\n"; \
 	         printf "m4_define([AT_PACKAGE_TARNAME],"; \
@@ -68,6 +68,7 @@ EXTRA_DIST += atlocal.in
 EXTRA_DIST += tests-template.at
 EXTRA_DIST += ast-nodes-preds-template.at
 EXTRA_DIST += base64-utf8-template.at
+EXTRA_DIST += syntax-template.at
 EXTRA_DIST += continuation-capture-template.at
 EXTRA_DIST += escaped-utf8-template.at
 EXTRA_DIST += expressions-template.at
@@ -125,6 +126,7 @@ TESTSUITE_DEPS += $(srcdir)/atlocal.in
 TESTSUITE_DEPS += $(srcdir)/package.m4
 TESTSUITE_DEPS += $(srcdir)/tests-template.at
 
+TESTSUITE_DEPS += $(srcdir)/syntax-template.at
 TESTSUITE_DEPS += $(srcdir)/continuation-capture-template.at
 
 TESTSUITE_DEPS += $(srcdir)/shell-print-template.at

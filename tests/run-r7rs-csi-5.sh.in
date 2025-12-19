@@ -12,6 +12,7 @@ cat > "${prog_scm}" <<EOF
 (import (pipchix essentials))
 (import (pipchix expressions))
 (import (pipchix macros))
+(import (pipchix general-purpose syntax))
 (import (pipchix general-purpose continuation-capture))
 (import (pipchix string-manipulation))
 (import (pipchix generate-identifier))

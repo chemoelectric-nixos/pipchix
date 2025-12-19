@@ -8,12 +8,13 @@ prog_scm=`@abs_top_builddir@/tempname`.scm
 cat > "${prog_scm}" <<EOF
 (import (scheme base))
 (import (scheme write))
-(import (pipchix essentials))
+(import (pipchix general-purpose syntax))
 (import (pipchix general-purpose continuation-capture))
 (import (pipchix abstract-syntax-tree))
 (import (pipchix nix-embed))
 (import (pipchix nix-list))
 (import (pipchix string-manipulation))
+(import (pipchix essentials))
 (output-nix-abstract-syntax-tree $1)
 (exit 0)
 EOF
