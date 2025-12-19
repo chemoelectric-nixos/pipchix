@@ -71,6 +71,7 @@ simple_typetest_branch(exact-integer)
            (syntax if-false)))))))
 ;;;»)
 
+simple_typetest_branch(symbol)
 simple_typetest_branch(string)
 simple_typetest_branch(char)
 simple_typetest_branch(vector)

@@ -206,6 +206,26 @@ m4_define([sexpr],
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
+                  (stx-symbol? y
+                    (scheme->nix x)
+                    (scheme->nix z)))))
+             (nix-list
+              (test (scheme->nix "yes")
+                    special-guest
+                    (scheme->nix "no"))
+              (test (scheme->nix "yes")
+                    "4"
+                    (scheme->nix "no"))))))
+     (proc))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·("yes")·("no")·@:>@·])],[])
+
+m4_define([sexpr],
+  [(let ((proc
+           (lambda ()
+             (define-syntax test
+               (syntax-rules ()
+                 ((_ x y z)
                   (stx-string? y
                     (scheme->nix x)
                     (scheme->nix z)))))

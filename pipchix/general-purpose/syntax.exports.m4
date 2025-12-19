@@ -10,6 +10,7 @@ stx-finite?
 stx-infinite?
 stx-nan?
 
+stx-symbol?
 stx-string?
 stx-char?
 stx-vector?
