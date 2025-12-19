@@ -31,6 +31,8 @@ m4_include(pipchix/pipchix-includes.m4)
 
   (import (rnrs (6)))
 
+  ;; m4_define(«scheme_standard»,«r6rs»)
+
   m4_include(pipchix/general-purpose/syntax.m4)
 
   )

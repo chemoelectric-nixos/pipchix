@@ -30,6 +30,7 @@ m4_include(pipchix/pipchix-includes.m4)
 
   (import (scheme base))
   (import (scheme cxr))
+  (import (scheme inexact))
 
   (cond-expand
     (chicken-5 (import (only (chicken syntax) er-macro-transformer)))
@@ -41,6 +42,8 @@ m4_include(pipchix/pipchix-includes.m4)
     (else))
 
   (begin
+
+    ;; m4_define(«scheme_standard»,«r7rs»)
 
     (cond-expand
       (chicken-5

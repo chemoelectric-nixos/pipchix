@@ -23,23 +23,58 @@
 ;;; WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ;;;
 
+;;;m4_divert(-1)
 ;;;m4_ifelse(general_macros,«er-macro-transformer»,«
-(define-syntax stx-number?
+;;;m4_define(«simple_typetest_branch»,«
+(define-syntax stx-$1?
   (er-macro-transformer
    (lambda (form rename compare)
      (let ((args (cdr form)))
-       (if (number? (car args))
+       (if ($1? (car args))
          (cadr args)
          (caddr args))))))
+;;;»)
 ;;;»,«
-(define-syntax stx-number?
+;;;m4_define(«simple_typetest_branch»,«
+(define-syntax stx-$1?
   (lambda (stx)
     (syntax-case stx ()
       ((_ x if-true if-false)
-       (if (number? (syntax->datum (syntax x)))
+       (if ($1? (syntax->datum (syntax x)))
          (syntax if-true)
          (syntax if-false))))))
 ;;;»)
+;;;»)
+;;;;;;m4_divert
+
+simple_typetest_branch(number)
+simple_typetest_branch(exact)
+simple_typetest_branch(inexact)
+simple_typetest_branch(integer)
+simple_typetest_branch(rational)
+simple_typetest_branch(real)
+simple_typetest_branch(complex)
+simple_typetest_branch(finite)
+simple_typetest_branch(infinite)
+simple_typetest_branch(nan)
+
+;;;m4_ifelse(scheme_standard,«r7rs»,«
+simple_typetest_branch(exact-integer)
+;;;»,«
+(define-syntax stx-exact-integer?
+  (lambda (stx)
+    (syntax-case stx ()
+      ((_ x if-true if-false)
+       (let ((x^ (syntax->datum (syntax x))))
+         (if (and (integer? x^) (exact? x^))
+           (syntax if-true)
+           (syntax if-false)))))))
+;;;»)
+
+simple_typetest_branch(string)
+simple_typetest_branch(char)
+simple_typetest_branch(vector)
+simple_typetest_branch(bytevector)
 
 m4_divert(-1)
 ;;; local variables:
@@ -47,6 +82,7 @@ m4_divert(-1)
 ;;; geiser-scheme-implementation: chibi
 ;;; coding: utf-8
 ;;; eval: (put 'with-syntax 'scheme-indent-function 1)
+;;; eval: (put 'stx-integer? 'scheme-indent-function 1)
+;;; eval: (put 'stx-exact? 'scheme-indent-function 1)
 ;;; end:
 m4_divert«»m4_dnl
-

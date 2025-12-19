@@ -60,6 +60,227 @@ m4_define([sexpr],
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([@<:@·("yes")·("no")·@:>@·])],[])
 
+m4_define([sexpr],
+  [(let ((proc
+           (lambda ()
+             (define-syntax test
+               (syntax-rules ()
+                 ((_ x y z)
+                  (stx-exact? y
+                    (scheme->nix x)
+                    (scheme->nix z)))))
+             (nix-list
+              (test (scheme->nix "yes")
+                    4
+                    (scheme->nix "no"))
+              (test (scheme->nix "yes")
+                    4.0
+                    (scheme->nix "no"))))))
+     (proc))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·("yes")·("no")·@:>@·])],[])
+
+m4_define([sexpr],
+  [(let ((proc
+           (lambda ()
+             (define-syntax test
+               (syntax-rules ()
+                 ((_ x y z)
+                  (stx-inexact? y
+                    (scheme->nix x)
+                    (scheme->nix z)))))
+             (nix-list
+              (test (scheme->nix "yes")
+                    4
+                    (scheme->nix "no"))
+              (test (scheme->nix "yes")
+                    4.0
+                    (scheme->nix "no"))))))
+     (proc))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·("no")·("yes")·@:>@·])],[])
+
+m4_define([sexpr],
+  [(let ((proc
+           (lambda ()
+             (define-syntax test
+               (syntax-rules ()
+                 ((_ x y z)
+                  (stx-exact-integer? y
+                    (scheme->nix x)
+                    (scheme->nix z)))))
+             (nix-list
+              (test (scheme->nix "yes")
+                    4
+                    (scheme->nix "no"))
+              (test (scheme->nix "yes")
+                    4.0
+                    (scheme->nix "no"))))))
+     (proc))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·("yes")·("no")·@:>@·])],[])
+
+m4_define([sexpr],
+  [(let ((proc
+           (lambda ()
+             (define-syntax test
+               (syntax-rules ()
+                 ((_ x y z)
+                  (stx-integer? y
+                    (scheme->nix x)
+                    (scheme->nix z)))))
+             (nix-list
+              (test (scheme->nix "yes")
+                    4.0
+                    (scheme->nix "no"))
+              (test (scheme->nix "yes")
+                    4.1
+                    (scheme->nix "no"))))))
+     (proc))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·("yes")·("no")·@:>@·])],[])
+
+m4_define([sexpr],
+  [(let ((proc
+           (lambda ()
+             (define-syntax test
+               (syntax-rules ()
+                 ((_ x y z)
+                  (stx-rational? y
+                    (scheme->nix x)
+                    (scheme->nix z)))))
+             (nix-list
+              (test (scheme->nix "yes")
+                    4
+                    (scheme->nix "no"))
+              (test (scheme->nix "yes")
+                    +inf.0
+                    (scheme->nix "no"))))))
+     (proc))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·("yes")·("no")·@:>@·])],[])
+
+m4_define([sexpr],
+  [(let ((proc
+           (lambda ()
+             (define-syntax test
+               (syntax-rules ()
+                 ((_ x y z)
+                  (stx-real? y
+                    (scheme->nix x)
+                    (scheme->nix z)))))
+             (nix-list
+              (test (scheme->nix "yes")
+                    4
+                    (scheme->nix "no"))
+              (test (scheme->nix "yes")
+                    +i
+                    (scheme->nix "no"))))))
+     (proc))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·("yes")·("no")·@:>@·])],[])
+
+m4_define([sexpr],
+  [(let ((proc
+           (lambda ()
+             (define-syntax test
+               (syntax-rules ()
+                 ((_ x y z)
+                  (stx-complex? y
+                    (scheme->nix x)
+                    (scheme->nix z)))))
+             (nix-list
+              (test (scheme->nix "yes")
+                    4
+                    (scheme->nix "no"))
+              (test (scheme->nix "yes")
+                    +i
+                    (scheme->nix "no"))))))
+     (proc))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·("yes")·("yes")·@:>@·])],[])
+
+m4_define([sexpr],
+  [(let ((proc
+           (lambda ()
+             (define-syntax test
+               (syntax-rules ()
+                 ((_ x y z)
+                  (stx-string? y
+                    (scheme->nix x)
+                    (scheme->nix z)))))
+             (nix-list
+              (test (scheme->nix "yes")
+                    4
+                    (scheme->nix "no"))
+              (test (scheme->nix "yes")
+                    "4"
+                    (scheme->nix "no"))))))
+     (proc))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·("no")·("yes")·@:>@·])],[])
+
+m4_define([sexpr],
+  [(let ((proc
+           (lambda ()
+             (define-syntax test
+               (syntax-rules ()
+                 ((_ x y z)
+                  (stx-char? y
+                    (scheme->nix x)
+                    (scheme->nix z)))))
+             (nix-list
+              (test (scheme->nix "yes")
+                    @%:@\backspace
+                    (scheme->nix "no"))
+              (test (scheme->nix "yes")
+                    "4"
+                    (scheme->nix "no"))))))
+     (proc))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·("yes")·("no")·@:>@·])],[])
+
+m4_define([sexpr],
+  [(let ((proc
+           (lambda ()
+             (define-syntax test
+               (syntax-rules ()
+                 ((_ x y z)
+                  (stx-vector? y
+                    (scheme->nix x)
+                    (scheme->nix z)))))
+             (nix-list
+              (test (scheme->nix "yes")
+                    @%:@\backspace
+                    (scheme->nix "no"))
+              (test (scheme->nix "yes")
+                    @%:@(1 2 3)
+                    (scheme->nix "no"))))))
+     (proc))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·("no")·("yes")·@:>@·])],[])
+
+m4_define([sexpr],
+  [(let ((proc
+           (lambda ()
+             (define-syntax test
+               (syntax-rules ()
+                 ((_ x y z)
+                  (stx-bytevector? y
+                    (scheme->nix x)
+                    (scheme->nix z)))))
+             (nix-list
+              (test (scheme->nix "yes")
+                    m4_case(rnrs_version,6,@%:@vu8(1 2 3),
+                                         7,@%:@u8(1 2 3))
+                    (scheme->nix "no"))
+              (test (scheme->nix "yes")
+                    @%:@(1 2 3)
+                    (scheme->nix "no"))))))
+     (proc))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·("yes")·("no")·@:>@·])],[])
+
 AT_CLEANUP
 
 # local variables:
