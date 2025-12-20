@@ -389,6 +389,56 @@ m4_define([sexpr],
            (lambda ()
              (define-syntax test
                (syntax-rules ()
+                 ((_ (x . y))
+                  (stx-car (x . y)))))
+             (scheme->nix (test (123 . 456))))))
+     (proc))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(123)·])],[])
+
+m4_define([sexpr],
+  [(let ((proc
+           (lambda ()
+             (define-syntax test
+               (syntax-rules ()
+                 ((_ (x . y))
+                  (stx-cdr (x . y)))))
+             (scheme->nix (test (123 . 456))))))
+     (proc))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(456)·])],[])
+
+m4_foreach([number],[1,2,3,4,5,6,7,8,9,10],[
+m4_pushdef([ordinal],m4_case(number,
+[1],[first],
+[2],[second],
+[3],[third],
+[4],[fourth],
+[5],[fifth],
+[6],[sixth],
+[7],[seventh],
+[8],[eighth],
+[9],[ninth],
+[10],[tenth]))
+m4_define([sexpr],
+  [(let ((proc
+           (lambda ()
+             (define-syntax test
+               (syntax-rules ()
+                 ((_ (x ...))
+                  (stx-ordinal (x ...)))))
+             (scheme->nix (test (1 2 3 4 5 6 7 8 9 10))))))
+     (proc))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(number)·])],[])
+m4_popdef([ordinal])
+])
+
+m4_define([sexpr],
+  [(let ((proc
+           (lambda ()
+             (define-syntax test
+               (syntax-rules ()
                  ((_ (x ...))
                   (stx-reverse (x ...)))))
              (scheme->nix (test (4 3 2 1 list))))))

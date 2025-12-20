@@ -121,24 +121,73 @@ simple_typetest_branch(null)
 simple_typetest_branch(pair)
 simple_typetest_branch(list)
 
+;;;m4_divert(-1)
 ;;;m4_ifelse(general_macros,«er-macro-transformer»,«
-(define-syntax stx-reverse
+;;;m4_define(«one_argument_procedure»,«
+(define-syntax stx-$1
   (er-macro-transformer
    (lambda (form rename compare)
      (let ((args (cdr form)))
        (if (and (pair? args)
-                (null? (cdr args))
-                (list? (car args)))
-         (reverse (car args))
+                (null? (cdr args)))
+         ($1 (car args))
          '(if #f #f)))))) ;; <unspecified>
+;;;»)
 ;;;»,«
-(define-syntax stx-reverse
+;;;m4_define(«one_argument_procedure»,«
+(define-syntax stx-$1
   (lambda (stx)
     (syntax-case stx ()
-      ((¶ (x ...))
-       (let ((x^ (syntax->datum (syntax (x ...)))))
-         (datum->syntax (syntax ¶) (reverse x^)))))))
+      ((¶ x)
+       (let ((x^ (syntax->datum (syntax x))))
+         (datum->syntax (syntax ¶) ($1 x^)))))))
 ;;;»)
+;;;»)
+;;;m4_divert
+
+one_argument_procedure(car)
+one_argument_procedure(cdr)
+one_argument_procedure(caar)
+one_argument_procedure(cadr)
+one_argument_procedure(cdar)
+one_argument_procedure(cddr)
+one_argument_procedure(caaaar)
+one_argument_procedure(caaar)
+one_argument_procedure(caaddr)
+one_argument_procedure(cadaar)
+one_argument_procedure(cadar)
+one_argument_procedure(cadddr)
+one_argument_procedure(cdaaar)
+one_argument_procedure(cdaar)
+one_argument_procedure(cdaddr)
+one_argument_procedure(cddaar)
+one_argument_procedure(cddar)
+one_argument_procedure(cddddr)
+one_argument_procedure(caaadr)
+one_argument_procedure(caadar)
+one_argument_procedure(caadr)
+one_argument_procedure(cadadr)
+one_argument_procedure(caddar)
+one_argument_procedure(caddr)
+one_argument_procedure(cdaadr)
+one_argument_procedure(cdadar)
+one_argument_procedure(cdadr)
+one_argument_procedure(cddadr)
+one_argument_procedure(cdddar)
+one_argument_procedure(cdddr)
+
+(define-syntax stx-first (syntax-rules () ((_ (a . ω)) a)))
+(define-syntax stx-second (syntax-rules () ((_ (a b . ω)) b)))
+(define-syntax stx-third (syntax-rules () ((_ (a b c . ω)) c)))
+(define-syntax stx-fourth (syntax-rules () ((_ (a b c d . ω)) d)))
+(define-syntax stx-fifth (syntax-rules () ((_ (a b c d e . ω)) e)))
+(define-syntax stx-sixth (syntax-rules () ((_ (a b c d e f . ω)) f)))
+(define-syntax stx-seventh (syntax-rules () ((_ (a b c d e f g . ω)) g)))
+(define-syntax stx-eighth (syntax-rules () ((_ (a b c d e f g h . ω)) h)))
+(define-syntax stx-ninth (syntax-rules () ((_ (a b c d e f g h i . ω)) i)))
+(define-syntax stx-tenth (syntax-rules () ((_ (a b c d e f g h i j . ω)) j)))
+
+one_argument_procedure(reverse)
 
 m4_divert(-1)
 ;;; local variables:
