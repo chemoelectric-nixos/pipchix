@@ -23,6 +23,8 @@
 ;;; WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ;;;
 
+;;;m4_define(«__unspecified__»,«(if #f #f) #| #<unspecified> |# »)
+
 ;;;m4_ifelse(scheme_standard,«r6rs»,«
 ;;;m4_define(«stx_satisfied_environment»,(environment '(rnrs)))
 ;;;»,scheme_standard,«r5rs»,«
@@ -42,7 +44,7 @@
          (cadr args)
          (if (pair? (cddr args))
            (caddr args)
-           '(if #f #f))))))) ;; <unspecified>
+           '__unspecified__))))))
 ;;;»,«
 (define-syntax stx-satisfied?
   (lambda (stx)
@@ -58,7 +60,7 @@
                          stx_satisfied_environment)))
          (if (pred (syntax->datum (syntax x)))
            (syntax if-true)
-           (syntax (if #f #f)))))))) ;; <unspecified>
+           (syntax __unspecified__)))))))
 ;;;»)
 
 ;;;m4_divert(-1)
@@ -72,7 +74,7 @@
          (cadr args)
          (if (pair? (cddr args))
            (caddr args)
-           '(if #f #f))))))) ;; <unspecified>
+           '__unspecified__))))))
 ;;;»)
 ;;;»,«
 ;;;m4_define(«simple_predicate_branch»,«
@@ -86,7 +88,7 @@
       ((_ x if-true)
        (if ($2 (syntax->datum (syntax x)))
          (syntax if-true)
-         (syntax (if #f #f))))))) ;; <unspecified>
+         (syntax __unspecified__))))))
 ;;;»)
 ;;;»)
 ;;;m4_define(«simple_typetest_branch»,simple_predicate_branch(stx-$1?,$1?))
@@ -131,7 +133,7 @@ simple_typetest_branch(list)
        (if (and (pair? args)
                 (null? (cdr args)))
          ($1 (car args))
-         '(if #f #f)))))) ;; <unspecified>
+         '__unspecified__)))))
 ;;;»)
 ;;;»,«
 ;;;m4_define(«one_argument_procedure»,«
