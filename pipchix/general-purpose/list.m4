@@ -24,6 +24,12 @@
 ;;; WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ;;;
 
+;;;;;;;; FIXME:
+;;;;;;;; FIXME:
+;;;;;;;; FIXME: REPLACE THE :optional ARGUMENTS WITH case-lambda
+;;;;;;;; FIXME:
+;;;;;;;; FIXME:
+
 ;;;m4_ifelse(srfi1_code_is_needed,«yes»,«
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
