@@ -1,4 +1,3 @@
-#!r6rs
 ;;;
 ;;; Copyright © 2025 Barry Schwartz
 ;;;
@@ -25,22 +24,35 @@
 ;;;
 m4_include(pipchix/pipchix-includes.m4)
 
-(library (pipchix general-purpose syntax)
+(define-library (pipchix general-purpose list)
 
-  (export m4_include(pipchix/general-purpose/syntax.exports.m4))
+  (export m4_include(pipchix/general-purpose/list.exports.m4))
 
-  (import (except (rnrs (6)) fold-left fold-right)
-          (for (rnrs eval (6)) expand)
-          (for (pipchix general-purpose list) expand))
+  (import (scheme base))
+  (import (scheme cxr))
+  (cond-expand
+    (loko
+     (import (scheme case-lambda)))
+    ((or chicken-5 guile)
+     (import (srfi 1)))
+    (else
+     (import (scheme list))))
 
-  ;; m4_define(«scheme_standard»,«r6rs»)
+  (begin
 
-  m4_include(pipchix/general-purpose/syntax.m4)
+    (cond-expand
+      (loko
+       define_err_r7rs
+       ;;m4_pushdef(srfi1_code_is_needed,«yes»)
+       m4_include(pipchix/general-purpose/list.m4)
+       ;;m4_popdef(srfi1_code_is_needed)
+       )
+      (else))
 
-  )
+    ))
 
 ;;; local variables:
 ;;; mode: scheme
-;;; geiser-scheme-implementation: chez
+;;; geiser-scheme-implementation: chibi
 ;;; coding: utf-8
 ;;; end:

@@ -23,7 +23,7 @@ env LC_ALL="@TEST_LOCALE@" \
     LANG="@TEST_LOCALE@" \
     @CHEZ_SCHEME@ \
     --libdirs "@abs_top_builddir@/r6rs:" \
-    --program "${prog_scm}"
+    --program "${prog_scm}" 2>/dev/null
 
 rm "${prog_scm}"
 

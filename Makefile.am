@@ -70,6 +70,7 @@ R6RS_SCHEME =
 R6RS_SCHEME += r6rs/pipchix/general-purpose/srfi-39.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/box.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/continuation-capture.sls
+R6RS_SCHEME += r6rs/pipchix/general-purpose/list.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/define-record-factory.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/syntax.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/identifiers-syntax.sls
@@ -96,6 +97,7 @@ endif
 R7RS_SCHEME =
 R7RS_SCHEME += r7rs/pipchix/general-purpose/box.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/continuation-capture.sld
+R7RS_SCHEME += r7rs/pipchix/general-purpose/list.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/define-record-factory.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/syntax.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/identifiers-syntax.sld
@@ -158,8 +160,11 @@ CHICKEN_EGGSPEC_BOTTOM = ' \
    (components \
     (extension pipchix.general-purpose.box) \
     (extension pipchix.general-purpose.continuation-capture) \
+    (extension pipchix.general-purpose.list) \
     (extension pipchix.general-purpose.define-record-factory) \
-    (extension pipchix.general-purpose.syntax) \
+    (extension pipchix.general-purpose.syntax \
+      (component-dependencies \
+       pipchix.general-purpose.list)) \
     (extension pipchix.general-purpose.identifiers-syntax) \
     (extension pipchix.string-manipulation \
       (component-dependencies \
@@ -242,6 +247,7 @@ CHICKEN_5_EGGFILES = \
     pipchix.egg \
     pipchix.general-purpose.box.scm \
     pipchix.general-purpose.continuation-capture.scm \
+    pipchix.general-purpose.list.scm \
     pipchix.general-purpose.define-record-factory.scm \
     pipchix.general-purpose.syntax.scm \
     pipchix.general-purpose.identifiers-syntax.scm \

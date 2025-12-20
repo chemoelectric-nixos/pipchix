@@ -25,17 +25,20 @@
 ;;;
 m4_include(pipchix/pipchix-includes.m4)
 
-(library (pipchix general-purpose syntax)
+(library (pipchix general-purpose list)
 
-  (export m4_include(pipchix/general-purpose/syntax.exports.m4))
+  (export m4_include(pipchix/general-purpose/list.exports.m4))
 
-  (import (except (rnrs (6)) fold-left fold-right)
-          (for (rnrs eval (6)) expand)
-          (for (pipchix general-purpose list) expand))
+  (import (except (rnrs (6))
+                  fold-left fold-right)
+          (rnrs mutable-pairs (6)))
 
-  ;; m4_define(«scheme_standard»,«r6rs»)
-
-  m4_include(pipchix/general-purpose/syntax.m4)
+  define_err_r6rs
+  ;;m4_define(«srfi1_code_is_needed»,«yes»)
+  ;;m4_define(«r6rs»,«yes»)
+  ;;m4_define(«list_copy_needed»,«yes»)
+  ;;m4_define(«make_list_needed»,«yes»)
+  m4_include(pipchix/general-purpose/list.m4)
 
   )
 

@@ -33,6 +33,7 @@ m4_include(pipchix/pipchix-includes.m4)
   (import (scheme eval))
   (import (scheme repl))
   (import (scheme inexact))
+  (import (pipchix general-purpose list))
 
   (cond-expand
     (chicken-5 (import (only (chicken syntax) er-macro-transformer)))
