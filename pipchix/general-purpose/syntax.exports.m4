@@ -1,5 +1,6 @@
 stx-satisfied?
 
+stx-boolean?
 stx-number?
 stx-exact?
 stx-inexact?
@@ -64,4 +65,7 @@ stx-eighth
 stx-ninth
 stx-tenth
 
+stx-last
+stx-last-pair
+stx-length
 stx-reverse

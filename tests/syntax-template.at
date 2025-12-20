@@ -46,6 +46,26 @@ m4_define([sexpr],
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
+                  (stx-boolean? y
+                    (scheme->nix x)
+                    (scheme->nix z)))))
+             (nix-list
+              (test (scheme->nix "yes")
+                    4
+                    (scheme->nix "no"))
+              (test (scheme->nix "yes")
+                    @%:@f
+                    (scheme->nix "no"))))))
+     (proc))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·("no")·("yes")·@:>@·])],[])
+
+m4_define([sexpr],
+  [(let ((proc
+           (lambda ()
+             (define-syntax test
+               (syntax-rules ()
+                 ((_ x y z)
                   (stx-number? y
                     (scheme->nix x)
                     (scheme->nix z)))))
@@ -408,7 +428,7 @@ m4_define([sexpr],
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([(456)·])],[])
 
-m4_foreach([number],[1,2,3,4,5,6,7,8,9,10],[
+m4_foreach([number],[1,2,3,4,5,6,7,8,9,10,10],[
 m4_pushdef([ordinal],m4_case(number,
 [1],[first],
 [2],[second],
@@ -419,7 +439,8 @@ m4_pushdef([ordinal],m4_case(number,
 [7],[seventh],
 [8],[eighth],
 [9],[ninth],
-[10],[tenth]))
+[10],[tenth],
+[10],[last]))
 m4_define([sexpr],
   [(let ((proc
            (lambda ()
@@ -433,6 +454,42 @@ check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([(number)·])],[])
 m4_popdef([ordinal])
 ])
+
+dnl m4_define([sexpr],
+dnl   [(let ((proc
+dnl            (lambda ()
+dnl              (define-syntax test
+dnl                (syntax-rules ()
+dnl                  ((_ x)
+dnl                   (stx-car (stx-last-pair x)))))
+dnl              (scheme->nix (test (1 2 3 4 5 . 6))))))
+dnl      (proc))])
+dnl check_unquoted([run_scheme 'sexpr'],[0],
+dnl   [interpunct_nl([(5)·])],[])
+dnl 
+dnl m4_define([sexpr],
+dnl   [(let ((proc
+dnl            (lambda ()
+dnl              (define-syntax test
+dnl                (syntax-rules ()
+dnl                  ((_ x)
+dnl                   (stx-cdr (stx-last-pair x)))))
+dnl              (scheme->nix (test (1 2 3 4 5 . 6))))))
+dnl      (proc))])
+dnl check_unquoted([run_scheme 'sexpr'],[0],
+dnl   [interpunct_nl([(6)·])],[])
+
+m4_define([sexpr],
+  [(let ((proc
+           (lambda ()
+             (define-syntax test
+               (syntax-rules ()
+                 ((_ (x ...))
+                  (stx-length (x ...)))))
+             (scheme->nix (test (1 2 3 4 5))))))
+     (proc))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(5)·])],[])
 
 m4_define([sexpr],
   [(let ((proc

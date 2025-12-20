@@ -94,6 +94,7 @@
 ;;;m4_define(«simple_typetest_branch»,simple_predicate_branch(stx-$1?,$1?))
 ;;;;;;m4_divert
 
+simple_typetest_branch(boolean)
 simple_typetest_branch(number)
 simple_typetest_branch(exact)
 simple_typetest_branch(inexact)
@@ -144,6 +145,15 @@ simple_typetest_branch(list)
        (let ((x^ (syntax->datum (syntax x))))
          (datum->syntax (syntax ¶) ($1 x^)))))))
 ;;;»)
+;;;m4_define(«two_argument_procedure»,«
+(define-syntax stx-$1
+  (lambda (stx)
+    (syntax-case stx ()
+      ((¶ x y)
+       (let ((x^ (syntax->datum (syntax x)))
+             (y^ (syntax->datum (syntax y))))
+         (datum->syntax (syntax ¶) ($1 x^ y^)))))))
+;;;»)
 ;;;»)
 ;;;m4_divert
 
@@ -189,6 +199,9 @@ one_argument_procedure(cdddr)
 (define-syntax stx-ninth (syntax-rules () ((_ (a b c d e f g h i . ω)) i)))
 (define-syntax stx-tenth (syntax-rules () ((_ (a b c d e f g h i j . ω)) j)))
 
+one_argument_procedure(last)
+one_argument_procedure(last-pair)
+one_argument_procedure(length)
 one_argument_procedure(reverse)
 
 m4_divert(-1)
