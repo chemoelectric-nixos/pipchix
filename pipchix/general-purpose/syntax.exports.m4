@@ -1,3 +1,5 @@
+stx-satisfied?
+
 stx-number?
 stx-exact?
 stx-inexact?
@@ -15,3 +17,7 @@ stx-string?
 stx-char?
 stx-vector?
 stx-bytevector?
+
+stx-null?
+stx-pair?
+stx-list?

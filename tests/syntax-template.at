@@ -301,6 +301,89 @@ m4_define([sexpr],
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([@<:@·("yes")·("no")·@:>@·])],[])
 
+m4_define([sexpr],
+  [(let ((proc
+           (lambda ()
+             (define-syntax test
+               (syntax-rules ()
+                 ((_ x y z)
+                  (stx-null? y
+                    (scheme->nix x)
+                    (scheme->nix z)))))
+             (nix-list
+              (test (scheme->nix "yes")
+                    ()
+                    (scheme->nix "no"))
+              (test (scheme->nix "yes")
+                    (1 2 3)
+                    (scheme->nix "no"))))))
+     (proc))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·("yes")·("no")·@:>@·])],[])
+
+m4_define([sexpr],
+  [(let ((proc
+           (lambda ()
+             (define-syntax test
+               (syntax-rules ()
+                 ((_ x y z)
+                  (stx-pair? y
+                    (scheme->nix x)
+                    (scheme->nix z)))))
+             (nix-list
+              (test (scheme->nix "yes")
+                    ()
+                    (scheme->nix "no"))
+              (test (scheme->nix "yes")
+                    (1 . 2)
+                    (scheme->nix "no"))))))
+     (proc))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·("no")·("yes")·@:>@·])],[])
+
+m4_define([sexpr],
+  [(let ((proc
+           (lambda ()
+             (define-syntax test
+               (syntax-rules ()
+                 ((_ x y z)
+                  (stx-list? y
+                    (scheme->nix x)
+                    (scheme->nix z)))))
+             (nix-list
+              (test (scheme->nix "yes")
+                    (1 2)
+                    (scheme->nix "no"))
+              (test (scheme->nix "yes")
+                    (1 . 2)
+                    (scheme->nix "no"))))))
+     (proc))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·("yes")·("no")·@:>@·])],[])
+
+m4_define([sexpr],
+  [(let ((proc
+           (lambda ()
+             (define-syntax test
+               (syntax-rules ()
+                 ((_ x y z)
+                  (stx-satisfied? ((lambda (a)
+                                     (and (list? a)
+                                          (= (length a) 2)))
+                                   y)
+                    (scheme->nix x)
+                    (scheme->nix z)))))
+             (nix-list
+              (test (scheme->nix "yes")
+                    (1 2)
+                    (scheme->nix "no"))
+              (test (scheme->nix "yes")
+                    (1 2 3)
+                    (scheme->nix "no"))))))
+     (proc))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·("yes")·("no")·@:>@·])],[])
+
 AT_CLEANUP
 
 # local variables:

@@ -30,6 +30,8 @@ m4_include(pipchix/pipchix-includes.m4)
 
   (import (scheme base))
   (import (scheme cxr))
+  (import (scheme eval))
+  (import (scheme repl))
   (import (scheme inexact))
 
   (cond-expand

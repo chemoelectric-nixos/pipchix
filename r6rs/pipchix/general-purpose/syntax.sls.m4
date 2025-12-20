@@ -29,7 +29,8 @@ m4_include(pipchix/pipchix-includes.m4)
 
   (export m4_include(pipchix/general-purpose/syntax.exports.m4))
 
-  (import (rnrs (6)))
+  (import (rnrs (6))
+          (for (rnrs eval (6)) expand))
 
   ;; m4_define(«scheme_standard»,«r6rs»)
 
