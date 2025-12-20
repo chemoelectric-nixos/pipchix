@@ -21,3 +21,5 @@ stx-bytevector?
 stx-null?
 stx-pair?
 stx-list?
+
+stx-reverse

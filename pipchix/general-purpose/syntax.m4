@@ -121,6 +121,25 @@ simple_typetest_branch(null)
 simple_typetest_branch(pair)
 simple_typetest_branch(list)
 
+;;;m4_ifelse(general_macros,«er-macro-transformer»,«
+(define-syntax stx-reverse
+  (er-macro-transformer
+   (lambda (form rename compare)
+     (let ((args (cdr form)))
+       (if (and (pair? args)
+                (null? (cdr args))
+                (list? (car args)))
+         (reverse (car args))
+         '(if #f #f)))))) ;; <unspecified>
+;;;»,«
+(define-syntax stx-reverse
+  (lambda (stx)
+    (syntax-case stx ()
+      ((¶ (x ...))
+       (let ((x^ (syntax->datum (syntax (x ...)))))
+         (datum->syntax (syntax ¶) (reverse x^)))))))
+;;;»)
+
 m4_divert(-1)
 ;;; local variables:
 ;;; mode: scheme

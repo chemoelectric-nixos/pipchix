@@ -3266,6 +3266,47 @@ $at_traceon; }
 
 
 
+
+
+printf "%s\n" "syntax-template.at:396" >"$at_check_line_file"
+(test ${enable_check_r6rs_chez} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/syntax-template.at:396"
+{ set +x
+printf "%s\n" "$at_srcdir/syntax-template.at:396: \"\${abs_builddir}\"/run-r6rs-chez.sh '(let ((proc
+           (lambda ()
+             (define-syntax test
+               (syntax-rules ()
+                 ((_ (x ...))
+                  (stx-reverse (x ...)))))
+             (scheme->nix (test (4 3 2 1 list))))))
+     (proc))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:396"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '(let ((proc
+           (lambda ()
+             (define-syntax test
+               (syntax-rules ()
+                 ((_ (x ...))
+                  (stx-reverse (x ...)))))
+             (scheme->nix (test (4 3 2 1 list))))))
+     (proc))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(1)
+(2)
+(3)
+(4)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/syntax-template.at:396"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
@@ -9696,6 +9737,47 @@ echo >>"$at_stdout"; printf "%s\n" "[
 " | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/syntax-template.at:384"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "syntax-template.at:396" >"$at_check_line_file"
+(test ${enable_check_r7rs_chibi} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/syntax-template.at:396"
+{ set +x
+printf "%s\n" "$at_srcdir/syntax-template.at:396: \"\${abs_builddir}\"/run-r7rs-chibi.sh '(let ((proc
+           (lambda ()
+             (define-syntax test
+               (syntax-rules ()
+                 ((_ (x ...))
+                  (stx-reverse (x ...)))))
+             (scheme->nix (test (4 3 2 1 list))))))
+     (proc))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:396"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-chibi.sh '(let ((proc
+           (lambda ()
+             (define-syntax test
+               (syntax-rules ()
+                 ((_ (x ...))
+                  (stx-reverse (x ...)))))
+             (scheme->nix (test (4 3 2 1 list))))))
+     (proc))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(1)
+(2)
+(3)
+(4)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/syntax-template.at:396"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -16180,6 +16262,47 @@ $at_traceon; }
 
 
 
+
+
+printf "%s\n" "syntax-template.at:396" >"$at_check_line_file"
+(test ${enable_check_r7rs_csc_5} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/syntax-template.at:396"
+{ set +x
+printf "%s\n" "$at_srcdir/syntax-template.at:396: \"\${abs_builddir}\"/run-r7rs-csc-5.sh '(let ((proc
+           (lambda ()
+             (define-syntax test
+               (syntax-rules ()
+                 ((_ (x ...))
+                  (stx-reverse (x ...)))))
+             (scheme->nix (test (4 3 2 1 list))))))
+     (proc))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:396"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csc-5.sh '(let ((proc
+           (lambda ()
+             (define-syntax test
+               (syntax-rules ()
+                 ((_ (x ...))
+                  (stx-reverse (x ...)))))
+             (scheme->nix (test (4 3 2 1 list))))))
+     (proc))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(1)
+(2)
+(3)
+(4)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/syntax-template.at:396"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
@@ -22615,6 +22738,47 @@ $at_traceon; }
 
 
 
+
+
+printf "%s\n" "syntax-template.at:396" >"$at_check_line_file"
+(test ${enable_check_r7rs_csi_5} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/syntax-template.at:396"
+{ set +x
+printf "%s\n" "$at_srcdir/syntax-template.at:396: \"\${abs_builddir}\"/run-r7rs-csi-5.sh '(let ((proc
+           (lambda ()
+             (define-syntax test
+               (syntax-rules ()
+                 ((_ (x ...))
+                  (stx-reverse (x ...)))))
+             (scheme->nix (test (4 3 2 1 list))))))
+     (proc))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:396"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csi-5.sh '(let ((proc
+           (lambda ()
+             (define-syntax test
+               (syntax-rules ()
+                 ((_ (x ...))
+                  (stx-reverse (x ...)))))
+             (scheme->nix (test (4 3 2 1 list))))))
+     (proc))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(1)
+(2)
+(3)
+(4)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/syntax-template.at:396"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
@@ -29045,6 +29209,47 @@ echo >>"$at_stdout"; printf "%s\n" "[
 " | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/syntax-template.at:384"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "syntax-template.at:396" >"$at_check_line_file"
+(test ${enable_check_r7rs_gauche} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/syntax-template.at:396"
+{ set +x
+printf "%s\n" "$at_srcdir/syntax-template.at:396: \"\${abs_builddir}\"/run-r7rs-gauche.sh '(let ((proc
+           (lambda ()
+             (define-syntax test
+               (syntax-rules ()
+                 ((_ (x ...))
+                  (stx-reverse (x ...)))))
+             (scheme->nix (test (4 3 2 1 list))))))
+     (proc))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:396"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gauche.sh '(let ((proc
+           (lambda ()
+             (define-syntax test
+               (syntax-rules ()
+                 ((_ (x ...))
+                  (stx-reverse (x ...)))))
+             (scheme->nix (test (4 3 2 1 list))))))
+     (proc))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(1)
+(2)
+(3)
+(4)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/syntax-template.at:396"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -35529,6 +35734,47 @@ $at_traceon; }
 
 
 
+
+
+printf "%s\n" "syntax-template.at:396" >"$at_check_line_file"
+(test ${enable_check_r6rs_guile} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/syntax-template.at:396"
+{ set +x
+printf "%s\n" "$at_srcdir/syntax-template.at:396: \"\${abs_builddir}\"/run-r6rs-guile.sh '(let ((proc
+           (lambda ()
+             (define-syntax test
+               (syntax-rules ()
+                 ((_ (x ...))
+                  (stx-reverse (x ...)))))
+             (scheme->nix (test (4 3 2 1 list))))))
+     (proc))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:396"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-guile.sh '(let ((proc
+           (lambda ()
+             (define-syntax test
+               (syntax-rules ()
+                 ((_ (x ...))
+                  (stx-reverse (x ...)))))
+             (scheme->nix (test (4 3 2 1 list))))))
+     (proc))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(1)
+(2)
+(3)
+(4)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/syntax-template.at:396"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
@@ -41959,6 +42205,47 @@ echo >>"$at_stdout"; printf "%s\n" "[
 " | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/syntax-template.at:384"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "syntax-template.at:396" >"$at_check_line_file"
+(test ${enable_check_r7rs_guile} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/syntax-template.at:396"
+{ set +x
+printf "%s\n" "$at_srcdir/syntax-template.at:396: \"\${abs_builddir}\"/run-r7rs-guile.sh '(let ((proc
+           (lambda ()
+             (define-syntax test
+               (syntax-rules ()
+                 ((_ (x ...))
+                  (stx-reverse (x ...)))))
+             (scheme->nix (test (4 3 2 1 list))))))
+     (proc))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:396"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-guile.sh '(let ((proc
+           (lambda ()
+             (define-syntax test
+               (syntax-rules ()
+                 ((_ (x ...))
+                  (stx-reverse (x ...)))))
+             (scheme->nix (test (4 3 2 1 list))))))
+     (proc))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(1)
+(2)
+(3)
+(4)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/syntax-template.at:396"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -48443,6 +48730,47 @@ $at_traceon; }
 
 
 
+
+
+printf "%s\n" "syntax-template.at:396" >"$at_check_line_file"
+(test ${enable_check_r6rs_loko} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/syntax-template.at:396"
+{ set +x
+printf "%s\n" "$at_srcdir/syntax-template.at:396: \"\${abs_builddir}\"/run-r6rs-loko.sh '(let ((proc
+           (lambda ()
+             (define-syntax test
+               (syntax-rules ()
+                 ((_ (x ...))
+                  (stx-reverse (x ...)))))
+             (scheme->nix (test (4 3 2 1 list))))))
+     (proc))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:396"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '(let ((proc
+           (lambda ()
+             (define-syntax test
+               (syntax-rules ()
+                 ((_ (x ...))
+                  (stx-reverse (x ...)))))
+             (scheme->nix (test (4 3 2 1 list))))))
+     (proc))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(1)
+(2)
+(3)
+(4)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/syntax-template.at:396"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
@@ -54873,6 +55201,47 @@ echo >>"$at_stdout"; printf "%s\n" "[
 " | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/syntax-template.at:384"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "syntax-template.at:396" >"$at_check_line_file"
+(test ${enable_check_r7rs_loko} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/syntax-template.at:396"
+{ set +x
+printf "%s\n" "$at_srcdir/syntax-template.at:396: \"\${abs_builddir}\"/run-r7rs-loko.sh '(let ((proc
+           (lambda ()
+             (define-syntax test
+               (syntax-rules ()
+                 ((_ (x ...))
+                  (stx-reverse (x ...)))))
+             (scheme->nix (test (4 3 2 1 list))))))
+     (proc))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:396"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(let ((proc
+           (lambda ()
+             (define-syntax test
+               (syntax-rules ()
+                 ((_ (x ...))
+                  (stx-reverse (x ...)))))
+             (scheme->nix (test (4 3 2 1 list))))))
+     (proc))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(1)
+(2)
+(3)
+(4)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/syntax-template.at:396"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -61357,6 +61726,47 @@ $at_traceon; }
 
 
 
+
+
+printf "%s\n" "syntax-template.at:396" >"$at_check_line_file"
+(test ${enable_check_r6rs_racket} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/syntax-template.at:396"
+{ set +x
+printf "%s\n" "$at_srcdir/syntax-template.at:396: \"\${abs_builddir}\"/run-r6rs-racket.sh '(let ((proc
+           (lambda ()
+             (define-syntax test
+               (syntax-rules ()
+                 ((_ (x ...))
+                  (stx-reverse (x ...)))))
+             (scheme->nix (test (4 3 2 1 list))))))
+     (proc))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:396"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-racket.sh '(let ((proc
+           (lambda ()
+             (define-syntax test
+               (syntax-rules ()
+                 ((_ (x ...))
+                  (stx-reverse (x ...)))))
+             (scheme->nix (test (4 3 2 1 list))))))
+     (proc))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(1)
+(2)
+(3)
+(4)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/syntax-template.at:396"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
@@ -67792,6 +68202,47 @@ $at_traceon; }
 
 
 
+
+
+printf "%s\n" "syntax-template.at:396" >"$at_check_line_file"
+(test ${enable_check_r6rs_sagittarius} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/syntax-template.at:396"
+{ set +x
+printf "%s\n" "$at_srcdir/syntax-template.at:396: \"\${abs_builddir}\"/run-r6rs-sagittarius.sh '(let ((proc
+           (lambda ()
+             (define-syntax test
+               (syntax-rules ()
+                 ((_ (x ...))
+                  (stx-reverse (x ...)))))
+             (scheme->nix (test (4 3 2 1 list))))))
+     (proc))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:396"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-sagittarius.sh '(let ((proc
+           (lambda ()
+             (define-syntax test
+               (syntax-rules ()
+                 ((_ (x ...))
+                  (stx-reverse (x ...)))))
+             (scheme->nix (test (4 3 2 1 list))))))
+     (proc))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(1)
+(2)
+(3)
+(4)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/syntax-template.at:396"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
   set +x
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
@@ -74222,6 +74673,47 @@ echo >>"$at_stdout"; printf "%s\n" "[
 " | \
   $at_diff - "$at_stdout" || at_failed=:
 at_fn_check_status 0 $at_status "$at_srcdir/syntax-template.at:384"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "syntax-template.at:396" >"$at_check_line_file"
+(test ${enable_check_r7rs_sagittarius} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/syntax-template.at:396"
+{ set +x
+printf "%s\n" "$at_srcdir/syntax-template.at:396: \"\${abs_builddir}\"/run-r7rs-sagittarius.sh '(let ((proc
+           (lambda ()
+             (define-syntax test
+               (syntax-rules ()
+                 ((_ (x ...))
+                  (stx-reverse (x ...)))))
+             (scheme->nix (test (4 3 2 1 list))))))
+     (proc))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:396"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-sagittarius.sh '(let ((proc
+           (lambda ()
+             (define-syntax test
+               (syntax-rules ()
+                 ((_ (x ...))
+                  (stx-reverse (x ...)))))
+             (scheme->nix (test (4 3 2 1 list))))))
+     (proc))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(1)
+(2)
+(3)
+(4)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/syntax-template.at:396"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
