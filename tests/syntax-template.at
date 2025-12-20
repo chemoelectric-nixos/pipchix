@@ -455,29 +455,17 @@ check_unquoted([run_scheme 'sexpr'],[0],
 m4_popdef([ordinal])
 ])
 
-dnl m4_define([sexpr],
-dnl   [(let ((proc
-dnl            (lambda ()
-dnl              (define-syntax test
-dnl                (syntax-rules ()
-dnl                  ((_ x)
-dnl                   (stx-car (stx-last-pair x)))))
-dnl              (scheme->nix (test (1 2 3 4 5 . 6))))))
-dnl      (proc))])
-dnl check_unquoted([run_scheme 'sexpr'],[0],
-dnl   [interpunct_nl([(5)·])],[])
-dnl 
-dnl m4_define([sexpr],
-dnl   [(let ((proc
-dnl            (lambda ()
-dnl              (define-syntax test
-dnl                (syntax-rules ()
-dnl                  ((_ x)
-dnl                   (stx-cdr (stx-last-pair x)))))
-dnl              (scheme->nix (test (1 2 3 4 5 . 6))))))
-dnl      (proc))])
-dnl check_unquoted([run_scheme 'sexpr'],[0],
-dnl   [interpunct_nl([(6)·])],[])
+m4_define([sexpr],
+  [(let ((proc
+           (lambda ()
+             (define-syntax test
+               (syntax-rules ()
+                 ((_ x)
+                  (stx-last-pair x))))
+             (scheme->nix (test (1 2 3 4 5 (lambda () 12345)))))))
+     (proc))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(12345)·])],[])
 
 m4_define([sexpr],
   [(let ((proc

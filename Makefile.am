@@ -287,7 +287,7 @@ $(CHICKEN_5_EGGDIR)/pipchix.egg: GNUmakefile $(TINYSCHEME_EXE)
 
 CHICKEN_5_EGGSPEC = ' \
  '$(CHICKEN_EGGSPEC_TOP)' \
-   (dependencies r7rs utf8 srfi-111) \
+   (dependencies r7rs utf8 srfi-1 srfi-111) \
    (component-options \
     (csc-options \
      "-R" "utf8" \
