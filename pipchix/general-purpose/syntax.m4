@@ -23,30 +23,39 @@
 ;;; WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ;;;
 
+;;;m4_ifelse(scheme_standard,«r6rs»,«
+;;;m4_define(«stx_satisfied_environment»,(environment '(rnrs)))
+;;;»,scheme_standard,«r5rs»,«
+;;;m4_define(«stx_satisfied_environment»,(interaction-environment))
+;;;»,«
+;;;m4_define(«stx_satisfied_environment»,(interaction-environment))
+;;;»)
 ;;;m4_ifelse(general_macros,«er-macro-transformer»,«
 (define-syntax stx-satisfied?
   (er-macro-transformer
    (lambda (form rename compare)
-     (let ((args (cdr form)))
-       (let ((pred (eval (caar args) (interaction-environment))))
-         (if (pred (cadar args))
-           (cadr args)
-           (if (pair? (cddr args))
-             (caddr args)
-             '(if #f #f)))))))) ;; <unspecified>
+     (let* ((args (cdr form))
+            (pred-form (caar args))
+            (pred (eval pred-form stx_satisfied_environment))
+            (x (cadar args)))
+       (if (pred x)
+         (cadr args)
+         (if (pair? (cddr args))
+           (caddr args)
+           '(if #f #f))))))) ;; <unspecified>
 ;;;»,«
 (define-syntax stx-satisfied?
   (lambda (stx)
     (syntax-case stx ()
       ((_ (predicate x) if-true if-false)
        (let ((pred (eval (syntax->datum (syntax predicate))
-                         (environment '(rnrs)))))
+                         stx_satisfied_environment)))
          (if (pred (syntax->datum (syntax x)))
            (syntax if-true)
            (syntax if-false))))
       ((_ (predicate x) if-true)
        (let ((pred (eval (syntax->datum (syntax predicate))
-                         (environment '(rnrs)))))
+                         stx_satisfied_environment)))
          (if (pred (syntax->datum (syntax x)))
            (syntax if-true)
            (syntax (if #f #f)))))))) ;; <unspecified>

@@ -45,26 +45,27 @@ m4_include(pipchix/pipchix-includes.m4)
 
   (begin
 
-    ;; m4_define(«scheme_standard»,«r7rs»)
-
     (cond-expand
       (chicken-5
        ;; m4_pushdef(«general_macros»,«er-macro-transformer»)
        ;; m4_pushdef(«syntax_rules»,«r5rs»)
+       ;; m4_pushdef(«scheme_standard»,«r5rs»)
        m4_include(pipchix/general-purpose/syntax.m4)
-       ;; m4_popdef(«general_macros»,«syntax_rules»)
+       ;; m4_popdef(«general_macros»,«syntax_rules»,«scheme_standard»)
        )
       ((or loko guile)
        ;; m4_pushdef(«general_macros»,syntax-case)
        ;; m4_pushdef(«syntax_rules»,«unknown»)
+       ;; m4_pushdef(«scheme_standard»,«r7rs»)
        m4_include(pipchix/general-purpose/syntax.m4)
-       ;; m4_popdef(«general_macros»,«syntax_rules»)
+       ;; m4_popdef(«general_macros»,«syntax_rules»,«scheme_standard»)
        )
       (else
        ;; m4_pushdef(«general_macros»,«er-macro-transformer»)
        ;; m4_pushdef(«syntax_rules»,«r7rs»)
+       ;; m4_pushdef(«scheme_standard»,«r7rs»)
        m4_include(pipchix/general-purpose/syntax.m4)
-       ;; m4_popdef(«general_macros»,«syntax_rules»)
+       ;; m4_popdef(«general_macros»,«syntax_rules»,«scheme_standard»)
        ))
 
     ))
