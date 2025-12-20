@@ -136,6 +136,17 @@ simple_typetest_branch(list)
          ($1 (car args))
          '__unspecified__)))))
 ;;;»)
+;;;m4_define(«two_argument_procedure»,«
+(define-syntax stx-$1
+  (er-macro-transformer
+   (lambda (form rename compare)
+     (let ((args (cdr form)))
+       (if (and (pair? args)
+                (pair? (cdr args))
+                (null? (cddr args)))
+         ($1 (car args) (cadr args))
+         '__unspecified__)))))
+;;;»)
 ;;;»,«
 ;;;m4_define(«one_argument_procedure»,«
 (define-syntax stx-$1

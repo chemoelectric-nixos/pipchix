@@ -34,7 +34,6 @@ m4_include(pipchix/pipchix-includes.m4)
           (for (pipchix general-purpose list) expand))
 
   ;; m4_define(«scheme_standard»,«r6rs»)
-
   m4_include(pipchix/general-purpose/syntax.m4)
 
   )
