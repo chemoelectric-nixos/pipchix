@@ -1,5 +1,3 @@
-stx-compose
-
 stx-satisfied?
 
 stx-boolean?
