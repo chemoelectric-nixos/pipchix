@@ -22,7 +22,7 @@ EOF
 
 env LC_ALL="@TEST_LOCALE@" \
     LANG="@TEST_LOCALE@" \
-    @SAGITTARIUS@ -r7 --loadpath='@abs_top_builddir@/r7rs' "${prog_scm}"
+    @SAGITTARIUS@ -d -r7 --loadpath='@abs_top_builddir@/r7rs' "${prog_scm}"
 
 rm "${prog_scm}"
 
