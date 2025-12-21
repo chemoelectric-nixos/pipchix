@@ -21,7 +21,7 @@ EOF
 
 env LC_ALL="@TEST_LOCALE@" \
     LANG="@TEST_LOCALE@" \
-    @SAGITTARIUS@ -r6 --loadpath='@abs_top_builddir@/r6rs' "${prog_scm}"
+    @SAGITTARIUS@ -d -r6 --loadpath='@abs_top_builddir@/r6rs' "${prog_scm}"
 
 rm "${prog_scm}"
 
