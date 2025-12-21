@@ -23,7 +23,68 @@
 ;;; WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ;;;
 
+
+;;;;;;;   (define-syntax stx-compose
+;;;;;;;     (syntax-rules ()
+;;;;;;;       ((_ (f) x)
+;;;;;;;        (f x))
+;;;;;;;       ((_ (g f) x)
+;;;;;;;        (let ()
+;;;;;;;          (define-syntax s2
+;;;;;;;            (syntax-rules ()
+;;;;;;;              ((_ t)
+;;;;;;;               (let ()
+;;;;;;;                 (define-syntax s1
+;;;;;;;                   (syntax-rules ()
+;;;;;;;                     ((_ s)
+;;;;;;;                      (f s))))
+;;;;;;;                 (g (s1 t)))
+;;;;;;;   
+;;;;;;;          (s2 x)))))
+
 ;;;m4_define(«__unspecified__»,«(if #f #f) #| #<unspecified> |# »)
+;;;
+;;;;;     (define-syntax stx-eager
+;;;;;       ;; Evaluate the x before f.
+;;;;;       (syntax-rules ()
+;;;;;         ((_ f x)
+;;;;;          (let ()
+;;;;;            (define-syntax expand-first
+;;;;;              (syntax-rules ()
+;;;;;                ((_ t)
+;;;;;                 (f t))))
+;;;;;            (expand-first x)))
+;;;;;         ((_ f x1 x2)
+;;;;;          (let ()
+;;;;;            (define-syntax expand-first
+;;;;;              (syntax-rules ()
+;;;;;                ((_ t1 t2)
+;;;;;                 (f t1 t2))))
+;;;;;            (expand-first x1 x2)))
+;;;;;         ((_ f x1 x2 . x*)
+;;;;;          (let ()
+;;;;;            (define-syntax expand-first
+;;;;;              (syntax-rules ()
+;;;;;                ((_ t1 t2 . t*)
+;;;;;                 (f t1 t2 . t*))))
+;;;;;            (expand-first x1 x2 . x*)))))
+
+;;;;;  ;;;m4_ifelse(general_macros,«er-macro-transformer»,«
+;;;;;  (define-syntax stx-apply
+;;;;;    (er-macro-transformer
+;;;;;     (lambda (form rename compare)
+;;;;;       '__unspecified__))) ;;;; FIXME FIXME: Write this for er-macro-transformer. IF IT IS USEFUL.
+;;;;;  ;;;»,«
+;;;;;  (define-syntax stx-apply
+;;;;;    (lambda (stx)
+;;;;;      (syntax-case stx ()
+;;;;;        ((_ f x ...)
+;;;;;         (with-syntax
+;;;;;             (((t ...) (syntax (x ...))))
+;;;;;           (syntax
+;;;;;            (let ((t x) ...)
+;;;;;              (f t ...))))))))
+;;;;;  ;;;»)
 
 ;;;m4_ifelse(scheme_standard,«r6rs»,«
 ;;;m4_define(«stx_satisfied_environment»,(environment '(rnrs)))
@@ -42,9 +103,8 @@
             (x (cadar args)))
        (if (pred x)
          (cadr args)
-         (if (pair? (cddr args))
-           (caddr args)
-           '__unspecified__))))))
+         (when (pair? (cddr args))
+           (caddr args)))))))
 ;;;»,«
 (define-syntax stx-satisfied?
   (lambda (stx)
@@ -58,9 +118,8 @@
       ((_ (predicate x) if-true)
        (let ((pred (eval (syntax->datum (syntax predicate))
                          stx_satisfied_environment)))
-         (if (pred (syntax->datum (syntax x)))
-           (syntax if-true)
-           (syntax __unspecified__)))))))
+         (when (pred (syntax->datum (syntax x)))
+           (syntax if-true)))))))
 ;;;»)
 
 ;;;m4_divert(-1)
@@ -69,12 +128,12 @@
 (define-syntax $1
   (er-macro-transformer
    (lambda (form rename compare)
-     (let ((args (cdr form)))
-       (if ($2 (car args))
+     (let* ((args (cdr form))
+            (x (car args)))
+       (if ($2 x)
          (cadr args)
-         (if (pair? (cddr args))
-           (caddr args)
-           '__unspecified__))))))
+         (when (pair? (cddr args))
+           (caddr args)))))))
 ;;;»)
 ;;;»,«
 ;;;m4_define(«simple_predicate_branch»,«
@@ -86,9 +145,8 @@
          (syntax if-true)
          (syntax if-false)))
       ((_ x if-true)
-       (if ($2 (syntax->datum (syntax x)))
-         (syntax if-true)
-         (syntax __unspecified__))))))
+       (when ($2 (syntax->datum (syntax x)))
+         (syntax if-true))))))
 ;;;»)
 ;;;»)
 ;;;m4_define(«simple_typetest_branch»,simple_predicate_branch(stx-$1?,$1?))
@@ -125,30 +183,18 @@ simple_typetest_branch(pair)
 simple_typetest_branch(list)
 
 ;;;m4_divert(-1)
+
+;;;m4_define(«one_argument_procedure»,«
 ;;;m4_ifelse(general_macros,«er-macro-transformer»,«
-;;;m4_define(«one_argument_procedure»,«
 (define-syntax stx-$1
   (er-macro-transformer
    (lambda (form rename compare)
      (let ((args (cdr form)))
-       (if (and (pair? args)
-                (null? (cdr args)))
-         ($1 (car args))
-         '__unspecified__)))))
-;;;»)
-;;;m4_define(«two_argument_procedure»,«
-(define-syntax stx-$1
-  (er-macro-transformer
-   (lambda (form rename compare)
-     (let ((args (cdr form)))
-       (if (and (pair? args)
-                (pair? (cdr args))
-                (null? (cddr args)))
-         ($1 (car args) (cadr args))
-         '__unspecified__)))))
-;;;»)
+       (when (and (pair? args)
+                  (null? (cdr args)))
+         (let ((x (car args)))
+           ($1 x)))))))
 ;;;»,«
-;;;m4_define(«one_argument_procedure»,«
 (define-syntax stx-$1
   (lambda (stx)
     (syntax-case stx ()
@@ -156,7 +202,21 @@ simple_typetest_branch(list)
        (let ((x^ (syntax->datum (syntax x))))
          (datum->syntax (syntax ¶) ($1 x^)))))))
 ;;;»)
+;;;») ;;; one_argument_procedure
+
 ;;;m4_define(«two_argument_procedure»,«
+;;;m4_ifelse(general_macros,«er-macro-transformer»,«
+(define-syntax stx-$1
+  (er-macro-transformer
+   (lambda (form rename compare)
+     (let ((args (cdr form)))
+       (when (and (pair? args)
+                  (pair? (cdr args))
+                  (null? (cddr args)))
+         (let ((x (car args))
+               (y (cadr args)))
+           ($1 x y)))))))
+;;;»,«
 (define-syntax stx-$1
   (lambda (stx)
     (syntax-case stx ()
@@ -166,6 +226,7 @@ simple_typetest_branch(list)
          (datum->syntax (syntax ¶) ($1 x^ y^)))))))
 ;;;»)
 ;;;»)
+
 ;;;m4_divert
 
 one_argument_procedure(car)

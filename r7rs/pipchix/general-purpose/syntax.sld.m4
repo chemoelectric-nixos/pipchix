@@ -27,7 +27,7 @@ m4_include(pipchix/pipchix-includes.m4)
 (define-library (pipchix general-purpose syntax)
 
   (export m4_include(pipchix/general-purpose/syntax.exports.m4))
-
+ 
   (import (scheme base))
   (import (scheme cxr))
   (import (scheme eval))
@@ -56,7 +56,7 @@ m4_include(pipchix/pipchix-includes.m4)
        ;; m4_popdef(«general_macros»,«syntax_rules»,«scheme_standard»)
        )
       ((or loko guile)
-       ;; m4_pushdef(«general_macros»,syntax-case)
+       ;; m4_pushdef(«general_macros»,«syntax-case»)
        ;; m4_pushdef(«syntax_rules»,«unknown»)
        ;; m4_pushdef(«scheme_standard»,«r7rs»)
        m4_include(pipchix/general-purpose/syntax.m4)
