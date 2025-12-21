@@ -23,68 +23,14 @@
 ;;; WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ;;;
 
-
-;;;;;;;   (define-syntax stx-compose
-;;;;;;;     (syntax-rules ()
-;;;;;;;       ((_ (f) x)
-;;;;;;;        (f x))
-;;;;;;;       ((_ (g f) x)
-;;;;;;;        (let ()
-;;;;;;;          (define-syntax s2
-;;;;;;;            (syntax-rules ()
-;;;;;;;              ((_ t)
-;;;;;;;               (let ()
-;;;;;;;                 (define-syntax s1
-;;;;;;;                   (syntax-rules ()
-;;;;;;;                     ((_ s)
-;;;;;;;                      (f s))))
-;;;;;;;                 (g (s1 t)))
-;;;;;;;   
-;;;;;;;          (s2 x)))))
-
-;;;m4_define(«__unspecified__»,«(if #f #f) #| #<unspecified> |# »)
-;;;
-;;;;;     (define-syntax stx-eager
-;;;;;       ;; Evaluate the x before f.
-;;;;;       (syntax-rules ()
-;;;;;         ((_ f x)
-;;;;;          (let ()
-;;;;;            (define-syntax expand-first
-;;;;;              (syntax-rules ()
-;;;;;                ((_ t)
-;;;;;                 (f t))))
-;;;;;            (expand-first x)))
-;;;;;         ((_ f x1 x2)
-;;;;;          (let ()
-;;;;;            (define-syntax expand-first
-;;;;;              (syntax-rules ()
-;;;;;                ((_ t1 t2)
-;;;;;                 (f t1 t2))))
-;;;;;            (expand-first x1 x2)))
-;;;;;         ((_ f x1 x2 . x*)
-;;;;;          (let ()
-;;;;;            (define-syntax expand-first
-;;;;;              (syntax-rules ()
-;;;;;                ((_ t1 t2 . t*)
-;;;;;                 (f t1 t2 . t*))))
-;;;;;            (expand-first x1 x2 . x*)))))
-
-;;;;;  ;;;m4_ifelse(general_macros,«er-macro-transformer»,«
-;;;;;  (define-syntax stx-apply
-;;;;;    (er-macro-transformer
-;;;;;     (lambda (form rename compare)
-;;;;;       '__unspecified__))) ;;;; FIXME FIXME: Write this for er-macro-transformer. IF IT IS USEFUL.
-;;;;;  ;;;»,«
-;;;;;  (define-syntax stx-apply
-;;;;;    (lambda (stx)
-;;;;;      (syntax-case stx ()
-;;;;;        ((_ f x ...)
-;;;;;         (with-syntax
-;;;;;             (((t ...) (syntax (x ...))))
-;;;;;           (syntax
-;;;;;            (let ((t x) ...)
-;;;;;              (f t ...))))))))
-;;;;;  ;;;»)
+(define-syntax stx-ck
+  ;; A dispatcher: applies the continuation ‘k’ to the value ‘v’. The
+  ;; continuation stack is ‘s’.
+  (syntax-rules ()
+    ((_ () v)                          ; Done: return the final value.
+     v)
+    ((_ (k . s) v)                    ; Continue: call the next macro.
+     (k s v))))
 
 ;;;m4_ifelse(scheme_standard,«r6rs»,«
 ;;;m4_define(«stx_satisfied_environment»,(environment '(rnrs)))
@@ -130,7 +76,7 @@
    (lambda (form rename compare)
      (let* ((args (cdr form))
             (x (car args)))
-       (if ($2 x)
+       (if ((if (symbol? $2) (rename $2) $2) x)
          (cadr args)
          (when (pair? (cddr args))
            (caddr args)))))))
@@ -193,7 +139,7 @@ simple_typetest_branch(list)
        (when (and (pair? args)
                   (null? (cdr args)))
          (let ((x (car args)))
-           ($1 x)))))))
+           ((if (symbol? $1) (rename $1) $1) x)))))))
 ;;;»,«
 (define-syntax stx-$1
   (lambda (stx)
@@ -215,7 +161,7 @@ simple_typetest_branch(list)
                   (null? (cddr args)))
          (let ((x (car args))
                (y (cadr args)))
-           ($1 x y)))))))
+           ((if (symbol? $1) (rename $1) $1) x y)))))))
 ;;;»,«
 (define-syntax stx-$1
   (lambda (stx)
