@@ -112,6 +112,16 @@ m4_define([sexpr], dnl  delete-duplicates! with eq?
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([@<:@·@<:@·(1)·(2)·@:>@·@<:@·(1)·(2)·@:>@·("a")·("b")·@<:@·(1)·(1)·@:>@·@<:@·(1)·(1)·@:>@·@:>@·])],[])
 
+m4_define([sexpr], dnl  member with default equal?
+  [(scheme->nix (member `(1 1) (list `(1 2) `(1 2) `a `a `b `a `b `(1 1) `a `(1 1) `b)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·@<:@·(1)·(1)·@:>@·("a")·@<:@·(1)·(1)·@:>@·("b")·@:>@·])],[])
+
+m4_define([sexpr], dnl  member with a custom test.
+  [(scheme->nix (member `a (list `(1 2) `(1 2) `a `a `b `a `b `(1 1) `a `(1 1) `b)
+                        (lambda (x y) (and (symbol? y) (not (eq? x y))))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·("b")·("a")·("b")·@<:@·(1)·(1)·@:>@·("a")·@<:@·(1)·(1)·@:>@·("b")·@:>@·])],[])
 
 AT_CLEANUP
 

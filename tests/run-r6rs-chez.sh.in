@@ -8,7 +8,8 @@ prog_scm=`@abs_top_builddir@/tempname`.scm
 cat > "${prog_scm}" <<EOF
 #!r6rs
 (import (rename (rnrs (6))
-                (fold-right r6rs-fold-right))
+                (fold-right r6rs-fold-right)
+                (member r6rs-member))
         (pipchix general-purpose list)
         (pipchix general-purpose syntax)
         (pipchix general-purpose continuation-capture)
@@ -25,7 +26,7 @@ env LC_ALL="@TEST_LOCALE@" \
     LANG="@TEST_LOCALE@" \
     @CHEZ_SCHEME@ \
     --libdirs "@abs_top_builddir@/r6rs:" \
-    --program "${prog_scm}" 2>/dev/null
+    --program "${prog_scm}"
 
 rm "${prog_scm}"
 

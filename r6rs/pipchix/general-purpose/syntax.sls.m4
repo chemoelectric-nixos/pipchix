@@ -29,7 +29,9 @@ m4_include(pipchix/pipchix-includes.m4)
 
   (export m4_include(pipchix/general-purpose/syntax.exports.m4))
 
-  (import (except (rnrs (6)) fold-left fold-right)
+  (import (except (rnrs (6))
+                  fold-right
+                  member)
           (for (rnrs eval (6)) expand)
           (for (pipchix general-purpose list) expand))
 

@@ -30,7 +30,8 @@ m4_include(pipchix/pipchix-includes.m4)
   (export m4_include(pipchix/general-purpose/list.exports.m4))
 
   (import (except (rnrs (6))
-                  fold-left fold-right)
+                  fold-right
+                  member)
           (rnrs mutable-pairs (6)))
 
   define_err_r6rs
@@ -38,6 +39,7 @@ m4_include(pipchix/pipchix-includes.m4)
   ;;m4_define(«r6rs»,«yes»)
   ;;m4_define(«list_copy_needed»,«yes»)
   ;;m4_define(«make_list_needed»,«yes»)
+  ;;m4_define(«member_needed»,«yes»)
   m4_include(pipchix/general-purpose/list.m4)
 
   )

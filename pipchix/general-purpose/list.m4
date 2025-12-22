@@ -1282,11 +1282,16 @@
     ((x lis ＝)
      (filter! (lambda (y) (not (＝ x y))) lis))))
 
-;;; Extended from R4RS to take an optional comparison argument.
 ;;;m4_ifelse(member_needed,«yes»,«
-(define (member x lis . maybe-=)
-  (let ((= (:optional maybe-= equal?)))
-    (find-tail (lambda (y) (= x y)) lis)))
+;;;
+;;; Extended from R4RS (and from R⁶RS) to take an optional comparison
+;;; argument.
+(define member
+  (case-lambda
+    ((x lis)
+     (member x lis equal?))
+    ((x lis ＝)
+     (find-tail (lambda (y) (＝ x y)) lis))))
 ;;;»)
 
 ;;; R4RS, hence we don't bother to define.
@@ -1515,7 +1520,8 @@
 ;;;   FILTER in this source code share longest common tails between args
 ;;;   and results to get structure sharing in the lset procedures.
 
-(define (%lset2<= = lis1 lis2) (every (lambda (x) (member x lis2 =)) lis1))
+(define (%lset2<= = lis1 lis2)
+  (every (lambda (x) (member x lis2 =)) lis1))
 
 (define (lset<= = . lists)
   (check-arg procedure? = lset<=)
