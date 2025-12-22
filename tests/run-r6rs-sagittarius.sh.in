@@ -7,7 +7,9 @@ prog_scm=`@abs_top_builddir@/tempname`.scm
 
 cat > "${prog_scm}" <<EOF
 #!r6rs
-(import (rnrs (6))
+(import (rename (rnrs (6))
+                (fold-right r6rs-fold-right))
+        (pipchix general-purpose list)
         (pipchix general-purpose syntax)
         (pipchix general-purpose continuation-capture)
         (pipchix abstract-syntax-tree)

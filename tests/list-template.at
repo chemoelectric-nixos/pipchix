@@ -1,0 +1,121 @@
+# Copyright © 2025 Barry Schwartz
+#
+# This file is part of Pipchix.
+#
+# Permission is hereby granted, free of charge, to any person obtaining
+# a copy of Pipchix and associated documentation files (the
+# "Software"), to deal in the Software without restriction, including
+# without limitation the rights to use, copy, modify, merge, publish,
+# distribute, sublicense, and/or sell copies of the Software, and to
+# permit persons to whom the Software is furnished to do so, subject to
+# the following conditions:
+# 
+# The above copyright notice and this permission notice shall be
+# included in all copies or substantial portions of the Software.
+# 
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+# LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+# OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+# WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+#
+
+AT_SETUP([setup_message(list library (SRFI-1))])
+
+AT_KEYWORDS([default_keywords list lists srfi1 srfi-1 SRFI-1 SRFI1])
+
+m4_define([sexpr], dnl  List of squares by unfold-right.
+  [(scheme->nix
+    (unfold-right zero?
+                  (lambda (x) (* x x))
+                  (lambda (x) (- x 1))
+                  10))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·(1)·(4)·(9)·(16)·(25)·(36)·(49)·(64)·(81)·(100)·@:>@·])],[])
+
+m4_define([sexpr], dnl  Reverse a proper list by unfold-right.
+  [(scheme->nix (unfold-right null-list? car cdr `(1 2 3 4)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·(4)·(3)·(2)·(1)·@:>@·])],[])
+
+m4_define([sexpr], dnl  (append-reverse rev-head tail) by unfold-right.
+  [(scheme->nix (unfold-right null-list? car cdr `(3 4) `(2 1)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·(4)·(3)·(2)·(1)·@:>@·])],[])
+
+m4_define([sexpr], dnl  List of squares by unfold.
+  [(scheme->nix
+    (unfold (lambda (x) (> x 10))
+            (lambda (x) (* x x))
+            (lambda (x) (+ x 1))
+            1))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·(1)·(4)·(9)·(16)·(25)·(36)·(49)·(64)·(81)·(100)·@:>@·])],[])
+
+m4_define([sexpr], dnl  Append lists by unfold.
+  [(scheme->nix (unfold null-list? car cdr `(1 4 9 16)
+                        (lambda (x) `(25 36 49 64 81 100))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·(1)·(4)·(9)·(16)·(25)·(36)·(49)·(64)·(81)·(100)·@:>@·])],[])
+
+m4_define([sexpr], dnl  Add elements by fold.
+  [(scheme->nix (fold + 0 `(1 4 9 16)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(30)·])],[])
+
+m4_define([sexpr], dnl  Multiple lists in a fold.
+  [(scheme->nix (fold cons* `() `("a" "b" "c") `(1 2 3 4 5)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·("c")·(3)·("b")·(2)·("a")·(1)·@:>@·])],[])
+
+m4_define([sexpr], dnl  delete with the default equal?
+  [(scheme->nix (delete `(1 2) `((1 2) ("a" "b" "c") (1 2) (1 2 3))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·@<:@·("a")·("b")·("c")·@:>@·@<:@·(1)·(2)·(3)·@:>@·@:>@·])],[])
+
+m4_define([sexpr], dnl  delete with (lambda (x y) (not (equal? x y)))
+  [(scheme->nix (delete `(1 2) `((1 2) ("a" "b" "c") (1 2) (1 2 3))
+                        (lambda (x y) (not (equal? x y)))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·@<:@·(1)·(2)·@:>@·@<:@·(1)·(2)·@:>@·@:>@·])],[])
+
+m4_define([sexpr], dnl  delete! with the default equal?
+  [(scheme->nix (delete! `(1 2) (list `(1 2) `("a" "b" "c") `(1 2) `(1 2 3))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·@<:@·("a")·("b")·("c")·@:>@·@<:@·(1)·(2)·(3)·@:>@·@:>@·])],[])
+
+m4_define([sexpr], dnl  delete! with (lambda (x y) (not (equal? x y)))
+  [(scheme->nix (delete! `(1 2) (list `(1 2) `("a" "b" "c") `(1 2) `(1 2 3))
+                         (lambda (x y) (not (equal? x y)))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·@<:@·(1)·(2)·@:>@·@<:@·(1)·(2)·@:>@·@:>@·])],[])
+
+m4_define([sexpr], dnl  delete-duplicates with the default equal?
+  [(scheme->nix (delete-duplicates `((1 2) (1 2) ("a" "b" "c") (1 2) (1 2 3) (1 2))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·@<:@·(1)·(2)·@:>@·@<:@·("a")·("b")·("c")·@:>@·@<:@·(1)·(2)·(3)·@:>@·@:>@·])],[])
+
+m4_define([sexpr], dnl  delete-duplicates with eq?
+  [(scheme->nix (delete-duplicates `((1 2) (1 2) a a b a b (1 1) a (1 1) b) eq?))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·@<:@·(1)·(2)·@:>@·@<:@·(1)·(2)·@:>@·("a")·("b")·@<:@·(1)·(1)·@:>@·@<:@·(1)·(1)·@:>@·@:>@·])],[])
+
+m4_define([sexpr], dnl  delete-duplicates! with the default equal?
+  [(scheme->nix (delete-duplicates! (list `(1 2) `(1 2) `("a" "b" "c") `(1 2) `(1 2 3) `(1 2))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·@<:@·(1)·(2)·@:>@·@<:@·("a")·("b")·("c")·@:>@·@<:@·(1)·(2)·(3)·@:>@·@:>@·])],[])
+
+m4_define([sexpr], dnl  delete-duplicates! with eq?
+  [(scheme->nix (delete-duplicates! (list `(1 2) `(1 2) `a `a `b `a `b `(1 1) `a `(1 1) `b) eq?))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·@<:@·(1)·(2)·@:>@·@<:@·(1)·(2)·@:>@·("a")·("b")·@<:@·(1)·(1)·@:>@·@<:@·(1)·(1)·@:>@·@:>@·])],[])
+
+
+AT_CLEANUP
+
+# local variables:
+# mode: autoconf
+# coding: utf-8
+# end:

@@ -863,46 +863,44 @@
 ;;; fold/unfold
 ;;;;;;;;;;;;;;;
 
-(define (unfold-right p f g seed . maybe-tail)
-  (check-arg procedure? p unfold-right)
-  (check-arg procedure? f unfold-right)
-  (check-arg procedure? g unfold-right)
-  (let lp ((seed seed) (ans (:optional maybe-tail '())))
-    (if (p seed) ans
-	(lp (g seed)
-	    (cons (f seed) ans)))))
+(define unfold-right
+  (case-lambda
+    ((p f g seed)
+     (unfold-right p f g seed '()))
+
+    ((p f g seed maybe-tail)
+     (let lp ((seed seed) (ans maybe-tail))
+       (if (p seed) ans
+	   (lp (g seed)
+	       (cons (f seed) ans)))))))
 
 
-(define (unfold p f g seed . maybe-tail-gen)
-  (check-arg procedure? p unfold)
-  (check-arg procedure? f unfold)
-  (check-arg procedure? g unfold)
-  (if (pair? maybe-tail-gen)
+(define unfold
+  (case-lambda
+    ((p f g seed)
+     (let recur ((seed seed))
+       (if (p seed) '()
+	   (cons (f seed) (recur (g seed))))))
 
-      (let ((tail-gen (car maybe-tail-gen)))
-	(if (pair? (cdr maybe-tail-gen))
-	    (apply error "Too many arguments" unfold p f g seed maybe-tail-gen)
-
-	    (let recur ((seed seed))
-	      (if (p seed) (tail-gen seed)
-		  (cons (f seed) (recur (g seed)))))))
-
-      (let recur ((seed seed))
-	(if (p seed) '()
-	    (cons (f seed) (recur (g seed)))))))
+    ((p f g seed maybe-tail-gen)
+     (let ((tail-gen maybe-tail-gen))
+       (let recur ((seed seed))
+	 (if (p seed) (tail-gen seed)
+	     (cons (f seed) (recur (g seed)))))))))
 
 
-(define (fold kons knil lis1 . lists)
-  (check-arg procedure? kons fold)
-  (if (pair? lists)
-      (let lp ((lists (cons lis1 lists)) (ans knil))	; N-ary case
-	(receive (cars+ans cdrs) (%cars+cdrs+ lists ans)
-	  (if (null? cars+ans) ans ; Done.
-	      (lp cdrs (apply kons cars+ans)))))
+(define fold
+  (case-lambda
+    ((kons knil lis1)
+     (let lp ((lis lis1) (ans knil))			; Fast path
+       (if (null-list? lis) ans
+	   (lp (cdr lis) (kons (car lis) ans)))))
 
-      (let lp ((lis lis1) (ans knil))			; Fast path
-	(if (null-list? lis) ans
-	    (lp (cdr lis) (kons (car lis) ans))))))
+    ((kons knil lis1 . lists)
+     (let lp ((lists (cons lis1 lists)) (ans knil))	; N-ary case
+       (receive (cars+ans cdrs) (%cars+cdrs+ lists ans)
+	 (if (null? cars+ans) ans ; Done.
+	     (lp cdrs (apply kons cars+ans))))))))
 
 
 (define (fold-right kons knil lis1 . lists)
@@ -1270,13 +1268,19 @@
 ;;; assoc key lis [=]		Search alist by key comparison
 ;;; alist-delete key alist [=]	Alist-delete by key comparison
 
-(define (delete x lis . maybe-=)
-  (let ((= (:optional maybe-= equal?)))
-    (filter (lambda (y) (not (= x y))) lis)))
+(define delete
+  (case-lambda
+    ((x lis)
+     (delete x lis equal?))
+    ((x lis ＝)
+     (filter (lambda (y) (not (＝ x y))) lis))))
 
-(define (delete! x lis . maybe-=)
-  (let ((= (:optional maybe-= equal?)))
-    (filter! (lambda (y) (not (= x y))) lis)))
+(define delete!
+  (case-lambda
+    ((x lis)
+     (delete! x lis equal?))
+    ((x lis ＝)
+     (filter! (lambda (y) (not (＝ x y))) lis))))
 
 ;;; Extended from R4RS to take an optional comparison argument.
 ;;;m4_ifelse(member_needed,«yes»,«
@@ -1301,25 +1305,29 @@
 ;;; linear-time algorithm to kill the dups. Or use an algorithm based on
 ;;; element-marking. The former gives you O(n lg n), the latter is linear.
 
-(define (delete-duplicates lis . maybe-=)
-  (let ((elt= (:optional maybe-= equal?)))
-    (check-arg procedure? elt= delete-duplicates)
-    (let recur ((lis lis))
-      (if (null-list? lis) lis
-	  (let* ((x (car lis))
-		 (tail (cdr lis))
-		 (new-tail (recur (delete x tail elt=))))
-	    (if (eq? tail new-tail) lis (cons x new-tail)))))))
+(define delete-duplicates
+  (case-lambda
+    ((lis)
+     (delete-duplicates lis equal?))
+    ((lis elt=)
+     (let recur ((lis lis))
+       (if (null-list? lis) lis
+	   (let* ((x (car lis))
+		  (tail (cdr lis))
+		  (new-tail (recur (delete x tail elt=))))
+	     (if (eq? tail new-tail) lis (cons x new-tail))))))))
 
-(define (delete-duplicates! lis . maybe-=)
-  (let ((elt= (:optional maybe-= equal?)))
-    (check-arg procedure? elt= delete-duplicates!)
-    (let recur ((lis lis))
-      (if (null-list? lis) lis
-	  (let* ((x (car lis))
-		 (tail (cdr lis))
-		 (new-tail (recur (delete! x tail elt=))))
-	    (if (eq? tail new-tail) lis (cons x new-tail)))))))
+(define delete-duplicates!
+  (case-lambda
+    ((lis)
+     (delete-duplicates! lis equal?))
+    ((lis elt=)
+     (let recur ((lis lis))
+       (if (null-list? lis) lis
+	   (let* ((x (car lis))
+		  (tail (cdr lis))
+		  (new-tail (recur (delete! x tail elt=))))
+	     (if (eq? tail new-tail) lis (cons x new-tail))))))))
 
 
 ;;; alist stuff

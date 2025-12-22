@@ -320,7 +320,7 @@ top_srcdir = @top_srcdir@
 AUTOMAKE_OPTIONS = foreign
 EXTRA_DIST = testsuite.at $(srcdir)/package.m4 $(TESTSUITE) atlocal.in \
 	tests-template.at ast-nodes-preds-template.at \
-	base64-utf8-template.at syntax-template.at \
+	base64-utf8-template.at list-template.at syntax-template.at \
 	continuation-capture-template.at escaped-utf8-template.at \
 	expressions-template.at macros-template.at \
 	nix-attributebinding-node-template.at \
@@ -340,7 +340,8 @@ AUTOM4TE = $(SHELL) $(top_srcdir)/build-aux/missing --run autom4te
 AUTOTEST = $(AUTOM4TE) --language=autotest
 TESTSUITE = $(srcdir)/testsuite
 TESTSUITE_DEPS = $(srcdir)/atlocal.in $(srcdir)/package.m4 \
-	$(srcdir)/tests-template.at $(srcdir)/syntax-template.at \
+	$(srcdir)/tests-template.at $(srcdir)/list-template.at \
+	$(srcdir)/syntax-template.at \
 	$(srcdir)/continuation-capture-template.at \
 	$(srcdir)/shell-print-template.at \
 	$(srcdir)/base64-utf8-template.at \

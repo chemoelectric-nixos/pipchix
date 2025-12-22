@@ -68,6 +68,7 @@ EXTRA_DIST += atlocal.in
 EXTRA_DIST += tests-template.at
 EXTRA_DIST += ast-nodes-preds-template.at
 EXTRA_DIST += base64-utf8-template.at
+EXTRA_DIST += list-template.at
 EXTRA_DIST += syntax-template.at
 EXTRA_DIST += continuation-capture-template.at
 EXTRA_DIST += escaped-utf8-template.at
@@ -126,6 +127,7 @@ TESTSUITE_DEPS += $(srcdir)/atlocal.in
 TESTSUITE_DEPS += $(srcdir)/package.m4
 TESTSUITE_DEPS += $(srcdir)/tests-template.at
 
+TESTSUITE_DEPS += $(srcdir)/list-template.at
 TESTSUITE_DEPS += $(srcdir)/syntax-template.at
 TESTSUITE_DEPS += $(srcdir)/continuation-capture-template.at
 
