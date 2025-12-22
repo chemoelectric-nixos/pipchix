@@ -1,4 +1,10 @@
-stx-ck
+cstx
+cstx-quote
+cstx-quasiquote
+cstx-eval
+cstx-cons
+cstx-append
+cstx-list->vector
 
 stx-satisfied?
 
@@ -25,49 +31,49 @@ stx-null?
 stx-pair?
 stx-list?
 
-stx-car
-stx-cdr
-stx-caar
-stx-cadr
-stx-cdar
-stx-cddr
-stx-caaaar
-stx-caaar
-stx-caaddr
-stx-cadaar
-stx-cadar
-stx-cadddr
-stx-cdaaar
-stx-cdaar
-stx-cdaddr
-stx-cddaar
-stx-cddar
-stx-cddddr
-stx-caaadr
-stx-caadar
-stx-caadr
-stx-cadadr
-stx-caddar
-stx-caddr
-stx-cdaadr
-stx-cdadar
-stx-cdadr
-stx-cddadr
-stx-cdddar
-stx-cdddr
+stx-car cstx-car
+stx-cdr cstx-cdr
+stx-caar cstx-caar
+stx-cadr cstx-cadr
+stx-cdar cstx-cdar
+stx-cddr cstx-cddr
+stx-caaaar cstx-caaaar
+stx-caaar cstx-caaar
+stx-caaddr cstx-caaddr
+stx-cadaar cstx-cadaar
+stx-cadar cstx-cadar
+stx-cadddr cstx-cadddr
+stx-cdaaar cstx-cdaaar
+stx-cdaar cstx-cdaar
+stx-cdaddr cstx-cdaddr
+stx-cddaar cstx-cddaar
+stx-cddar cstx-cddar
+stx-cddddr cstx-cddddr
+stx-caaadr cstx-caaadr
+stx-caadar cstx-caadar
+stx-caadr cstx-caadr
+stx-cadadr cstx-cadadr
+stx-caddar cstx-caddar
+stx-caddr cstx-caddr
+stx-cdaadr cstx-cdaadr
+stx-cdadar cstx-cdadar
+stx-cdadr cstx-cdadr
+stx-cddadr cstx-cddadr
+stx-cdddar cstx-cdddar
+stx-cdddr cstx-cdddr
 
-stx-first
-stx-second
-stx-third
-stx-fourth
-stx-fifth
-stx-sixth
-stx-seventh
-stx-eighth
-stx-ninth
-stx-tenth
+stx-first cstx-first
+stx-second cstx-second
+stx-third cstx-third
+stx-fourth cstx-fourth
+stx-fifth cstx-fifth
+stx-sixth cstx-sixth
+stx-seventh cstx-seventh
+stx-eighth cstx-eighth
+stx-ninth cstx-ninth
+stx-tenth cstx-tenth
 
-stx-last
-stx-last-pair
-stx-length
-stx-reverse
+stx-last cstx-last
+stx-last-pair cstx-last-pair
+stx-length cstx-length
+stx-reverse cstx-reverse

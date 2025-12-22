@@ -32,6 +32,10 @@ m4_divert(-1)
 ;;;m4_define(«define_err_r6rs»,«(define (err . args) (apply error #f args))»)
 ;;;m4_define(«define_err_r7rs»,«(define err error)»)
 
+;;;m4_define(«define_ck_macros»,«
+m4_include(pipchix/ck.scm)
+;;;»)
+
 ;;;m4_define(«define_string_reverse_concatenate»,«
 (define (%%string-reverse-concatenate lst)
   ;; Concatenation without the possible limitations of using

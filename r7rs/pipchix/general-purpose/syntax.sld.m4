@@ -29,6 +29,7 @@ m4_include(pipchix/pipchix-includes.m4)
   (export m4_include(pipchix/general-purpose/syntax.exports.m4))
  
   (import (scheme base))
+  (import (scheme write)) ;; For debugging.
   (import (scheme cxr))
   (import (scheme eval))
   (import (scheme repl))

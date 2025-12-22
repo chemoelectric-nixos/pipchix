@@ -23,29 +23,36 @@
 ;;; WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ;;;
 
-(define-syntax stx-ck
-  ;; A dispatcher: applies the continuation ‘k’ to the value ‘v’. The
-  ;; continuation stack is ‘s’.
+
+define_ck_macros
+
+(define-syntax cstx
   (syntax-rules ()
-    ((_ () v)                          ; Done: return the final value.
-     v)
-    ((_ (k . s) v)                    ; Continue: call the next macro.
-     (k s v))))
+    ((_ x)
+     (ck () x))))
+
+(define-syntax cstx-quote (syntax-rules () ((_ s x) (c-quote s x))))
+(define-syntax cstx-quasiquote (syntax-rules () ((_ s x) (c-quasiquote s x))))
+(define-syntax cstx-eval (syntax-rules () ((_ s x) (c-eval s x))))
+(define-syntax cstx-cons (syntax-rules () ((_ s x) (c-cons s x))))
+(define-syntax cstx-append (syntax-rules () ((_ s x) (c-append s x))))
+(define-syntax cstx-list->vector (syntax-rules () ((_ s x) (c-list->vector s x))))
 
 ;;;m4_ifelse(scheme_standard,«r6rs»,«
-;;;m4_define(«stx_satisfied_environment»,(environment '(rnrs)))
+;;;m4_define(«eval_environment»,(environment '(rnrs)))
 ;;;»,scheme_standard,«r5rs»,«
-;;;m4_define(«stx_satisfied_environment»,(interaction-environment))
+;;;m4_define(«eval_environment»,(interaction-environment))
 ;;;»,«
-;;;m4_define(«stx_satisfied_environment»,(interaction-environment))
+;;;m4_define(«eval_environment»,(interaction-environment))
 ;;;»)
+
 ;;;m4_ifelse(general_macros,«er-macro-transformer»,«
 (define-syntax stx-satisfied?
   (er-macro-transformer
    (lambda (form rename compare)
      (let* ((args (cdr form))
             (pred-form (caar args))
-            (pred (eval pred-form stx_satisfied_environment))
+            (pred (eval pred-form eval_environment))
             (x (cadar args)))
        (if (pred x)
          (cadr args)
@@ -57,13 +64,13 @@
     (syntax-case stx ()
       ((_ (predicate x) if-true if-false)
        (let ((pred (eval (syntax->datum (syntax predicate))
-                         stx_satisfied_environment)))
+                         eval_environment)))
          (if (pred (syntax->datum (syntax x)))
            (syntax if-true)
            (syntax if-false))))
       ((_ (predicate x) if-true)
        (let ((pred (eval (syntax->datum (syntax predicate))
-                         stx_satisfied_environment)))
+                         eval_environment)))
          (when (pred (syntax->datum (syntax x)))
            (syntax if-true)))))))
 ;;;»)
@@ -132,21 +139,41 @@ simple_typetest_branch(list)
 
 ;;;m4_define(«one_argument_procedure»,«
 ;;;m4_ifelse(general_macros,«er-macro-transformer»,«
-(define-syntax stx-$1
+(define-syntax stx-$1                   ; An ordinary macro.
   (er-macro-transformer
    (lambda (form rename compare)
      (let ((args (cdr form)))
-       (when (and (pair? args)
-                  (null? (cdr args)))
-         (let ((x (car args)))
-           ((if (symbol? $1) (rename $1) $1) x)))))))
+       (let ((f (if (symbol? $1) (rename $1) $1))
+             (x (car args)))
+         (f x))))))
+
+(define-syntax cstx-$1                  ; A ck-macro.
+  (er-macro-transformer
+   (lambda (form rename compare)
+     (let ((ck (rename 'ck))
+           (s (cadr form))
+           (args (cddr form)))
+       (let* ((f (if (symbol? $1) (rename $1) $1))
+              (x (eval (car args) eval_environment))
+              (y (f x))
+              (retval `(,ck ,s ',y)))
+         retval)))))
 ;;;»,«
-(define-syntax stx-$1
+(define-syntax stx-$1                   ; An ordinary macro.
   (lambda (stx)
     (syntax-case stx ()
       ((¶ x)
        (let ((x^ (syntax->datum (syntax x))))
          (datum->syntax (syntax ¶) ($1 x^)))))))
+
+(define-syntax cstx-$1                  ; A ck-macro.
+  (lambda (stx)
+    (syntax-case stx ()
+      ((¶ s x)
+       (let* ((f $1)
+              (t (eval (syntax->datum (syntax x)) eval_environment))
+              (y (datum->syntax (syntax ¶) (f t))))
+         (quasisyntax (ck s '(unsyntax y))))))))
 ;;;»)
 ;;;») ;;; one_argument_procedure
 
@@ -156,12 +183,9 @@ simple_typetest_branch(list)
   (er-macro-transformer
    (lambda (form rename compare)
      (let ((args (cdr form)))
-       (when (and (pair? args)
-                  (pair? (cdr args))
-                  (null? (cddr args)))
-         (let ((x (car args))
-               (y (cadr args)))
-           ((if (symbol? $1) (rename $1) $1) x y)))))))
+       (let ((x (car args))
+             (y (cadr args)))
+         ((if (symbol? $1) (rename $1) $1) x y))))))
 ;;;»,«
 (define-syntax stx-$1
   (lambda (stx)
@@ -206,16 +230,30 @@ one_argument_procedure(cddadr)
 one_argument_procedure(cdddar)
 one_argument_procedure(cdddr)
 
-(define-syntax stx-first (syntax-rules () ((_ (a . ω)) a)))
-(define-syntax stx-second (syntax-rules () ((_ (a b . ω)) b)))
-(define-syntax stx-third (syntax-rules () ((_ (a b c . ω)) c)))
-(define-syntax stx-fourth (syntax-rules () ((_ (a b c d . ω)) d)))
-(define-syntax stx-fifth (syntax-rules () ((_ (a b c d e . ω)) e)))
-(define-syntax stx-sixth (syntax-rules () ((_ (a b c d e f . ω)) f)))
-(define-syntax stx-seventh (syntax-rules () ((_ (a b c d e f g . ω)) g)))
-(define-syntax stx-eighth (syntax-rules () ((_ (a b c d e f g h . ω)) h)))
-(define-syntax stx-ninth (syntax-rules () ((_ (a b c d e f g h i . ω)) i)))
-(define-syntax stx-tenth (syntax-rules () ((_ (a b c d e f g h i j . ω)) j)))
+;;;
+;;; These work fine, but cannot be made by our m4 code into ck-macros:
+;;;
+;;; (define-syntax stx-first (syntax-rules () ((_ (a . ω)) a)))
+;;; (define-syntax stx-second (syntax-rules () ((_ (a b . ω)) b)))
+;;; (define-syntax stx-third (syntax-rules () ((_ (a b c . ω)) c)))
+;;; (define-syntax stx-fourth (syntax-rules () ((_ (a b c d . ω)) d)))
+;;; (define-syntax stx-fifth (syntax-rules () ((_ (a b c d e . ω)) e)))
+;;; (define-syntax stx-sixth (syntax-rules () ((_ (a b c d e f . ω)) f)))
+;;; (define-syntax stx-seventh (syntax-rules () ((_ (a b c d e f g . ω)) g)))
+;;; (define-syntax stx-eighth (syntax-rules () ((_ (a b c d e f g h . ω)) h)))
+;;; (define-syntax stx-ninth (syntax-rules () ((_ (a b c d e f g h i . ω)) i)))
+;;; (define-syntax stx-tenth (syntax-rules () ((_ (a b c d e f g h i j . ω)) j)))
+
+one_argument_procedure(first)
+one_argument_procedure(second)
+one_argument_procedure(third)
+one_argument_procedure(fourth)
+one_argument_procedure(fifth)
+one_argument_procedure(sixth)
+one_argument_procedure(seventh)
+one_argument_procedure(eighth)
+one_argument_procedure(ninth)
+one_argument_procedure(tenth)
 
 one_argument_procedure(last)
 one_argument_procedure(last-pair)
@@ -231,5 +269,6 @@ m4_divert(-1)
 ;;; eval: (put 'stx-satisfied? 'scheme-indent-function 1)
 ;;; eval: (put 'stx-integer? 'scheme-indent-function 1)
 ;;; eval: (put 'stx-exact? 'scheme-indent-function 1)
+;;; eval: (put 'stx-list? 'scheme-indent-function 1)
 ;;; end:
 m4_divert«»m4_dnl

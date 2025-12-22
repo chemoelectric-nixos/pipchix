@@ -502,7 +502,7 @@ CLEANFILES = tmp.* $(R6RS_SCHEME) $(R6RS_SCHEME:%=%.tmp) \
 DISTCLEANFILES = Makefile GNUmakefile ${top_builddir}/tempname \
 	is-older
 EXTRA_DIST = silent-rules.mk COPYING README.adoc INSTALL AUTHORS \
-	pipchix/pipchix-includes.m4 $(R6RS_SCHEME:%=%.m4) \
+	$(PIPCHXINC) $(R6RS_SCHEME:%=%.m4) \
 	$(R6RS_SCHEME:r6rs/pipchix/%.sls=pipchix/%.m4) \
 	$(R6RS_SCHEME:r6rs/pipchix/%.sls=pipchix/%.exports.m4) \
 	$(R7RS_SCHEME:%=%.m4) \
@@ -517,6 +517,8 @@ nodist_r6rspipchix_DATA = $(am__append_2)
 nodist_r7rspipchix_DATA = $(am__append_3)
 nodist_chickeneggs5pipchix_DATA = $(am__append_1)
 M4_PREPROCESS = $(GNU_M4) -P -I '$(srcdir)'
+PIPCHXINC = $(srcdir)/pipchix/pipchix-includes.m4 \
+	$(srcdir)/pipchix/ck.scm
 R6RS_SCHEME = r6rs/pipchix/general-purpose/srfi-39.sls \
 	r6rs/pipchix/general-purpose/box.sls \
 	r6rs/pipchix/general-purpose/continuation-capture.sls \
@@ -1302,7 +1304,7 @@ uninstall-am: uninstall-nodist_chickeneggs5pipchixDATA \
 $(builddir)/r6rs/pipchix/%.sls: $(srcdir)/r6rs/pipchix/%.sls.m4 \
 	                        $(srcdir)/pipchix/%.m4 \
 	                        $(srcdir)/pipchix/%.exports.m4 \
-	                        $(srcdir)/pipchix/pipchix-includes.m4
+	                        $(PIPCHXINC)
 	$(call v,SLS.M4)$(MKDIR_P) $(@D) && \
 		$(M4_PREPROCESS) $(<) > $(@).tmp && \
 		mv $(@){.tmp,}
@@ -1310,7 +1312,7 @@ $(builddir)/r6rs/pipchix/%.sls: $(srcdir)/r6rs/pipchix/%.sls.m4 \
 $(builddir)/r7rs/pipchix/%.sld: $(srcdir)/r7rs/pipchix/%.sld.m4 \
 	                        $(srcdir)/pipchix/%.m4 \
 	                        $(srcdir)/pipchix/%.exports.m4 \
-	                        $(srcdir)/pipchix/pipchix-includes.m4
+	                        $(PIPCHXINC)
 	$(call v,SLD.M4)$(MKDIR_P) $(@D) && \
 		$(M4_PREPROCESS) $(<) > $(@).tmp && \
 		mv $(@){.tmp,}
@@ -1320,7 +1322,7 @@ $(builddir)/r7rs/pipchix/%.sld: $(srcdir)/r7rs/pipchix/%.sld.m4 \
 $(builddir)/$(CHICKEN_5_EGGDIR)/pipchix.%.scm: \
 	                   $(srcdir)/r7rs/pipchix/%.sld.m4 \
 	                   $(srcdir)/pipchix/%.m4 \
-	                   $(srcdir)/pipchix/pipchix-includes.m4
+	                   $(PIPCHXINC)
 	$(call v,SCM.M4) $(MKDIR_P) $(@D) && \
 		$(M4_PREPROCESS) $(<) > $(@).tmp && \
 		mv $(@){.tmp,}
@@ -1328,7 +1330,7 @@ $(builddir)/$(CHICKEN_5_EGGDIR)/pipchix.%.scm: \
 $(builddir)/$(CHICKEN_5_EGGDIR)/pipchix.general-purpose.%.scm: \
 	                   $(srcdir)/r7rs/pipchix/general-purpose/%.sld.m4 \
 	                   $(srcdir)/pipchix/general-purpose/%.m4 \
-	                   $(srcdir)/pipchix/pipchix-includes.m4
+	                   $(PIPCHXINC)
 	$(call v,SCM.M4) $(MKDIR_P) $(@D) && \
 		$(M4_PREPROCESS) $(<) > $(@).tmp && \
 		mv $(@){.tmp,}
@@ -1336,7 +1338,7 @@ $(builddir)/$(CHICKEN_5_EGGDIR)/pipchix.general-purpose.%.scm: \
 $(builddir)/$(CHICKEN_5_EGGDIR)/pipchix.macros.%.scm: \
 	                   $(srcdir)/r7rs/pipchix/macros/%.sld.m4 \
 	                   $(srcdir)/pipchix/macros/%.m4 \
-	                   $(srcdir)/pipchix/pipchix-includes.m4
+	                   $(PIPCHXINC)
 	$(call v,SCM.M4) $(MKDIR_P) $(@D) && \
 		$(M4_PREPROCESS) $(<) > $(@).tmp && \
 		mv $(@){.tmp,}
@@ -1397,7 +1399,7 @@ chicken-5-egg-stamp: $(CHICKEN_5_EGGFILES)
 	     ./is-older $(@) $(R7RS_SCHEME:%=${srcdir}/%.m4) \
 	         $(R7RS_SCHEME:r7rs/pipchix/%.sld=${srcdir}/pipchix/%.m4) \
                  $(R7RS_SCHEME:r7rs/pipchix/%.sld=${srcdir}/pipchix/%.exports.m4) \
-	         ${srcdir}/pipchix/pipchix-includes.m4; then \
+	         $(PIPCHXINC); then \
 	  ( \
 	    $(MKDIR_P) $(CHICKEN_5_EGGDIR) && \
 	    cd $(CHICKEN_5_EGGDIR) && \
