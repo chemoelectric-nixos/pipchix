@@ -373,8 +373,8 @@
 ;;; 
 ;;; 
 ;;; 
-;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; ;;; BOOLEAN LOGIC
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; BOOLEAN LOGIC
 ;;; 
 ;;; ;;; (c-not X)  ->  '#t or '#f
 ;;; ;;;
@@ -386,136 +386,136 @@
 ;;;      (ck s '#t))
 ;;;     ((c-not s otherwise)
 ;;;      (ck s '#f))))
-;;; 
-;;; 
-;;; ;;; (c-true X ...)  ->  '#t
-;;; ;;;
-;;; ;;; Always yields '#t, regardless of its arguments.
-;;; ;;; May be useful for some higher-order macros.
-;;; ;;; Equivalent to (c-constantly '#t X ...).
-;;; (define-syntax c-true
-;;;   (syntax-rules (quote)
-;;;     ((c-true s X ...)
-;;;      (ck s '#t))))
-;;; 
-;;; 
-;;; ;;; (c-false X ...)  ->  '#f
-;;; ;;;
-;;; ;;; Always yields '#f, regardless of its arguments.
-;;; ;;; May be useful for some higher-order macros.
-;;; ;;; Equivalent to (c-constantly '#f X ...).
-;;; (define-syntax c-false
-;;;   (syntax-rules (quote)
-;;;     ((c-false s X ...)
-;;;      (ck s '#f))))
-;;; 
-;;; 
-;;; ;;; (c-if TEST PASS FAIL)  ->  PASS or FAIL
-;;; ;;;
-;;; ;;; Conditional branching. If TEST is '#f, this yields FAIL. Otherwise
-;;; ;;; it yields PASS.
-;;; ;;;
-;;; ;;; Due to the way the CK machine works, both branches will be
-;;; ;;; expanded, then the unneeded branch will be discarded. This is
-;;; ;;; analogous to (lambda (test pass fail) (if test pass fail)).
-;;; ;;;
-;;; ;;; If you only want the needed branch to be expanded (e.g. because
-;;; ;;; the branches are complex and slow to expand, or because it would
-;;; ;;; be an error to expand the unneeded branch), use `c-if*' instead.
-;;; (define-syntax c-if
-;;;   (syntax-rules (quote)
-;;;     ((c-if s '#f 'pass 'fail)           ; If #f, expand to fail.
-;;;      (ck s 'fail))
-;;;     ((c-if s otherwise 'pass 'fail)     ; Else, expand to pass.
-;;;      (ck s 'pass))))
-;;; 
-;;; 
-;;; ;;; (c-if* TEST 'PASS 'FAIL)  ->  PASS or FAIL
-;;; ;;;
-;;; ;;; Similar to `c-if', except that the branches must have an extra
-;;; ;;; level of quoting, and only one branch will be expanded. This is
-;;; ;;; more similar to how `if' behaves, but it is a bit awkward to use.
-;;; ;;; Analogous to
-;;; ;;; (lambda (test pass fail) (if test (eval pass) (eval fail)))
-;;; (define-syntax c-if*
-;;;   (syntax-rules (quote)
-;;;     ((c-if* s '#f 'pass 'fail)
-;;;      (ck s fail))
-;;;     ((c-if* s otherwise 'pass 'fail)
-;;;      (ck s pass))))
-;;; 
-;;; 
-;;; ;;; (c-or X ...)  ->  item or '#f
-;;; ;;;
-;;; ;;; Yields the first argument that is not '#f. Yields '#f if all
-;;; ;;; arguments are '#f, or if there are no arguments.
-;;; ;;;
-;;; ;;; All arguments will be expanded, but at most one will be kept.
-;;; ;;; In other words, there is no short circuiting. If you only want to
-;;; ;;; expand the arguments as needed, use `c-or*' instead.
-;;; (define-syntax c-or
-;;;   (syntax-rules (quote)
-;;;     ((c-or s)
-;;;      (ck s '#f))
-;;;     ((c-or s 'h)
-;;;      (ck s 'h))
-;;;     ;; TODO: Can this be optimized to avoid expanding 'h twice?
-;;;     ((c-or s 'h . t)
-;;;      (ck s (c-if 'h 'h (c-or . t))))))
-;;; 
-;;; 
-;;; ;;; (c-or* 'X ...)  ->  item or '#f
-;;; ;;;
-;;; ;;; Similar to `c-or', but all arguments must have an extra level of
-;;; ;;; quoting, and the arguments will be expanded one at a time until a
-;;; ;;; non-'#f value is found. This is more similar to how `or' behaves,
-;;; ;;; but it is a bit awkward to use.
-;;; (define-syntax c-or*
-;;;   (syntax-rules (quote)
-;;;     ((c-or* s)
-;;;      (ck s '#f))
-;;;     ((c-or* s 'h)
-;;;      (ck s h))
-;;;     ;; TODO: Can this be optimized to avoid expanding 'h twice?
-;;;     ((c-or* s 'h . t)
-;;;      (ck s (c-if* h 'h '(c-or* . t))))))
-;;; 
-;;; 
-;;; ;;; (c-and X ...)  ->  item or '#f
-;;; ;;;
-;;; ;;; If all arguments are not '#f, yields the last argument. If any of
-;;; ;;; the arguments are '#f, yields '#f. If there are no arguments,
-;;; ;;; yields '#t.
-;;; ;;;
-;;; ;;; All arguments will be expanded, but at most one will be kept.
-;;; ;;; In other words, there is no short circuiting. If you only want to
-;;; ;;; expand the arguments as needed, use `c-and*' instead.
-;;; (define-syntax c-and
-;;;   (syntax-rules (quote)
-;;;     ((c-and s)
-;;;      (ck s '#t))
-;;;     ((c-and s 'h)
-;;;      (ck s 'h))
-;;;     ((c-and s 'h . t)
-;;;      (ck s (c-if 'h (c-and . t) '#f)))))
-;;; 
-;;; 
-;;; ;;; (c-and* 'X ...)  ->  item or '#f
-;;; ;;;
-;;; ;;; Similar to `c-and', but all the arguments must have an extra level
-;;; ;;; of quoting, and the arguments will be expanded one at a time until
-;;; ;;; a '#f value is found. This is more similar to how `and' behaves,
-;;; ;;; but it is a bit awkward to use.
-;;; (define-syntax c-and*
-;;;   (syntax-rules (quote)
-;;;     ((c-and* s)
-;;;      (ck s '#t))
-;;;     ((c-and* s 'h)
-;;;      (ck s h))
-;;;     ((c-and* s 'h . t)
-;;;      (ck s (c-if* h '(c-and* . t) ''#f)))))
-;;; 
-;;; 
+
+
+;;; (c-true X ...)  ->  '#t
+;;;
+;;; Always yields '#t, regardless of its arguments.
+;;; May be useful for some higher-order macros.
+;;; Equivalent to (c-constantly '#t X ...).
+(define-syntax c-true
+  (syntax-rules (quote)
+    ((c-true s X ...)
+     (ck s '#t))))
+
+
+;;; (c-false X ...)  ->  '#f
+;;;
+;;; Always yields '#f, regardless of its arguments.
+;;; May be useful for some higher-order macros.
+;;; Equivalent to (c-constantly '#f X ...).
+(define-syntax c-false
+  (syntax-rules (quote)
+    ((c-false s X ...)
+     (ck s '#f))))
+
+
+;;; (c-if TEST PASS FAIL)  ->  PASS or FAIL
+;;;
+;;; Conditional branching. If TEST is '#f, this yields FAIL. Otherwise
+;;; it yields PASS.
+;;;
+;;; Due to the way the CK machine works, both branches will be
+;;; expanded, then the unneeded branch will be discarded. This is
+;;; analogous to (lambda (test pass fail) (if test pass fail)).
+;;;
+;;; If you only want the needed branch to be expanded (e.g. because
+;;; the branches are complex and slow to expand, or because it would
+;;; be an error to expand the unneeded branch), use `c-if*' instead.
+(define-syntax c-if
+  (syntax-rules (quote)
+    ((c-if s '#f 'pass 'fail)           ; If #f, expand to fail.
+     (ck s 'fail))
+    ((c-if s otherwise 'pass 'fail)     ; Else, expand to pass.
+     (ck s 'pass))))
+
+
+;;; (c-if* TEST 'PASS 'FAIL)  ->  PASS or FAIL
+;;;
+;;; Similar to `c-if', except that the branches must have an extra
+;;; level of quoting, and only one branch will be expanded. This is
+;;; more similar to how `if' behaves, but it is a bit awkward to use.
+;;; Analogous to
+;;; (lambda (test pass fail) (if test (eval pass) (eval fail)))
+(define-syntax c-if*
+  (syntax-rules (quote)
+    ((c-if* s '#f 'pass 'fail)
+     (ck s fail))
+    ((c-if* s otherwise 'pass 'fail)
+     (ck s pass))))
+
+
+;;; (c-or X ...)  ->  item or '#f
+;;;
+;;; Yields the first argument that is not '#f. Yields '#f if all
+;;; arguments are '#f, or if there are no arguments.
+;;;
+;;; All arguments will be expanded, but at most one will be kept.
+;;; In other words, there is no short circuiting. If you only want to
+;;; expand the arguments as needed, use `c-or*' instead.
+(define-syntax c-or
+  (syntax-rules (quote)
+    ((c-or s)
+     (ck s '#f))
+    ((c-or s 'h)
+     (ck s 'h))
+    ;; TODO: Can this be optimized to avoid expanding 'h twice?
+    ((c-or s 'h . t)
+     (ck s (c-if 'h 'h (c-or . t))))))
+
+
+;;; (c-or* 'X ...)  ->  item or '#f
+;;;
+;;; Similar to `c-or', but all arguments must have an extra level of
+;;; quoting, and the arguments will be expanded one at a time until a
+;;; non-'#f value is found. This is more similar to how `or' behaves,
+;;; but it is a bit awkward to use.
+(define-syntax c-or*
+  (syntax-rules (quote)
+    ((c-or* s)
+     (ck s '#f))
+    ((c-or* s 'h)
+     (ck s h))
+    ;; TODO: Can this be optimized to avoid expanding 'h twice?
+    ((c-or* s 'h . t)
+     (ck s (c-if* h 'h '(c-or* . t))))))
+
+
+;;; (c-and X ...)  ->  item or '#f
+;;;
+;;; If all arguments are not '#f, yields the last argument. If any of
+;;; the arguments are '#f, yields '#f. If there are no arguments,
+;;; yields '#t.
+;;;
+;;; All arguments will be expanded, but at most one will be kept.
+;;; In other words, there is no short circuiting. If you only want to
+;;; expand the arguments as needed, use `c-and*' instead.
+(define-syntax c-and
+  (syntax-rules (quote)
+    ((c-and s)
+     (ck s '#t))
+    ((c-and s 'h)
+     (ck s 'h))
+    ((c-and s 'h . t)
+     (ck s (c-if 'h (c-and . t) '#f)))))
+
+
+;;; (c-and* 'X ...)  ->  item or '#f
+;;;
+;;; Similar to `c-and', but all the arguments must have an extra level
+;;; of quoting, and the arguments will be expanded one at a time until
+;;; a '#f value is found. This is more similar to how `and' behaves,
+;;; but it is a bit awkward to use.
+(define-syntax c-and*
+  (syntax-rules (quote)
+    ((c-and* s)
+     (ck s '#t))
+    ((c-and* s 'h)
+     (ck s h))
+    ((c-and* s 'h . t)
+     (ck s (c-if* h '(c-and* . t) ''#f)))))
+
+
 ;;; ;;; (c-null? X)  ->  '#t or '#f
 ;;; ;;;
 ;;; ;;; Yields '#t if the argument is the empty list, '().

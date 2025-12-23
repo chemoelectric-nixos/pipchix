@@ -5,6 +5,12 @@ cstx-quote
 cstx-quasiquote
 cstx-eval
 
+cstx-true
+cstx-false
+cstx-if  cstx-if*
+cstx-and cstx-and*
+cstx-or  cstx-or*
+
 ;;;;; --------------------------------------------------
 
 
@@ -56,6 +62,25 @@ stx_cstx(pair?)
 stx_cstx(null?)
 stx_cstx(null-list?)
 stx_cstx(not-pair?)
+
+cstx-exact-integer?
+
+stx_cstx(number?)
+stx_cstx(exact?)
+stx_cstx(inexact?)
+stx_cstx(integer?)
+stx_cstx(rational?)
+stx_cstx(real?)
+stx_cstx(complex?)
+stx_cstx(finite?)
+stx_cstx(infinite?)
+stx_cstx(nan?)
+stx_cstx(boolean?)
+stx_cstx(symbol?)
+stx_cstx(string?)
+stx_cstx(char?)
+stx_cstx(vector?)
+stx_cstx(bytevector?)
 
 stx_cstx(car)
 stx_cstx(cdr)
@@ -110,5 +135,7 @@ stx_cstx(xcons)
 stx_cstx(cons*)
 stx_cstx(list)
 stx_cstx(append)
+
+stx_cstx(not)
 
 ;;;;; --------------------------------------------------

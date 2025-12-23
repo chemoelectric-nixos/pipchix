@@ -23,6 +23,11 @@
 ;;; WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ;;;
 
+(define-syntax prep-cstx
+  (syntax-rules ()
+    ((_ z)
+     (if (boolean? z) `,z z))))
+
 (define-syntax c-cons (syntax-rules () ((_ s x y) (cstx-cons s x y))))
 (define-syntax c-append (syntax-rules () ((_ s . args) (cstx-append s . args))))
 (define-syntax c-list->vector (syntax-rules () ((_ s x y) (cstx-list->vector s x y))))
@@ -40,6 +45,15 @@ define_ck_macros
 (define-syntax cstx-quote (syntax-rules () ((_ s x) (c-quote s x))))
 (define-syntax cstx-quasiquote (syntax-rules () ((_ s x) (c-quasiquote s x))))
 (define-syntax cstx-eval (syntax-rules () ((_ s x) (c-eval s x))))
+
+(define-syntax cstx-true (syntax-rules () ((_ s . args) (c-true s . args))))
+(define-syntax cstx-false (syntax-rules () ((_ s . args) (c-false s . args))))
+(define-syntax cstx-if (syntax-rules () ((_ s x t f) (c-if s x t f))))
+(define-syntax cstx-if* (syntax-rules () ((_ s x t f) (c-if* s x t f))))
+(define-syntax cstx-and (syntax-rules () ((_ s . args) (c-and s . args))))
+(define-syntax cstx-and* (syntax-rules () ((_ s . args) (c-and* s . args))))
+(define-syntax cstx-or (syntax-rules () ((_ s . args) (c-or s . args))))
+(define-syntax cstx-or* (syntax-rules () ((_ s . args) (c-or* s . args))))
 
 ;;;m4_ifelse(scheme_standard,«r6rs»,«
 ;;;m4_define(«eval_environment»,(environment '(rnrs)))
@@ -162,7 +176,7 @@ m4_pushdef(«PROC»,m4_ifelse($2,«»,«$1»,«$2»))
               (x (eval (car args) eval_environment))
               (y (f x))
               (retval `(,ck ,s ',y)))
-         retval)))))
+         (prep-cstx retval))))))
 ;;;»,«
 (define-syntax stx-NAME                 ; An ordinary macro.
   (lambda (stx)
@@ -178,10 +192,10 @@ m4_pushdef(«PROC»,m4_ifelse($2,«»,«$1»,«$2»))
        (let* ((f PROC)
               (t (eval (syntax->datum (syntax x)) eval_environment))
               (y (datum->syntax (syntax ¶) (f t))))
-         (quasisyntax (ck s '(unsyntax y))))))))
+         (prep-cstx (quasisyntax (ck s '(unsyntax y)))))))))
 ;;;»)
 m4_popdef(«NAME»,«PROC»)
-;;;») ;;; one_argument_procedure
+;;;»)
 
 ;;;m4_define(«two_argument_procedure»,«
 m4_pushdef(«NAME»,«$1»)
@@ -207,7 +221,7 @@ m4_pushdef(«PROC»,m4_ifelse($2,«»,«$1»,«$2»))
               (y (eval (cadr args) eval_environment))
               (z (f x y))
               (retval `(,ck ,s ',z)))
-         retval)))))
+         (prep-cstx retval))))))
 ;;;»,«
 (define-syntax stx-NAME                 ; An ordinary macro.
   (lambda (stx)
@@ -227,7 +241,7 @@ m4_pushdef(«PROC»,m4_ifelse($2,«»,«$1»,«$2»))
               (u (eval (syntax->datum (syntax x)) eval_environment))
               (v (eval (syntax->datum (syntax y)) eval_environment))
               (z (datum->syntax (syntax ¶) (f u v))))
-         (quasisyntax (ck s '(unsyntax z))))))))
+         (prep-cstx (quasisyntax (ck s '(unsyntax z)))))))))
 ;;;»)
 m4_popdef(«NAME»,«PROC»)
 ;;;»)
@@ -254,7 +268,7 @@ m4_pushdef(«PROC»,m4_ifelse($2,«»,«$1»,«$2»))
        (let* ((f (if (symbol? PROC) (rename PROC) PROC))
               (z (apply f (map evaluate args)))
               (retval `(,ck ,s ',z)))
-         retval)))))
+         (prep-cstx retval))))))
 ;;;»,«
 (define-syntax stx-NAME                 ; An ordinary macro.
   (lambda (stx)
@@ -274,7 +288,7 @@ m4_pushdef(«PROC»,m4_ifelse($2,«»,«$1»,«$2»))
               (x* (map evaluate (syntax->datum (syntax args))))
               (y (apply f x*))
               (z (datum->syntax (syntax ¶) y)))
-         (quasisyntax (ck s '(unsyntax z))))))))
+         (prep-cstx (quasisyntax (ck s '(unsyntax z)))))))))
 ;;;»)
 m4_popdef(«NAME»,«PROC»)
 ;;;»)
@@ -289,6 +303,33 @@ one_argument_procedure(pair?)
 one_argument_procedure(null?)
 one_argument_procedure(null-list?)
 one_argument_procedure(not-pair?)
+
+;;; m4_ifelse(scheme_standard,«r7rs»,«
+one_argument_procedure(exact-integer?)
+;;; »,«
+(define-syntax cstx-exact-integer?
+  (syntax-rules ()
+    ((_ s x)
+     (ck s (cstx-and* (cstx-quote (cstx-integer? x))
+                      (cstx-quote (cstx-exact? x)))))))
+;;; »)
+
+one_argument_procedure(number?)
+one_argument_procedure(exact?)
+one_argument_procedure(inexact?)
+one_argument_procedure(integer?)
+one_argument_procedure(rational?)
+one_argument_procedure(real?)
+one_argument_procedure(complex?)
+one_argument_procedure(finite?)
+one_argument_procedure(infinite?)
+one_argument_procedure(nan?)
+one_argument_procedure(boolean?)
+one_argument_procedure(symbol?)
+one_argument_procedure(string?)
+one_argument_procedure(char?)
+one_argument_procedure(vector?)
+one_argument_procedure(bytevector?)
 
 one_argument_procedure(car)
 one_argument_procedure(cdr)
@@ -357,6 +398,8 @@ two_argument_procedure(xcons)
 general_arguments_procedure(cons*)
 general_arguments_procedure(list)
 general_arguments_procedure(append)
+
+one_argument_procedure(not)
 
 m4_divert(-1)
 ;;; local variables:
