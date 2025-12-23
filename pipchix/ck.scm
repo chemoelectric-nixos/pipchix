@@ -1277,10 +1277,13 @@
 ;;;
 ;;; Yields a vector containing the same elements as the given list.
 ;;; Analogous to `list->vector' from SRFI 43.
+
+;;; m4_ifelse(c_list_to_vector_provided,«yes»,,«
 (define-syntax c-list->vector
   (syntax-rules (quote)
     ((c-list->vector s '(x ...))
      (ck s '#(x ...)))))
+;;; »)
 
 
 ;;; ;;; (c-vector->list V)  ->  list

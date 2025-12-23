@@ -25,9 +25,11 @@
 
 (define-syntax c-cons (syntax-rules () ((_ s x y) (cstx-cons s x y))))
 (define-syntax c-append (syntax-rules () ((_ s . args) (cstx-append s . args))))
+(define-syntax c-list->vector (syntax-rules () ((_ s x y) (cstx-list->vector s x y))))
 
 m4_define(«c_cons_provided»,«yes»)
 m4_define(«c_append_provided»,«yes»)
+m4_define(«c_list_to_vector_provided»,«yes»)
 define_ck_macros
 
 (define-syntax cstx
@@ -38,7 +40,6 @@ define_ck_macros
 (define-syntax cstx-quote (syntax-rules () ((_ s x) (c-quote s x))))
 (define-syntax cstx-quasiquote (syntax-rules () ((_ s x) (c-quasiquote s x))))
 (define-syntax cstx-eval (syntax-rules () ((_ s x) (c-eval s x))))
-(define-syntax cstx-list->vector (syntax-rules () ((_ s x) (c-list->vector s x))))
 
 ;;;m4_ifelse(scheme_standard,«r6rs»,«
 ;;;m4_define(«eval_environment»,(environment '(rnrs)))
@@ -290,6 +291,7 @@ one_argument_procedure(last)
 one_argument_procedure(last-pair)
 one_argument_procedure(length)
 one_argument_procedure(reverse)
+one_argument_procedure(list->vector)
 
 two_argument_procedure(cons)
 
