@@ -23,37 +23,36 @@
 ;;; WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ;;;
 
-(define-syntax prep-cstx
-  (syntax-rules ()
-    ((_ z)
-     (if (boolean? z) `,z z))))
+(define-syntax c-cons (syntax-rules () ((_ s x y) (stx-cons s x y))))
+(define-syntax c-append (syntax-rules () ((_ s . args) (stx-append s . args))))
+(define-syntax c-list->vector (syntax-rules () ((_ s x y) (stx-list->vector s x y))))
 
-(define-syntax c-cons (syntax-rules () ((_ s x y) (cstx-cons s x y))))
-(define-syntax c-append (syntax-rules () ((_ s . args) (cstx-append s . args))))
-(define-syntax c-list->vector (syntax-rules () ((_ s x y) (cstx-list->vector s x y))))
-
-m4_define(«c_cons_provided»,«yes»)
-m4_define(«c_append_provided»,«yes»)
-m4_define(«c_list_to_vector_provided»,«yes»)
+m4_define(«c_cons_provided»,«yes»)m4_dnl
+m4_define(«c_append_provided»,«yes»)m4_dnl
+m4_define(«c_list_to_vector_provided»,«yes»)m4_dnl
 define_ck_macros
 
-(define-syntax cstx
+(define-syntax stx
   (syntax-rules ()
     ((_ x)
      (ck () x))))
 
-(define-syntax cstx-quote (syntax-rules () ((_ s x) (c-quote s x))))
-(define-syntax cstx-quasiquote (syntax-rules () ((_ s x) (c-quasiquote s x))))
-(define-syntax cstx-eval (syntax-rules () ((_ s x) (c-eval s x))))
+(define-syntax stx-quote (syntax-rules () ((_ s x) (c-quote s x))))
+(define-syntax stx-quasiquote (syntax-rules () ((_ s x) (c-quasiquote s x))))
+(define-syntax stx-eval (syntax-rules () ((_ s x) (c-eval s x))))
 
-(define-syntax cstx-true (syntax-rules () ((_ s . args) (c-true s . args))))
-(define-syntax cstx-false (syntax-rules () ((_ s . args) (c-false s . args))))
-(define-syntax cstx-if (syntax-rules () ((_ s x t f) (c-if s x t f))))
-(define-syntax cstx-if* (syntax-rules () ((_ s x t f) (c-if* s x t f))))
-(define-syntax cstx-and (syntax-rules () ((_ s . args) (c-and s . args))))
-(define-syntax cstx-and* (syntax-rules () ((_ s . args) (c-and* s . args))))
-(define-syntax cstx-or (syntax-rules () ((_ s . args) (c-or s . args))))
-(define-syntax cstx-or* (syntax-rules () ((_ s . args) (c-or* s . args))))
+(define-syntax stx-true (syntax-rules () ((_ s . args) (c-true s . args))))
+(define-syntax stx-false (syntax-rules () ((_ s . args) (c-false s . args))))
+(define-syntax stx-if (syntax-rules () ((_ s x t f) (c-if s x t f))))
+(define-syntax stx-if* (syntax-rules () ((_ s x t f) (c-if* s x t f))))
+(define-syntax stx-and (syntax-rules () ((_ s . args) (c-and s . args))))
+(define-syntax stx-and* (syntax-rules () ((_ s . args) (c-and* s . args))))
+(define-syntax stx-or (syntax-rules () ((_ s . args) (c-or s . args))))
+(define-syntax stx-or* (syntax-rules () ((_ s . args) (c-or* s . args))))
+
+;;;m4_divert(-1)
+
+m4_define(«stx_output»,«(if (boolean? $1) `,$1 $1)»)
 
 ;;;m4_ifelse(scheme_standard,«r6rs»,«
 ;;;m4_define(«eval_environment»,(environment '(rnrs)))
@@ -63,110 +62,11 @@ define_ck_macros
 ;;;m4_define(«eval_environment»,(interaction-environment))
 ;;;»)
 
-;;;m4_ifelse(general_macros,«er-macro-transformer»,«
-(define-syntax if-stx-satisfied
-  (er-macro-transformer
-   (lambda (form rename compare)
-     (let* ((args (cdr form))
-            (pred-form (caar args))
-            (pred (eval pred-form eval_environment))
-            (x (cadar args)))
-       (if (pred x)
-         (cadr args)
-         (when (pair? (cddr args))
-           (caddr args)))))))
-;;;»,«
-(define-syntax if-stx-satisfied
-  (lambda (stx)
-    (syntax-case stx ()
-      ((_ (predicate x) if-true if-false)
-       (let ((pred (eval (syntax->datum (syntax predicate))
-                         eval_environment)))
-         (if (pred (syntax->datum (syntax x)))
-           (syntax if-true)
-           (syntax if-false))))
-      ((_ (predicate x) if-true)
-       (let ((pred (eval (syntax->datum (syntax predicate))
-                         eval_environment)))
-         (when (pred (syntax->datum (syntax x)))
-           (syntax if-true)))))))
-;;;»)
-
-;;;m4_divert(-1)
-;;;m4_ifelse(general_macros,«er-macro-transformer»,«
-;;;m4_define(«simple_predicate_branch»,«
-(define-syntax $1
-  (er-macro-transformer
-   (lambda (form rename compare)
-     (let* ((args (cdr form))
-            (x (car args)))
-       (if ((if (symbol? $2) (rename $2) $2) x)
-         (cadr args)
-         (when (pair? (cddr args))
-           (caddr args)))))))
-;;;»)
-;;;»,«
-;;;m4_define(«simple_predicate_branch»,«
-(define-syntax $1
-  (lambda (stx)
-    (syntax-case stx ()
-      ((_ x if-true if-false)
-       (if ($2 (syntax->datum (syntax x)))
-         (syntax if-true)
-         (syntax if-false)))
-      ((_ x if-true)
-       (when ($2 (syntax->datum (syntax x)))
-         (syntax if-true))))))
-;;;»)
-;;;»)
-;;;m4_define(«simple_typetest_branch»,simple_predicate_branch(if-stx-$1,$1?))
-;;;;;;m4_divert
-
-simple_typetest_branch(boolean)
-simple_typetest_branch(number)
-simple_typetest_branch(exact)
-simple_typetest_branch(inexact)
-simple_typetest_branch(integer)
-simple_typetest_branch(rational)
-simple_typetest_branch(real)
-simple_typetest_branch(complex)
-simple_typetest_branch(finite)
-simple_typetest_branch(infinite)
-simple_typetest_branch(nan)
-
-;;;m4_ifelse(scheme_standard,«r7rs»,«
-simple_typetest_branch(exact-integer)
-;;;»,«
-simple_predicate_branch(if-stx-exact-integer,
-                        (lambda (x)
-                          (and (integer? x) (exact? x))))
-;;;»)
-
-simple_typetest_branch(symbol)
-simple_typetest_branch(string)
-simple_typetest_branch(char)
-simple_typetest_branch(vector)
-simple_typetest_branch(bytevector)
-
-simple_typetest_branch(null)
-simple_typetest_branch(pair)
-simple_typetest_branch(list)
-
-;;;m4_divert(-1)
-
 ;;;m4_define(«one_argument_procedure»,«
 m4_pushdef(«NAME»,«$1»)
 m4_pushdef(«PROC»,m4_ifelse($2,«»,«$1»,«$2»))
 ;;;m4_ifelse(general_macros,«er-macro-transformer»,«
-(define-syntax stx-NAME                 ; An ordinary macro.
-  (er-macro-transformer
-   (lambda (form rename compare)
-     (let ((args (cdr form)))
-       (let ((f (if (symbol? PROC) (rename PROC) PROC))
-             (x (car args)))
-         (f x))))))
-
-(define-syntax cstx-NAME                ; A ck-macro.
+(define-syntax stx-NAME
   (er-macro-transformer
    (lambda (form rename compare)
      (let ((ck (rename 'ck))
@@ -176,23 +76,16 @@ m4_pushdef(«PROC»,m4_ifelse($2,«»,«$1»,«$2»))
               (x (eval (car args) eval_environment))
               (y (f x))
               (retval `(,ck ,s ',y)))
-         (prep-cstx retval))))))
+         (stx_output(retval)))))))
 ;;;»,«
-(define-syntax stx-NAME                 ; An ordinary macro.
-  (lambda (stx)
-    (syntax-case stx ()
-      ((¶ x)
-       (let ((x^ (syntax->datum (syntax x))))
-         (datum->syntax (syntax ¶) (PROC x^)))))))
-
-(define-syntax cstx-NAME                ; A ck-macro.
+(define-syntax stx-NAME
   (lambda (stx)
     (syntax-case stx ()
       ((¶ s x)
        (let* ((f PROC)
               (t (eval (syntax->datum (syntax x)) eval_environment))
               (y (datum->syntax (syntax ¶) (f t))))
-         (prep-cstx (quasisyntax (ck s '(unsyntax y)))))))))
+         (stx_output((quasisyntax (ck s '(unsyntax y))))))))))
 ;;;»)
 m4_popdef(«NAME»,«PROC»)
 ;;;»)
@@ -201,16 +94,7 @@ m4_popdef(«NAME»,«PROC»)
 m4_pushdef(«NAME»,«$1»)
 m4_pushdef(«PROC»,m4_ifelse($2,«»,«$1»,«$2»))
 ;;;m4_ifelse(general_macros,«er-macro-transformer»,«
-(define-syntax stx-NAME                 ; An ordinary macro.
-  (er-macro-transformer
-   (lambda (form rename compare)
-     (let ((args (cdr form)))
-       (let ((f (if (symbol? PROC) (rename PROC) PROC))
-             (x (car args))
-             (y (cadr args)))
-         (f x y))))))
-
-(define-syntax cstx-NAME                ; A ck-macro.
+(define-syntax stx-NAME
   (er-macro-transformer
    (lambda (form rename compare)
      (let ((ck (rename 'ck))
@@ -221,19 +105,9 @@ m4_pushdef(«PROC»,m4_ifelse($2,«»,«$1»,«$2»))
               (y (eval (cadr args) eval_environment))
               (z (f x y))
               (retval `(,ck ,s ',z)))
-         (prep-cstx retval))))))
+         (stx_output(retval)))))))
 ;;;»,«
-(define-syntax stx-NAME                 ; An ordinary macro.
-  (lambda (stx)
-    (syntax-case stx ()
-      ((¶ x y)
-       (let* ((f PROC)
-              (u (syntax->datum (syntax x)))
-              (v (syntax->datum (syntax y)))
-              (z (datum->syntax (syntax ¶) (f u v))))
-         z)))))
-
-(define-syntax cstx-NAME                ; A ck-macro.
+(define-syntax stx-NAME
   (lambda (stx)
     (syntax-case stx ()
       ((¶ s x y)
@@ -241,7 +115,7 @@ m4_pushdef(«PROC»,m4_ifelse($2,«»,«$1»,«$2»))
               (u (eval (syntax->datum (syntax x)) eval_environment))
               (v (eval (syntax->datum (syntax y)) eval_environment))
               (z (datum->syntax (syntax ¶) (f u v))))
-         (prep-cstx (quasisyntax (ck s '(unsyntax z)))))))))
+         (stx_output((quasisyntax (ck s '(unsyntax z))))))))))
 ;;;»)
 m4_popdef(«NAME»,«PROC»)
 ;;;»)
@@ -250,14 +124,7 @@ m4_popdef(«NAME»,«PROC»)
 m4_pushdef(«NAME»,«$1»)
 m4_pushdef(«PROC»,m4_ifelse($2,«»,«$1»,«$2»))
 ;;;m4_ifelse(general_macros,«er-macro-transformer»,«
-(define-syntax stx-NAME                 ; An ordinary macro.
-  (er-macro-transformer
-   (lambda (form rename compare)
-     (let ((args (cdr form)))
-       (let ((f (if (symbol? PROC) (rename PROC) PROC)))
-         (apply f args))))))
-
-(define-syntax cstx-NAME                ; A ck-macro.
+(define-syntax stx-NAME
   (er-macro-transformer
    (lambda (form rename compare)
      (let ((evaluate (lambda (ea)
@@ -268,17 +135,9 @@ m4_pushdef(«PROC»,m4_ifelse($2,«»,«$1»,«$2»))
        (let* ((f (if (symbol? PROC) (rename PROC) PROC))
               (z (apply f (map evaluate args)))
               (retval `(,ck ,s ',z)))
-         (prep-cstx retval))))))
+         (stx_output(retval)))))))
 ;;;»,«
-(define-syntax stx-NAME                 ; An ordinary macro.
-  (lambda (stx)
-    (syntax-case stx ()
-      ((¶ . args)
-       (let* ((f PROC)
-              (y (apply f (syntax->datum (syntax args)))))
-         (datum->syntax (syntax ¶) y))))))
-
-(define-syntax cstx-NAME                ; A ck-macro.
+(define-syntax stx-NAME
   (lambda (stx)
     (syntax-case stx ()
       ((¶ s . args)
@@ -288,7 +147,7 @@ m4_pushdef(«PROC»,m4_ifelse($2,«»,«$1»,«$2»))
               (x* (map evaluate (syntax->datum (syntax args))))
               (y (apply f x*))
               (z (datum->syntax (syntax ¶) y)))
-         (prep-cstx (quasisyntax (ck s '(unsyntax z)))))))))
+         (stx_output((quasisyntax (ck s '(unsyntax z))))))))))
 ;;;»)
 m4_popdef(«NAME»,«PROC»)
 ;;;»)
@@ -307,11 +166,11 @@ one_argument_procedure(not-pair?)
 ;;; m4_ifelse(scheme_standard,«r7rs»,«
 one_argument_procedure(exact-integer?)
 ;;; »,«
-(define-syntax cstx-exact-integer?
+(define-syntax stx-exact-integer?
   (syntax-rules ()
     ((_ s x)
-     (ck s (cstx-and* (cstx-quote (cstx-integer? x))
-                      (cstx-quote (cstx-exact? x)))))))
+     (ck s (stx-and* (stx-quote (stx-integer? x))
+                      (stx-quote (stx-exact? x)))))))
 ;;; »)
 
 one_argument_procedure(number?)

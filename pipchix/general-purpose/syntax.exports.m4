@@ -1,141 +1,111 @@
-;;;;; --------------------------------------------------
-
-cstx
-cstx-quote
-cstx-quasiquote
-cstx-eval
-
-cstx-true
-cstx-false
-cstx-if  cstx-if*
-cstx-and cstx-and*
-cstx-or  cstx-or*
+;;; m4_define(export_stx,stx-$1)
 
 ;;;;; --------------------------------------------------
 
+stx
 
-;;;;; FIXME:
-;;;;; FIXME: ARE THESE WORTH KEEPING?
-;;;;; FIXME:
+export_stx(quote)
+export_stx(quasiquote)
+export_stx(eval)
 
-
-if-stx-satisfied
-
-if-stx-boolean
-if-stx-number
-if-stx-exact
-if-stx-inexact
-if-stx-integer
-if-stx-exact-integer
-if-stx-rational
-if-stx-real
-if-stx-complex
-if-stx-finite
-if-stx-infinite
-if-stx-nan
-
-if-stx-symbol
-if-stx-string
-if-stx-char
-if-stx-vector
-if-stx-bytevector
-
-if-stx-null
-if-stx-pair
-if-stx-list
+export_stx(true)
+export_stx(false)
+export_stx(if)
+export_stx(if*)
+export_stx(and)
+export_stx(and*)
+export_stx(or)
+export_stx(or*)
 
 ;;;;; --------------------------------------------------
 
+export_stx(list?)
+export_stx(proper-list?)
+export_stx(circular-list?)
+export_stx(dotted-list?)
+export_stx(pair?)
+export_stx(null?)
+export_stx(null-list?)
+export_stx(not-pair?)
 
-;;;;; FIXME:
-;;;;; FIXME: ARE THE stx- VERSIONS WORTH KEEPING?
-;;;;; FIXME:
+;;;;; --------------------------------------------------
 
+export_stx(exact-integer?)
+export_stx(number?)
+export_stx(exact?)
+export_stx(inexact?)
+export_stx(integer?)
+export_stx(rational?)
+export_stx(real?)
+export_stx(complex?)
+export_stx(finite?)
+export_stx(infinite?)
+export_stx(nan?)
+export_stx(boolean?)
+export_stx(symbol?)
+export_stx(string?)
+export_stx(char?)
+export_stx(vector?)
+export_stx(bytevector?)
 
-;;; m4_define(stx_cstx,stx-$1 cstx-$1)
+;;;;; --------------------------------------------------
 
-stx_cstx(list?)
-stx_cstx(proper-list?)
-stx_cstx(circular-list?)
-stx_cstx(dotted-list?)
-stx_cstx(pair?)
-stx_cstx(null?)
-stx_cstx(null-list?)
-stx_cstx(not-pair?)
+export_stx(car)
+export_stx(cdr)
+export_stx(caar)
+export_stx(cadr)
+export_stx(cdar)
+export_stx(cddr)
+export_stx(caaaar)
+export_stx(caaar)
+export_stx(caaddr)
+export_stx(cadaar)
+export_stx(cadar)
+export_stx(cadddr)
+export_stx(cdaaar)
+export_stx(cdaar)
+export_stx(cdaddr)
+export_stx(cddaar)
+export_stx(cddar)
+export_stx(cddddr)
+export_stx(caaadr)
+export_stx(caadar)
+export_stx(caadr)
+export_stx(cadadr)
+export_stx(caddar)
+export_stx(caddr)
+export_stx(cdaadr)
+export_stx(cdadar)
+export_stx(cdadr)
+export_stx(cddadr)
+export_stx(cdddar)
+export_stx(cdddr)
 
-cstx-exact-integer?
+export_stx(first)
+export_stx(second)
+export_stx(third)
+export_stx(fourth)
+export_stx(fifth)
+export_stx(sixth)
+export_stx(seventh)
+export_stx(eighth)
+export_stx(ninth)
+export_stx(tenth)
 
-stx_cstx(number?)
-stx_cstx(exact?)
-stx_cstx(inexact?)
-stx_cstx(integer?)
-stx_cstx(rational?)
-stx_cstx(real?)
-stx_cstx(complex?)
-stx_cstx(finite?)
-stx_cstx(infinite?)
-stx_cstx(nan?)
-stx_cstx(boolean?)
-stx_cstx(symbol?)
-stx_cstx(string?)
-stx_cstx(char?)
-stx_cstx(vector?)
-stx_cstx(bytevector?)
+export_stx(last)
+export_stx(last-pair)
+export_stx(length)
+export_stx(reverse)
+export_stx(list->vector)
 
-stx_cstx(car)
-stx_cstx(cdr)
-stx_cstx(caar)
-stx_cstx(cadr)
-stx_cstx(cdar)
-stx_cstx(cddr)
-stx_cstx(caaaar)
-stx_cstx(caaar)
-stx_cstx(caaddr)
-stx_cstx(cadaar)
-stx_cstx(cadar)
-stx_cstx(cadddr)
-stx_cstx(cdaaar)
-stx_cstx(cdaar)
-stx_cstx(cdaddr)
-stx_cstx(cddaar)
-stx_cstx(cddar)
-stx_cstx(cddddr)
-stx_cstx(caaadr)
-stx_cstx(caadar)
-stx_cstx(caadr)
-stx_cstx(cadadr)
-stx_cstx(caddar)
-stx_cstx(caddr)
-stx_cstx(cdaadr)
-stx_cstx(cdadar)
-stx_cstx(cdadr)
-stx_cstx(cddadr)
-stx_cstx(cdddar)
-stx_cstx(cdddr)
+export_stx(cons)
+export_stx(xcons)
+export_stx(cons*)
+export_stx(list)
+export_stx(append)
 
-stx_cstx(first)
-stx_cstx(second)
-stx_cstx(third)
-stx_cstx(fourth)
-stx_cstx(fifth)
-stx_cstx(sixth)
-stx_cstx(seventh)
-stx_cstx(eighth)
-stx_cstx(ninth)
-stx_cstx(tenth)
+;;;;; --------------------------------------------------
 
-stx_cstx(last)
-stx_cstx(last-pair)
-stx_cstx(length)
-stx_cstx(reverse)
-stx_cstx(list->vector)
-
-stx_cstx(cons)
-stx_cstx(xcons)
-stx_cstx(cons*)
-stx_cstx(list)
-stx_cstx(append)
-
-stx_cstx(not)
+export_stx(not)
 
 ;;;;; --------------------------------------------------
