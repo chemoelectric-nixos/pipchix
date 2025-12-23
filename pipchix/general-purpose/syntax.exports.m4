@@ -2,8 +2,6 @@ cstx
 cstx-quote
 cstx-quasiquote
 cstx-eval
-cstx-cons
-cstx-append
 cstx-list->vector
 
 stx-satisfied?
@@ -77,3 +75,6 @@ stx-last cstx-last
 stx-last-pair cstx-last-pair
 stx-length cstx-length
 stx-reverse cstx-reverse
+
+stx-cons cstx-cons
+stx-append cstx-append

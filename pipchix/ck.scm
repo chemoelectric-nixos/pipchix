@@ -671,10 +671,13 @@
 ;;; (c-cons X Y)  ->  '(X . Y)
 ;;;
 ;;; Yields a pair with the two given arguments. Analogous to `cons'.
+
+;;; m4_ifelse(c_cons_provided,«yes»,,«
 (define-syntax c-cons
   (syntax-rules (quote)
     ((c-cons s 'h 't)
      (ck s '(h . t)))))
+;;;»)
 
 
 ;;; ;;; (c-cons* X ... Y Z)  ->  '(X ... Y . Z)
@@ -912,6 +915,8 @@
 ;;;
 ;;; Yields a list containing the elements of the given lists.
 ;;; Analogous to `append'.
+
+;;; m4_ifelse(c_append_provided,«yes»,,«
 (define-syntax c-append
   (syntax-rules (quote)
     ((c-append s)
@@ -922,6 +927,7 @@
      (ck s '(a ... b ...)))
     ((c-append s '(a ...) '(b ...) . more)
      (ck s (c-append '(a ... b ...) . more)))))
+;;; »)
 
 
 ;;; ;;; (c-append-map1 '(OP ...) L)  ->  list

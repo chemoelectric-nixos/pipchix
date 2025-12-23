@@ -23,7 +23,11 @@
 ;;; WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ;;;
 
+(define-syntax c-cons (syntax-rules () ((_ s x y) (cstx-cons s x y))))
+(define-syntax c-append (syntax-rules () ((_ s . args) (cstx-append s . args))))
 
+m4_define(«c_cons_provided»,«yes»)
+m4_define(«c_append_provided»,«yes»)
 define_ck_macros
 
 (define-syntax cstx
@@ -34,8 +38,6 @@ define_ck_macros
 (define-syntax cstx-quote (syntax-rules () ((_ s x) (c-quote s x))))
 (define-syntax cstx-quasiquote (syntax-rules () ((_ s x) (c-quasiquote s x))))
 (define-syntax cstx-eval (syntax-rules () ((_ s x) (c-eval s x))))
-(define-syntax cstx-cons (syntax-rules () ((_ s x) (c-cons s x))))
-(define-syntax cstx-append (syntax-rules () ((_ s x) (c-append s x))))
 (define-syntax cstx-list->vector (syntax-rules () ((_ s x) (c-list->vector s x))))
 
 ;;;m4_ifelse(scheme_standard,«r6rs»,«
@@ -178,23 +180,52 @@ simple_typetest_branch(list)
 ;;;») ;;; one_argument_procedure
 
 ;;;m4_define(«two_argument_procedure»,«
+m4_pushdef(«NAME»,«$1»)
+m4_pushdef(«PROC»,m4_ifelse($2,«»,«$1»,«$2»))
 ;;;m4_ifelse(general_macros,«er-macro-transformer»,«
-(define-syntax stx-$1
+(define-syntax stx-NAME                 ; An ordinary macro.
   (er-macro-transformer
    (lambda (form rename compare)
      (let ((args (cdr form)))
-       (let ((x (car args))
+       (let ((f (if (symbol? PROC) (rename PROC) PROC))
+             (x (car args))
              (y (cadr args)))
-         ((if (symbol? $1) (rename $1) $1) x y))))))
+         (f x y))))))
+
+(define-syntax cstx-NAME                ; A ck-macro.
+  (er-macro-transformer
+   (lambda (form rename compare)
+     (let ((ck (rename 'ck))
+           (s (cadr form))
+           (args (cddr form)))
+       (let* ((f (if (symbol? PROC) (rename PROC) PROC))
+              (x (eval (car args) eval_environment))
+              (y (eval (cadr args) eval_environment))
+              (z (f x y))
+              (retval `(,ck ,s ',z)))
+         retval)))))
 ;;;»,«
-(define-syntax stx-$1
+(define-syntax stx-NAME                 ; An ordinary macro.
   (lambda (stx)
     (syntax-case stx ()
       ((¶ x y)
-       (let ((x^ (syntax->datum (syntax x)))
-             (y^ (syntax->datum (syntax y))))
-         (datum->syntax (syntax ¶) ($1 x^ y^)))))))
+       (let* ((f PROC)
+              (u (syntax->datum (syntax x)))
+              (v (syntax->datum (syntax y)))
+              (z (datum->syntax (syntax ¶) (f u v))))
+         z)))))
+
+(define-syntax cstx-NAME                ; A ck-macro.
+  (lambda (stx)
+    (syntax-case stx ()
+      ((¶ s x y)
+       (let* ((f PROC)
+              (u (eval (syntax->datum (syntax x)) eval_environment))
+              (v (eval (syntax->datum (syntax y)) eval_environment))
+              (z (datum->syntax (syntax ¶) (f u v))))
+         (quasisyntax (ck s '(unsyntax z))))))))
 ;;;»)
+m4_popdef(«NAME»,«PROC»)
 ;;;»)
 
 ;;;m4_divert
@@ -259,6 +290,30 @@ one_argument_procedure(last)
 one_argument_procedure(last-pair)
 one_argument_procedure(length)
 one_argument_procedure(reverse)
+
+two_argument_procedure(cons)
+
+;;; - - - - - - - - - - - - - - - - - - - -
+
+two_argument_procedure(append%%,append)
+
+(define-syntax stx-append
+  (syntax-rules ()
+    ((_ x y)
+     (stx-append%% x y))))
+
+(define-syntax cstx-append
+  (syntax-rules ( quote )
+    ((_ s)
+     (ck s '()))
+    ((_ s '(a ...))
+     (ck s '(a ...)))
+    ((_ s x y)
+     (ck s (cstx-append%% x y)))
+    ((_ s x y . more)
+     (ck s (cstx-append (cstx-append%% x y) . more)))))
+
+;;; - - - - - - - - - - - - - - - - - - - -
 
 m4_divert(-1)
 ;;; local variables:
