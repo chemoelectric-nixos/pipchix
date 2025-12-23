@@ -141,43 +141,46 @@ simple_typetest_branch(list)
 ;;;m4_divert(-1)
 
 ;;;m4_define(«one_argument_procedure»,«
+m4_pushdef(«NAME»,«$1»)
+m4_pushdef(«PROC»,m4_ifelse($2,«»,«$1»,«$2»))
 ;;;m4_ifelse(general_macros,«er-macro-transformer»,«
-(define-syntax stx-$1                   ; An ordinary macro.
+(define-syntax stx-NAME                 ; An ordinary macro.
   (er-macro-transformer
    (lambda (form rename compare)
      (let ((args (cdr form)))
-       (let ((f (if (symbol? $1) (rename $1) $1))
+       (let ((f (if (symbol? PROC) (rename PROC) PROC))
              (x (car args)))
          (f x))))))
 
-(define-syntax cstx-$1                  ; A ck-macro.
+(define-syntax cstx-NAME                ; A ck-macro.
   (er-macro-transformer
    (lambda (form rename compare)
      (let ((ck (rename 'ck))
            (s (cadr form))
            (args (cddr form)))
-       (let* ((f (if (symbol? $1) (rename $1) $1))
+       (let* ((f (if (symbol? PROC) (rename PROC) PROC))
               (x (eval (car args) eval_environment))
               (y (f x))
               (retval `(,ck ,s ',y)))
          retval)))))
 ;;;»,«
-(define-syntax stx-$1                   ; An ordinary macro.
+(define-syntax stx-NAME                 ; An ordinary macro.
   (lambda (stx)
     (syntax-case stx ()
       ((¶ x)
        (let ((x^ (syntax->datum (syntax x))))
-         (datum->syntax (syntax ¶) ($1 x^)))))))
+         (datum->syntax (syntax ¶) (PROC x^)))))))
 
-(define-syntax cstx-$1                  ; A ck-macro.
+(define-syntax cstx-NAME                ; A ck-macro.
   (lambda (stx)
     (syntax-case stx ()
       ((¶ s x)
-       (let* ((f $1)
+       (let* ((f PROC)
               (t (eval (syntax->datum (syntax x)) eval_environment))
               (y (datum->syntax (syntax ¶) (f t))))
          (quasisyntax (ck s '(unsyntax y))))))))
 ;;;»)
+m4_popdef(«NAME»,«PROC»)
 ;;;») ;;; one_argument_procedure
 
 ;;;m4_define(«two_argument_procedure»,«
@@ -224,6 +227,53 @@ m4_pushdef(«PROC»,m4_ifelse($2,«»,«$1»,«$2»))
               (u (eval (syntax->datum (syntax x)) eval_environment))
               (v (eval (syntax->datum (syntax y)) eval_environment))
               (z (datum->syntax (syntax ¶) (f u v))))
+         (quasisyntax (ck s '(unsyntax z))))))))
+;;;»)
+m4_popdef(«NAME»,«PROC»)
+;;;»)
+
+;;;m4_define(«general_arguments_procedure»,«
+m4_pushdef(«NAME»,«$1»)
+m4_pushdef(«PROC»,m4_ifelse($2,«»,«$1»,«$2»))
+;;;m4_ifelse(general_macros,«er-macro-transformer»,«
+(define-syntax stx-NAME                 ; An ordinary macro.
+  (er-macro-transformer
+   (lambda (form rename compare)
+     (let ((args (cdr form)))
+       (let ((f (if (symbol? PROC) (rename PROC) PROC)))
+         (apply f args))))))
+
+(define-syntax cstx-NAME                ; A ck-macro.
+  (er-macro-transformer
+   (lambda (form rename compare)
+     (let ((evaluate (lambda (ea)
+                       (eval ea eval_environment)))
+           (ck (rename 'ck))
+           (s (cadr form))
+           (args (cddr form)))
+       (let* ((f (if (symbol? PROC) (rename PROC) PROC))
+              (z (apply f (map evaluate args)))
+              (retval `(,ck ,s ',z)))
+         retval)))))
+;;;»,«
+(define-syntax stx-NAME                 ; An ordinary macro.
+  (lambda (stx)
+    (syntax-case stx ()
+      ((¶ . args)
+       (let* ((f PROC)
+              (y (apply f (syntax->datum (syntax args)))))
+         (datum->syntax (syntax ¶) y))))))
+
+(define-syntax cstx-NAME                ; A ck-macro.
+  (lambda (stx)
+    (syntax-case stx ()
+      ((¶ s . args)
+       (let* ((evaluate (lambda (ea)
+                          (eval ea eval_environment)))
+              (f PROC)
+              (x* (map evaluate (syntax->datum (syntax args))))
+              (y (apply f x*))
+              (z (datum->syntax (syntax ¶) y)))
          (quasisyntax (ck s '(unsyntax z))))))))
 ;;;»)
 m4_popdef(«NAME»,«PROC»)
@@ -295,27 +345,7 @@ one_argument_procedure(list->vector)
 
 two_argument_procedure(cons)
 
-;;; - - - - - - - - - - - - - - - - - - - -
-
-two_argument_procedure(append%%,append)
-
-(define-syntax stx-append
-  (syntax-rules ()
-    ((_ x y)
-     (stx-append%% x y))))
-
-(define-syntax cstx-append
-  (syntax-rules ( quote )
-    ((_ s)
-     (ck s '()))
-    ((_ s '(a ...))
-     (ck s '(a ...)))
-    ((_ s x y)
-     (ck s (cstx-append%% x y)))
-    ((_ s x y . more)
-     (ck s (cstx-append x (cstx-append y . more))))))
-
-;;; - - - - - - - - - - - - - - - - - - - -
+general_arguments_procedure(append)
 
 m4_divert(-1)
 ;;; local variables:
