@@ -2979,7 +2979,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:40: \"\${abs_builddir}\"/run-r6rs-c
              (define-syntax test
                (syntax-rules ()
                  ((_ x)
-                  (stx-number? x
+                  (if-stx-number x
                     (scheme->nix \"yes\")
                     (scheme->nix \"no\")))))
              (nix-list (test 4) (test \"4\")))))
@@ -2990,7 +2990,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:4
              (define-syntax test
                (syntax-rules ()
                  ((_ x)
-                  (stx-number? x
+                  (if-stx-number x
                     (scheme->nix "yes")
                     (scheme->nix "no")))))
              (nix-list (test 4) (test "4")))))
@@ -3022,7 +3022,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:60: \"\${abs_builddir}\"/run-r6rs-c
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-boolean? y
+                  (if-stx-boolean y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -3039,7 +3039,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:6
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-boolean? y
+                  (if-stx-boolean y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -3077,7 +3077,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:80: \"\${abs_builddir}\"/run-r6rs-c
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-number? y
+                  (if-stx-number y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -3094,7 +3094,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:8
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-number? y
+                  (if-stx-number y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -3132,7 +3132,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:100: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-exact? y
+                  (if-stx-exact y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -3149,7 +3149,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:1
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-exact? y
+                  (if-stx-exact y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -3187,7 +3187,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:120: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-inexact? y
+                  (if-stx-inexact y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -3204,7 +3204,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:1
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-inexact? y
+                  (if-stx-inexact y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -3242,7 +3242,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:140: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-exact-integer? y
+                  (if-stx-exact-integer y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -3259,7 +3259,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:1
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-exact-integer? y
+                  (if-stx-exact-integer y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -3297,7 +3297,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:160: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-integer? y
+                  (if-stx-integer y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -3314,7 +3314,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:1
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-integer? y
+                  (if-stx-integer y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -3352,7 +3352,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:180: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-rational? y
+                  (if-stx-rational y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -3369,7 +3369,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:1
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-rational? y
+                  (if-stx-rational y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -3407,7 +3407,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:200: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-real? y
+                  (if-stx-real y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -3424,7 +3424,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:2
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-real? y
+                  (if-stx-real y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -3462,7 +3462,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:220: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-complex? y
+                  (if-stx-complex y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -3479,7 +3479,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:2
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-complex? y
+                  (if-stx-complex y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -3517,7 +3517,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:240: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-symbol? y
+                  (if-stx-symbol y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -3534,7 +3534,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:2
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-symbol? y
+                  (if-stx-symbol y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -3572,7 +3572,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:260: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-string? y
+                  (if-stx-string y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -3589,7 +3589,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:2
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-string? y
+                  (if-stx-string y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -3627,7 +3627,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:280: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-char? y
+                  (if-stx-char y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -3644,7 +3644,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:2
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-char? y
+                  (if-stx-char y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -3682,7 +3682,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:300: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-vector? y
+                  (if-stx-vector y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -3699,7 +3699,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:3
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-vector? y
+                  (if-stx-vector y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -3737,7 +3737,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:321: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-bytevector? y
+                  (if-stx-bytevector y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -3754,7 +3754,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:3
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-bytevector? y
+                  (if-stx-bytevector y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -3792,7 +3792,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:341: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-null? y
+                  (if-stx-null y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -3809,7 +3809,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:3
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-null? y
+                  (if-stx-null y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -3847,7 +3847,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:361: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-pair? y
+                  (if-stx-pair y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -3864,7 +3864,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:3
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-pair? y
+                  (if-stx-pair y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -3902,7 +3902,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:381: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-list? y
+                  (if-stx-list y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -3919,7 +3919,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:3
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-list? y
+                  (if-stx-list y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -3957,7 +3957,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:404: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-satisfied? ((lambda (a)
+                  (if-stx-satisfied ((lambda (a)
                                      (and (list? a)
                                           (= (length a) 2)))
                                    y)
@@ -3977,7 +3977,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:4
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-satisfied? ((lambda (a)
+                  (if-stx-satisfied ((lambda (a)
                                      (and (list? a)
                                           (= (length a) 2)))
                                    y)
@@ -10748,7 +10748,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:40: \"\${abs_builddir}\"/run-r7rs-c
              (define-syntax test
                (syntax-rules ()
                  ((_ x)
-                  (stx-number? x
+                  (if-stx-number x
                     (scheme->nix \"yes\")
                     (scheme->nix \"no\")))))
              (nix-list (test 4) (test \"4\")))))
@@ -10759,7 +10759,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:4
              (define-syntax test
                (syntax-rules ()
                  ((_ x)
-                  (stx-number? x
+                  (if-stx-number x
                     (scheme->nix "yes")
                     (scheme->nix "no")))))
              (nix-list (test 4) (test "4")))))
@@ -10791,7 +10791,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:60: \"\${abs_builddir}\"/run-r7rs-c
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-boolean? y
+                  (if-stx-boolean y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -10808,7 +10808,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:6
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-boolean? y
+                  (if-stx-boolean y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -10846,7 +10846,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:80: \"\${abs_builddir}\"/run-r7rs-c
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-number? y
+                  (if-stx-number y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -10863,7 +10863,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:8
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-number? y
+                  (if-stx-number y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -10901,7 +10901,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:100: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-exact? y
+                  (if-stx-exact y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -10918,7 +10918,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:1
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-exact? y
+                  (if-stx-exact y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -10956,7 +10956,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:120: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-inexact? y
+                  (if-stx-inexact y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -10973,7 +10973,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:1
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-inexact? y
+                  (if-stx-inexact y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -11011,7 +11011,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:140: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-exact-integer? y
+                  (if-stx-exact-integer y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -11028,7 +11028,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:1
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-exact-integer? y
+                  (if-stx-exact-integer y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -11066,7 +11066,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:160: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-integer? y
+                  (if-stx-integer y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -11083,7 +11083,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:1
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-integer? y
+                  (if-stx-integer y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -11121,7 +11121,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:180: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-rational? y
+                  (if-stx-rational y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -11138,7 +11138,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:1
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-rational? y
+                  (if-stx-rational y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -11176,7 +11176,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:200: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-real? y
+                  (if-stx-real y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -11193,7 +11193,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:2
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-real? y
+                  (if-stx-real y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -11231,7 +11231,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:220: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-complex? y
+                  (if-stx-complex y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -11248,7 +11248,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:2
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-complex? y
+                  (if-stx-complex y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -11286,7 +11286,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:240: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-symbol? y
+                  (if-stx-symbol y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -11303,7 +11303,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:2
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-symbol? y
+                  (if-stx-symbol y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -11341,7 +11341,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:260: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-string? y
+                  (if-stx-string y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -11358,7 +11358,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:2
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-string? y
+                  (if-stx-string y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -11396,7 +11396,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:280: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-char? y
+                  (if-stx-char y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -11413,7 +11413,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:2
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-char? y
+                  (if-stx-char y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -11451,7 +11451,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:300: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-vector? y
+                  (if-stx-vector y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -11468,7 +11468,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:3
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-vector? y
+                  (if-stx-vector y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -11506,7 +11506,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:321: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-bytevector? y
+                  (if-stx-bytevector y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -11523,7 +11523,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:3
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-bytevector? y
+                  (if-stx-bytevector y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -11561,7 +11561,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:341: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-null? y
+                  (if-stx-null y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -11578,7 +11578,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:3
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-null? y
+                  (if-stx-null y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -11616,7 +11616,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:361: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-pair? y
+                  (if-stx-pair y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -11633,7 +11633,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:3
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-pair? y
+                  (if-stx-pair y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -11671,7 +11671,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:381: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-list? y
+                  (if-stx-list y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -11688,7 +11688,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:3
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-list? y
+                  (if-stx-list y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -11726,7 +11726,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:404: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-satisfied? ((lambda (a)
+                  (if-stx-satisfied ((lambda (a)
                                      (and (list? a)
                                           (= (length a) 2)))
                                    y)
@@ -11746,7 +11746,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:4
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-satisfied? ((lambda (a)
+                  (if-stx-satisfied ((lambda (a)
                                      (and (list? a)
                                           (= (length a) 2)))
                                    y)
@@ -18561,7 +18561,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:40: \"\${abs_builddir}\"/run-r7rs-c
              (define-syntax test
                (syntax-rules ()
                  ((_ x)
-                  (stx-number? x
+                  (if-stx-number x
                     (scheme->nix \"yes\")
                     (scheme->nix \"no\")))))
              (nix-list (test 4) (test \"4\")))))
@@ -18572,7 +18572,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:4
              (define-syntax test
                (syntax-rules ()
                  ((_ x)
-                  (stx-number? x
+                  (if-stx-number x
                     (scheme->nix "yes")
                     (scheme->nix "no")))))
              (nix-list (test 4) (test "4")))))
@@ -18604,7 +18604,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:60: \"\${abs_builddir}\"/run-r7rs-c
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-boolean? y
+                  (if-stx-boolean y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -18621,7 +18621,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:6
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-boolean? y
+                  (if-stx-boolean y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -18659,7 +18659,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:80: \"\${abs_builddir}\"/run-r7rs-c
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-number? y
+                  (if-stx-number y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -18676,7 +18676,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:8
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-number? y
+                  (if-stx-number y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -18714,7 +18714,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:100: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-exact? y
+                  (if-stx-exact y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -18731,7 +18731,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:1
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-exact? y
+                  (if-stx-exact y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -18769,7 +18769,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:120: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-inexact? y
+                  (if-stx-inexact y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -18786,7 +18786,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:1
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-inexact? y
+                  (if-stx-inexact y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -18824,7 +18824,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:140: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-exact-integer? y
+                  (if-stx-exact-integer y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -18841,7 +18841,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:1
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-exact-integer? y
+                  (if-stx-exact-integer y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -18879,7 +18879,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:160: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-integer? y
+                  (if-stx-integer y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -18896,7 +18896,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:1
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-integer? y
+                  (if-stx-integer y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -18934,7 +18934,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:180: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-rational? y
+                  (if-stx-rational y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -18951,7 +18951,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:1
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-rational? y
+                  (if-stx-rational y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -18989,7 +18989,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:200: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-real? y
+                  (if-stx-real y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -19006,7 +19006,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:2
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-real? y
+                  (if-stx-real y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -19044,7 +19044,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:220: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-complex? y
+                  (if-stx-complex y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -19061,7 +19061,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:2
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-complex? y
+                  (if-stx-complex y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -19099,7 +19099,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:240: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-symbol? y
+                  (if-stx-symbol y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -19116,7 +19116,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:2
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-symbol? y
+                  (if-stx-symbol y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -19154,7 +19154,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:260: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-string? y
+                  (if-stx-string y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -19171,7 +19171,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:2
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-string? y
+                  (if-stx-string y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -19209,7 +19209,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:280: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-char? y
+                  (if-stx-char y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -19226,7 +19226,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:2
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-char? y
+                  (if-stx-char y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -19264,7 +19264,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:300: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-vector? y
+                  (if-stx-vector y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -19281,7 +19281,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:3
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-vector? y
+                  (if-stx-vector y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -19319,7 +19319,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:321: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-bytevector? y
+                  (if-stx-bytevector y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -19336,7 +19336,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:3
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-bytevector? y
+                  (if-stx-bytevector y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -19374,7 +19374,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:341: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-null? y
+                  (if-stx-null y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -19391,7 +19391,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:3
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-null? y
+                  (if-stx-null y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -19429,7 +19429,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:361: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-pair? y
+                  (if-stx-pair y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -19446,7 +19446,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:3
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-pair? y
+                  (if-stx-pair y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -19484,7 +19484,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:381: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-list? y
+                  (if-stx-list y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -19501,7 +19501,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:3
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-list? y
+                  (if-stx-list y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -19539,7 +19539,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:404: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-satisfied? ((lambda (a)
+                  (if-stx-satisfied ((lambda (a)
                                      (and (list? a)
                                           (= (length a) 2)))
                                    y)
@@ -19559,7 +19559,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:4
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-satisfied? ((lambda (a)
+                  (if-stx-satisfied ((lambda (a)
                                      (and (list? a)
                                           (= (length a) 2)))
                                    y)
@@ -26330,7 +26330,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:40: \"\${abs_builddir}\"/run-r7rs-c
              (define-syntax test
                (syntax-rules ()
                  ((_ x)
-                  (stx-number? x
+                  (if-stx-number x
                     (scheme->nix \"yes\")
                     (scheme->nix \"no\")))))
              (nix-list (test 4) (test \"4\")))))
@@ -26341,7 +26341,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:4
              (define-syntax test
                (syntax-rules ()
                  ((_ x)
-                  (stx-number? x
+                  (if-stx-number x
                     (scheme->nix "yes")
                     (scheme->nix "no")))))
              (nix-list (test 4) (test "4")))))
@@ -26373,7 +26373,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:60: \"\${abs_builddir}\"/run-r7rs-c
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-boolean? y
+                  (if-stx-boolean y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -26390,7 +26390,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:6
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-boolean? y
+                  (if-stx-boolean y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -26428,7 +26428,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:80: \"\${abs_builddir}\"/run-r7rs-c
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-number? y
+                  (if-stx-number y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -26445,7 +26445,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:8
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-number? y
+                  (if-stx-number y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -26483,7 +26483,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:100: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-exact? y
+                  (if-stx-exact y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -26500,7 +26500,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:1
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-exact? y
+                  (if-stx-exact y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -26538,7 +26538,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:120: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-inexact? y
+                  (if-stx-inexact y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -26555,7 +26555,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:1
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-inexact? y
+                  (if-stx-inexact y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -26593,7 +26593,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:140: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-exact-integer? y
+                  (if-stx-exact-integer y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -26610,7 +26610,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:1
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-exact-integer? y
+                  (if-stx-exact-integer y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -26648,7 +26648,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:160: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-integer? y
+                  (if-stx-integer y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -26665,7 +26665,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:1
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-integer? y
+                  (if-stx-integer y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -26703,7 +26703,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:180: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-rational? y
+                  (if-stx-rational y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -26720,7 +26720,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:1
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-rational? y
+                  (if-stx-rational y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -26758,7 +26758,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:200: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-real? y
+                  (if-stx-real y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -26775,7 +26775,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:2
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-real? y
+                  (if-stx-real y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -26813,7 +26813,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:220: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-complex? y
+                  (if-stx-complex y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -26830,7 +26830,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:2
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-complex? y
+                  (if-stx-complex y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -26868,7 +26868,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:240: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-symbol? y
+                  (if-stx-symbol y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -26885,7 +26885,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:2
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-symbol? y
+                  (if-stx-symbol y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -26923,7 +26923,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:260: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-string? y
+                  (if-stx-string y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -26940,7 +26940,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:2
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-string? y
+                  (if-stx-string y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -26978,7 +26978,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:280: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-char? y
+                  (if-stx-char y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -26995,7 +26995,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:2
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-char? y
+                  (if-stx-char y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -27033,7 +27033,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:300: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-vector? y
+                  (if-stx-vector y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -27050,7 +27050,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:3
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-vector? y
+                  (if-stx-vector y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -27088,7 +27088,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:321: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-bytevector? y
+                  (if-stx-bytevector y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -27105,7 +27105,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:3
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-bytevector? y
+                  (if-stx-bytevector y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -27143,7 +27143,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:341: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-null? y
+                  (if-stx-null y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -27160,7 +27160,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:3
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-null? y
+                  (if-stx-null y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -27198,7 +27198,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:361: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-pair? y
+                  (if-stx-pair y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -27215,7 +27215,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:3
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-pair? y
+                  (if-stx-pair y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -27253,7 +27253,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:381: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-list? y
+                  (if-stx-list y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -27270,7 +27270,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:3
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-list? y
+                  (if-stx-list y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -27308,7 +27308,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:404: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-satisfied? ((lambda (a)
+                  (if-stx-satisfied ((lambda (a)
                                      (and (list? a)
                                           (= (length a) 2)))
                                    y)
@@ -27328,7 +27328,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:4
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-satisfied? ((lambda (a)
+                  (if-stx-satisfied ((lambda (a)
                                      (and (list? a)
                                           (= (length a) 2)))
                                    y)
@@ -34099,7 +34099,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:40: \"\${abs_builddir}\"/run-r7rs-g
              (define-syntax test
                (syntax-rules ()
                  ((_ x)
-                  (stx-number? x
+                  (if-stx-number x
                     (scheme->nix \"yes\")
                     (scheme->nix \"no\")))))
              (nix-list (test 4) (test \"4\")))))
@@ -34110,7 +34110,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:4
              (define-syntax test
                (syntax-rules ()
                  ((_ x)
-                  (stx-number? x
+                  (if-stx-number x
                     (scheme->nix "yes")
                     (scheme->nix "no")))))
              (nix-list (test 4) (test "4")))))
@@ -34142,7 +34142,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:60: \"\${abs_builddir}\"/run-r7rs-g
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-boolean? y
+                  (if-stx-boolean y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -34159,7 +34159,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:6
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-boolean? y
+                  (if-stx-boolean y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -34197,7 +34197,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:80: \"\${abs_builddir}\"/run-r7rs-g
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-number? y
+                  (if-stx-number y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -34214,7 +34214,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:8
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-number? y
+                  (if-stx-number y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -34252,7 +34252,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:100: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-exact? y
+                  (if-stx-exact y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -34269,7 +34269,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:1
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-exact? y
+                  (if-stx-exact y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -34307,7 +34307,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:120: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-inexact? y
+                  (if-stx-inexact y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -34324,7 +34324,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:1
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-inexact? y
+                  (if-stx-inexact y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -34362,7 +34362,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:140: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-exact-integer? y
+                  (if-stx-exact-integer y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -34379,7 +34379,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:1
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-exact-integer? y
+                  (if-stx-exact-integer y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -34417,7 +34417,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:160: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-integer? y
+                  (if-stx-integer y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -34434,7 +34434,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:1
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-integer? y
+                  (if-stx-integer y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -34472,7 +34472,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:180: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-rational? y
+                  (if-stx-rational y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -34489,7 +34489,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:1
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-rational? y
+                  (if-stx-rational y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -34527,7 +34527,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:200: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-real? y
+                  (if-stx-real y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -34544,7 +34544,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:2
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-real? y
+                  (if-stx-real y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -34582,7 +34582,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:220: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-complex? y
+                  (if-stx-complex y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -34599,7 +34599,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:2
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-complex? y
+                  (if-stx-complex y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -34637,7 +34637,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:240: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-symbol? y
+                  (if-stx-symbol y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -34654,7 +34654,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:2
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-symbol? y
+                  (if-stx-symbol y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -34692,7 +34692,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:260: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-string? y
+                  (if-stx-string y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -34709,7 +34709,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:2
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-string? y
+                  (if-stx-string y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -34747,7 +34747,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:280: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-char? y
+                  (if-stx-char y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -34764,7 +34764,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:2
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-char? y
+                  (if-stx-char y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -34802,7 +34802,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:300: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-vector? y
+                  (if-stx-vector y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -34819,7 +34819,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:3
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-vector? y
+                  (if-stx-vector y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -34857,7 +34857,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:321: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-bytevector? y
+                  (if-stx-bytevector y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -34874,7 +34874,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:3
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-bytevector? y
+                  (if-stx-bytevector y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -34912,7 +34912,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:341: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-null? y
+                  (if-stx-null y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -34929,7 +34929,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:3
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-null? y
+                  (if-stx-null y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -34967,7 +34967,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:361: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-pair? y
+                  (if-stx-pair y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -34984,7 +34984,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:3
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-pair? y
+                  (if-stx-pair y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -35022,7 +35022,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:381: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-list? y
+                  (if-stx-list y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -35039,7 +35039,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:3
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-list? y
+                  (if-stx-list y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -35077,7 +35077,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:404: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-satisfied? ((lambda (a)
+                  (if-stx-satisfied ((lambda (a)
                                      (and (list? a)
                                           (= (length a) 2)))
                                    y)
@@ -35097,7 +35097,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:4
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-satisfied? ((lambda (a)
+                  (if-stx-satisfied ((lambda (a)
                                      (and (list? a)
                                           (= (length a) 2)))
                                    y)
@@ -41912,7 +41912,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:40: \"\${abs_builddir}\"/run-r6rs-g
              (define-syntax test
                (syntax-rules ()
                  ((_ x)
-                  (stx-number? x
+                  (if-stx-number x
                     (scheme->nix \"yes\")
                     (scheme->nix \"no\")))))
              (nix-list (test 4) (test \"4\")))))
@@ -41923,7 +41923,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:4
              (define-syntax test
                (syntax-rules ()
                  ((_ x)
-                  (stx-number? x
+                  (if-stx-number x
                     (scheme->nix "yes")
                     (scheme->nix "no")))))
              (nix-list (test 4) (test "4")))))
@@ -41955,7 +41955,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:60: \"\${abs_builddir}\"/run-r6rs-g
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-boolean? y
+                  (if-stx-boolean y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -41972,7 +41972,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:6
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-boolean? y
+                  (if-stx-boolean y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -42010,7 +42010,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:80: \"\${abs_builddir}\"/run-r6rs-g
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-number? y
+                  (if-stx-number y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -42027,7 +42027,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:8
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-number? y
+                  (if-stx-number y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -42065,7 +42065,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:100: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-exact? y
+                  (if-stx-exact y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -42082,7 +42082,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:1
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-exact? y
+                  (if-stx-exact y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -42120,7 +42120,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:120: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-inexact? y
+                  (if-stx-inexact y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -42137,7 +42137,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:1
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-inexact? y
+                  (if-stx-inexact y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -42175,7 +42175,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:140: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-exact-integer? y
+                  (if-stx-exact-integer y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -42192,7 +42192,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:1
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-exact-integer? y
+                  (if-stx-exact-integer y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -42230,7 +42230,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:160: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-integer? y
+                  (if-stx-integer y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -42247,7 +42247,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:1
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-integer? y
+                  (if-stx-integer y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -42285,7 +42285,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:180: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-rational? y
+                  (if-stx-rational y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -42302,7 +42302,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:1
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-rational? y
+                  (if-stx-rational y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -42340,7 +42340,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:200: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-real? y
+                  (if-stx-real y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -42357,7 +42357,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:2
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-real? y
+                  (if-stx-real y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -42395,7 +42395,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:220: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-complex? y
+                  (if-stx-complex y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -42412,7 +42412,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:2
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-complex? y
+                  (if-stx-complex y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -42450,7 +42450,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:240: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-symbol? y
+                  (if-stx-symbol y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -42467,7 +42467,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:2
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-symbol? y
+                  (if-stx-symbol y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -42505,7 +42505,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:260: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-string? y
+                  (if-stx-string y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -42522,7 +42522,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:2
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-string? y
+                  (if-stx-string y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -42560,7 +42560,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:280: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-char? y
+                  (if-stx-char y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -42577,7 +42577,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:2
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-char? y
+                  (if-stx-char y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -42615,7 +42615,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:300: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-vector? y
+                  (if-stx-vector y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -42632,7 +42632,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:3
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-vector? y
+                  (if-stx-vector y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -42670,7 +42670,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:321: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-bytevector? y
+                  (if-stx-bytevector y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -42687,7 +42687,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:3
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-bytevector? y
+                  (if-stx-bytevector y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -42725,7 +42725,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:341: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-null? y
+                  (if-stx-null y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -42742,7 +42742,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:3
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-null? y
+                  (if-stx-null y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -42780,7 +42780,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:361: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-pair? y
+                  (if-stx-pair y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -42797,7 +42797,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:3
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-pair? y
+                  (if-stx-pair y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -42835,7 +42835,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:381: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-list? y
+                  (if-stx-list y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -42852,7 +42852,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:3
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-list? y
+                  (if-stx-list y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -42890,7 +42890,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:404: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-satisfied? ((lambda (a)
+                  (if-stx-satisfied ((lambda (a)
                                      (and (list? a)
                                           (= (length a) 2)))
                                    y)
@@ -42910,7 +42910,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:4
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-satisfied? ((lambda (a)
+                  (if-stx-satisfied ((lambda (a)
                                      (and (list? a)
                                           (= (length a) 2)))
                                    y)
@@ -49681,7 +49681,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:40: \"\${abs_builddir}\"/run-r7rs-g
              (define-syntax test
                (syntax-rules ()
                  ((_ x)
-                  (stx-number? x
+                  (if-stx-number x
                     (scheme->nix \"yes\")
                     (scheme->nix \"no\")))))
              (nix-list (test 4) (test \"4\")))))
@@ -49692,7 +49692,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:4
              (define-syntax test
                (syntax-rules ()
                  ((_ x)
-                  (stx-number? x
+                  (if-stx-number x
                     (scheme->nix "yes")
                     (scheme->nix "no")))))
              (nix-list (test 4) (test "4")))))
@@ -49724,7 +49724,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:60: \"\${abs_builddir}\"/run-r7rs-g
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-boolean? y
+                  (if-stx-boolean y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -49741,7 +49741,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:6
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-boolean? y
+                  (if-stx-boolean y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -49779,7 +49779,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:80: \"\${abs_builddir}\"/run-r7rs-g
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-number? y
+                  (if-stx-number y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -49796,7 +49796,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:8
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-number? y
+                  (if-stx-number y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -49834,7 +49834,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:100: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-exact? y
+                  (if-stx-exact y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -49851,7 +49851,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:1
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-exact? y
+                  (if-stx-exact y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -49889,7 +49889,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:120: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-inexact? y
+                  (if-stx-inexact y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -49906,7 +49906,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:1
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-inexact? y
+                  (if-stx-inexact y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -49944,7 +49944,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:140: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-exact-integer? y
+                  (if-stx-exact-integer y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -49961,7 +49961,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:1
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-exact-integer? y
+                  (if-stx-exact-integer y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -49999,7 +49999,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:160: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-integer? y
+                  (if-stx-integer y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -50016,7 +50016,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:1
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-integer? y
+                  (if-stx-integer y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -50054,7 +50054,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:180: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-rational? y
+                  (if-stx-rational y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -50071,7 +50071,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:1
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-rational? y
+                  (if-stx-rational y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -50109,7 +50109,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:200: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-real? y
+                  (if-stx-real y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -50126,7 +50126,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:2
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-real? y
+                  (if-stx-real y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -50164,7 +50164,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:220: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-complex? y
+                  (if-stx-complex y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -50181,7 +50181,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:2
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-complex? y
+                  (if-stx-complex y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -50219,7 +50219,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:240: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-symbol? y
+                  (if-stx-symbol y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -50236,7 +50236,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:2
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-symbol? y
+                  (if-stx-symbol y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -50274,7 +50274,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:260: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-string? y
+                  (if-stx-string y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -50291,7 +50291,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:2
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-string? y
+                  (if-stx-string y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -50329,7 +50329,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:280: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-char? y
+                  (if-stx-char y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -50346,7 +50346,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:2
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-char? y
+                  (if-stx-char y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -50384,7 +50384,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:300: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-vector? y
+                  (if-stx-vector y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -50401,7 +50401,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:3
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-vector? y
+                  (if-stx-vector y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -50439,7 +50439,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:321: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-bytevector? y
+                  (if-stx-bytevector y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -50456,7 +50456,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:3
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-bytevector? y
+                  (if-stx-bytevector y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -50494,7 +50494,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:341: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-null? y
+                  (if-stx-null y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -50511,7 +50511,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:3
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-null? y
+                  (if-stx-null y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -50549,7 +50549,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:361: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-pair? y
+                  (if-stx-pair y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -50566,7 +50566,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:3
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-pair? y
+                  (if-stx-pair y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -50604,7 +50604,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:381: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-list? y
+                  (if-stx-list y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -50621,7 +50621,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:3
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-list? y
+                  (if-stx-list y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -50659,7 +50659,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:404: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-satisfied? ((lambda (a)
+                  (if-stx-satisfied ((lambda (a)
                                      (and (list? a)
                                           (= (length a) 2)))
                                    y)
@@ -50679,7 +50679,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:4
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-satisfied? ((lambda (a)
+                  (if-stx-satisfied ((lambda (a)
                                      (and (list? a)
                                           (= (length a) 2)))
                                    y)
@@ -57494,7 +57494,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:40: \"\${abs_builddir}\"/run-r6rs-l
              (define-syntax test
                (syntax-rules ()
                  ((_ x)
-                  (stx-number? x
+                  (if-stx-number x
                     (scheme->nix \"yes\")
                     (scheme->nix \"no\")))))
              (nix-list (test 4) (test \"4\")))))
@@ -57505,7 +57505,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:4
              (define-syntax test
                (syntax-rules ()
                  ((_ x)
-                  (stx-number? x
+                  (if-stx-number x
                     (scheme->nix "yes")
                     (scheme->nix "no")))))
              (nix-list (test 4) (test "4")))))
@@ -57537,7 +57537,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:60: \"\${abs_builddir}\"/run-r6rs-l
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-boolean? y
+                  (if-stx-boolean y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -57554,7 +57554,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:6
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-boolean? y
+                  (if-stx-boolean y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -57592,7 +57592,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:80: \"\${abs_builddir}\"/run-r6rs-l
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-number? y
+                  (if-stx-number y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -57609,7 +57609,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:8
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-number? y
+                  (if-stx-number y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -57647,7 +57647,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:100: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-exact? y
+                  (if-stx-exact y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -57664,7 +57664,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:1
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-exact? y
+                  (if-stx-exact y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -57702,7 +57702,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:120: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-inexact? y
+                  (if-stx-inexact y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -57719,7 +57719,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:1
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-inexact? y
+                  (if-stx-inexact y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -57757,7 +57757,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:140: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-exact-integer? y
+                  (if-stx-exact-integer y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -57774,7 +57774,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:1
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-exact-integer? y
+                  (if-stx-exact-integer y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -57812,7 +57812,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:160: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-integer? y
+                  (if-stx-integer y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -57829,7 +57829,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:1
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-integer? y
+                  (if-stx-integer y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -57867,7 +57867,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:180: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-rational? y
+                  (if-stx-rational y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -57884,7 +57884,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:1
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-rational? y
+                  (if-stx-rational y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -57922,7 +57922,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:200: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-real? y
+                  (if-stx-real y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -57939,7 +57939,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:2
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-real? y
+                  (if-stx-real y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -57977,7 +57977,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:220: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-complex? y
+                  (if-stx-complex y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -57994,7 +57994,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:2
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-complex? y
+                  (if-stx-complex y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -58032,7 +58032,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:240: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-symbol? y
+                  (if-stx-symbol y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -58049,7 +58049,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:2
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-symbol? y
+                  (if-stx-symbol y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -58087,7 +58087,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:260: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-string? y
+                  (if-stx-string y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -58104,7 +58104,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:2
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-string? y
+                  (if-stx-string y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -58142,7 +58142,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:280: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-char? y
+                  (if-stx-char y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -58159,7 +58159,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:2
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-char? y
+                  (if-stx-char y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -58197,7 +58197,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:300: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-vector? y
+                  (if-stx-vector y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -58214,7 +58214,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:3
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-vector? y
+                  (if-stx-vector y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -58252,7 +58252,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:321: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-bytevector? y
+                  (if-stx-bytevector y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -58269,7 +58269,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:3
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-bytevector? y
+                  (if-stx-bytevector y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -58307,7 +58307,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:341: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-null? y
+                  (if-stx-null y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -58324,7 +58324,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:3
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-null? y
+                  (if-stx-null y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -58362,7 +58362,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:361: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-pair? y
+                  (if-stx-pair y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -58379,7 +58379,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:3
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-pair? y
+                  (if-stx-pair y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -58417,7 +58417,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:381: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-list? y
+                  (if-stx-list y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -58434,7 +58434,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:3
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-list? y
+                  (if-stx-list y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -58472,7 +58472,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:404: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-satisfied? ((lambda (a)
+                  (if-stx-satisfied ((lambda (a)
                                      (and (list? a)
                                           (= (length a) 2)))
                                    y)
@@ -58492,7 +58492,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:4
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-satisfied? ((lambda (a)
+                  (if-stx-satisfied ((lambda (a)
                                      (and (list? a)
                                           (= (length a) 2)))
                                    y)
@@ -65263,7 +65263,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:40: \"\${abs_builddir}\"/run-r7rs-l
              (define-syntax test
                (syntax-rules ()
                  ((_ x)
-                  (stx-number? x
+                  (if-stx-number x
                     (scheme->nix \"yes\")
                     (scheme->nix \"no\")))))
              (nix-list (test 4) (test \"4\")))))
@@ -65274,7 +65274,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:4
              (define-syntax test
                (syntax-rules ()
                  ((_ x)
-                  (stx-number? x
+                  (if-stx-number x
                     (scheme->nix "yes")
                     (scheme->nix "no")))))
              (nix-list (test 4) (test "4")))))
@@ -65306,7 +65306,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:60: \"\${abs_builddir}\"/run-r7rs-l
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-boolean? y
+                  (if-stx-boolean y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -65323,7 +65323,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:6
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-boolean? y
+                  (if-stx-boolean y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -65361,7 +65361,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:80: \"\${abs_builddir}\"/run-r7rs-l
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-number? y
+                  (if-stx-number y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -65378,7 +65378,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:8
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-number? y
+                  (if-stx-number y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -65416,7 +65416,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:100: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-exact? y
+                  (if-stx-exact y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -65433,7 +65433,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:1
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-exact? y
+                  (if-stx-exact y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -65471,7 +65471,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:120: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-inexact? y
+                  (if-stx-inexact y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -65488,7 +65488,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:1
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-inexact? y
+                  (if-stx-inexact y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -65526,7 +65526,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:140: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-exact-integer? y
+                  (if-stx-exact-integer y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -65543,7 +65543,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:1
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-exact-integer? y
+                  (if-stx-exact-integer y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -65581,7 +65581,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:160: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-integer? y
+                  (if-stx-integer y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -65598,7 +65598,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:1
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-integer? y
+                  (if-stx-integer y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -65636,7 +65636,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:180: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-rational? y
+                  (if-stx-rational y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -65653,7 +65653,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:1
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-rational? y
+                  (if-stx-rational y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -65691,7 +65691,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:200: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-real? y
+                  (if-stx-real y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -65708,7 +65708,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:2
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-real? y
+                  (if-stx-real y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -65746,7 +65746,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:220: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-complex? y
+                  (if-stx-complex y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -65763,7 +65763,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:2
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-complex? y
+                  (if-stx-complex y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -65801,7 +65801,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:240: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-symbol? y
+                  (if-stx-symbol y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -65818,7 +65818,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:2
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-symbol? y
+                  (if-stx-symbol y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -65856,7 +65856,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:260: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-string? y
+                  (if-stx-string y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -65873,7 +65873,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:2
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-string? y
+                  (if-stx-string y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -65911,7 +65911,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:280: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-char? y
+                  (if-stx-char y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -65928,7 +65928,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:2
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-char? y
+                  (if-stx-char y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -65966,7 +65966,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:300: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-vector? y
+                  (if-stx-vector y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -65983,7 +65983,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:3
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-vector? y
+                  (if-stx-vector y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -66021,7 +66021,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:321: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-bytevector? y
+                  (if-stx-bytevector y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -66038,7 +66038,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:3
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-bytevector? y
+                  (if-stx-bytevector y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -66076,7 +66076,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:341: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-null? y
+                  (if-stx-null y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -66093,7 +66093,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:3
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-null? y
+                  (if-stx-null y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -66131,7 +66131,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:361: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-pair? y
+                  (if-stx-pair y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -66148,7 +66148,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:3
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-pair? y
+                  (if-stx-pair y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -66186,7 +66186,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:381: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-list? y
+                  (if-stx-list y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -66203,7 +66203,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:3
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-list? y
+                  (if-stx-list y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -66241,7 +66241,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:404: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-satisfied? ((lambda (a)
+                  (if-stx-satisfied ((lambda (a)
                                      (and (list? a)
                                           (= (length a) 2)))
                                    y)
@@ -66261,7 +66261,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:4
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-satisfied? ((lambda (a)
+                  (if-stx-satisfied ((lambda (a)
                                      (and (list? a)
                                           (= (length a) 2)))
                                    y)
@@ -73076,7 +73076,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:40: \"\${abs_builddir}\"/run-r6rs-r
              (define-syntax test
                (syntax-rules ()
                  ((_ x)
-                  (stx-number? x
+                  (if-stx-number x
                     (scheme->nix \"yes\")
                     (scheme->nix \"no\")))))
              (nix-list (test 4) (test \"4\")))))
@@ -73087,7 +73087,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:4
              (define-syntax test
                (syntax-rules ()
                  ((_ x)
-                  (stx-number? x
+                  (if-stx-number x
                     (scheme->nix "yes")
                     (scheme->nix "no")))))
              (nix-list (test 4) (test "4")))))
@@ -73119,7 +73119,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:60: \"\${abs_builddir}\"/run-r6rs-r
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-boolean? y
+                  (if-stx-boolean y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -73136,7 +73136,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:6
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-boolean? y
+                  (if-stx-boolean y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -73174,7 +73174,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:80: \"\${abs_builddir}\"/run-r6rs-r
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-number? y
+                  (if-stx-number y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -73191,7 +73191,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:8
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-number? y
+                  (if-stx-number y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -73229,7 +73229,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:100: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-exact? y
+                  (if-stx-exact y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -73246,7 +73246,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:1
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-exact? y
+                  (if-stx-exact y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -73284,7 +73284,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:120: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-inexact? y
+                  (if-stx-inexact y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -73301,7 +73301,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:1
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-inexact? y
+                  (if-stx-inexact y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -73339,7 +73339,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:140: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-exact-integer? y
+                  (if-stx-exact-integer y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -73356,7 +73356,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:1
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-exact-integer? y
+                  (if-stx-exact-integer y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -73394,7 +73394,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:160: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-integer? y
+                  (if-stx-integer y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -73411,7 +73411,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:1
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-integer? y
+                  (if-stx-integer y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -73449,7 +73449,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:180: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-rational? y
+                  (if-stx-rational y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -73466,7 +73466,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:1
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-rational? y
+                  (if-stx-rational y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -73504,7 +73504,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:200: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-real? y
+                  (if-stx-real y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -73521,7 +73521,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:2
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-real? y
+                  (if-stx-real y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -73559,7 +73559,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:220: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-complex? y
+                  (if-stx-complex y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -73576,7 +73576,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:2
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-complex? y
+                  (if-stx-complex y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -73614,7 +73614,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:240: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-symbol? y
+                  (if-stx-symbol y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -73631,7 +73631,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:2
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-symbol? y
+                  (if-stx-symbol y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -73669,7 +73669,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:260: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-string? y
+                  (if-stx-string y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -73686,7 +73686,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:2
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-string? y
+                  (if-stx-string y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -73724,7 +73724,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:280: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-char? y
+                  (if-stx-char y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -73741,7 +73741,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:2
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-char? y
+                  (if-stx-char y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -73779,7 +73779,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:300: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-vector? y
+                  (if-stx-vector y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -73796,7 +73796,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:3
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-vector? y
+                  (if-stx-vector y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -73834,7 +73834,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:321: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-bytevector? y
+                  (if-stx-bytevector y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -73851,7 +73851,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:3
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-bytevector? y
+                  (if-stx-bytevector y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -73889,7 +73889,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:341: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-null? y
+                  (if-stx-null y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -73906,7 +73906,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:3
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-null? y
+                  (if-stx-null y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -73944,7 +73944,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:361: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-pair? y
+                  (if-stx-pair y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -73961,7 +73961,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:3
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-pair? y
+                  (if-stx-pair y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -73999,7 +73999,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:381: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-list? y
+                  (if-stx-list y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -74016,7 +74016,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:3
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-list? y
+                  (if-stx-list y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -74054,7 +74054,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:404: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-satisfied? ((lambda (a)
+                  (if-stx-satisfied ((lambda (a)
                                      (and (list? a)
                                           (= (length a) 2)))
                                    y)
@@ -74074,7 +74074,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:4
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-satisfied? ((lambda (a)
+                  (if-stx-satisfied ((lambda (a)
                                      (and (list? a)
                                           (= (length a) 2)))
                                    y)
@@ -80845,7 +80845,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:40: \"\${abs_builddir}\"/run-r6rs-s
              (define-syntax test
                (syntax-rules ()
                  ((_ x)
-                  (stx-number? x
+                  (if-stx-number x
                     (scheme->nix \"yes\")
                     (scheme->nix \"no\")))))
              (nix-list (test 4) (test \"4\")))))
@@ -80856,7 +80856,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:4
              (define-syntax test
                (syntax-rules ()
                  ((_ x)
-                  (stx-number? x
+                  (if-stx-number x
                     (scheme->nix "yes")
                     (scheme->nix "no")))))
              (nix-list (test 4) (test "4")))))
@@ -80888,7 +80888,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:60: \"\${abs_builddir}\"/run-r6rs-s
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-boolean? y
+                  (if-stx-boolean y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -80905,7 +80905,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:6
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-boolean? y
+                  (if-stx-boolean y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -80943,7 +80943,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:80: \"\${abs_builddir}\"/run-r6rs-s
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-number? y
+                  (if-stx-number y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -80960,7 +80960,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:8
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-number? y
+                  (if-stx-number y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -80998,7 +80998,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:100: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-exact? y
+                  (if-stx-exact y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -81015,7 +81015,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:1
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-exact? y
+                  (if-stx-exact y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -81053,7 +81053,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:120: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-inexact? y
+                  (if-stx-inexact y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -81070,7 +81070,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:1
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-inexact? y
+                  (if-stx-inexact y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -81108,7 +81108,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:140: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-exact-integer? y
+                  (if-stx-exact-integer y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -81125,7 +81125,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:1
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-exact-integer? y
+                  (if-stx-exact-integer y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -81163,7 +81163,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:160: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-integer? y
+                  (if-stx-integer y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -81180,7 +81180,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:1
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-integer? y
+                  (if-stx-integer y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -81218,7 +81218,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:180: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-rational? y
+                  (if-stx-rational y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -81235,7 +81235,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:1
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-rational? y
+                  (if-stx-rational y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -81273,7 +81273,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:200: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-real? y
+                  (if-stx-real y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -81290,7 +81290,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:2
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-real? y
+                  (if-stx-real y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -81328,7 +81328,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:220: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-complex? y
+                  (if-stx-complex y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -81345,7 +81345,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:2
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-complex? y
+                  (if-stx-complex y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -81383,7 +81383,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:240: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-symbol? y
+                  (if-stx-symbol y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -81400,7 +81400,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:2
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-symbol? y
+                  (if-stx-symbol y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -81438,7 +81438,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:260: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-string? y
+                  (if-stx-string y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -81455,7 +81455,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:2
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-string? y
+                  (if-stx-string y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -81493,7 +81493,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:280: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-char? y
+                  (if-stx-char y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -81510,7 +81510,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:2
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-char? y
+                  (if-stx-char y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -81548,7 +81548,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:300: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-vector? y
+                  (if-stx-vector y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -81565,7 +81565,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:3
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-vector? y
+                  (if-stx-vector y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -81603,7 +81603,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:321: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-bytevector? y
+                  (if-stx-bytevector y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -81620,7 +81620,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:3
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-bytevector? y
+                  (if-stx-bytevector y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -81658,7 +81658,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:341: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-null? y
+                  (if-stx-null y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -81675,7 +81675,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:3
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-null? y
+                  (if-stx-null y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -81713,7 +81713,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:361: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-pair? y
+                  (if-stx-pair y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -81730,7 +81730,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:3
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-pair? y
+                  (if-stx-pair y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -81768,7 +81768,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:381: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-list? y
+                  (if-stx-list y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -81785,7 +81785,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:3
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-list? y
+                  (if-stx-list y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -81823,7 +81823,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:404: \"\${abs_builddir}\"/run-r6rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-satisfied? ((lambda (a)
+                  (if-stx-satisfied ((lambda (a)
                                      (and (list? a)
                                           (= (length a) 2)))
                                    y)
@@ -81843,7 +81843,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:4
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-satisfied? ((lambda (a)
+                  (if-stx-satisfied ((lambda (a)
                                      (and (list? a)
                                           (= (length a) 2)))
                                    y)
@@ -88614,7 +88614,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:40: \"\${abs_builddir}\"/run-r7rs-s
              (define-syntax test
                (syntax-rules ()
                  ((_ x)
-                  (stx-number? x
+                  (if-stx-number x
                     (scheme->nix \"yes\")
                     (scheme->nix \"no\")))))
              (nix-list (test 4) (test \"4\")))))
@@ -88625,7 +88625,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:4
              (define-syntax test
                (syntax-rules ()
                  ((_ x)
-                  (stx-number? x
+                  (if-stx-number x
                     (scheme->nix "yes")
                     (scheme->nix "no")))))
              (nix-list (test 4) (test "4")))))
@@ -88657,7 +88657,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:60: \"\${abs_builddir}\"/run-r7rs-s
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-boolean? y
+                  (if-stx-boolean y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -88674,7 +88674,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:6
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-boolean? y
+                  (if-stx-boolean y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -88712,7 +88712,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:80: \"\${abs_builddir}\"/run-r7rs-s
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-number? y
+                  (if-stx-number y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -88729,7 +88729,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:8
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-number? y
+                  (if-stx-number y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -88767,7 +88767,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:100: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-exact? y
+                  (if-stx-exact y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -88784,7 +88784,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:1
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-exact? y
+                  (if-stx-exact y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -88822,7 +88822,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:120: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-inexact? y
+                  (if-stx-inexact y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -88839,7 +88839,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:1
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-inexact? y
+                  (if-stx-inexact y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -88877,7 +88877,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:140: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-exact-integer? y
+                  (if-stx-exact-integer y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -88894,7 +88894,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:1
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-exact-integer? y
+                  (if-stx-exact-integer y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -88932,7 +88932,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:160: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-integer? y
+                  (if-stx-integer y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -88949,7 +88949,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:1
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-integer? y
+                  (if-stx-integer y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -88987,7 +88987,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:180: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-rational? y
+                  (if-stx-rational y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -89004,7 +89004,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:1
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-rational? y
+                  (if-stx-rational y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -89042,7 +89042,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:200: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-real? y
+                  (if-stx-real y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -89059,7 +89059,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:2
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-real? y
+                  (if-stx-real y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -89097,7 +89097,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:220: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-complex? y
+                  (if-stx-complex y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -89114,7 +89114,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:2
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-complex? y
+                  (if-stx-complex y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -89152,7 +89152,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:240: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-symbol? y
+                  (if-stx-symbol y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -89169,7 +89169,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:2
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-symbol? y
+                  (if-stx-symbol y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -89207,7 +89207,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:260: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-string? y
+                  (if-stx-string y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -89224,7 +89224,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:2
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-string? y
+                  (if-stx-string y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -89262,7 +89262,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:280: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-char? y
+                  (if-stx-char y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -89279,7 +89279,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:2
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-char? y
+                  (if-stx-char y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -89317,7 +89317,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:300: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-vector? y
+                  (if-stx-vector y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -89334,7 +89334,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:3
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-vector? y
+                  (if-stx-vector y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -89372,7 +89372,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:321: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-bytevector? y
+                  (if-stx-bytevector y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -89389,7 +89389,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:3
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-bytevector? y
+                  (if-stx-bytevector y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -89427,7 +89427,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:341: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-null? y
+                  (if-stx-null y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -89444,7 +89444,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:3
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-null? y
+                  (if-stx-null y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -89482,7 +89482,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:361: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-pair? y
+                  (if-stx-pair y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -89499,7 +89499,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:3
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-pair? y
+                  (if-stx-pair y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -89537,7 +89537,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:381: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-list? y
+                  (if-stx-list y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -89554,7 +89554,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:3
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-list? y
+                  (if-stx-list y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -89592,7 +89592,7 @@ printf "%s\n" "$at_srcdir/syntax-template.at:404: \"\${abs_builddir}\"/run-r7rs-
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-satisfied? ((lambda (a)
+                  (if-stx-satisfied ((lambda (a)
                                      (and (list? a)
                                           (= (length a) 2)))
                                    y)
@@ -89612,7 +89612,7 @@ at_fn_check_prepare_notrace 'a ${...} parameter expansion' "syntax-template.at:4
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-satisfied? ((lambda (a)
+                  (if-stx-satisfied ((lambda (a)
                                      (and (list? a)
                                           (= (length a) 2)))
                                    y)

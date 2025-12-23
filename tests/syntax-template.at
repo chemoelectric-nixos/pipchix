@@ -32,7 +32,7 @@ m4_define([sexpr],
              (define-syntax test
                (syntax-rules ()
                  ((_ x)
-                  (stx-number? x
+                  (if-stx-number x
                     (scheme->nix "yes")
                     (scheme->nix "no")))))
              (nix-list (test 4) (test "4")))))
@@ -46,7 +46,7 @@ m4_define([sexpr],
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-boolean? y
+                  (if-stx-boolean y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -66,7 +66,7 @@ m4_define([sexpr],
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-number? y
+                  (if-stx-number y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -86,7 +86,7 @@ m4_define([sexpr],
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-exact? y
+                  (if-stx-exact y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -106,7 +106,7 @@ m4_define([sexpr],
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-inexact? y
+                  (if-stx-inexact y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -126,7 +126,7 @@ m4_define([sexpr],
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-exact-integer? y
+                  (if-stx-exact-integer y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -146,7 +146,7 @@ m4_define([sexpr],
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-integer? y
+                  (if-stx-integer y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -166,7 +166,7 @@ m4_define([sexpr],
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-rational? y
+                  (if-stx-rational y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -186,7 +186,7 @@ m4_define([sexpr],
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-real? y
+                  (if-stx-real y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -206,7 +206,7 @@ m4_define([sexpr],
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-complex? y
+                  (if-stx-complex y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -226,7 +226,7 @@ m4_define([sexpr],
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-symbol? y
+                  (if-stx-symbol y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -246,7 +246,7 @@ m4_define([sexpr],
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-string? y
+                  (if-stx-string y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -266,7 +266,7 @@ m4_define([sexpr],
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-char? y
+                  (if-stx-char y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -286,7 +286,7 @@ m4_define([sexpr],
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-vector? y
+                  (if-stx-vector y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -306,7 +306,7 @@ m4_define([sexpr],
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-bytevector? y
+                  (if-stx-bytevector y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -327,7 +327,7 @@ m4_define([sexpr],
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-null? y
+                  (if-stx-null y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -347,7 +347,7 @@ m4_define([sexpr],
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-pair? y
+                  (if-stx-pair y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -367,7 +367,7 @@ m4_define([sexpr],
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-list? y
+                  (if-stx-list y
                     (scheme->nix x)
                     (scheme->nix z)))))
              (nix-list
@@ -387,7 +387,7 @@ m4_define([sexpr],
              (define-syntax test
                (syntax-rules ()
                  ((_ x y z)
-                  (stx-satisfied? ((lambda (a)
+                  (if-stx-satisfied ((lambda (a)
                                      (and (list? a)
                                           (= (length a) 2)))
                                    y)

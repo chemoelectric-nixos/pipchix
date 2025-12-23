@@ -50,7 +50,7 @@ define_ck_macros
 ;;;»)
 
 ;;;m4_ifelse(general_macros,«er-macro-transformer»,«
-(define-syntax stx-satisfied?
+(define-syntax if-stx-satisfied
   (er-macro-transformer
    (lambda (form rename compare)
      (let* ((args (cdr form))
@@ -62,7 +62,7 @@ define_ck_macros
          (when (pair? (cddr args))
            (caddr args)))))))
 ;;;»,«
-(define-syntax stx-satisfied?
+(define-syntax if-stx-satisfied
   (lambda (stx)
     (syntax-case stx ()
       ((_ (predicate x) if-true if-false)
@@ -105,7 +105,7 @@ define_ck_macros
          (syntax if-true))))))
 ;;;»)
 ;;;»)
-;;;m4_define(«simple_typetest_branch»,simple_predicate_branch(stx-$1?,$1?))
+;;;m4_define(«simple_typetest_branch»,simple_predicate_branch(if-stx-$1,$1?))
 ;;;;;;m4_divert
 
 simple_typetest_branch(boolean)
@@ -123,7 +123,7 @@ simple_typetest_branch(nan)
 ;;;m4_ifelse(scheme_standard,«r7rs»,«
 simple_typetest_branch(exact-integer)
 ;;;»,«
-simple_predicate_branch(stx-exact-integer?,
+simple_predicate_branch(if-stx-exact-integer,
                         (lambda (x)
                           (and (integer? x) (exact? x))))
 ;;;»)
@@ -281,6 +281,15 @@ m4_popdef(«NAME»,«PROC»)
 
 ;;;m4_divert
 
+one_argument_procedure(list?)
+one_argument_procedure(proper-list?)
+one_argument_procedure(circular-list?)
+one_argument_procedure(dotted-list?)
+one_argument_procedure(pair?)
+one_argument_procedure(null?)
+one_argument_procedure(null-list?)
+one_argument_procedure(not-pair?)
+
 one_argument_procedure(car)
 one_argument_procedure(cdr)
 one_argument_procedure(caar)
@@ -344,7 +353,9 @@ one_argument_procedure(reverse)
 one_argument_procedure(list->vector)
 
 two_argument_procedure(cons)
-
+two_argument_procedure(xcons)
+general_arguments_procedure(cons*)
+general_arguments_procedure(list)
 general_arguments_procedure(append)
 
 m4_divert(-1)
