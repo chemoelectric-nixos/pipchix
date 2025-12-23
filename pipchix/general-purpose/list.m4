@@ -1338,11 +1338,17 @@
 ;;; alist stuff
 ;;;;;;;;;;;;;;;
 
-;;; Extended from R4RS to take an optional comparison argument.
 ;;;m4_ifelse(assoc_needed,«yes»,«
-(define (assoc x lis . maybe-=)
-  (let ((= (:optional maybe-= equal?)))
-    (find (lambda (entry) (= x (car entry))) lis)))
+;;;
+;;; Extended from R4RS (and R⁶RS) to take an optional comparison
+;;; argument.
+;;;
+(define assoc
+  (case-lambda
+    ((x lis)
+     (assoc x lis equal?))
+    ((x lis ＝)
+     (find (lambda (entry) (＝ x (car entry))) lis))))
 ;;;»)
 
 (define (alist-cons key datum alist) (cons (cons key datum) alist))

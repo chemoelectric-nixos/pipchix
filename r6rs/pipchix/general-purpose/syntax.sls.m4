@@ -31,7 +31,9 @@ m4_include(pipchix/pipchix-includes.m4)
 
   (import (except (rnrs (6))
                   fold-right
-                  member)
+                  member
+                  assoc
+                  map)
           (for (rnrs eval (6)) expand)
           (for (pipchix general-purpose list) expand))
 

@@ -31,7 +31,9 @@ m4_include(pipchix/pipchix-includes.m4)
 
   (import (except (rnrs (6))
                   fold-right
-                  member)
+                  member
+                  assoc
+                  map)
           (rnrs mutable-pairs (6)))
 
   define_err_r6rs
@@ -40,6 +42,8 @@ m4_include(pipchix/pipchix-includes.m4)
   ;;m4_define(«list_copy_needed»,«yes»)
   ;;m4_define(«make_list_needed»,«yes»)
   ;;m4_define(«member_needed»,«yes»)
+  ;;m4_define(«assoc_needed»,«yes»)
+  ;;m4_define(«map_needed»,«yes»)
   m4_include(pipchix/general-purpose/list.m4)
 
   )
