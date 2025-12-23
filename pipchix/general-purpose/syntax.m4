@@ -313,7 +313,7 @@ two_argument_procedure(append%%,append)
     ((_ s x y)
      (ck s (cstx-append%% x y)))
     ((_ s x y . more)
-     (ck s (cstx-append (cstx-append%% x y) . more)))))
+     (ck s (cstx-append x (cstx-append y . more))))))
 
 ;;; - - - - - - - - - - - - - - - - - - - -
 
