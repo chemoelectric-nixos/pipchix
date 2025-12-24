@@ -68,38 +68,148 @@
 ;;;
 ;;;-------------------------------------------------------------------
 
-(define-syntax c-cons (syntax-rules () ((_ s x y) (stx-cons s x y))))
-(define-syntax c-append (syntax-rules () ((_ s . args) (stx-append s . args))))
-(define-syntax c-list->vector (syntax-rules () ((_ s x y) (stx-list->vector s x y))))
+(define-syntax c-cons
+  (syntax-rules ()
+    ((¶ s x y)
+     (stx-cons s x y))))
+
+(define-syntax c-append
+  (syntax-rules ()
+    ((¶ s . args)
+     (stx-append s . args))))
+
+(define-syntax c-list->vector
+  (syntax-rules ()
+    ((¶ s x y)
+     (stx-list->vector s x y))))
 
 m4_define(«c_cons_provided»,«yes»)m4_dnl
 m4_define(«c_append_provided»,«yes»)m4_dnl
 m4_define(«c_list_to_vector_provided»,«yes»)m4_dnl
 define_ck_macros
 
+(define-syntax stx-ck
+  (syntax-rules ()
+    ((¶ s x)
+     (ck s x))))
+
 (define-syntax stx
   (syntax-rules ()
-    ((_ x)
+    ((¶ x)
      (ck () x))))
 
-(define-syntax stx-ck (syntax-rules () ((_ s x) (ck s x))))
+(define-syntax stx-quasiquote
+  (syntax-rules ()
+    ((¶ s x)
+     (c-quasiquote s x))))
 
-(define-syntax stx-quote (syntax-rules () ((_ s x) (c-quote s x))))
-(define-syntax stx-quasiquote (syntax-rules () ((_ s x) (c-quasiquote s x))))
-(define-syntax stx-eval (syntax-rules () ((_ s x) (c-eval s x))))
+;;; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+;;;
+;;; Some simple ck-macros based on those commented out in original
+;;; source code included above.
+;;;
 
-(define-syntax stx-true (syntax-rules () ((_ s . args) (c-true s . args))))
-(define-syntax stx-false (syntax-rules () ((_ s . args) (c-false s . args))))
-(define-syntax stx-if (syntax-rules () ((_ s x t f) (c-if s x t f))))
-(define-syntax stx-if* (syntax-rules () ((_ s x t f) (c-if* s x t f))))
-(define-syntax stx-and (syntax-rules () ((_ s . args) (c-and s . args))))
-(define-syntax stx-and* (syntax-rules () ((_ s . args) (c-and* s . args))))
-(define-syntax stx-or (syntax-rules () ((_ s . args) (c-or s . args))))
-(define-syntax stx-or* (syntax-rules () ((_ s . args) (c-or* s . args))))
+(define-syntax stx-quote
+  ;; Add an extra level of quote to an argument.
+  (syntax-rules ( quote )
+    ((¶ s x)
+     (ck s 'x))))
+
+(define-syntax stx-eval
+  ;; Unquote an operation so it can be expanded. This is roughly
+  ;; analogous to using ‘eval’.
+  (syntax-rules ( quote )
+    ((¶ s '(op ...))
+     (ck s (op ...)))))
+
+(define-syntax stx-identity
+  (syntax-rules ( quote )
+    ((¶ s 'v)
+     (ck s 'v))))
+
+(define-syntax stx-constantly
+  ;; Return the first argument constantly.
+  (syntax-rules ( quote )
+    ((¶ s X Y ...)
+     (ck s X))))
+
+(define-syntax stx-true
+  (syntax-rules ( quote )
+    ((¶ s X ...)
+     (ck s '#t))))
+
+(define-syntax stx-false
+  (syntax-rules ( quote )
+    ((¶ s X ...)
+     (ck s '#f))))
+
+(define-syntax stx-if
+  ;; An ‘if’ that evaluates both branches.
+  (syntax-rules ( quote )
+    ((¶ s '#f 'pass 'fail)              ; If #f, expand to fail.
+     (ck s 'fail))
+    ((¶ s otherwise 'pass 'fail)        ; Else, expand to pass.
+     (ck s 'pass))))
+
+(define-syntax stx-if*
+  ;; An ‘if’ that evaluates only the branch taken. The branches must
+  ;; have an extra level of quoting.
+  (syntax-rules ( quote )
+    ((¶ s '#f 'pass 'fail)
+     (ck s fail))
+    ((¶ s otherwise 'pass 'fail)
+     (ck s pass))))
+
+(define-syntax stx-or
+  ;; ‘or’ that evaluates eagerly.
+  (syntax-rules ( quote )
+    ((¶ s)
+     (ck s '#f))
+    ((¶ s 'h)
+     (ck s 'h))
+    ;; TODO: Can this be optimized to avoid expanding 'h twice?
+    ((¶ s 'h . t)
+     (ck s (stx-if 'h 'h (stx-or . t))))))
+
+(define-syntax stx-or*
+  ;; Short-circuiting ‘or’. The arguments must have an extra level of
+  ;; quoting.
+  (syntax-rules ( quote )
+    ((¶ s)
+     (ck s '#f))
+    ((¶ s 'h)
+     (ck s h))
+    ;; TODO: Can this be optimized to avoid expanding 'h twice?
+    ((¶ s 'h . t)
+     (ck s (stx-if* h 'h '(stx-or* . t))))))
+
+(define-syntax stx-and
+  ;; ‘and’ that evaluates eagerly.
+  (syntax-rules ( quote )
+    ((¶ s)
+     (ck s '#t))
+    ((¶ s 'h)
+     (ck s 'h))
+    ((¶ s 'h . t)
+     (ck s (stx-if 'h (stx-and . t) '#f)))))
+
+(define-syntax stx-and*
+  ;; Short-circuiting ‘and’. The arguments must have an extra level of
+  ;; quoting.
+  (syntax-rules ( quote )
+    ((¶ s)
+     (ck s '#t))
+    ((¶ s 'h)
+     (ck s h))
+    ((¶ s 'h . t)
+     (ck s (stx-if* h '(stx-and* . t) ''#f)))))
+
+;;; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 ;;;m4_divert(-1)
 
-m4_define(«stx_output»,«(if (boolean? $1) `,$1 $1)»)
+m4_define(«stx_output»,
+          «(if (or (boolean? $1) (number? $1)) `,$1 $1)»)
 
 ;;;m4_ifelse(scheme_standard,«r6rs»,«
 ;;;m4_define(«eval_environment»,(environment '(rnrs)))
@@ -204,15 +314,6 @@ m4_popdef(«NAME»,«MACR»,«PROC»)
 
 ;;;m4_divert
 
-one_argument_procedure(list?)
-one_argument_procedure(proper-list?)
-one_argument_procedure(circular-list?)
-one_argument_procedure(dotted-list?)
-one_argument_procedure(pair?)
-one_argument_procedure(null?)
-one_argument_procedure(null-list?)
-one_argument_procedure(not-pair?)
-
 ;;; m4_ifelse(scheme_standard,«r7rs»,«
 one_argument_procedure(exact-integer?)
 ;;; »,«
@@ -239,6 +340,17 @@ one_argument_procedure(string?)
 one_argument_procedure(char?)
 one_argument_procedure(vector?)
 one_argument_procedure(bytevector?)
+
+;;;-------------------------------------------------------------------
+
+one_argument_procedure(list?)
+one_argument_procedure(proper-list?)
+one_argument_procedure(circular-list?)
+one_argument_procedure(dotted-list?)
+one_argument_procedure(pair?)
+one_argument_procedure(null?)
+one_argument_procedure(null-list?)
+one_argument_procedure(not-pair?)
 
 one_argument_procedure(car)
 one_argument_procedure(cdr)
@@ -282,17 +394,33 @@ one_argument_procedure(eighth)
 one_argument_procedure(ninth)
 one_argument_procedure(tenth)
 
+two_argument_procedure(list-ref)
+one_argument_procedure(length)
+
 one_argument_procedure(last)
 one_argument_procedure(last-pair)
-one_argument_procedure(length)
 one_argument_procedure(reverse)
-one_argument_procedure(list->vector)
-
 two_argument_procedure(cons)
 two_argument_procedure(xcons)
 general_arguments_procedure(cons*)
 general_arguments_procedure(list)
 general_arguments_procedure(append)
+
+two_argument_procedure(list-tabulate)
+general_arguments_procedure(iota)
+
+;; Here is an alternative to R⁷RS circular list syntax.
+general_arguments_procedure(circular-list)
+
+
+general_arguments_procedure(delete)
+general_arguments_procedure(delete-duplicates)
+
+one_argument_procedure(list->vector)
+
+general_arguments_procedure(list=)
+
+;;;-------------------------------------------------------------------
 
 one_argument_procedure(not)
 

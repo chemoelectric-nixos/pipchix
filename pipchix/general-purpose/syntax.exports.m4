@@ -9,6 +9,8 @@ stx-quote
 stx-quasiquote
 stx-eval
 
+stx-identity
+stx-constantly
 stx-true
 stx-false
 stx-if
@@ -93,17 +95,28 @@ stx-eighth
 stx-ninth
 stx-tenth
 
+stx-list-ref
+stx-length
+
 stx-last
 stx-last-pair
-stx-length
 stx-reverse
-stx-list->vector
-
 stx-cons
 stx-xcons
 stx-cons*
 stx-list
 stx-append
+
+stx-list-tabulate
+stx-iota
+stx-circular-list
+
+stx-delete
+stx-delete-duplicates
+
+stx-list=
+
+stx-list->vector
 
 ;;;;; --------------------------------------------------
 
