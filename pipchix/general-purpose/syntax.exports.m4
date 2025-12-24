@@ -111,12 +111,20 @@ stx--
 stx-*
 stx-/
 stx-abs
+stx-quotient
+stx-remainder
+stx-ceiling-quotient
+stx-ceiling-remainder
 stx-floor-quotient
 stx-floor-remainder
 stx-truncate-quotient
 stx-truncate-remainder
-stx-quotient
-stx-remainder
+stx-round-quotient
+stx-round-remainder
+stx-euclidean-quotient
+stx-euclidean-remainder
+stx-balanced-quotient
+stx-balanced-remainder
 
 stx-=
 stx-<
