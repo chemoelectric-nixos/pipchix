@@ -41,7 +41,6 @@ m4_include(pipchix/pipchix-includes.m4)
   (import (scheme inexact))
   (import (pipchix general-purpose list))
   (import (pipchix general-purpose division))
-  (import (pipchix general-purpose box))          
 
   (cond-expand
     (chicken-5 (import (only (chicken syntax) er-macro-transformer)))

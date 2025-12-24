@@ -29,11 +29,18 @@ m4_include(pipchix/pipchix-includes.m4)
   (export m4_include(pipchix/macros/nix-lambda.exports.m4))
 
   (import (scheme base))
+  (import (scheme cxr))
   (import (pipchix abstract-syntax-tree))
-  (import (pipchix general-purpose identifiers-syntax))
+  (cond-expand
+    (chicken-5
+     (import (chicken syntax)))
+    ((or loko guile)
+     (import (rnrs syntax-case (6))))
+    (else))
   
   (begin
 
+    define_ellipsis_test_r7rs(if-...)
     m4_include(pipchix/macros/nix-lambda.m4)
 
     ))

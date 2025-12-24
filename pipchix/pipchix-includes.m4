@@ -24,19 +24,19 @@ m4_divert(-1)
 ;;; WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ;;;
 
-;;;m4_changequote(«,»)
-;;;m4_changecom(«#|»,«|#»)
-;;;m4_define(«semicolon»,«;»)
-;;;m4_define(«backslash»,«\»)
+;;; m4_changequote(«,»)
+;;; m4_changecom(«#|»,«|#»)
+;;; m4_define(«semicolon»,«;»)
+;;; m4_define(«backslash»,«\»)
 
-;;;m4_define(«define_err_r6rs»,«(define (err . args) (apply error #f args))»)
-;;;m4_define(«define_err_r7rs»,«(define err error)»)
+;;; m4_define(«define_err_r6rs»,«(define (err . args) (apply error #f args))»)
+;;; m4_define(«define_err_r7rs»,«(define err error)»)
 
-;;;m4_define(«define_ck_macros»,«
+;;; m4_define(«define_ck_macros»,«
 m4_include(pipchix/ck.scm)
-;;;»)
+;;; »)
 
-;;;m4_define(«define_string_reverse_concatenate»,«
+;;; m4_define(«define_string_reverse_concatenate»,«
 (define (%%string-reverse-concatenate lst)
   ;; Concatenation without the possible limitations of using
   ;; ‘apply’.
@@ -45,11 +45,10 @@ m4_include(pipchix/ck.scm)
     (if (pair? lst)
         (loop (cdr lst) (string-append (car lst) str))
         str)))
-;;;»)
+;;; »)
 
-;;;m4_define(«define_nix_set_setrec_letrec»,«
-m4_pushdef(«who»,«$1»)m4_dnl
-
+;;; m4_define(«define_nix_set_setrec_letrec»,«
+;;; m4_pushdef(«who»,«$1»)
 (define-syntax expand-%%who%%-bindings
   (syntax-rules ( inherit inherit-from <== ==> )
 
@@ -98,9 +97,60 @@ m4_pushdef(«who»,«$1»)m4_dnl
      (make-nix-get-node
       (and attrset (scheme->nix attrset))
       (list->nix-attributepath-node (list identifier))))))
-
-m4_popdef(«who»)m4_dnl
+;;; m4_popdef(«who»)
 ;;;»)
+
+;;; m4_define(«define_ellipsis_test_r6rs»,«
+;;; m4_pushdef(«NAME»,m4_ifelse($1,«»,«if-...»,«$1»))
+(define-syntax NAME
+  (lambda (stx)
+    (syntax-case stx ()
+      ((¶ ident if-true if-false)
+       (if (free-identifier=? (syntax ident)
+                              (syntax (... ...)))
+         (syntax if-true)
+         (syntax if-false))))))
+;;; m4_popdef(«NAME»)
+;;; »)
+
+;;; m4_define(«define_ellipsis_test_r7rs»,«
+;;; m4_pushdef(«NAME»,m4_ifelse($1,«»,«if-...»,«$1»))
+(cond-expand
+
+  (chicken-5
+   (define-syntax NAME
+     (er-macro-transformer
+      (lambda (form rename compare)
+        (unless (= (length form) 4)
+          (error "malformed NAME" form))
+        (let ((args (cdr form))
+              (ellipsis (rename '...)))
+          (let ((ellipsis=?
+                 (lambda (x) (and (symbol? x)
+                                  (compare x ellipsis)))))
+            (if (ellipsis=? (car args))
+              (cadr args)
+              (caddr args))))))))
+
+  (loko
+   (define-syntax NAME
+     (lambda (stx)
+       (syntax-case stx ()
+         ((_ ident if-true if-false)
+          (if (free-identifier=? (syntax ident)
+                                 (syntax (... ...)))
+            (syntax if-true)
+            (syntax if-false)))))))
+
+  (else
+   (define-syntax NAME
+     (syntax-rules ::: ( ... )
+       ((_ ... if-true if-false)
+        if-true)
+       ((_ xxx if-true if-false)
+        if-false)))))
+;;; m4_popdef(«NAME»)
+;;; »)
 
 ;;; local variables:
 ;;; mode: scheme

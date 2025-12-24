@@ -77,7 +77,6 @@ R6RS_SCHEME += r6rs/pipchix/general-purpose/list.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/division.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/define-record-factory.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/syntax.sls
-R6RS_SCHEME += r6rs/pipchix/general-purpose/identifiers-syntax.sls
 R6RS_SCHEME += r6rs/pipchix/generate-identifier.sls
 R6RS_SCHEME += r6rs/pipchix/essentials.sls
 R6RS_SCHEME += r6rs/pipchix/expressions.sls
@@ -105,7 +104,6 @@ R7RS_SCHEME += r7rs/pipchix/general-purpose/list.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/division.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/define-record-factory.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/syntax.sld
-R7RS_SCHEME += r7rs/pipchix/general-purpose/identifiers-syntax.sld
 R7RS_SCHEME += r7rs/pipchix/generate-identifier.sld
 R7RS_SCHEME += r7rs/pipchix/essentials.sld
 R7RS_SCHEME += r7rs/pipchix/expressions.sld
@@ -172,7 +170,6 @@ CHICKEN_EGGSPEC_BOTTOM = ' \
       (component-dependencies \
        pipchix.general-purpose.list \
        pipchix.general-purpose.division)) \
-    (extension pipchix.general-purpose.identifiers-syntax) \
     (extension pipchix.string-manipulation \
       (component-dependencies \
        pipchix.general-purpose.box)) \
@@ -198,8 +195,7 @@ CHICKEN_EGGSPEC_BOTTOM = ' \
        pipchix.generate-identifier)) \
     (extension pipchix.macros.nix-lambda \
       (component-dependencies \
-       pipchix.abstract-syntax-tree \
-       pipchix.general-purpose.identifiers-syntax)) \
+       pipchix.abstract-syntax-tree)) \
     (extension pipchix.expressions \
       (component-dependencies \
        pipchix.abstract-syntax-tree \
@@ -258,7 +254,6 @@ CHICKEN_5_EGGFILES = \
     pipchix.general-purpose.division.scm \
     pipchix.general-purpose.define-record-factory.scm \
     pipchix.general-purpose.syntax.scm \
-    pipchix.general-purpose.identifiers-syntax.scm \
     pipchix.generate-identifier.scm \
     pipchix.string-manipulation.scm \
     pipchix.abstract-syntax-tree.scm \
