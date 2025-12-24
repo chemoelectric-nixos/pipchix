@@ -50,6 +50,7 @@ m4_pushdef([run_scheme],[$5])
 AT_BANNER([tests_banner])
 
 m4_include(list-template.at)
+m4_include(division-template.at)
 m4_include(syntax-template.at)
 m4_include(continuation-capture-template.at)
 
