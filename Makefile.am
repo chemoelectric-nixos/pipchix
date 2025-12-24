@@ -74,6 +74,7 @@ R6RS_SCHEME += r6rs/pipchix/general-purpose/srfi-39.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/box.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/continuation-capture.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/list.sls
+R6RS_SCHEME += r6rs/pipchix/general-purpose/division.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/define-record-factory.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/syntax.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/identifiers-syntax.sls
@@ -101,6 +102,7 @@ R7RS_SCHEME =
 R7RS_SCHEME += r7rs/pipchix/general-purpose/box.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/continuation-capture.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/list.sld
+R7RS_SCHEME += r7rs/pipchix/general-purpose/division.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/define-record-factory.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/syntax.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/identifiers-syntax.sld
@@ -164,10 +166,12 @@ CHICKEN_EGGSPEC_BOTTOM = ' \
     (extension pipchix.general-purpose.box) \
     (extension pipchix.general-purpose.continuation-capture) \
     (extension pipchix.general-purpose.list) \
+    (extension pipchix.general-purpose.division) \
     (extension pipchix.general-purpose.define-record-factory) \
     (extension pipchix.general-purpose.syntax \
       (component-dependencies \
-       pipchix.general-purpose.list)) \
+       pipchix.general-purpose.list \
+       pipchix.general-purpose.division)) \
     (extension pipchix.general-purpose.identifiers-syntax) \
     (extension pipchix.string-manipulation \
       (component-dependencies \
@@ -251,6 +255,7 @@ CHICKEN_5_EGGFILES = \
     pipchix.general-purpose.box.scm \
     pipchix.general-purpose.continuation-capture.scm \
     pipchix.general-purpose.list.scm \
+    pipchix.general-purpose.division.scm \
     pipchix.general-purpose.define-record-factory.scm \
     pipchix.general-purpose.syntax.scm \
     pipchix.general-purpose.identifiers-syntax.scm \
@@ -290,7 +295,7 @@ $(CHICKEN_5_EGGDIR)/pipchix.egg: GNUmakefile $(TINYSCHEME_EXE)
 
 CHICKEN_5_EGGSPEC = ' \
  '$(CHICKEN_EGGSPEC_TOP)' \
-   (dependencies r7rs utf8 srfi-1 srfi-111) \
+   (dependencies r7rs utf8 srfi-1 srfi-111 srfi-141) \
    (component-options \
     (csc-options \
      "-R" "utf8" \

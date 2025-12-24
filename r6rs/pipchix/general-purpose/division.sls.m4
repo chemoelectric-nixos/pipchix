@@ -25,22 +25,22 @@
 ;;;
 m4_include(pipchix/pipchix-includes.m4)
 
-(library (pipchix general-purpose syntax)
+(library (pipchix general-purpose division)
 
-  (export m4_include(pipchix/general-purpose/syntax.exports.m4))
+  ;;
+  ;; SRFI-141, also known as (scheme division)
+  ;;
+  ;; Provided here for portability of Pipchix to different Scheme
+  ;; implementations.
+  ;;
 
-  (import (except (rnrs (6))
-                  fold-right
-                  member
-                  assoc
-                  map)
-          (for (rnrs eval (6)) expand)
-          (for (only (rnrs r5rs (6)) quotient remainder) expand)
-          (for (pipchix general-purpose list) expand)
-          (for (pipchix general-purpose division) expand))
+  (export m4_include(pipchix/general-purpose/division.exports.m4))
 
-  ;; m4_define(«scheme_standard»,«r6rs»)
-  m4_include(pipchix/general-purpose/syntax.m4)
+  (import (rnrs base (6))
+          (only (rnrs r5rs (6)) quotient remainder))
+
+  define_err_r6rs
+  m4_include(pipchix/general-purpose/division.m4)
 
   )
 

@@ -1,4 +1,3 @@
-#!r6rs
 ;;;
 ;;; Copyright © 2025 Barry Schwartz
 ;;;
@@ -25,27 +24,40 @@
 ;;;
 m4_include(pipchix/pipchix-includes.m4)
 
-(library (pipchix general-purpose syntax)
+(define-library (pipchix general-purpose division)
 
-  (export m4_include(pipchix/general-purpose/syntax.exports.m4))
+  ;;
+  ;; SRFI-141, also known as (scheme division)
+  ;;
+  ;; Provided here for portability of Pipchix to different Scheme
+  ;; implementations.
+  ;;
 
-  (import (except (rnrs (6))
-                  fold-right
-                  member
-                  assoc
-                  map)
-          (for (rnrs eval (6)) expand)
-          (for (only (rnrs r5rs (6)) quotient remainder) expand)
-          (for (pipchix general-purpose list) expand)
-          (for (pipchix general-purpose division) expand))
+  (export m4_include(pipchix/general-purpose/division.exports.m4))
 
-  ;; m4_define(«scheme_standard»,«r6rs»)
-  m4_include(pipchix/general-purpose/syntax.m4)
+  (import (scheme base))
+  (cond-expand
+    (loko)
+    (chicken-5
+     (import (srfi 141)))
+    (else
+     (import (scheme division))))
 
-  )
+  (begin
+
+    (cond-expand
+      ((or loko guile)
+       define_err_r7rs
+       ;;m4_pushdef(«r7rs_small_is_provided»,«yes»)
+       m4_include(pipchix/general-purpose/division.m4)
+       ;;m4_popdef(«r7rs_small_is_provided»)
+       )
+      (else))
+
+    ))
 
 ;;; local variables:
 ;;; mode: scheme
-;;; geiser-scheme-implementation: chez
+;;; geiser-scheme-implementation: chibi
 ;;; coding: utf-8
 ;;; end:

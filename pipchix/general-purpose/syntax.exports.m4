@@ -106,4 +106,28 @@ stx-append
 
 stx-not
 
+stx-+
+stx--
+stx-*
+stx-/
+stx-abs
+stx-floor-quotient
+stx-floor-remainder
+stx-truncate-quotient
+stx-truncate-remainder
+stx-quotient
+stx-remainder
+
+stx-=
+stx-<
+stx->
+stx-<=
+stx->=
+
+stx-zero?
+stx-positive?
+stx-negative?
+stx-odd?
+stx-even?
+
 ;;;;; --------------------------------------------------

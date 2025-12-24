@@ -64,9 +64,10 @@ m4_define(«stx_output»,«(if (boolean? $1) `,$1 $1)»)
 
 ;;;m4_define(«one_argument_procedure»,«
 m4_pushdef(«NAME»,«$1»)
+m4_pushdef(«MACR»,m4_ifelse($2,«»,«stx-$1»,«$1»))
 m4_pushdef(«PROC»,m4_ifelse($2,«»,«$1»,«$2»))
 ;;;m4_ifelse(general_macros,«er-macro-transformer»,«
-(define-syntax stx-NAME
+(define-syntax MACR
   (er-macro-transformer
    (lambda (form rename compare)
      (let ((ck (rename 'ck))
@@ -78,7 +79,7 @@ m4_pushdef(«PROC»,m4_ifelse($2,«»,«$1»,«$2»))
               (retval `(,ck ,s ',y)))
          stx_output(retval))))))
 ;;;»,«
-(define-syntax stx-NAME
+(define-syntax MACR
   (lambda (stx)
     (syntax-case stx ()
       ((¶ s x)
@@ -87,14 +88,15 @@ m4_pushdef(«PROC»,m4_ifelse($2,«»,«$1»,«$2»))
               (y (datum->syntax (syntax ¶) (f t))))
          stx_output((quasisyntax (ck s '(unsyntax y)))))))))
 ;;;»)
-m4_popdef(«NAME»,«PROC»)
+m4_popdef(«NAME»,«MACR»,«PROC»)
 ;;;»)
 
 ;;;m4_define(«two_argument_procedure»,«
 m4_pushdef(«NAME»,«$1»)
+m4_pushdef(«MACR»,m4_ifelse($2,«»,«stx-$1»,«$1»))
 m4_pushdef(«PROC»,m4_ifelse($2,«»,«$1»,«$2»))
 ;;;m4_ifelse(general_macros,«er-macro-transformer»,«
-(define-syntax stx-NAME
+(define-syntax MACR
   (er-macro-transformer
    (lambda (form rename compare)
      (let ((ck (rename 'ck))
@@ -107,7 +109,7 @@ m4_pushdef(«PROC»,m4_ifelse($2,«»,«$1»,«$2»))
               (retval `(,ck ,s ',z)))
          stx_output(retval))))))
 ;;;»,«
-(define-syntax stx-NAME
+(define-syntax MACR
   (lambda (stx)
     (syntax-case stx ()
       ((¶ s x y)
@@ -117,14 +119,15 @@ m4_pushdef(«PROC»,m4_ifelse($2,«»,«$1»,«$2»))
               (z (datum->syntax (syntax ¶) (f u v))))
          stx_output((quasisyntax (ck s '(unsyntax z)))))))))
 ;;;»)
-m4_popdef(«NAME»,«PROC»)
+m4_popdef(«NAME»,«MACR»,«PROC»)
 ;;;»)
 
 ;;;m4_define(«general_arguments_procedure»,«
 m4_pushdef(«NAME»,«$1»)
+m4_pushdef(«MACR»,m4_ifelse($2,«»,«stx-$1»,«$1»))
 m4_pushdef(«PROC»,m4_ifelse($2,«»,«$1»,«$2»))
 ;;;m4_ifelse(general_macros,«er-macro-transformer»,«
-(define-syntax stx-NAME
+(define-syntax MACR
   (er-macro-transformer
    (lambda (form rename compare)
      (let ((evaluate (lambda (ea)
@@ -137,7 +140,7 @@ m4_pushdef(«PROC»,m4_ifelse($2,«»,«$1»,«$2»))
               (retval `(,ck ,s ',z)))
          stx_output(retval))))))
 ;;;»,«
-(define-syntax stx-NAME
+(define-syntax MACR
   (lambda (stx)
     (syntax-case stx ()
       ((¶ s . args)
@@ -149,7 +152,7 @@ m4_pushdef(«PROC»,m4_ifelse($2,«»,«$1»,«$2»))
               (z (datum->syntax (syntax ¶) y)))
          stx_output((quasisyntax (ck s '(unsyntax z)))))))))
 ;;;»)
-m4_popdef(«NAME»,«PROC»)
+m4_popdef(«NAME»,«MACR»,«PROC»)
 ;;;»)
 
 ;;;m4_divert
@@ -221,20 +224,6 @@ one_argument_procedure(cddadr)
 one_argument_procedure(cdddar)
 one_argument_procedure(cdddr)
 
-;;;
-;;; These work fine, but cannot be made by our m4 code into ck-macros:
-;;;
-;;; (define-syntax stx-first (syntax-rules () ((_ (a . ω)) a)))
-;;; (define-syntax stx-second (syntax-rules () ((_ (a b . ω)) b)))
-;;; (define-syntax stx-third (syntax-rules () ((_ (a b c . ω)) c)))
-;;; (define-syntax stx-fourth (syntax-rules () ((_ (a b c d . ω)) d)))
-;;; (define-syntax stx-fifth (syntax-rules () ((_ (a b c d e . ω)) e)))
-;;; (define-syntax stx-sixth (syntax-rules () ((_ (a b c d e f . ω)) f)))
-;;; (define-syntax stx-seventh (syntax-rules () ((_ (a b c d e f g . ω)) g)))
-;;; (define-syntax stx-eighth (syntax-rules () ((_ (a b c d e f g h . ω)) h)))
-;;; (define-syntax stx-ninth (syntax-rules () ((_ (a b c d e f g h i . ω)) i)))
-;;; (define-syntax stx-tenth (syntax-rules () ((_ (a b c d e f g h i j . ω)) j)))
-
 one_argument_procedure(first)
 one_argument_procedure(second)
 one_argument_procedure(third)
@@ -259,6 +248,30 @@ general_arguments_procedure(list)
 general_arguments_procedure(append)
 
 one_argument_procedure(not)
+
+general_arguments_procedure(+)
+general_arguments_procedure(-)
+general_arguments_procedure(*)
+general_arguments_procedure(/)
+one_argument_procedure(abs)
+two_argument_procedure(floor-quotient)
+two_argument_procedure(floor-remainder)
+two_argument_procedure(truncate-quotient)
+two_argument_procedure(truncate-remainder)
+two_argument_procedure(quotient)
+two_argument_procedure(remainder)
+
+general_arguments_procedure(=)
+general_arguments_procedure(<)
+general_arguments_procedure(>)
+general_arguments_procedure(<=)
+general_arguments_procedure(>=)
+
+one_argument_procedure(zero?)
+one_argument_procedure(positive?)
+one_argument_procedure(negative?)
+one_argument_procedure(odd?)
+one_argument_procedure(even?)
 
 m4_divert(-1)
 ;;; local variables:
