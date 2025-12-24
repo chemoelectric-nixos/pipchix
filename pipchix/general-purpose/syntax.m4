@@ -22,6 +22,24 @@
 ;;; OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 ;;; WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ;;;
+;;;-------------------------------------------------------------------
+;;;
+;;; Faster ck-macros, that can handle diverse Scheme types.
+;;;
+;;; These are implemented with er-macro-transformer or syntax-case,
+;;; instead of in syntax-rules (with some exceptions, such as the ck
+;;; abstract machine itself). The ck-macros themselves are for use
+;;; with syntax-rules, and can be thought of as primitives.
+;;;
+;;; However, one should keep in mind that evaluation usually is done
+;;; with ‘eval’ rather than by the syntax-rules mechanism. The
+;;; environment passed to ‘eval’ depends on the Scheme implementation.
+;;; An exception is for ‘user-defined’ ck-macro primitives. For these,
+;;; a custom environment can be specified. The same environment will
+;;; be used to evaluate both the procedure that defines the primitive
+;;; and the arguments when they are passed to it.
+;;;
+;;;-------------------------------------------------------------------
 
 (define-syntax c-cons (syntax-rules () ((_ s x y) (stx-cons s x y))))
 (define-syntax c-append (syntax-rules () ((_ s . args) (stx-append s . args))))
@@ -36,6 +54,8 @@ define_ck_macros
   (syntax-rules ()
     ((_ x)
      (ck () x))))
+
+(define-syntax stx-ck (syntax-rules () ((_ s x) (ck s x))))
 
 (define-syntax stx-quote (syntax-rules () ((_ s x) (c-quote s x))))
 (define-syntax stx-quasiquote (syntax-rules () ((_ s x) (c-quasiquote s x))))
@@ -280,6 +300,49 @@ one_argument_procedure(positive?)
 one_argument_procedure(negative?)
 one_argument_procedure(odd?)
 one_argument_procedure(even?)
+
+;;;-------------------------------------------------------------------
+;;;
+;;; User-defined fast ck-macros.
+;;;
+
+(define-syntax define-stx-macro
+  (syntax-rules ()
+    ((_ NAME PROC)
+     (define-stx-macro NAME PROC eval_environment))
+    ((_ NAME PROC ENV)
+     (begin
+;;;m4_ifelse(general_macros,«er-macro-transformer»,«
+       (define-syntax NAME
+         (er-macro-transformer
+          (lambda (form rename compare)
+            (let ((stx-ck (rename 'stx-ck))
+                  (s (cadr form))
+                  (args (cddr form)))
+              (let* ((env ENV)
+                     (user-evaluate (lambda (ϑ) (eval ϑ env)))
+                     (f (user-evaluate PROC))
+                     (z (apply f (map user-evaluate args)))
+                     (retval `(,stx-ck ,s ',z)))
+                stx_output(retval))))))
+;;;»,«
+       (define-syntax NAME
+         (lambda (stx)
+           (syntax-case stx ()
+             ((¶ s . args)
+              (let* ((env ENV)
+                     (user-evaluate (lambda (ϑ) (eval ϑ env)))
+                     (f (user-evaluate PROC))
+                     (x* (map user-evaluate
+                              (syntax->datum (syntax args))))
+                     (y (apply f x*))
+                     (z (datum->syntax (syntax ¶) y)))
+                stx_output((quasisyntax
+                            (stx-ck s '(unsyntax z)))))))))
+;;;»)
+       ))))
+
+;;;-------------------------------------------------------------------
 
 m4_divert(-1)
 ;;; local variables:

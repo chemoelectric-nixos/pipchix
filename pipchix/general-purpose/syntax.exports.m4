@@ -1,6 +1,9 @@
 ;;;;; --------------------------------------------------
 
 stx
+stx-ck
+
+define-stx-macro
 
 stx-quote
 stx-quasiquote

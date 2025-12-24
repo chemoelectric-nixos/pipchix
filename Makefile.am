@@ -228,7 +228,7 @@ $(builddir)/$(CHICKEN_5_EGGDIR)/pipchix.%.scm: \
 	                   $(srcdir)/pipchix/%.m4 \
 	                   $(PIPCHXINC)
 	$(call v,SCM.M4) $(MKDIR_P) $(@D) && \
-		$(M4_PREPROCESS) $(<) > $(@).tmp && \
+		$(M4_PREPROCESS) -DCHICKEN_5=yes $(<) > $(@).tmp && \
 		mv $(@){.tmp,}
 
 $(builddir)/$(CHICKEN_5_EGGDIR)/pipchix.general-purpose.%.scm: \
@@ -236,7 +236,7 @@ $(builddir)/$(CHICKEN_5_EGGDIR)/pipchix.general-purpose.%.scm: \
 	                   $(srcdir)/pipchix/general-purpose/%.m4 \
 	                   $(PIPCHXINC)
 	$(call v,SCM.M4) $(MKDIR_P) $(@D) && \
-		$(M4_PREPROCESS) $(<) > $(@).tmp && \
+		$(M4_PREPROCESS) -DCHICKEN_5=yes $(<) > $(@).tmp && \
 		mv $(@){.tmp,}
 
 $(builddir)/$(CHICKEN_5_EGGDIR)/pipchix.macros.%.scm: \
@@ -244,7 +244,7 @@ $(builddir)/$(CHICKEN_5_EGGDIR)/pipchix.macros.%.scm: \
 	                   $(srcdir)/pipchix/macros/%.m4 \
 	                   $(PIPCHXINC)
 	$(call v,SCM.M4) $(MKDIR_P) $(@D) && \
-		$(M4_PREPROCESS) $(<) > $(@).tmp && \
+		$(M4_PREPROCESS) -DCHICKEN_5=yes $(<) > $(@).tmp && \
 		mv $(@){.tmp,}
 
 CHICKEN_5_EGGS = chicken/eggs/5

@@ -27,6 +27,11 @@ m4_include(pipchix/pipchix-includes.m4)
 (define-library (pipchix general-purpose syntax)
 
   (export m4_include(pipchix/general-purpose/syntax.exports.m4))
+  ;; m4_ifelse(CHICKEN_5,«yes»,,«
+  (cond-expand
+    (gauche (export :info-alist))
+    (else))
+  ;; »)
  
   (import (scheme base))
   (import (scheme write)) ;; For debugging.
@@ -36,6 +41,7 @@ m4_include(pipchix/pipchix-includes.m4)
   (import (scheme inexact))
   (import (pipchix general-purpose list))
   (import (pipchix general-purpose division))
+  (import (pipchix general-purpose box))          
 
   (cond-expand
     (chicken-5 (import (only (chicken syntax) er-macro-transformer)))
