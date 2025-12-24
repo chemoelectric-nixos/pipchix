@@ -96,7 +96,7 @@ define_ck_macros
 (define-syntax stx
   (syntax-rules ()
     ((¶ x)
-     (ck () x))))
+     (stx-ck () x))))
 
 (define-syntax stx-quasiquote
   (syntax-rules ()
@@ -113,96 +113,96 @@ define_ck_macros
   ;; Add an extra level of quote to an argument.
   (syntax-rules ( quote )
     ((¶ s x)
-     (ck s 'x))))
+     (stx-ck s 'x))))
 
 (define-syntax stx-eval
   ;; Unquote an operation so it can be expanded. This is roughly
   ;; analogous to using ‘eval’.
   (syntax-rules ( quote )
     ((¶ s '(op ...))
-     (ck s (op ...)))))
+     (stx-ck s (op ...)))))
 
 (define-syntax stx-identity
   (syntax-rules ( quote )
     ((¶ s 'v)
-     (ck s 'v))))
+     (stx-ck s 'v))))
 
 (define-syntax stx-constantly
   ;; Return the first argument constantly.
   (syntax-rules ( quote )
     ((¶ s X Y ...)
-     (ck s X))))
+     (stx-ck s X))))
 
 (define-syntax stx-true
   (syntax-rules ( quote )
     ((¶ s X ...)
-     (ck s '#t))))
+     (stx-ck s '#t))))
 
 (define-syntax stx-false
   (syntax-rules ( quote )
     ((¶ s X ...)
-     (ck s '#f))))
+     (stx-ck s '#f))))
 
 (define-syntax stx-if
   ;; An ‘if’ that evaluates both branches.
   (syntax-rules ( quote )
     ((¶ s '#f 'pass 'fail)              ; If #f, expand to fail.
-     (ck s 'fail))
+     (stx-ck s 'fail))
     ((¶ s otherwise 'pass 'fail)        ; Else, expand to pass.
-     (ck s 'pass))))
+     (stx-ck s 'pass))))
 
 (define-syntax stx-if*
   ;; An ‘if’ that evaluates only the branch taken. The branches must
   ;; have an extra level of quoting.
   (syntax-rules ( quote )
     ((¶ s '#f 'pass 'fail)
-     (ck s fail))
+     (stx-ck s fail))
     ((¶ s otherwise 'pass 'fail)
-     (ck s pass))))
+     (stx-ck s pass))))
 
 (define-syntax stx-or
   ;; ‘or’ that evaluates eagerly.
   (syntax-rules ( quote )
     ((¶ s)
-     (ck s '#f))
+     (stx-ck s '#f))
     ((¶ s 'h)
-     (ck s 'h))
+     (stx-ck s 'h))
     ;; TODO: Can this be optimized to avoid expanding 'h twice?
     ((¶ s 'h . t)
-     (ck s (stx-if 'h 'h (stx-or . t))))))
+     (stx-ck s (stx-if 'h 'h (stx-or . t))))))
 
 (define-syntax stx-or*
   ;; Short-circuiting ‘or’. The arguments must have an extra level of
   ;; quoting.
   (syntax-rules ( quote )
     ((¶ s)
-     (ck s '#f))
+     (stx-ck s '#f))
     ((¶ s 'h)
-     (ck s h))
+     (stx-ck s h))
     ;; TODO: Can this be optimized to avoid expanding 'h twice?
     ((¶ s 'h . t)
-     (ck s (stx-if* h 'h '(stx-or* . t))))))
+     (stx-ck s (stx-if* h 'h '(stx-or* . t))))))
 
 (define-syntax stx-and
   ;; ‘and’ that evaluates eagerly.
   (syntax-rules ( quote )
     ((¶ s)
-     (ck s '#t))
+     (stx-ck s '#t))
     ((¶ s 'h)
-     (ck s 'h))
+     (stx-ck s 'h))
     ((¶ s 'h . t)
-     (ck s (stx-if 'h (stx-and . t) '#f)))))
+     (stx-ck s (stx-if 'h (stx-and . t) '#f)))))
 
 (define-syntax stx-and*
   ;; Short-circuiting ‘and’. The arguments must have an extra level of
   ;; quoting.
   (syntax-rules ( quote )
     ((¶ s)
-     (ck s '#t))
+     (stx-ck s '#t))
     ((¶ s 'h)
-     (ck s h))
+     (stx-ck s h))
     ((¶ s 'h . t)
-     (ck s (stx-if* h '(stx-and* . t) ''#f)))))
+     (stx-ck s (stx-if* h '(stx-and* . t) ''#f)))))
 
 ;;; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -319,10 +319,24 @@ one_argument_procedure(exact-integer?)
 ;;; »,«
 (define-syntax stx-exact-integer?
   (syntax-rules ()
-    ((_ s x)
+    ((¶ s x)
      (ck s (stx-and* (stx-quote (stx-integer? x))
                      (stx-quote (stx-exact? x)))))))
 ;;; »)
+
+;;;-------------------------------------------------------------------
+
+two_argument_procedure(equal?)
+two_argument_procedure(eqv?)
+two_argument_procedure(eq?)
+
+one_argument_procedure(symbol->string)
+one_argument_procedure(string->symbol)
+
+general_arguments_procedure(number->string)
+general_arguments_procedure(string->number)
+
+;;;-------------------------------------------------------------------
 
 one_argument_procedure(number?)
 one_argument_procedure(exact?)
@@ -396,29 +410,65 @@ one_argument_procedure(tenth)
 
 two_argument_procedure(list-ref)
 one_argument_procedure(length)
+one_argument_procedure(length+)
 
 one_argument_procedure(last)
 one_argument_procedure(last-pair)
 one_argument_procedure(reverse)
+two_argument_procedure(take)
+two_argument_procedure(drop)
+two_argument_procedure(take-right)
+two_argument_procedure(drop-right)
+general_arguments_procedure(fold)
+general_arguments_procedure(fold-right)
+general_arguments_procedure(pair-fold)
+general_arguments_procedure(pair-fold-right)
+general_arguments_procedure(reduce)
+general_arguments_procedure(reduce-right)
+general_arguments_procedure(unfold)
+general_arguments_procedure(unfold-right)
+general_arguments_procedure(map)
+general_arguments_procedure(map-in-order)
+general_arguments_procedure(append-map)
+general_arguments_procedure(filter-map)
+two_argument_procedure(filter)
+two_argument_procedure(remove)
+general_arguments_procedure(delete)
+general_arguments_procedure(delete-duplicates)
+
+general_arguments_procedure(append)
+two_argument_procedure(append-reverse)
+one_argument_procedure(concatenate)
+general_arguments_procedure(zip)
 two_argument_procedure(cons)
 two_argument_procedure(xcons)
 general_arguments_procedure(cons*)
 general_arguments_procedure(list)
-general_arguments_procedure(append)
-
 two_argument_procedure(list-tabulate)
 general_arguments_procedure(iota)
-
-;; Here is an alternative to R⁷RS circular list syntax.
 general_arguments_procedure(circular-list)
 
+general_arguments_procedure(list=)
+general_arguments_procedure(count)
+two_argument_procedure(find)
+two_argument_procedure(find-tail)
+two_argument_procedure(take-while)
+two_argument_procedure(drop-while)
+general_arguments_procedure(any)
+general_arguments_procedure(every)
+general_arguments_procedure(list-index)
+general_arguments_procedure(member)
+two_argument_procedure(memq)
+two_argument_procedure(memv)
 
-general_arguments_procedure(delete)
-general_arguments_procedure(delete-duplicates)
+general_arguments_procedure(assoc)
+two_argument_procedure(assq)
+two_argument_procedure(assv)
+general_arguments_procedure(alist-cons)
+general_arguments_procedure(alist-delete)
 
 one_argument_procedure(list->vector)
-
-general_arguments_procedure(list=)
+general_arguments_procedure(vector->list)
 
 ;;;-------------------------------------------------------------------
 
@@ -461,11 +511,11 @@ one_argument_procedure(even?)
 ;;; User-defined fast ck-macros.
 ;;;
 
-(define-syntax define-stx-macro
+(define-syntax define-stx-primitive
   (syntax-rules ()
-    ((_ NAME PROC)
-     (define-stx-macro NAME PROC eval_environment))
-    ((_ NAME PROC ENV)
+    ((¶ NAME PROC)
+     (define-stx-primitive NAME PROC eval_environment))
+    ((¶ NAME PROC ENV)
      (begin
 ;;;m4_ifelse(general_macros,«er-macro-transformer»,«
        (define-syntax NAME

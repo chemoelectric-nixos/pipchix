@@ -2,8 +2,7 @@
 
 stx
 stx-ck
-
-define-stx-macro
+define-stx-primitive
 
 stx-quote
 stx-quasiquote
@@ -19,6 +18,18 @@ stx-and
 stx-and*
 stx-or
 stx-or*
+
+;;;;; --------------------------------------------------
+
+stx-equal?
+stx-eqv?
+stx-eq?
+
+stx-symbol->string
+stx-string->symbol
+
+stx-number->string
+stx-string->number
 
 ;;;;; --------------------------------------------------
 
@@ -97,26 +108,65 @@ stx-tenth
 
 stx-list-ref
 stx-length
+stx-length+
 
 stx-last
 stx-last-pair
 stx-reverse
+stx-append-reverse
+stx-zip
+stx-take
+stx-drop
+stx-take-right
+stx-drop-right
+stx-fold
+stx-fold-right
+stx-pair-fold
+stx-pair-fold-right
+stx-reduce
+stx-reduce-right
+stx-unfold
+stx-unfold-right
+stx-map
+stx-map-in-order
+stx-append-map
+stx-filter-map
+stx-filter
+stx-remove
+stx-delete
+stx-delete-duplicates
+
+stx-append
+stx-concatenate
 stx-cons
 stx-xcons
 stx-cons*
 stx-list
-stx-append
-
 stx-list-tabulate
 stx-iota
-stx-circular-list
-
-stx-delete
-stx-delete-duplicates
+stx-circular-list ;; Use this outside R⁷RS to get a circular list at compile time.
 
 stx-list=
+stx-count
+stx-find
+stx-find-tail
+stx-take-while
+stx-drop-while
+stx-any
+stx-every
+stx-list-index
+stx-member
+stx-memq
+stx-memv
+
+stx-assoc
+stx-assq
+stx-assv
+stx-alist-cons
+stx-alist-delete
 
 stx-list->vector
+stx-vector->list
 
 ;;;;; --------------------------------------------------
 
