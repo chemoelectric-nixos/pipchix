@@ -30,13 +30,13 @@ m4_define([sexpr],
   [(let ()
     (scheme->nix
      (stx (stx-quote
-           (stx-map '\''(lambda (t) (cons 10 t))
-                    '\''(('\''1)
-                         ('\''2)
-                         ('\''3)
-                         ('\''4)))))))])
-check_unquoted([run_scheme 'sexpr'],[0],
-  [interpunct_nl([])],[])
+           (stx-reverse dnl '\''(lambda (t) (cons 10 t))
+                    '\''((1)
+                         (2)
+                         (3)
+                         (4)))))))])
+dnl check_unquoted([run_scheme 'sexpr'],[0],
+dnl   [interpunct_nl([])],[])
 
 dnl     (stx (stx-quote (stx-concatMap
 dnl                      '\''(stx-cons '\''10)

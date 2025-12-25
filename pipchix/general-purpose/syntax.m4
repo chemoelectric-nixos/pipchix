@@ -68,45 +68,116 @@
 ;;;
 ;;;-------------------------------------------------------------------
 
-(define-syntax c-cons
-  (syntax-rules ()
-    ((¶ s x y)
-     (stx-cons s x y))))
+;;; CK ABSTRACT MACHINE
 
-(define-syntax c-append
-  (syntax-rules ()
-    ((¶ s . args)
-     (stx-append s . args))))
+;;; Based on John Croisant’s public domain version for CHICKEN Scheme,
+;;; which in turn is based on "Applicative syntax-rules: macros that
+;;; compose better" by Oleg Kiselyov
+;;; http://okmij.org/ftp/Scheme/macros.html#ck-macros
 
-(define-syntax c-list->vector
-  (syntax-rules ()
-    ((¶ s x y)
-     (stx-list->vector s x y))))
-
-m4_define(«c_cons_provided»,«yes»)m4_dnl
-m4_define(«c_append_provided»,«yes»)m4_dnl
-m4_define(«c_list_to_vector_provided»,«yes»)m4_dnl
-define_ck_macros
-
+;;; The `ck' macro implements the CK abstract machine. It does
+;;; focusing and refocusing, relying on user-defined CK-macros for
+;;; (primitive) reductions.
+;;;
+;;; The argument `s' is a stack (list) representing pending operations
+;;; (CK-macro applications). Each stack frame is a list of the form:
+;;;
+;;;    ((op va ...) ea ...)
+;;;
+;;; `op' is the name of a CK-macro that does the reduction.
+;;; Zero or more `va' must all be values (i.e. quoted).
+;;; Zero or more `ea' are arbitrary expressions (could be values, or
+;;; more operations to apply).
+;;;
+;;; `ck' is a highly recursive macro with various patterns. To aid
+;;; comprehension, the patterns are labeled as steps 0 through 6,
+;;; reflecting the overall progression of the recursion. Some steps
+;;; repeat or jump around to other steps.
+;;;
+;;; "arg" is an internal implementation detail, and should not be used
+;;; by the caller. It acts as a "mode flag" while the macro is
+;;; processing arguments, to avoid conflicting syntax patterns.
+;;;
 (define-syntax stx-ck
-  (syntax-rules ()
-    ((¶ s x)
-     (ck s x))))
+  (syntax-rules ( quote quasiquote )
+    ;; Step 1 is listed last to make the macro work.
+    ;; Otherwise its pattern would interfere with steps 4 and 6.
+
+    ;; 0. If the top-level value is quasiquoted, transform directly
+    ;; into a call to `c-quasiquote', skipping steps 1-5.
+    ((¶ s `v)
+     (stx-quasiquote s 'v))
+
+    ;; 2A. If the next unprocessed arg is quasiquoted, transform
+    ;; directly into a call to `c-quasiquote', skipping steps 3-5.
+    ;; Otherwise go to step 2B.
+    ((¶ s "arg" (op ...) `v ea1 ...)
+     (stx-quasiquote (((op ...) ea1 ...) . s) 'v))
+
+    ;; 2B. If the next unprocessed arg is already a value, move it
+    ;; inside and repeat this step. Otherwise go to step 3. (This is
+    ;; an optimization to avoid needlessly doing steps 3 and 4.)
+    ((¶ s "arg" (op ...) 'v ea1 ...)
+     (stx-ck s "arg" (op ... 'v) ea1 ...))
+
+    ;; 3. Focus on next arg (`ea'), and push everything else onto the
+    ;; stack. If `ea' is a value, go to step 4. Otherwise, go to 5.
+    ((¶ s "arg" (op ...) ea ea1 ...)
+     (stx-ck (((op ...) ea1 ...) . s) ea))
+
+    ;; 4. If the focused arg is a value and there is at least one
+    ;; operation on the stack, pop the top operation off the stack,
+    ;; move the value inside, and process the remaining unprocessed
+    ;; args (`ea ...'), if any. If there are remaining args, go back
+    ;; to step 2. If there are no remaining args, go to step 5.
+    ((¶ (((op ...) ea ...) . s) 'v)
+     (stx-ck s "arg" (op ... 'v) ea ...))
+
+    ;; 5. Currently focused on an operation, either from step 1 or 4.
+    ;; Either way, it is time to expand the operation.
+    ;; The operation will expand into a call to `(ck s x)', where
+    ;; `x' is either an operation or a value.
+    ;; If `x' is an operation, go back to step 1.
+    ;; If `x' is a value, but there are pending operations on the
+    ;; stack, go back to step 4.
+    ;; Otherwise, if `x' is a value and there are no pending
+    ;; operations, go to step 6.
+    ((¶ s "arg" (op va ...))
+     (op s va ...))
+
+    ;; 6. The stack is empty (no pending operations) and there is a
+    ;; value, so yield the unquoted value as the final result.
+    ((¶ () 'v)
+     v)
+
+    ;; 1. Move the operation's args outside, if it has any. If the
+    ;; operation has no args, go to step 5. Otherwise, go to step 2.
+    ((¶ s (op ea ...))
+     (stx-ck s "arg" (op) ea ...))))
+
+(define-syntax stx-quasiquote
+  (syntax-rules ( quote unquote unquote-splicing )
+    ((¶ s '#(v ...))
+     (stx-ck s (stx-list->vector (stx-quasiquote '(v ...)))))
+    ((¶ s ',v)
+     (stx-ck s v))
+    ((¶ s '(,@v . vs))
+     (stx-ck s (stx-append v (stx-quasiquote 'vs))))
+    ((¶ s '(v . vs))
+     (stx-ck s (stx-cons (stx-quasiquote 'v)
+                         (stx-quasiquote 'vs))))
+    ((¶ s 'v)
+     (stx-ck s 'v))))
 
 (define-syntax stx
   (syntax-rules ()
     ((¶ x)
      (stx-ck () x))))
 
-(define-syntax stx-quasiquote
-  (syntax-rules ()
-    ((¶ s x)
-     (c-quasiquote s x))))
-
 ;;; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 ;;;
-;;; Some simple ck-macros based on those commented out in original
-;;; source code included above.
+;;; Some simple ck-macros based on those in John Croisant’s CHICKEN
+;;; egg.
 ;;;
 
 (define-syntax stx-quote
@@ -122,8 +193,8 @@ define_ck_macros
 
 (define-syntax stx-identity
   (syntax-rules ( quote )
-    ((¶ s 'v)
-     (stx-ck s 'v))))
+    ((¶ s x)
+     (stx-ck s x))))
 
 (define-syntax stx-constantly
   ;; Return the first argument constantly.
@@ -144,9 +215,9 @@ define_ck_macros
 (define-syntax stx-if
   ;; An ‘if’ that evaluates both branches.
   (syntax-rules ( quote )
-    ((¶ s '#f 'pass 'fail)              ; If #f, expand to fail.
+    ((¶ s '#f 'pass 'fail)
      (stx-ck s 'fail))
-    ((¶ s otherwise 'pass 'fail)        ; Else, expand to pass.
+    ((¶ s otherwise 'pass 'fail)
      (stx-ck s 'pass))))
 
 (define-syntax stx-if*
@@ -200,14 +271,14 @@ define_ck_macros
     ((¶ s 'h)
      (stx-ck s h))
     ((¶ s 'h . t)
-     (stx-ck s (stx-if* h '(stx-and* . t) ''#f)))))
+(stx-ck s (stx-if* h '(stx-and* . t) ''#f)))))
 
 ;;; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 ;;;m4_divert(-1)
 
-m4_define(«stx_output»,
-          «(if (or (boolean? $1) (number? $1)) `,$1 $1)»)
+m4_define(«stx_output»,«$1»)
+m4_dnl          «(if (or (boolean? $1) (number? $1)) `,$1 $1)»)   FIXME   FIXME   FIXME   FIXME   FIXME   FIXME   FIXME   FIXME
 
 ;;;m4_ifelse(scheme_standard,«r6rs»,«
 ;;;m4_define(«eval_environment»,(environment '(rnrs)))
@@ -227,13 +298,12 @@ m4_pushdef(«PROC»,m4_ifelse($2,«»,«$1»,«$2»))
    (lambda (form rename compare)
      (let ((env eval_environment)
            (Evaluate (lambda (ϑ) (eval ϑ env)))
-           (ck (rename 'ck))
            (s (cadr form))
            (args (cddr form))
            (f (if (symbol? PROC) (rename PROC) PROC))
            (x (Evaluate (car args)))
            (y (f x))
-           (retval `(,ck ,s ',y)))
+           (retval `(,(rename stx-ck) ,s ',y)))
        stx_output(retval)))))
 ;;;»,«
 (define-syntax MACR
@@ -245,7 +315,7 @@ m4_pushdef(«PROC»,m4_ifelse($2,«»,«$1»,«$2»))
               (f PROC)
               (t (Evaluate (syntax->datum (syntax x))))
               (y (datum->syntax (syntax ¶) (f t))))
-         stx_output((quasisyntax (ck s '(unsyntax y)))))))))
+         stx_output((quasisyntax (stx-ck s '(unsyntax y)))))))))
 ;;;»)
 m4_popdef(«NAME»,«MACR»,«PROC»)
 ;;;»)
@@ -260,14 +330,13 @@ m4_pushdef(«PROC»,m4_ifelse($2,«»,«$1»,«$2»))
    (lambda (form rename compare)
      (let* ((env eval_environment)
             (Evaluate (lambda (ϑ) (eval ϑ env)))
-            (ck (rename 'ck))
             (s (cadr form))
             (args (cddr form))
             (f (if (symbol? PROC) (rename PROC) PROC))
             (x (Evaluate (car args)))
             (y (Evaluate (cadr args)))
             (z (f x y))
-            (retval `(,ck ,s ',z)))
+            (retval `(,(rename stx-ck) ,s ',z)))
        stx_output(retval)))))
 ;;;»,«
 (define-syntax MACR
@@ -280,7 +349,7 @@ m4_pushdef(«PROC»,m4_ifelse($2,«»,«$1»,«$2»))
               (u (Evaluate (syntax->datum (syntax x))))
               (v (Evaluate (syntax->datum (syntax y))))
               (z (datum->syntax (syntax ¶) (f u v))))
-         stx_output((quasisyntax (ck s '(unsyntax z)))))))))
+         stx_output((quasisyntax (stx-ck s '(unsyntax z)))))))))
 ;;;»)
 m4_popdef(«NAME»,«MACR»,«PROC»)
 ;;;»)
@@ -295,13 +364,12 @@ m4_pushdef(«PROC»,m4_ifelse($2,«»,«$1»,«$2»))
    (lambda (form rename compare)
      (let* ((env eval_environment)
             (Evaluate (lambda (ϑ) (eval ϑ env)))
-            (ck (rename 'ck))
             (s (cadr form))
             (args (cddr form))
             (f (if (symbol? PROC) (rename PROC) PROC))
             (x* (map Evaluate args))
             (z (apply f x*))
-            (retval `(,ck ,s ',z)))
+            (retval `(,(rename stx-ck) ,s ',z)))
        stx_output(retval)))))
 ;;;»,«
 (define-syntax MACR
@@ -314,7 +382,7 @@ m4_pushdef(«PROC»,m4_ifelse($2,«»,«$1»,«$2»))
               (x* (map Evaluate (syntax->datum (syntax args))))
               (y (apply f x*))
               (z (datum->syntax (syntax ¶) y)))
-         stx_output((quasisyntax (ck s '(unsyntax z)))))))))
+         stx_output((quasisyntax (stx-ck s '(unsyntax z)))))))))
 ;;;»)
 m4_popdef(«NAME»,«MACR»,«PROC»)
 ;;;»)
@@ -327,8 +395,8 @@ one_argument_procedure(exact-integer?)
 (define-syntax stx-exact-integer?
   (syntax-rules ()
     ((¶ s x)
-     (ck s (stx-and* (stx-quote (stx-integer? x))
-                     (stx-quote (stx-exact? x)))))))
+     (stx-ck s (stx-and* (stx-quote (stx-integer? x))
+                         (stx-quote (stx-exact? x)))))))
 ;;; »)
 
 ;;;-------------------------------------------------------------------
@@ -435,22 +503,6 @@ two_argument_procedure(take)
 two_argument_procedure(drop)
 two_argument_procedure(take-right)
 two_argument_procedure(drop-right)
-general_arguments_procedure(fold)
-general_arguments_procedure(fold-right)
-general_arguments_procedure(pair-fold)
-general_arguments_procedure(pair-fold-right)
-general_arguments_procedure(reduce)
-general_arguments_procedure(reduce-right)
-general_arguments_procedure(unfold)
-general_arguments_procedure(unfold-right)
-general_arguments_procedure(map)
-general_arguments_procedure(map-in-order)
-general_arguments_procedure(append-map)
-general_arguments_procedure(filter-map)
-two_argument_procedure(filter)
-two_argument_procedure(remove)
-general_arguments_procedure(delete)
-general_arguments_procedure(delete-duplicates)
 
 general_arguments_procedure(append)
 two_argument_procedure(append-reverse)
@@ -461,28 +513,9 @@ two_argument_procedure(xcons)
 general_arguments_procedure(cons*)
 general_arguments_procedure(list)
 one_argument_procedure(list-copy)
-two_argument_procedure(list-tabulate)
 general_arguments_procedure(iota)
 general_arguments_procedure(circular-list)
-
-general_arguments_procedure(list=)
-general_arguments_procedure(count)
-two_argument_procedure(find)
-two_argument_procedure(find-tail)
-two_argument_procedure(take-while)
-two_argument_procedure(drop-while)
-general_arguments_procedure(any)
-general_arguments_procedure(every)
-general_arguments_procedure(list-index)
-general_arguments_procedure(member)
-two_argument_procedure(memq)
-two_argument_procedure(memv)
-
-general_arguments_procedure(assoc)
-two_argument_procedure(assq)
-two_argument_procedure(assv)
 general_arguments_procedure(alist-cons)
-general_arguments_procedure(alist-delete)
 
 one_argument_procedure(list->vector)
 general_arguments_procedure(vector->list)
@@ -528,7 +561,7 @@ one_argument_procedure(even?)
 ;;; User-defined fast ck-macros.
 ;;;
 
-(define-syntax define-stx-primitive
+(define-syntax define-stx-macro
   (syntax-rules ()
     ((¶ NAME PROC)
      (define-stx-primitive NAME PROC eval_environment))

@@ -517,8 +517,7 @@ nodist_r6rspipchix_DATA = $(am__append_2)
 nodist_r7rspipchix_DATA = $(am__append_3)
 nodist_chickeneggs5pipchix_DATA = $(am__append_1)
 M4_PREPROCESS = $(GNU_M4) -P -I '$(srcdir)'
-PIPCHXINC = $(srcdir)/pipchix/pipchix-includes.m4 \
-	$(srcdir)/pipchix/ck.scm
+PIPCHXINC = $(srcdir)/pipchix/pipchix-includes.m4
 R6RS_SCHEME = r6rs/pipchix/general-purpose/srfi-39.sls \
 	r6rs/pipchix/general-purpose/box.sls \
 	r6rs/pipchix/general-purpose/continuation-capture.sls \

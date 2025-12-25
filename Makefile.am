@@ -62,7 +62,6 @@ CLEANFILES += tmp.*
 
 PIPCHXINC =
 PIPCHXINC += $(srcdir)/pipchix/pipchix-includes.m4
-PIPCHXINC += $(srcdir)/pipchix/ck.scm
 EXTRA_DIST += $(PIPCHXINC)
 
 if INSTALL_CHICKEN_5_EGG_SOURCE
