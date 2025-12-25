@@ -4,9 +4,11 @@ stx
 stx-ck
 define-stx-primitive
 
-stx-quote
-stx-quasiquote
 stx-eval
+
+stx-quote
+stx-dequote
+stx-quasiquote
 
 stx-identity
 stx-constantly
@@ -142,6 +144,7 @@ stx-cons
 stx-xcons
 stx-cons*
 stx-list
+stx-list-copy
 stx-list-tabulate
 stx-iota
 stx-circular-list ;; Use this outside R⁷RS to get a circular list at compile time.
