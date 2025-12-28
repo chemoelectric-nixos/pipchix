@@ -34,14 +34,11 @@ m4_include(pipchix/pipchix-includes.m4)
   ;; »)
  
   (import (scheme base))
-  (import (scheme write)) ;; For debugging.
   (import (scheme eval))
-  (import (rename (only (scheme eval)
-                        eval environment)
-                  (eval e-macros-eval)
-                  (environment e-macros-environment)))
+  (import (scheme write)) ;; For debugging.
   (import (pipchix general-purpose list))
-
+  (import (pipchix general-purpose e-macros-environment))
+  
   (cond-expand
     (chicken-5 (import (only (chicken syntax) er-macro-transformer)))
     (chibi (import (only (chibi) er-macro-transformer)))
@@ -54,14 +51,17 @@ m4_include(pipchix/pipchix-includes.m4)
   (begin
 
     define_err_r7rs
-    m4_define(default_environment,default_environment_r7rs)
 
     (cond-expand
       (chicken-5
        ;; m4_pushdef(«general_macros»,«er-macro-transformer»)
        ;; m4_pushdef(«syntax_rules»,«r5rs»)
        ;; m4_pushdef(«scheme_standard»,«r5rs»)
+       (import-for-syntax (scheme base))
+       (import-for-syntax (scheme eval))
        (import-for-syntax (srfi 1))
+       (import-for-syntax
+        (pipchix general-purpose e-macros-environment))
        m4_include(pipchix/general-purpose/e-macros.m4)
        ;; m4_popdef(«general_macros»,«syntax_rules»,«scheme_standard»)
        )

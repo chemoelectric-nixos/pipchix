@@ -76,6 +76,7 @@ R6RS_SCHEME += r6rs/pipchix/general-purpose/list.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/division.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/define-record-factory.sls
 #R6RS_SCHEME += r6rs/pipchix/general-purpose/ck.sls
+R6RS_SCHEME += r6rs/pipchix/general-purpose/e-macros-environment.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/e-macros.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/em.sls
 R6RS_SCHEME += r6rs/pipchix/generate-identifier.sls
@@ -105,6 +106,7 @@ R7RS_SCHEME += r7rs/pipchix/general-purpose/list.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/division.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/define-record-factory.sld
 #R7RS_SCHEME += r7rs/pipchix/general-purpose/ck.sld
+R7RS_SCHEME += r7rs/pipchix/general-purpose/e-macros-environment.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/e-macros.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/em.sld
 R7RS_SCHEME += r7rs/pipchix/generate-identifier.sld
@@ -174,10 +176,12 @@ CHICKEN_EGGSPEC_BOTTOM = ' \
     (extension pipchix.general-purpose.list) \
     (extension pipchix.general-purpose.division) \
     (extension pipchix.general-purpose.define-record-factory) \
-    (pipchix.general-purpose.e-macros.scm \
+    (extension pipchix.general-purpose.e-macros-environment) \
+    (extension pipchix.general-purpose.e-macros \
       (component-dependencies \
+       pipchix.general-purpose.e-macros-environment \
        pipchix.general-purpose.list)) \
-    (pipchix.general-purpose.em.scm \
+    (extension pipchix.general-purpose.em \
       (component-dependencies \
        pipchix.general-purpose.list)) \
     (extension pipchix.string-manipulation \
@@ -265,6 +269,7 @@ CHICKEN_5_EGGFILES = \
     pipchix.general-purpose.list.scm \
     pipchix.general-purpose.division.scm \
     pipchix.general-purpose.define-record-factory.scm \
+    pipchix.general-purpose.e-macros-environment.scm \
     pipchix.general-purpose.e-macros.scm \
     pipchix.general-purpose.em.scm \
     pipchix.generate-identifier.scm \

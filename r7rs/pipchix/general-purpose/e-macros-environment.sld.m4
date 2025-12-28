@@ -1,4 +1,3 @@
-#!r6rs
 ;;;
 ;;; Copyright © 2025 Barry Schwartz
 ;;;
@@ -25,31 +24,29 @@
 ;;;
 m4_include(pipchix/pipchix-includes.m4)
 
-(library (pipchix general-purpose e-macros)
+(define-library (pipchix general-purpose e-macros-environment)
 
-  (export m4_include(pipchix/general-purpose/e-macros.exports.m4))
+  (export m4_include(pipchix/general-purpose/e-macros-environment.exports.m4))
 
-  (import (except (rnrs (6))
-                  fold-right
-                  member
-                  assoc
-                  map)
-          (for (rnrs eval (6)) run expand)
-          (for (pipchix general-purpose srfi-39) run expand)
-          (for (pipchix general-purpose e-macros-environment)
-            run expand)
-          (for (pipchix general-purpose list) run expand))
+  (import (scheme base))
+  (import (scheme eval))
 
-  ;; m4_define(«scheme_standard»,«r6rs»)
-  ;; m4_define(«general_macros»,«syntax-case»)
+  (begin
 
-  define_err_r6rs
-  m4_include(pipchix/general-purpose/e-macros.m4)
+    (cond-expand
+      (chicken-5
+       (import-for-syntax (scheme base))
+       (import-for-syntax (scheme eval)))
+      (else))
 
-  )
+    define_err_r7rs
+    m4_define(default_environment,default_environment_r7rs)
+    m4_include(pipchix/general-purpose/e-macros-environment.m4)
+
+    ))
 
 ;;; local variables:
 ;;; mode: scheme
-;;; geiser-scheme-implementation: chez
+;;; geiser-scheme-implementation: chibi
 ;;; coding: utf-8
 ;;; end:

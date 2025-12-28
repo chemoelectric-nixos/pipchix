@@ -26,6 +26,10 @@ AT_SETUP([setup_message(e-macros)])
 
 AT_KEYWORDS([default_keywords e-macros])
 
+# Currently the library does not work with the CHICKEN 5 compiler,
+# unless you first actually install the ‘pipchix’ egg.
+AT_SKIP_IF(m4_if(implementation,[csc-5],[true],[false]))
+
 m4_define([sexpr],[(scheme->nix (e-false 1 2 3 4 5))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([nix_false])],[])

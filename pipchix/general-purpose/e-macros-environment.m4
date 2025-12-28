@@ -1,4 +1,3 @@
-#!r6rs
 ;;;
 ;;; Copyright © 2025 Barry Schwartz
 ;;;
@@ -23,33 +22,44 @@
 ;;; OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 ;;; WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ;;;
-m4_include(pipchix/pipchix-includes.m4)
 
-(library (pipchix general-purpose e-macros)
+(define e-macros-eval eval)
+(define e-macros-environment environment)
 
-  (export m4_include(pipchix/general-purpose/e-macros.exports.m4))
+(define *e-macros-libraries*
+  (make-parameter
+   (vector 'default_environment)
+   (lambda (obj)
+     (unless (and (vector? obj)
+                  (>= (vector-length obj) 1))
+       (err "expected a vector of length >=1" obj))
+     obj)))
 
-  (import (except (rnrs (6))
-                  fold-right
-                  member
-                  assoc
-                  map)
-          (for (rnrs eval (6)) run expand)
-          (for (pipchix general-purpose srfi-39) run expand)
-          (for (pipchix general-purpose e-macros-environment)
-            run expand)
-          (for (pipchix general-purpose list) run expand))
+(define (e-macros-libraries)
+  (vector-ref (*e-macros-libraries*) 0))
 
-  ;; m4_define(«scheme_standard»,«r6rs»)
-  ;; m4_define(«general_macros»,«syntax-case»)
+(define-syntax with-e-macros-libraries
+  (syntax-rules ()
+    ((¶ ((a b ...) ...) body ...)
+     (parameterize ((*e-macros-libraries*
+                     (vector '((a b ...) ...))))
+       (if #f #f)
+       body ...))))
 
-  define_err_r6rs
-  m4_include(pipchix/general-purpose/e-macros.m4)
+(define-syntax set-e-macros-libraries!
+  (syntax-rules ()
+    ((¶ ((a b ...) ...))
+     (vector-set! (*e-macros-libraries*) 0
+                  '((a b ...) ...)))))
 
-  )
+(define (e-macros-evaluate form)
+  (e-macros-eval form (apply e-macros-environment
+                             (e-macros-libraries))))
 
+m4_divert(-1)
 ;;; local variables:
 ;;; mode: scheme
-;;; geiser-scheme-implementation: chez
+;;; geiser-scheme-implementation: chibi
 ;;; coding: utf-8
 ;;; end:
+m4_divert«»m4_dnl

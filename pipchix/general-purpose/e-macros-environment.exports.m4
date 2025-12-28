@@ -5,9 +5,3 @@ e-macros-libraries
 with-e-macros-libraries
 set-e-macros-libraries!
 
-define-e-macro
-
-e-false
-e-true
-
-e-list

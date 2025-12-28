@@ -35,7 +35,7 @@
             (let* ((evaluate
                     (lambda (obj)
                       (e-macros-eval obj (apply e-macros-environment
-                                                'default_environment))))
+                                                (e-macros-libraries)))))
                    (f-of-x*
                     (let loop ((arg* arguments)
                                (x* '()))
@@ -57,10 +57,7 @@
                                        ;; Drop the quoting by a level.
                                        (car arg)))))
                             (loop arg* (cons x x*))))
-                        (cons `(e-macros-eval
-                                'E-MACRO-PROCEDURE
-                                ',(apply e-macros-environment
-                                         'default_environment))
+                        (cons `(e-macros-evaluate 'E-MACRO-PROCEDURE)
                               (reverse! x*))))))
               `,f-of-x*))))))))
 
@@ -76,7 +73,7 @@
             (let* ((evaluate
                     (lambda (obj)
                       (e-macros-eval obj (apply e-macros-environment
-                                                'default_environment))))
+                                                (e-macros-libraries)))))
                    (f-of-x*
                     ;; The following strips all syntactic information
                     ;; from the ‘quote’ expressions.
@@ -100,10 +97,7 @@
                                       ;; Drop the quoting by a level.
                                       (car arg)))))
                             (loop arg* (cons x x*))))
-                        (cons `(e-macros-eval
-                                'E-MACRO-PROCEDURE
-                                ',(apply e-macros-environment
-                                         'default_environment))
+                        (cons `(e-macros-evaluate 'E-MACRO-PROCEDURE)
                               (reverse! x*))))))
               (datum->syntax (syntax µ) f-of-x*)))))))))
 
@@ -131,7 +125,7 @@
 ;;;;;                (let* ((x_ (syntax->datum (syntax x)))
 ;;;;;                       (x_ (e-macros-eval
 ;;;;;                            x_ (apply e-macros-environment
-;;;;;                                      'default_environment))))
+;;;;;                                      (e-macros-libraries)))))
 ;;;;;                  (datum->syntax (syntax µ) x_)))
 ;;;;;               ((µ x)
 ;;;;;                (syntax x)))))
@@ -148,7 +142,7 @@
 ;;;;;                 `((e-macros-eval
 ;;;;;                    'E-MACRO-PROCEDURE
 ;;;;;                    ',(apply e-macros-environment
-;;;;;                             'default_environment))
+;;;;;                             (e-macros-libraries)))
 ;;;;;                   . ,(map syntax->datum (reverse! x*)))))))))))))
 
 ;;; »)

@@ -25,26 +25,19 @@
 ;;;
 m4_include(pipchix/pipchix-includes.m4)
 
-(library (pipchix general-purpose e-macros)
+(library (pipchix general-purpose e-macros-environment)
 
-  (export m4_include(pipchix/general-purpose/e-macros.exports.m4))
+  (export m4_include(pipchix/general-purpose/e-macros-environment.exports.m4))
 
-  (import (except (rnrs (6))
-                  fold-right
-                  member
-                  assoc
-                  map)
-          (for (rnrs eval (6)) run expand)
-          (for (pipchix general-purpose srfi-39) run expand)
-          (for (pipchix general-purpose e-macros-environment)
-            run expand)
-          (for (pipchix general-purpose list) run expand))
+  (import (rnrs base (6))
+          (rnrs control (6))
+          (rnrs eval (6))
+          (pipchix general-purpose srfi-39))
 
-  ;; m4_define(«scheme_standard»,«r6rs»)
-  ;; m4_define(«general_macros»,«syntax-case»)
 
   define_err_r6rs
-  m4_include(pipchix/general-purpose/e-macros.m4)
+  ;;; m4_define(«default_environment»,default_environment_r6rs)
+  m4_include(pipchix/general-purpose/e-macros-environment.m4)
 
   )
 
