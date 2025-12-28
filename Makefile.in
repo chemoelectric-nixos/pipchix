@@ -518,7 +518,6 @@ nodist_r7rspipchix_DATA = $(am__append_3)
 nodist_chickeneggs5pipchix_DATA = $(am__append_1)
 M4_PREPROCESS = $(GNU_M4) -P -I '$(srcdir)'
 PIPCHXINC = $(srcdir)/pipchix/pipchix-includes.m4
-#R6RS_SCHEME += r6rs/pipchix/general-purpose/ck.sls
 R6RS_SCHEME = r6rs/pipchix/general-purpose/srfi-39.sls \
 	r6rs/pipchix/general-purpose/box.sls \
 	r6rs/pipchix/general-purpose/continuation-capture.sls \
@@ -536,7 +535,6 @@ R6RS_SCHEME = r6rs/pipchix/general-purpose/srfi-39.sls \
 	r6rs/pipchix/macros/nix-lambda.sls \
 	r6rs/pipchix/abstract-syntax-tree.sls \
 	r6rs/pipchix/string-manipulation.sls
-#R7RS_SCHEME += r7rs/pipchix/general-purpose/ck.sld
 R7RS_SCHEME = r7rs/pipchix/general-purpose/box.sld \
 	r7rs/pipchix/general-purpose/continuation-capture.sld \
 	r7rs/pipchix/general-purpose/list.sld \
@@ -638,8 +636,6 @@ CHICKEN_EGGSPEC_BOTTOM = ' \
        pipchix.nix-embed \
        pipchix.nix-list))))'
 
-
-#    pipchix.general-purpose.ck.scm
 CHICKEN_5_EGGS = chicken/eggs/5
 CHICKEN_5_EGGDIR = $(CHICKEN_5_EGGS)/pipchix
 CHICKEN_5_EGGFILES = \

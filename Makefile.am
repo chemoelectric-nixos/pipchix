@@ -75,7 +75,6 @@ R6RS_SCHEME += r6rs/pipchix/general-purpose/continuation-capture.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/list.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/division.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/define-record-factory.sls
-#R6RS_SCHEME += r6rs/pipchix/general-purpose/ck.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/e-macros-environment.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/e-macros.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/em.sls
@@ -105,7 +104,6 @@ R7RS_SCHEME += r7rs/pipchix/general-purpose/continuation-capture.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/list.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/division.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/define-record-factory.sld
-#R7RS_SCHEME += r7rs/pipchix/general-purpose/ck.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/e-macros-environment.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/e-macros.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/em.sld
@@ -256,8 +254,6 @@ $(builddir)/$(CHICKEN_5_EGGDIR)/pipchix.macros.%.scm: \
 	$(call v,SCM.M4) $(MKDIR_P) $(@D) && \
 		$(M4_PREPROCESS) -DCHICKEN_5=yes $(<) > $(@).tmp && \
 		mv $(@){.tmp,}
-
-#    pipchix.general-purpose.ck.scm
 
 CHICKEN_5_EGGS = chicken/eggs/5
 CHICKEN_5_EGGDIR = $(CHICKEN_5_EGGS)/pipchix

@@ -115,6 +115,10 @@
 
 define_simple_e_macro(list)
 define_simple_e_macro(circular-list)
+define_simple_e_macro(cons)
+define_simple_e_macro(xcons)
+define_simple_e_macro(cons*)
+define_simple_e_macro(iota)
 
 define_simple_e_macro(take)
 define_simple_e_macro(drop)
@@ -162,6 +166,9 @@ define_simple_e_macro(seventh)
 define_simple_e_macro(eighth)
 define_simple_e_macro(ninth)
 define_simple_e_macro(tenth)
+
+define_simple_e_macro(last)
+define_simple_e_macro(last-pair)
 
 define_simple_e_macro(list-ref)
 

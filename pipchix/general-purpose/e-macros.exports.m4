@@ -12,6 +12,10 @@ e-true
 
 e-list
 e-circular-list
+e-cons
+e-xcons
+e-cons*
+e-iota
 
 e-take
 e-drop
@@ -59,6 +63,9 @@ e-seventh
 e-eighth
 e-ninth
 e-tenth
+
+e-last
+e-last-pair
 
 e-list-ref
 
