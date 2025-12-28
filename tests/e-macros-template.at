@@ -42,6 +42,60 @@ m4_define([sexpr],[(scheme->nix (e-list 1 2 3 '\''(e-list 4 5 (e-true) 6)))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([@<:@·(1)·(2)·(3)·@<:@·(4)·(5)·nix_true[](6)·@:>@·@:>@·])],[])
 
+m4_define([sexpr],[(scheme->nix (e-take (e-circular-list 1 2 3) 11))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·(1)·(2)·(3)·(1)·(2)·(3)·(1)·(2)·(3)·(1)·(2)·@:>@·])],[])
+
+m4_define([sexpr],[(scheme->nix (e-take '\''(e-circular-list 1 2 3) 11))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·(1)·(2)·(3)·(1)·(2)·(3)·(1)·(2)·(3)·(1)·(2)·@:>@·])],[])
+
+m4_define([sexpr],[(scheme->nix (e-drop (e-list 1 2 3 4 5) 3))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·(4)·(5)·@:>@·])],[])
+
+m4_define([sexpr],[(scheme->nix (e-take-right (e-list 1 2 3 4 5) 3))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·(3)·(4)·(5)·@:>@·])],[])
+
+m4_define([sexpr],[(scheme->nix (e-drop-right (e-list 1 2 3 4 5) 3))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·(1)·(2)·@:>@·])],[])
+
+m4_define([sexpr],[(scheme->nix (e-car (e-list 1 2 3 4 5)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(1)·])],[])
+
+m4_define([sexpr],[(scheme->nix (e-cdr (e-list 1 2 3 4 5)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·(2)·(3)·(4)·(5)·@:>@·])],[])
+
+m4_foreach(N,[1,2,3,4,5,6,7,8,9,10],[
+m4_pushdef([ORDINAL],m4_case(N,
+[1],first,
+[2],second,
+[3],third,
+[4],fourth,
+[5],fifth,
+[6],sixth,
+[7],seventh,
+[8],eighth,
+[9],ninth,
+[10],tenth))
+m4_define([sexpr],[(scheme->nix (e-ORDINAL (e-list 10 20 30 40 50 60 70 80 90 100)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(N[]0)·])],[])
+m4_popdef([ORDINAL])
+])
+
+m4_define([sexpr],[(scheme->nix (e-list-ref (e-list 1 2 3 40 5) 3))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(40)·])],[])
+
+m4_define([sexpr],[(scheme->nix (e-list 1 2 3 '\''(e-reverse '\''(e-list 4 5 (e-true) 6))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·(1)·(2)·(3)·@<:@·(6)·nix_true[](5)·(4)·@:>@·@:>@·])],[])
+
 AT_CLEANUP
 
 # local variables:

@@ -29,8 +29,8 @@ m4_divert(-1)
 ;;; m4_define(«semicolon»,«;»)
 ;;; m4_define(«backslash»,«\»)
 
-;;; m4_define(«default_environment_r6rs»,«((rnrs (6))))»)
-;;; m4_define(«default_environment_r7rs»,«((scheme base) (scheme cxr) (scheme write))»)
+;;; m4_define(«default_environment_r6rs»,«((except (rnrs (6)) fold-right member assoc map) (pipchix general-purpose list) (pipchix general-purpose box)))»)
+;;; m4_define(«default_environment_r7rs»,«((scheme base) (scheme write) (pipchix general-purpose list) (pipchix general-purpose box))»)
 
 ;;; m4_define(«define_err_r6rs»,«(define (err . args) (apply error #f args))»)
 ;;; m4_define(«define_err_r7rs»,«(define err error)»)
