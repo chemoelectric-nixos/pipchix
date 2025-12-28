@@ -518,13 +518,15 @@ nodist_r7rspipchix_DATA = $(am__append_3)
 nodist_chickeneggs5pipchix_DATA = $(am__append_1)
 M4_PREPROCESS = $(GNU_M4) -P -I '$(srcdir)'
 PIPCHXINC = $(srcdir)/pipchix/pipchix-includes.m4
+#R6RS_SCHEME += r6rs/pipchix/general-purpose/ck.sls
 R6RS_SCHEME = r6rs/pipchix/general-purpose/srfi-39.sls \
 	r6rs/pipchix/general-purpose/box.sls \
 	r6rs/pipchix/general-purpose/continuation-capture.sls \
 	r6rs/pipchix/general-purpose/list.sls \
 	r6rs/pipchix/general-purpose/division.sls \
 	r6rs/pipchix/general-purpose/define-record-factory.sls \
-	r6rs/pipchix/general-purpose/syntax.sls \
+	r6rs/pipchix/general-purpose/e-macros.sls \
+	r6rs/pipchix/general-purpose/em.sls \
 	r6rs/pipchix/generate-identifier.sls \
 	r6rs/pipchix/essentials.sls r6rs/pipchix/expressions.sls \
 	r6rs/pipchix/macros.sls r6rs/pipchix/nix-embed.sls \
@@ -533,12 +535,14 @@ R6RS_SCHEME = r6rs/pipchix/general-purpose/srfi-39.sls \
 	r6rs/pipchix/macros/nix-lambda.sls \
 	r6rs/pipchix/abstract-syntax-tree.sls \
 	r6rs/pipchix/string-manipulation.sls
+#R7RS_SCHEME += r7rs/pipchix/general-purpose/ck.sld
 R7RS_SCHEME = r7rs/pipchix/general-purpose/box.sld \
 	r7rs/pipchix/general-purpose/continuation-capture.sld \
 	r7rs/pipchix/general-purpose/list.sld \
 	r7rs/pipchix/general-purpose/division.sld \
 	r7rs/pipchix/general-purpose/define-record-factory.sld \
-	r7rs/pipchix/general-purpose/syntax.sld \
+	r7rs/pipchix/general-purpose/e-macros.sld \
+	r7rs/pipchix/general-purpose/em.sld \
 	r7rs/pipchix/generate-identifier.sld \
 	r7rs/pipchix/essentials.sld r7rs/pipchix/expressions.sld \
 	r7rs/pipchix/macros.sld r7rs/pipchix/nix-embed.sld \
@@ -565,6 +569,11 @@ CHICKEN_EGGSPEC_TOP = ' \
    (category code-generation) \
    (license "MIT")'
 
+
+#    (extension pipchix.general-purpose.ck \
+#      (component-dependencies \
+#       pipchix.general-purpose.list \
+#       pipchix.general-purpose.division))
 CHICKEN_EGGSPEC_BOTTOM = ' \
    (components \
     (extension pipchix.general-purpose.box) \
@@ -572,10 +581,12 @@ CHICKEN_EGGSPEC_BOTTOM = ' \
     (extension pipchix.general-purpose.list) \
     (extension pipchix.general-purpose.division) \
     (extension pipchix.general-purpose.define-record-factory) \
-    (extension pipchix.general-purpose.syntax \
+    (pipchix.general-purpose.e-macros.scm \
       (component-dependencies \
-       pipchix.general-purpose.list \
-       pipchix.general-purpose.division)) \
+       pipchix.general-purpose.list)) \
+    (pipchix.general-purpose.em.scm \
+      (component-dependencies \
+       pipchix.general-purpose.list)) \
     (extension pipchix.string-manipulation \
       (component-dependencies \
        pipchix.general-purpose.box)) \
@@ -623,6 +634,8 @@ CHICKEN_EGGSPEC_BOTTOM = ' \
        pipchix.nix-embed \
        pipchix.nix-list))))'
 
+
+#    pipchix.general-purpose.ck.scm
 CHICKEN_5_EGGS = chicken/eggs/5
 CHICKEN_5_EGGDIR = $(CHICKEN_5_EGGS)/pipchix
 CHICKEN_5_EGGFILES = \
@@ -633,7 +646,8 @@ CHICKEN_5_EGGFILES = \
     pipchix.general-purpose.list.scm \
     pipchix.general-purpose.division.scm \
     pipchix.general-purpose.define-record-factory.scm \
-    pipchix.general-purpose.syntax.scm \
+    pipchix.general-purpose.e-macros.scm \
+    pipchix.general-purpose.em.scm \
     pipchix.generate-identifier.scm \
     pipchix.string-manipulation.scm \
     pipchix.abstract-syntax-tree.scm \

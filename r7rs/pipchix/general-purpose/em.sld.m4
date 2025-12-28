@@ -24,9 +24,9 @@
 ;;;
 m4_include(pipchix/pipchix-includes.m4)
 
-(define-library (pipchix general-purpose syntax)
+(define-library (pipchix general-purpose em)
 
-  (export m4_include(pipchix/general-purpose/syntax.exports.m4))
+  (export m4_include(pipchix/general-purpose/em.exports.m4))
   ;; m4_ifelse(CHICKEN_5,«yes»,,«
   (cond-expand
     (gauche (export :info-alist))
@@ -35,12 +35,8 @@ m4_include(pipchix/pipchix-includes.m4)
  
   (import (scheme base))
   (import (scheme write)) ;; For debugging.
-  (import (scheme cxr))
   (import (scheme eval))
-  (import (scheme repl))
-  (import (scheme inexact))
   (import (pipchix general-purpose list))
-  (import (pipchix general-purpose division))
 
   (cond-expand
     (chicken-5 (import (only (chicken syntax) er-macro-transformer)))
@@ -53,27 +49,29 @@ m4_include(pipchix/pipchix-includes.m4)
 
   (begin
 
+    define_err_r7rs
+
     (cond-expand
       (chicken-5
        ;; m4_pushdef(«general_macros»,«er-macro-transformer»)
        ;; m4_pushdef(«syntax_rules»,«r5rs»)
        ;; m4_pushdef(«scheme_standard»,«r5rs»)
        (import-for-syntax (srfi 1))
-       m4_include(pipchix/general-purpose/syntax.m4)
+       m4_include(pipchix/general-purpose/em.m4)
        ;; m4_popdef(«general_macros»,«syntax_rules»,«scheme_standard»)
        )
       ((or loko guile)
        ;; m4_pushdef(«general_macros»,«syntax-case»)
        ;; m4_pushdef(«syntax_rules»,«unknown»)
        ;; m4_pushdef(«scheme_standard»,«r7rs»)
-       m4_include(pipchix/general-purpose/syntax.m4)
+       m4_include(pipchix/general-purpose/em.m4)
        ;; m4_popdef(«general_macros»,«syntax_rules»,«scheme_standard»)
        )
       (else
        ;; m4_pushdef(«general_macros»,«er-macro-transformer»)
        ;; m4_pushdef(«syntax_rules»,«r7rs»)
        ;; m4_pushdef(«scheme_standard»,«r7rs»)
-       m4_include(pipchix/general-purpose/syntax.m4)
+       m4_include(pipchix/general-purpose/em.m4)
        ;; m4_popdef(«general_macros»,«syntax_rules»,«scheme_standard»)
        ))
 

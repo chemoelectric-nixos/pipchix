@@ -75,7 +75,9 @@ R6RS_SCHEME += r6rs/pipchix/general-purpose/continuation-capture.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/list.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/division.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/define-record-factory.sls
-R6RS_SCHEME += r6rs/pipchix/general-purpose/syntax.sls
+#R6RS_SCHEME += r6rs/pipchix/general-purpose/ck.sls
+R6RS_SCHEME += r6rs/pipchix/general-purpose/e-macros.sls
+R6RS_SCHEME += r6rs/pipchix/general-purpose/em.sls
 R6RS_SCHEME += r6rs/pipchix/generate-identifier.sls
 R6RS_SCHEME += r6rs/pipchix/essentials.sls
 R6RS_SCHEME += r6rs/pipchix/expressions.sls
@@ -102,7 +104,9 @@ R7RS_SCHEME += r7rs/pipchix/general-purpose/continuation-capture.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/list.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/division.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/define-record-factory.sld
-R7RS_SCHEME += r7rs/pipchix/general-purpose/syntax.sld
+#R7RS_SCHEME += r7rs/pipchix/general-purpose/ck.sld
+R7RS_SCHEME += r7rs/pipchix/general-purpose/e-macros.sld
+R7RS_SCHEME += r7rs/pipchix/general-purpose/em.sld
 R7RS_SCHEME += r7rs/pipchix/generate-identifier.sld
 R7RS_SCHEME += r7rs/pipchix/essentials.sld
 R7RS_SCHEME += r7rs/pipchix/expressions.sld
@@ -158,6 +162,11 @@ CHICKEN_EGGSPEC_TOP = ' \
    (category code-generation) \
    (license "MIT")'
 
+#    (extension pipchix.general-purpose.ck \
+#      (component-dependencies \
+#       pipchix.general-purpose.list \
+#       pipchix.general-purpose.division))
+
 CHICKEN_EGGSPEC_BOTTOM = ' \
    (components \
     (extension pipchix.general-purpose.box) \
@@ -165,10 +174,12 @@ CHICKEN_EGGSPEC_BOTTOM = ' \
     (extension pipchix.general-purpose.list) \
     (extension pipchix.general-purpose.division) \
     (extension pipchix.general-purpose.define-record-factory) \
-    (extension pipchix.general-purpose.syntax \
+    (pipchix.general-purpose.e-macros.scm \
       (component-dependencies \
-       pipchix.general-purpose.list \
-       pipchix.general-purpose.division)) \
+       pipchix.general-purpose.list)) \
+    (pipchix.general-purpose.em.scm \
+      (component-dependencies \
+       pipchix.general-purpose.list)) \
     (extension pipchix.string-manipulation \
       (component-dependencies \
        pipchix.general-purpose.box)) \
@@ -242,6 +253,8 @@ $(builddir)/$(CHICKEN_5_EGGDIR)/pipchix.macros.%.scm: \
 		$(M4_PREPROCESS) -DCHICKEN_5=yes $(<) > $(@).tmp && \
 		mv $(@){.tmp,}
 
+#    pipchix.general-purpose.ck.scm
+
 CHICKEN_5_EGGS = chicken/eggs/5
 CHICKEN_5_EGGDIR = $(CHICKEN_5_EGGS)/pipchix
 CHICKEN_5_EGGFILES = \
@@ -252,7 +265,8 @@ CHICKEN_5_EGGFILES = \
     pipchix.general-purpose.list.scm \
     pipchix.general-purpose.division.scm \
     pipchix.general-purpose.define-record-factory.scm \
-    pipchix.general-purpose.syntax.scm \
+    pipchix.general-purpose.e-macros.scm \
+    pipchix.general-purpose.em.scm \
     pipchix.generate-identifier.scm \
     pipchix.string-manipulation.scm \
     pipchix.abstract-syntax-tree.scm \

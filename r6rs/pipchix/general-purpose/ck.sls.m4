@@ -25,9 +25,9 @@
 ;;;
 m4_include(pipchix/pipchix-includes.m4)
 
-(library (pipchix general-purpose syntax)
+(library (pipchix general-purpose ck)
 
-  (export m4_include(pipchix/general-purpose/syntax.exports.m4))
+  (export m4_include(pipchix/general-purpose/ck.exports.m4))
 
   (import (except (rnrs (6))
                   fold-right
@@ -40,7 +40,7 @@ m4_include(pipchix/pipchix-includes.m4)
           (for (pipchix general-purpose division) expand))
 
   ;; m4_define(«scheme_standard»,«r6rs»)
-  m4_include(pipchix/general-purpose/syntax.m4)
+  m4_include(pipchix/general-purpose/ck.m4)
 
   )
 

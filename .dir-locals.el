@@ -1,3 +1,7 @@
 ((nil (indent-tabs-mode . nil))
  (makefile-mode (indent-tabs-mode . t))
- (scheme-mode (eval . (put 'if 'scheme-indent-function 1))))
+ (scheme-mode (eval . (put 'if 'scheme-indent-function 1))
+              (eval . (put 'cond 'scheme-indent-function 0))
+              (eval . (put 'with-syntax 'scheme-indent-function 1))
+              ))
+
