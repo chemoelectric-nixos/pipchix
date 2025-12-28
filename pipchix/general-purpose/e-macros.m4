@@ -114,11 +114,22 @@
 (define-e-macro e-true (lambda anything #t))
 
 define_simple_e_macro(list)
+define_simple_e_macro(make-list)
 define_simple_e_macro(circular-list)
 define_simple_e_macro(cons)
 define_simple_e_macro(xcons)
 define_simple_e_macro(cons*)
 define_simple_e_macro(iota)
+define_simple_e_macro(list-tabulate)
+
+define_simple_e_macro(pair?)
+define_simple_e_macro(null?)
+define_simple_e_macro(proper-list?)
+define_simple_e_macro(circular-list?)
+define_simple_e_macro(dotted-list?)
+define_simple_e_macro(not-pair?)
+define_simple_e_macro(null-list?)
+define_simple_e_macro(list=)
 
 define_simple_e_macro(take)
 define_simple_e_macro(drop)

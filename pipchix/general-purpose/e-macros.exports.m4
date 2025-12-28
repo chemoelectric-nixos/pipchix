@@ -11,11 +11,22 @@ e-false
 e-true
 
 e-list
+e-make-list
 e-circular-list
 e-cons
 e-xcons
 e-cons*
 e-iota
+e-list-tabulate
+
+e-pair?
+e-null?
+e-proper-list?
+e-circular-list?
+e-dotted-list?
+e-not-pair?
+e-null-list?
+e-list=
 
 e-take
 e-drop
