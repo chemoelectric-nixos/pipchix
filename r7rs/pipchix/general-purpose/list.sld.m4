@@ -30,8 +30,10 @@ m4_include(pipchix/pipchix-includes.m4)
 
   (cond-expand
     (guile
-     ;; Guile has a broken ‘member’ procedure.
-     (import (except (scheme base) member)))
+     ;; Guile’s claims of support for R⁷RS probably are exaggerated.
+     (import (except (scheme base)
+                     member
+                     assoc)))
     (else
      (import (scheme base))))
   (import (scheme cxr))
@@ -50,10 +52,18 @@ m4_include(pipchix/pipchix-includes.m4)
        ;; Guile is very buggy, and its SRFI-1 simply failed our tests.
        ;;
        ;;m4_pushdef(«srfi1_code_is_needed»,«yes»)
+       ;;m4_pushdef(«list_copy_needed»,«yes»)
+       ;;m4_pushdef(«make_list_needed»,«yes»)
        ;;m4_pushdef(«member_needed»,«yes»)
+       ;;m4_pushdef(«assoc_needed»,«yes»)
+       ;;m4_pushdef(«map_needed»,«yes»)
        m4_include(pipchix/general-purpose/list.m4)
        ;;m4_popdef(«srfi1_code_is_needed»)
+       ;;m4_popdef(«list_copy_needed»)
+       ;;m4_popdef(«make_list_needed»)
        ;;m4_popdef(«member_needed»)
+       ;;m4_popdef(«assoc_needed»)
+       ;;m4_popdef(«map_needed»)
        )
       ((or chibi loko)
        ;; Chibi’s (scheme list) mishandles circular lists (Chibi

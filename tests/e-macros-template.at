@@ -410,6 +410,43 @@ m4_define([sexpr],
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([@<:@·(3)·(10)·(22)·(9)·@:>@·])],[])
 
+m4_define([sexpr],
+  [(scheme->nix (e-assoc '\'''\''(2) '\'''\''(((1)) ((2)) ((3)))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·@<:@·(2)·@:>@·@:>@·])],[])
+
+m4_define([sexpr],
+  [(scheme->nix (e-assoc '\'''\''(2) '\'''\''(((1)) ((2)) ((3)))
+                         '\''(lambda (x y) (< (car x) (car y)))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·@<:@·(3)·@:>@·@:>@·])],[])
+
+m4_define([sexpr],
+  [(scheme->nix (e-assq '\'''\''c '\'''\''((a b) (c d) (e f))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·("c")·("d")·@:>@·])],[])
+
+m4_define([sexpr],
+  [(scheme->nix (e-assv 5 '\'''\''((2 3) (5 7) (11 13))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·(5)·(7)·@:>@·])],[])
+
+m4_define([sexpr],
+  [(scheme->nix (e-alist-cons 2 '\'''\''(3) '\'''\''((5 7) (11 13))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·@<:@·(2)·(3)·@:>@·@<:@·(5)·(7)·@:>@·@<:@·(11)·(13)·@:>@·@:>@·])],[])
+
+m4_define([sexpr],
+  [(scheme->nix (e-alist-delete 5 '\'''\''((2 3) (5 7) (11 13))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·@<:@·(2)·(3)·@:>@·@<:@·(11)·(13)·@:>@·@:>@·])],[])
+
+m4_define([sexpr],
+  [(scheme->nix (e-alist-delete 5 '\'''\''((2 3) (5 7) (11 13))
+                                '\''<))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·@<:@·(2)·(3)·@:>@·@<:@·(5)·(7)·@:>@·@:>@·])],[])
+
 AT_CLEANUP
 
 # local variables:

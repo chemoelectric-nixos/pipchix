@@ -219,6 +219,12 @@ define_simple_e_macro(list-index)
 define_simple_e_macro(take-while)
 define_simple_e_macro(drop-while)
 
+define_simple_e_macro(assoc)
+define_simple_e_macro(assq)
+define_simple_e_macro(assv)
+define_simple_e_macro(alist-cons)
+define_simple_e_macro(alist-delete)
+
 m4_divert(-1)
 ;;; local variables:
 ;;; mode: scheme

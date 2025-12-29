@@ -115,3 +115,9 @@ e-every
 e-list-index
 e-take-while
 e-drop-while
+
+e-assoc
+e-assq
+e-assv
+e-alist-cons
+e-alist-delete
