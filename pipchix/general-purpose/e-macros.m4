@@ -192,6 +192,17 @@ define_simple_e_macro(append-reverse)
 define_simple_e_macro(zip)
 define_simple_e_macro(count)
 
+define_simple_e_macro(map)
+define_simple_e_macro(map-in-order)
+define_simple_e_macro(append-map)
+define_simple_e_macro(filter-map)
+define_simple_e_macro(fold)
+define_simple_e_macro(unfold)
+define_simple_e_macro(pair-fold)
+define_simple_e_macro(fold-right)
+define_simple_e_macro(unfold-right)
+define_simple_e_macro(pair-fold-right)
+
 m4_divert(-1)
 ;;; local variables:
 ;;; mode: scheme

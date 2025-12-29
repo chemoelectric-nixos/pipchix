@@ -31,9 +31,9 @@ m4_include(pipchix/pipchix-includes.m4)
   (import (scheme base))
   (import (scheme cxr))
   (cond-expand
-    ((or chibi loko)
+    ((or chibi guile loko)
      (import (scheme case-lambda)))
-    ((or chicken-5 guile)
+    ((or chicken-5)
      (import (srfi 1)))
     (else
      (import (scheme list))))
@@ -41,9 +41,10 @@ m4_include(pipchix/pipchix-includes.m4)
   (begin
 
     (cond-expand
-      ((or chibi loko)
+      ((or chibi guile loko)
        ;; Chibi’s (scheme list) mishandles circular lists (Chibi
-       ;; Scheme version 0.11.0). Loko does not come with R⁷RS-large.
+       ;; Scheme version 0.11.0). Guile is very buggy, and its SRFI-1
+       ;; simply failed our tests. Loko does not come with R⁷RS-large.
        define_err_r7rs
        ;;m4_pushdef(srfi1_code_is_needed,«yes»)
        m4_include(pipchix/general-purpose/list.m4)

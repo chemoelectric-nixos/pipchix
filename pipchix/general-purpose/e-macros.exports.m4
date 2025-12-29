@@ -88,3 +88,14 @@ e-concatenate
 e-append-reverse
 e-zip
 e-count
+
+e-map
+e-map-in-order
+e-append-map
+e-filter-map
+e-fold
+e-unfold
+e-pair-fold
+e-fold-right
+e-unfold-right
+e-pair-fold-right
