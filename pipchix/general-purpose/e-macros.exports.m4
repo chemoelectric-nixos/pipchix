@@ -99,3 +99,8 @@ e-pair-fold
 e-fold-right
 e-unfold-right
 e-pair-fold-right
+
+e-filter
+e-remove
+e-delete
+e-delete-duplicates

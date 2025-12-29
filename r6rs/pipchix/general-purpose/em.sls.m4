@@ -33,7 +33,8 @@ m4_include(pipchix/pipchix-includes.m4)
                   fold-right
                   member
                   assoc
-                  map)
+                  map
+                  remove)
           (for (rnrs eval (6)) expand)
           (for (pipchix general-purpose list) expand))
 

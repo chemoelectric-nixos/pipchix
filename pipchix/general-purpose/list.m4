@@ -1238,9 +1238,7 @@
 
 
 ;;; Inline us, please.
-;;;m4_ifelse(r6rs,«yes»,,«
 (define (remove  pred l) (filter  (lambda (x) (not (pred x))) l))
-;;;»)
 (define (remove! pred l) (filter! (lambda (x) (not (pred x))) l))
 
 

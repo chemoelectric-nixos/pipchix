@@ -310,6 +310,42 @@ m4_define([sexpr],
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([@<:@·@<:@·(1)·(2)·(3)·@:>@·@<:@·(2)·(3)·@:>@·@<:@·(3)·@:>@·@:>@·])],[])
 
+m4_define([sexpr],
+  [(scheme->nix (e-filter '\''(lambda (x) (zero? (euclidean-remainder x 2)))
+                          '\'''\''(0 7 8 8 43 -4)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·(0)·(8)·(8)·(-4)·@:>@·])],[])
+
+m4_define([sexpr],
+  [(scheme->nix (e-remove '\''(lambda (x) (zero? (euclidean-remainder x 2)))
+                          '\'''\''(0 7 8 8 43 -4)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·(7)·(43)·@:>@·])],[])
+
+m4_define([sexpr],
+  [(scheme->nix (e-delete '\'''\''8 '\'''\''(0 7 8 8 43 -4)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·(0)·(7)·(43)·(-4)·@:>@·])],[])
+
+m4_define([sexpr],
+  [(scheme->nix (e-delete '\'''\''8 '\'''\''(0 7 8 8 43 -4)
+                          '\''(lambda (x y) (not (= x y)))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·(8)·(8)·@:>@·])],[])
+
+m4_define([sexpr],
+  [(scheme->nix (e-delete-duplicates
+                 '\'''\''(0 7 8 8 43 8 -4 0 -4 43)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·(0)·(7)·(8)·(43)·(-4)·@:>@·])],[])
+
+m4_define([sexpr],
+  [(scheme->nix
+    (e-delete-duplicates '\'''\''(("a" 3) ("b" 7) ("a" 9) ("c" 1))
+                         '\''(lambda (x y) (string=? (car x) (car y)))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·@<:@·("a")·(3)·@:>@·@<:@·("b")·(7)·@:>@·@<:@·("c")·(1)·@:>@·@:>@·])],[])
+
 AT_CLEANUP
 
 # local variables:

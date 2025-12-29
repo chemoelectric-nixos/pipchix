@@ -33,7 +33,8 @@ m4_include(pipchix/pipchix-includes.m4)
                   fold-right
                   member
                   assoc
-                  map)
+                  map
+                  remove)
           (rnrs mutable-pairs (6)))
 
   define_err_r6rs

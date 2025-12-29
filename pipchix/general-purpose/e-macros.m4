@@ -203,6 +203,11 @@ define_simple_e_macro(fold-right)
 define_simple_e_macro(unfold-right)
 define_simple_e_macro(pair-fold-right)
 
+define_simple_e_macro(filter)
+define_simple_e_macro(remove)
+define_simple_e_macro(delete)
+define_simple_e_macro(delete-duplicates)
+
 m4_divert(-1)
 ;;; local variables:
 ;;; mode: scheme
