@@ -126,8 +126,6 @@ m4_define([sexpr],[(scheme->nix (e-dotted-list? (e-list 1 2 3)))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([nix_false])],[])
 
-m4_if(implementation,[chibi],,[ dnl  If not Chibi Scheme:
-
 m4_define([sexpr],[(scheme->nix (e-proper-list? (e-circular-list 1 2 3)))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([nix_false])],[])
@@ -139,10 +137,6 @@ check_unquoted([run_scheme 'sexpr'],[0],
 m4_define([sexpr],[(scheme->nix (e-dotted-list? (e-circular-list 1 2 3)))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([nix_false])],[])
-
-]) dnl  End of if not Chibi Scheme. Because Chibi’s (scheme list)
-   dnl  (that is, SRFI-1) seems to mishandle circular lists. Also
-   dnl  Chibi cannot read our own implementation of SRFI-1.
 
 m4_define([sexpr],[(scheme->nix (e-proper-list? 1))])
 check_unquoted([run_scheme 'sexpr'],[0],
