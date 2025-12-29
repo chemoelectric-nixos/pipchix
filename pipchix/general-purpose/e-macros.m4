@@ -183,8 +183,14 @@ define_simple_e_macro(last-pair)
 
 define_simple_e_macro(list-ref)
 
+define_simple_e_macro(length)
+define_simple_e_macro(length+)
 define_simple_e_macro(reverse)
-
+define_simple_e_macro(append)
+define_simple_e_macro(concatenate)
+define_simple_e_macro(append-reverse)
+define_simple_e_macro(zip)
+define_simple_e_macro(count)
 
 m4_divert(-1)
 ;;; local variables:

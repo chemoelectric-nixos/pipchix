@@ -80,5 +80,11 @@ e-last-pair
 
 e-list-ref
 
+e-length
+e-length+
 e-reverse
-
+e-append
+e-concatenate
+e-append-reverse
+e-zip
+e-count

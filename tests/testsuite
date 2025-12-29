@@ -6159,8 +6159,74 @@ printf "%s\n" "e-macros-template.at:221" >"$at_check_line_file"
 (test ${enable_check_r6rs_chez} = no) \
   && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:221"
 { set +x
-printf "%s\n" "$at_srcdir/e-macros-template.at:221: \"\${abs_builddir}\"/run-r6rs-chez.sh '(scheme->nix (e-list 1 2 3 '\\''(e-reverse '\\''(e-list 4 5 (e-true) 6))))'"
+printf "%s\n" "$at_srcdir/e-macros-template.at:221: \"\${abs_builddir}\"/run-r6rs-chez.sh '(scheme->nix (e-length (e-list 1 2 3 4 5 6 7)))'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:221"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '(scheme->nix (e-length (e-list 1 2 3 4 5 6 7)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(7)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:221"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:225" >"$at_check_line_file"
+(test ${enable_check_r6rs_chez} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:225"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:225: \"\${abs_builddir}\"/run-r6rs-chez.sh '(scheme->nix (e-length+ (e-list 1 2 3 4 5 6 7)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:225"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '(scheme->nix (e-length+ (e-list 1 2 3 4 5 6 7)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(7)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:225"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:229" >"$at_check_line_file"
+(test ${enable_check_r6rs_chez} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:229"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:229: \"\${abs_builddir}\"/run-r6rs-chez.sh '(scheme->nix (e-length+ (e-circular-list 1 2 3 4 5 6 7)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:229"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '(scheme->nix (e-length+ (e-circular-list 1 2 3 4 5 6 7)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.false)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:229"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:233" >"$at_check_line_file"
+(test ${enable_check_r6rs_chez} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:233"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:233: \"\${abs_builddir}\"/run-r6rs-chez.sh '(scheme->nix (e-list 1 2 3 '\\''(e-reverse '\\''(e-list 4 5 (e-true) 6))))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:233"
 ( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '(scheme->nix (e-list 1 2 3 '\''(e-reverse '\''(e-list 4 5 (e-true) 6))))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -6179,7 +6245,155 @@ echo >>"$at_stdout"; printf "%s\n" "[
 ]
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:221"
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:233"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:237" >"$at_check_line_file"
+(test ${enable_check_r6rs_chez} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:237"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:237: \"\${abs_builddir}\"/run-r6rs-chez.sh '(scheme->nix (e-append '\\''(e-list 1 2 3) '\\''(e-list 40 50 60)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:237"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '(scheme->nix (e-append '\''(e-list 1 2 3) '\''(e-list 40 50 60)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(1)
+(2)
+(3)
+(40)
+(50)
+(60)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:237"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:241" >"$at_check_line_file"
+(test ${enable_check_r6rs_chez} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:241"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:241: \"\${abs_builddir}\"/run-r6rs-chez.sh '(scheme->nix (e-concatenate '\\''(e-list '\\''(e-list 1 2 3) '\\''(e-list 40 50 60))))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:241"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '(scheme->nix (e-concatenate '\''(e-list '\''(e-list 1 2 3) '\''(e-list 40 50 60))))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(1)
+(2)
+(3)
+(40)
+(50)
+(60)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:241"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:245" >"$at_check_line_file"
+(test ${enable_check_r6rs_chez} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:245"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:245: \"\${abs_builddir}\"/run-r6rs-chez.sh '(scheme->nix (e-append-reverse '\\''(e-list 1 2 3) '\\''(e-list 40 50 60)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:245"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '(scheme->nix (e-append-reverse '\''(e-list 1 2 3) '\''(e-list 40 50 60)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(3)
+(2)
+(1)
+(40)
+(50)
+(60)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:245"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:249" >"$at_check_line_file"
+(test ${enable_check_r6rs_chez} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:249"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:249: \"\${abs_builddir}\"/run-r6rs-chez.sh '(scheme->nix (e-zip '\\''(e-list 3 1 4 1) '\\''(e-circular-list #f #t)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:249"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '(scheme->nix (e-zip '\''(e-list 3 1 4 1) '\''(e-circular-list #f #t)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+[
+(3)
+(builtins.false)
+]
+[
+(1)
+(builtins.true)
+]
+[
+(4)
+(builtins.false)
+]
+[
+(1)
+(builtins.true)
+]
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:249"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:253" >"$at_check_line_file"
+(test ${enable_check_r6rs_chez} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:253"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:253: \"\${abs_builddir}\"/run-r6rs-chez.sh '(scheme->nix (e-count '\\''< '\\''(e-list 3 1 4 1) '\\''(e-circular-list 1 10)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:253"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-chez.sh '(scheme->nix (e-count '\''< '\''(e-list 3 1 4 1) '\''(e-circular-list 1 10)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(2)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:253"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -15515,8 +15729,74 @@ printf "%s\n" "e-macros-template.at:221" >"$at_check_line_file"
 (test ${enable_check_r7rs_chibi} = no) \
   && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:221"
 { set +x
-printf "%s\n" "$at_srcdir/e-macros-template.at:221: \"\${abs_builddir}\"/run-r7rs-chibi.sh '(scheme->nix (e-list 1 2 3 '\\''(e-reverse '\\''(e-list 4 5 (e-true) 6))))'"
+printf "%s\n" "$at_srcdir/e-macros-template.at:221: \"\${abs_builddir}\"/run-r7rs-chibi.sh '(scheme->nix (e-length (e-list 1 2 3 4 5 6 7)))'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:221"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-chibi.sh '(scheme->nix (e-length (e-list 1 2 3 4 5 6 7)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(7)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:221"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:225" >"$at_check_line_file"
+(test ${enable_check_r7rs_chibi} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:225"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:225: \"\${abs_builddir}\"/run-r7rs-chibi.sh '(scheme->nix (e-length+ (e-list 1 2 3 4 5 6 7)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:225"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-chibi.sh '(scheme->nix (e-length+ (e-list 1 2 3 4 5 6 7)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(7)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:225"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:229" >"$at_check_line_file"
+(test ${enable_check_r7rs_chibi} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:229"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:229: \"\${abs_builddir}\"/run-r7rs-chibi.sh '(scheme->nix (e-length+ (e-circular-list 1 2 3 4 5 6 7)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:229"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-chibi.sh '(scheme->nix (e-length+ (e-circular-list 1 2 3 4 5 6 7)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.false)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:229"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:233" >"$at_check_line_file"
+(test ${enable_check_r7rs_chibi} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:233"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:233: \"\${abs_builddir}\"/run-r7rs-chibi.sh '(scheme->nix (e-list 1 2 3 '\\''(e-reverse '\\''(e-list 4 5 (e-true) 6))))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:233"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-chibi.sh '(scheme->nix (e-list 1 2 3 '\''(e-reverse '\''(e-list 4 5 (e-true) 6))))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -15535,7 +15815,155 @@ echo >>"$at_stdout"; printf "%s\n" "[
 ]
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:221"
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:233"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:237" >"$at_check_line_file"
+(test ${enable_check_r7rs_chibi} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:237"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:237: \"\${abs_builddir}\"/run-r7rs-chibi.sh '(scheme->nix (e-append '\\''(e-list 1 2 3) '\\''(e-list 40 50 60)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:237"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-chibi.sh '(scheme->nix (e-append '\''(e-list 1 2 3) '\''(e-list 40 50 60)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(1)
+(2)
+(3)
+(40)
+(50)
+(60)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:237"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:241" >"$at_check_line_file"
+(test ${enable_check_r7rs_chibi} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:241"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:241: \"\${abs_builddir}\"/run-r7rs-chibi.sh '(scheme->nix (e-concatenate '\\''(e-list '\\''(e-list 1 2 3) '\\''(e-list 40 50 60))))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:241"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-chibi.sh '(scheme->nix (e-concatenate '\''(e-list '\''(e-list 1 2 3) '\''(e-list 40 50 60))))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(1)
+(2)
+(3)
+(40)
+(50)
+(60)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:241"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:245" >"$at_check_line_file"
+(test ${enable_check_r7rs_chibi} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:245"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:245: \"\${abs_builddir}\"/run-r7rs-chibi.sh '(scheme->nix (e-append-reverse '\\''(e-list 1 2 3) '\\''(e-list 40 50 60)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:245"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-chibi.sh '(scheme->nix (e-append-reverse '\''(e-list 1 2 3) '\''(e-list 40 50 60)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(3)
+(2)
+(1)
+(40)
+(50)
+(60)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:245"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:249" >"$at_check_line_file"
+(test ${enable_check_r7rs_chibi} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:249"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:249: \"\${abs_builddir}\"/run-r7rs-chibi.sh '(scheme->nix (e-zip '\\''(e-list 3 1 4 1) '\\''(e-circular-list #f #t)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:249"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-chibi.sh '(scheme->nix (e-zip '\''(e-list 3 1 4 1) '\''(e-circular-list #f #t)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+[
+(3)
+(builtins.false)
+]
+[
+(1)
+(builtins.true)
+]
+[
+(4)
+(builtins.false)
+]
+[
+(1)
+(builtins.true)
+]
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:249"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:253" >"$at_check_line_file"
+(test ${enable_check_r7rs_chibi} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:253"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:253: \"\${abs_builddir}\"/run-r7rs-chibi.sh '(scheme->nix (e-count '\\''< '\\''(e-list 3 1 4 1) '\\''(e-circular-list 1 10)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:253"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-chibi.sh '(scheme->nix (e-count '\''< '\''(e-list 3 1 4 1) '\''(e-circular-list 1 10)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(2)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:253"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -24916,8 +25344,74 @@ printf "%s\n" "e-macros-template.at:221" >"$at_check_line_file"
 (test ${enable_check_r7rs_csc_5} = no) \
   && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:221"
 { set +x
-printf "%s\n" "$at_srcdir/e-macros-template.at:221: \"\${abs_builddir}\"/run-r7rs-csc-5.sh '(scheme->nix (e-list 1 2 3 '\\''(e-reverse '\\''(e-list 4 5 (e-true) 6))))'"
+printf "%s\n" "$at_srcdir/e-macros-template.at:221: \"\${abs_builddir}\"/run-r7rs-csc-5.sh '(scheme->nix (e-length (e-list 1 2 3 4 5 6 7)))'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:221"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csc-5.sh '(scheme->nix (e-length (e-list 1 2 3 4 5 6 7)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(7)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:221"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:225" >"$at_check_line_file"
+(test ${enable_check_r7rs_csc_5} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:225"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:225: \"\${abs_builddir}\"/run-r7rs-csc-5.sh '(scheme->nix (e-length+ (e-list 1 2 3 4 5 6 7)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:225"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csc-5.sh '(scheme->nix (e-length+ (e-list 1 2 3 4 5 6 7)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(7)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:225"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:229" >"$at_check_line_file"
+(test ${enable_check_r7rs_csc_5} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:229"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:229: \"\${abs_builddir}\"/run-r7rs-csc-5.sh '(scheme->nix (e-length+ (e-circular-list 1 2 3 4 5 6 7)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:229"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csc-5.sh '(scheme->nix (e-length+ (e-circular-list 1 2 3 4 5 6 7)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.false)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:229"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:233" >"$at_check_line_file"
+(test ${enable_check_r7rs_csc_5} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:233"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:233: \"\${abs_builddir}\"/run-r7rs-csc-5.sh '(scheme->nix (e-list 1 2 3 '\\''(e-reverse '\\''(e-list 4 5 (e-true) 6))))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:233"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-csc-5.sh '(scheme->nix (e-list 1 2 3 '\''(e-reverse '\''(e-list 4 5 (e-true) 6))))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -24936,7 +25430,155 @@ echo >>"$at_stdout"; printf "%s\n" "[
 ]
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:221"
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:233"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:237" >"$at_check_line_file"
+(test ${enable_check_r7rs_csc_5} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:237"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:237: \"\${abs_builddir}\"/run-r7rs-csc-5.sh '(scheme->nix (e-append '\\''(e-list 1 2 3) '\\''(e-list 40 50 60)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:237"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csc-5.sh '(scheme->nix (e-append '\''(e-list 1 2 3) '\''(e-list 40 50 60)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(1)
+(2)
+(3)
+(40)
+(50)
+(60)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:237"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:241" >"$at_check_line_file"
+(test ${enable_check_r7rs_csc_5} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:241"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:241: \"\${abs_builddir}\"/run-r7rs-csc-5.sh '(scheme->nix (e-concatenate '\\''(e-list '\\''(e-list 1 2 3) '\\''(e-list 40 50 60))))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:241"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csc-5.sh '(scheme->nix (e-concatenate '\''(e-list '\''(e-list 1 2 3) '\''(e-list 40 50 60))))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(1)
+(2)
+(3)
+(40)
+(50)
+(60)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:241"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:245" >"$at_check_line_file"
+(test ${enable_check_r7rs_csc_5} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:245"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:245: \"\${abs_builddir}\"/run-r7rs-csc-5.sh '(scheme->nix (e-append-reverse '\\''(e-list 1 2 3) '\\''(e-list 40 50 60)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:245"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csc-5.sh '(scheme->nix (e-append-reverse '\''(e-list 1 2 3) '\''(e-list 40 50 60)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(3)
+(2)
+(1)
+(40)
+(50)
+(60)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:245"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:249" >"$at_check_line_file"
+(test ${enable_check_r7rs_csc_5} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:249"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:249: \"\${abs_builddir}\"/run-r7rs-csc-5.sh '(scheme->nix (e-zip '\\''(e-list 3 1 4 1) '\\''(e-circular-list #f #t)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:249"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csc-5.sh '(scheme->nix (e-zip '\''(e-list 3 1 4 1) '\''(e-circular-list #f #t)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+[
+(3)
+(builtins.false)
+]
+[
+(1)
+(builtins.true)
+]
+[
+(4)
+(builtins.false)
+]
+[
+(1)
+(builtins.true)
+]
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:249"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:253" >"$at_check_line_file"
+(test ${enable_check_r7rs_csc_5} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:253"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:253: \"\${abs_builddir}\"/run-r7rs-csc-5.sh '(scheme->nix (e-count '\\''< '\\''(e-list 3 1 4 1) '\\''(e-circular-list 1 10)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:253"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csc-5.sh '(scheme->nix (e-count '\''< '\''(e-list 3 1 4 1) '\''(e-circular-list 1 10)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(2)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:253"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -34272,8 +34914,74 @@ printf "%s\n" "e-macros-template.at:221" >"$at_check_line_file"
 (test ${enable_check_r7rs_csi_5} = no) \
   && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:221"
 { set +x
-printf "%s\n" "$at_srcdir/e-macros-template.at:221: \"\${abs_builddir}\"/run-r7rs-csi-5.sh '(scheme->nix (e-list 1 2 3 '\\''(e-reverse '\\''(e-list 4 5 (e-true) 6))))'"
+printf "%s\n" "$at_srcdir/e-macros-template.at:221: \"\${abs_builddir}\"/run-r7rs-csi-5.sh '(scheme->nix (e-length (e-list 1 2 3 4 5 6 7)))'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:221"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csi-5.sh '(scheme->nix (e-length (e-list 1 2 3 4 5 6 7)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(7)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:221"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:225" >"$at_check_line_file"
+(test ${enable_check_r7rs_csi_5} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:225"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:225: \"\${abs_builddir}\"/run-r7rs-csi-5.sh '(scheme->nix (e-length+ (e-list 1 2 3 4 5 6 7)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:225"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csi-5.sh '(scheme->nix (e-length+ (e-list 1 2 3 4 5 6 7)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(7)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:225"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:229" >"$at_check_line_file"
+(test ${enable_check_r7rs_csi_5} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:229"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:229: \"\${abs_builddir}\"/run-r7rs-csi-5.sh '(scheme->nix (e-length+ (e-circular-list 1 2 3 4 5 6 7)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:229"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csi-5.sh '(scheme->nix (e-length+ (e-circular-list 1 2 3 4 5 6 7)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.false)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:229"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:233" >"$at_check_line_file"
+(test ${enable_check_r7rs_csi_5} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:233"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:233: \"\${abs_builddir}\"/run-r7rs-csi-5.sh '(scheme->nix (e-list 1 2 3 '\\''(e-reverse '\\''(e-list 4 5 (e-true) 6))))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:233"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-csi-5.sh '(scheme->nix (e-list 1 2 3 '\''(e-reverse '\''(e-list 4 5 (e-true) 6))))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -34292,7 +35000,155 @@ echo >>"$at_stdout"; printf "%s\n" "[
 ]
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:221"
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:233"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:237" >"$at_check_line_file"
+(test ${enable_check_r7rs_csi_5} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:237"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:237: \"\${abs_builddir}\"/run-r7rs-csi-5.sh '(scheme->nix (e-append '\\''(e-list 1 2 3) '\\''(e-list 40 50 60)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:237"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csi-5.sh '(scheme->nix (e-append '\''(e-list 1 2 3) '\''(e-list 40 50 60)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(1)
+(2)
+(3)
+(40)
+(50)
+(60)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:237"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:241" >"$at_check_line_file"
+(test ${enable_check_r7rs_csi_5} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:241"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:241: \"\${abs_builddir}\"/run-r7rs-csi-5.sh '(scheme->nix (e-concatenate '\\''(e-list '\\''(e-list 1 2 3) '\\''(e-list 40 50 60))))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:241"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csi-5.sh '(scheme->nix (e-concatenate '\''(e-list '\''(e-list 1 2 3) '\''(e-list 40 50 60))))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(1)
+(2)
+(3)
+(40)
+(50)
+(60)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:241"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:245" >"$at_check_line_file"
+(test ${enable_check_r7rs_csi_5} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:245"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:245: \"\${abs_builddir}\"/run-r7rs-csi-5.sh '(scheme->nix (e-append-reverse '\\''(e-list 1 2 3) '\\''(e-list 40 50 60)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:245"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csi-5.sh '(scheme->nix (e-append-reverse '\''(e-list 1 2 3) '\''(e-list 40 50 60)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(3)
+(2)
+(1)
+(40)
+(50)
+(60)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:245"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:249" >"$at_check_line_file"
+(test ${enable_check_r7rs_csi_5} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:249"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:249: \"\${abs_builddir}\"/run-r7rs-csi-5.sh '(scheme->nix (e-zip '\\''(e-list 3 1 4 1) '\\''(e-circular-list #f #t)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:249"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csi-5.sh '(scheme->nix (e-zip '\''(e-list 3 1 4 1) '\''(e-circular-list #f #t)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+[
+(3)
+(builtins.false)
+]
+[
+(1)
+(builtins.true)
+]
+[
+(4)
+(builtins.false)
+]
+[
+(1)
+(builtins.true)
+]
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:249"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:253" >"$at_check_line_file"
+(test ${enable_check_r7rs_csi_5} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:253"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:253: \"\${abs_builddir}\"/run-r7rs-csi-5.sh '(scheme->nix (e-count '\\''< '\\''(e-list 3 1 4 1) '\\''(e-circular-list 1 10)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:253"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-csi-5.sh '(scheme->nix (e-count '\''< '\''(e-list 3 1 4 1) '\''(e-circular-list 1 10)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(2)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:253"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -43628,8 +44484,74 @@ printf "%s\n" "e-macros-template.at:221" >"$at_check_line_file"
 (test ${enable_check_r7rs_gauche} = no) \
   && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:221"
 { set +x
-printf "%s\n" "$at_srcdir/e-macros-template.at:221: \"\${abs_builddir}\"/run-r7rs-gauche.sh '(scheme->nix (e-list 1 2 3 '\\''(e-reverse '\\''(e-list 4 5 (e-true) 6))))'"
+printf "%s\n" "$at_srcdir/e-macros-template.at:221: \"\${abs_builddir}\"/run-r7rs-gauche.sh '(scheme->nix (e-length (e-list 1 2 3 4 5 6 7)))'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:221"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gauche.sh '(scheme->nix (e-length (e-list 1 2 3 4 5 6 7)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(7)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:221"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:225" >"$at_check_line_file"
+(test ${enable_check_r7rs_gauche} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:225"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:225: \"\${abs_builddir}\"/run-r7rs-gauche.sh '(scheme->nix (e-length+ (e-list 1 2 3 4 5 6 7)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:225"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gauche.sh '(scheme->nix (e-length+ (e-list 1 2 3 4 5 6 7)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(7)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:225"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:229" >"$at_check_line_file"
+(test ${enable_check_r7rs_gauche} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:229"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:229: \"\${abs_builddir}\"/run-r7rs-gauche.sh '(scheme->nix (e-length+ (e-circular-list 1 2 3 4 5 6 7)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:229"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gauche.sh '(scheme->nix (e-length+ (e-circular-list 1 2 3 4 5 6 7)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.false)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:229"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:233" >"$at_check_line_file"
+(test ${enable_check_r7rs_gauche} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:233"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:233: \"\${abs_builddir}\"/run-r7rs-gauche.sh '(scheme->nix (e-list 1 2 3 '\\''(e-reverse '\\''(e-list 4 5 (e-true) 6))))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:233"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-gauche.sh '(scheme->nix (e-list 1 2 3 '\''(e-reverse '\''(e-list 4 5 (e-true) 6))))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -43648,7 +44570,155 @@ echo >>"$at_stdout"; printf "%s\n" "[
 ]
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:221"
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:233"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:237" >"$at_check_line_file"
+(test ${enable_check_r7rs_gauche} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:237"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:237: \"\${abs_builddir}\"/run-r7rs-gauche.sh '(scheme->nix (e-append '\\''(e-list 1 2 3) '\\''(e-list 40 50 60)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:237"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gauche.sh '(scheme->nix (e-append '\''(e-list 1 2 3) '\''(e-list 40 50 60)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(1)
+(2)
+(3)
+(40)
+(50)
+(60)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:237"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:241" >"$at_check_line_file"
+(test ${enable_check_r7rs_gauche} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:241"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:241: \"\${abs_builddir}\"/run-r7rs-gauche.sh '(scheme->nix (e-concatenate '\\''(e-list '\\''(e-list 1 2 3) '\\''(e-list 40 50 60))))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:241"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gauche.sh '(scheme->nix (e-concatenate '\''(e-list '\''(e-list 1 2 3) '\''(e-list 40 50 60))))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(1)
+(2)
+(3)
+(40)
+(50)
+(60)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:241"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:245" >"$at_check_line_file"
+(test ${enable_check_r7rs_gauche} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:245"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:245: \"\${abs_builddir}\"/run-r7rs-gauche.sh '(scheme->nix (e-append-reverse '\\''(e-list 1 2 3) '\\''(e-list 40 50 60)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:245"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gauche.sh '(scheme->nix (e-append-reverse '\''(e-list 1 2 3) '\''(e-list 40 50 60)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(3)
+(2)
+(1)
+(40)
+(50)
+(60)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:245"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:249" >"$at_check_line_file"
+(test ${enable_check_r7rs_gauche} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:249"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:249: \"\${abs_builddir}\"/run-r7rs-gauche.sh '(scheme->nix (e-zip '\\''(e-list 3 1 4 1) '\\''(e-circular-list #f #t)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:249"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gauche.sh '(scheme->nix (e-zip '\''(e-list 3 1 4 1) '\''(e-circular-list #f #t)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+[
+(3)
+(builtins.false)
+]
+[
+(1)
+(builtins.true)
+]
+[
+(4)
+(builtins.false)
+]
+[
+(1)
+(builtins.true)
+]
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:249"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:253" >"$at_check_line_file"
+(test ${enable_check_r7rs_gauche} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:253"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:253: \"\${abs_builddir}\"/run-r7rs-gauche.sh '(scheme->nix (e-count '\\''< '\\''(e-list 3 1 4 1) '\\''(e-circular-list 1 10)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:253"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-gauche.sh '(scheme->nix (e-count '\''< '\''(e-list 3 1 4 1) '\''(e-circular-list 1 10)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(2)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:253"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -53028,8 +54098,74 @@ printf "%s\n" "e-macros-template.at:221" >"$at_check_line_file"
 (test ${enable_check_r6rs_guile} = no) \
   && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:221"
 { set +x
-printf "%s\n" "$at_srcdir/e-macros-template.at:221: \"\${abs_builddir}\"/run-r6rs-guile.sh '(scheme->nix (e-list 1 2 3 '\\''(e-reverse '\\''(e-list 4 5 (e-true) 6))))'"
+printf "%s\n" "$at_srcdir/e-macros-template.at:221: \"\${abs_builddir}\"/run-r6rs-guile.sh '(scheme->nix (e-length (e-list 1 2 3 4 5 6 7)))'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:221"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-guile.sh '(scheme->nix (e-length (e-list 1 2 3 4 5 6 7)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(7)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:221"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:225" >"$at_check_line_file"
+(test ${enable_check_r6rs_guile} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:225"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:225: \"\${abs_builddir}\"/run-r6rs-guile.sh '(scheme->nix (e-length+ (e-list 1 2 3 4 5 6 7)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:225"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-guile.sh '(scheme->nix (e-length+ (e-list 1 2 3 4 5 6 7)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(7)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:225"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:229" >"$at_check_line_file"
+(test ${enable_check_r6rs_guile} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:229"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:229: \"\${abs_builddir}\"/run-r6rs-guile.sh '(scheme->nix (e-length+ (e-circular-list 1 2 3 4 5 6 7)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:229"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-guile.sh '(scheme->nix (e-length+ (e-circular-list 1 2 3 4 5 6 7)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.false)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:229"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:233" >"$at_check_line_file"
+(test ${enable_check_r6rs_guile} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:233"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:233: \"\${abs_builddir}\"/run-r6rs-guile.sh '(scheme->nix (e-list 1 2 3 '\\''(e-reverse '\\''(e-list 4 5 (e-true) 6))))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:233"
 ( $at_check_trace; "${abs_builddir}"/run-r6rs-guile.sh '(scheme->nix (e-list 1 2 3 '\''(e-reverse '\''(e-list 4 5 (e-true) 6))))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -53048,7 +54184,155 @@ echo >>"$at_stdout"; printf "%s\n" "[
 ]
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:221"
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:233"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:237" >"$at_check_line_file"
+(test ${enable_check_r6rs_guile} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:237"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:237: \"\${abs_builddir}\"/run-r6rs-guile.sh '(scheme->nix (e-append '\\''(e-list 1 2 3) '\\''(e-list 40 50 60)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:237"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-guile.sh '(scheme->nix (e-append '\''(e-list 1 2 3) '\''(e-list 40 50 60)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(1)
+(2)
+(3)
+(40)
+(50)
+(60)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:237"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:241" >"$at_check_line_file"
+(test ${enable_check_r6rs_guile} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:241"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:241: \"\${abs_builddir}\"/run-r6rs-guile.sh '(scheme->nix (e-concatenate '\\''(e-list '\\''(e-list 1 2 3) '\\''(e-list 40 50 60))))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:241"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-guile.sh '(scheme->nix (e-concatenate '\''(e-list '\''(e-list 1 2 3) '\''(e-list 40 50 60))))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(1)
+(2)
+(3)
+(40)
+(50)
+(60)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:241"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:245" >"$at_check_line_file"
+(test ${enable_check_r6rs_guile} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:245"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:245: \"\${abs_builddir}\"/run-r6rs-guile.sh '(scheme->nix (e-append-reverse '\\''(e-list 1 2 3) '\\''(e-list 40 50 60)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:245"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-guile.sh '(scheme->nix (e-append-reverse '\''(e-list 1 2 3) '\''(e-list 40 50 60)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(3)
+(2)
+(1)
+(40)
+(50)
+(60)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:245"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:249" >"$at_check_line_file"
+(test ${enable_check_r6rs_guile} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:249"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:249: \"\${abs_builddir}\"/run-r6rs-guile.sh '(scheme->nix (e-zip '\\''(e-list 3 1 4 1) '\\''(e-circular-list #f #t)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:249"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-guile.sh '(scheme->nix (e-zip '\''(e-list 3 1 4 1) '\''(e-circular-list #f #t)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+[
+(3)
+(builtins.false)
+]
+[
+(1)
+(builtins.true)
+]
+[
+(4)
+(builtins.false)
+]
+[
+(1)
+(builtins.true)
+]
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:249"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:253" >"$at_check_line_file"
+(test ${enable_check_r6rs_guile} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:253"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:253: \"\${abs_builddir}\"/run-r6rs-guile.sh '(scheme->nix (e-count '\\''< '\\''(e-list 3 1 4 1) '\\''(e-circular-list 1 10)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:253"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-guile.sh '(scheme->nix (e-count '\''< '\''(e-list 3 1 4 1) '\''(e-circular-list 1 10)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(2)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:253"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -62384,8 +63668,74 @@ printf "%s\n" "e-macros-template.at:221" >"$at_check_line_file"
 (test ${enable_check_r7rs_guile} = no) \
   && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:221"
 { set +x
-printf "%s\n" "$at_srcdir/e-macros-template.at:221: \"\${abs_builddir}\"/run-r7rs-guile.sh '(scheme->nix (e-list 1 2 3 '\\''(e-reverse '\\''(e-list 4 5 (e-true) 6))))'"
+printf "%s\n" "$at_srcdir/e-macros-template.at:221: \"\${abs_builddir}\"/run-r7rs-guile.sh '(scheme->nix (e-length (e-list 1 2 3 4 5 6 7)))'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:221"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-guile.sh '(scheme->nix (e-length (e-list 1 2 3 4 5 6 7)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(7)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:221"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:225" >"$at_check_line_file"
+(test ${enable_check_r7rs_guile} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:225"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:225: \"\${abs_builddir}\"/run-r7rs-guile.sh '(scheme->nix (e-length+ (e-list 1 2 3 4 5 6 7)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:225"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-guile.sh '(scheme->nix (e-length+ (e-list 1 2 3 4 5 6 7)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(7)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:225"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:229" >"$at_check_line_file"
+(test ${enable_check_r7rs_guile} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:229"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:229: \"\${abs_builddir}\"/run-r7rs-guile.sh '(scheme->nix (e-length+ (e-circular-list 1 2 3 4 5 6 7)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:229"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-guile.sh '(scheme->nix (e-length+ (e-circular-list 1 2 3 4 5 6 7)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.false)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:229"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:233" >"$at_check_line_file"
+(test ${enable_check_r7rs_guile} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:233"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:233: \"\${abs_builddir}\"/run-r7rs-guile.sh '(scheme->nix (e-list 1 2 3 '\\''(e-reverse '\\''(e-list 4 5 (e-true) 6))))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:233"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-guile.sh '(scheme->nix (e-list 1 2 3 '\''(e-reverse '\''(e-list 4 5 (e-true) 6))))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -62404,7 +63754,155 @@ echo >>"$at_stdout"; printf "%s\n" "[
 ]
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:221"
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:233"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:237" >"$at_check_line_file"
+(test ${enable_check_r7rs_guile} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:237"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:237: \"\${abs_builddir}\"/run-r7rs-guile.sh '(scheme->nix (e-append '\\''(e-list 1 2 3) '\\''(e-list 40 50 60)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:237"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-guile.sh '(scheme->nix (e-append '\''(e-list 1 2 3) '\''(e-list 40 50 60)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(1)
+(2)
+(3)
+(40)
+(50)
+(60)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:237"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:241" >"$at_check_line_file"
+(test ${enable_check_r7rs_guile} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:241"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:241: \"\${abs_builddir}\"/run-r7rs-guile.sh '(scheme->nix (e-concatenate '\\''(e-list '\\''(e-list 1 2 3) '\\''(e-list 40 50 60))))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:241"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-guile.sh '(scheme->nix (e-concatenate '\''(e-list '\''(e-list 1 2 3) '\''(e-list 40 50 60))))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(1)
+(2)
+(3)
+(40)
+(50)
+(60)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:241"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:245" >"$at_check_line_file"
+(test ${enable_check_r7rs_guile} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:245"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:245: \"\${abs_builddir}\"/run-r7rs-guile.sh '(scheme->nix (e-append-reverse '\\''(e-list 1 2 3) '\\''(e-list 40 50 60)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:245"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-guile.sh '(scheme->nix (e-append-reverse '\''(e-list 1 2 3) '\''(e-list 40 50 60)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(3)
+(2)
+(1)
+(40)
+(50)
+(60)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:245"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:249" >"$at_check_line_file"
+(test ${enable_check_r7rs_guile} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:249"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:249: \"\${abs_builddir}\"/run-r7rs-guile.sh '(scheme->nix (e-zip '\\''(e-list 3 1 4 1) '\\''(e-circular-list #f #t)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:249"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-guile.sh '(scheme->nix (e-zip '\''(e-list 3 1 4 1) '\''(e-circular-list #f #t)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+[
+(3)
+(builtins.false)
+]
+[
+(1)
+(builtins.true)
+]
+[
+(4)
+(builtins.false)
+]
+[
+(1)
+(builtins.true)
+]
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:249"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:253" >"$at_check_line_file"
+(test ${enable_check_r7rs_guile} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:253"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:253: \"\${abs_builddir}\"/run-r7rs-guile.sh '(scheme->nix (e-count '\\''< '\\''(e-list 3 1 4 1) '\\''(e-circular-list 1 10)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:253"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-guile.sh '(scheme->nix (e-count '\''< '\''(e-list 3 1 4 1) '\''(e-circular-list 1 10)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(2)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:253"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -71784,8 +73282,74 @@ printf "%s\n" "e-macros-template.at:221" >"$at_check_line_file"
 (test ${enable_check_r6rs_loko} = no) \
   && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:221"
 { set +x
-printf "%s\n" "$at_srcdir/e-macros-template.at:221: \"\${abs_builddir}\"/run-r6rs-loko.sh '(scheme->nix (e-list 1 2 3 '\\''(e-reverse '\\''(e-list 4 5 (e-true) 6))))'"
+printf "%s\n" "$at_srcdir/e-macros-template.at:221: \"\${abs_builddir}\"/run-r6rs-loko.sh '(scheme->nix (e-length (e-list 1 2 3 4 5 6 7)))'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:221"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '(scheme->nix (e-length (e-list 1 2 3 4 5 6 7)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(7)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:221"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:225" >"$at_check_line_file"
+(test ${enable_check_r6rs_loko} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:225"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:225: \"\${abs_builddir}\"/run-r6rs-loko.sh '(scheme->nix (e-length+ (e-list 1 2 3 4 5 6 7)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:225"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '(scheme->nix (e-length+ (e-list 1 2 3 4 5 6 7)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(7)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:225"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:229" >"$at_check_line_file"
+(test ${enable_check_r6rs_loko} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:229"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:229: \"\${abs_builddir}\"/run-r6rs-loko.sh '(scheme->nix (e-length+ (e-circular-list 1 2 3 4 5 6 7)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:229"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '(scheme->nix (e-length+ (e-circular-list 1 2 3 4 5 6 7)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.false)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:229"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:233" >"$at_check_line_file"
+(test ${enable_check_r6rs_loko} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:233"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:233: \"\${abs_builddir}\"/run-r6rs-loko.sh '(scheme->nix (e-list 1 2 3 '\\''(e-reverse '\\''(e-list 4 5 (e-true) 6))))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:233"
 ( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '(scheme->nix (e-list 1 2 3 '\''(e-reverse '\''(e-list 4 5 (e-true) 6))))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -71804,7 +73368,155 @@ echo >>"$at_stdout"; printf "%s\n" "[
 ]
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:221"
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:233"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:237" >"$at_check_line_file"
+(test ${enable_check_r6rs_loko} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:237"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:237: \"\${abs_builddir}\"/run-r6rs-loko.sh '(scheme->nix (e-append '\\''(e-list 1 2 3) '\\''(e-list 40 50 60)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:237"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '(scheme->nix (e-append '\''(e-list 1 2 3) '\''(e-list 40 50 60)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(1)
+(2)
+(3)
+(40)
+(50)
+(60)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:237"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:241" >"$at_check_line_file"
+(test ${enable_check_r6rs_loko} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:241"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:241: \"\${abs_builddir}\"/run-r6rs-loko.sh '(scheme->nix (e-concatenate '\\''(e-list '\\''(e-list 1 2 3) '\\''(e-list 40 50 60))))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:241"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '(scheme->nix (e-concatenate '\''(e-list '\''(e-list 1 2 3) '\''(e-list 40 50 60))))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(1)
+(2)
+(3)
+(40)
+(50)
+(60)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:241"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:245" >"$at_check_line_file"
+(test ${enable_check_r6rs_loko} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:245"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:245: \"\${abs_builddir}\"/run-r6rs-loko.sh '(scheme->nix (e-append-reverse '\\''(e-list 1 2 3) '\\''(e-list 40 50 60)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:245"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '(scheme->nix (e-append-reverse '\''(e-list 1 2 3) '\''(e-list 40 50 60)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(3)
+(2)
+(1)
+(40)
+(50)
+(60)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:245"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:249" >"$at_check_line_file"
+(test ${enable_check_r6rs_loko} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:249"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:249: \"\${abs_builddir}\"/run-r6rs-loko.sh '(scheme->nix (e-zip '\\''(e-list 3 1 4 1) '\\''(e-circular-list #f #t)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:249"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '(scheme->nix (e-zip '\''(e-list 3 1 4 1) '\''(e-circular-list #f #t)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+[
+(3)
+(builtins.false)
+]
+[
+(1)
+(builtins.true)
+]
+[
+(4)
+(builtins.false)
+]
+[
+(1)
+(builtins.true)
+]
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:249"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:253" >"$at_check_line_file"
+(test ${enable_check_r6rs_loko} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:253"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:253: \"\${abs_builddir}\"/run-r6rs-loko.sh '(scheme->nix (e-count '\\''< '\\''(e-list 3 1 4 1) '\\''(e-circular-list 1 10)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:253"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-loko.sh '(scheme->nix (e-count '\''< '\''(e-list 3 1 4 1) '\''(e-circular-list 1 10)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(2)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:253"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -81140,8 +82852,74 @@ printf "%s\n" "e-macros-template.at:221" >"$at_check_line_file"
 (test ${enable_check_r7rs_loko} = no) \
   && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:221"
 { set +x
-printf "%s\n" "$at_srcdir/e-macros-template.at:221: \"\${abs_builddir}\"/run-r7rs-loko.sh '(scheme->nix (e-list 1 2 3 '\\''(e-reverse '\\''(e-list 4 5 (e-true) 6))))'"
+printf "%s\n" "$at_srcdir/e-macros-template.at:221: \"\${abs_builddir}\"/run-r7rs-loko.sh '(scheme->nix (e-length (e-list 1 2 3 4 5 6 7)))'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:221"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(scheme->nix (e-length (e-list 1 2 3 4 5 6 7)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(7)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:221"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:225" >"$at_check_line_file"
+(test ${enable_check_r7rs_loko} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:225"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:225: \"\${abs_builddir}\"/run-r7rs-loko.sh '(scheme->nix (e-length+ (e-list 1 2 3 4 5 6 7)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:225"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(scheme->nix (e-length+ (e-list 1 2 3 4 5 6 7)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(7)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:225"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:229" >"$at_check_line_file"
+(test ${enable_check_r7rs_loko} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:229"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:229: \"\${abs_builddir}\"/run-r7rs-loko.sh '(scheme->nix (e-length+ (e-circular-list 1 2 3 4 5 6 7)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:229"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(scheme->nix (e-length+ (e-circular-list 1 2 3 4 5 6 7)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.false)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:229"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:233" >"$at_check_line_file"
+(test ${enable_check_r7rs_loko} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:233"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:233: \"\${abs_builddir}\"/run-r7rs-loko.sh '(scheme->nix (e-list 1 2 3 '\\''(e-reverse '\\''(e-list 4 5 (e-true) 6))))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:233"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(scheme->nix (e-list 1 2 3 '\''(e-reverse '\''(e-list 4 5 (e-true) 6))))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -81160,7 +82938,155 @@ echo >>"$at_stdout"; printf "%s\n" "[
 ]
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:221"
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:233"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:237" >"$at_check_line_file"
+(test ${enable_check_r7rs_loko} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:237"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:237: \"\${abs_builddir}\"/run-r7rs-loko.sh '(scheme->nix (e-append '\\''(e-list 1 2 3) '\\''(e-list 40 50 60)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:237"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(scheme->nix (e-append '\''(e-list 1 2 3) '\''(e-list 40 50 60)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(1)
+(2)
+(3)
+(40)
+(50)
+(60)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:237"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:241" >"$at_check_line_file"
+(test ${enable_check_r7rs_loko} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:241"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:241: \"\${abs_builddir}\"/run-r7rs-loko.sh '(scheme->nix (e-concatenate '\\''(e-list '\\''(e-list 1 2 3) '\\''(e-list 40 50 60))))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:241"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(scheme->nix (e-concatenate '\''(e-list '\''(e-list 1 2 3) '\''(e-list 40 50 60))))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(1)
+(2)
+(3)
+(40)
+(50)
+(60)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:241"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:245" >"$at_check_line_file"
+(test ${enable_check_r7rs_loko} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:245"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:245: \"\${abs_builddir}\"/run-r7rs-loko.sh '(scheme->nix (e-append-reverse '\\''(e-list 1 2 3) '\\''(e-list 40 50 60)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:245"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(scheme->nix (e-append-reverse '\''(e-list 1 2 3) '\''(e-list 40 50 60)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(3)
+(2)
+(1)
+(40)
+(50)
+(60)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:245"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:249" >"$at_check_line_file"
+(test ${enable_check_r7rs_loko} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:249"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:249: \"\${abs_builddir}\"/run-r7rs-loko.sh '(scheme->nix (e-zip '\\''(e-list 3 1 4 1) '\\''(e-circular-list #f #t)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:249"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(scheme->nix (e-zip '\''(e-list 3 1 4 1) '\''(e-circular-list #f #t)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+[
+(3)
+(builtins.false)
+]
+[
+(1)
+(builtins.true)
+]
+[
+(4)
+(builtins.false)
+]
+[
+(1)
+(builtins.true)
+]
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:249"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:253" >"$at_check_line_file"
+(test ${enable_check_r7rs_loko} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:253"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:253: \"\${abs_builddir}\"/run-r7rs-loko.sh '(scheme->nix (e-count '\\''< '\\''(e-list 3 1 4 1) '\\''(e-circular-list 1 10)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:253"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-loko.sh '(scheme->nix (e-count '\''< '\''(e-list 3 1 4 1) '\''(e-circular-list 1 10)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(2)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:253"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -90540,8 +92466,74 @@ printf "%s\n" "e-macros-template.at:221" >"$at_check_line_file"
 (test ${enable_check_r6rs_racket} = no) \
   && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:221"
 { set +x
-printf "%s\n" "$at_srcdir/e-macros-template.at:221: \"\${abs_builddir}\"/run-r6rs-racket.sh '(scheme->nix (e-list 1 2 3 '\\''(e-reverse '\\''(e-list 4 5 (e-true) 6))))'"
+printf "%s\n" "$at_srcdir/e-macros-template.at:221: \"\${abs_builddir}\"/run-r6rs-racket.sh '(scheme->nix (e-length (e-list 1 2 3 4 5 6 7)))'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:221"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-racket.sh '(scheme->nix (e-length (e-list 1 2 3 4 5 6 7)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(7)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:221"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:225" >"$at_check_line_file"
+(test ${enable_check_r6rs_racket} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:225"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:225: \"\${abs_builddir}\"/run-r6rs-racket.sh '(scheme->nix (e-length+ (e-list 1 2 3 4 5 6 7)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:225"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-racket.sh '(scheme->nix (e-length+ (e-list 1 2 3 4 5 6 7)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(7)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:225"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:229" >"$at_check_line_file"
+(test ${enable_check_r6rs_racket} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:229"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:229: \"\${abs_builddir}\"/run-r6rs-racket.sh '(scheme->nix (e-length+ (e-circular-list 1 2 3 4 5 6 7)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:229"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-racket.sh '(scheme->nix (e-length+ (e-circular-list 1 2 3 4 5 6 7)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.false)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:229"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:233" >"$at_check_line_file"
+(test ${enable_check_r6rs_racket} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:233"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:233: \"\${abs_builddir}\"/run-r6rs-racket.sh '(scheme->nix (e-list 1 2 3 '\\''(e-reverse '\\''(e-list 4 5 (e-true) 6))))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:233"
 ( $at_check_trace; "${abs_builddir}"/run-r6rs-racket.sh '(scheme->nix (e-list 1 2 3 '\''(e-reverse '\''(e-list 4 5 (e-true) 6))))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -90560,7 +92552,155 @@ echo >>"$at_stdout"; printf "%s\n" "[
 ]
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:221"
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:233"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:237" >"$at_check_line_file"
+(test ${enable_check_r6rs_racket} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:237"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:237: \"\${abs_builddir}\"/run-r6rs-racket.sh '(scheme->nix (e-append '\\''(e-list 1 2 3) '\\''(e-list 40 50 60)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:237"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-racket.sh '(scheme->nix (e-append '\''(e-list 1 2 3) '\''(e-list 40 50 60)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(1)
+(2)
+(3)
+(40)
+(50)
+(60)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:237"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:241" >"$at_check_line_file"
+(test ${enable_check_r6rs_racket} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:241"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:241: \"\${abs_builddir}\"/run-r6rs-racket.sh '(scheme->nix (e-concatenate '\\''(e-list '\\''(e-list 1 2 3) '\\''(e-list 40 50 60))))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:241"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-racket.sh '(scheme->nix (e-concatenate '\''(e-list '\''(e-list 1 2 3) '\''(e-list 40 50 60))))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(1)
+(2)
+(3)
+(40)
+(50)
+(60)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:241"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:245" >"$at_check_line_file"
+(test ${enable_check_r6rs_racket} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:245"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:245: \"\${abs_builddir}\"/run-r6rs-racket.sh '(scheme->nix (e-append-reverse '\\''(e-list 1 2 3) '\\''(e-list 40 50 60)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:245"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-racket.sh '(scheme->nix (e-append-reverse '\''(e-list 1 2 3) '\''(e-list 40 50 60)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(3)
+(2)
+(1)
+(40)
+(50)
+(60)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:245"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:249" >"$at_check_line_file"
+(test ${enable_check_r6rs_racket} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:249"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:249: \"\${abs_builddir}\"/run-r6rs-racket.sh '(scheme->nix (e-zip '\\''(e-list 3 1 4 1) '\\''(e-circular-list #f #t)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:249"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-racket.sh '(scheme->nix (e-zip '\''(e-list 3 1 4 1) '\''(e-circular-list #f #t)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+[
+(3)
+(builtins.false)
+]
+[
+(1)
+(builtins.true)
+]
+[
+(4)
+(builtins.false)
+]
+[
+(1)
+(builtins.true)
+]
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:249"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:253" >"$at_check_line_file"
+(test ${enable_check_r6rs_racket} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:253"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:253: \"\${abs_builddir}\"/run-r6rs-racket.sh '(scheme->nix (e-count '\\''< '\\''(e-list 3 1 4 1) '\\''(e-circular-list 1 10)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:253"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-racket.sh '(scheme->nix (e-count '\''< '\''(e-list 3 1 4 1) '\''(e-circular-list 1 10)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(2)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:253"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -99896,8 +102036,74 @@ printf "%s\n" "e-macros-template.at:221" >"$at_check_line_file"
 (test ${enable_check_r6rs_sagittarius} = no) \
   && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:221"
 { set +x
-printf "%s\n" "$at_srcdir/e-macros-template.at:221: \"\${abs_builddir}\"/run-r6rs-sagittarius.sh '(scheme->nix (e-list 1 2 3 '\\''(e-reverse '\\''(e-list 4 5 (e-true) 6))))'"
+printf "%s\n" "$at_srcdir/e-macros-template.at:221: \"\${abs_builddir}\"/run-r6rs-sagittarius.sh '(scheme->nix (e-length (e-list 1 2 3 4 5 6 7)))'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:221"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-sagittarius.sh '(scheme->nix (e-length (e-list 1 2 3 4 5 6 7)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(7)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:221"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:225" >"$at_check_line_file"
+(test ${enable_check_r6rs_sagittarius} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:225"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:225: \"\${abs_builddir}\"/run-r6rs-sagittarius.sh '(scheme->nix (e-length+ (e-list 1 2 3 4 5 6 7)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:225"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-sagittarius.sh '(scheme->nix (e-length+ (e-list 1 2 3 4 5 6 7)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(7)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:225"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:229" >"$at_check_line_file"
+(test ${enable_check_r6rs_sagittarius} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:229"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:229: \"\${abs_builddir}\"/run-r6rs-sagittarius.sh '(scheme->nix (e-length+ (e-circular-list 1 2 3 4 5 6 7)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:229"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-sagittarius.sh '(scheme->nix (e-length+ (e-circular-list 1 2 3 4 5 6 7)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.false)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:229"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:233" >"$at_check_line_file"
+(test ${enable_check_r6rs_sagittarius} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:233"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:233: \"\${abs_builddir}\"/run-r6rs-sagittarius.sh '(scheme->nix (e-list 1 2 3 '\\''(e-reverse '\\''(e-list 4 5 (e-true) 6))))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:233"
 ( $at_check_trace; "${abs_builddir}"/run-r6rs-sagittarius.sh '(scheme->nix (e-list 1 2 3 '\''(e-reverse '\''(e-list 4 5 (e-true) 6))))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -99916,7 +102122,155 @@ echo >>"$at_stdout"; printf "%s\n" "[
 ]
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:221"
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:233"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:237" >"$at_check_line_file"
+(test ${enable_check_r6rs_sagittarius} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:237"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:237: \"\${abs_builddir}\"/run-r6rs-sagittarius.sh '(scheme->nix (e-append '\\''(e-list 1 2 3) '\\''(e-list 40 50 60)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:237"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-sagittarius.sh '(scheme->nix (e-append '\''(e-list 1 2 3) '\''(e-list 40 50 60)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(1)
+(2)
+(3)
+(40)
+(50)
+(60)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:237"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:241" >"$at_check_line_file"
+(test ${enable_check_r6rs_sagittarius} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:241"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:241: \"\${abs_builddir}\"/run-r6rs-sagittarius.sh '(scheme->nix (e-concatenate '\\''(e-list '\\''(e-list 1 2 3) '\\''(e-list 40 50 60))))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:241"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-sagittarius.sh '(scheme->nix (e-concatenate '\''(e-list '\''(e-list 1 2 3) '\''(e-list 40 50 60))))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(1)
+(2)
+(3)
+(40)
+(50)
+(60)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:241"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:245" >"$at_check_line_file"
+(test ${enable_check_r6rs_sagittarius} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:245"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:245: \"\${abs_builddir}\"/run-r6rs-sagittarius.sh '(scheme->nix (e-append-reverse '\\''(e-list 1 2 3) '\\''(e-list 40 50 60)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:245"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-sagittarius.sh '(scheme->nix (e-append-reverse '\''(e-list 1 2 3) '\''(e-list 40 50 60)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(3)
+(2)
+(1)
+(40)
+(50)
+(60)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:245"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:249" >"$at_check_line_file"
+(test ${enable_check_r6rs_sagittarius} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:249"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:249: \"\${abs_builddir}\"/run-r6rs-sagittarius.sh '(scheme->nix (e-zip '\\''(e-list 3 1 4 1) '\\''(e-circular-list #f #t)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:249"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-sagittarius.sh '(scheme->nix (e-zip '\''(e-list 3 1 4 1) '\''(e-circular-list #f #t)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+[
+(3)
+(builtins.false)
+]
+[
+(1)
+(builtins.true)
+]
+[
+(4)
+(builtins.false)
+]
+[
+(1)
+(builtins.true)
+]
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:249"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:253" >"$at_check_line_file"
+(test ${enable_check_r6rs_sagittarius} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:253"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:253: \"\${abs_builddir}\"/run-r6rs-sagittarius.sh '(scheme->nix (e-count '\\''< '\\''(e-list 3 1 4 1) '\\''(e-circular-list 1 10)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:253"
+( $at_check_trace; "${abs_builddir}"/run-r6rs-sagittarius.sh '(scheme->nix (e-count '\''< '\''(e-list 3 1 4 1) '\''(e-circular-list 1 10)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(2)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:253"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -109252,8 +111606,74 @@ printf "%s\n" "e-macros-template.at:221" >"$at_check_line_file"
 (test ${enable_check_r7rs_sagittarius} = no) \
   && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:221"
 { set +x
-printf "%s\n" "$at_srcdir/e-macros-template.at:221: \"\${abs_builddir}\"/run-r7rs-sagittarius.sh '(scheme->nix (e-list 1 2 3 '\\''(e-reverse '\\''(e-list 4 5 (e-true) 6))))'"
+printf "%s\n" "$at_srcdir/e-macros-template.at:221: \"\${abs_builddir}\"/run-r7rs-sagittarius.sh '(scheme->nix (e-length (e-list 1 2 3 4 5 6 7)))'"
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:221"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-sagittarius.sh '(scheme->nix (e-length (e-list 1 2 3 4 5 6 7)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(7)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:221"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:225" >"$at_check_line_file"
+(test ${enable_check_r7rs_sagittarius} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:225"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:225: \"\${abs_builddir}\"/run-r7rs-sagittarius.sh '(scheme->nix (e-length+ (e-list 1 2 3 4 5 6 7)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:225"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-sagittarius.sh '(scheme->nix (e-length+ (e-list 1 2 3 4 5 6 7)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(7)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:225"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:229" >"$at_check_line_file"
+(test ${enable_check_r7rs_sagittarius} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:229"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:229: \"\${abs_builddir}\"/run-r7rs-sagittarius.sh '(scheme->nix (e-length+ (e-circular-list 1 2 3 4 5 6 7)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:229"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-sagittarius.sh '(scheme->nix (e-length+ (e-circular-list 1 2 3 4 5 6 7)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(builtins.false)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:229"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:233" >"$at_check_line_file"
+(test ${enable_check_r7rs_sagittarius} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:233"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:233: \"\${abs_builddir}\"/run-r7rs-sagittarius.sh '(scheme->nix (e-list 1 2 3 '\\''(e-reverse '\\''(e-list 4 5 (e-true) 6))))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:233"
 ( $at_check_trace; "${abs_builddir}"/run-r7rs-sagittarius.sh '(scheme->nix (e-list 1 2 3 '\''(e-reverse '\''(e-list 4 5 (e-true) 6))))'
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
@@ -109272,7 +111692,155 @@ echo >>"$at_stdout"; printf "%s\n" "[
 ]
 " | \
   $at_diff - "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:221"
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:233"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:237" >"$at_check_line_file"
+(test ${enable_check_r7rs_sagittarius} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:237"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:237: \"\${abs_builddir}\"/run-r7rs-sagittarius.sh '(scheme->nix (e-append '\\''(e-list 1 2 3) '\\''(e-list 40 50 60)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:237"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-sagittarius.sh '(scheme->nix (e-append '\''(e-list 1 2 3) '\''(e-list 40 50 60)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(1)
+(2)
+(3)
+(40)
+(50)
+(60)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:237"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:241" >"$at_check_line_file"
+(test ${enable_check_r7rs_sagittarius} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:241"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:241: \"\${abs_builddir}\"/run-r7rs-sagittarius.sh '(scheme->nix (e-concatenate '\\''(e-list '\\''(e-list 1 2 3) '\\''(e-list 40 50 60))))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:241"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-sagittarius.sh '(scheme->nix (e-concatenate '\''(e-list '\''(e-list 1 2 3) '\''(e-list 40 50 60))))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(1)
+(2)
+(3)
+(40)
+(50)
+(60)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:241"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:245" >"$at_check_line_file"
+(test ${enable_check_r7rs_sagittarius} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:245"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:245: \"\${abs_builddir}\"/run-r7rs-sagittarius.sh '(scheme->nix (e-append-reverse '\\''(e-list 1 2 3) '\\''(e-list 40 50 60)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:245"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-sagittarius.sh '(scheme->nix (e-append-reverse '\''(e-list 1 2 3) '\''(e-list 40 50 60)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+(3)
+(2)
+(1)
+(40)
+(50)
+(60)
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:245"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:249" >"$at_check_line_file"
+(test ${enable_check_r7rs_sagittarius} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:249"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:249: \"\${abs_builddir}\"/run-r7rs-sagittarius.sh '(scheme->nix (e-zip '\\''(e-list 3 1 4 1) '\\''(e-circular-list #f #t)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:249"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-sagittarius.sh '(scheme->nix (e-zip '\''(e-list 3 1 4 1) '\''(e-circular-list #f #t)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "[
+[
+(3)
+(builtins.false)
+]
+[
+(1)
+(builtins.true)
+]
+[
+(4)
+(builtins.false)
+]
+[
+(1)
+(builtins.true)
+]
+]
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:249"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+
+
+printf "%s\n" "e-macros-template.at:253" >"$at_check_line_file"
+(test ${enable_check_r7rs_sagittarius} = no) \
+  && at_fn_check_skip 77 "$at_srcdir/e-macros-template.at:253"
+{ set +x
+printf "%s\n" "$at_srcdir/e-macros-template.at:253: \"\${abs_builddir}\"/run-r7rs-sagittarius.sh '(scheme->nix (e-count '\\''< '\\''(e-list 3 1 4 1) '\\''(e-circular-list 1 10)))'"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "e-macros-template.at:253"
+( $at_check_trace; "${abs_builddir}"/run-r7rs-sagittarius.sh '(scheme->nix (e-count '\''< '\''(e-list 3 1 4 1) '\''(e-circular-list 1 10)))'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; printf "%s\n" "(2)
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/e-macros-template.at:253"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
