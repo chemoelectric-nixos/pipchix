@@ -104,3 +104,14 @@ e-filter
 e-remove
 e-delete
 e-delete-duplicates
+
+e-member
+e-memq
+e-memv
+e-find
+e-find-tail
+e-any
+e-every
+e-list-index
+e-take-while
+e-drop-while

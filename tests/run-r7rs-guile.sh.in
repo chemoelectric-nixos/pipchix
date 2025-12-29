@@ -6,7 +6,7 @@
 prog_scm=`@abs_top_builddir@/tempname`.scm
 
 cat > "${prog_scm}" <<EOF
-(import (scheme base))
+(import (except (scheme base) member))
 (import (scheme write))
 (import (pipchix general-purpose list))
 (import (pipchix general-purpose division))

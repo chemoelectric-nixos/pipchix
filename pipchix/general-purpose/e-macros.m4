@@ -208,6 +208,17 @@ define_simple_e_macro(remove)
 define_simple_e_macro(delete)
 define_simple_e_macro(delete-duplicates)
 
+define_simple_e_macro(member)
+define_simple_e_macro(memq)
+define_simple_e_macro(memv)
+define_simple_e_macro(find)
+define_simple_e_macro(find-tail)
+define_simple_e_macro(any)
+define_simple_e_macro(every)
+define_simple_e_macro(list-index)
+define_simple_e_macro(take-while)
+define_simple_e_macro(drop-while)
+
 m4_divert(-1)
 ;;; local variables:
 ;;; mode: scheme
