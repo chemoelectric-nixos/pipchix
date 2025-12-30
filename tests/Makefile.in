@@ -321,7 +321,7 @@ AUTOMAKE_OPTIONS = foreign
 EXTRA_DIST = testsuite.at $(srcdir)/package.m4 $(TESTSUITE) atlocal.in \
 	tests-template.at ast-nodes-preds-template.at \
 	base64-utf8-template.at list-template.at division-template.at \
-	e-macros-template.at em-template.at \
+	e-macros-template.at em-syntax-rules-template.at \
 	continuation-capture-template.at escaped-utf8-template.at \
 	expressions-template.at macros-template.at \
 	nix-attributebinding-node-template.at \
@@ -343,7 +343,7 @@ TESTSUITE = $(srcdir)/testsuite
 TESTSUITE_DEPS = $(srcdir)/atlocal.in $(srcdir)/package.m4 \
 	$(srcdir)/tests-template.at $(srcdir)/list-template.at \
 	$(srcdir)/division-template.at $(srcdir)/e-macros-template.at \
-	$(srcdir)/em-template.at \
+	$(srcdir)/em-syntax-rules-template.at \
 	$(srcdir)/continuation-capture-template.at \
 	$(srcdir)/shell-print-template.at \
 	$(srcdir)/base64-utf8-template.at \

@@ -71,7 +71,7 @@ EXTRA_DIST += base64-utf8-template.at
 EXTRA_DIST += list-template.at
 EXTRA_DIST += division-template.at
 EXTRA_DIST += e-macros-template.at
-EXTRA_DIST += em-template.at
+EXTRA_DIST += em-syntax-rules-template.at
 EXTRA_DIST += continuation-capture-template.at
 EXTRA_DIST += escaped-utf8-template.at
 EXTRA_DIST += expressions-template.at
@@ -132,7 +132,7 @@ TESTSUITE_DEPS += $(srcdir)/tests-template.at
 TESTSUITE_DEPS += $(srcdir)/list-template.at
 TESTSUITE_DEPS += $(srcdir)/division-template.at
 TESTSUITE_DEPS += $(srcdir)/e-macros-template.at
-TESTSUITE_DEPS += $(srcdir)/em-template.at
+TESTSUITE_DEPS += $(srcdir)/em-syntax-rules-template.at
 TESTSUITE_DEPS += $(srcdir)/continuation-capture-template.at
 
 TESTSUITE_DEPS += $(srcdir)/shell-print-template.at

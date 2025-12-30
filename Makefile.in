@@ -526,7 +526,7 @@ R6RS_SCHEME = r6rs/pipchix/general-purpose/srfi-39.sls \
 	r6rs/pipchix/general-purpose/define-record-factory.sls \
 	r6rs/pipchix/general-purpose/e-macros-environment.sls \
 	r6rs/pipchix/general-purpose/e-macros.sls \
-	r6rs/pipchix/general-purpose/em.sls \
+	r6rs/pipchix/general-purpose/em-syntax-rules.sls \
 	r6rs/pipchix/generate-identifier.sls \
 	r6rs/pipchix/essentials.sls r6rs/pipchix/expressions.sls \
 	r6rs/pipchix/macros.sls r6rs/pipchix/nix-embed.sls \
@@ -542,7 +542,7 @@ R7RS_SCHEME = r7rs/pipchix/general-purpose/box.sld \
 	r7rs/pipchix/general-purpose/define-record-factory.sld \
 	r7rs/pipchix/general-purpose/e-macros-environment.sld \
 	r7rs/pipchix/general-purpose/e-macros.sld \
-	r7rs/pipchix/general-purpose/em.sld \
+	r7rs/pipchix/general-purpose/em-syntax-rules.sld \
 	r7rs/pipchix/generate-identifier.sld \
 	r7rs/pipchix/essentials.sld r7rs/pipchix/expressions.sld \
 	r7rs/pipchix/macros.sld r7rs/pipchix/nix-embed.sld \
@@ -586,7 +586,7 @@ CHICKEN_EGGSPEC_BOTTOM = ' \
       (component-dependencies \
        pipchix.general-purpose.e-macros-environment \
        pipchix.general-purpose.list)) \
-    (extension pipchix.general-purpose.em \
+    (extension pipchix.general-purpose.em-syntax-rules \
       (component-dependencies \
        pipchix.general-purpose.list)) \
     (extension pipchix.string-manipulation \
@@ -648,7 +648,7 @@ CHICKEN_5_EGGFILES = \
     pipchix.general-purpose.define-record-factory.scm \
     pipchix.general-purpose.e-macros-environment.scm \
     pipchix.general-purpose.e-macros.scm \
-    pipchix.general-purpose.em.scm \
+    pipchix.general-purpose.em-syntax-rules.scm \
     pipchix.generate-identifier.scm \
     pipchix.string-manipulation.scm \
     pipchix.abstract-syntax-tree.scm \

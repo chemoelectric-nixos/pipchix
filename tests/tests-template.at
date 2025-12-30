@@ -52,7 +52,7 @@ AT_BANNER([tests_banner])
 m4_include(list-template.at)
 m4_include(division-template.at)
 m4_include(e-macros-template.at)
-m4_include(em-template.at)
+m4_include(em-syntax-rules-template.at)
 m4_include(continuation-capture-template.at)
 
 m4_include(nix-embedded-node-template.at)
