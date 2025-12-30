@@ -38,6 +38,30 @@ m4_define([sexpr],[(scheme->nix (e-true 1 2 3 4 5))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([nix_true])],[])
 
+m4_define([sexpr],[(scheme->nix (e-equal? '\''`(1 2) '\''`(3 4)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([nix_false])],[])
+
+m4_define([sexpr],[(scheme->nix (e-equal? '\''`(1 2) '\''`(1 2)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([nix_true])],[])
+
+m4_define([sexpr],[(scheme->nix (e-eqv? '\'''\''2 '\'''\''4))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([nix_false])],[])
+
+m4_define([sexpr],[(scheme->nix (e-eqv? '\'''\''2 '\'''\''2))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([nix_true])],[])
+
+m4_define([sexpr],[(scheme->nix (e-eq? '\'''\''@%:%f '\'''\''@%:%t))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([nix_false])],[])
+
+m4_define([sexpr],[(scheme->nix (e-eq? '\'''\''@%:%f '\'''\''@%:%f))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([nix_true])],[])
+
 m4_define([sexpr],[(scheme->nix (e-list 1 2 3 '\''(e-list 4 5 (e-true) 6)))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([@<:@·(1)·(2)·(3)·@<:@·(4)·(5)·nix_true[](6)·@:>@·@:>@·])],[])

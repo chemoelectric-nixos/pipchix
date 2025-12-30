@@ -131,6 +131,10 @@
 (define-e-macro e-false (lambda anything #f))
 (define-e-macro e-true (lambda anything #t))
 
+define_simple_e_macro(equal?)
+define_simple_e_macro(eqv?)
+define_simple_e_macro(eq?)
+
 define_simple_e_macro(list)
 define_simple_e_macro(make-list)
 define_simple_e_macro(circular-list)

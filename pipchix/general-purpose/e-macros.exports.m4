@@ -10,6 +10,10 @@ define-e-macro
 e-false
 e-true
 
+e-equal?
+e-eqv?
+e-eq?
+
 e-list
 e-make-list
 e-circular-list
