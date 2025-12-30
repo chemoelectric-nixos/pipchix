@@ -40,17 +40,13 @@
 
 (define-syntax with-e-macros-libraries
   (syntax-rules ()
-    ((¶ ((a b ...) ...) body ...)
-     (parameterize ((*e-macros-libraries*
-                     (vector '((a b ...) ...))))
+    ((¶ lst body ...)
+     (parameterize ((*e-macros-libraries* (vector lst)))
        (if #f #f)
        body ...))))
 
-(define-syntax set-e-macros-libraries!
-  (syntax-rules ()
-    ((¶ ((a b ...) ...))
-     (vector-set! (*e-macros-libraries*) 0
-                  '((a b ...) ...)))))
+(define (set-e-macros-libraries! lst)
+  (vector-set! (*e-macros-libraries*) 0 lst))
 
 (define (e-macros-evaluate form)
   (e-macros-eval form (apply e-macros-environment
