@@ -35,6 +35,7 @@ m4_include(pipchix/pipchix-includes.m4)
  
   (import (scheme base))
   (import (scheme eval))
+  (import (scheme inexact))
   (import (scheme write)) ;; For debugging.
   (import (pipchix general-purpose list))
   (import (pipchix general-purpose e-macros-environment))

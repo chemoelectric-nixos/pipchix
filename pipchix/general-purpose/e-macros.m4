@@ -135,6 +135,31 @@ define_simple_e_macro(equal?)
 define_simple_e_macro(eqv?)
 define_simple_e_macro(eq?)
 
+define_simple_e_macro(number?)
+define_simple_e_macro(exact?)
+define_simple_e_macro(inexact?)
+define_simple_e_macro(integer?)
+define_simple_e_macro(rational?)
+define_simple_e_macro(real?)
+define_simple_e_macro(complex?)
+define_simple_e_macro(finite?)
+define_simple_e_macro(infinite?)
+define_simple_e_macro(nan?)
+define_simple_e_macro(boolean?)
+define_simple_e_macro(symbol?)
+define_simple_e_macro(string?)
+define_simple_e_macro(char?)
+define_simple_e_macro(vector?)
+define_simple_e_macro(bytevector?)
+
+;;; m4_ifelse(scheme_standard,«r7rs»,«
+define_simple_e_macro(exact-integer?)
+;;; »,«
+(define-e-macro e-exact-integer?
+  (lambda (obj)
+    (and (integer? obj) (exact? obj))))
+;;; »)
+
 define_simple_e_macro(list)
 define_simple_e_macro(make-list)
 define_simple_e_macro(circular-list)

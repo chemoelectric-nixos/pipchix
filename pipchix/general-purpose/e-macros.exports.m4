@@ -14,6 +14,24 @@ e-equal?
 e-eqv?
 e-eq?
 
+e-number?
+e-exact?
+e-inexact?
+e-integer?
+e-exact-integer?
+e-rational?
+e-real?
+e-complex?
+e-finite?
+e-infinite?
+e-nan?
+e-boolean?
+e-symbol?
+e-string?
+e-char?
+e-vector?
+e-bytevector?
+
 e-list
 e-make-list
 e-circular-list
