@@ -66,50 +66,69 @@
 ;;; »,«
 
 (define-syntax define-e-macro
+;;;;
+;;;; FIXME FIXME FIXME : THIS CODE NEEDS CLEANING UP.
+;;;; FIXME FIXME FIXME : THIS CODE NEEDS CLEANING UP.
+;;;; FIXME FIXME FIXME : THIS CODE NEEDS CLEANING UP.
+;;;; FIXME FIXME FIXME : THIS CODE NEEDS CLEANING UP.
+;;;; FIXME FIXME FIXME : THIS CODE NEEDS CLEANING UP.
+;;;; FIXME FIXME FIXME : THIS CODE NEEDS CLEANING UP.
+;;;;
   (syntax-rules ()
     ((¶ E-MACRO-NAME E-MACRO-PROCEDURE)
      (define-syntax E-MACRO-NAME
        (lambda (stx)
-         (syntax-case stx ()
-           ((µ . arguments)
-            (let* ((evaluate
-                    (lambda (obj)
-                      (e-macros-eval obj (apply e-macros-environment
-                                                (e-macros-libraries)))))
-                   (f-of-x*
-                    ;; The following strips all syntactic information
-                    ;; from the ‘quote’ expressions.
-                    (let loop ((arg* `,(syntax->datum
-                                        (syntax arguments)))
-                               (x* '()))
-                      (if (pair? arg*)
-                        (let-values (((arg arg*) (car+cdr arg*)))
-                          (let ((x (cond
-                                     ((not-pair? arg)
-                                      arg)
-                                     ((not (eq? (car arg) 'quote))
-                                      ;; FIXME: Is there a better test
-                                      ;; for quote? TRY TO SAVE THE
-                                      ;; SYNTAX INFO.
-                                      arg)
-                                     ((not-pair? (car arg))
-                                      ;; Expand the argument.
-                                      (evaluate arg))
-                                     ((and (not (eq? (caar arg) 'quote))
-                                           (not (eq? (caar arg) 'quasiquote)))
-                                      ;; FIXME: Is there a better test
-                                      ;; for quote? TRY TO SAVE THE
-                                      ;; SYNTAX INFO.
-                                      ;;
-                                      ;; Expand the argument.
-                                      (evaluate arg))
-                                     (else
-                                      ;; Drop the quoting by a level.
-                                      (car arg)))))
-                            (loop arg* (cons x x*))))
-                        (cons `(e-macros-evaluate 'E-MACRO-PROCEDURE)
-                              (reverse! x*))))))
-              (datum->syntax (syntax µ) f-of-x*)))))))))
+         (define (evaluate obj)
+           (e-macros-eval obj (apply e-macros-environment
+                                     (e-macros-libraries))))
+         (define (syntax->list x)
+           (syntax-case x ()
+             (()       '())
+             ((a . a*) (cons (syntax a)
+                             (syntax->list (syntax a*))))
+             (a        (syntax a))))
+         (define (quote=? u)
+           (and (identifier? u)
+                (free-identifier=? u (syntax quote))))
+         (define (quote-or-quasiquote=? u)
+           (and (identifier? u)
+                (or (free-identifier=? u (syntax quote))
+                    (free-identifier=? u (syntax quasiquote)))))
+         (let* ((form (syntax->list stx))
+                (µ (car form))
+                (arguments (cdr form))
+                (f-of-x*
+                 (let loop ((arg* arguments)
+                            (x* '()))
+                   (if (pair? arg*)
+                     (let-values (((arg arg*) (car+cdr arg*)))
+                       (let* ((arg_ (syntax->datum arg))
+                              (x (cond
+                                   ((not-pair? arg_)
+                                    arg_)
+                                   ((not (quote=?
+                                          (car (syntax->list arg))))
+                                    arg_)
+                                   ((not-pair?
+                                     (syntax->list
+                                      (car (syntax->list arg))))
+                                    ;; Expand the argument.
+                                    (evaluate arg_))
+                                   ((not (quote-or-quasiquote=?
+                                          (car
+                                           (syntax->list
+                                            (car
+                                             (syntax->list arg))))))
+                                    ;; Expand the argument.
+                                    (evaluate arg_))
+                                   (else
+                                    ;; Drop the quoting by a level.
+                                    (syntax->datum
+                                     (car (syntax->list arg)))))))
+                         (loop arg* (cons x x*))))
+                     (cons `(e-macros-evaluate 'E-MACRO-PROCEDURE)
+                           (reverse! x*))))))
+           (datum->syntax µ f-of-x*)))))))
 
 ;;; »)
 
