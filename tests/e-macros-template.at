@@ -54,11 +54,11 @@ m4_define([sexpr],[(scheme->nix (e-eqv? '\'''\''2 '\'''\''2))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([nix_true])],[])
 
-m4_define([sexpr],[(scheme->nix (e-eq? '\'''\''@%:%f '\'''\''@%:%t))])
+m4_define([sexpr],[(scheme->nix (e-eq? '\'''\''@%:@f '\'''\''@%:@t))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([nix_false])],[])
 
-m4_define([sexpr],[(scheme->nix (e-eq? '\'''\''@%:%f '\'''\''@%:%f))])
+m4_define([sexpr],[(scheme->nix (e-eq? '\'''\''@%:@f '\'''\''@%:@f))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([nix_true])],[])
 
