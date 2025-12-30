@@ -66,14 +66,6 @@
 ;;; »,«
 
 (define-syntax define-e-macro
-;;;;
-;;;; FIXME FIXME FIXME : THIS CODE NEEDS CLEANING UP.
-;;;; FIXME FIXME FIXME : THIS CODE NEEDS CLEANING UP.
-;;;; FIXME FIXME FIXME : THIS CODE NEEDS CLEANING UP.
-;;;; FIXME FIXME FIXME : THIS CODE NEEDS CLEANING UP.
-;;;; FIXME FIXME FIXME : THIS CODE NEEDS CLEANING UP.
-;;;; FIXME FIXME FIXME : THIS CODE NEEDS CLEANING UP.
-;;;;
   (syntax-rules ()
     ((¶ E-MACRO-NAME E-MACRO-PROCEDURE)
      (define-syntax E-MACRO-NAME
@@ -81,12 +73,19 @@
          (define (evaluate obj)
            (e-macros-eval obj (apply e-macros-environment
                                      (e-macros-libraries))))
-         (define (syntax->list x)
+         (define (syntax->dotted-list x)
            (syntax-case x ()
              (()       '())
              ((a . a*) (cons (syntax a)
-                             (syntax->list (syntax a*))))
+                             (syntax->dotted-list (syntax a*))))
              (a        (syntax a))))
+         (define (syntax-pair? x)
+           (syntax-case x ()
+             ((a . a*) #t)
+             (a        #f)))
+         (define (syntax-car x)
+           (syntax-case x ()
+             ((a . a*) (syntax a))))
          (define (quote=? u)
            (and (identifier? u)
                 (free-identifier=? u (syntax quote))))
@@ -94,7 +93,7 @@
            (and (identifier? u)
                 (or (free-identifier=? u (syntax quote))
                     (free-identifier=? u (syntax quasiquote)))))
-         (let* ((form (syntax->list stx))
+         (let* ((form (syntax->dotted-list stx))
                 (µ (car form))
                 (arguments (cdr form))
                 (f-of-x*
@@ -102,29 +101,24 @@
                             (x* '()))
                    (if (pair? arg*)
                      (let-values (((arg arg*) (car+cdr arg*)))
-                       (let* ((arg_ (syntax->datum arg))
-                              (x (cond
-                                   ((not-pair? arg_)
-                                    arg_)
-                                   ((not (quote=?
-                                          (car (syntax->list arg))))
-                                    arg_)
-                                   ((not-pair?
-                                     (syntax->list
-                                      (car (syntax->list arg))))
+                       (let* ((x (cond
+                                   ((not (syntax-pair? arg))
+                                    (syntax->datum arg))
+                                   ((not (quote=? (syntax-car arg)))
+                                    (syntax->datum arg))
+                                   ((not (syntax-pair?
+                                          (syntax-car arg)))
                                     ;; Expand the argument.
-                                    (evaluate arg_))
+                                    (evaluate (syntax->datum arg)))
                                    ((not (quote-or-quasiquote=?
-                                          (car
-                                           (syntax->list
-                                            (car
-                                             (syntax->list arg))))))
+                                          (syntax-car
+                                           (syntax-car arg))))
                                     ;; Expand the argument.
-                                    (evaluate arg_))
+                                    (evaluate (syntax->datum arg)))
                                    (else
                                     ;; Drop the quoting by a level.
                                     (syntax->datum
-                                     (car (syntax->list arg)))))))
+                                     (syntax-car arg))))))
                          (loop arg* (cons x x*))))
                      (cons `(e-macros-evaluate 'E-MACRO-PROCEDURE)
                            (reverse! x*))))))
