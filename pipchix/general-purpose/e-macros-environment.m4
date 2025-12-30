@@ -42,7 +42,7 @@
   (syntax-rules ()
     ((¶ lst body ...)
      (parameterize ((*e-macros-libraries* (vector lst)))
-       (if #f #f)
+       (if #f #f) ;; The body defaults to ‘#<unspecified>’
        body ...))))
 
 (define (set-e-macros-libraries! lst)
