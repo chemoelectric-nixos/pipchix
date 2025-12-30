@@ -42,6 +42,7 @@
                       (if (pair? arg*)
                         (let-values (((arg arg*) (car+cdr arg*)))
                           (let* ((quot (rename 'quote))
+                                 (quasiquot (rename 'quasiquote))
                                  (x (cond
                                       ((not-pair? arg)
                                        arg)
@@ -50,7 +51,8 @@
                                       ((not-pair? (car arg))
                                        ;; Expand the argument.
                                        (evaluate arg))
-                                      ((not (compare (caar arg) quot))
+                                      ((and (not (compare (caar arg) quot))
+                                            (not (compare (caar arg) quasiquot)))
                                        ;; Expand the argument.
                                        (evaluate arg))
                                       (else
@@ -87,14 +89,17 @@
                                       arg)
                                      ((not (eq? (car arg) 'quote))
                                       ;; FIXME: Is there a better test
-                                      ;; for quote?
+                                      ;; for quote? TRY TO SAVE THE
+                                      ;; SYNTAX INFO.
                                       arg)
                                      ((not-pair? (car arg))
                                       ;; Expand the argument.
                                       (evaluate arg))
-                                     ((not (eq? (caar arg) 'quote))
+                                     ((and (not (eq? (caar arg) 'quote))
+                                           (not (eq? (caar arg) 'quasiquote)))
                                       ;; FIXME: Is there a better test
-                                      ;; for quote?
+                                      ;; for quote? TRY TO SAVE THE
+                                      ;; SYNTAX INFO.
                                       ;;
                                       ;; Expand the argument.
                                       (evaluate arg))
