@@ -28,15 +28,24 @@
 (define-syntax em-syntax-rules
   (er-macro-transformer
    (lambda (form rename compare)
-     (let-values
-         (((alternate-ellipsis literals rules)
-           (if (pair? (second form))
-             (values #f (second form) (cddr form))
-             (values (second form) (third form) (cdddr form)))))
 
-       (define (check-literals litrls)
-         (unless (pair? litrls)
-           (err "malformed em-syntax-rules literals" form)))
+     (define alternate-ellipsis #f)
+     (define literals '())
+
+     (define (eager-macro-transformer-spec form)
+       ;; Returns three values: either #f or alternate ellipsis
+       ;; identifier, a list of literals, and a list of what should
+       ;; be eager macro rules.
+       (let-values
+           (((alt-ellipsis litrls rules)
+             (if (identifier? (first form))
+               (values (first form) (second form) (cddr form))
+               (values #f (first form) (cdr form)))))
+         (unless (pair? literals)
+           (err "expected a list of literals" literals))
+         (unless (every identifier? literals)
+           (err "literals must be identifiers" literals))
+         (values alt-ellipsis litrls rules)))
 
        (define (identifier? rule)
          (symbol? rule))
@@ -149,8 +158,11 @@
          (or (id=? form '<>)
              (eager-macro-datum form)))
 
-       (check-literals literals)
-       'FIXME))))
+       (let-values (((alt-ellipsis litrls rules)
+                     (eager-macro-transformer-spec (cdr form))))
+         (set! alternate-ellipsis alt-ellipsis)
+         (set! literals litrls)
+         'FIXME))))
 
 ;;; »,«
 
