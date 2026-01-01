@@ -1,4 +1,4 @@
-# Copyright © 2025 Barry Schwartz
+# Copyright © 2025, 2026 Barry Schwartz
 #
 # This file is part of Pipchix.
 #
@@ -26,9 +26,22 @@ AT_SETUP([setup_message(em-syntax-rules)])
 
 AT_KEYWORDS([default_keywords em em-syntax-rules])
 
+# Currently the library does not work with the CHICKEN 5 compiler,
+# unless you first actually install the ‘pipchix’ egg.
+AT_SKIP_IF(m4_if(implementation,[csc-5],[true],[false]))
+
 m4_define([sexpr],[(scheme->nix "FIXME")])
- check_unquoted([run_scheme 'sexpr'],[0],
-   [interpunct_nl([("FIXME")·])],[])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([("FIXME")·])],[])
+
+m4_define([sexpr],
+  [(let ()
+     (define-syntax test1
+       (em-syntax-rules (===>)
+         ((¶ anything) "FIXME")))
+     (scheme->nix (test1)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([("FIXME")·])],[])
 
 AT_CLEANUP
 

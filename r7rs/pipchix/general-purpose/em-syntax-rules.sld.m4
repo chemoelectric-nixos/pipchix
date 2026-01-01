@@ -1,5 +1,5 @@
 ;;;
-;;; Copyright © 2025 Barry Schwartz
+;;; Copyright © 2025, 2026 Barry Schwartz
 ;;;
 ;;; This file is part of Pipchix.
 ;;; 
@@ -50,12 +50,14 @@ m4_include(pipchix/pipchix-includes.m4)
   (begin
 
     define_err_r7rs
+    define_syntax_err_r7rs
 
     (cond-expand
       (chicken-5
        ;; m4_pushdef(«general_macros»,«er-macro-transformer»)
        ;; m4_pushdef(«syntax_rules»,«r5rs»)
        ;; m4_pushdef(«scheme_standard»,«r5rs»)
+       (import-for-syntax (scheme base))
        (import-for-syntax (srfi 1))
        m4_include(pipchix/general-purpose/em-syntax-rules.m4)
        ;; m4_popdef(«general_macros»,«syntax_rules»,«scheme_standard»)

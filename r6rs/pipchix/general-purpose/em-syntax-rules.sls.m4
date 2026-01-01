@@ -40,6 +40,7 @@ m4_include(pipchix/pipchix-includes.m4)
 
   ;; m4_define(«scheme_standard»,«r6rs»)
   define_err_r6rs
+  define_syntax_err_r7rs
   m4_include(pipchix/general-purpose/em-syntax-rules.m4)
 
   )
