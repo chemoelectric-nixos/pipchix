@@ -1,5 +1,5 @@
 ;;;
-;;; Copyright © 2025 Barry Schwartz
+;;; Copyright © 2025, 2026 Barry Schwartz
 ;;;
 ;;; This file is part of Pipchix.
 ;;; 
@@ -59,9 +59,9 @@
                                        ;; Drop the quoting by a level.
                                        (car arg)))))
                             (loop arg* (cons x x*))))
-                        (cons `(e-macros-evaluate 'E-MACRO-PROCEDURE)
+                        (cons '(e-macros-evaluate 'E-MACRO-PROCEDURE)
                               (reverse! x*))))))
-              `,f-of-x*))))))))
+              f-of-x*))))))))
 
 ;;; »,«
 
