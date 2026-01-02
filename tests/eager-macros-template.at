@@ -1,0 +1,58 @@
+# Copyright © 2026 Barry Schwartz
+#
+# This file is part of Pipchix.
+#
+# Permission is hereby granted, free of charge, to any person obtaining
+# a copy of Pipchix and associated documentation files (the
+# "Software"), to deal in the Software without restriction, including
+# without limitation the rights to use, copy, modify, merge, publish,
+# distribute, sublicense, and/or sell copies of the Software, and to
+# permit persons to whom the Software is furnished to do so, subject to
+# the following conditions:
+# 
+# The above copyright notice and this permission notice shall be
+# included in all copies or substantial portions of the Software.
+# 
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+# LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+# OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+# WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+#
+
+AT_SETUP([setup_message(eager-macros)])
+
+AT_KEYWORDS([default_keywords eager-macros])
+
+dnl   PROBABLY THE FOLLOWING WILL BE TRUE--
+dnl
+dnl # Currently the library does not work with the CHICKEN 5 compiler,
+dnl # unless you first actually install the ‘pipchix’ egg.
+dnl AT_SKIP_IF(m4_if(implementation,[csc-5],[true],[false]))
+
+m4_define([sexpr],[(scheme->nix (zero? 1))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([nix_false])],[])
+
+m4_define([sexpr],[(scheme->nix (reverse:e (reverse:e (reverse:e `(1 2 3 4)))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·(4)·(3)·(2)·(1)·@:>@·])],[])
+
+dnl m4_define([sexpr],
+dnl   [(scheme->nix (append:e `(1 2) (append:e `(3 4) `(5 6) (append:e `(7 8) `(9 10)))))])
+dnl check_unquoted([run_scheme 'sexpr'],[0],
+dnl   [interpunct_nl([])],[])
+
+dnl m4_define([sexpr],
+dnl   [(scheme->nix (append:e `(7 8) `(9 10)))])
+dnl check_unquoted([run_scheme 'sexpr'],[0],
+dnl   [interpunct_nl([])],[])
+
+AT_CLEANUP
+
+# local variables:
+# mode: autoconf
+# coding: utf-8
+# end:
