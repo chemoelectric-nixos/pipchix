@@ -79,7 +79,6 @@ R6RS_SCHEME += r6rs/pipchix/general-purpose/e-macros-environment.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/e-macros.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/eager-syntax-rules.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/eager-macros.sls
-R6RS_SCHEME += r6rs/pipchix/general-purpose/em-syntax-rules.sls
 R6RS_SCHEME += r6rs/pipchix/generate-identifier.sls
 R6RS_SCHEME += r6rs/pipchix/essentials.sls
 R6RS_SCHEME += r6rs/pipchix/expressions.sls
@@ -110,7 +109,6 @@ R7RS_SCHEME += r7rs/pipchix/general-purpose/e-macros-environment.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/e-macros.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/eager-syntax-rules.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/eager-macros.sld
-R7RS_SCHEME += r7rs/pipchix/general-purpose/em-syntax-rules.sld
 R7RS_SCHEME += r7rs/pipchix/generate-identifier.sld
 R7RS_SCHEME += r7rs/pipchix/essentials.sld
 R7RS_SCHEME += r7rs/pipchix/expressions.sld
@@ -184,9 +182,6 @@ CHICKEN_EGGSPEC_BOTTOM = ' \
     (extension pipchix.general-purpose.eager-macros \
       (component-dependencies \
        pipchix.general-purpose.eager-syntax-rules \
-       pipchix.general-purpose.list)) \
-    (extension pipchix.general-purpose.em-syntax-rules \
-      (component-dependencies \
        pipchix.general-purpose.list)) \
     (extension pipchix.string-manipulation \
       (component-dependencies \
@@ -275,7 +270,6 @@ CHICKEN_5_EGGFILES = \
     pipchix.general-purpose.e-macros.scm \
     pipchix.general-purpose.eager-syntax-rules.scm \
     pipchix.general-purpose.eager-macros.scm \
-    pipchix.general-purpose.em-syntax-rules.scm \
     pipchix.generate-identifier.scm \
     pipchix.string-manipulation.scm \
     pipchix.abstract-syntax-tree.scm \

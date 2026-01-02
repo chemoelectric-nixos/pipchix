@@ -16,7 +16,6 @@ cat > "${prog_scm}" <<EOF
 (import (pipchix general-purpose division))
 (import (pipchix general-purpose e-macros))
 (import (pipchix general-purpose eager-macros))
-(import (pipchix general-purpose em-syntax-rules))
 (import (pipchix general-purpose continuation-capture))
 (import (pipchix string-manipulation))
 (import (pipchix generate-identifier))
@@ -24,7 +23,6 @@ cat > "${prog_scm}" <<EOF
 (import (pipchix nix-embed))
 (import (pipchix nix-list))
 (import-for-syntax (pipchix general-purpose eager-macros))
-(import-for-syntax (pipchix general-purpose em-syntax-rules))
 (output-nix-abstract-syntax-tree $1)
 (exit 0)
 EOF
