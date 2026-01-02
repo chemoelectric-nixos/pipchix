@@ -27,10 +27,12 @@ m4_include(pipchix/pipchix-includes.m4)
 (define-library (pipchix general-purpose eager-syntax-rules)
 
   (export m4_include(pipchix/general-purpose/eager-syntax-rules.exports.m4))
+  ;; m4_ifelse(CHICKEN_5,«yes»,«
+  (export syntax-rules:e-aux1)
+  ;; »)
   ;; m4_ifelse(CHICKEN_5,«yes»,,«
   (cond-expand
     (gauche (export :info-alist))
-    (chicken-5 (export syntax-rules:e-aux1))
     (else))
   ;; »)
 
