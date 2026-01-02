@@ -71,6 +71,7 @@ endif
 R6RS_SCHEME =
 R6RS_SCHEME += r6rs/pipchix/general-purpose/srfi-39.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/box.sls
+R6RS_SCHEME += r6rs/pipchix/general-purpose/cut.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/continuation-capture.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/list.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/division.sls
@@ -101,6 +102,7 @@ endif
 
 R7RS_SCHEME =
 R7RS_SCHEME += r7rs/pipchix/general-purpose/box.sld
+R7RS_SCHEME += r7rs/pipchix/general-purpose/cut.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/continuation-capture.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/list.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/division.sld
@@ -167,6 +169,7 @@ CHICKEN_EGGSPEC_TOP = ' \
 CHICKEN_EGGSPEC_BOTTOM = ' \
    (components \
     (extension pipchix.general-purpose.box) \
+    (extension pipchix.general-purpose.cut) \
     (extension pipchix.general-purpose.continuation-capture) \
     (extension pipchix.general-purpose.list) \
     (extension pipchix.general-purpose.division) \
@@ -262,6 +265,7 @@ CHICKEN_5_EGGFILES = \
   $(addprefix $(CHICKEN_5_EGGDIR)/, \
     pipchix.egg \
     pipchix.general-purpose.box.scm \
+    pipchix.general-purpose.cut.scm \
     pipchix.general-purpose.continuation-capture.scm \
     pipchix.general-purpose.list.scm \
     pipchix.general-purpose.division.scm \

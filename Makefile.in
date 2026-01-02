@@ -520,6 +520,7 @@ M4_PREPROCESS = $(GNU_M4) -P -I '$(srcdir)'
 PIPCHXINC = $(srcdir)/pipchix/pipchix-includes.m4
 R6RS_SCHEME = r6rs/pipchix/general-purpose/srfi-39.sls \
 	r6rs/pipchix/general-purpose/box.sls \
+	r6rs/pipchix/general-purpose/cut.sls \
 	r6rs/pipchix/general-purpose/continuation-capture.sls \
 	r6rs/pipchix/general-purpose/list.sls \
 	r6rs/pipchix/general-purpose/division.sls \
@@ -537,6 +538,7 @@ R6RS_SCHEME = r6rs/pipchix/general-purpose/srfi-39.sls \
 	r6rs/pipchix/abstract-syntax-tree.sls \
 	r6rs/pipchix/string-manipulation.sls
 R7RS_SCHEME = r7rs/pipchix/general-purpose/box.sld \
+	r7rs/pipchix/general-purpose/cut.sld \
 	r7rs/pipchix/general-purpose/continuation-capture.sld \
 	r7rs/pipchix/general-purpose/list.sld \
 	r7rs/pipchix/general-purpose/division.sld \
@@ -574,6 +576,7 @@ CHICKEN_EGGSPEC_TOP = ' \
 CHICKEN_EGGSPEC_BOTTOM = ' \
    (components \
     (extension pipchix.general-purpose.box) \
+    (extension pipchix.general-purpose.cut) \
     (extension pipchix.general-purpose.continuation-capture) \
     (extension pipchix.general-purpose.list) \
     (extension pipchix.general-purpose.division) \
@@ -643,6 +646,7 @@ CHICKEN_5_EGGFILES = \
   $(addprefix $(CHICKEN_5_EGGDIR)/, \
     pipchix.egg \
     pipchix.general-purpose.box.scm \
+    pipchix.general-purpose.cut.scm \
     pipchix.general-purpose.continuation-capture.scm \
     pipchix.general-purpose.list.scm \
     pipchix.general-purpose.division.scm \
