@@ -61,8 +61,8 @@
           (set! i (+ i 1))
           (string->symbol
            (string-append
-            "g-" (random-partial-identifier) "-"
-            (number->string i))))))) )
+            "g    " (random-partial-identifier) "    "
+            (number->string i) "    ")))))) )
 
   (else)) ;; cond-expand
 
@@ -103,7 +103,7 @@
             (f (gensym))
             (lets-list
              (cons
-              (list f receiver) ;;;;;; FIXME: Do a recursive rename on the receiver.
+              (list f receiver)
               (list-tabulate
                n (lambda (i)
                    (list (list-ref tmp* i)
