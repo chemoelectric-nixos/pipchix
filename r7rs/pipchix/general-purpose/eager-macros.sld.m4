@@ -27,63 +27,25 @@ m4_include(pipchix/pipchix-includes.m4)
 (define-library (pipchix general-purpose eager-macros)
 
   (export m4_include(pipchix/general-purpose/eager-macros.exports.m4))
-  ;; m4_ifelse(CHICKEN_5,«yes»,,«
-  (cond-expand
-    (gauche (export :info-alist))
-    (else))
-  ;; »)
-
   (import (scheme base))
-  (import (scheme case-lambda))
   (import (scheme write)) ;; For debugging.
   (import (pipchix general-purpose list))
-
-  (cond-expand
-    (chicken-5 (import (only (chicken syntax)
-                             er-macro-transformer))
-               (import (only (chicken base)
-                             gensym)))
-    (chibi (import (scheme file))
-           (import (only (chibi) er-macro-transformer))
-           (import (pipchix general-purpose continuation-capture)))
-    (gauche (import (only (r7rs aux)
-                          :info-alist
-                          er-macro-transformer
-                          gensym)))
-    (sagittarius (import (only (sagittarius)
-                               er-macro-transformer
-                               gensym)))
-    ((or loko guile) (import (rnrs syntax-case (6))))
-    (else))
+  (import (pipchix general-purpose eager-syntax-rules))
 
   (begin
 
-    define_err_r7rs
-
+    m4_dnl The following m4_ifelse is needed for Loko.
+    ;;; m4_ifelse(CHICKEN_5,«yes»,«
     (cond-expand
       (chicken-5
-       ;; m4_pushdef(«general_macros»,«er-macro-transformer»)
-       ;; m4_pushdef(«syntax_rules»,«r5rs»)
-       ;; m4_pushdef(«scheme_standard»,«r5rs»)
-       (import-for-syntax (scheme base))
-       (import-for-syntax (srfi 1))
-       m4_include(pipchix/general-purpose/eager-macros.m4)
-       ;; m4_popdef(«general_macros»,«syntax_rules»,«scheme_standard»)
-       )
-      ((or loko guile)
-       ;; m4_pushdef(«general_macros»,«syntax-case»)
-       ;; m4_pushdef(«syntax_rules»,«unknown»)
-       ;; m4_pushdef(«scheme_standard»,«r7rs»)
-       m4_include(pipchix/general-purpose/eager-macros.m4)
-       ;; m4_popdef(«general_macros»,«syntax_rules»,«scheme_standard»)
-       )
-      (else
-       ;; m4_pushdef(«general_macros»,«er-macro-transformer»)
-       ;; m4_pushdef(«syntax_rules»,«r7rs»)
-       ;; m4_pushdef(«scheme_standard»,«r7rs»)
-       m4_include(pipchix/general-purpose/eager-macros.m4)
-       ;; m4_popdef(«general_macros»,«syntax_rules»,«scheme_standard»)
-       ))
+       (import-for-syntax
+        (pipchix general-purpose eager-syntax-rules)))
+      (else #f))
+    ;;; »)
+
+    define_err_r7rs
+
+    m4_include(pipchix/general-purpose/eager-macros.m4)
 
     ))
 

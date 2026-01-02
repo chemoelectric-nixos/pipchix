@@ -32,23 +32,14 @@ dnl # Currently the library does not work with the CHICKEN 5 compiler,
 dnl # unless you first actually install the ‘pipchix’ egg.
 dnl AT_SKIP_IF(m4_if(implementation,[csc-5],[true],[false]))
 
-m4_define([sexpr],[(scheme->nix (zero? 1))])
-check_unquoted([run_scheme 'sexpr'],[0],
-  [interpunct_nl([nix_false])],[])
-
 m4_define([sexpr],[(scheme->nix (reverse:e (reverse:e (reverse:e `(1 2 3 4)))))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([@<:@·(4)·(3)·(2)·(1)·@:>@·])],[])
 
-dnl m4_define([sexpr],
-dnl   [(scheme->nix (append:e `(1 2) (append:e `(3 4) `(5 6) (append:e `(7 8) `(9 10)))))])
-dnl check_unquoted([run_scheme 'sexpr'],[0],
-dnl   [interpunct_nl([])],[])
-
-dnl m4_define([sexpr],
-dnl   [(scheme->nix (append:e `(7 8) `(9 10)))])
-dnl check_unquoted([run_scheme 'sexpr'],[0],
-dnl   [interpunct_nl([])],[])
+m4_define([sexpr],
+  [(scheme->nix (append:e `(1 2) (append:e `(3 4) `(5 6) (append:e `(7 8) `(9 10)))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·(1)·(2)·(3)·(4)·(5)·(6)·(7)·(8)·(9)·(10)·@:>@·])],[])
 
 AT_CLEANUP
 

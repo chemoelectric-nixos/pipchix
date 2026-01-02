@@ -27,7 +27,8 @@ m4_include(pipchix/pipchix-includes.m4)
 
 (library (pipchix general-purpose eager-macros)
 
-  (export m4_include(pipchix/general-purpose/eager-macros.exports.m4))
+  (export m4_include(pipchix/general-purpose/eager-macros.exports.m4)
+          syntax-rules:e-aux1)
 
   (import (except (rnrs (6))
                   fold-right
@@ -35,10 +36,10 @@ m4_include(pipchix/pipchix-includes.m4)
                   assoc
                   map
                   remove)
-          (for (pipchix general-purpose list) run expand))
-
-  ;; m4_define(«scheme_standard»,«r6rs»)
-  ;; m4_define(«general_macros»,«syntax-case»)
+          (for (pipchix general-purpose list)
+            run expand)
+          (for (pipchix general-purpose eager-syntax-rules)
+            run expand))
 
   define_err_r6rs
   m4_include(pipchix/general-purpose/eager-macros.m4)
