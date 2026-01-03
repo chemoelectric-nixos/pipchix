@@ -73,7 +73,16 @@
  (lambda (form rename compare)
    (let* ((_LET_ (rename 'let))
           (arg* (cdr form))
-          (actual-parameters (first arg*))
+          (actual-parameters (list-copy (first arg*)))
+          (actual-parameters
+           (if (pair? actual-parameters)
+             (let ((lst-pair (last-pair actual-parameters)))
+               (if (null? (cdr lst-pair))
+                 actual-parameters
+                 (begin
+                   ;; Turn a dotted list into a proper list.
+                   (set-cdr! lst-pair (list (cdr lst-pair)))
+                   actual-parameters)))))
           (receiver (second arg*))
           (n (length actual-parameters))
           (tmp* (list-tabulate n (lambda (i) (gensym))))
@@ -93,12 +102,13 @@
 ;;; m4_define(«syntax_rules_e_aux2»,«
 (lambda (stx)
 
-  (define (syntax->proper-or-dotted-list stx_)
+  (define (syntax->proper-list stx_)
+    ;; Converts any dotted list to a proper list.
     (syntax-case stx_ ()
       (()       '())
       ((x . x*) (cons (syntax x)
-                      (syntax->proper-or-dotted-list (syntax x*))))
-      (x        (syntax x))))
+                      (syntax->proper-list (syntax x*))))
+      (x        (list (syntax x))))) ;; The conversion.
 
   (define (syntax-first stx_)
     (syntax-case stx_ ()
@@ -112,10 +122,10 @@
     (syntax-case stx_ ()
       ((x . y) (syntax y))))
 
-  (let* ((form (syntax->proper-or-dotted-list stx))
+  (let* ((form (syntax->proper-list stx))
          (arg* (syntax-cdr form))
          (actual-parameters
-          (syntax->proper-or-dotted-list (first arg*)))
+          (syntax->proper-list (first arg*)))
          (receiver (second arg*))
          (n (length actual-parameters))
          (tmp* (generate-temporaries actual-parameters))
