@@ -99,29 +99,31 @@
 
 ;;; »,«
 
+;;; m4_define(«define_syntax_primitives»,«
+(define (syntax->proper-list stx_)
+  ;; Converts any dotted list to a proper list.
+  (syntax-case stx_ ()
+    (()       '())
+    ((x . x*) (cons (syntax x)
+                    (syntax->proper-list (syntax x*))))
+    (x        (list (syntax x))))) ;; The conversion.
+
+(define (syntax-first stx_)
+  (syntax-case stx_ ()
+    ((x . y) (syntax x))))
+
+(define (syntax-second stx_)
+  (syntax-case stx_ ()
+    ((x y . z) (syntax y))))
+
+(define (syntax-cdr stx_)
+  (syntax-case stx_ ()
+    ((x . y) (syntax y))))
+;;; »)
+
 ;;; m4_define(«syntax_rules_e_aux2»,«
 (lambda (stx)
-
-  (define (syntax->proper-list stx_)
-    ;; Converts any dotted list to a proper list.
-    (syntax-case stx_ ()
-      (()       '())
-      ((x . x*) (cons (syntax x)
-                      (syntax->proper-list (syntax x*))))
-      (x        (list (syntax x))))) ;; The conversion.
-
-  (define (syntax-first stx_)
-    (syntax-case stx_ ()
-      ((x . y) (syntax x))))
-
-  (define (syntax-second stx_)
-    (syntax-case stx_ ()
-      ((x y . z) (syntax y))))
-
-  (define (syntax-cdr stx_)
-    (syntax-case stx_ ()
-      ((x . y) (syntax y))))
-
+  define_syntax_primitives
   (let* ((form (syntax->proper-list stx))
          (arg* (syntax-cdr form))
          (actual-parameters
