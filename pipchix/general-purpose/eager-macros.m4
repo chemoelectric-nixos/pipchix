@@ -29,7 +29,20 @@
 
 (define-syntax append:e
   (syntax-rules:e ()
-    ((¶ lst1 ...) append)))
+    ((¶ . lst*) append)))
+
+;;;;; (define-syntax srfi148-even?:e
+;;;;;   ;; Is a list of even length? By the algorithm for em-syntax-rules
+;;;;;   ;; from SRFI-148. Obviously this can be done more efficiently in
+;;;;;   ;; syntax-rules:e by using ordinary list processing.
+;;;;;   (syntax-rules:e ()
+;;;;;     ((¶ ())
+;;;;;      (lambda () #t))
+;;;;;     ((¶ (a b . c))
+;;;;;      (lambda (a_ b_ . c_)
+;;;;;        (srfi148-even?:e c_)))
+;;;;;     ((¶ a)
+;;;;;      (lambda a_ #f))))
 
 m4_divert(-1)
 ;;; local variables:

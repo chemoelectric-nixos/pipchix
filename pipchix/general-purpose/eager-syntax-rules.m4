@@ -145,6 +145,25 @@
 
 ;;; »)
 
+;;;;; (define (rename-identifiers stx)
+;;;;;   (define (gensym)
+;;;;;     (car (generate-temporaries '(1))))
+;;;;;   (syntax-case stx ()
+;;;;;     ((¶ ())
+;;;;;      '())
+;;;;;     ((¶ (x . x*) . (y . y*))
+;;;;;      (cons (rename-identifiers (syntax (x . x*)))
+;;;;;            (rename-identifiers (syntax (y . y*)))))
+;;;;;     ((¶ x . (y . y*))
+;;;;;      (cons (gensym)
+;;;;;            (rename-identifiers (syntax (y . y*)))))
+;;;;;     ((¶ (x . x*) . y)
+;;;;;      (cons (rename-identifiers (syntax (x . x*)))
+;;;;;            (gensym)))
+;;;;;     ((¶ x . y)
+;;;;;      (cons (gensym)
+;;;;;            (gensym))) ))
+
 (define-syntax syntax-rules:e-aux1
   (syntax-rules ()
 

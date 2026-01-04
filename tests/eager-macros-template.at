@@ -39,6 +39,16 @@ m4_define([sexpr],
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([@<:@·(1)·(2)·(3)·(4)·(5)·(6)·(7)·(8)·(9)·(10)·@:>@·])],[])
 
+dnl m4_define([sexpr],
+dnl   [(scheme->nix (srfi148-even?:e `(1 2 3 4)))])
+dnl check_unquoted([run_scheme 'sexpr'],[0],
+dnl   [interpunct_nl([nix_true])],[])
+
+dnl m4_define([sexpr],
+dnl   [(scheme->nix (srfi148-even?:e `(1 2 3 4 5)))])
+dnl check_unquoted([run_scheme 'sexpr'],[0],
+dnl   [interpunct_nl([nix_false])],[])
+
 AT_CLEANUP
 
 # local variables:
