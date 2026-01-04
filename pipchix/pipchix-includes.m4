@@ -34,7 +34,7 @@ m4_divert(-1)
 
 ;;; m4_define(«define_err_r6rs»,«(define (err . args) (apply error #f args))»)
 ;;; m4_define(«define_err_r7rs»,«(define err error)»)
-;;; m4_define(«define_syntax_err_r6rs»,«(define-syntax syntax-err (syntax-rules () ((_ . a) (syntax-violation . a))))»)
+;;; m4_define(«define_syntax_err_r6rs»,«(define-syntax syntax-err (syntax-rules () ((_ . a) (syntax-violation #f a))))»)
 ;;; m4_define(«define_syntax_err_r7rs»,«(define-syntax syntax-err (syntax-rules () ((_ . a) (syntax-error . a))))»)
 
 ;;; m4_define(«define_ck_macros»,«

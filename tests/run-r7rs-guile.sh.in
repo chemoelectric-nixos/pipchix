@@ -9,6 +9,7 @@ cat > "${prog_scm}" <<EOF
 (import (except (scheme base) member))
 (import (scheme write))
 (import (pipchix general-purpose list))
+(import (pipchix general-purpose match))
 (import (pipchix general-purpose division))
 (import (pipchix general-purpose e-macros))
 (import (pipchix general-purpose eager-macros))

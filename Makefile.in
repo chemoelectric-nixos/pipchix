@@ -524,6 +524,7 @@ R6RS_SCHEME = r6rs/pipchix/general-purpose/srfi-39.sls \
 	r6rs/pipchix/general-purpose/continuation-capture.sls \
 	r6rs/pipchix/general-purpose/list.sls \
 	r6rs/pipchix/general-purpose/division.sls \
+	r6rs/pipchix/general-purpose/match.sls \
 	r6rs/pipchix/general-purpose/define-record-factory.sls \
 	r6rs/pipchix/general-purpose/e-macros-environment.sls \
 	r6rs/pipchix/general-purpose/e-macros.sls \
@@ -542,6 +543,7 @@ R7RS_SCHEME = r7rs/pipchix/general-purpose/box.sld \
 	r7rs/pipchix/general-purpose/continuation-capture.sld \
 	r7rs/pipchix/general-purpose/list.sld \
 	r7rs/pipchix/general-purpose/division.sld \
+	r7rs/pipchix/general-purpose/match.sld \
 	r7rs/pipchix/general-purpose/define-record-factory.sld \
 	r7rs/pipchix/general-purpose/e-macros-environment.sld \
 	r7rs/pipchix/general-purpose/e-macros.sld \
@@ -580,6 +582,9 @@ CHICKEN_EGGSPEC_BOTTOM = ' \
     (extension pipchix.general-purpose.continuation-capture) \
     (extension pipchix.general-purpose.list) \
     (extension pipchix.general-purpose.division) \
+    (extension pipchix.general-purpose.match \
+      (component-dependencies \
+       pipchix.general-purpose.list)) \
     (extension pipchix.general-purpose.define-record-factory) \
     (extension pipchix.general-purpose.e-macros-environment) \
     (extension pipchix.general-purpose.e-macros \
@@ -650,6 +655,7 @@ CHICKEN_5_EGGFILES = \
     pipchix.general-purpose.continuation-capture.scm \
     pipchix.general-purpose.list.scm \
     pipchix.general-purpose.division.scm \
+    pipchix.general-purpose.match.scm \
     pipchix.general-purpose.define-record-factory.scm \
     pipchix.general-purpose.e-macros-environment.scm \
     pipchix.general-purpose.e-macros.scm \

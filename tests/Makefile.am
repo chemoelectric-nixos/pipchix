@@ -69,6 +69,7 @@ EXTRA_DIST += tests-template.at
 EXTRA_DIST += ast-nodes-preds-template.at
 EXTRA_DIST += base64-utf8-template.at
 EXTRA_DIST += list-template.at
+EXTRA_DIST += match-template.at
 EXTRA_DIST += division-template.at
 EXTRA_DIST += e-macros-template.at
 EXTRA_DIST += eager-macros-template.at
@@ -130,6 +131,7 @@ TESTSUITE_DEPS += $(srcdir)/package.m4
 TESTSUITE_DEPS += $(srcdir)/tests-template.at
 
 TESTSUITE_DEPS += $(srcdir)/list-template.at
+TESTSUITE_DEPS += $(srcdir)/match-template.at
 TESTSUITE_DEPS += $(srcdir)/division-template.at
 TESTSUITE_DEPS += $(srcdir)/e-macros-template.at
 TESTSUITE_DEPS += $(srcdir)/eager-macros-template.at
