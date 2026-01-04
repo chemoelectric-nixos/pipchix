@@ -1237,7 +1237,8 @@
   (define-syntax match-check-identifier
     (er-macro-transformer
      (lambda (expr rename compare)
-       (if (and (symbol? (cadr expr)) (not (keyword? (cadr expr))))
+       (if (and (symbol? (cadr expr))
+                (not (chicken-scheme-keyword? (cadr expr))))
            (car (cddr expr))
            (cadr (cddr expr))))))
   (define-syntax match-bound-identifier=?

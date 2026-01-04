@@ -40,7 +40,8 @@ m4_include(pipchix/pipchix-includes.m4)
             ;; https://racket.discourse.group/t/error-cond-unbound-identifier-also-no-app-syntax-transformer-is-bound/3081/3
             ;; for why I added (meta -1). It is for Racket.
             run expand (meta -1))
-          (for (pipchix general-purpose list) run expand))
+          (for (pipchix general-purpose list) run expand)
+          (for (pipchix general-purpose match) run expand))
 
   ;; m4_define(«scheme_standard»,«r6rs»)
   ;; m4_define(«general_macros»,«syntax-case»)

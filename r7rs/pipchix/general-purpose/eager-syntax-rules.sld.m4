@@ -40,6 +40,7 @@ m4_include(pipchix/pipchix-includes.m4)
   (import (scheme case-lambda))
   (import (scheme write)) ;; For debugging.
   (import (pipchix general-purpose list))
+  (import (pipchix general-purpose match))
 
   (cond-expand
     (chicken-5 (import (only (chicken syntax)

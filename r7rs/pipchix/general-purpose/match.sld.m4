@@ -27,6 +27,49 @@ m4_include(pipchix/pipchix-includes.m4)
 (define-library (pipchix general-purpose match)
 
   (export m4_include(pipchix/general-purpose/match.exports.m4))
+  ;; m4_ifelse(CHICKEN_5,«yes»,«
+  (export match-bound-identifier-memv
+          match-bound-identifier=?
+          match-check-identifier
+          match-check-ellipsis
+          match-cons
+          match-rewrite2
+          match-rewrite
+          match-letrec-two-step
+          match-letrec-two
+          match-letrec-one
+          match-named-let
+          match-let/aux
+          match-extract-quasiquote-vars-step
+          match-extract-quasiquote-vars
+          match-extract-vars-step
+          match-extract-vars
+          match-record-named-refs
+          match-record-refs
+          match-vector-tail-two
+          match-vector-tail
+          match-gen-vector-ellipsis
+          match-vector-step
+          match-vector-two
+          match-vector
+          match-gen-search
+          match-verify-no-ellipsis
+          match-gen-ellipsis/range
+          match-gen-ellipsis/qq
+          match-gen-ellipsis
+          match-gen-or-step
+          match-gen-or
+          match-drop-first-arg
+          match-tuck-ids
+          match-drop-ids
+          match-quasiquote-step
+          match-quasiquote
+          match-two
+          match-one
+          match-next
+          match-syntax-error
+          chicken-scheme-keyword?)
+  ;; »)
   ;; m4_ifelse(CHICKEN_5,«yes»,,«
   (cond-expand
     (gauche (export :info-alist))
@@ -41,7 +84,10 @@ m4_include(pipchix/pipchix-includes.m4)
     (chicken-5 (import (only (chicken syntax)
                              er-macro-transformer))
                (import (only (chicken base)
-                             gensym)))
+                             gensym))
+               (import (rename (chicken keyword)
+                               (keyword?
+                                chicken-scheme-keyword?))))
     (chibi (import (scheme file))
            (import (only (chibi)
                          er-macro-transformer

@@ -593,7 +593,8 @@ CHICKEN_EGGSPEC_BOTTOM = ' \
        pipchix.general-purpose.list)) \
     (extension pipchix.general-purpose.eager-syntax-rules \
       (component-dependencies \
-       pipchix.general-purpose.list)) \
+       pipchix.general-purpose.list \
+       pipchix.general-purpose.match)) \
     (extension pipchix.general-purpose.eager-macros \
       (component-dependencies \
        pipchix.general-purpose.eager-syntax-rules \
