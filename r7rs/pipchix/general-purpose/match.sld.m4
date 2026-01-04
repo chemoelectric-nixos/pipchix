@@ -49,7 +49,11 @@ m4_include(pipchix/pipchix-includes.m4)
     (gauche (import (only (r7rs aux)
                           :info-alist
                           er-macro-transformer
-                          gensym)))
+                          gensym
+                          is-a?)
+                    (only (gauche record)
+                          rtd-accessor
+                          rtd-mutator)))
     (sagittarius (import (only (sagittarius)
                                er-macro-transformer
                                gensym)))
@@ -84,6 +88,15 @@ m4_include(pipchix/pipchix-includes.m4)
        m4_include(pipchix/general-purpose/match.m4)
        ;; m4_popdef(«general_macros»,«syntax_rules»,«scheme_standard»)
        ))
+
+    (cond-expand
+      (gauche
+       (define (slot-ref rec v name)
+         ((rtd-accessor rec name) v))
+       (define (slot-set! rec v name value)
+         ((rtd-mutator rec name) v value)))
+
+      (else))
 
     ))
 

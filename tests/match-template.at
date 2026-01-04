@@ -34,6 +34,24 @@ m4_define([sexpr],[(scheme->nix (match (list 1 2 3) ((a b c) b)))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([(2)·])],[])
 
+m4_if(implementation,[gauche],[
+
+m4_define([sexpr],
+  [(scheme->nix
+    (let ()
+      (define-record-type employee
+        (make-employee name title)
+        employee?
+        (name get-name)
+        (title get-title))
+      (match (make-employee "Bob" "Doctor")
+        ((® employee (title t) (name n))
+         (list t n)))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·("Doctor")·("Bob")·@:>@·])],[])
+
+])
+
 AT_CLEANUP
 
 # local variables:
