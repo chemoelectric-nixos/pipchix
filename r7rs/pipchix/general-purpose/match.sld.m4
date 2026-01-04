@@ -34,6 +34,7 @@ m4_include(pipchix/pipchix-includes.m4)
   ;; »)
 
   (import (scheme base))
+  (import (scheme case-lambda))
   (import (pipchix general-purpose list))
 
   (cond-expand
@@ -56,7 +57,14 @@ m4_include(pipchix/pipchix-includes.m4)
                           rtd-mutator)))
     (sagittarius (import (only (sagittarius)
                                er-macro-transformer
-                               gensym)))
+                               gensym)
+                         (only (sagittarius clos)
+                               is-a?
+                               slot-ref-using-class
+                               slot-set-using-class!)
+                         (rename (only (sagittarius clos)
+                                       (slot-ref orig-slot-ref)
+                                       (slot-set! orig-slot-set!)))))
     ((or loko guile) (import (rnrs syntax-case (6))))
     (else))
 
@@ -95,6 +103,20 @@ m4_include(pipchix/pipchix-includes.m4)
          ((rtd-accessor rec name) v))
        (define (slot-set! rec v name value)
          ((rtd-mutator rec name) v value)))
+
+      (sagittarius
+       (define slot-ref
+         (case-lambda
+           ((rec v name)
+            (slot-ref-using-class rec v name))
+           ((obj name)
+            (orig-slot-ref obj name))))
+       (define slot-set!
+         (case-lambda
+           ((rec v name value)
+            (slot-set-using-class! rec v name value))
+           ((obj name value)
+            (orig-slot-set! obj name value)))))
 
       (else))
 

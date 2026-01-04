@@ -34,8 +34,7 @@ m4_define([sexpr],[(scheme->nix (match (list 1 2 3) ((a b c) b)))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([(2)·])],[])
 
-m4_if(implementation,[gauche],[
-
+m4_define([test_Doctor_Bob_title_name],[
 m4_define([sexpr],
   [(scheme->nix
     (let ()
@@ -49,8 +48,10 @@ m4_define([sexpr],
          (list t n)))))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([@<:@·("Doctor")·("Bob")·@:>@·])],[])
-
 ])
+m4_case(implementation,
+[gauche],[test_Doctor_Bob_title_name],
+[sagittarius],[m4_if(rnrs_version,[7],[test_Doctor_Bob_title_name])])
 
 AT_CLEANUP
 
