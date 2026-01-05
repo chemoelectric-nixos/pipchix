@@ -79,10 +79,6 @@
 ;;> The special identifier \scheme{_} matches anything, no matter how
 ;;> many times it is used, and does not bind the result in the body.
 
-;;> \emph{Note for Pipchix: Very unusually, but as a simple
-;;> workaround for a limitation of R⁶RS, Pipchix has changed this
-;;> notation from \scheme{_} to the interpunct \scheme{·}.}
-
 ;;> \Example{(match (list 1 2 1) ((_ _ b) 1) ((a b a) 2))}
 
 ;;> To match a literal identifier (or list or any other literal), use
@@ -370,6 +366,15 @@
          (syntax if-true)
          (syntax if-false))))))
 
+(define-syntax match-check-underscore
+  (lambda (stx)
+    (syntax-case stx ()
+      ((¶ x if-true if-false)
+       (let ((y (syntax->datum (syntax x))))
+         (if (eq? y '_)
+           (syntax if-true)
+           (syntax if-false)))))))
+
 ;;; ») ;;; R⁶RS
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -401,6 +406,28 @@
 ;; and passes it on to MATCH-NEXT.  It's a constant throughout the
 ;; code below that the binding `v' is a direct variable reference, not
 ;; an expression.
+
+(define-syntax match-set!-ineffectively
+  (syntax-rules ()
+    ((¶ variable expression)
+     (if #f #f))))
+
+(define-syntax match-without-binding
+  (syntax-rules ()
+    ((match-without-binding)
+     (match-syntax-error "missing match expression"))
+    ((match-without-binding atom)
+     (match-syntax-error "no match clauses"))
+    ((match-without-binding (app ...) (pat . body) ...)
+     (let ((v (app ...)))
+       (match-next v ((app ...) (match-set!-ineffectively (app ...))) (pat . body) ...)))
+    ((match-without-binding #(vec ...) (pat . body) ...)
+     (let ((v #(vec ...)))
+       (match-next v (v (match-set!-ineffectively v)) (pat . body) ...)))
+    ((match-without-binding atom (pat . body) ...)
+     (let ((v atom))
+       (match-next v (atom (match-set!-ineffectively atom)) (pat . body) ...)))
+    ))
 
 (define-syntax match
   (syntax-rules ()
@@ -439,7 +466,7 @@
      (match-next v g+s (pat (=> failure) . body) . rest))))
 
 ;; MATCH-ONE first checks for ellipsis patterns, otherwise passes on to
-;; MATCH-TWO.
+;; MATCH-TWO.f
 
 (define-syntax match-one
   (syntax-rules ()
@@ -473,7 +500,7 @@
 ;; pattern so far.
 
 (define-syntax match-two
-  (syntax-rules (· ___ **1 =.. *.. *** quote quasiquote ? $ struct ® object = and or not set! get!)
+  (syntax-rules (___ **1 =.. *.. *** quote quasiquote ? $ struct ® object = and or not set! get!)
     ((match-two v () g+s (sk ...) fk i)
      (if (null? v) (sk ... i) fk))
     ((match-two v (quote p) g+s (sk ...) fk i)
@@ -540,34 +567,37 @@
          fk))
     ((match-two v (p . q) g+s sk fk i)
      (if (pair? v)
-         (let ((w (car v)) (x (cdr v)))
-           (match-one w p ((car v) (set-car! v))
-                      (match-one x q ((cdr v) (set-cdr! v)) sk fk)
-                      fk
-                      i))
-         fk))
+       (let ((w (car v)) (x (cdr v)))
+         (match-one w p ((car v) (set-car! v))
+                    (match-one x q ((cdr v) (set-cdr! v)) sk fk)
+                    fk
+                    i))
+       fk))
     ((match-two v #(p ...) g+s . x)
      (match-vector v 0 () (p ...) . x))
-    ((match-two v · g+s (sk ...) fk i) (sk ... i))
     ;; Not a pair or vector or special literal, test to see if it's a
     ;; new symbol, in which case we just bind it, or if it's an
     ;; already bound symbol or some other literal, in which case we
     ;; compare it with EQUAL?.
     ((match-two v x g+s (sk ...) fk (id ...))
-     ;; This extra match-check-identifier is optional in general, but
-     ;; can serve as a fast path, and is needed to distinguish
-     ;; keywords in Chicken.
-     (match-check-identifier
+     (match-check-underscore
       x
-      (let-syntax
-          ((new-sym?
-            (syntax-rules (id ...)
-              ((new-sym? x sk2 fk2) sk2)
-              ((new-sym? y sk2 fk2) fk2))))
-        (new-sym? random-sym-to-match
-                  (let ((x v)) (sk ... (id ... x)))
-                  (if (equal? v x) (sk ... (id ...)) fk)))
-      (if (equal? v x) (sk ... (id ...)) fk)))
+      ;; An R⁶RS-compatible ‘_’ wildcard.
+      (sk ... (id ...))
+      ;; This extra match-check-identifier is optional in general, but
+      ;; can serve as a fast path, and is needed to distinguish
+      ;; keywords in Chicken.
+      (match-check-identifier
+       x
+       (let-syntax
+           ((new-sym?
+             (syntax-rules (id ...)
+               ((new-sym? x sk2 fk2) sk2)
+               ((new-sym? y sk2 fk2) fk2))))
+         (new-sym? random-sym-to-match
+                   (let ((x v)) (sk ... (id ... x)))
+                   (if (equal? v x) (sk ... (id ...)) fk)))
+       (if (equal? v x) (sk ... (id ...)) fk))))
     ))
 
 ;; QUASIQUOTE patterns
@@ -955,7 +985,7 @@
 ;; (match-extract-vars pattern continuation (ids ...) (new-vars ...))
 
 (define-syntax match-extract-vars
-  (syntax-rules (· ___ **1 =.. *.. *** ? $ struct ® object = quote quasiquote and or not get! set!)
+  (syntax-rules (___ **1 =.. *.. *** ? $ struct ® object = quote quasiquote and or not get! set!)
     ((match-extract-vars (? pred . p) . x)
      (match-extract-vars p . x))
     ((match-extract-vars ($ rec . p) . x)
@@ -989,7 +1019,6 @@
      (match-extract-vars p (match-extract-vars-step q k i v) i ()))
     ((match-extract-vars #(p ...) . x)
      (match-extract-vars (p ...) . x))
-    ((match-extract-vars · (k ...) i v)    (k ... v))
     ((match-extract-vars ___ (k ...) i v)  (k ... v))
     ((match-extract-vars *** (k ...) i v)  (k ... v))
     ((match-extract-vars **1 (k ...) i v)  (k ... v))
@@ -998,14 +1027,17 @@
     ;; This is the main part, the only place where we might add a new
     ;; var if it's an unbound symbol.
     ((match-extract-vars p (k ...) (i ...) v)
-     (let-syntax
-         ((new-sym?
-           (syntax-rules (i ...)
-             ((new-sym? p sk fk) sk)
-             ((new-sym? any sk fk) fk))))
-       (new-sym? random-sym-to-match
-                 (k ... ((p p-ls) . v))
-                 (k ... v))))
+     (match-check-underscore
+      p
+      (k ... v) ;; p is a ‘_’ wildcard.
+      (let-syntax
+          ((new-sym?
+            (syntax-rules (i ...)
+              ((new-sym? p sk fk) sk)
+              ((new-sym? any sk fk) fk))))
+        (new-sym? random-sym-to-match
+                  (k ... ((p p-ls) . v))
+                  (k ... v)))))
     ))
 
 ;; Stepper used in the above so it can expand the CAR and CDR
@@ -1225,7 +1257,15 @@
      (lambda (expr rename compare)
        (if (memv (cadr expr) (car (cddr expr)))
            (cadr (cddr expr))
-           (car (cddr (cddr expr))))))))
+           (car (cddr (cddr expr)))))))
+  (define-syntax match-check-underscore
+    (er-macro-transformer
+     (lambda (expr rename compare)
+       (let* ((arg* (cdr expr))
+              (x (first arg*)))
+         (if (eq? x '_)
+           (second arg*)
+           (third arg*)))))))
 
  (chicken-5
   (define-syntax match-check-ellipsis
@@ -1252,7 +1292,15 @@
      (lambda (expr rename compare)
        (if (memv (cadr expr) (car (cddr expr)))
            (cadr (cddr expr))
-           (car (cddr (cddr expr))))))))
+           (car (cddr (cddr expr)))))))
+  (define-syntax match-check-underscore
+    (er-macro-transformer
+     (lambda (expr rename compare)
+       (let* ((arg* (cdr expr))
+              (x (first arg*)))
+         (if (eq? x '_)
+           (second arg*)
+           (third arg*)))))))
 
  (else
   ;; Portable versions
@@ -1327,6 +1375,13 @@
                 ((memv? anything-else sk2 fk2) sk2))))
           (memv? random-sym-to-match sk fk))
         fk))))
+
+  (define-syntax match-check-underscore
+    (syntax-rules (_)
+      ((match-check-underscore _ sk fk)
+       sk)
+      ((match-check-underscore x sk fk)
+       fk)))
   ))
 
 ;;; ») ;;; not R⁶RS
