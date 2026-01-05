@@ -27,8 +27,8 @@ m4_include(pipchix/pipchix-includes.m4)
 
 (library (pipchix general-purpose eager-macros)
 
-  (export m4_include(pipchix/general-purpose/eager-macros.exports.m4)
-          syntax-rules:e-aux1)
+  (export m4_include(pipchix/general-purpose/eager-macros.exports.m4))
+;;;;;;;          syntax-rules:e-aux1)
 
   (import (except (rnrs (6))
                   fold-right

@@ -34,6 +34,12 @@ m4_define([sexpr],[(scheme->nix (match (list 1 2 3) ((a b c) b)))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([(2)·])],[])
 
+m4_define([sexpr],[(scheme->nix (match (list 1 2 3)
+                                 ((_ _ _)
+                                  "success")))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([("success")·])],[])
+
 m4_define([test_Doctor_Bob_title_name],[
 m4_define([sexpr],
   [(scheme->nix

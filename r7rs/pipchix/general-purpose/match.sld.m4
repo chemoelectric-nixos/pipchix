@@ -28,10 +28,12 @@ m4_include(pipchix/pipchix-includes.m4)
 
   (export m4_include(pipchix/general-purpose/match.exports.m4))
   ;; m4_ifelse(CHICKEN_5,«yes»,«
-  (export match-bound-identifier-memv
+  (export match-set!-ineffectively
+          match-bound-identifier-memv
           match-bound-identifier=?
           match-check-identifier
           match-check-ellipsis
+          match-check-underscore
           match-cons
           match-rewrite2
           match-rewrite

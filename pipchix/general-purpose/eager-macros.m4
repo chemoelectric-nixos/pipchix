@@ -23,13 +23,13 @@
 ;;; WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ;;;
 
-(define-syntax reverse:e
-  (syntax-rules:e ()
-    ((¶ lst) reverse)))
-
-(define-syntax append:e
-  (syntax-rules:e ()
-    ((¶ . lst*) append)))
+;;;;(define-syntax reverse:e
+;;;;  (syntax-rules:e ()
+;;;;    ((¶ lst) reverse)))
+;;;;
+;;;;(define-syntax append:e
+;;;;  (syntax-rules:e ()
+;;;;    ((¶ . lst*) append)))
 
 ;;;;; (define-syntax srfi148-even?:e
 ;;;;;   ;; Is a list of even length? By the algorithm for em-syntax-rules

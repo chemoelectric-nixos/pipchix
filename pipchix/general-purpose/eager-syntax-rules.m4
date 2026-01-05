@@ -23,6 +23,17 @@
 ;;; WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ;;;
 
+;;; m4_ifelse(scheme_standard,«r6rs»,«
+
+(define-syntax syntax-error
+  (syntax-rules ()
+    ((¶ message . args)
+     ;; R⁶RS provides only for two arguments after the message. So put
+     ;; all the arguments into a list.
+     (syntax-violation #f message args))))
+
+;;; »)
+
 ;;; m4_ifelse(general_macros,«er-macro-transformer»,«
 
 (cond-expand
@@ -69,6 +80,7 @@
   (else)) ;; cond-expand
 
 ;;; m4_define(«syntax_rules_e_aux2»,«
+#|
 (er-macro-transformer
  (lambda (form rename compare)
    (let* ((_LET_ (rename 'let))
@@ -94,7 +106,8 @@
              n (lambda (i)
                  (list (list-ref tmp* i)
                        (list-ref actual-parameters i)))))))
-     `(,_LET_ ,lets-list (,f . ,tmp*)) )))
+`(,_LET_ ,lets-list (,f . ,tmp*)) )))
+|#
 ;;; »)
 
 ;;; »,«
@@ -122,6 +135,7 @@
 ;;; »)
 
 ;;; m4_define(«syntax_rules_e_aux2»,«
+#|
 (lambda (stx)
   define_syntax_primitives
   (let* ((form (syntax->proper-list stx))
@@ -141,29 +155,12 @@
                       (list-ref actual-parameters i)))))))
     (quasisyntax (let (unsyntax lets-list)
                    ((unsyntax f) . (unsyntax tmp*)))) ))
+|#
 ;;; »)
 
 ;;; »)
 
-;;;;; (define (rename-identifiers stx)
-;;;;;   (define (gensym)
-;;;;;     (car (generate-temporaries '(1))))
-;;;;;   (syntax-case stx ()
-;;;;;     ((¶ ())
-;;;;;      '())
-;;;;;     ((¶ (x . x*) . (y . y*))
-;;;;;      (cons (rename-identifiers (syntax (x . x*)))
-;;;;;            (rename-identifiers (syntax (y . y*)))))
-;;;;;     ((¶ x . (y . y*))
-;;;;;      (cons (gensym)
-;;;;;            (rename-identifiers (syntax (y . y*)))))
-;;;;;     ((¶ (x . x*) . y)
-;;;;;      (cons (rename-identifiers (syntax (x . x*)))
-;;;;;            (gensym)))
-;;;;;     ((¶ x . y)
-;;;;;      (cons (gensym)
-;;;;;            (gensym))) ))
-
+#|
 (define-syntax syntax-rules:e-aux1
   (syntax-rules ()
 
@@ -189,7 +186,8 @@
        ...))
     ;; »)
 
-    ))
+))
+
 
 (define-syntax syntax-rules:e
   (syntax-rules ()
@@ -208,7 +206,26 @@
       alt-ellipsis (literals ...) (pattern receiver) ...))
     ;; »)
 
-    ))
+))
+|#
+
+(define-syntax syntax-rules:e
+  (syntax-rules ()
+    ((¶ rule)
+     (syntax-rules:e-rule rule))
+    ((¶ (rule . rule*))
+     (cons (syntax-rules:e-rule rule)
+           (syntax-rules:e rule*)))))
+
+(define-syntax syntax-rules:e-rule
+  (syntax-rules (=>)
+    ((¶ (pattern (=> failure) receiver))
+     "FIXME")
+    ((¶ (pattern receiver))
+     "FIXME")
+    ((¶ . anything)
+     (syntax-error "expected a syntax-rules:e rule" anything))))
+    
 
 m4_divert(-1)
 ;;; local variables:
