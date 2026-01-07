@@ -1,6 +1,6 @@
 #!r6rs
 ;;;
-;;; Copyright © 2025 Barry Schwartz. All Rights Reserved.
+;;; Copyright © 2025, 2026 Barry Schwartz. All Rights Reserved.
 ;;; Copyright © 2002 Marc Feeley. All Rights Reserved.
 ;;;
 ;;; This file is part of Pipchix.

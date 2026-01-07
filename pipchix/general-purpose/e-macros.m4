@@ -63,7 +63,9 @@
                               (reverse! x*))))))
               f-of-x*))))))))
 
-;;; »,«
+;;; »)
+
+;;; m4_ifelse(general_macros,«syntax-case»,«
 
 (define-syntax define-e-macro
   (syntax-rules ()
@@ -152,12 +154,13 @@ define_simple_e_macro(char?)
 define_simple_e_macro(vector?)
 define_simple_e_macro(bytevector?)
 
-;;; m4_ifelse(scheme_standard,«r7rs»,«
-define_simple_e_macro(exact-integer?)
-;;; »,«
+;;; m4_ifelse(RNRS_NUMBER,«6»,«
 (define-e-macro e-exact-integer?
   (lambda (obj)
     (and (integer? obj) (exact? obj))))
+;;; »)
+;;; m4_ifelse(RNRS_NUMBER,«7»,«
+define_simple_e_macro(exact-integer?)
 ;;; »)
 
 define_simple_e_macro(list)

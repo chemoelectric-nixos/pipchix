@@ -32,9 +32,7 @@ m4_include(pipchix/pipchix-includes.m4)
   (import basic_libraries
           (for (pipchix general-purpose match) run expand))
 
-  ;; m4_define(«scheme_standard»,«r6rs»)
   ;; m4_define(«general_macros»,«syntax-case»)
-
   m4_include(pipchix/general-purpose/eager-syntax.m4)
 
   )

@@ -586,7 +586,9 @@ CHICKEN_EGGSPEC_BOTTOM = ' \
       (component-dependencies \
        pipchix.general-purpose.list)) \
     (extension pipchix.general-purpose.define-record-factory) \
-    (extension pipchix.general-purpose.e-macros-environment) \
+    (extension pipchix.general-purpose.e-macros-environment \
+      (component-dependencies \
+       pipchix.general-purpose.list)) \
     (extension pipchix.general-purpose.e-macros \
       (component-dependencies \
        pipchix.general-purpose.e-macros-environment \

@@ -35,9 +35,7 @@ m4_include(pipchix/pipchix-includes.m4)
           (for (pipchix general-purpose e-macros-environment)
             run expand))
 
-  ;; m4_define(«scheme_standard»,«r6rs»)
   ;; m4_define(«general_macros»,«syntax-case»)
-
   m4_include(pipchix/general-purpose/e-macros.m4)
 
   )
