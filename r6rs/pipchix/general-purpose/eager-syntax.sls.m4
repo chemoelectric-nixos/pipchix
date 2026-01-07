@@ -29,17 +29,7 @@ m4_include(pipchix/pipchix-includes.m4)
 
   (export m4_include(pipchix/general-purpose/eager-syntax.exports.m4))
 
-  (import (for (except (rnrs (6))
-                       fold-right
-                       member
-                       assoc
-                       map
-                       remove)
-            ;; See
-            ;; https://racket.discourse.group/t/error-cond-unbound-identifier-also-no-app-syntax-transformer-is-bound/3081/3
-            ;; for why I added (meta -1). It is for Racket.
-            run expand (meta -1))
-          (for (pipchix general-purpose list) run expand)
+  (import basic_libraries
           (for (pipchix general-purpose match) run expand))
 
   ;; m4_define(«scheme_standard»,«r6rs»)

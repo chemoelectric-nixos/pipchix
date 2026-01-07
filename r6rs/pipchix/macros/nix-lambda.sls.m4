@@ -30,7 +30,7 @@ m4_include(pipchix/pipchix-includes.m4)
   (export
    m4_include(pipchix/macros/nix-lambda.exports.m4))
 
-  (import (rnrs (6))
+  (import basic_libraries
           (pipchix abstract-syntax-tree))
 
   define_ellipsis_test_r6rs(if-...)

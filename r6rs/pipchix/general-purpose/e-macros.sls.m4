@@ -1,6 +1,6 @@
 #!r6rs
 ;;;
-;;; Copyright © 2025 Barry Schwartz
+;;; Copyright © 2025, 2026 Barry Schwartz
 ;;;
 ;;; This file is part of Pipchix.
 ;;; 
@@ -29,17 +29,11 @@ m4_include(pipchix/pipchix-includes.m4)
 
   (export m4_include(pipchix/general-purpose/e-macros.exports.m4))
 
-  (import (except (rnrs (6))
-                  fold-right
-                  member
-                  assoc
-                  map
-                  remove)
+  (import basic_libraries
           (for (rnrs eval (6)) run expand)
           (for (pipchix general-purpose srfi-39) run expand)
           (for (pipchix general-purpose e-macros-environment)
-            run expand)
-          (for (pipchix general-purpose list) run expand))
+            run expand))
 
   ;; m4_define(«scheme_standard»,«r6rs»)
   ;; m4_define(«general_macros»,«syntax-case»)

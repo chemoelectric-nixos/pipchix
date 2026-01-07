@@ -29,15 +29,7 @@ m4_include(pipchix/pipchix-includes.m4)
 
   (export m4_include(pipchix/general-purpose/eager-macros.exports.m4))
 
-  (import (for (except (rnrs (6))
-                       fold-right
-                       member
-                       assoc
-                       map
-                       remove)
-            run expand)
-          (for (pipchix general-purpose list)
-            run expand)
+  (import basic_libraries
           (for (pipchix general-purpose eager-syntax)
             run expand))
 

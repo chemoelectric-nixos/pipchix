@@ -28,8 +28,7 @@ m4_include(pipchix/pipchix-includes.m4)
 
   (export m4_include(pipchix/macros/nix-lambda.exports.m4))
 
-  (import (scheme base))
-  (import (scheme cxr))
+  (import basic_libraries)
   (import (pipchix abstract-syntax-tree))
   (cond-expand
     (chicken-5

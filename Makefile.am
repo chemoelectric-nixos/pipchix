@@ -179,7 +179,9 @@ CHICKEN_EGGSPEC_BOTTOM = ' \
       (component-dependencies \
        pipchix.general-purpose.list)) \
     (extension pipchix.general-purpose.define-record-factory) \
-    (extension pipchix.general-purpose.e-macros-environment) \
+    (extension pipchix.general-purpose.e-macros-environment \
+      (component-dependencies \
+       pipchix.general-purpose.list)) \
     (extension pipchix.general-purpose.e-macros \
       (component-dependencies \
        pipchix.general-purpose.e-macros-environment \
@@ -194,36 +196,46 @@ CHICKEN_EGGSPEC_BOTTOM = ' \
        pipchix.general-purpose.list)) \
     (extension pipchix.string-manipulation \
       (component-dependencies \
+       pipchix.general-purpose.list \
        pipchix.general-purpose.box)) \
     (extension pipchix.generate-identifier \
       (component-dependencies \
+       pipchix.general-purpose.list \
        pipchix.general-purpose.continuation-capture \
        pipchix.string-manipulation)) \
     (extension pipchix.abstract-syntax-tree \
       (component-dependencies \
+       pipchix.general-purpose.list \
        pipchix.general-purpose.define-record-factory)) \
     (extension pipchix.nix-embed \
       (component-dependencies \
+       pipchix.general-purpose.list \
        pipchix.abstract-syntax-tree)) \
     (extension pipchix.nix-list \
       (component-dependencies \
+       pipchix.general-purpose.list \
        pipchix.abstract-syntax-tree)) \
     (extension pipchix.macros.nix-set \
       (component-dependencies \
+       pipchix.general-purpose.list \
        pipchix.abstract-syntax-tree)) \
     (extension pipchix.macros.nix-letrec \
       (component-dependencies \
+       pipchix.general-purpose.list \
        pipchix.abstract-syntax-tree \
        pipchix.generate-identifier)) \
     (extension pipchix.macros.nix-lambda \
       (component-dependencies \
+       pipchix.general-purpose.list \
        pipchix.abstract-syntax-tree)) \
     (extension pipchix.expressions \
       (component-dependencies \
+       pipchix.general-purpose.list \
        pipchix.abstract-syntax-tree \
        pipchix.nix-list)) \
     (extension pipchix.macros \
       (component-dependencies \
+       pipchix.general-purpose.list \
        pipchix.abstract-syntax-tree \
        pipchix.nix-list \
        pipchix.expressions \
@@ -232,6 +244,7 @@ CHICKEN_EGGSPEC_BOTTOM = ' \
        pipchix.macros.nix-lambda)) \
     (extension pipchix.essentials \
       (component-dependencies \
+       pipchix.general-purpose.list \
        pipchix.string-manipulation \
        pipchix.abstract-syntax-tree \
        pipchix.expressions \

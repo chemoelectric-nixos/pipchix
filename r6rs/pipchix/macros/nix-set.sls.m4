@@ -27,7 +27,7 @@ m4_include(pipchix/pipchix-includes.m4)
 
   (export m4_include(pipchix/macros/nix-set.exports.m4))
 
-  (import (rnrs base (6))
+  (import basic_libraries
           (pipchix abstract-syntax-tree))
 
   m4_include(pipchix/macros/nix-set.m4)

@@ -28,10 +28,7 @@ m4_include(pipchix/pipchix-includes.m4)
 
   (export m4_include(pipchix/generate-identifier.exports.m4))
 
-  (import (scheme base))
-  (import (scheme case-lambda))
-  (import (scheme char))
-  (import (scheme file))
+  (import basic_libraries)
   (import (pipchix string-manipulation))
   (import (pipchix general-purpose continuation-capture))
 

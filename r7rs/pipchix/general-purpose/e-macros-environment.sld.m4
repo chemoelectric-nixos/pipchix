@@ -28,16 +28,15 @@ m4_include(pipchix/pipchix-includes.m4)
 
   (export m4_include(pipchix/general-purpose/e-macros-environment.exports.m4))
 
-  (import (scheme base))
+  (import basic_libraries)
   (import (scheme eval))
 
   (begin
 
-    (cond-expand
-      (chicken-5
-       (import-for-syntax (scheme base))
-       (import-for-syntax (scheme eval)))
-      (else))
+    ;; m4_ifelse(CHICKEN_5,«yes»,«
+    (import-for-syntax (scheme base))
+    (import-for-syntax (scheme eval))
+    ;; »)
 
     m4_define(default_environment,default_environment_r7rs)
     m4_include(pipchix/general-purpose/e-macros-environment.m4)

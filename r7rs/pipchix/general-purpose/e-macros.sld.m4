@@ -1,5 +1,5 @@
 ;;;
-;;; Copyright © 2025 Barry Schwartz
+;;; Copyright © 2025, 2026 Barry Schwartz
 ;;;
 ;;; This file is part of Pipchix.
 ;;; 
@@ -33,11 +33,7 @@ m4_include(pipchix/pipchix-includes.m4)
     (else))
   ;; »)
  
-  (import (scheme base))
-  (import (scheme eval))
-  (import (scheme inexact))
-  (import (scheme write)) ;; For debugging.
-  (import (pipchix general-purpose list))
+  (import basic_libraries)
   (import (pipchix general-purpose e-macros-environment))
   
   (cond-expand

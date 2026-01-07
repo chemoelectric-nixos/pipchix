@@ -28,7 +28,7 @@ m4_include(pipchix/pipchix-includes.m4)
 
   (export m4_include(pipchix/nix-list.exports.m4))
 
-  (import (scheme base))
+  (import basic_libraries)
   (import (pipchix abstract-syntax-tree))
 
   (begin

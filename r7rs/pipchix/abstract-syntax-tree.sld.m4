@@ -28,17 +28,13 @@ m4_include(pipchix/pipchix-includes.m4)
 
   (export m4_include(pipchix/abstract-syntax-tree.exports.m4))
 
-  (import (scheme base))
-  (import (scheme case-lambda))
-  (import (scheme char))
-  (import (scheme write))
+  (import basic_libraries)
   (import (pipchix general-purpose define-record-factory))
 
-  (cond-expand
-    (chicken-5
-     (import (utf8))
-     (import (utf8-srfi-13)))
-    (else))
+  ;; m4_ifelse(CHICKEN_5,«yes»,«
+  (import (utf8))
+  (import (utf8-srfi-13))
+  ;; »)
 
   (begin
 

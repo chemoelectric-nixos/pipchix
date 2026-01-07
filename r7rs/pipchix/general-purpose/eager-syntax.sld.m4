@@ -33,10 +33,7 @@ m4_include(pipchix/pipchix-includes.m4)
     (else))
   ;; »)
 
-  (import (scheme base))
-  (import (scheme case-lambda))
-  (import (scheme write)) ;; For debugging.
-  (import (pipchix general-purpose list))
+  (import basic_libraries)
   (import (pipchix general-purpose match))
 
   (cond-expand

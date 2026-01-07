@@ -29,12 +29,8 @@ m4_include(pipchix/pipchix-includes.m4)
 
   (export m4_include(pipchix/string-manipulation.exports.m4))
 
-  (import (rnrs base (6))
-          (rnrs control (6))
-          (rnrs lists (6))
+  (import basic_libraries
           (rnrs mutable-strings (6))
-          (rnrs unicode (6))
-          (rnrs bytevectors (6))
           (pipchix general-purpose box)
           (pipchix general-purpose srfi-39))
 

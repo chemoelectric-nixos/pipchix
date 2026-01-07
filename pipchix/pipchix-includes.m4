@@ -36,11 +36,38 @@ m4_divert(-1)
 ;;; m4_define(«SCHEME_ERROR»,«(error #f $1 $2 $3 $4 $5 $6 $7 $8 $9)»)
 ;;; m4_define(«SLOW_SYNTAX_ERROR»,«(syntax-violation #f (list $1 $2 $3 $4 $5 $6 $7 $8 $9))»)
 ;;; m4_define(«FAST_SYNTAX_ERROR»,«(syntax-violation #f (list $1 $2 $3 $4 $5 $6 $7 $8 $9))»)
-;;; »,RNRS_NUMBER,«7»,«
+;;; »)
+;;; m4_ifelse(RNRS_NUMBER,«7»,«
 ;;; m4_define(«SCHEME_ERROR»,«(error $1 $2 $3 $4 $5 $6 $7 $8 $9)»)
 ;;; m4_define(«SLOW_SYNTAX_ERROR»,«(error $1 $2 $3 $4 $5 $6 $7 $8 $9)»)
 ;;; m4_define(«FAST_SYNTAX_ERROR»,«(syntax-error $1 $2 $3 $4 $5 $6 $7 $8 $9)»)
 ;;; »)
+
+;;;
+;;; See
+;;; https://racket.discourse.group/t/error-cond-unbound-identifier-also-no-app-syntax-transformer-is-bound/3081/3
+;;; for why I add (meta -1) below. It is for Racket and has been
+;;; needed in a few cases.
+;;;
+;;; m4_ifelse(RNRS_NUMBER,«6»,«
+;;; m4_define(«basic_libraries»,«
+(for (except (rnrs (6)) fold-right member assoc map remove) run expand (meta -1))
+(for (pipchix general-purpose list) run expand)»)»)
+
+;;; m4_ifelse(RNRS_NUMBER,«7»,«
+;;; m4_define(«basic_libraries»,«
+(scheme base)
+(scheme case-lambda)
+(scheme char)
+(scheme complex)
+(scheme file)
+(scheme inexact)
+(scheme lazy)
+(scheme load)
+(scheme process-context)
+(scheme read)
+(scheme write)
+(pipchix general-purpose list)»)»)
 
 ;;; m4_define(«define_string_reverse_concatenate»,«
 (define (%%string-reverse-concatenate lst)

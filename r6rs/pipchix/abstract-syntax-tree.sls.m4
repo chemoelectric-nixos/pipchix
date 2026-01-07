@@ -29,11 +29,8 @@ m4_include(pipchix/pipchix-includes.m4)
 
   (export m4_include(pipchix/abstract-syntax-tree.exports.m4))
 
-  (import (rnrs base (6))
-          (rnrs control (6))
-          (rnrs io simple (6))
+  (import basic_libraries
           (rnrs mutable-strings (6))
-          (rnrs unicode (6))
           (pipchix general-purpose define-record-factory))
 
   m4_include(pipchix/abstract-syntax-tree.m4)

@@ -29,13 +29,7 @@ m4_include(pipchix/pipchix-includes.m4)
 
   (export m4_include(pipchix/generate-identifier.exports.m4))
 
-  (import (rnrs base (6))
-          (rnrs bytevectors (6))
-          (rnrs control (6))
-          (rnrs exceptions (6))
-          (rnrs io simple (6))
-          (rnrs io ports (6))
-          (rnrs unicode (6))
+  (import basic_libraries
           (pipchix string-manipulation)
           (pipchix general-purpose continuation-capture))
 

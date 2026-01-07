@@ -29,8 +29,7 @@ m4_include(pipchix/pipchix-includes.m4)
 
   (export m4_include(pipchix/general-purpose/e-macros-environment.exports.m4))
 
-  (import (rnrs base (6))
-          (rnrs control (6))
+  (import basic_libraries
           (rnrs eval (6))
           (pipchix general-purpose srfi-39))
 

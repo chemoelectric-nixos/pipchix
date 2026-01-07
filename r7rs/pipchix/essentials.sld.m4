@@ -28,8 +28,7 @@ m4_include(pipchix/pipchix-includes.m4)
 
   (export m4_include(pipchix/essentials.exports.m4))
 
-  (import (scheme base))
-  (import (scheme case-lambda))
+  (import basic_libraries)
   (import (pipchix abstract-syntax-tree))
   (import (pipchix expressions))
   (import (pipchix macros))
