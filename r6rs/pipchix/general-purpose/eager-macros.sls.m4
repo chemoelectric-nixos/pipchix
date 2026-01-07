@@ -38,7 +38,7 @@ m4_include(pipchix/pipchix-includes.m4)
             run expand)
           (for (pipchix general-purpose list)
             run expand)
-          (for (pipchix general-purpose eager-syntax-rules)
+          (for (pipchix general-purpose eager-syntax)
             run expand))
 
   define_err_r6rs

@@ -24,9 +24,9 @@
 ;;;
 m4_include(pipchix/pipchix-includes.m4)
 
-(define-library (pipchix general-purpose eager-syntax-rules)
+(define-library (pipchix general-purpose eager-syntax)
 
-  (export m4_include(pipchix/general-purpose/eager-syntax-rules.exports.m4))
+  (export m4_include(pipchix/general-purpose/eager-syntax.exports.m4))
   ;; m4_ifelse(CHICKEN_5,«yes»,,«
   (cond-expand
     (gauche (export :info-alist))
@@ -68,21 +68,21 @@ m4_include(pipchix/pipchix-includes.m4)
        (import-for-syntax (chicken syntax))
        (import-for-syntax (scheme base))
        (import-for-syntax (srfi 1))
-       m4_include(pipchix/general-purpose/eager-syntax-rules.m4)
+       m4_include(pipchix/general-purpose/eager-syntax.m4)
        ;; m4_popdef(«general_macros»,«syntax_rules»,«scheme_standard»)
        )
       ((or loko guile)
        ;; m4_pushdef(«general_macros»,«syntax-case»)
        ;; m4_pushdef(«syntax_rules»,«unknown»)
        ;; m4_pushdef(«scheme_standard»,«r7rs»)
-       m4_include(pipchix/general-purpose/eager-syntax-rules.m4)
+       m4_include(pipchix/general-purpose/eager-syntax.m4)
        ;; m4_popdef(«general_macros»,«syntax_rules»,«scheme_standard»)
        )
       (else
        ;; m4_pushdef(«general_macros»,«er-macro-transformer»)
        ;; m4_pushdef(«syntax_rules»,«r7rs»)
        ;; m4_pushdef(«scheme_standard»,«r7rs»)
-       m4_include(pipchix/general-purpose/eager-syntax-rules.m4)
+       m4_include(pipchix/general-purpose/eager-syntax.m4)
        ;; m4_popdef(«general_macros»,«syntax_rules»,«scheme_standard»)
        ))
 

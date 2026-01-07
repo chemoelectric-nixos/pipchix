@@ -25,9 +25,9 @@
 ;;;
 m4_include(pipchix/pipchix-includes.m4)
 
-(library (pipchix general-purpose eager-syntax-rules)
+(library (pipchix general-purpose eager-syntax)
 
-  (export m4_include(pipchix/general-purpose/eager-syntax-rules.exports.m4))
+  (export m4_include(pipchix/general-purpose/eager-syntax.exports.m4))
 
   (import (for (except (rnrs (6))
                        fold-right
@@ -46,7 +46,7 @@ m4_include(pipchix/pipchix-includes.m4)
   ;; m4_define(«general_macros»,«syntax-case»)
 
   define_err_r6rs
-  m4_include(pipchix/general-purpose/eager-syntax-rules.m4)
+  m4_include(pipchix/general-purpose/eager-syntax.m4)
 
   )
 

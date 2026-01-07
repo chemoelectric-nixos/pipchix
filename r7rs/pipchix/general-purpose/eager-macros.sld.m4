@@ -30,12 +30,12 @@ m4_include(pipchix/pipchix-includes.m4)
   (import (scheme base))
   (import (scheme write)) ;; For debugging.
   (import (pipchix general-purpose list))
-  (import (pipchix general-purpose eager-syntax-rules))
+  (import (pipchix general-purpose eager-syntax))
 
   (begin
 
     ;; m4_ifelse(CHICKEN_5,«yes»,«
-    (import-for-syntax (pipchix general-purpose eager-syntax-rules))
+    (import-for-syntax (pipchix general-purpose eager-syntax))
     ;; »)
 
     define_err_r7rs
