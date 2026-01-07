@@ -25,11 +25,11 @@
 
 ;;;;
 ;;;; The original code was the following public domain stuff, but
-;;;; changes may be subject to the Pipchix license. (It’s probably the
-;;;; ‘public domain’ verbiage, rather than the licensing stuff above,
-;;;; anyway, that would make lawyers throw a fit. I do not pretend to
-;;;; be copacetic with with such silliness. Use the code as you see
-;;;; fit.)
+;;;; changes make it subject to the Pipchix license. (It’s probably
+;;;; the ‘public domain’ verbiage, rather than the licensing stuff
+;;;; above, anyway, that would make lawyers throw a fit. I do not
+;;;; pretend to be copacetic with with such silliness. Use the code
+;;;; within license terms as you see fit.)
 ;;;;
 ;;;; match.scm -- portable hygienic pattern matcher -*- coding: utf-8 -*-
 ;;
@@ -312,20 +312,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;;; m4_ifelse(scheme_standard,«r6rs»,«
-
-(define-syntax syntax-error
-  (syntax-rules ()
-    ((¶ message . args)
-     ;; R⁶RS provides only for two arguments after the message. So put
-     ;; all the arguments into a list.
-     (syntax-violation #f message args))))
-
-;;; »)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;;; m4_ifelse(scheme_standard,«r6rs»,«
+;;; m4_ifelse(RNRS_NUMBER,«6»,«
 
 (define-syntax match-check-ellipsis
   (lambda (stx)
@@ -382,7 +369,7 @@
 
 (define-syntax match-syntax-error
   (syntax-rules ()
-    ((_) (syntax-error "invalid match-syntax-error usage"))))
+    ((_) FAST_SYNTAX_ERROR("invalid match-syntax-error usage"))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -1230,7 +1217,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Otherwise COND-EXPANDed bits.
 
-;;; m4_ifelse(scheme_standard,«r6rs»,,«
+;;; m4_ifelse(RNRS_NUMBER,«6»,,«
 
 (cond-expand
  (chibi
