@@ -28,14 +28,14 @@ m4_include(pipchix/pipchix-includes.m4)
 (library (pipchix general-purpose eager-macros)
 
   (export m4_include(pipchix/general-purpose/eager-macros.exports.m4))
-;;;;;;;          syntax-rules:e-aux1)
 
-  (import (except (rnrs (6))
-                  fold-right
-                  member
-                  assoc
-                  map
-                  remove)
+  (import (for (except (rnrs (6))
+                       fold-right
+                       member
+                       assoc
+                       map
+                       remove)
+            run expand)
           (for (pipchix general-purpose list)
             run expand)
           (for (pipchix general-purpose eager-syntax-rules)

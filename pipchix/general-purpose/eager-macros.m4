@@ -23,26 +23,28 @@
 ;;; WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ;;;
 
-;;;;(define-syntax reverse:e
-;;;;  (syntax-rules:e ()
-;;;;    ((¶ lst) reverse)))
-;;;;
-;;;;(define-syntax append:e
-;;;;  (syntax-rules:e ()
-;;;;    ((¶ . lst*) append)))
+(define-syntax reverse:e
+  (eager-syntax reverse))
 
-;;;;; (define-syntax srfi148-even?:e
-;;;;;   ;; Is a list of even length? By the algorithm for em-syntax-rules
-;;;;;   ;; from SRFI-148. Obviously this can be done more efficiently in
-;;;;;   ;; syntax-rules:e by using ordinary list processing.
-;;;;;   (syntax-rules:e ()
-;;;;;     ((¶ ())
-;;;;;      (lambda () #t))
-;;;;;     ((¶ (a b . c))
-;;;;;      (lambda (a_ b_ . c_)
-;;;;;        (srfi148-even?:e c_)))
-;;;;;     ((¶ a)
-;;;;;      (lambda a_ #f))))
+(define-syntax append:e
+  (eager-syntax append))
+
+(define-syntax even?:e
+  ;; Test if a list is of even length. By the algorithm for ‘em-even?’
+  ;; from SRFI-148.
+  (eager-syntax
+   (lambda (lst)
+;;;;;     (unless (proper-list? lst)
+;;;;;       (err "expected a proper list" lst))
+     (let loop ((lst lst))
+       (cond
+         ((null? lst) #t)
+         ((null? (cdr lst)) #f)
+         (else
+          ;; This cannot be done as a recursive macro, because
+          ;; eager-syntax would not know when to stop expansion.
+          (loop (drop lst 2)))
+         )))))
 
 m4_divert(-1)
 ;;; local variables:

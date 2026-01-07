@@ -67,165 +67,87 @@
               (random-partial-identifier--linux)))))))
 
    (define gensym
-     (let ((i -1))
+     (let ((i -1)
+           (nonbreaking-space (string #\x00A0)))
        (case-lambda
          (() (gensym ""))
          ((ignored)
           (set! i (+ i 1))
-          (string->symbol
-           (string-append
-            "g    " (random-partial-identifier) "    "
-            (number->string i) "    ")))))) )
+          (string->symbol (string-append
+                           "g"
+                           nonbreaking-space
+                           (random-partial-identifier)
+                           nonbreaking-space
+                           (number->string i))))))) )
 
   (else)) ;; cond-expand
 
-;;; m4_define(«syntax_rules_e_aux2»,«
-#|
-(er-macro-transformer
- (lambda (form rename compare)
-   (let* ((_LET_ (rename 'let))
-          (arg* (cdr form))
-          (actual-parameters (list-copy (first arg*)))
-          (actual-parameters
-           (if (pair? actual-parameters)
-             (let ((lst-pair (last-pair actual-parameters)))
-               (if (null? (cdr lst-pair))
-                 actual-parameters
-                 (begin
-                   ;; Turn a dotted list into a proper list.
-                   (set-cdr! lst-pair (list (cdr lst-pair)))
-                   actual-parameters)))))
-          (receiver (second arg*))
-          (n (length actual-parameters))
-          (tmp* (list-tabulate n (lambda (i) (gensym))))
-          (f (gensym))
-          (lets-list
-           (cons
-            (list f receiver)
-            (list-tabulate
-             n (lambda (i)
-                 (list (list-ref tmp* i)
-                       (list-ref actual-parameters i)))))))
-`(,_LET_ ,lets-list (,f . ,tmp*)) )))
-|#
+;;; m4_define(«define_finite_list_to_proper_list»,«
+(define (finite-list->proper-list lst)
+  ;; Copies a finite list, converting any dotted list to a
+  ;; proper list.
+  (cond
+    ((null? lst) lst)
+    ((not-pair? lst) (list lst))        ; Convert dotted list.
+    (else
+     (let ((next (cdr lst)))
+       (cond
+         ((null? next) lst)
+         ((not-pair? next)
+          (cons (car lst) next))        ; Convert dotted list.
+         (else
+          (cons (car lst)
+                (finite-list->proper-list next))))))))
 ;;; »)
+
+(cond-expand
+
+  (chibi
+   (define (eager-syntax receiver)
+     (er-macro-transformer
+      (lambda (form rename compare)
+        define_finite_list_to_proper_list
+        (let* ((_LET_ (rename 'let))
+               (arg* (cdr form))
+               (actual-parameters (finite-list->proper-list arg*))
+               (f-x* (cons receiver actual-parameters))
+               (tmp* (map (lambda (x) (gensym)) f-x*))
+               (lets-list (map list tmp* f-x*)))
+          `(,_LET_ ,lets-list ,tmp*))))) )
+
+  (else
+   (define (eager-syntax receiver)
+     (er-macro-transformer
+      (lambda (form rename compare)
+        define_finite_list_to_proper_list
+        (let* ((arg* (cdr form))
+               (actual-parameters (finite-list->proper-list arg*))
+               (f-x* (cons receiver actual-parameters)))
+          f-x*)))) ))
 
 ;;; »,«
 
-;;; m4_define(«define_syntax_primitives»,«
-(define (syntax->proper-list stx_)
-  ;; Converts any dotted list to a proper list.
-  (syntax-case stx_ ()
-    (()       '())
-    ((x . x*) (cons (syntax x)
-                    (syntax->proper-list (syntax x*))))
-    (x        (list (syntax x))))) ;; The conversion.
-
-(define (syntax-first stx_)
-  (syntax-case stx_ ()
-    ((x . y) (syntax x))))
-
-(define (syntax-second stx_)
-  (syntax-case stx_ ()
-    ((x y . z) (syntax y))))
-
-(define (syntax-cdr stx_)
-  (syntax-case stx_ ()
-    ((x . y) (syntax y))))
-;;; »)
-
-;;; m4_define(«syntax_rules_e_aux2»,«
-#|
-(lambda (stx)
-  define_syntax_primitives
-  (let* ((form (syntax->proper-list stx))
-         (arg* (syntax-cdr form))
-         (actual-parameters
-          (syntax->proper-list (first arg*)))
-         (receiver (second arg*))
-         (n (length actual-parameters))
-         (tmp* (generate-temporaries actual-parameters))
-         (f (car (generate-temporaries '(1))))
-         (lets-list
-          (cons
-           (list f receiver)
-           (list-tabulate
-            n (lambda (i)
-                (list (list-ref tmp* i)
-                      (list-ref actual-parameters i)))))))
-    (quasisyntax (let (unsyntax lets-list)
-                   ((unsyntax f) . (unsyntax tmp*)))) ))
-|#
-;;; »)
+(define-syntax eager-syntax
+  (syntax-rules ()
+    ((¶ receiver)
+     (lambda (stx)
+       (define (syntax->proper-list x)
+         ;; Converts any dotted list to a proper list.
+         (syntax-case x ()
+           (()       '())
+           ((a . a*) (cons (syntax a)
+                           (syntax->proper-list (syntax a*))))
+           (a        (list (syntax a))))) ;; The conversion.
+       (let* ((form (syntax->proper-list stx))
+              (arg* (cdr form))
+              (f-arg* (cons (syntax receiver) arg*))
+              (tmp* (generate-temporaries f-arg*))
+              (lets-list (map list tmp* f-arg*)))
+         (quasisyntax
+          (let (unsyntax lets-list)
+            (unsyntax tmp*))))))))
 
 ;;; »)
-
-#|
-(define-syntax syntax-rules:e-aux1
-  (syntax-rules ()
-
-    ((¶ #f (literals ...) ((ident . pattern) receiver) ...)
-
-     (syntax-rules (literals ...)
-       ((ident . pattern)
-        (let-syntax ((syntax-rules:e-aux2
-                      syntax_rules_e_aux2
-                      ))
-          (syntax-rules:e-aux2 pattern receiver)))
-       ...))
-
-    ;; m4_ifelse(scheme_standard,«r6rs»,,«
-    ((¶ alt-ellipsis (literals ...) ((ident . pattern) receiver) ...)
-
-     (syntax-rules alt-ellipsis (literals ...)
-       ((ident . pattern)
-        (let-syntax ((syntax-rules:e-aux2
-                      syntax_rules_e_aux2
-                      ))
-          (syntax-rules:e-aux2 pattern receiver)))
-       ...))
-    ;; »)
-
-))
-
-
-(define-syntax syntax-rules:e
-  (syntax-rules ()
-
-    ((syntax-rules:e (literals ...)
-       (pattern receiver) ...)
-
-     (syntax-rules:e-aux1
-      #f (literals ...) (pattern receiver) ...))
-
-    ;; m4_ifelse(scheme_standard,«r6rs»,,«
-    ((syntax-rules:e alt-ellipsis (literals ...)
-                     (pattern receiver) ...)
-
-     (syntax-rules:e-aux1
-      alt-ellipsis (literals ...) (pattern receiver) ...))
-    ;; »)
-
-))
-|#
-
-(define-syntax syntax-rules:e
-  (syntax-rules ()
-    ((¶ rule)
-     (syntax-rules:e-rule rule))
-    ((¶ (rule . rule*))
-     (cons (syntax-rules:e-rule rule)
-           (syntax-rules:e rule*)))))
-
-(define-syntax syntax-rules:e-rule
-  (syntax-rules (=>)
-    ((¶ (pattern (=> failure) receiver))
-     "FIXME")
-    ((¶ (pattern receiver))
-     "FIXME")
-    ((¶ . anything)
-     (syntax-error "expected a syntax-rules:e rule" anything))))
-    
 
 m4_divert(-1)
 ;;; local variables:

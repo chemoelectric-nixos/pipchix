@@ -33,24 +33,24 @@ AT_SKIP_IF(m4_if(implementation,[csc-5],[true],[false]))
 m4_define([sexpr],[(scheme->nix (zero? 0))])
 check_unquoted([run_scheme 'sexpr'],[0],[nix_true],[])
 
-dnl m4_define([sexpr],[(scheme->nix (reverse:e (reverse:e (reverse:e `(1 2 3 4)))))])
-dnl check_unquoted([run_scheme 'sexpr'],[0],
-dnl   [interpunct_nl([@<:@·(4)·(3)·(2)·(1)·@:>@·])],[])
-dnl 
-dnl m4_define([sexpr],
-dnl   [(scheme->nix (append:e `(1 2) (append:e `(3 4) `(5 6) (append:e `(7 8) `(9 10)))))])
-dnl check_unquoted([run_scheme 'sexpr'],[0],
-dnl   [interpunct_nl([@<:@·(1)·(2)·(3)·(4)·(5)·(6)·(7)·(8)·(9)·(10)·@:>@·])],[])
+m4_define([sexpr],[(scheme->nix (reverse:e (reverse:e (reverse:e `(1 2 3 4)))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·(4)·(3)·(2)·(1)·@:>@·])],[])
 
-dnl m4_define([sexpr],
-dnl   [(scheme->nix (srfi148-even?:e `(1 2 3 4)))])
-dnl check_unquoted([run_scheme 'sexpr'],[0],
-dnl   [interpunct_nl([nix_true])],[])
+m4_define([sexpr],
+  [(scheme->nix (append:e `(1 2) (append:e `(3 4) `(5 6) (append:e `(7 8) `(9 10)))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·(1)·(2)·(3)·(4)·(5)·(6)·(7)·(8)·(9)·(10)·@:>@·])],[])
 
-dnl m4_define([sexpr],
-dnl   [(scheme->nix (srfi148-even?:e `(1 2 3 4 5)))])
-dnl check_unquoted([run_scheme 'sexpr'],[0],
-dnl   [interpunct_nl([nix_false])],[])
+m4_define([sexpr],
+  [(scheme->nix (even?:e `(1 2 3 4)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([nix_true])],[])
+
+m4_define([sexpr],
+  [(scheme->nix (even?:e `(1 2 3 4 5)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([nix_false])],[])
 
 AT_CLEANUP
 

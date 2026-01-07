@@ -34,14 +34,9 @@ m4_include(pipchix/pipchix-includes.m4)
 
   (begin
 
-    m4_dnl The following m4_ifelse is needed for Loko.
-    ;;; m4_ifelse(CHICKEN_5,«yes»,«
-    (cond-expand
-      (chicken-5
-       (import-for-syntax
-        (pipchix general-purpose eager-syntax-rules)))
-      (else #f))
-    ;;; »)
+    ;; m4_ifelse(CHICKEN_5,«yes»,«
+    (import-for-syntax (pipchix general-purpose eager-syntax-rules))
+    ;; »)
 
     define_err_r7rs
 

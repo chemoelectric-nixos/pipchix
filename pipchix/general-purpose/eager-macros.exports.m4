@@ -1,6 +1,6 @@
-syntax-rules:e
+eager-syntax
 
-;;;;reverse:e
-;;;;append:e
+reverse:e
+append:e
 
-;;;;; srfi148-even?:e
+even?:e

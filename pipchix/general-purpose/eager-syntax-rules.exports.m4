@@ -1,1 +1,1 @@
-syntax-rules:e
+eager-syntax

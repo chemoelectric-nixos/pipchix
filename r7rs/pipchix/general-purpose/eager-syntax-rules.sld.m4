@@ -27,9 +27,6 @@ m4_include(pipchix/pipchix-includes.m4)
 (define-library (pipchix general-purpose eager-syntax-rules)
 
   (export m4_include(pipchix/general-purpose/eager-syntax-rules.exports.m4))
-  ;; m4_ifelse(CHICKEN_5,«yes»,«
-  ;;;;;(export syntax-rules:e-aux1)
-  ;; »)
   ;; m4_ifelse(CHICKEN_5,«yes»,,«
   (cond-expand
     (gauche (export :info-alist))
@@ -43,8 +40,7 @@ m4_include(pipchix/pipchix-includes.m4)
   (import (pipchix general-purpose match))
 
   (cond-expand
-    (chicken-5 (import (only (chicken syntax)
-                             er-macro-transformer))
+    (chicken-5 (import (chicken syntax))
                (import (only (chicken base)
                              gensym)))
     (chibi (import (scheme file))
@@ -69,6 +65,7 @@ m4_include(pipchix/pipchix-includes.m4)
        ;; m4_pushdef(«general_macros»,«er-macro-transformer»)
        ;; m4_pushdef(«syntax_rules»,«r5rs»)
        ;; m4_pushdef(«scheme_standard»,«r5rs»)
+       (import-for-syntax (chicken syntax))
        (import-for-syntax (scheme base))
        (import-for-syntax (srfi 1))
        m4_include(pipchix/general-purpose/eager-syntax-rules.m4)

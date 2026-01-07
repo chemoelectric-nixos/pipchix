@@ -28,7 +28,6 @@ m4_include(pipchix/pipchix-includes.m4)
 (library (pipchix general-purpose eager-syntax-rules)
 
   (export m4_include(pipchix/general-purpose/eager-syntax-rules.exports.m4))
-;;;;;;          syntax-rules:e-aux1)
 
   (import (for (except (rnrs (6))
                        fold-right
