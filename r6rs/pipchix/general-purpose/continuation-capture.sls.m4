@@ -1,6 +1,6 @@
 #!r6rs
 ;;;
-;;; Copyright © 2025 Barry Schwartz
+;;; Copyright © 2025, 2026 Barry Schwartz
 ;;;
 ;;; This file is part of Pipchix.
 ;;; 
@@ -32,7 +32,6 @@ m4_include(pipchix/pipchix-includes.m4)
   (import (rnrs base (6))
           (rnrs records syntactic (6)))
 
-  m4_define(«continuation_capture_implementation»,«r6rs»)
   m4_include(pipchix/general-purpose/continuation-capture.m4)
 
   )

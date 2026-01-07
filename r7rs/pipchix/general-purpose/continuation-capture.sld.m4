@@ -1,5 +1,5 @@
 ;;;
-;;; Copyright © 2025 Barry Schwartz
+;;; Copyright © 2025, 2026 Barry Schwartz
 ;;;
 ;;; This file is part of Pipchix.
 ;;; 
@@ -32,7 +32,6 @@ m4_include(pipchix/pipchix-includes.m4)
 
   (begin
 
-    m4_define(«continuation_capture_implementation»,«r7rs»)
     m4_include(pipchix/general-purpose/continuation-capture.m4)
 
     ))

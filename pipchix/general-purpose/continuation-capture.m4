@@ -1,5 +1,5 @@
 ;;;
-;;; Copyright © 2025 Barry Schwartz
+;;; Copyright © 2025, 2026 Barry Schwartz
 ;;;
 ;;; This file is part of Pipchix.
 ;;; 
@@ -49,20 +49,20 @@
 ;;; efficiency. (If we do, we can offload tasks to Ada programs!)
 ;;;
 
-;;;m4_ifelse(continuation_capture_implementation,«r6rs»,«
+;;; m4_ifelse(RNRS_NUMBER,«6»,«
 (define-record-type (continuation
                      %%make-continuation
                      continuation?)
   (fields
    (immutable proc %%continuation-proc)))
-;;;»)
+;;; »)
 
-;;;m4_ifelse(continuation_capture_implementation,«r7rs»,«
+;;; m4_ifelse(RNRS_NUMBER,«7»,«
 (define-record-type <continuation>
   (%%make-continuation proc)
   continuation?
   (proc %%continuation-proc))
-;;;»)
+;;; »)
 
 (define (continuation-capture receiver)
   ((call/cc (lambda (proc)
