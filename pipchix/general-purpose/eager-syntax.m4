@@ -103,27 +103,30 @@
 (cond-expand
 
   (chibi
-   (define (eager-syntax receiver)
-     (er-macro-transformer
-      (lambda (form rename compare)
-        define_finite_list_to_proper_list
-        (let* ((_LET_ (rename 'let))
-               (arg* (cdr form))
-               (actual-parameters (finite-list->proper-list arg*))
-               (f-x* (cons receiver actual-parameters))
-               (tmp* (map (lambda (x) (gensym)) f-x*))
-               (lets-list (map list tmp* f-x*)))
-          `(,_LET_ ,lets-list ,tmp*))))) )
+   (define-syntax eager-syntax
+     (syntax-rules ()
+       ((¶ receiver)
+        (er-macro-transformer
+         (lambda (form rename compare)
+           define_finite_list_to_proper_list
+           (let* ((arg* (cdr form))
+                  (actual-parameters (finite-list->proper-list arg*))
+                  (f-x* (cons receiver actual-parameters))
+                  (tmp* (map (lambda (x) (gensym)) f-x*))
+                  (lets-list (map list tmp* f-x*)))
+             `(,(rename 'let) ,lets-list ,tmp*))))))) )
 
   (else
-   (define (eager-syntax receiver)
-     (er-macro-transformer
-      (lambda (form rename compare)
-        define_finite_list_to_proper_list
-        (let* ((arg* (cdr form))
-               (actual-parameters (finite-list->proper-list arg*))
-               (f-x* (cons receiver actual-parameters)))
-          f-x*)))) ))
+   (define-syntax eager-syntax
+     (syntax-rules ()
+       ((¶ receiver)
+        (er-macro-transformer
+         (lambda (form rename compare)
+           define_finite_list_to_proper_list
+           (let* ((arg* (cdr form))
+                  (actual-parameters (finite-list->proper-list arg*))
+                  (f-x* (cons receiver actual-parameters)))
+             f-x*)))))) ))
 
 ;;; »,«
 
