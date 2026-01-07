@@ -23,64 +23,48 @@
 ;;; WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ;;;
 
-;;; m4_ifelse(scheme_standard,«r6rs»,«
+;;; m4_define(«make_your_own_gensyms»,«
+(define (random-partial-identifier--linux)
+  (with-input-from-file "/proc/sys/kernel/random/uuid"
+    (lambda () (read-string 36))))
 
-(define-syntax syntax-error
-  (syntax-rules ()
-    ((¶ message . args)
-     ;; R⁶RS provides only for two arguments after the message. So put
-     ;; all the arguments into a list.
-     (syntax-violation #f message args))))
+(define (random-partial-identifier--general)
+  ;; A UUID that was generated once upon a time.
+  "c1f4e8ef-a7a5-4fc5-9917-3bbb355047cc")
 
+(define (random-partial-identifier)
+  ;;
+  ;; Choose an identifier generator and install it as a new
+  ;; ‘random-partial-identifier’ procedure.
+  ;;
+  (continuation-capture
+   (lambda (cc)
+     (with-exception-handler
+         (lambda (c)
+           (set! random-partial-identifier
+             random-partial-identifier--general)
+           (continuation-return cc
+             (random-partial-identifier--general)))
+       (lambda ()
+         (set! random-partial-identifier
+           random-partial-identifier--linux)
+         (continuation-return cc
+           (random-partial-identifier--linux)))))))
+
+(define gensym
+  (let ((i -1)
+        (nonbreaking-space (string #\x00A0)))
+    (case-lambda
+      (() (gensym ""))
+      ((ignored)
+       (set! i (+ i 1))
+       (string->symbol (string-append
+                        "g"
+                        nonbreaking-space
+                        (random-partial-identifier)
+                        nonbreaking-space
+                        (number->string i)))))))
 ;;; »)
-
-;;; m4_ifelse(general_macros,«er-macro-transformer»,«
-
-(cond-expand
-  (chibi
-
-   (define (random-partial-identifier--linux)
-     (with-input-from-file "/proc/sys/kernel/random/uuid"
-       (lambda () (read-string 36))))
-
-   (define (random-partial-identifier--general)
-     ;; A UUID that was generated once upon a time.
-     "c1f4e8ef-a7a5-4fc5-9917-3bbb355047cc")
-
-   (define (random-partial-identifier)
-     ;;
-     ;; Choose an identifier generator and install it as a new
-     ;; ‘random-partial-identifier’ procedure.
-     ;;
-     (continuation-capture
-      (lambda (cc)
-        (with-exception-handler
-            (lambda (c)
-              (set! random-partial-identifier
-                random-partial-identifier--general)
-              (continuation-return cc
-                (random-partial-identifier--general)))
-          (lambda ()
-            (set! random-partial-identifier
-              random-partial-identifier--linux)
-            (continuation-return cc
-              (random-partial-identifier--linux)))))))
-
-   (define gensym
-     (let ((i -1)
-           (nonbreaking-space (string #\x00A0)))
-       (case-lambda
-         (() (gensym ""))
-         ((ignored)
-          (set! i (+ i 1))
-          (string->symbol (string-append
-                           "g"
-                           nonbreaking-space
-                           (random-partial-identifier)
-                           nonbreaking-space
-                           (number->string i))))))) )
-
-  (else)) ;; cond-expand
 
 ;;; m4_define(«define_finite_list_to_proper_list»,«
 (define (finite-list->proper-list lst)
@@ -100,21 +84,27 @@
                 (finite-list->proper-list next))))))))
 ;;; »)
 
+;;; m4_ifelse(general_macros,«er-macro-transformer»,«
+
 (cond-expand
 
   (chibi
-   (define-syntax eager-syntax
-     (syntax-rules ()
-       ((¶ receiver)
-        (er-macro-transformer
-         (lambda (form rename compare)
-           define_finite_list_to_proper_list
-           (let* ((arg* (cdr form))
-                  (actual-parameters (finite-list->proper-list arg*))
-                  (f-x* (cons receiver actual-parameters))
-                  (tmp* (map (lambda (x) (gensym)) f-x*))
-                  (lets-list (map list tmp* f-x*)))
-             `(,(rename 'let) ,lets-list ,tmp*))))))) )
+   (begin
+     make_your_own_gensyms
+     (define-syntax eager-syntax
+       (syntax-rules ()
+         ((¶ receiver)
+          (er-macro-transformer
+           (lambda (form rename compare)
+             make_your_own_gensyms
+             define_finite_list_to_proper_list
+             (let* ((arg* (cdr form))
+                    (actual-parameters
+                     (finite-list->proper-list arg*))
+                    (f-x* (cons receiver actual-parameters))
+                    (tmp* (map (lambda (x) (gensym)) f-x*))
+                    (lets-list (map list tmp* f-x*)))
+               `(,(rename 'let) ,lets-list ,tmp*)))))))) )
 
   (else
    (define-syntax eager-syntax
@@ -128,7 +118,9 @@
                   (f-x* (cons receiver actual-parameters)))
              f-x*)))))) ))
 
-;;; »,«
+;;; »)
+
+;;; m4_ifelse(general_macros,«syntax-case»,«
 
 (define-syntax eager-syntax
   (syntax-rules ()
