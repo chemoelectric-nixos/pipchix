@@ -32,7 +32,6 @@ m4_include(pipchix/pipchix-includes.m4)
   (import (rnrs base (6))
           (pipchix abstract-syntax-tree))
 
-  define_err_r6rs
   m4_include(pipchix/nix-embed.m4)
 
   )

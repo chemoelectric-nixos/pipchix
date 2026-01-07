@@ -35,7 +35,6 @@ m4_include(pipchix/pipchix-includes.m4)
           (pipchix general-purpose srfi-39))
 
 
-  define_err_r6rs
   ;;; m4_define(«default_environment»,default_environment_r6rs)
   m4_include(pipchix/general-purpose/e-macros-environment.m4)
 

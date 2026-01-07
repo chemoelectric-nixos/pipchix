@@ -42,7 +42,6 @@ m4_include(pipchix/pipchix-includes.m4)
   ;; m4_define(«scheme_standard»,«r6rs»)
   ;; m4_define(«general_macros»,«syntax-case»)
 
-  define_err_r6rs
   m4_include(pipchix/general-purpose/match.m4)
 
   )

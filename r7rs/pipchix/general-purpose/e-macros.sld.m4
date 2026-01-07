@@ -51,8 +51,6 @@ m4_include(pipchix/pipchix-includes.m4)
 
   (begin
 
-    define_err_r7rs
-
     (cond-expand
       (chicken-5
        ;; m4_pushdef(«general_macros»,«er-macro-transformer»)

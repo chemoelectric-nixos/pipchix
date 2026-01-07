@@ -1,5 +1,5 @@
 ;;;
-;;; Copyright © 2025 Barry Schwartz
+;;; Copyright © 2025, 2026 Barry Schwartz
 ;;;
 ;;; This file is part of Pipchix.
 ;;; 
@@ -27,7 +27,7 @@
   (cond ((string? str)
          (make-nix-embedded-node str))
         (else
-         (err "not a string" str))))
+         SCHEME_ERROR("not a string", str))))
 
 m4_divert(-1)
 ;;; local variables:

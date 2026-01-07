@@ -1,5 +1,5 @@
 ;;;
-;;; Copyright © 2025 Barry Schwartz
+;;; Copyright © 2025, 2026 Barry Schwartz
 ;;;
 ;;; This file is part of Pipchix.
 ;;; 
@@ -212,15 +212,15 @@ m4_ifelse(implementation_of_define_record_factory,«er-macro-transformer»,«
        ;; FIXME: Do a more precise analysis. (It is better to analyze
        ;; here than to force the code below to follow a particular
        ;; order, just to get the best error messages.)
-       (err "syntax error in rule" (car rule*)))
+       SCHEME_ERROR("syntax error in rule", (car rule*)))
 
      (let ((n (length form)))
        (cond
         ((= n 1)
-         (err "record type designation is missing" form))
+         SCHEME_ERROR("record type designation is missing", form))
         ((not (symbol? (cadr form)))
-         (err "record type designation is not a symbol"
-              (cadr form)))
+         SCHEME_ERROR("record type designation is not a symbol",
+                      (cadr form)))
         (else
          (let* ((designation (cadr form))
                 (original-constructor% (gensym))

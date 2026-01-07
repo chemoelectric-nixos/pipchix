@@ -138,7 +138,7 @@ $(builddir)/r6rs/pipchix/%.sls: $(srcdir)/r6rs/pipchix/%.sls.m4 \
 	                        $(srcdir)/pipchix/%.exports.m4 \
 	                        $(PIPCHXINC)
 	$(call v,SLS.M4)$(MKDIR_P) $(@D) && \
-		$(M4_PREPROCESS) $(<) > $(@).tmp && \
+		$(M4_PREPROCESS) -DRNRS_NUMBER=6 $(<) > $(@).tmp && \
 		mv $(@){.tmp,}
 
 $(builddir)/r7rs/pipchix/%.sld: $(srcdir)/r7rs/pipchix/%.sld.m4 \
@@ -146,7 +146,7 @@ $(builddir)/r7rs/pipchix/%.sld: $(srcdir)/r7rs/pipchix/%.sld.m4 \
 	                        $(srcdir)/pipchix/%.exports.m4 \
 	                        $(PIPCHXINC)
 	$(call v,SLD.M4)$(MKDIR_P) $(@D) && \
-		$(M4_PREPROCESS) $(<) > $(@).tmp && \
+		$(M4_PREPROCESS) -DRNRS_NUMBER=7 $(<) > $(@).tmp && \
 		mv $(@){.tmp,}
 
 #
@@ -241,12 +241,14 @@ CHICKEN_EGGSPEC_BOTTOM = ' \
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+CHICKEN_5_M4FLAGS = -DRNRS_NUMBER=7 -DCHICKEN_5=yes
+
 $(builddir)/$(CHICKEN_5_EGGDIR)/pipchix.%.scm: \
 	                   $(srcdir)/r7rs/pipchix/%.sld.m4 \
 	                   $(srcdir)/pipchix/%.m4 \
 	                   $(PIPCHXINC)
 	$(call v,SCM.M4) $(MKDIR_P) $(@D) && \
-		$(M4_PREPROCESS) -DCHICKEN_5=yes $(<) > $(@).tmp && \
+		$(M4_PREPROCESS) $(CHICKEN_5_M4FLAGS) $(<) > $(@).tmp && \
 		mv $(@){.tmp,}
 
 $(builddir)/$(CHICKEN_5_EGGDIR)/pipchix.general-purpose.%.scm: \
@@ -254,7 +256,7 @@ $(builddir)/$(CHICKEN_5_EGGDIR)/pipchix.general-purpose.%.scm: \
 	                   $(srcdir)/pipchix/general-purpose/%.m4 \
 	                   $(PIPCHXINC)
 	$(call v,SCM.M4) $(MKDIR_P) $(@D) && \
-		$(M4_PREPROCESS) -DCHICKEN_5=yes $(<) > $(@).tmp && \
+		$(M4_PREPROCESS) $(CHICKEN_5_M4FLAGS) $(<) > $(@).tmp && \
 		mv $(@){.tmp,}
 
 $(builddir)/$(CHICKEN_5_EGGDIR)/pipchix.macros.%.scm: \
@@ -262,7 +264,7 @@ $(builddir)/$(CHICKEN_5_EGGDIR)/pipchix.macros.%.scm: \
 	                   $(srcdir)/pipchix/macros/%.m4 \
 	                   $(PIPCHXINC)
 	$(call v,SCM.M4) $(MKDIR_P) $(@D) && \
-		$(M4_PREPROCESS) -DCHICKEN_5=yes $(<) > $(@).tmp && \
+		$(M4_PREPROCESS) $(CHICKEN_5_M4FLAGS) $(<) > $(@).tmp && \
 		mv $(@){.tmp,}
 
 CHICKEN_5_EGGS = chicken/eggs/5

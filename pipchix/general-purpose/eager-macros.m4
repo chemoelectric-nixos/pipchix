@@ -34,8 +34,8 @@
   ;; from SRFI-148.
   (eager-syntax
    (lambda (lst)
-;;;;;     (unless (proper-list? lst)
-;;;;;       (err "expected a proper list" lst))
+     (unless (proper-list? lst)
+       SCHEME_ERROR("expected a proper list", lst))
      (let loop ((lst lst))
        (cond
          ((null? lst) #t)

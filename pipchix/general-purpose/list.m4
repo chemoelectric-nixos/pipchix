@@ -278,8 +278,8 @@
   (check-arg (lambda (n) (and (integer? n) (>= n 0))) len make-list)
   (let ((elt (cond ((null? maybe-elt) #f) ; Default value
 		   ((null? (cdr maybe-elt)) (car maybe-elt))
-		   (else (err "Too many arguments to make-list"
-			      (cons len maybe-elt))))))
+		   (else SCHEME_ERROR("Too many arguments to make-list",
+			              (cons len maybe-elt))))))
     (do ((i len (- i 1))
 	 (ans '() (cons elt ans)))
 	((<= i 0) ans))))
@@ -329,7 +329,7 @@
      (check-arg integer? count iota)
      (check-arg number? start iota)
      (check-arg number? step iota)
-     (if (< count 0) (err "Negative step count" iota count))
+     (if (< count 0) SCHEME_ERROR("Negative step count", iota, count))
      (let loop ((n 0) (r '()))
        (if (= n count)
 	 (reverse r)
@@ -358,7 +358,7 @@
 ;	  (if (pair? rest)
 ;	      (let ((arg3 (check (car rest)))
 ;		    (rest (cdr rest)))
-;		(if (pair? rest) (err "Too many parameters" proc arg1 rest-args)
+;		(if (pair? rest) (error "Too many parameters" proc arg1 rest-args)
 ;		    (values arg1 arg2 arg3)))
 ;	      (values arg1 arg2 1)))
 ;	(values 0 arg1 1))))
@@ -367,7 +367,7 @@
 ;  (receive (from to step) (%parse-iota-args arg1 rest-args iota:)
 ;    (let* ((numsteps (floor (/ (- to from) step)))
 ;	   (last-val (+ from (* step numsteps))))
-;      (if (< numsteps 0) (err "Negative step count" iota: from to step))
+;      (if (< numsteps 0) (error "Negative step count" iota: from to step))
 ;      (do ((steps-left numsteps (- steps-left 1))
 ;	   (val last-val (- val step))
 ;	   (ans '() (cons val ans)))
@@ -378,7 +378,7 @@
 ;  (receive (from to step) (%parse-iota-args arg1 rest-args :iota)
 ;    (let* ((numsteps (ceiling (/ (- to from) step)))
 ;	   (last-val (+ from (* step (- numsteps 1)))))
-;      (if (< numsteps 0) (err "Negative step count" :iota from to step))
+;      (if (< numsteps 0) (error "Negative step count" :iota from to step))
 ;      (do ((steps-left numsteps (- steps-left 1))
 ;	   (val last-val (- val step))
 ;	   (ans '() (cons val ans)))
@@ -443,7 +443,7 @@
 (define (null-list? l)
   (cond ((pair? l) #f)
 	((null? l) #t)
-	(else (err "null-list?: argument out of domain" l))))
+	(else SCHEME_ERROR("null-list?: argument out of domain", l))))
 
 
 (define (list= = . lists)

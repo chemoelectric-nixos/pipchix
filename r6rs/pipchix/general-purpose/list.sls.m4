@@ -37,7 +37,6 @@ m4_include(pipchix/pipchix-includes.m4)
                   remove)
           (rnrs mutable-pairs (6)))
 
-  define_err_r6rs
   ;;m4_define(«srfi1_code_is_needed»,«yes»)
   ;;m4_define(«r6rs»,«yes»)
   ;;m4_define(«list_copy_needed»,«yes»)

@@ -39,7 +39,6 @@ m4_include(pipchix/pipchix-includes.m4)
        (import-for-syntax (scheme eval)))
       (else))
 
-    define_err_r7rs
     m4_define(default_environment,default_environment_r7rs)
     m4_include(pipchix/general-purpose/e-macros-environment.m4)
 

@@ -1,5 +1,5 @@
 ;;;
-;;; Copyright © 2025 Barry Schwartz
+;;; Copyright © 2025, 2026 Barry Schwartz
 ;;;
 ;;; This file is part of Pipchix.
 ;;; 
@@ -33,7 +33,6 @@ m4_include(pipchix/pipchix-includes.m4)
 
   (begin
 
-    define_err_r7rs
     m4_include(pipchix/nix-embed.m4)
 
     ))

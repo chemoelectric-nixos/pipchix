@@ -39,9 +39,9 @@
   ;; There is nothing here to ensure the handler is actually a
   ;; handler. We assume the programmer knows what they are doing.
   (unless (symbol? format)
-    (err "not a symbol" format))
+    SCHEME_ERROR("not a symbol", format))
   (unless (procedure? handler)
-    (err "not a procedure" handler))
+    SCHEME_ERROR("not a procedure", handler))
   (%%add-shell-print-format! format handler))
 
 (define (%%add-shell-print-format! format handler)
@@ -54,9 +54,10 @@
                   (lambda (boxed-format)
                     (let ((format (unbox boxed-format)))
                       (unless (symbol? format)
-                        (err "not a symbol" format))
+                        SCHEME_ERROR("not a symbol", format))
                       (unless (assq format %%shell-print-handlers)
-                        (err "not an available handler" format))
+                        SCHEME_ERROR("not an available handler",
+                                     format))
                       boxed-format))))
 
 (define (current-shell-print-format)
@@ -79,9 +80,9 @@
        (shell-print str))
       (else
        (unless (symbol? format)
-         (err "not a symbol" format))
+         SCHEME_ERROR("not a symbol", format))
        (unless (assq format %%shell-print-handlers)
-         (err "not an available handler" format))
+         SCHEME_ERROR("not an available handler", format))
        (let ((handler-pair (assq format %%shell-print-handlers)))
          (let ((handler (cdr handler-pair)))
            (handler str))))))))
@@ -151,7 +152,9 @@
       ((#o013) "\\v")
       ((#o014) "\\f")
       ((#o015) "\\r")
-      (else (err "internal error in bytevector->escaped-8bit" u))))
+      (else
+       SCHEME_ERROR("internal error in bytevector->escaped-8bit",
+                    u))))
   (define (fragment-length u)
     (cond ((%%is-alphanumeric-ascii? u) 1)
           ((and (<= #o007 u) (<= u #o015)) 2)

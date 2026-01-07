@@ -1,5 +1,5 @@
 ;;;
-;;; Copyright © 2025 Barry Schwartz
+;;; Copyright © 2025, 2026 Barry Schwartz
 ;;;
 ;;; This file is part of Pipchix.
 ;;; 
@@ -33,15 +33,13 @@ m4_include(pipchix/pipchix-includes.m4)
   (import (scheme char))
   (import (pipchix general-purpose box))
 
-  (cond-expand
-    (chicken-5
-     (import (utf8))
-     (import (utf8-srfi-13)))
-    (else))
+  ;; m4_ifelse(CHICKEN_5,«yes»,«
+  (import (utf8))
+  (import (utf8-srfi-13))
+  ;; »)
 
   (begin
 
-    define_err_r7rs
     (define integer-division truncate/)
 
     m4_include(pipchix/string-manipulation.m4)

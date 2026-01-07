@@ -33,7 +33,6 @@ m4_include(pipchix/pipchix-includes.m4)
           (rnrs control (6))
           (rnrs records syntactic (6)))
 
-  define_err_r6rs
   m4_define(«implementation_of_define_record_factory»,«r6rs»)
   m4_include(pipchix/general-purpose/define-record-factory.m4)
 

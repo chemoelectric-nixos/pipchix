@@ -32,7 +32,7 @@
    (lambda (obj)
      (unless (and (vector? obj)
                   (>= (vector-length obj) 1))
-       (err "expected a vector of length >=1" obj))
+       SCHEME_ERROR("expected a vector of length >=1", obj))
      obj)))
 
 (define (e-macros-libraries)

@@ -47,7 +47,6 @@ m4_include(pipchix/pipchix-includes.m4)
 
     (cond-expand
       ((or loko guile)
-       define_err_r7rs
        ;;m4_pushdef(«r7rs_small_is_provided»,«yes»)
        m4_include(pipchix/general-purpose/division.m4)
        ;;m4_popdef(«r7rs_small_is_provided»)

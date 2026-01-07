@@ -38,8 +38,6 @@ m4_include(pipchix/pipchix-includes.m4)
     (import-for-syntax (pipchix general-purpose eager-syntax))
     ;; »)
 
-    define_err_r7rs
-
     m4_include(pipchix/general-purpose/eager-macros.m4)
 
     ))

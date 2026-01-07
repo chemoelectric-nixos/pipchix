@@ -1,5 +1,5 @@
 ;;;
-;;; Copyright © 2025 Barry Schwartz
+;;; Copyright © 2025, 2026 Barry Schwartz
 ;;;
 ;;; This file is part of Pipchix.
 ;;; 
@@ -32,7 +32,7 @@ define_string_reverse_concatenate
 
 (define (register-nix-node-predicate pred)
   (unless (procedure? pred)
-    (err "not a procedure" pred))
+    SCHEME_ERROR("not a procedure", pred))
   (set! nix-node-predicates
     (cons pred nix-node-predicates))
   pred)
@@ -60,7 +60,7 @@ define_string_reverse_concatenate
                   (string? data)
                   (number? data))
               (construct data))
-             (else (err "incorrect type" data))))))
+             (else SCHEME_ERROR("incorrect type", data))))))
   (predicate> nix-data-node? register-nix-node-predicate)
   (getter> 1 nix-data-node-ref))
 
@@ -137,14 +137,14 @@ define_string_reverse_concatenate
            (lambda (getter)
              (lambda (obj)
                (unless (nix-attributeset-node? obj)
-                 (err "not a <nix-attributeset-node>" obj))
+                 SCHEME_ERROR("not a <nix-attributeset-node>", obj))
                (let ((kind (getter obj)))
                  (eq? kind 'nix-setrec)))))
   (getter> 1 nix-letrec-node-recursive?
            (lambda (getter)
              (lambda (obj)
                (unless (nix-letrec-node? obj)
-                 (err "not a <nix-letrec-node>" obj))
+                 SCHEME_ERROR("not a <nix-letrec-node>", obj))
                ;; This should always be true, because Nix has only the
                ;; recursive ‘let’.
                (let ((kind (getter obj)))
@@ -330,7 +330,7 @@ define_string_reverse_concatenate
          (list->nix-list-node (map scheme->nix value)))
         ((nix-abstract-syntax-tree? value)
          value)
-        (else (err "incorrect type" value))))
+        (else SCHEME_ERROR("incorrect type", value))))
 
 (define output-nix-abstract-syntax-tree
   (let ((outp-default
@@ -373,7 +373,7 @@ define_string_reverse_concatenate
          (%%output-nix-ifthenelse-node ast outp))
         ((nix-lambda-node? ast)
          (%%output-nix-lambda-node ast outp))
-        (else (err "not an abstract syntax tree" ast)))))))
+        (else SCHEME_ERROR("not an abstract syntax tree", ast)))))))
 
 ;;; A synonym.
 (define output-nix-ast output-nix-abstract-syntax-tree)
@@ -397,7 +397,7 @@ define_string_reverse_concatenate
           ((string? data)
            (%%output-string data outp)
            (outp "\n"))
-          (else (err "bad <nix-data-node>" ast)))))
+          (else SCHEME_ERROR("bad <nix-data-node>", ast)))))
 
 (define (%%output-string str outp)
   (cond ((%%string-needs-escaping? str)
@@ -508,9 +508,9 @@ define_string_reverse_concatenate
            (%%output-nix-identifier
             (make-nix-data-node (symbol->string data)) outp))
           ((not (string? data))
-           (err "not a symbol or string" data))
+           SCHEME_ERROR("not a symbol or string", data))
           ((not (%%string-is-nix-identifier? data))
-           (err "not a Nix identifier" data))
+           SCHEME_ERROR("not a Nix identifier", data))
           (else
            (outp data)
            (outp "\n")))))
@@ -600,7 +600,7 @@ define_string_reverse_concatenate
            ((pair? carp)
             ;; There is a default value.
             (unless (= (length carp) 2)
-              (err "expected an argument with default value" carp))
+              SCHEME_ERROR("expected an argument with default value", carp))
             (%%output-nix-identifier (car carp) outp)
             (outp "?\n")
             (output-nix-abstract-syntax-tree
@@ -610,7 +610,7 @@ define_string_reverse_concatenate
            ((nix-lambda-ellipsis-argument? carp)
             (outp "...\n"))
            (else
-            (err "malformed nix-lambda arguments" p)))
+            SCHEME_ERROR("malformed nix-lambda arguments", p)))
           (loop (cdr p) ",\n")))))
   (let ((args (nix-lambda-node-args ast))
         (body (nix-lambda-node-body ast)))
@@ -626,7 +626,7 @@ define_string_reverse_concatenate
                  (%%output-nix-identifier carp outp)
                  (outp ":\n"))
                 (else
-                 (err "malformed nix-lambda arguments" p))))
+                 SCHEME_ERROR("malformed nix-lambda arguments", p))))
         (loop (cdr p))))
     (output-nix-abstract-syntax-tree (scheme->nix body) outp)
     (outp ")\n")))
@@ -688,8 +688,8 @@ define_string_reverse_concatenate
               (and (nix-get-node? attrset)
                    (not (nix-get-node-attributeset attrset)))
               (nix-attributeset-node? attrset))
-    (err "expected an identifier or attribute set"
-         attrset)))
+    SCHEME_ERROR("expected an identifier or attribute set",
+                 attrset)))
 
 m4_divert(-1)
 ;;; local variables:

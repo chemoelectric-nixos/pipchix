@@ -41,7 +41,6 @@ m4_include(pipchix/pipchix-includes.m4)
           (for (pipchix general-purpose eager-syntax)
             run expand))
 
-  define_err_r6rs
   m4_include(pipchix/general-purpose/eager-macros.m4)
 
   )

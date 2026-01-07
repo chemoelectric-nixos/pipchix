@@ -32,13 +32,24 @@ m4_divert(-1)
 ;;; m4_define(«default_environment_r6rs»,«((except (rnrs (6)) fold-right member assoc map remove) (pipchix general-purpose list) (pipchix general-purpose box) (pipchix general-purpose division))»)
 ;;; m4_define(«default_environment_r7rs»,«((scheme base) (scheme complex) (scheme inexact) (scheme write) (pipchix general-purpose list) (pipchix general-purpose box) (pipchix general-purpose division))»)
 
+;;;;;;;;;;;; FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME
+;;;;;;;;;;; FIXME FIXME FIXME get rid of this
 ;;; m4_define(«define_err_r6rs»,«(define (err . args) (apply error #f args))»)
 ;;; m4_define(«define_err_r7rs»,«(define err error)»)
 ;;; m4_define(«define_syntax_err_r6rs»,«(define-syntax syntax-err (syntax-rules () ((_ . a) (syntax-violation #f a))))»)
 ;;; m4_define(«define_syntax_err_r7rs»,«(define-syntax syntax-err (syntax-rules () ((_ . a) (syntax-error . a))))»)
+;;;;;;;;;;;; FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME
+;;;;;;;;;;;; FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME
+;;;;;;;;;;;; FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME
 
-;;; m4_define(«define_ck_macros»,«
-m4_include(pipchix/ck.scm)
+;;; m4_ifelse(RNRS_NUMBER,«6»,«
+;;; m4_define(«SCHEME_ERROR»,«(error #f $1 $2 $3 $4 $5 $6 $7 $8 $9)»)
+;;; m4_define(«SLOW_SYNTAX_ERROR»,«(syntax-violation #f (list $1 $2 $3 $4 $5 $6 $7 $8 $9)»)
+;;; m4_define(«FAST_SYNTAX_ERROR»,«(syntax-violation #f (list $1 $2 $3 $4 $5 $6 $7 $8 $9)»)
+;;; »,RNRS_NUMBER,«7»,«
+;;; m4_define(«SCHEME_ERROR»,«(error $1 $2 $3 $4 $5 $6 $7 $8 $9)»)
+;;; m4_define(«SLOW_SYNTAX_ERROR»,«(error $1 $2 $3 $4 $5 $6 $7 $8 $9)»)
+;;; m4_define(«FAST_SYNTAX_ERROR»,«(syntax-error $1 $2 $3 $4 $5 $6 $7 $8 $9)»)
 ;;; »)
 
 ;;; m4_define(«define_string_reverse_concatenate»,«

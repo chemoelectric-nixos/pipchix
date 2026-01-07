@@ -39,7 +39,6 @@ m4_include(pipchix/pipchix-includes.m4)
   (import (rnrs base (6))
           (only (rnrs r5rs (6)) quotient remainder))
 
-  define_err_r6rs
   m4_include(pipchix/general-purpose/division.m4)
 
   )
