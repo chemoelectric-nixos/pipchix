@@ -12,15 +12,24 @@ cons*:e
 list:e
 circular-list:e
 make-list:e
+list-tabulate:e
+iota:e
 take:e
 drop:e
 take-right:e
 drop-right:e
 last:e
 last-pair:e
+list-ref:e
 append:e
+concatenate:e
 reverse:e
+append-reverse:e
+map:e
+append-map:e
+zip:e
 length:e
+length+:e
 every:e
 any:e
 

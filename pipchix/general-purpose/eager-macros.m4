@@ -57,6 +57,8 @@ simple_eager_macro(xcons) ;; Forms pairs, with arguments exchanged.
 simple_eager_macro(cons*) ;; Prepends elements to lists.
 simple_eager_macro(list)  ;; Forms lists from elements.
 simple_eager_macro(circular-list) ;; Forms circular lists.
+simple_eager_macro(list-tabulate) ;; Make a list of given length.
+simple_eager_macro(iota)          ;; Make a list by counting.
 
 (define-syntax make-list:e
   ;; Makes a list of n copies of element.
@@ -64,17 +66,24 @@ simple_eager_macro(circular-list) ;; Forms circular lists.
    (lambda (n element)
      (make-list n element))))
 
-simple_eager_macro(take)       ;; Takes the first n elements.
-simple_eager_macro(drop)       ;; Drops the first n elements.
-simple_eager_macro(take-right) ;; Takes the last n elements.
-simple_eager_macro(drop-right) ;; Drops the last n elements.
-simple_eager_macro(last)       ;; Returns the last element.
-simple_eager_macro(last-pair)  ;; Returns the last pair.
-simple_eager_macro(append)     ;; Appends lists.
-simple_eager_macro(reverse)    ;; Reverses a list.
-simple_eager_macro(length)     ;; Returns a lists length.
-simple_eager_macro(every)      ;; Tests for everthing true.
-simple_eager_macro(any)        ;; Tests for anything true.
+simple_eager_macro(take)           ;; Takes the first n elements.
+simple_eager_macro(drop)           ;; Drops the first n elements.
+simple_eager_macro(take-right)     ;; Takes the last n elements.
+simple_eager_macro(drop-right)     ;; Drops the last n elements.
+simple_eager_macro(last)           ;; Returns the last element.
+simple_eager_macro(last-pair)      ;; Returns the last pair.
+simple_eager_macro(list-ref)       ;; Returns the i’th element.
+simple_eager_macro(append)         ;; Appends lists.
+simple_eager_macro(concatenate)    ;; Concatenates a list of lists.
+simple_eager_macro(reverse)        ;; Reverses a list.
+simple_eager_macro(append-reverse) ;; Reverses, then appends a tail.
+simple_eager_macro(map)            ;; Maps elements from list to list.
+simple_eager_macro(append-map)     ;; Maps lists and appends results.
+simple_eager_macro(zip)            ;; Join lists element by element.
+simple_eager_macro(length)         ;; Returns a list’s length.
+simple_eager_macro(length+)        ;; Returns a list’s length or #f.
+simple_eager_macro(every)          ;; Tests for everthing true.
+simple_eager_macro(any)            ;; Tests for anything true.
 
 simple_eager_macro(car)
 simple_eager_macro(cdr)
