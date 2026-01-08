@@ -30,9 +30,40 @@ AT_KEYWORDS([default_keywords eager-macros])
 # unless you first actually install the ‘pipchix’ egg.
 AT_SKIP_IF(m4_if(implementation,[csc-5],[true],[false]))
 
+m4_define([sexpr],[(scheme->nix (call-with-values (lambda () (identity:e 5 1 2 3 4 7)) list))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·(5)·(1)·(2)·(3)·(4)·(7)·@:>@·])],[])
+
+m4_define([sexpr],[(scheme->nix (identity:e 5))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(5)·])],[])
+
 m4_define([sexpr],[(scheme->nix (constant:e 5 1 2 3 4 7))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([(5)·])],[])
+
+dnl  What a gensym ‘is’ depends on the Scheme implementation. Let us
+dnl  check merely that something other than #f is created.
+m4_define([sexpr],
+  [(scheme->nix (and (gensym:e) @%:@t))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([nix_true])],[])
+
+m4_define([sexpr],
+  [(scheme->nix (proper-list? (generate-temporaries:e '\''(1 2 3 4 5 6 7))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([nix_true])],[])
+
+m4_define([sexpr],
+  [(scheme->nix (length (generate-temporaries:e '\''(1 2 3 4 5 6 7))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(7)·])],[])
+
+m4_define([sexpr],
+  [(scheme->nix (every (lambda (x) (and x @%:@t))
+                       (generate-temporaries:e '\''(1 2 3 4 5 6 7))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([nix_true])],[])
 
 m4_define([sexpr],[(scheme->nix (reverse:e (reverse:e (reverse:e `(1 2 3 4)))))])
 check_unquoted([run_scheme 'sexpr'],[0],

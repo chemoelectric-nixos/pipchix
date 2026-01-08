@@ -23,25 +23,45 @@
 ;;; WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ;;;
 
+(define-syntax identity:e
+  ;; Expands to all its arguments.
+  (eager-syntax (lambda args (apply values args))))
+
 (define-syntax constant:e
-  ;; Expand to c, regardless of other arguments.
+  ;; Expands to c, regardless of other arguments.
   (eager-syntax (lambda (c . rest) c)))
 
 (define-syntax gensym:e
   ;; Expands to a unique identifier.
   (eager-syntax gensym))
 
+(define-syntax generate-temporaries:e
+  ;; Expands to a list of unique identifiers.
+  (eager-syntax generate-temporaries))
+
+(define-syntax error:e
+  ;; (error:e message arg1 arg2 ...)
+  (eager-syntax
+   (case-lambda
+     ((message)
+      SLOW_SYNTAX_ERROR(«message»))
+     m4_forloop(N,1,9,«
+     ((message m4_forloop(M,1,N,« arg«»M»))
+      SLOW_SYNTAX_ERROR(«message»m4_forloop(M,1,N,«,arg«»M»)))
+     »)
+     )))
+
 (define-syntax reverse:e
-  ;; Reverse a list.
+  ;; Reverses a list.
   (eager-syntax reverse))
 
 (define-syntax append:e
-  ;; Append lists.
+  ;; Appends lists.
   (eager-syntax append))
 
 (define-syntax even?:e
-  ;; Test if a list is of even length. By the algorithm for ‘em-even?’
-  ;; from SRFI-148.
+  ;; Tests if a list is of even length. Does so by approximately the
+  ;; algorithm for ‘em-even?’ from SRFI-148.
   (eager-syntax
    (lambda (lst)
      (unless (proper-list? lst)
@@ -51,8 +71,9 @@
          ((null? lst) #t)
          ((null? (cdr lst)) #f)
          (else
-          ;; This cannot be done as a recursive macro, because
-          ;; eager-syntax would not know when to stop expansion.
+          ;; This cannot be done (in any direct way) as a recursive
+          ;; macro, because eager-syntax would not know when to stop
+          ;; expansion.
           (loop (drop lst 2)))
          )))))
 
