@@ -29,13 +29,16 @@ m4_divert(-1)
 ;;; m4_define(«semicolon»,«;»)
 ;;; m4_define(«backslash»,«\»)
 
+;;; m4_define(«m4_forloop», «m4_ifelse(m4_eval(«($2) <= ($3)»), «1», «m4_pushdef(«$1»)_$0(«$1», m4_eval(«$2»), m4_eval(«$3»), «$4»)m4_popdef(«$1»)»)»)
+;;; m4_define(«_m4_forloop», «m4_define(«$1», «$2»)$4«»m4_ifelse(«$2», «$3», «», «$0(«$1», m4_incr(«$2»), «$3», «$4»)»)»)
+
 ;;; m4_define(«default_environment_r6rs»,«((except (rnrs (6)) fold-right member assoc map remove) (pipchix general-purpose list) (pipchix general-purpose box) (pipchix general-purpose division))»)
 ;;; m4_define(«default_environment_r7rs»,«((scheme base) (scheme complex) (scheme inexact) (scheme write) (pipchix general-purpose list) (pipchix general-purpose box) (pipchix general-purpose division))»)
 
 ;;; m4_ifelse(RNRS_NUMBER,«6»,«
 ;;; m4_define(«SCHEME_ERROR»,«(error #f $1 $2 $3 $4 $5 $6 $7 $8 $9)»)
-;;; m4_define(«SLOW_SYNTAX_ERROR»,«(syntax-violation #f (list $1 $2 $3 $4 $5 $6 $7 $8 $9))»)
-;;; m4_define(«FAST_SYNTAX_ERROR»,«(syntax-violation #f (list $1 $2 $3 $4 $5 $6 $7 $8 $9))»)
+;;; m4_define(«SLOW_SYNTAX_ERROR»,«(syntax-violation #f $1 (list $2 $3 $4 $5 $6 $7 $8 $9))»)
+;;; m4_define(«FAST_SYNTAX_ERROR»,«(syntax-violation #f $1 (list $2 $3 $4 $5 $6 $7 $8 $9))»)
 ;;; »)
 ;;; m4_ifelse(RNRS_NUMBER,«7»,«
 ;;; m4_define(«SCHEME_ERROR»,«(error $1 $2 $3 $4 $5 $6 $7 $8 $9)»)
