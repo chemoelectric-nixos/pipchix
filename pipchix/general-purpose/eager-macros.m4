@@ -49,6 +49,9 @@
      ((message m4_forloop(M,1,N,« arg«»M»))
       SLOW_SYNTAX_ERROR(«message»m4_forloop(M,1,N,«,arg«»M»)))
      »)
+     ((message . msg*)
+      ;; If there are more than nine irritants, put them in a list.
+      SLOW_SYNTAX_ERROR(«message»,«(list "More than nine:" msg*)»))
      )))
 
 (define-syntax reverse:e
