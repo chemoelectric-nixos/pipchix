@@ -57,7 +57,7 @@ m4_include(pipchix/pipchix-includes.m4)
       ((or loko guile)
        (define gensym
          (case-lambda
-           (() (generate-temporaries '(1)))
+           (() (car (generate-temporaries '(1))))
            ((ignored) (gensym)))))
 
       (chibi
