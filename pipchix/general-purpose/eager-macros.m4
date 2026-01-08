@@ -23,10 +23,20 @@
 ;;; WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ;;;
 
+(define-syntax constant:e
+  ;; Expand to c, regardless of other arguments.
+  (eager-syntax (lambda (c . rest) c)))
+
+(define-syntax gensym:e
+  ;; Expands to a unique identifier.
+  (eager-syntax gensym))
+
 (define-syntax reverse:e
+  ;; Reverse a list.
   (eager-syntax reverse))
 
 (define-syntax append:e
+  ;; Append lists.
   (eager-syntax append))
 
 (define-syntax even?:e

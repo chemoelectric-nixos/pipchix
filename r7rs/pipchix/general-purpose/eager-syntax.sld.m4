@@ -27,29 +27,19 @@ m4_include(pipchix/pipchix-includes.m4)
 (define-library (pipchix general-purpose eager-syntax)
 
   (export m4_include(pipchix/general-purpose/eager-syntax.exports.m4))
-  ;; m4_ifelse(CHICKEN_5,«yes»,,«
-  (cond-expand
-    (gauche (export :info-alist))
-    (else))
-  ;; »)
 
   (import basic_libraries)
-  (import (pipchix general-purpose match))
+  (import (pipchix general-purpose gensym))
 
+  (import basic_libraries)
   (cond-expand
-    (chicken-5 (import (chicken syntax))
-               (import (only (chicken base)
-                             gensym)))
-    (chibi (import (scheme file))
-           (import (only (chibi) er-macro-transformer))
-           (import (pipchix general-purpose continuation-capture)))
+    (chicken-5 (import (chicken syntax)))
+    (chibi (import (only (chibi) er-macro-transformer)))
     (gauche (import (only (r7rs aux)
                           :info-alist
-                          er-macro-transformer
-                          gensym)))
+                          er-macro-transformer)))
     (sagittarius (import (only (sagittarius)
-                               er-macro-transformer
-                               gensym)))
+                               er-macro-transformer)))
     ((or loko guile) (import (rnrs syntax-case (6))))
     (else))
 

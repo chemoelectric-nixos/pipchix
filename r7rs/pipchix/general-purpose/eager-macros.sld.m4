@@ -28,6 +28,7 @@ m4_include(pipchix/pipchix-includes.m4)
 
   (export m4_include(pipchix/general-purpose/eager-macros.exports.m4))
   (import basic_libraries)
+  (import (pipchix general-purpose gensym))
   (import (pipchix general-purpose eager-syntax))
 
   (begin

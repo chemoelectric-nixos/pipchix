@@ -78,15 +78,11 @@ m4_include(pipchix/pipchix-includes.m4)
     (else))
   ;; »)
 
-  (import (scheme base))
-  (import (scheme case-lambda))
-  (import (pipchix general-purpose list))
+  (import basic_libraries)
 
   (cond-expand
     (chicken-5 (import (only (chicken syntax)
                              er-macro-transformer))
-               (import (only (chicken base)
-                             gensym))
                (import (rename (chicken keyword)
                                (keyword?
                                 chicken-scheme-keyword?))))
@@ -98,14 +94,12 @@ m4_include(pipchix/pipchix-includes.m4)
     (gauche (import (only (r7rs aux)
                           :info-alist
                           er-macro-transformer
-                          gensym
                           is-a?)
                     (only (gauche record)
                           rtd-accessor
                           rtd-mutator)))
     (sagittarius (import (only (sagittarius)
-                               er-macro-transformer
-                               gensym)
+                               er-macro-transformer)
                          (only (sagittarius clos)
                                is-a?
                                slot-ref-using-class

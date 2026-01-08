@@ -30,8 +30,9 @@ AT_KEYWORDS([default_keywords eager-macros])
 # unless you first actually install the ‘pipchix’ egg.
 AT_SKIP_IF(m4_if(implementation,[csc-5],[true],[false]))
 
-m4_define([sexpr],[(scheme->nix (zero? 0))])
-check_unquoted([run_scheme 'sexpr'],[0],[nix_true],[])
+m4_define([sexpr],[(scheme->nix (constant:e 5 1 2 3 4 7))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(5)·])],[])
 
 m4_define([sexpr],[(scheme->nix (reverse:e (reverse:e (reverse:e `(1 2 3 4)))))])
 check_unquoted([run_scheme 'sexpr'],[0],

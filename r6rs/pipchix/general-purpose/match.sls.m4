@@ -29,15 +29,7 @@ m4_include(pipchix/pipchix-includes.m4)
 
   (export m4_include(pipchix/general-purpose/match.exports.m4))
 
-  (import (for (except (rnrs (6))
-                       fold-right
-                       member
-                       assoc
-                       map
-                       remove)
-            run expand)
-          (for (pipchix general-purpose list)
-            run expand))
+  (import basic_libraries)
 
   ;; m4_define(«general_macros»,«syntax-case»)
   m4_include(pipchix/general-purpose/match.m4)

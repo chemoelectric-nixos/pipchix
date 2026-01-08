@@ -76,6 +76,7 @@ R6RS_SCHEME += r6rs/pipchix/general-purpose/continuation-capture.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/list.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/division.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/match.sls
+R6RS_SCHEME += r6rs/pipchix/general-purpose/gensym.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/define-record-factory.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/e-macros-environment.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/e-macros.sls
@@ -108,6 +109,7 @@ R7RS_SCHEME += r7rs/pipchix/general-purpose/continuation-capture.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/list.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/division.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/match.sld
+R7RS_SCHEME += r7rs/pipchix/general-purpose/gensym.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/define-record-factory.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/e-macros-environment.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/e-macros.sld
@@ -175,10 +177,13 @@ CHICKEN_EGGSPEC_BOTTOM = ' \
     (extension pipchix.general-purpose.continuation-capture) \
     (extension pipchix.general-purpose.list) \
     (extension pipchix.general-purpose.division) \
+    (extension pipchix.general-purpose.define-record-factory) \
+    (extension pipchix.general-purpose.gensym \
+      (component-dependencies \
+       pipchix.general-purpose.list)) \
     (extension pipchix.general-purpose.match \
       (component-dependencies \
        pipchix.general-purpose.list)) \
-    (extension pipchix.general-purpose.define-record-factory) \
     (extension pipchix.general-purpose.e-macros-environment \
       (component-dependencies \
        pipchix.general-purpose.list)) \
@@ -188,10 +193,11 @@ CHICKEN_EGGSPEC_BOTTOM = ' \
        pipchix.general-purpose.list)) \
     (extension pipchix.general-purpose.eager-syntax \
       (component-dependencies \
-       pipchix.general-purpose.list \
-       pipchix.general-purpose.match)) \
+       pipchix.general-purpose.gensym \
+       pipchix.general-purpose.list)) \
     (extension pipchix.general-purpose.eager-macros \
       (component-dependencies \
+       pipchix.general-purpose.gensym \
        pipchix.general-purpose.eager-syntax \
        pipchix.general-purpose.list)) \
     (extension pipchix.string-manipulation \
@@ -291,6 +297,7 @@ CHICKEN_5_EGGFILES = \
     pipchix.general-purpose.list.scm \
     pipchix.general-purpose.division.scm \
     pipchix.general-purpose.match.scm \
+    pipchix.general-purpose.gensym.scm \
     pipchix.general-purpose.define-record-factory.scm \
     pipchix.general-purpose.e-macros-environment.scm \
     pipchix.general-purpose.e-macros.scm \
