@@ -23,6 +23,8 @@
 ;;; WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ;;;
 
+;;; m4_define(«simple_eager_macro»,«(define-syntax $1:e (eager-syntax $1))»)
+
 (define-syntax identity:e
   ;; Expands to all its arguments.
   (eager-syntax (lambda args (apply values args))))
@@ -31,15 +33,10 @@
   ;; Expands to c, regardless of other arguments.
   (eager-syntax (lambda (c . rest) c)))
 
-(define-syntax gensym:e
-  ;; Expands to a unique identifier.
-  (eager-syntax gensym))
+simple_eager_macro(gensym) ;; Expands to a unique identifier.
+simple_eager_macro(generate-temporaries) ;; List of gensyms.
 
-(define-syntax generate-temporaries:e
-  ;; Expands to a list of unique identifiers.
-  (eager-syntax generate-temporaries))
-
-(define-syntax error:e
+(define-syntax error:e ;; Reports a syntax error.
   ;; (error:e message arg1 arg2 ...)
   (eager-syntax
    (case-lambda
@@ -54,13 +51,13 @@
       SLOW_SYNTAX_ERROR(«message»,«(list "More than nine:" msg*)»))
      )))
 
-(define-syntax reverse:e
-  ;; Reverses a list.
-  (eager-syntax reverse))
 
-(define-syntax append:e
-  ;; Appends lists.
-  (eager-syntax append))
+simple_eager_macro(cons)    ;; Forms pairs.
+simple_eager_macro(xcons)   ;; Forms pairs, with arguments exchanged.
+simple_eager_macro(cons*)   ;; Prepends elements to lists.
+simple_eager_macro(list)    ;; Forms lists from elements.
+simple_eager_macro(append)  ;; Appends lists.
+simple_eager_macro(reverse) ;; Reverses a list.
 
 (define-syntax even?:e
   ;; Tests if a list is of even length. Does so by approximately the

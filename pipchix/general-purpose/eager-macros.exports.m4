@@ -6,7 +6,11 @@ gensym:e
 generate-temporaries:e
 error:e
 
-reverse:e
+cons:e
+xcons:e
+cons*:e
+list:e
 append:e
+reverse:e
 
 even?:e
