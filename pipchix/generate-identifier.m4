@@ -66,19 +66,6 @@
         (set! seed x)
         x))))
 
-(define (uinteger64->bytevector u)
-  (let ((bv (make-bytevector 8)))
-    (let loop ((i 0)
-               (q u))
-      (unless (= i 8)
-        (let-values (((q r) (truncate/ q 256)))
-          (bytevector-u8-set! bv i r)
-          (loop (+ i 1) q))))
-    bv))
-
-(define (uinteger64->base64 u)
-  (bytevector->base64 (uinteger64->bytevector u)))
-
 (define (random-partial-identifier--general)
   (uinteger64->base64 (random-number-generator)))
 

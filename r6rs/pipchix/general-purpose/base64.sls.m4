@@ -1,6 +1,6 @@
 #!r6rs
 ;;;
-;;; Copyright © 2025, 2026 Barry Schwartz
+;;; Copyright © 2026 Barry Schwartz
 ;;;
 ;;; This file is part of Pipchix.
 ;;; 
@@ -25,27 +25,15 @@
 ;;;
 m4_include(pipchix/pipchix-includes.m4)
 
-(library (pipchix string-manipulation)
+(library (pipchix general-purpose base64)
 
-  (export m4_include(pipchix/string-manipulation.exports.m4))
+  (export m4_include(pipchix/general-purpose/base64.exports.m4))
 
   (import basic_libraries
           (rnrs mutable-strings (6))
-          (pipchix general-purpose box)
-          (pipchix general-purpose base64)
-          (pipchix general-purpose srfi-39))
+          (pipchix general-purpose division))
 
-  (define (string-copy! to at from)
-    ;; A limited version of string-copy! that assumes non-overlapping
-    ;; regions.
-    (let ((n (string-length from)))
-      (let loop ((i at)
-                 (j 0))
-        (unless (= j n)
-          (string-set! to i (string-ref from j))
-          (loop (+ i 1) (+ j 1))))))
-
-  m4_include(pipchix/string-manipulation.m4)
+  m4_include(pipchix/general-purpose/base64.m4)
 
   )
 

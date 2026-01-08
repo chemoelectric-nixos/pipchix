@@ -30,6 +30,7 @@ m4_include(pipchix/pipchix-includes.m4)
 
   (import basic_libraries)
   (import (pipchix string-manipulation))
+  (import (pipchix general-purpose base64))
   (import (pipchix general-purpose continuation-capture))
 
   (begin

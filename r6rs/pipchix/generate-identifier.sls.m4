@@ -31,6 +31,7 @@ m4_include(pipchix/pipchix-includes.m4)
 
   (import basic_libraries
           (pipchix string-manipulation)
+          (pipchix general-purpose base64)
           (pipchix general-purpose continuation-capture))
 
   (define read-string

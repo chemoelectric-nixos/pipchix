@@ -87,47 +87,6 @@
          (let ((handler (cdr handler-pair)))
            (handler str))))))))
 
-(define bytevector->base64
-  ;; Return the BASE64 representation of a bytevector.
-  (let* ((digits
-          "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/")
-         (look-up (lambda (i) (string-ref digits i))))
-    (lambda (bv)
-      (let* ((n (bytevector-length bv))
-             (bvref (lambda (bv j)
-                      (if (<= n j) 0 (bytevector-u8-ref bv j)))))
-        (let-values (((quot rem) (integer-division n 3)))
-          (let* ((m^ (if (zero? rem) quot (+ quot 1)))
-                 (m (* 4 m^))
-                 (str (make-string m)))
-            (let loop ((i 0))
-              (unless (= i m^)
-                (let* ((k (* i 4))
-                       (j (* i 3))
-                       (b0 (bvref bv j))
-                       (b1 (bvref bv (+ j 1)))
-                       (b2 (bvref bv (+ j 2))))
-                  (let-values
-                      (((b0x b0y) (integer-division b0 4))
-                       ((b1x b1y) (integer-division b1 16))
-                       ((b2x b2y) (integer-division b2 64)))
-                    (let ((u0 b0x)
-                          (u1 (+ b1x (* 16 b0y)))
-                          (u2 (+ b2x (* 4 b1y)))
-                          (u3 b2y))
-                      (string-set! str k (look-up u0))
-                      (string-set! str (+ k 1) (look-up u1))
-                      (string-set! str (+ k 2) (look-up u2))
-                      (string-set! str (+ k 3) (look-up u3))
-                      (loop (+ i 1)))))))
-            (unless (zero? rem)
-              (let ((q (* 4 quot)))
-                (let loop ((i (+ q 1 rem)))
-                  (unless (= i (+ q 4))
-                    (string-set! str i #\=)
-                    (loop (+ i 1))))))
-            str))))))
-
 (define (base64-utf8 str)
   ;; Return the BASE64 representation of the UTF-8 encoding of a
   ;; string.

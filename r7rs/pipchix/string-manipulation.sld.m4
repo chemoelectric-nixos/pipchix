@@ -30,6 +30,7 @@ m4_include(pipchix/pipchix-includes.m4)
 
   (import basic_libraries)
   (import (pipchix general-purpose box))
+  (import (pipchix general-purpose base64))
 
   ;; m4_ifelse(CHICKEN_5,«yes»,«
   (import (utf8))
@@ -37,8 +38,6 @@ m4_include(pipchix/pipchix-includes.m4)
   ;; »)
 
   (begin
-
-    (define integer-division truncate/)
 
     m4_include(pipchix/string-manipulation.m4)
 
