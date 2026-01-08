@@ -55,15 +55,21 @@ check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([nix_true])],[])
 
 m4_define([sexpr],
-  [(scheme->nix (length (generate-temporaries:e '\''(1 2 3 4 5 6 7))))])
+  [(scheme->nix (length:e (generate-temporaries:e '\''(1 2 3 4 5 6 7))))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([(7)·])],[])
 
 m4_define([sexpr],
-  [(scheme->nix (every (lambda (x) (and x @%:@t))
-                       (generate-temporaries:e '\''(1 2 3 4 5 6 7))))])
+  [(scheme->nix (every:e (lambda (x) (and x @%:@t))
+                         (generate-temporaries:e '\''(1 2 3 4 5 6 7))))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([nix_true])],[])
+
+m4_define([sexpr],
+  [(scheme->nix (any:e (lambda (x) (not (and x @%:@t)))
+                       (generate-temporaries:e '\''(1 2 3 4 5 6 7))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([nix_false])],[])
 
 m4_define([sexpr],
   [(scheme->nix (cons:e 0 `(1 2)))])
@@ -86,9 +92,34 @@ check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([@<:@·(3)·(4)·(5)·@<:@·(1)·(2)·@:>@·@:>@·])],[])
 
 m4_define([sexpr],
-  [(scheme->nix (take (circular-list:e 3 4 5) 8))])
+  [(scheme->nix (take:e (circular-list:e 3 4 5) 8))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([@<:@·(3)·(4)·(5)·(3)·(4)·(5)·(3)·(4)·@:>@·])],[])
+
+m4_define([sexpr],
+  [(scheme->nix (drop:e (take:e (circular-list:e 3 4 5) 8) 2))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·(5)·(3)·(4)·(5)·(3)·(4)·@:>@·])],[])
+
+m4_define([sexpr],
+  [(scheme->nix (take-right:e (drop:e (take:e (circular-list:e 3 4 5) 8) 2) 4))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·(4)·(5)·(3)·(4)·@:>@·])],[])
+
+m4_define([sexpr],
+  [(scheme->nix (last-pair:e (take-right:e (drop:e (take:e (circular-list:e 3 4 5) 8) 2) 4)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·(4)·@:>@·])],[])
+
+m4_define([sexpr],
+  [(scheme->nix (drop-right:e (take-right:e (drop:e (take:e (circular-list:e 3 4 5) 8) 2) 4) 2))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·(4)·(5)·@:>@·])],[])
+
+m4_define([sexpr],
+  [(scheme->nix (make-list:e 5 6))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·(6)·(6)·(6)·(6)·(6)·@:>@·])],[])
 
 m4_define([sexpr],
   [(scheme->nix (append:e `(1 2) (append:e `(3 4) `(5 6) (append:e `(7 8) `(9 10)))))])
@@ -99,6 +130,29 @@ m4_define([sexpr],[(scheme->nix (reverse:e (reverse:e (reverse:e `(1 2 3 4)))))]
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([@<:@·(4)·(3)·(2)·(1)·@:>@·])],[])
 
+m4_for([N],[1],[10],[1],[
+m4_pushdef([ORDINAL],m4_case(N,[1],[first],
+[2],[second],
+[3],[third],
+[4],[fourth],
+[5],[fifth],
+[6],[sixth],
+[7],[seventh],
+[8],[eighth],
+[9],[ninth],
+[10],[tenth],
+[1],[car],
+[2],[cadr],
+[3],[caddr],
+[4],[cadddr],
+[10],[last]))
+m4_define([sexpr],
+  [(scheme->nix (ORDINAL:e (list:e 15 25 35 45 55 65 75 85 95 105)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(N[]5)·])],[])
+m4_popdef([ORDINAL])
+])
+
 m4_define([sexpr],
   [(scheme->nix (even?:e `(1 2 3 4)))])
 check_unquoted([run_scheme 'sexpr'],[0],
@@ -108,6 +162,16 @@ m4_define([sexpr],
   [(scheme->nix (even?:e `(1 2 3 4 5)))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([nix_false])],[])
+
+m4_define([sexpr],
+  [(scheme->nix (odd?:e `(1 2 3 4)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([nix_false])],[])
+
+m4_define([sexpr],
+  [(scheme->nix (odd?:e `(1 2 3 4 5)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([nix_true])],[])
 
 AT_CLEANUP
 

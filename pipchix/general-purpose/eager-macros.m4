@@ -57,8 +57,66 @@ simple_eager_macro(xcons) ;; Forms pairs, with arguments exchanged.
 simple_eager_macro(cons*) ;; Prepends elements to lists.
 simple_eager_macro(list)  ;; Forms lists from elements.
 simple_eager_macro(circular-list) ;; Forms circular lists.
-simple_eager_macro(append)        ;; Appends lists.
-simple_eager_macro(reverse)       ;; Reverses a list.
+
+(define-syntax make-list:e
+  ;; Makes a list of n copies of element.
+  (eager-syntax
+   (lambda (n element)
+     (make-list n element))))
+
+simple_eager_macro(take)       ;; Takes the first n elements.
+simple_eager_macro(drop)       ;; Drops the first n elements.
+simple_eager_macro(take-right) ;; Takes the last n elements.
+simple_eager_macro(drop-right) ;; Drops the last n elements.
+simple_eager_macro(last)       ;; Returns the last element.
+simple_eager_macro(last-pair)  ;; Returns the last pair.
+simple_eager_macro(append)     ;; Appends lists.
+simple_eager_macro(reverse)    ;; Reverses a list.
+simple_eager_macro(length)     ;; Returns a lists length.
+simple_eager_macro(every)      ;; Tests for everthing true.
+simple_eager_macro(any)        ;; Tests for anything true.
+
+simple_eager_macro(car)
+simple_eager_macro(cdr)
+simple_eager_macro(caar)
+simple_eager_macro(cadr)
+simple_eager_macro(cdar)
+simple_eager_macro(cddr)
+simple_eager_macro(caaaar)
+simple_eager_macro(caaar)
+simple_eager_macro(caaddr)
+simple_eager_macro(cadaar)
+simple_eager_macro(cadar)
+simple_eager_macro(cadddr)
+simple_eager_macro(cdaaar)
+simple_eager_macro(cdaar)
+simple_eager_macro(cdaddr)
+simple_eager_macro(cddaar)
+simple_eager_macro(cddar)
+simple_eager_macro(cddddr)
+simple_eager_macro(caaadr)
+simple_eager_macro(caadar)
+simple_eager_macro(caadr)
+simple_eager_macro(cadadr)
+simple_eager_macro(caddar)
+simple_eager_macro(caddr)
+simple_eager_macro(cdaadr)
+simple_eager_macro(cdadar)
+simple_eager_macro(cdadr)
+simple_eager_macro(cddadr)
+simple_eager_macro(cdddar)
+simple_eager_macro(cdddr)
+
+simple_eager_macro(first)
+simple_eager_macro(second)
+simple_eager_macro(third)
+simple_eager_macro(fourth)
+simple_eager_macro(fifth)
+simple_eager_macro(sixth)
+simple_eager_macro(seventh)
+simple_eager_macro(eighth)
+simple_eager_macro(ninth)
+simple_eager_macro(tenth)
 
 (define-syntax even?:e
   ;; Tests if a list is of even length. Does so by approximately the
@@ -77,6 +135,12 @@ simple_eager_macro(reverse)       ;; Reverses a list.
           ;; expansion.
           (loop (drop lst 2)))
          )))))
+
+(define-syntax odd?:e
+  ;; Tests if a list is of odd length.
+  (eager-syntax
+   (lambda (lst)
+     (not (even?:e lst)))))
 
 m4_divert(-1)
 ;;; local variables:
