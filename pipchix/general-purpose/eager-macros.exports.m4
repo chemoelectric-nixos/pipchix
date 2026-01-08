@@ -25,11 +25,18 @@ append:e
 concatenate:e
 reverse:e
 append-reverse:e
+zip:e
 map:e
 append-map:e
-zip:e
+fold:e
+fold-right:e
+pair-fold:e
+pair-fold-right:e
+unfold:e
+unfold-right:e
 length:e
 length+:e
+count:e
 every:e
 any:e
 

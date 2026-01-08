@@ -70,6 +70,11 @@ check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([nix_false])],[])
 
 m4_define([sexpr],
+  [(scheme->nix (count:e even? '\''(1 2 3 4 5 6 7)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(3)·])],[])
+
+m4_define([sexpr],
   [(scheme->nix (every:e (lambda (x) (and x @%:@t))
                          (generate-temporaries:e '\''(1 2 3 4 5 6 7))))])
 check_unquoted([run_scheme 'sexpr'],[0],
@@ -168,6 +173,48 @@ check_unquoted([run_scheme 'sexpr'],[0],
 m4_define([sexpr],[(scheme->nix (append-reverse:e `(1 2 3 4) `("a" "b")))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([@<:@·(4)·(3)·(2)·(1)·("a")·("b")·@:>@·])],[])
+
+m4_define([sexpr],
+  [(scheme->nix
+    (fold:e cons* '\''() '\''("a" "b" "c") '\''(1 2 3 4 5)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·("c")·(3)·("b")·(2)·("a")·(1)·@:>@·])],[])
+
+m4_define([sexpr],
+  [(scheme->nix
+    (fold-right:e cons* '\''() '\''("a" "b" "c") '\''(1 2 3 4 5)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·("a")·(1)·("b")·(2)·("c")·(3)·@:>@·])],[])
+
+m4_define([sexpr],
+  [(scheme->nix
+    (pair-fold:e cons* '\''() '\''("a" "b" "c") '\''(1 2 3 4 5)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·[·("c")·]·[·(3)·(4)·(5)·]·[·("b")·("c")·]·[·(2)·(3)·(4)·(5)·]·[·("a")·("b")·("c")·]·[·(1)·(2)·(3)·(4)·(5)·]·]·]])],[])
+
+m4_define([sexpr],
+  [(scheme->nix
+    (pair-fold-right:e cons* '\''() '\''("a" "b" "c") '\''(1 2 3 4 5)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·[·("a")·("b")·("c")·]·[·(1)·(2)·(3)·(4)·(5)·]·[·("b")·("c")·]·[·(2)·(3)·(4)·(5)·]·[·("c")·]·[·(3)·(4)·(5)·]·]·]])],[])
+
+m4_define([sexpr],
+  [(scheme->nix
+    (unfold:e (lambda (x) (> x 10))
+              (lambda (x) (* x x))
+              (lambda (x) (+ x 1))
+              1))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·(1)·(4)·(9)·(16)·(25)·(36)·(49)·(64)·(81)·(100)·@:>@·])],[])
+
+m4_define([sexpr],
+  [(scheme->nix
+    (unfold-right:e zero?
+                    (lambda (x) (* x x))
+                    (lambda (x) (- x 1))
+                    10))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·(1)·(4)·(9)·(16)·(25)·(36)·(49)·(64)·(81)·(100)·@:>@·])],[])
 
 m4_for([N],[1],[10],[1],[
 m4_pushdef([ORDINAL],m4_case(N,[1],[first],
