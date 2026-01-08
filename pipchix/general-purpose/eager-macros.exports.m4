@@ -10,6 +10,7 @@ cons:e
 xcons:e
 cons*:e
 list:e
+circular-list:e
 append:e
 reverse:e
 

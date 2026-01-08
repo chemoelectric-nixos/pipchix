@@ -52,12 +52,13 @@ simple_eager_macro(generate-temporaries) ;; List of gensyms.
      )))
 
 
-simple_eager_macro(cons)    ;; Forms pairs.
-simple_eager_macro(xcons)   ;; Forms pairs, with arguments exchanged.
-simple_eager_macro(cons*)   ;; Prepends elements to lists.
-simple_eager_macro(list)    ;; Forms lists from elements.
-simple_eager_macro(append)  ;; Appends lists.
-simple_eager_macro(reverse) ;; Reverses a list.
+simple_eager_macro(cons)  ;; Forms pairs.
+simple_eager_macro(xcons) ;; Forms pairs, with arguments exchanged.
+simple_eager_macro(cons*) ;; Prepends elements to lists.
+simple_eager_macro(list)  ;; Forms lists from elements.
+simple_eager_macro(circular-list) ;; Forms circular lists.
+simple_eager_macro(append)        ;; Appends lists.
+simple_eager_macro(reverse)       ;; Reverses a list.
 
 (define-syntax even?:e
   ;; Tests if a list is of even length. Does so by approximately the
