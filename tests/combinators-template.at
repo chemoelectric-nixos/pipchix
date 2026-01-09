@@ -120,6 +120,46 @@ dnl  Purposely use procedures that require the short circuit.
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([nix_false])],[])
 
+m4_define([sexpr],
+  [(scheme->nix (and~> 3 (cut + <> 5) (cut / 13 <>) (cut = <> 2) number->string))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([nix_false])],[])
+
+m4_define([sexpr],
+  [(scheme->nix (thrush+-and 3 (cut + <> 5) (cut / 13 <>) (cut = <> 2) number->string))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([nix_false])],[])
+
+m4_define([sexpr],
+  [(scheme->nix (thrush+-and 3))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(3)·])],[])
+
+m4_define([sexpr],
+  [(scheme->nix (thrush+-and 3 (cut + <> 2)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(5)·])],[])
+
+m4_define([sexpr],
+  [(scheme->nix ((and~>* 1 2 3) + -))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(-6)·])],[])
+
+m4_define([sexpr],
+  [(scheme->nix ((thrush*-and 1 2 3) + -))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(-6)·])],[])
+
+m4_define([sexpr],
+  [(scheme->nix ((thrush*-and 1 2 3) + (cut = <> 5) list->vector))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([nix_false])],[])
+
+m4_define([sexpr],
+  [(scheme->nix ((and~>* 1 2 3) + (cut = <> 5) list->vector))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([nix_false])],[])
+
 AT_CLEANUP
 
 # local variables:

@@ -110,6 +110,27 @@
 (define λand~> thrush-and)       ;; Racket’s synonym.
 (define lambda-and~> thrush-and) ;; A synonym without Greek script.
 
+(define (thrush+-and val . proc*)
+  ;;
+  ;; Short-circuiting thrush+
+  ;;
+  (if (pair? proc*)
+    ((apply thrush-and proc*) val)
+    val))
+
+(define and~> thrush+-and) ;; A synonym known to Racket programmers.
+
+(define (thrush*-and val . val*)
+  ;;
+  ;; Short-circuiting thrush*
+  ;;
+  (lambda proc*
+    (call-with-values
+        (lambda () (apply values (cons val val*)))
+      (apply thrush-and proc*))))
+
+(define and~>* thrush*-and) ;; A synonym known to Racket programmers.
+
 m4_divert(-1)
 ;;; local variables:
 ;;; mode: scheme
