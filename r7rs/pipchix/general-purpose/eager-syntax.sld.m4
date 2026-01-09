@@ -33,7 +33,7 @@ m4_include(pipchix/pipchix-includes.m4)
 
   ;; m4_ifelse(CHICKEN_5,«yes»,«
 
-  (chicken-5 (import (chicken syntax)))
+  (import (chicken syntax))
 
   ;; »,« else not CHICKEN_5
 
