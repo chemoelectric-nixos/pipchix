@@ -51,6 +51,18 @@ simple_eager_macro(generate-temporaries) ;; List of gensyms.
       SLOW_SYNTAX_ERROR(«message»,«(list "More than nine:" msg*)»))
      )))
 
+simple_eager_macro(even?) ;; Is a number even?
+simple_eager_macro(odd?)  ;; Is a number odd?
+
+;; SRFI-1 predicates.
+simple_eager_macro(proper-list?)
+simple_eager_macro(circular-list?)
+simple_eager_macro(dotted-list?)
+simple_eager_macro(pair?)
+simple_eager_macro(null?)
+simple_eager_macro(not-pair?)
+simple_eager_macro(null-list?)
+simple_eager_macro(list=)
 
 simple_eager_macro(cons)  ;; Forms pairs.
 simple_eager_macro(xcons) ;; Forms pairs, with arguments exchanged.
@@ -134,9 +146,19 @@ simple_eager_macro(eighth)
 simple_eager_macro(ninth)
 simple_eager_macro(tenth)
 
-(define-syntax even?:e
+(define-syntax length-even?:e
+  ;;
   ;; Tests if a list is of even length. Does so by approximately the
   ;; algorithm for ‘em-even?’ from SRFI-148.
+  ;;
+  ;; eager-syntax can use Scheme numbers, and so there is no need to
+  ;; use list-length as numbers. Thus this macro and length-odd? are
+  ;; demonstrations. One can, for instance, use length:e, followed by
+  ;; even?:e or odd?:e, instead.
+  ;;
+  ;; An interesting exercise might be to write a macro to decide
+  ;; evenness of the number of actual arguments.
+  ;;
   (eager-syntax
    (lambda (lst)
      (unless (proper-list? lst)
@@ -152,11 +174,11 @@ simple_eager_macro(tenth)
           (loop (drop lst 2)))
          )))))
 
-(define-syntax odd?:e
+(define-syntax length-odd?:e
   ;; Tests if a list is of odd length.
   (eager-syntax
    (lambda (lst)
-     (not (even?:e lst)))))
+     (not (length-even?:e lst)))))
 
 m4_divert(-1)
 ;;; local variables:

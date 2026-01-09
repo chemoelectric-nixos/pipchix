@@ -6,6 +6,18 @@ gensym:e
 generate-temporaries:e
 error:e
 
+even?:e
+odd?:e
+
+proper-list?:e
+circular-list?:e
+dotted-list?:e
+pair?:e
+null?:e
+not-pair?:e
+null-list?:e
+list=:e
+
 cons:e
 xcons:e
 cons*:e
@@ -82,5 +94,5 @@ eighth:e
 ninth:e
 tenth:e
 
-even?:e
-odd?:e
+length-even?:e
+length-odd?:e
