@@ -195,7 +195,7 @@ AC_CONFIG_COMMANDS([tempname],
   SHELL="${SHELL}"
 ])
 
-TEST_LOCALE=C.utf8
+TEST_LOCALE=${TEST_LOCALE='C.utf8'}
 AC_ARG_VAR([TEST_LOCALE],
            [locale to use when running tests
             (default: C.utf8)])

@@ -12,6 +12,7 @@ cat > "${prog_scm}" <<EOF
         (pipchix general-purpose match)
         (pipchix general-purpose division)
         (pipchix general-purpose e-macros)
+        (pipchix general-purpose combinators)
         (for (pipchix general-purpose eager-syntax) run expand)
         (for (pipchix general-purpose eager-macros) run expand)
         (pipchix general-purpose continuation-capture)

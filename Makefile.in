@@ -366,6 +366,7 @@ CHICKEN_UNINSTALL_5 = @CHICKEN_UNINSTALL_5@
 CPPFLAGS = @CPPFLAGS@
 CSCOPE = @CSCOPE@
 CSC_5 = @CSC_5@
+CSC_5_OPTIMIZATION_LEVEL = @CSC_5_OPTIMIZATION_LEVEL@
 CSI_5 = @CSI_5@
 CTAGS = @CTAGS@
 CYGPATH_W = @CYGPATH_W@
@@ -532,6 +533,7 @@ R6RS_SCHEME = r6rs/pipchix/general-purpose/srfi-39.sls \
 	r6rs/pipchix/general-purpose/e-macros.sls \
 	r6rs/pipchix/general-purpose/eager-syntax.sls \
 	r6rs/pipchix/general-purpose/eager-macros.sls \
+	r6rs/pipchix/general-purpose/combinators.sls \
 	r6rs/pipchix/generate-identifier.sls \
 	r6rs/pipchix/essentials.sls r6rs/pipchix/expressions.sls \
 	r6rs/pipchix/macros.sls r6rs/pipchix/nix-embed.sls \
@@ -553,6 +555,7 @@ R7RS_SCHEME = r7rs/pipchix/general-purpose/box.sld \
 	r7rs/pipchix/general-purpose/e-macros.sld \
 	r7rs/pipchix/general-purpose/eager-syntax.sld \
 	r7rs/pipchix/general-purpose/eager-macros.sld \
+	r7rs/pipchix/general-purpose/combinators.sld \
 	r7rs/pipchix/generate-identifier.sld \
 	r7rs/pipchix/essentials.sld r7rs/pipchix/expressions.sld \
 	r7rs/pipchix/macros.sld r7rs/pipchix/nix-embed.sld \
@@ -612,6 +615,9 @@ CHICKEN_EGGSPEC_BOTTOM = ' \
       (component-dependencies \
        pipchix.general-purpose.gensym \
        pipchix.general-purpose.eager-syntax \
+       pipchix.general-purpose.list)) \
+    (extension pipchix.general-purpose.combinators \
+      (component-dependencies \
        pipchix.general-purpose.list)) \
     (extension pipchix.string-manipulation \
       (component-dependencies \
@@ -694,6 +700,7 @@ CHICKEN_5_EGGFILES = \
     pipchix.general-purpose.e-macros.scm \
     pipchix.general-purpose.eager-syntax.scm \
     pipchix.general-purpose.eager-macros.scm \
+    pipchix.general-purpose.combinators.scm \
     pipchix.generate-identifier.scm \
     pipchix.string-manipulation.scm \
     pipchix.abstract-syntax-tree.scm \
@@ -715,7 +722,8 @@ CHICKEN_5_EGGSPEC = ' \
      "-R" "utf8" \
      "-R" "r7rs" \
      "-X" "r7rs" \
-     "-O2" "-d1" \
+     "-O$(CSC_5_OPTIMIZATION_LEVEL)" \
+     "-d1" \
      "-compile-syntax")) \
  '$(CHICKEN_EGGSPEC_BOTTOM)
 

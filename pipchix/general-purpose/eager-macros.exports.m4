@@ -144,6 +144,3 @@ seventh:e
 eighth:e
 ninth:e
 tenth:e
-
-length-even?:e
-length-odd?:e

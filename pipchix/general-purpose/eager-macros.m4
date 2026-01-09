@@ -43,9 +43,9 @@ simple_eager_macro(generate-temporaries) ;; List of gensyms.
      ((message)
       SLOW_SYNTAX_ERROR(«message»))
      m4_forloop(N,1,9,«
-     ((message m4_forloop(M,1,N,« arg«»M»))
-      SLOW_SYNTAX_ERROR(«message»m4_forloop(M,1,N,«,arg«»M»)))
-     »)
+                ((message m4_forloop(M,1,N,« arg«»M»))
+                 SLOW_SYNTAX_ERROR(«message»m4_forloop(M,1,N,«,arg«»M»)))
+                »)
      ((message . msg*)
       ;; If there are more than nine irritants, put them in a list.
       SLOW_SYNTAX_ERROR(«message»,«(list "More than nine:" msg*)»))
@@ -204,45 +204,10 @@ simple_eager_macro(eighth)
 simple_eager_macro(ninth)
 simple_eager_macro(tenth)
 
-(define-syntax length-even?:e
-  ;;
-  ;; Tests if a list is of even length. Does so by approximately the
-  ;; algorithm for ‘em-even?’ from SRFI-148.
-  ;;
-  ;; eager-syntax can use Scheme numbers, and so there is no need to
-  ;; use list-length as numbers. Thus this macro and length-odd? are
-  ;; demonstrations. One can, for instance, use length:e, followed by
-  ;; even?:e or odd?:e, instead.
-  ;;
-  ;; An interesting exercise might be to write a macro to decide
-  ;; evenness of the number of actual arguments.
-  ;;
-  (eager-syntax
-   (lambda (lst)
-     (unless (proper-list? lst)
-       SCHEME_ERROR("expected a proper list", lst))
-     (let loop ((lst lst))
-       (cond
-         ((null? lst) #t)
-         ((null? (cdr lst)) #f)
-         (else
-          ;; This cannot be done (in any direct way) as a recursive
-          ;; macro, because eager-syntax would not know when to stop
-          ;; expansion.
-          (loop (drop lst 2)))
-         )))))
-
-(define-syntax length-odd?:e
-  ;; Tests if a list is of odd length.
-  (eager-syntax
-   (lambda (lst)
-     (not (length-even?:e lst)))))
-
 m4_divert(-1)
 ;;; local variables:
 ;;; mode: scheme
 ;;; geiser-scheme-implementation: chibi
 ;;; coding: utf-8
-;;; eval: (put 'syntax-rules:e 'scheme-indent-function 1)
 ;;; end:
 m4_divert«»m4_dnl

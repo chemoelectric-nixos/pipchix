@@ -13,6 +13,7 @@ cat > "${prog_scm}" <<EOF
 (import (pipchix general-purpose division))
 (import (pipchix general-purpose e-macros))
 (import (pipchix general-purpose eager-macros))
+(import (pipchix general-purpose combinators))
 (import (pipchix general-purpose continuation-capture))
 (import (pipchix abstract-syntax-tree))
 (import (pipchix nix-embed))

@@ -56,7 +56,7 @@ m4_include(pipchix/pipchix-includes.m4)
     ;; m4_pushdef(«general_macros»,«er-macro-transformer»)
     (import-for-syntax (chicken syntax))
     (import-for-syntax (scheme base))
-    (import-for-syntax (srfi 1))
+    (import-for-syntax (pipchix general-purpose list))
     m4_include(pipchix/general-purpose/eager-syntax.m4)
     ;; m4_popdef(«general_macros»)
 

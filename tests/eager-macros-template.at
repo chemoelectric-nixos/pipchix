@@ -398,26 +398,6 @@ check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([(I[]5)·])],[])
 ])
 
-m4_define([sexpr],
-  [(scheme->nix (length-even?:e `(1 2 3 4)))])
-check_unquoted([run_scheme 'sexpr'],[0],
-  [interpunct_nl([nix_true])],[])
-
-m4_define([sexpr],
-  [(scheme->nix (length-even?:e `(1 2 3 4 5)))])
-check_unquoted([run_scheme 'sexpr'],[0],
-  [interpunct_nl([nix_false])],[])
-
-m4_define([sexpr],
-  [(scheme->nix (length-odd?:e `(1 2 3 4)))])
-check_unquoted([run_scheme 'sexpr'],[0],
-  [interpunct_nl([nix_false])],[])
-
-m4_define([sexpr],
-  [(scheme->nix (length-odd?:e `(1 2 3 4 5)))])
-check_unquoted([run_scheme 'sexpr'],[0],
-  [interpunct_nl([nix_true])],[])
-
 AT_CLEANUP
 
 # local variables:

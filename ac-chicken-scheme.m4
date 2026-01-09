@@ -76,3 +76,8 @@ CHEM_PATH_PROGS_CACHED_AND_PRECIOUS([CSC_5],
     fi
   ])
 AM_CONDITIONAL([CSC_5],[test "${chem_cv_path_CSC_5_found}" != no])
+
+CSC_5_OPTIMIZATION_LEVEL=${CSC_5_OPTIMIZATION_LEVEL=2}
+AC_ARG_VAR([CSC_5_OPTIMIZATION_LEVEL],
+  [optimization level for the CHICKEN 5 egg (default: 2)
+   (one might reduce this when testing)])

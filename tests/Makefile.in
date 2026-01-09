@@ -192,6 +192,7 @@ CHICKEN_UNINSTALL_5 = @CHICKEN_UNINSTALL_5@
 CPPFLAGS = @CPPFLAGS@
 CSCOPE = @CSCOPE@
 CSC_5 = @CSC_5@
+CSC_5_OPTIMIZATION_LEVEL = @CSC_5_OPTIMIZATION_LEVEL@
 CSI_5 = @CSI_5@
 CTAGS = @CTAGS@
 CYGPATH_W = @CYGPATH_W@
@@ -322,9 +323,10 @@ EXTRA_DIST = testsuite.at $(srcdir)/package.m4 $(TESTSUITE) atlocal.in \
 	tests-template.at ast-nodes-preds-template.at \
 	base64-utf8-template.at list-template.at match-template.at \
 	division-template.at e-macros-template.at \
-	eager-macros-template.at continuation-capture-template.at \
-	escaped-utf8-template.at expressions-template.at \
-	macros-template.at nix-attributebinding-node-template.at \
+	eager-macros-template.at combinators-template.at \
+	continuation-capture-template.at escaped-utf8-template.at \
+	expressions-template.at macros-template.at \
+	nix-attributebinding-node-template.at \
 	nix-attributepath-node-template.at \
 	nix-attributeset-node-template.at nix-lambda-node-template.at \
 	nix-letrec-node-template.at nix-data-node-template.at \
@@ -345,6 +347,7 @@ TESTSUITE_DEPS = $(srcdir)/atlocal.in $(srcdir)/package.m4 \
 	$(srcdir)/match-template.at $(srcdir)/division-template.at \
 	$(srcdir)/e-macros-template.at \
 	$(srcdir)/eager-macros-template.at \
+	$(srcdir)/combinators-template.at \
 	$(srcdir)/continuation-capture-template.at \
 	$(srcdir)/shell-print-template.at \
 	$(srcdir)/base64-utf8-template.at \

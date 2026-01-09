@@ -666,6 +666,7 @@ GAUCHE
 CHIBI_SCHEME_FALSE
 CHIBI_SCHEME_TRUE
 CHIBI_SCHEME
+CSC_5_OPTIMIZATION_LEVEL
 CSC_5_FALSE
 CSC_5_TRUE
 CSC_5
@@ -877,6 +878,7 @@ CHICKEN_INSTALL_5
 CHICKEN_UNINSTALL_5
 CSI_5
 CSC_5
+CSC_5_OPTIMIZATION_LEVEL
 CHIBI_SCHEME
 GAUCHE
 GUILE
@@ -1589,6 +1591,9 @@ Some influential environment variables:
               chicken-uninstall version 5
   CSI_5       CHICKEN interpreter version 5
   CSC_5       CHICKEN compiler version 5
+  CSC_5_OPTIMIZATION_LEVEL
+              optimization level for the CHICKEN 5 egg (default: 2) (one might
+              reduce this when testing)
   CHIBI_SCHEME
               Chibi Scheme
   GAUCHE      Gauche Scheme
@@ -7471,6 +7476,9 @@ else
 fi
 
 
+CSC_5_OPTIMIZATION_LEVEL=${CSC_5_OPTIMIZATION_LEVEL=2}
+
+
 # Copyright © 2025 Barry Schwartz
 #
 # This file is part of Pipchix.
@@ -8359,7 +8367,7 @@ ac_config_links="$ac_config_links tinyscheme-1.42/opdefines.h:tinyscheme-1.42/op
 ac_config_commands="$ac_config_commands tempname"
 
 
-TEST_LOCALE=C.utf8
+TEST_LOCALE=${TEST_LOCALE='C.utf8'}
 
 
 cat >confcache <<\_ACEOF

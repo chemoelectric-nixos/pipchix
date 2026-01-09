@@ -27,6 +27,7 @@ m4_include(pipchix/pipchix-includes.m4)
 (define-library (pipchix general-purpose eager-macros)
 
   (export m4_include(pipchix/general-purpose/eager-macros.exports.m4))
+
   (import basic_libraries)
   (import (pipchix general-purpose gensym))
   (import (pipchix general-purpose eager-syntax))
@@ -34,6 +35,8 @@ m4_include(pipchix/pipchix-includes.m4)
   (begin
 
     ;; m4_ifelse(CHICKEN_5,«yes»,«
+    (import-for-syntax (pipchix general-purpose list))
+    (import-for-syntax (pipchix general-purpose gensym))
     (import-for-syntax (pipchix general-purpose eager-syntax))
     ;; »)
 
