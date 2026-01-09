@@ -30,8 +30,8 @@
   ;; (thrush f g h) returns a procedure whose data flow is
   ;; input-values => f => g => h => output-values
   ;;
-  ;; CHICKEN programmers may recognize similarity to the ‘clojurian’
-  ;; egg.
+  ;; One may wish to use this along with SRFI-26 (pipchix
+  ;; general-purpose cut).
   ;;
   (lambda vals
     (let ((p proc*))
@@ -50,6 +50,20 @@
 
 (define λ~> thrush)      ;; A synonym known to Racket programmers.
 (define lambda~> thrush) ;; A synonym without Greek script.
+
+(define (thrush+ val . proc*)
+  ;;
+  ;; A combinator known to Racket programmers. It is also a
+  ;; generalization of the CHICKEN Scheme ‘clojurian’ combinators.
+  ;;
+  ;; One may wish to use this along with SRFI-26 (pipchix
+  ;; general-purpose cut).
+  ;;
+  (if (pair? proc*)
+    ((apply thrush proc*) val)
+    val))
+
+(define ~> thrush+) ;; A synonym known to Racket programmers.
 
 m4_divert(-1)
 ;;; local variables:
