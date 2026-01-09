@@ -23,7 +23,23 @@
 ;;; WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ;;;
 
-(define (thrush proc . proc*)
+(define (thrush-maker caller)
+  ;;
+  ;; Creates ‘point-free’ combinators known to Racket programmers.
+  ;;
+  (lambda (proc . proc*)
+    (lambda vals
+      (let ((p proc*))
+        (define loop
+          (lambda vals
+            (if (pair? p)
+              (let ((proc (car p)))
+                (set! p (cdr p))
+                (caller loop proc vals))
+              (apply values vals))))
+        (caller loop proc vals)))))
+
+(define thrush
   ;;
   ;; A ‘point-free’ combinator known to Racket programmers.
   ;;
@@ -33,20 +49,11 @@
   ;; One may wish to use this along with SRFI-26 (pipchix
   ;; general-purpose cut).
   ;;
-  (lambda vals
-    (let ((p proc*))
-      (define loop
-        (lambda vals
-          (if (pair? p)
-            (let ((proc (car p)))
-              (set! p (cdr p))
-              (call-with-values
-                  (lambda () (apply proc vals))
-                loop))
-            (apply values vals))))
-      (call-with-values
-          (lambda () (apply proc vals))
-        loop))))
+  (thrush-maker
+   (lambda (loop proc vals)
+     (call-with-values
+         (lambda () (apply proc vals))
+       loop))))
 
 (define λ~> thrush)      ;; A synonym known to Racket programmers.
 (define lambda~> thrush) ;; A synonym without Greek script.
@@ -83,6 +90,25 @@
       (apply thrush proc*))))
 
 (define ~>* thrush*) ;; A synonym known to Racket programmers.
+
+(define thrush-and
+  ;;
+  ;; Short-circuiting thrush. Stops and returns #f as soon as any
+  ;; procedure returns the single value #f.
+  ;;
+  (let ((short-circuit? (lambda (vals)
+                          (and (pair? vals)
+                               (eq? (car vals) #f)
+                               (null? (cdr vals))))))
+    (thrush-maker
+     (lambda (loop proc vals)
+       (and (not (short-circuit? vals))
+            (call-with-values
+                (lambda () (apply proc vals))
+              loop))))))
+
+(define λand~> thrush-and)       ;; Racket’s synonym.
+(define lambda-and~> thrush-and) ;; A synonym without Greek script.
 
 m4_divert(-1)
 ;;; local variables:

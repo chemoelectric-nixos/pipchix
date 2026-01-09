@@ -90,6 +90,36 @@ m4_define([sexpr],
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([nix_true])],[])
 
+m4_define([sexpr],
+  [(scheme->nix ((thrush-and (cut + <> 3) (cut = <> 5)) 2))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([nix_true])],[])
+
+m4_define([sexpr],
+dnl  Purposely use procedures that require the short circuit.
+  [(scheme->nix ((thrush-and (cut + <> 3) (cut = <> 2) + - * /) 2))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([nix_false])],[])
+
+m4_define([sexpr],
+  [(scheme->nix
+    (let ((proc (λand~> (lambda lists
+                          (apply values (map reverse lists)))
+                        (lambda lists
+                          (apply values (map list->vector lists)))
+                        (lambda vectors
+                          (apply values (map vector->list vectors)))
+                        list)))
+      (proc `(1 2) `(3 4) `(5 6))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·[·(2)·(1)·]·[·(4)·(3)·]·[·(6)·(5)·]·]·]])],[])
+
+m4_define([sexpr],
+dnl  Purposely use procedures that require the short circuit.
+  [(scheme->nix ((lambda-and~> (cut + <> 3) (cut = <> 2) + - * /) 2))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([nix_false])],[])
+
 AT_CLEANUP
 
 # local variables:
