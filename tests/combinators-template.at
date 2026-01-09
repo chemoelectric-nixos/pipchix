@@ -75,6 +75,21 @@ m4_define([sexpr],
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([("13/8")·])],[])
 
+m4_define([sexpr],
+  [(scheme->nix (~> 3))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(3)·])],[])
+
+m4_define([sexpr],
+  [(scheme->nix ((thrush* "foo" "bar") string-append string-length))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(6)·])],[])
+
+m4_define([sexpr],
+  [(scheme->nix ((~>* 1 2 3) + even?))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([nix_true])],[])
+
 AT_CLEANUP
 
 # local variables:

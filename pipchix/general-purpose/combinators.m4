@@ -65,6 +65,25 @@
 
 (define ~> thrush+) ;; A synonym known to Racket programmers.
 
+(define (thrush* val . val*)
+  ;;
+  ;; Another Racket combinator. One can write
+  ;;
+  ;;   ((thrush* 1 2 3) proc1 proc2 proc3)
+  ;;
+  ;; instead of
+  ;;
+  ;;   ((thrush proc1 proc2 proc3) 1 2 3)
+  ;;
+  ;; or
+  ;;
+  (lambda proc*
+    (call-with-values
+        (lambda () (apply values (cons val val*)))
+      (apply thrush proc*))))
+
+(define ~>* thrush*) ;; A synonym known to Racket programmers.
+
 m4_divert(-1)
 ;;; local variables:
 ;;; mode: scheme
