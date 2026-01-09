@@ -160,6 +160,16 @@ check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([nix_false])],[])
 
 m4_define([sexpr],
+  [(scheme->nix (exact-integer?:e 5.0))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([nix_false])],[])
+
+m4_define([sexpr],
+  [(scheme->nix (exact-integer?:e 5))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([nix_true])],[])
+
+m4_define([sexpr],
   [(scheme->nix (length:e (generate-temporaries:e '\''(1 2 3 4 5 6 7))))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([(7)·])],[])
@@ -177,6 +187,34 @@ m4_define([sexpr],[(scheme->nix (odd?:e 173))])
 check_unquoted([run_scheme 'sexpr'],[0],[interpunct_nl([nix_true])],[])
 m4_define([sexpr],[(scheme->nix (odd?:e 174))])
 check_unquoted([run_scheme 'sexpr'],[0],[interpunct_nl([nix_false])],[])
+
+dnl  The regular ‘if’ composes:
+m4_define([sexpr],
+  [(scheme->nix
+    (reverse:e
+     (if (even?:e (length:e (list:e 1 2 3 4)))
+       (list:e 1 2 3)
+       (list:e 4 5 6))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·(3)·(2)·(1)·@:>@·])],[])
+
+dnl  The regular ‘and’ composes:
+m4_define([sexpr],
+  [(scheme->nix
+    (append:e (list:e 8 7 6 5)
+              (and (eqv?:e 1 1)
+                   (reverse:e (list:e 1 2 3 4)))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·(8)·(7)·(6)·(5)·(4)·(3)·(2)·(1)·@:>@·])],[])
+
+dnl  The regular ‘or’ composes:
+m4_define([sexpr],
+  [(scheme->nix
+    (append:e (list:e 8 7 6 5)
+              (or (eqv?:e 1 2)
+                  (reverse:e (list:e 1 2 3 4)))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·(8)·(7)·(6)·(5)·(4)·(3)·(2)·(1)·@:>@·])],[])
 
 m4_define([sexpr],
   [(scheme->nix (length+:e (circular-list:e '\''(1 2 3 4 5 6 7))))])

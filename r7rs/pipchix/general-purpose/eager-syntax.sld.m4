@@ -31,9 +31,13 @@ m4_include(pipchix/pipchix-includes.m4)
   (import basic_libraries)
   (import (pipchix general-purpose gensym))
 
-  (import basic_libraries)
+  ;; m4_ifelse(CHICKEN_5,«yes»,«
+
+  (chicken-5 (import (chicken syntax)))
+
+  ;; »,« else not CHICKEN_5
+
   (cond-expand
-    (chicken-5 (import (chicken syntax)))
     (chibi (import (only (chibi) er-macro-transformer)))
     (gauche (import (only (r7rs aux)
                           :info-alist
@@ -43,17 +47,22 @@ m4_include(pipchix/pipchix-includes.m4)
     ((or loko guile) (import (rnrs syntax-case (6))))
     (else))
 
+  ;; ») end not CHICKEN_5
+
   (begin
 
+    ;; m4_ifelse(CHICKEN_5,«yes»,«
+
+    ;; m4_pushdef(«general_macros»,«er-macro-transformer»)
+    (import-for-syntax (chicken syntax))
+    (import-for-syntax (scheme base))
+    (import-for-syntax (srfi 1))
+    m4_include(pipchix/general-purpose/eager-syntax.m4)
+    ;; m4_popdef(«general_macros»)
+
+    ;; »,« else not CHICKEN_5
+
     (cond-expand
-      (chicken-5
-       ;; m4_pushdef(«general_macros»,«er-macro-transformer»)
-       (import-for-syntax (chicken syntax))
-       (import-for-syntax (scheme base))
-       (import-for-syntax (srfi 1))
-       m4_include(pipchix/general-purpose/eager-syntax.m4)
-       ;; m4_popdef(«general_macros»)
-       )
       ((or loko guile)
        ;; m4_pushdef(«general_macros»,«syntax-case»)
        m4_include(pipchix/general-purpose/eager-syntax.m4)
@@ -64,6 +73,8 @@ m4_include(pipchix/pipchix-includes.m4)
        m4_include(pipchix/general-purpose/eager-syntax.m4)
        ;; m4_popdef(«general_macros»)
        ))
+
+    ;; ») end not CHICKEN_5
 
     ))
 
