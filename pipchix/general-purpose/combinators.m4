@@ -156,10 +156,7 @@
   ;; first go through a ‘join’ of the g and then are passed to f.
   ;;
   (let ((proc (apply join (cons g g*))))
-    (lambda (x . x*)
-      (call-with-values
-          (lambda () (apply proc (cons x x*)))
-        f))))
+    (wind-inner-outer proc f)))
 
 (define (wind-post f g . g*)
   ;;
@@ -167,10 +164,7 @@
   ;; values of f are passed through the ‘join’ of the g.
   ;;
   (let ((proc (apply join (cons g g*))))
-    (lambda (x . x*)
-      (call-with-values
-          (lambda () (apply f (cons x x*)))
-        proc))))
+    (wind-inner-outer f proc)))
 
 (define (wind f g . g*)
   ;;
@@ -181,7 +175,7 @@
   ;;
   (let ((pre (apply wind-pre (cons* f g g*))))
     (lambda (h . h*)
-      (apply wind-post pre h h*))))
+      (apply wind-post (cons* pre h h*)))))
 
 (define (join* proc)
   ;;
@@ -196,6 +190,33 @@
                      (cons (proc (car x*))
                            (recurs (cdr x*)))
                      '()))))))
+
+(define (wind-pre* f g)
+  ;;
+  ;; wind-pre for join*
+  ;;
+  (let ((proc (join* g)))
+    (wind-inner-outer proc f)))
+
+(define (wind-post* f g)
+  ;;
+  ;; wind-post for join*
+  ;;
+  (let ((proc (join* g)))
+    (wind-inner-outer f proc)))
+
+(define (wind* f g h)
+  ;;
+  ;; wind for join*
+  ;;
+  (let ((pre (wind-pre* f g)))
+    (wind-post* pre h)))
+
+(define (wind-inner-outer inner outer)
+  (lambda (x . x*)
+    (call-with-values
+        (lambda () (apply inner (cons x x*)))
+      outer)))
 
 ;;;-------------------------------------------------------------------
 

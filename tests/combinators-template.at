@@ -213,6 +213,38 @@ m4_define([sexpr],
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([[[·(2)·(3)·(4)·]·]])],[])
 
+m4_define([sexpr],
+  [(scheme->nix
+    (let ()
+      (define str< (wind-pre* < string-length))
+      (list (str< "foo" "barrr" "bazzzzz")
+            (str< "foooooo" "barrr" "baz"))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·nix_true[]nix_false@:>@·])],[])
+
+m4_define([sexpr],
+  [(scheme->nix
+    (let ()
+      (define partition-counts (wind-post* partition length))
+      (list (call-with-values
+                (lambda ()
+                  (partition-counts symbol? '\''(a b 1 2 3 4 5 c 5 7 8 d 8 e)))
+              list)
+            (call-with-values
+                (lambda ()
+                  (partition-counts even? '\''(1 2 3 4 5 6 7 8 9 10)))
+              list))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·[·(5)·(9)·]·[·(5)·(5)·]·]·]])],[])
+
+m4_define([sexpr],
+  [(scheme->nix
+    (let ()
+      (define str-append (wind* append string->list list->string))
+      (str-append "foo" "bar" "baz")))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([("foobarbaz")·])],[])
+
 AT_CLEANUP
 
 # local variables:
