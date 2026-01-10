@@ -4,5 +4,5 @@ thrush* ~>*
 thrush-and λand~> lambda-and~>
 thrush+-and and~>
 thrush*-and and~>*
-join
+join wind-pre wind-post wind
 join*

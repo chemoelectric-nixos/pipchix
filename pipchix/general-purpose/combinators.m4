@@ -23,7 +23,9 @@
 ;;; WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ;;;
 
-(define (thrush-maker caller)
+;;;-------------------------------------------------------------------
+
+(define (thrush-maker custom)
   ;;
   ;; Creates ‘point-free’ combinators known to Racket programmers.
   ;;
@@ -35,9 +37,9 @@
             (if (pair? p)
               (let ((proc (car p)))
                 (set! p (cdr p))
-                (caller loop proc vals))
+                (custom loop proc vals))
               (apply values vals))))
-        (caller loop proc vals)))))
+        (custom loop proc vals)))))
 
 (define thrush
   ;;
@@ -131,6 +133,8 @@
 
 (define and~>* thrush*-and) ;; A synonym known to Racket programmers.
 
+;;;-------------------------------------------------------------------
+
 (define (join proc . proc*)
   ;;
   ;; Join one-to-one procedures in parallel to make an n-to-n
@@ -146,6 +150,39 @@
                            (recurs (cdr proc*) (cdr x*)))
                      '()))))))
 
+(define (wind-pre f g . g*)
+  ;;
+  ;; This combinator may be familiar to Racket programmers. Values
+  ;; first go through a ‘join’ of the g and then are passed to f.
+  ;;
+  (let ((proc (apply join (cons g g*))))
+    (lambda (x . x*)
+      (call-with-values
+          (lambda () (apply proc (cons x x*)))
+        f))))
+
+(define (wind-post f g . g*)
+  ;;
+  ;; This combinator may be familiar to Racket programmers. The output
+  ;; values of f are passed through the ‘join’ of the g.
+  ;;
+  (let ((proc (apply join (cons g g*))))
+    (lambda (x . x*)
+      (call-with-values
+          (lambda () (apply f (cons x x*)))
+        proc))))
+
+(define (wind f g . g*)
+  ;;
+  ;; This combinator may be familiar to Racket programmers. It
+  ;; combines ‘wind-pre’ and ‘wind-post’. Values go through the ‘join’
+  ;; of the g, then through f, then they go through the ‘join’ of the
+  ;; h.
+  ;;
+  (let ((pre (apply wind-pre (cons* f g g*))))
+    (lambda (h . h*)
+      (apply wind-post pre h h*))))
+
 (define (join* proc)
   ;;
   ;; Apply a procedure to multiple values. This combinator may be
@@ -159,6 +196,8 @@
                      (cons (proc (car x*))
                            (recurs (cdr x*)))
                      '()))))))
+
+;;;-------------------------------------------------------------------
 
 m4_divert(-1)
 ;;; local variables:

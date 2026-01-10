@@ -176,6 +176,43 @@ m4_define([sexpr],
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([[[·("foo")·("bar")·]·]])],[])
 
+m4_define([sexpr],
+  [(scheme->nix
+    ((wind-pre + string-length (lambda (s)
+                                 (string-length
+                                  (symbol->string s))))
+     "foo" '\''bazz))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(7)·])],[])
+
+m4_define([sexpr],
+  [(scheme->nix
+    (call-with-values
+        (lambda ()
+          ((wind-post partition length length)
+           number? '\''(1 2 3 a 4 5 6 "foo" 8)))
+      list))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·(7)·(2)·]·]])],[])
+
+m4_define([sexpr],
+  [(scheme->nix
+    (let ()
+      (define (sqr x) (* x x))
+      (define pythagoras ((wind + sqr sqr) sqrt))
+      (list (pythagoras 3 4)
+            (pythagoras 5 12))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·(5)·(13)·]·]])],[])
+
+m4_define([sexpr],
+  [(scheme->nix
+    (call-with-values
+        (lambda () ((join* (cut + <> 1)) 1 2 3))
+      list))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·(2)·(3)·(4)·]·]])],[])
+
 AT_CLEANUP
 
 # local variables:
