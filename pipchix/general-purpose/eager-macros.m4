@@ -149,6 +149,7 @@ simple_eager_macro(reverse)        ;; Reverses a list.
 simple_eager_macro(append-reverse) ;; Reverses, then appends a tail.
 simple_eager_macro(zip)            ;; Join lists element by element.
 simple_eager_macro(map)            ;; Maps elements from list to list.
+simple_eager_macro(filter-map)     ;; Maps elements except some.
 simple_eager_macro(append-map)     ;; Maps lists and appends results.
 simple_eager_macro(fold)
 simple_eager_macro(fold-right)
@@ -156,6 +157,10 @@ simple_eager_macro(pair-fold)
 simple_eager_macro(pair-fold-right)
 simple_eager_macro(unfold)
 simple_eager_macro(unfold-right)
+simple_eager_macro(filter)
+simple_eager_macro(remove)
+simple_eager_macro(delete)
+simple_eager_macro(delete-duplicates)
 simple_eager_macro(length)         ;; Returns a list’s length.
 simple_eager_macro(length+)        ;; Returns a list’s length or #f.
 simple_eager_macro(count)          ;; Counts elements passing a test.

@@ -26,10 +26,6 @@ AT_SETUP([setup_message(eager-macros)])
 
 AT_KEYWORDS([default_keywords eager-macros])
 
-# Currently the library does not work with the CHICKEN 5 compiler,
-# unless you first actually install the ‘pipchix’ egg.
-AT_SKIP_IF(m4_if(implementation,[csc-5],[true],[false]))
-
 m4_define([sexpr],[(scheme->nix (call-with-values (lambda () (identity:e 5 1 2 3 4 7)) list))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([@<:@·(5)·(1)·(2)·(3)·(4)·(7)·@:>@·])],[])
@@ -269,6 +265,12 @@ check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([@<:@·("0")·("1")·("2")·("3")·("4")·@:>@·])],[])
 
 m4_define([sexpr],
+  [(scheme->nix (filter-map:e (lambda (n) (and (even? n) (number->string n)))
+                              (iota:e 5)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·("0")·("2")·("4")·@:>@·])],[])
+
+m4_define([sexpr],
   [(scheme->nix (append-map:e (lambda (x) (list x (- x))) (list:e 1 3 8)))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([@<:@·(1)·(-1)·(3)·(-3)·(8)·(-8)·@:>@·])],[])
@@ -367,6 +369,36 @@ m4_define([sexpr],
                     10))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([@<:@·(1)·(4)·(9)·(16)·(25)·(36)·(49)·(64)·(81)·(100)·@:>@·])],[])
+
+m4_define([sexpr],
+  [(scheme->nix (filter:e even? '\''(1 2 3 4 5 6)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·(2)·(4)·(6)·@:>@·])],[])
+
+m4_define([sexpr],
+  [(scheme->nix (remove:e odd? '\''(1 2 3 4 5 6)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·(2)·(4)·(6)·@:>@·])],[])
+
+m4_define([sexpr],
+  [(scheme->nix (delete:e 3 '\''(1 2 3 4 5 6)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·(1)·(2)·(4)·(5)·(6)·@:>@·])],[])
+
+m4_define([sexpr],
+  [(scheme->nix (delete:e 2 '\''(1 2 3 4 5 6) <))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·(1)·(2)·@:>@·])],[])
+
+m4_define([sexpr],
+  [(scheme->nix (delete-duplicates:e '\''(1 2 3 3 4 5 6 1 1 6 1 2 3 3)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·(1)·(2)·(3)·(4)·(5)·(6)·@:>@·])],[])
+
+m4_define([sexpr],
+  [(scheme->nix (delete-duplicates:e '\''(1 2 3 3 4 5 6 1 1 6 1 2 3 3) =))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([@<:@·(1)·(2)·(3)·(4)·(5)·(6)·@:>@·])],[])
 
 m4_for([N],[1],[10],[1],[
 m4_pushdef([ORDINAL],m4_case(N,[1],[first],

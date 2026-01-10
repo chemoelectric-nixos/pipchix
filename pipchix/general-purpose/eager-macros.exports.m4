@@ -90,6 +90,7 @@ reverse:e
 append-reverse:e
 zip:e
 map:e
+filter-map:e
 append-map:e
 fold:e
 fold-right:e
@@ -97,6 +98,10 @@ pair-fold:e
 pair-fold-right:e
 unfold:e
 unfold-right:e
+filter:e
+remove:e
+delete:e
+delete-duplicates:e
 length:e
 length+:e
 count:e
