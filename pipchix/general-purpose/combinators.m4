@@ -131,6 +131,21 @@
 
 (define and~>* thrush*-and) ;; A synonym known to Racket programmers.
 
+(define (join proc . proc*)
+  ;;
+  ;; Join one-to-one procedures in parallel to make an n-to-n
+  ;; procedure. This combinator may be familiar to Racket programmers.
+  ;;
+  (lambda (x . x*)
+    (apply values
+           (cons (proc x)
+                 (let recurs ((proc* proc*)
+                              (x* x*))
+                   (if (pair? proc*)
+                     (cons ((car proc*) (car x*))
+                           (recurs (cdr proc*) (cdr x*)))
+                     '()))))))
+
 m4_divert(-1)
 ;;; local variables:
 ;;; mode: scheme

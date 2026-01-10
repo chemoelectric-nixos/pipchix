@@ -160,6 +160,14 @@ m4_define([sexpr],
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([nix_false])],[])
 
+m4_define([sexpr],
+  [(scheme->nix
+    (call-with-values
+        (lambda () ((join (cut + <> 1) (cut - <> 1)) 0 0))
+      list))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·(1)·(-1)·]·]])],[])
+
 AT_CLEANUP
 
 # local variables:
