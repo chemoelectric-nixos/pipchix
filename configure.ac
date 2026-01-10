@@ -146,10 +146,6 @@ AC_CONFIG_FILES([tests/run-r6rs-chez.sh],
                 [chmod +x tests/run-r6rs-chez.sh])
 AC_CONFIG_FILES([tests/run-r7rs-chibi.sh],
                 [chmod +x tests/run-r7rs-chibi.sh])
-AC_CONFIG_FILES([tests/run-r7rs-csc-5.sh],
-                [chmod +x tests/run-r7rs-csc-5.sh])
-AC_CONFIG_FILES([tests/run-r7rs-csi-5.sh],
-                [chmod +x tests/run-r7rs-csi-5.sh])
 AC_CONFIG_FILES([tests/run-r7rs-gauche.sh],
                 [chmod +x tests/run-r7rs-gauche.sh])
 AC_CONFIG_FILES([tests/run-r6rs-guile.sh],
