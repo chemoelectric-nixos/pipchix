@@ -146,6 +146,20 @@
                            (recurs (cdr proc*) (cdr x*)))
                      '()))))))
 
+(define (join* proc)
+  ;;
+  ;; Apply a procedure to multiple values. This combinator may be
+  ;; familiar to Racket programmers.
+  ;;
+  (lambda (x . x*)
+    (apply values
+           (cons (proc x)
+                 (let recurs ((x* x*))
+                   (if (pair? x*)
+                     (cons (proc (car x*))
+                           (recurs (cdr x*)))
+                     '()))))))
+
 m4_divert(-1)
 ;;; local variables:
 ;;; mode: scheme

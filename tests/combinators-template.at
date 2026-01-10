@@ -168,6 +168,14 @@ m4_define([sexpr],
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([[[·(1)·(-1)·]·]])],[])
 
+m4_define([sexpr],
+  [(scheme->nix
+    (call-with-values
+        (lambda () ((join* symbol->string) '\''foo '\''bar))
+      list))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·("foo")·("bar")·]·]])],[])
+
 AT_CLEANUP
 
 # local variables:
