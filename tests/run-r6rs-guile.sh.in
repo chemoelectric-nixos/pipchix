@@ -7,12 +7,14 @@ prog_scm=`@abs_top_builddir@/tempname`.scm
 
 cat > "${prog_scm}" <<EOF
 (import (except (rnrs (6)) fold-right member assoc map remove)
+        (rnrs mutable-strings (6))
         (pipchix general-purpose cut)
         (pipchix general-purpose list)
         (pipchix general-purpose match)
         (pipchix general-purpose division)
         (pipchix general-purpose e-macros)
         (pipchix general-purpose eager-macros)
+        (pipchix general-purpose ec)
         (pipchix general-purpose combinators)
         (pipchix general-purpose continuation-capture)
         (pipchix abstract-syntax-tree)

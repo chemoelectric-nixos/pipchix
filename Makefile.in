@@ -509,6 +509,7 @@ R6RS_SCHEME = r6rs/pipchix/general-purpose/srfi-39.sls \
 	r6rs/pipchix/general-purpose/e-macros.sls \
 	r6rs/pipchix/general-purpose/eager-syntax.sls \
 	r6rs/pipchix/general-purpose/eager-macros.sls \
+	r6rs/pipchix/general-purpose/ec.sls \
 	r6rs/pipchix/general-purpose/combinators.sls \
 	r6rs/pipchix/generate-identifier.sls \
 	r6rs/pipchix/essentials.sls r6rs/pipchix/expressions.sls \
@@ -531,6 +532,7 @@ R7RS_SCHEME = r7rs/pipchix/general-purpose/box.sld \
 	r7rs/pipchix/general-purpose/e-macros.sld \
 	r7rs/pipchix/general-purpose/eager-syntax.sld \
 	r7rs/pipchix/general-purpose/eager-macros.sld \
+	r7rs/pipchix/general-purpose/ec.sld \
 	r7rs/pipchix/general-purpose/combinators.sld \
 	r7rs/pipchix/generate-identifier.sld \
 	r7rs/pipchix/essentials.sld r7rs/pipchix/expressions.sld \

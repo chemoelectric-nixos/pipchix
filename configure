@@ -7826,10 +7826,6 @@ ac_config_files="$ac_config_files tests/run-r6rs-chez.sh"
 
 ac_config_files="$ac_config_files tests/run-r7rs-chibi.sh"
 
-ac_config_files="$ac_config_files tests/run-r7rs-csc-5.sh"
-
-ac_config_files="$ac_config_files tests/run-r7rs-csi-5.sh"
-
 ac_config_files="$ac_config_files tests/run-r7rs-gauche.sh"
 
 ac_config_files="$ac_config_files tests/run-r6rs-guile.sh"
@@ -8721,8 +8717,6 @@ do
     "tests/atlocal") CONFIG_FILES="$CONFIG_FILES tests/atlocal" ;;
     "tests/run-r6rs-chez.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r6rs-chez.sh" ;;
     "tests/run-r7rs-chibi.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r7rs-chibi.sh" ;;
-    "tests/run-r7rs-csc-5.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r7rs-csc-5.sh" ;;
-    "tests/run-r7rs-csi-5.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r7rs-csi-5.sh" ;;
     "tests/run-r7rs-gauche.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r7rs-gauche.sh" ;;
     "tests/run-r6rs-guile.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r6rs-guile.sh" ;;
     "tests/run-r7rs-guile.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r7rs-guile.sh" ;;
@@ -9365,8 +9359,6 @@ EOF
     ;;
     "tests/run-r6rs-chez.sh":F) chmod +x tests/run-r6rs-chez.sh ;;
     "tests/run-r7rs-chibi.sh":F) chmod +x tests/run-r7rs-chibi.sh ;;
-    "tests/run-r7rs-csc-5.sh":F) chmod +x tests/run-r7rs-csc-5.sh ;;
-    "tests/run-r7rs-csi-5.sh":F) chmod +x tests/run-r7rs-csi-5.sh ;;
     "tests/run-r7rs-gauche.sh":F) chmod +x tests/run-r7rs-gauche.sh ;;
     "tests/run-r6rs-guile.sh":F) chmod +x tests/run-r6rs-guile.sh ;;
     "tests/run-r7rs-guile.sh":F) chmod +x tests/run-r7rs-guile.sh ;;

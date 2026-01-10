@@ -54,6 +54,7 @@ m4_include(match-template.at)
 m4_include(division-template.at)
 m4_include(e-macros-template.at)
 m4_include(eager-macros-template.at)
+m4_include(ec-template.at)
 m4_include(combinators-template.at)
 m4_include(continuation-capture-template.at)
 

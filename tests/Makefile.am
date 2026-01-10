@@ -136,6 +136,7 @@ TESTSUITE_DEPS += $(srcdir)/match-template.at
 TESTSUITE_DEPS += $(srcdir)/division-template.at
 TESTSUITE_DEPS += $(srcdir)/e-macros-template.at
 TESTSUITE_DEPS += $(srcdir)/eager-macros-template.at
+TESTSUITE_DEPS += $(srcdir)/ec-template.at
 TESTSUITE_DEPS += $(srcdir)/combinators-template.at
 TESTSUITE_DEPS += $(srcdir)/continuation-capture-template.at
 
