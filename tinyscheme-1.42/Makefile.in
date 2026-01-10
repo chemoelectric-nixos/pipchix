@@ -119,11 +119,9 @@ am__aclocal_m4_deps = $(top_srcdir)/m4/ax_check_compile_flag.m4 \
 	$(top_srcdir)/m4/chem_prog_gnu_make.m4 \
 	$(top_srcdir)/m4/chem_prog_m4.m4 \
 	$(top_srcdir)/m4/chem_unique_id.m4 \
-	$(top_srcdir)/ac-chicken-install-options.m4 \
 	$(top_srcdir)/ac-r6rs-install-options.m4 \
 	$(top_srcdir)/ac-r7rs-install-options.m4 \
 	$(top_srcdir)/ac-tinyscheme.m4 $(top_srcdir)/ac-chez-scheme.m4 \
-	$(top_srcdir)/ac-chicken-scheme.m4 \
 	$(top_srcdir)/ac-chibi-scheme.m4 \
 	$(top_srcdir)/ac-gauche-scheme.m4 \
 	$(top_srcdir)/ac-guile-scheme.m4 \
@@ -176,13 +174,8 @@ CFLAGS_FOR_PIC = @CFLAGS_FOR_PIC@
 CFLAGS_FOR_STATIC = @CFLAGS_FOR_STATIC@
 CHEZ_SCHEME = @CHEZ_SCHEME@
 CHIBI_SCHEME = @CHIBI_SCHEME@
-CHICKEN_INSTALL_5 = @CHICKEN_INSTALL_5@
-CHICKEN_UNINSTALL_5 = @CHICKEN_UNINSTALL_5@
 CPPFLAGS = @CPPFLAGS@
 CSCOPE = @CSCOPE@
-CSC_5 = @CSC_5@
-CSC_5_OPTIMIZATION_LEVEL = @CSC_5_OPTIMIZATION_LEVEL@
-CSI_5 = @CSI_5@
 CTAGS = @CTAGS@
 CYGPATH_W = @CYGPATH_W@
 DEFS = @DEFS@
@@ -251,8 +244,6 @@ build_cpu = @build_cpu@
 build_os = @build_os@
 build_vendor = @build_vendor@
 builddir = @builddir@
-chickeneggs5pipchixdir = @chickeneggs5pipchixdir@
-chickeneggsdir = @chickeneggsdir@
 datadir = @datadir@
 datarootdir = @datarootdir@
 docdir = @docdir@
@@ -263,8 +254,6 @@ enable_check_r6rs_loko = @enable_check_r6rs_loko@
 enable_check_r6rs_racket = @enable_check_r6rs_racket@
 enable_check_r6rs_sagittarius = @enable_check_r6rs_sagittarius@
 enable_check_r7rs_chibi = @enable_check_r7rs_chibi@
-enable_check_r7rs_csc_5 = @enable_check_r7rs_csc_5@
-enable_check_r7rs_csi_5 = @enable_check_r7rs_csi_5@
 enable_check_r7rs_gauche = @enable_check_r7rs_gauche@
 enable_check_r7rs_guile = @enable_check_r7rs_guile@
 enable_check_r7rs_loko = @enable_check_r7rs_loko@
@@ -281,7 +270,6 @@ ifGNUmake = @ifGNUmake@
 ifnGNUmake = @ifnGNUmake@
 includedir = @includedir@
 infodir = @infodir@
-install_chicken_5_egg_source = @install_chicken_5_egg_source@
 install_r6rs_source = @install_r6rs_source@
 install_r7rs_source = @install_r7rs_source@
 install_sh = @install_sh@

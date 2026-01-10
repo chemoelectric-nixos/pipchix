@@ -27,16 +27,11 @@ m4_include(pipchix/pipchix-includes.m4)
 (define-library (pipchix general-purpose gensym)
 
   (export gensym generate-temporaries)
-  ;; m4_ifelse(CHICKEN_5,«yes»,,«
   (cond-expand
     (gauche (export :info-alist))
     (else))
-  ;; »)
 
   (import basic_libraries)
-  ;; m4_ifelse(CHICKEN_5,«yes»,«
-  (import (only (chicken base) gensym))
-  ;; »,«
   (cond-expand
     (chibi (import (scheme file))
            (import (pipchix general-purpose base64))
@@ -45,14 +40,9 @@ m4_include(pipchix/pipchix-includes.m4)
     (sagittarius (import (only (sagittarius) gensym)))
     ((or loko guile) (import (rnrs syntax-case (6))))
     (else))
-  ;; »)
 
   (begin
 
-    ;; m4_ifelse(CHICKEN_5,«yes»,«
-    (define (generate-temporaries lst)
-      (map (lambda (x) (gensym)) lst))
-    ;; »,«
     (cond-expand
       ((or loko guile)
        (define gensym
@@ -140,7 +130,6 @@ m4_include(pipchix/pipchix-includes.m4)
       (else
        (define (generate-temporaries lst)
          (map (lambda (x) (gensym)) lst))))
-    ;; »)
 
     ))
 

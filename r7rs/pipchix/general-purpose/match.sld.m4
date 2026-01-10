@@ -27,56 +27,9 @@ m4_include(pipchix/pipchix-includes.m4)
 (define-library (pipchix general-purpose match)
 
   (export m4_include(pipchix/general-purpose/match.exports.m4))
-  ;; m4_ifelse(CHICKEN_5,«yes»,«
-  (export match-set!-ineffectively
-          match-bound-identifier-memv
-          match-bound-identifier=?
-          match-check-identifier
-          match-check-ellipsis
-          match-check-underscore
-          match-cons
-          match-rewrite2
-          match-rewrite
-          match-letrec-two-step
-          match-letrec-two
-          match-letrec-one
-          match-named-let
-          match-let/aux
-          match-extract-quasiquote-vars-step
-          match-extract-quasiquote-vars
-          match-extract-vars-step
-          match-extract-vars
-          match-record-named-refs
-          match-record-refs
-          match-vector-tail-two
-          match-vector-tail
-          match-gen-vector-ellipsis
-          match-vector-step
-          match-vector-two
-          match-vector
-          match-gen-search
-          match-verify-no-ellipsis
-          match-gen-ellipsis/range
-          match-gen-ellipsis/qq
-          match-gen-ellipsis
-          match-gen-or-step
-          match-gen-or
-          match-drop-first-arg
-          match-tuck-ids
-          match-drop-ids
-          match-quasiquote-step
-          match-quasiquote
-          match-two
-          match-one
-          match-next
-          match-syntax-error
-          chicken-scheme-keyword?)
-  ;; »)
-  ;; m4_ifelse(CHICKEN_5,«yes»,,«
   (cond-expand
     (gauche (export :info-alist))
     (else))
-  ;; »)
 
   (import basic_libraries)
 
@@ -113,13 +66,6 @@ m4_include(pipchix/pipchix-includes.m4)
   (begin
 
     (cond-expand
-      (chicken-5
-       ;; m4_pushdef(«general_macros»,«er-macro-transformer»)
-       (import-for-syntax (scheme base))
-       (import-for-syntax (srfi 1))
-       m4_include(pipchix/general-purpose/match.m4)
-       ;; m4_popdef(«general_macros»)
-       )
       ((or loko guile)
        ;; m4_pushdef(«general_macros»,«syntax-case»)
        m4_include(pipchix/general-purpose/match.m4)

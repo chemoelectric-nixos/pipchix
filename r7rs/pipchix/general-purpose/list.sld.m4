@@ -40,8 +40,6 @@ m4_include(pipchix/pipchix-includes.m4)
   (cond-expand
     ((or chibi guile loko)
      (import (scheme case-lambda)))
-    ((or chicken-5)
-     (import (srfi 1)))
     (else
      (import (scheme list))))
 

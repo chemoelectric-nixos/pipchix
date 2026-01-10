@@ -32,11 +32,6 @@ m4_include(pipchix/pipchix-includes.m4)
   (import (pipchix general-purpose box))
   (import (pipchix general-purpose base64))
 
-  ;; m4_ifelse(CHICKEN_5,«yes»,«
-  (import (utf8))
-  (import (utf8-srfi-13))
-  ;; »)
-
   (begin
 
     m4_include(pipchix/string-manipulation.m4)

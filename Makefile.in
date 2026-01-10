@@ -137,28 +137,21 @@ POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
 EXTRA_PROGRAMS = is-older$(EXEEXT)
-@INSTALL_CHICKEN_5_EGG_SOURCE_TRUE@am__append_1 = $(CHICKEN_5_EGGFILES)
-@INSTALL_R6RS_SOURCE_TRUE@am__append_2 = $(R6RS_SCHEME)
-@INSTALL_R7RS_SOURCE_TRUE@am__append_3 = $(R7RS_SCHEME)
-
+@INSTALL_R6RS_SOURCE_TRUE@am__append_1 = $(R6RS_SCHEME)
+@INSTALL_R7RS_SOURCE_TRUE@am__append_2 = $(R7RS_SCHEME)
+@CHEZ_SCHEME_TRUE@@ENABLE_CHECK_R6RS_CHEZ_TRUE@am__append_3 = $(R6RS_SCHEME)
+@CHIBI_SCHEME_TRUE@@ENABLE_CHECK_R7RS_CHIBI_TRUE@am__append_4 = $(R7RS_SCHEME)
+@ENABLE_CHECK_R7RS_GAUCHE_TRUE@@GAUCHE_TRUE@am__append_5 = $(R7RS_SCHEME)
+@ENABLE_CHECK_R6RS_GUILE_TRUE@@GUILE_TRUE@am__append_6 = $(R6RS_SCHEME)
 #
-@CHICKEN_INSTALL_5_TRUE@@CSI_5_TRUE@@ENABLE_CHECK_R7RS_CSI_5_TRUE@am__append_4 = chicken-5-egg-stamp
+@ENABLE_CHECK_R7RS_GUILE_TRUE@@GUILE_TRUE@am__append_7 = $(R7RS_SCHEME)
+@ENABLE_CHECK_R6RS_LOKO_TRUE@@LOKO_TRUE@am__append_8 = $(R6RS_SCHEME)
 #
-@CHICKEN_INSTALL_5_TRUE@@CSC_5_TRUE@@ENABLE_CHECK_R7RS_CSC_5_TRUE@am__append_5 = chicken-5-egg-stamp
+@ENABLE_CHECK_R7RS_LOKO_TRUE@@LOKO_TRUE@am__append_9 = $(R7RS_SCHEME)
+@ENABLE_CHECK_R6RS_RACKET_TRUE@@PLT_R6RS_TRUE@am__append_10 = $(R6RS_SCHEME)
+@ENABLE_CHECK_R6RS_SAGITTARIUS_TRUE@@SAGITTARIUS_TRUE@am__append_11 = $(R6RS_SCHEME)
 #
-@CHEZ_SCHEME_TRUE@@ENABLE_CHECK_R6RS_CHEZ_TRUE@am__append_6 = $(R6RS_SCHEME)
-@CHIBI_SCHEME_TRUE@@ENABLE_CHECK_R7RS_CHIBI_TRUE@am__append_7 = $(R7RS_SCHEME)
-@ENABLE_CHECK_R7RS_GAUCHE_TRUE@@GAUCHE_TRUE@am__append_8 = $(R7RS_SCHEME)
-@ENABLE_CHECK_R6RS_GUILE_TRUE@@GUILE_TRUE@am__append_9 = $(R6RS_SCHEME)
-#
-@ENABLE_CHECK_R7RS_GUILE_TRUE@@GUILE_TRUE@am__append_10 = $(R7RS_SCHEME)
-@ENABLE_CHECK_R6RS_LOKO_TRUE@@LOKO_TRUE@am__append_11 = $(R6RS_SCHEME)
-#
-@ENABLE_CHECK_R7RS_LOKO_TRUE@@LOKO_TRUE@am__append_12 = $(R7RS_SCHEME)
-@ENABLE_CHECK_R6RS_RACKET_TRUE@@PLT_R6RS_TRUE@am__append_13 = $(R6RS_SCHEME)
-@ENABLE_CHECK_R6RS_SAGITTARIUS_TRUE@@SAGITTARIUS_TRUE@am__append_14 = $(R6RS_SCHEME)
-#
-@ENABLE_CHECK_R7RS_SAGITTARIUS_TRUE@@SAGITTARIUS_TRUE@am__append_15 = $(R7RS_SCHEME)
+@ENABLE_CHECK_R7RS_SAGITTARIUS_TRUE@@SAGITTARIUS_TRUE@am__append_12 = $(R7RS_SCHEME)
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/ax_check_compile_flag.m4 \
@@ -168,11 +161,9 @@ am__aclocal_m4_deps = $(top_srcdir)/m4/ax_check_compile_flag.m4 \
 	$(top_srcdir)/m4/chem_prog_gnu_make.m4 \
 	$(top_srcdir)/m4/chem_prog_m4.m4 \
 	$(top_srcdir)/m4/chem_unique_id.m4 \
-	$(top_srcdir)/ac-chicken-install-options.m4 \
 	$(top_srcdir)/ac-r6rs-install-options.m4 \
 	$(top_srcdir)/ac-r7rs-install-options.m4 \
 	$(top_srcdir)/ac-tinyscheme.m4 $(top_srcdir)/ac-chez-scheme.m4 \
-	$(top_srcdir)/ac-chicken-scheme.m4 \
 	$(top_srcdir)/ac-chibi-scheme.m4 \
 	$(top_srcdir)/ac-gauche-scheme.m4 \
 	$(top_srcdir)/ac-guile-scheme.m4 \
@@ -261,10 +252,9 @@ am__uninstall_files_from_dir = { \
   || { echo " ( cd '$$dir' && rm -f" $$files ")"; \
        $(am__cd) "$$dir" && echo $$files | $(am__xargs_n) 40 $(am__rm_f); }; \
   }
-am__installdirs = "$(DESTDIR)$(chickeneggs5pipchixdir)" \
-	"$(DESTDIR)$(r6rspipchixdir)" "$(DESTDIR)$(r7rspipchixdir)"
-DATA = $(nodist_chickeneggs5pipchix_DATA) $(nodist_r6rspipchix_DATA) \
-	$(nodist_r7rspipchix_DATA)
+am__installdirs = "$(DESTDIR)$(r6rspipchixdir)" \
+	"$(DESTDIR)$(r7rspipchixdir)"
+DATA = $(nodist_r6rspipchix_DATA) $(nodist_r7rspipchix_DATA)
 RECURSIVE_CLEAN_TARGETS = mostlyclean-recursive clean-recursive	\
   distclean-recursive maintainer-clean-recursive
 am__recursive_targets = \
@@ -361,13 +351,8 @@ CFLAGS_FOR_PIC = @CFLAGS_FOR_PIC@
 CFLAGS_FOR_STATIC = @CFLAGS_FOR_STATIC@
 CHEZ_SCHEME = @CHEZ_SCHEME@
 CHIBI_SCHEME = @CHIBI_SCHEME@
-CHICKEN_INSTALL_5 = @CHICKEN_INSTALL_5@
-CHICKEN_UNINSTALL_5 = @CHICKEN_UNINSTALL_5@
 CPPFLAGS = @CPPFLAGS@
 CSCOPE = @CSCOPE@
-CSC_5 = @CSC_5@
-CSC_5_OPTIMIZATION_LEVEL = @CSC_5_OPTIMIZATION_LEVEL@
-CSI_5 = @CSI_5@
 CTAGS = @CTAGS@
 CYGPATH_W = @CYGPATH_W@
 DEFS = @DEFS@
@@ -436,8 +421,6 @@ build_cpu = @build_cpu@
 build_os = @build_os@
 build_vendor = @build_vendor@
 builddir = @builddir@
-chickeneggs5pipchixdir = @chickeneggs5pipchixdir@
-chickeneggsdir = @chickeneggsdir@
 datadir = @datadir@
 datarootdir = @datarootdir@
 docdir = @docdir@
@@ -448,8 +431,6 @@ enable_check_r6rs_loko = @enable_check_r6rs_loko@
 enable_check_r6rs_racket = @enable_check_r6rs_racket@
 enable_check_r6rs_sagittarius = @enable_check_r6rs_sagittarius@
 enable_check_r7rs_chibi = @enable_check_r7rs_chibi@
-enable_check_r7rs_csc_5 = @enable_check_r7rs_csc_5@
-enable_check_r7rs_csi_5 = @enable_check_r7rs_csi_5@
 enable_check_r7rs_gauche = @enable_check_r7rs_gauche@
 enable_check_r7rs_guile = @enable_check_r7rs_guile@
 enable_check_r7rs_loko = @enable_check_r7rs_loko@
@@ -466,7 +447,6 @@ ifGNUmake = @ifGNUmake@
 ifnGNUmake = @ifnGNUmake@
 includedir = @includedir@
 infodir = @infodir@
-install_chicken_5_egg_source = @install_chicken_5_egg_source@
 install_r6rs_source = @install_r6rs_source@
 install_r7rs_source = @install_r7rs_source@
 install_sh = @install_sh@
@@ -496,10 +476,7 @@ SUBDIRS = tinyscheme-1.42 . tests
 ACLOCAL_AMFLAGS = -I m4 --install
 AUTOMAKE_OPTIONS = foreign
 CLEANFILES = tmp.* $(R6RS_SCHEME) $(R6RS_SCHEME:%=%.tmp) \
-	$(R7RS_SCHEME) $(R7RS_SCHEME:%=%.tmp) $(CHICKEN_5_EGGFILES) \
-	$(CHICKEN_5_EGGDIR)/*.{$(OBJEXT),so,link,import.scm} \
-	$(CHICKEN_5_EGGDIR)/pipchix.{build,install}.sh \
-	chicken-5-egg-stamp
+	$(R7RS_SCHEME) $(R7RS_SCHEME:%=%.tmp)
 DISTCLEANFILES = Makefile GNUmakefile ${top_builddir}/tempname \
 	is-older
 EXTRA_DIST = silent-rules.mk COPYING README.adoc INSTALL AUTHORS \
@@ -510,13 +487,12 @@ EXTRA_DIST = silent-rules.mk COPYING README.adoc INSTALL AUTHORS \
 	$(R7RS_SCHEME:r7rs/pipchix/%.sld=pipchix/%.m4) \
 	$(R7RS_SCHEME:r7rs/pipchix/%.sld=pipchix/%.exports.m4)
 EXTRA_SCRIPTS = 
-BUILT_SOURCES = $(am__append_4) $(am__append_5) $(am__append_6) \
-	$(am__append_7) $(am__append_8) $(am__append_9) \
-	$(am__append_10) $(am__append_11) $(am__append_12) \
-	$(am__append_13) $(am__append_14) $(am__append_15) is-older
-nodist_r6rspipchix_DATA = $(am__append_2)
-nodist_r7rspipchix_DATA = $(am__append_3)
-nodist_chickeneggs5pipchix_DATA = $(am__append_1)
+BUILT_SOURCES = $(am__append_3) $(am__append_4) $(am__append_5) \
+	$(am__append_6) $(am__append_7) $(am__append_8) \
+	$(am__append_9) $(am__append_10) $(am__append_11) \
+	$(am__append_12) is-older
+nodist_r6rspipchix_DATA = $(am__append_1)
+nodist_r7rspipchix_DATA = $(am__append_2)
 M4_PREPROCESS = $(GNU_M4) -P -I '$(srcdir)'
 PIPCHXINC = $(srcdir)/pipchix/pipchix-includes.m4
 R6RS_SCHEME = r6rs/pipchix/general-purpose/srfi-39.sls \
@@ -570,163 +546,6 @@ R7RS_SCHEME = r7rs/pipchix/general-purpose/box.sld \
 # This is NOT for use in place of mktemp.
 #
 TEMPNAME = $(shell ${top_builddir}/tempname)
-
-#---------------------------------------------------------------------
-#
-# CHICKEN Scheme support.
-#
-CHICKEN_EGGSPEC_TOP = ' \
-  ((synopsis "Use Scheme to write Nix code") \
-   (version "$(PACKAGE_VERSION)") \
-   (author "Barry Schwartz") \
-   (category code-generation) \
-   (license "MIT")'
-
-CHICKEN_EGGSPEC_BOTTOM = ' \
-   (components \
-    (extension pipchix.general-purpose.box) \
-    (extension pipchix.general-purpose.cut) \
-    (extension pipchix.general-purpose.continuation-capture) \
-    (extension pipchix.general-purpose.list) \
-    (extension pipchix.general-purpose.division) \
-    (extension pipchix.general-purpose.define-record-factory) \
-    (extension pipchix.general-purpose.base64 \
-      (component-dependencies \
-       pipchix.general-purpose.division \
-       pipchix.general-purpose.list)) \
-    (extension pipchix.general-purpose.gensym \
-      (component-dependencies \
-       pipchix.general-purpose.list)) \
-    (extension pipchix.general-purpose.match \
-      (component-dependencies \
-       pipchix.general-purpose.list)) \
-    (extension pipchix.general-purpose.e-macros-environment \
-      (component-dependencies \
-       pipchix.general-purpose.list)) \
-    (extension pipchix.general-purpose.e-macros \
-      (component-dependencies \
-       pipchix.general-purpose.e-macros-environment \
-       pipchix.general-purpose.list)) \
-    (extension pipchix.general-purpose.eager-syntax \
-      (component-dependencies \
-       pipchix.general-purpose.gensym \
-       pipchix.general-purpose.list)) \
-    (extension pipchix.general-purpose.eager-macros \
-      (component-dependencies \
-       pipchix.general-purpose.gensym \
-       pipchix.general-purpose.eager-syntax \
-       pipchix.general-purpose.list)) \
-    (extension pipchix.general-purpose.combinators \
-      (component-dependencies \
-       pipchix.general-purpose.list)) \
-    (extension pipchix.string-manipulation \
-      (component-dependencies \
-       pipchix.general-purpose.base64 \
-       pipchix.general-purpose.list \
-       pipchix.general-purpose.box)) \
-    (extension pipchix.generate-identifier \
-      (component-dependencies \
-       pipchix.general-purpose.list \
-       pipchix.general-purpose.base64 \
-       pipchix.general-purpose.continuation-capture \
-       pipchix.string-manipulation)) \
-    (extension pipchix.abstract-syntax-tree \
-      (component-dependencies \
-       pipchix.general-purpose.list \
-       pipchix.general-purpose.define-record-factory)) \
-    (extension pipchix.nix-embed \
-      (component-dependencies \
-       pipchix.general-purpose.list \
-       pipchix.abstract-syntax-tree)) \
-    (extension pipchix.nix-list \
-      (component-dependencies \
-       pipchix.general-purpose.list \
-       pipchix.abstract-syntax-tree)) \
-    (extension pipchix.macros.nix-set \
-      (component-dependencies \
-       pipchix.general-purpose.list \
-       pipchix.abstract-syntax-tree)) \
-    (extension pipchix.macros.nix-letrec \
-      (component-dependencies \
-       pipchix.general-purpose.list \
-       pipchix.abstract-syntax-tree \
-       pipchix.generate-identifier)) \
-    (extension pipchix.macros.nix-lambda \
-      (component-dependencies \
-       pipchix.general-purpose.list \
-       pipchix.abstract-syntax-tree)) \
-    (extension pipchix.expressions \
-      (component-dependencies \
-       pipchix.general-purpose.list \
-       pipchix.abstract-syntax-tree \
-       pipchix.nix-list)) \
-    (extension pipchix.macros \
-      (component-dependencies \
-       pipchix.general-purpose.list \
-       pipchix.abstract-syntax-tree \
-       pipchix.nix-list \
-       pipchix.expressions \
-       pipchix.macros.nix-set \
-       pipchix.macros.nix-letrec \
-       pipchix.macros.nix-lambda)) \
-    (extension pipchix.essentials \
-      (component-dependencies \
-       pipchix.general-purpose.list \
-       pipchix.string-manipulation \
-       pipchix.abstract-syntax-tree \
-       pipchix.expressions \
-       pipchix.macros \
-       pipchix.nix-embed \
-       pipchix.nix-list))))'
-
-
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-CHICKEN_5_M4FLAGS = -DRNRS_NUMBER=7 -DCHICKEN_5=yes
-CHICKEN_5_EGGS = chicken/eggs/5
-CHICKEN_5_EGGDIR = $(CHICKEN_5_EGGS)/pipchix
-CHICKEN_5_EGGFILES = \
-  $(addprefix $(CHICKEN_5_EGGDIR)/, \
-    pipchix.egg \
-    pipchix.general-purpose.box.scm \
-    pipchix.general-purpose.cut.scm \
-    pipchix.general-purpose.continuation-capture.scm \
-    pipchix.general-purpose.list.scm \
-    pipchix.general-purpose.division.scm \
-    pipchix.general-purpose.match.scm \
-    pipchix.general-purpose.base64.scm \
-    pipchix.general-purpose.gensym.scm \
-    pipchix.general-purpose.define-record-factory.scm \
-    pipchix.general-purpose.e-macros-environment.scm \
-    pipchix.general-purpose.e-macros.scm \
-    pipchix.general-purpose.eager-syntax.scm \
-    pipchix.general-purpose.eager-macros.scm \
-    pipchix.general-purpose.combinators.scm \
-    pipchix.generate-identifier.scm \
-    pipchix.string-manipulation.scm \
-    pipchix.abstract-syntax-tree.scm \
-    pipchix.nix-embed.scm \
-    pipchix.nix-list.scm \
-    pipchix.macros.nix-set.scm \
-    pipchix.macros.nix-letrec.scm \
-    pipchix.macros.nix-lambda.scm \
-    pipchix.essentials.scm \
-    pipchix.expressions.scm \
-    pipchix.macros.scm \
-    COPYING README.adoc)
-
-CHICKEN_5_EGGSPEC = ' \
- '$(CHICKEN_EGGSPEC_TOP)' \
-   (dependencies r7rs utf8 srfi-1 srfi-111 srfi-141) \
-   (component-options \
-    (csc-options \
-     "-R" "utf8" \
-     "-R" "r7rs" \
-     "-X" "r7rs" \
-     "-O$(CSC_5_OPTIMIZATION_LEVEL)" \
-     "-d1" \
-     "-compile-syntax")) \
- '$(CHICKEN_EGGSPEC_BOTTOM)
-
 
 #---------------------------------------------------------------------
 TINYSCHEME_DIR = tinyscheme-1.42
@@ -841,27 +660,6 @@ am--depfiles: $(am__depfiles_remade)
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(COMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
-install-nodist_chickeneggs5pipchixDATA: $(nodist_chickeneggs5pipchix_DATA)
-	@$(NORMAL_INSTALL)
-	@list='$(nodist_chickeneggs5pipchix_DATA)'; test -n "$(chickeneggs5pipchixdir)" || list=; \
-	if test -n "$$list"; then \
-	  echo " $(MKDIR_P) '$(DESTDIR)$(chickeneggs5pipchixdir)'"; \
-	  $(MKDIR_P) "$(DESTDIR)$(chickeneggs5pipchixdir)" || exit 1; \
-	fi; \
-	for p in $$list; do \
-	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
-	  echo "$$d$$p"; \
-	done | $(am__base_list) | \
-	while read files; do \
-	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(chickeneggs5pipchixdir)'"; \
-	  $(INSTALL_DATA) $$files "$(DESTDIR)$(chickeneggs5pipchixdir)" || exit $$?; \
-	done
-
-uninstall-nodist_chickeneggs5pipchixDATA:
-	@$(NORMAL_UNINSTALL)
-	@list='$(nodist_chickeneggs5pipchix_DATA)'; test -n "$(chickeneggs5pipchixdir)" || list=; \
-	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
-	dir='$(DESTDIR)$(chickeneggs5pipchixdir)'; $(am__uninstall_files_from_dir)
 install-nodist_r6rspipchixDATA: $(nodist_r6rspipchix_DATA)
 	@$(NORMAL_INSTALL)
 	@list='$(nodist_r6rspipchix_DATA)'; test -n "$(r6rspipchixdir)" || list=; \
@@ -1219,7 +1017,7 @@ check: $(BUILT_SOURCES)
 all-am: GNUmakefile $(DATA)
 installdirs: installdirs-recursive
 installdirs-am:
-	for dir in "$(DESTDIR)$(chickeneggs5pipchixdir)" "$(DESTDIR)$(r6rspipchixdir)" "$(DESTDIR)$(r7rspipchixdir)"; do \
+	for dir in "$(DESTDIR)$(r6rspipchixdir)" "$(DESTDIR)$(r7rspipchixdir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: $(BUILT_SOURCES)
@@ -1280,8 +1078,8 @@ info: info-recursive
 
 info-am:
 
-install-data-am: install-nodist_chickeneggs5pipchixDATA \
-	install-nodist_r6rspipchixDATA install-nodist_r7rspipchixDATA
+install-data-am: install-nodist_r6rspipchixDATA \
+	install-nodist_r7rspipchixDATA
 
 install-dvi: install-dvi-recursive
 
@@ -1328,8 +1126,7 @@ ps: ps-recursive
 
 ps-am:
 
-uninstall-am: uninstall-nodist_chickeneggs5pipchixDATA \
-	uninstall-nodist_r6rspipchixDATA \
+uninstall-am: uninstall-nodist_r6rspipchixDATA \
 	uninstall-nodist_r7rspipchixDATA
 
 .MAKE: $(am__recursive_targets) all check install install-am \
@@ -1345,16 +1142,13 @@ uninstall-am: uninstall-nodist_chickeneggs5pipchixDATA \
 	html-am info info-am install install-am install-data \
 	install-data-am install-dvi install-dvi-am install-exec \
 	install-exec-am install-html install-html-am install-info \
-	install-info-am install-man \
-	install-nodist_chickeneggs5pipchixDATA \
-	install-nodist_r6rspipchixDATA install-nodist_r7rspipchixDATA \
-	install-pdf install-pdf-am install-ps install-ps-am \
-	install-strip installcheck installcheck-am installdirs \
-	installdirs-am maintainer-clean maintainer-clean-generic \
-	mostlyclean mostlyclean-compile mostlyclean-generic pdf pdf-am \
-	ps ps-am tags tags-am uninstall uninstall-am \
-	uninstall-nodist_chickeneggs5pipchixDATA \
-	uninstall-nodist_r6rspipchixDATA \
+	install-info-am install-man install-nodist_r6rspipchixDATA \
+	install-nodist_r7rspipchixDATA install-pdf install-pdf-am \
+	install-ps install-ps-am install-strip installcheck \
+	installcheck-am installdirs installdirs-am maintainer-clean \
+	maintainer-clean-generic mostlyclean mostlyclean-compile \
+	mostlyclean-generic pdf pdf-am ps ps-am tags tags-am uninstall \
+	uninstall-am uninstall-nodist_r6rspipchixDATA \
 	uninstall-nodist_r7rspipchixDATA
 
 .PRECIOUS: GNUmakefile
@@ -1384,95 +1178,6 @@ $(builddir)/r7rs/pipchix/%.sld: $(srcdir)/r7rs/pipchix/%.sld.m4 \
 		$(M4_PREPROCESS) -DRNRS_NUMBER=7 $(<) > $(@).tmp && \
 		mv $(@){.tmp,}
 
-$(builddir)/$(CHICKEN_5_EGGDIR)/pipchix.%.scm: \
-	                   $(srcdir)/r7rs/pipchix/%.sld.m4 \
-	                   $(srcdir)/pipchix/%.m4 \
-	                   $(PIPCHXINC)
-	$(call v,SCM.M4) $(MKDIR_P) $(@D) && \
-		$(M4_PREPROCESS) $(CHICKEN_5_M4FLAGS) $(<) > $(@).tmp && \
-		mv $(@){.tmp,}
-
-$(builddir)/$(CHICKEN_5_EGGDIR)/pipchix.general-purpose.%.scm: \
-	                   $(srcdir)/r7rs/pipchix/general-purpose/%.sld.m4 \
-	                   $(srcdir)/pipchix/general-purpose/%.m4 \
-	                   $(PIPCHXINC)
-	$(call v,SCM.M4) $(MKDIR_P) $(@D) && \
-		$(M4_PREPROCESS) $(CHICKEN_5_M4FLAGS) $(<) > $(@).tmp && \
-		mv $(@){.tmp,}
-
-$(builddir)/$(CHICKEN_5_EGGDIR)/pipchix.macros.%.scm: \
-	                   $(srcdir)/r7rs/pipchix/macros/%.sld.m4 \
-	                   $(srcdir)/pipchix/macros/%.m4 \
-	                   $(PIPCHXINC)
-	$(call v,SCM.M4) $(MKDIR_P) $(@D) && \
-		$(M4_PREPROCESS) $(CHICKEN_5_M4FLAGS) $(<) > $(@).tmp && \
-		mv $(@){.tmp,}
-
-$(CHICKEN_5_EGGDIR)/COPYING: COPYING
-	$(call copy-file, $(<), $(@))
-
-$(CHICKEN_5_EGGDIR)/README.adoc: README.adoc
-	$(call copy-file, $(<), $(@))
-
-$(CHICKEN_5_EGGDIR)/pipchix.egg: GNUmakefile $(TINYSCHEME_EXE)
-	$(call v,SEXP) \
-	script=$(TEMPNAME) && \
-	$(MKDIR_P) $(@D) && \
-	if true; then \
-	  printf '%s' $(DEFINE_NICELY_PRINT); \
-	  printf '(define eggfile (quote %s))' \
-	                 $(CHICKEN_5_EGGSPEC); \
-	  printf '(nicely-print eggfile)'; \
-	fi > "$${script}" && \
-	$(call tinyscheme-1, ${abs_builddir}/"$${script}") \
-			> $(abs_builddir)/$(@) && \
-	rm "$${script}"
-
-$(PACKAGE_TARNAME)-$(PACKAGE_VERSION).egg-5.tar.xz: $(CHICKEN_5_EGGFILES)
-	( \
-	  cd $(CHICKEN_5_EGGDIR) && \
-	  tar --format=posix -chf - $(notdir $(CHICKEN_5_EGGFILES)) \
-	     | Z_OPT=$${XZ_OPT--e} xz -c \
-	) > $(@).tmp && mv $(@){.tmp,}
-
-dist-chicken-egg-5: $(PACKAGE_TARNAME)-$(PACKAGE_VERSION).egg-5.tar.xz
-
-@CHICKEN_INSTALL_5_TRUE@chicken-install-5: $(CHICKEN_5_EGGFILES)
-@CHICKEN_INSTALL_5_TRUE@	( \
-@CHICKEN_INSTALL_5_TRUE@	  cd $(CHICKEN_5_EGGDIR) && \
-@CHICKEN_INSTALL_5_TRUE@	  env SUDO="$${INSTALL_AS}" $(CHICKEN_INSTALL_5) -s \
-@CHICKEN_INSTALL_5_TRUE@	)
-
-@CHICKEN_UNINSTALL_5_TRUE@chicken-uninstall-5:
-@CHICKEN_UNINSTALL_5_TRUE@	env SUDO="$${INSTALL_AS}" \
-@CHICKEN_UNINSTALL_5_TRUE@	  $(CHICKEN_UNINSTALL_5) -s -force pipchix
-
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-@CSI_5_TRUE@@GNU@define get-chicken-5-repository-path
-@CSI_5_TRUE@@GNU@$(CSI_5) -n -b -R r7rs -R utf8-srfi-13 -R chicken.platform \
-@CSI_5_TRUE@@GNU@    -e '(display (string-join (cons "$(abs_builddir)/$(CHICKEN_5_EGGDIR)" (repository-path)) ":"))'
-@CSI_5_TRUE@@GNU@endef
-@CSI_5_FALSE@@GNU@define get-chicken-5-repository-path
-@CSI_5_FALSE@@GNU@true
-@CSI_5_FALSE@@GNU@endef
-
-# The following may require that you have installed the eggs needed by
-# Pipchix.
-chicken-5-egg-stamp: $(CHICKEN_5_EGGFILES)
-	@if ! test -e chicken-5-egg-stamp || \
-	     ./is-older $(@) $(R7RS_SCHEME:%=${srcdir}/%.m4) \
-	         $(R7RS_SCHEME:r7rs/pipchix/%.sld=${srcdir}/pipchix/%.m4) \
-                 $(R7RS_SCHEME:r7rs/pipchix/%.sld=${srcdir}/pipchix/%.exports.m4) \
-	         $(PIPCHXINC); then \
-	  ( \
-	    $(MKDIR_P) $(CHICKEN_5_EGGDIR) && \
-	    cd $(CHICKEN_5_EGGDIR) && \
-	    $(CHICKEN_INSTALL_5) -n \
-	  ); \
-	  touch $(@); \
-	fi
-
 #---------------------------------------------------------------------
 
 tests/run-r6rs-%.sh: tests/run-r6rs-%.sh.in
@@ -1481,9 +1186,6 @@ tests/run-r7rs-%.sh: tests/run-r7rs-%.sh.in
 config.status: tests/run-r6rs-chez.sh.in
 
 config.status: tests/run-r7rs-chibi.sh.in
-
-config.status: tests/run-r7rs-csc-5.sh.in
-config.status: tests/run-r7rs-csi-5.sh.in
 
 config.status: tests/run-r7rs-gauche.sh.in
 

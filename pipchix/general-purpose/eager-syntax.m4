@@ -23,54 +23,35 @@
 ;;; WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ;;;
 
-;;; m4_define(«define_finite_list_to_proper_list»,«
-(define (finite-list->proper-list lst)
-  ;; Copies a finite list, converting any dotted list to a
-  ;; proper list.
-  (cond
-    ((null? lst) lst)
-    ((not-pair? lst) (list lst))        ; Convert dotted list.
-    (else
-     (let ((next (cdr lst)))
-       (cond
-         ((null? next) lst)
-         ((not-pair? next)
-          (cons (car lst) next))        ; Convert dotted list.
-         (else
-          (cons (car lst)
-                (finite-list->proper-list next))))))))
-;;; »)
-
 ;;; m4_ifelse(general_macros,«er-macro-transformer»,«
 
-(cond-expand
-
-  (chibi
-   (define-syntax eager-syntax
-     (syntax-rules ()
-       ((¶ receiver)
-        (er-macro-transformer
-         (lambda (form rename compare)
-           define_finite_list_to_proper_list
-           (let* ((arg* (cdr form))
-                  (actual-parameters
-                   (finite-list->proper-list arg*))
-                  (f-x* (cons receiver actual-parameters))
-                  (tmp* (map (lambda (x) (gensym)) f-x*))
-                  (lets-list (map list tmp* f-x*)))
-             `(,(rename 'let) ,lets-list ,tmp*))))))) )
-
-  (else
-   (define-syntax eager-syntax
-     (syntax-rules ()
-       ((¶ receiver)
-        (er-macro-transformer
-         (lambda (form rename compare)
-           define_finite_list_to_proper_list
-           (let* ((arg* (cdr form))
-                  (actual-parameters (finite-list->proper-list arg*))
-                  (f-x* (cons receiver actual-parameters)))
-             f-x*)))))) ))
+(define-syntax eager-syntax
+  (syntax-rules ()
+    ((¶ receiver)
+     (er-macro-transformer
+      (lambda (form rename compare)
+        (define (finite-list->proper-list lst)
+          ;; Copies a finite list, converting any dotted list to a
+          ;; proper list.
+          (cond
+            ((null? lst) lst)
+            ((not-pair? lst) (list lst)) ;; Convert dotted list.
+            (else
+             (let ((next (cdr lst)))
+               (cond
+                 ((null? next) lst)
+                 ((not-pair? next)
+                  (cons (car lst) next)) ;; Convert dotted list.
+                 (else
+                  (cons (car lst)
+                        (finite-list->proper-list next))))))))
+        (let* ((arg* (cdr form))
+               (actual-parameters
+                (finite-list->proper-list arg*))
+               (f-x* (cons receiver actual-parameters))
+               (tmp* (map (lambda (x) (gensym)) f-x*))
+               (lets-list (map list tmp* f-x*)))
+          `(,(rename 'let) ,lets-list ,tmp*)))))))
 
 ;;; »)
 

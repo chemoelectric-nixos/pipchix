@@ -31,11 +31,6 @@ m4_include(pipchix/pipchix-includes.m4)
   (import basic_libraries)
   (import (pipchix general-purpose define-record-factory))
 
-  ;; m4_ifelse(CHICKEN_5,«yes»,«
-  (import (utf8))
-  (import (utf8-srfi-13))
-  ;; »)
-
   (begin
 
     m4_include(pipchix/abstract-syntax-tree.m4)

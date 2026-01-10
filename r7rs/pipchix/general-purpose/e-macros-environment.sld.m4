@@ -33,11 +33,6 @@ m4_include(pipchix/pipchix-includes.m4)
 
   (begin
 
-    ;; m4_ifelse(CHICKEN_5,«yes»,«
-    (import-for-syntax (scheme base))
-    (import-for-syntax (scheme eval))
-    ;; »)
-
     m4_define(default_environment,default_environment_r7rs)
     m4_include(pipchix/general-purpose/e-macros-environment.m4)
 

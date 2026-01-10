@@ -666,19 +666,6 @@ GAUCHE
 CHIBI_SCHEME_FALSE
 CHIBI_SCHEME_TRUE
 CHIBI_SCHEME
-CSC_5_OPTIMIZATION_LEVEL
-CSC_5_FALSE
-CSC_5_TRUE
-CSC_5
-CSI_5_FALSE
-CSI_5_TRUE
-CSI_5
-CHICKEN_UNINSTALL_5_FALSE
-CHICKEN_UNINSTALL_5_TRUE
-CHICKEN_UNINSTALL_5
-CHICKEN_INSTALL_5_FALSE
-CHICKEN_INSTALL_5_TRUE
-CHICKEN_INSTALL_5
 CHEZ_SCHEME_FALSE
 CHEZ_SCHEME_TRUE
 CHEZ_SCHEME
@@ -708,12 +695,6 @@ enable_check_r6rs_guile
 ENABLE_CHECK_R7RS_GAUCHE_FALSE
 ENABLE_CHECK_R7RS_GAUCHE_TRUE
 enable_check_r7rs_gauche
-ENABLE_CHECK_R7RS_CSC_5_FALSE
-ENABLE_CHECK_R7RS_CSC_5_TRUE
-enable_check_r7rs_csc_5
-ENABLE_CHECK_R7RS_CSI_5_FALSE
-ENABLE_CHECK_R7RS_CSI_5_TRUE
-enable_check_r7rs_csi_5
 ENABLE_CHECK_R7RS_CHIBI_FALSE
 ENABLE_CHECK_R7RS_CHIBI_TRUE
 enable_check_r7rs_chibi
@@ -728,11 +709,6 @@ r6rspipchixdir
 INSTALL_R6RS_SOURCE_FALSE
 INSTALL_R6RS_SOURCE_TRUE
 install_r6rs_source
-chickeneggs5pipchixdir
-INSTALL_CHICKEN_5_EGG_SOURCE_FALSE
-INSTALL_CHICKEN_5_EGG_SOURCE_TRUE
-install_chicken_5_egg_source
-chickeneggsdir
 enable_color
 UNIQUE_ID
 GNU_M4
@@ -847,13 +823,10 @@ enable_dependency_tracking
 enable_silent_rules
 enable_maintainer_mode
 enable_color
-enable_install_chicken_5_egg_source
 enable_install_r6rs_source
 enable_install_r7rs_source
 enable_check_r6rs_chez
 enable_check_r7rs_chibi
-enable_check_r7rs_csi_5
-enable_check_r7rs_csc_5
 enable_check_r7rs_gauche
 enable_check_r6rs_guile
 enable_check_r7rs_guile
@@ -874,11 +847,6 @@ CPPFLAGS
 GNU_M4
 UNIQUE_ID
 CHEZ_SCHEME
-CHICKEN_INSTALL_5
-CHICKEN_UNINSTALL_5
-CSI_5
-CSC_5
-CSC_5_OPTIMIZATION_LEVEL
 CHIBI_SCHEME
 GAUCHE
 GUILE
@@ -1525,10 +1493,6 @@ Optional Features:
                           sometimes confusing) to the casual installer
   --disable-color         disable color in configure and test outputs (enabled
                           by default)
-  --enable-install-chicken-5-egg-source[=DIR]
-                          install CHICKEN 5 egg source code
-                          [DATAROOTDIR/chicken/eggs/5/pipchix] (by default not
-                          installed)
   --enable-install-r6rs-source[=DIR]
                           install R⁶RS source code
                           [DATAROOTDIR/r6rs/pipchix] (by default not
@@ -1543,12 +1507,6 @@ Optional Features:
   --disable-check-r7rs-chibi
                           disable tests with Chibi Scheme (enabled by default
                           if the Scheme implementation is found)
-  --disable-check-r7rs-csi_5
-                          disable tests with CHICKEN 5 interpreter (enabled by
-                          default if the Scheme implementation is found)
-  --disable-check-r7rs-csc_5
-                          disable tests with CHICKEN 5 compiler (enabled by
-                          default if the Scheme implementation is found)
   --disable-check-r7rs-gauche
                           disable tests with Gauche Scheme (enabled by default
                           if the Scheme implementation is found)
@@ -1585,15 +1543,6 @@ Some influential environment variables:
   GNU_M4      GNU m4 macro processor
   UNIQUE_ID   shell code to create a unique identifier without spaces
   CHEZ_SCHEME Chez Scheme
-  CHICKEN_INSTALL_5
-              chicken-install version 5
-  CHICKEN_UNINSTALL_5
-              chicken-uninstall version 5
-  CSI_5       CHICKEN interpreter version 5
-  CSC_5       CHICKEN compiler version 5
-  CSC_5_OPTIMIZATION_LEVEL
-              optimization level for the CHICKEN 5 egg (default: 2) (one might
-              reduce this when testing)
   CHIBI_SCHEME
               Chibi Scheme
   GAUCHE      Gauche Scheme
@@ -6508,57 +6457,6 @@ fi
 
 
 
-chickeneggsdir="${chickeneggsdir:-\$(datadir)/chicken/eggs}"
-
-
-
-
-# Check whether --enable-install-chicken-5-egg-source was given.
-if test ${enable_install_chicken_5_egg_source+y}
-then :
-  enableval=$enable_install_chicken_5_egg_source; install_chicken_5_egg_source="${enableval}"
-else case e in #(
-  e) install_chicken_5_egg_source=no ;;
-esac
-fi
-
-
- if test "${install_chicken_5_egg_source}" != no; then
-  INSTALL_CHICKEN_5_EGG_SOURCE_TRUE=
-  INSTALL_CHICKEN_5_EGG_SOURCE_FALSE='#'
-else
-  INSTALL_CHICKEN_5_EGG_SOURCE_TRUE='#'
-  INSTALL_CHICKEN_5_EGG_SOURCE_FALSE=
-fi
-
-chickeneggs5pipchixdir="${chickeneggs5pipchixdir:-\$(chickeneggsdir)/5/pipchix}"
-
-
-# Copyright © 2025 Barry Schwartz
-#
-# This file is part of Pipchix.
-#
-# Permission is hereby granted, free of charge, to any person obtaining
-# a copy of Pipchix and associated documentation files (the
-# "Software"), to deal in the Software without restriction, including
-# without limitation the rights to use, copy, modify, merge, publish,
-# distribute, sublicense, and/or sell copies of the Software, and to
-# permit persons to whom the Software is furnished to do so, subject to
-# the following conditions:
-#
-# The above copyright notice and this permission notice shall be
-# included in all copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-# LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-# OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-# WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-
-
 # Check whether --enable-install-r6rs-source was given.
 if test ${enable_install_r6rs_source+y}
 then :
@@ -6664,44 +6562,6 @@ fi
 else
   ENABLE_CHECK_R7RS_CHIBI_TRUE='#'
   ENABLE_CHECK_R7RS_CHIBI_FALSE=
-fi
-
-
-# Check whether --enable-check-r7rs-csi-5 was given.
-if test ${enable_check_r7rs_csi_5+y}
-then :
-  enableval=$enable_check_r7rs_csi_5; eval enable_check_r7rs_csi_5="${enableval}"
-else case e in #(
-  e) eval enable_check_r7rs_csi_5=yes ;;
-esac
-fi
-
-
- if test "${enable_check_r7rs_csi_5}" != no; then
-  ENABLE_CHECK_R7RS_CSI_5_TRUE=
-  ENABLE_CHECK_R7RS_CSI_5_FALSE='#'
-else
-  ENABLE_CHECK_R7RS_CSI_5_TRUE='#'
-  ENABLE_CHECK_R7RS_CSI_5_FALSE=
-fi
-
-
-# Check whether --enable-check-r7rs-csc-5 was given.
-if test ${enable_check_r7rs_csc_5+y}
-then :
-  enableval=$enable_check_r7rs_csc_5; eval enable_check_r7rs_csc_5="${enableval}"
-else case e in #(
-  e) eval enable_check_r7rs_csc_5=yes ;;
-esac
-fi
-
-
- if test "${enable_check_r7rs_csc_5}" != no; then
-  ENABLE_CHECK_R7RS_CSC_5_TRUE=
-  ENABLE_CHECK_R7RS_CSC_5_FALSE='#'
-else
-  ENABLE_CHECK_R7RS_CSC_5_TRUE='#'
-  ENABLE_CHECK_R7RS_CSC_5_FALSE=
 fi
 
 
@@ -7109,374 +6969,6 @@ else
   CHEZ_SCHEME_TRUE='#'
   CHEZ_SCHEME_FALSE=
 fi
-
-
-# Copyright © 2025 Barry Schwartz
-#
-# This file is part of Pipchix.
-#
-# Permission is hereby granted, free of charge, to any person obtaining
-# a copy of Pipchix and associated documentation files (the
-# "Software"), to deal in the Software without restriction, including
-# without limitation the rights to use, copy, modify, merge, publish,
-# distribute, sublicense, and/or sell copies of the Software, and to
-# permit persons to whom the Software is furnished to do so, subject to
-# the following conditions:
-#
-# The above copyright notice and this permission notice shall be
-# included in all copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-# LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-# OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-# WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-#
-# CHICKEN Scheme configuration.
-#
-
-{ :;
-
-# Override the cache if the precious variable CHICKEN_INSTALL_5 is set.
-test -n "${CHICKEN_INSTALL_5}" && unset ac_cv_path_CHICKEN_INSTALL_5
-chem_cv_path_CHICKEN_INSTALL_5_found=yes
-{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for chicken-install chicken-install-5" >&5
-printf %s "checking for chicken-install chicken-install-5... " >&6; }
-if test ${ac_cv_path_CHICKEN_INSTALL_5+y}
-then :
-  printf %s "(cached) " >&6
-else case e in #(
-  e) if test -z "$CHICKEN_INSTALL_5"; then
-  ac_path_CHICKEN_INSTALL_5_found=false
-  # Loop through the user's path and test for each of PROGNAME-LIST
-  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-for as_dir in $PATH
-do
-  IFS=$as_save_IFS
-  case $as_dir in #(((
-    '') as_dir=./ ;;
-    */) ;;
-    *) as_dir=$as_dir/ ;;
-  esac
-    for ac_prog in chicken-install chicken-install-5
-   do
-    for ac_exec_ext in '' $ac_executable_extensions; do
-      ac_path_CHICKEN_INSTALL_5="$as_dir$ac_prog$ac_exec_ext"
-      as_fn_executable_p "$ac_path_CHICKEN_INSTALL_5" || continue
-
-      if test -n "${CHICKEN_INSTALL_5}"; then
-         # Bypass the test if the precious variable CHICKEN_INSTALL_5 is set.
-         ac_cv_path_CHICKEN_INSTALL_5="${CHICKEN_INSTALL_5}"
-         ac_path_CHICKEN_INSTALL_5_found=:
-      else
-         # Run the test.
-
-    if LC_ALL=C LANG=C ${ac_path_CHICKEN_INSTALL_5} -version 2>&1 | \
-      LC_ALL=C LANG=C ${GREP} '^5\.' 2> /dev/null > /dev/null; then
-        ac_cv_path_CHICKEN_INSTALL_5="${ac_path_CHICKEN_INSTALL_5}"
-        ac_path_CHICKEN_INSTALL_5_found=:
-    fi
-
-      fi
-      $ac_path_CHICKEN_INSTALL_5_found && break 3
-    done
-  done
-  done
-IFS=$as_save_IFS
-  if test -z "$ac_cv_path_CHICKEN_INSTALL_5"; then
-    :
-  fi
-else
-  ac_cv_path_CHICKEN_INSTALL_5=$CHICKEN_INSTALL_5
-fi
-
-      if test -z "${ac_cv_path_CHICKEN_INSTALL_5}"; then
-         ac_cv_path_CHICKEN_INSTALL_5="not found"
-         chem_cv_path_CHICKEN_INSTALL_5_found=no
-      fi
-    ;;
-esac
-fi
-{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $ac_cv_path_CHICKEN_INSTALL_5" >&5
-printf "%s\n" "$ac_cv_path_CHICKEN_INSTALL_5" >&6; }
-if test x"${chem_cv_path_CHICKEN_INSTALL_5_found}" = x"yes"; then
-   CHICKEN_INSTALL_5="${ac_cv_path_CHICKEN_INSTALL_5}"
-else
-   CHICKEN_INSTALL_5=""
-   # Do not cache the negative result. That way someone can install
-   # the program and have it be discovered, even though they did not
-   # clear a cache entry.
-   unset ac_cv_path_CHICKEN_INSTALL_5
-fi
-}
- if test "${chem_cv_path_CHICKEN_INSTALL_5_found}" != no; then
-  CHICKEN_INSTALL_5_TRUE=
-  CHICKEN_INSTALL_5_FALSE='#'
-else
-  CHICKEN_INSTALL_5_TRUE='#'
-  CHICKEN_INSTALL_5_FALSE=
-fi
-
-
-{ :;
-
-# Override the cache if the precious variable CHICKEN_UNINSTALL_5 is set.
-test -n "${CHICKEN_UNINSTALL_5}" && unset ac_cv_path_CHICKEN_UNINSTALL_5
-chem_cv_path_CHICKEN_UNINSTALL_5_found=yes
-{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for chicken-uninstall chicken-uninstall-5" >&5
-printf %s "checking for chicken-uninstall chicken-uninstall-5... " >&6; }
-if test ${ac_cv_path_CHICKEN_UNINSTALL_5+y}
-then :
-  printf %s "(cached) " >&6
-else case e in #(
-  e) if test -z "$CHICKEN_UNINSTALL_5"; then
-  ac_path_CHICKEN_UNINSTALL_5_found=false
-  # Loop through the user's path and test for each of PROGNAME-LIST
-  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-for as_dir in $PATH
-do
-  IFS=$as_save_IFS
-  case $as_dir in #(((
-    '') as_dir=./ ;;
-    */) ;;
-    *) as_dir=$as_dir/ ;;
-  esac
-    for ac_prog in chicken-uninstall chicken-uninstall-5
-   do
-    for ac_exec_ext in '' $ac_executable_extensions; do
-      ac_path_CHICKEN_UNINSTALL_5="$as_dir$ac_prog$ac_exec_ext"
-      as_fn_executable_p "$ac_path_CHICKEN_UNINSTALL_5" || continue
-
-      if test -n "${CHICKEN_UNINSTALL_5}"; then
-         # Bypass the test if the precious variable CHICKEN_UNINSTALL_5 is set.
-         ac_cv_path_CHICKEN_UNINSTALL_5="${CHICKEN_UNINSTALL_5}"
-         ac_path_CHICKEN_UNINSTALL_5_found=:
-      else
-         # Run the test.
-
-    if LC_ALL=C LANG=C ${ac_path_CHICKEN_UNINSTALL_5} -version 2>&1 | \
-      LC_ALL=C LANG=C ${GREP} '^5\.' 2> /dev/null > /dev/null; then
-        ac_cv_path_CHICKEN_UNINSTALL_5="${ac_path_CHICKEN_UNINSTALL_5}"
-        ac_path_CHICKEN_UNINSTALL_5_found=:
-    fi
-
-      fi
-      $ac_path_CHICKEN_UNINSTALL_5_found && break 3
-    done
-  done
-  done
-IFS=$as_save_IFS
-  if test -z "$ac_cv_path_CHICKEN_UNINSTALL_5"; then
-    :
-  fi
-else
-  ac_cv_path_CHICKEN_UNINSTALL_5=$CHICKEN_UNINSTALL_5
-fi
-
-      if test -z "${ac_cv_path_CHICKEN_UNINSTALL_5}"; then
-         ac_cv_path_CHICKEN_UNINSTALL_5="not found"
-         chem_cv_path_CHICKEN_UNINSTALL_5_found=no
-      fi
-    ;;
-esac
-fi
-{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $ac_cv_path_CHICKEN_UNINSTALL_5" >&5
-printf "%s\n" "$ac_cv_path_CHICKEN_UNINSTALL_5" >&6; }
-if test x"${chem_cv_path_CHICKEN_UNINSTALL_5_found}" = x"yes"; then
-   CHICKEN_UNINSTALL_5="${ac_cv_path_CHICKEN_UNINSTALL_5}"
-else
-   CHICKEN_UNINSTALL_5=""
-   # Do not cache the negative result. That way someone can install
-   # the program and have it be discovered, even though they did not
-   # clear a cache entry.
-   unset ac_cv_path_CHICKEN_UNINSTALL_5
-fi
-}
- if test "${chem_cv_path_CHICKEN_UNINSTALL_5_found}" != no; then
-  CHICKEN_UNINSTALL_5_TRUE=
-  CHICKEN_UNINSTALL_5_FALSE='#'
-else
-  CHICKEN_UNINSTALL_5_TRUE='#'
-  CHICKEN_UNINSTALL_5_FALSE=
-fi
-
-
-{ :;
-
-# Override the cache if the precious variable CSI_5 is set.
-test -n "${CSI_5}" && unset ac_cv_path_CSI_5
-chem_cv_path_CSI_5_found=yes
-{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for csi csi-5" >&5
-printf %s "checking for csi csi-5... " >&6; }
-if test ${ac_cv_path_CSI_5+y}
-then :
-  printf %s "(cached) " >&6
-else case e in #(
-  e) if test -z "$CSI_5"; then
-  ac_path_CSI_5_found=false
-  # Loop through the user's path and test for each of PROGNAME-LIST
-  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-for as_dir in $PATH
-do
-  IFS=$as_save_IFS
-  case $as_dir in #(((
-    '') as_dir=./ ;;
-    */) ;;
-    *) as_dir=$as_dir/ ;;
-  esac
-    for ac_prog in csi csi-5
-   do
-    for ac_exec_ext in '' $ac_executable_extensions; do
-      ac_path_CSI_5="$as_dir$ac_prog$ac_exec_ext"
-      as_fn_executable_p "$ac_path_CSI_5" || continue
-
-      if test -n "${CSI_5}"; then
-         # Bypass the test if the precious variable CSI_5 is set.
-         ac_cv_path_CSI_5="${CSI_5}"
-         ac_path_CSI_5_found=:
-      else
-         # Run the test.
-
-    if LC_ALL=C LANG=C ${ac_path_CSI_5} -version 2>&1 | \
-      LC_ALL=C LANG=C ${GREP} '^CHICKEN' 2> /dev/null > /dev/null; then
-        if LC_ALL=C LANG=C ${ac_path_CSI_5} -version 2>&1 | \
-          LC_ALL=C LANG=C ${GREP} '^Version 5\.' 2> /dev/null > /dev/null; then
-            ac_cv_path_CSI_5="${ac_path_CSI_5}"
-            ac_path_CSI_5_found=:
-        fi
-    fi
-
-      fi
-      $ac_path_CSI_5_found && break 3
-    done
-  done
-  done
-IFS=$as_save_IFS
-  if test -z "$ac_cv_path_CSI_5"; then
-    :
-  fi
-else
-  ac_cv_path_CSI_5=$CSI_5
-fi
-
-      if test -z "${ac_cv_path_CSI_5}"; then
-         ac_cv_path_CSI_5="not found"
-         chem_cv_path_CSI_5_found=no
-      fi
-    ;;
-esac
-fi
-{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $ac_cv_path_CSI_5" >&5
-printf "%s\n" "$ac_cv_path_CSI_5" >&6; }
-if test x"${chem_cv_path_CSI_5_found}" = x"yes"; then
-   CSI_5="${ac_cv_path_CSI_5}"
-else
-   CSI_5=""
-   # Do not cache the negative result. That way someone can install
-   # the program and have it be discovered, even though they did not
-   # clear a cache entry.
-   unset ac_cv_path_CSI_5
-fi
-}
- if test "${chem_cv_path_CSI_5_found}" != no; then
-  CSI_5_TRUE=
-  CSI_5_FALSE='#'
-else
-  CSI_5_TRUE='#'
-  CSI_5_FALSE=
-fi
-
-
-{ :;
-
-# Override the cache if the precious variable CSC_5 is set.
-test -n "${CSC_5}" && unset ac_cv_path_CSC_5
-chem_cv_path_CSC_5_found=yes
-{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for csc csc-5" >&5
-printf %s "checking for csc csc-5... " >&6; }
-if test ${ac_cv_path_CSC_5+y}
-then :
-  printf %s "(cached) " >&6
-else case e in #(
-  e) if test -z "$CSC_5"; then
-  ac_path_CSC_5_found=false
-  # Loop through the user's path and test for each of PROGNAME-LIST
-  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-for as_dir in $PATH
-do
-  IFS=$as_save_IFS
-  case $as_dir in #(((
-    '') as_dir=./ ;;
-    */) ;;
-    *) as_dir=$as_dir/ ;;
-  esac
-    for ac_prog in csc csc-5
-   do
-    for ac_exec_ext in '' $ac_executable_extensions; do
-      ac_path_CSC_5="$as_dir$ac_prog$ac_exec_ext"
-      as_fn_executable_p "$ac_path_CSC_5" || continue
-
-      if test -n "${CSC_5}"; then
-         # Bypass the test if the precious variable CSC_5 is set.
-         ac_cv_path_CSC_5="${CSC_5}"
-         ac_path_CSC_5_found=:
-      else
-         # Run the test.
-
-    if LC_ALL=C LANG=C ${ac_path_CSC_5} -version 2>&1 | \
-      LC_ALL=C LANG=C ${GREP} '^CHICKEN' 2> /dev/null > /dev/null; then
-        if LC_ALL=C LANG=C ${ac_path_CSC_5} -version 2>&1 | \
-          LC_ALL=C LANG=C ${GREP} '^Version 5\.' 2> /dev/null > /dev/null; then
-            ac_cv_path_CSC_5="${ac_path_CSC_5}"
-            ac_path_CSC_5_found=:
-        fi
-    fi
-
-      fi
-      $ac_path_CSC_5_found && break 3
-    done
-  done
-  done
-IFS=$as_save_IFS
-  if test -z "$ac_cv_path_CSC_5"; then
-    :
-  fi
-else
-  ac_cv_path_CSC_5=$CSC_5
-fi
-
-      if test -z "${ac_cv_path_CSC_5}"; then
-         ac_cv_path_CSC_5="not found"
-         chem_cv_path_CSC_5_found=no
-      fi
-    ;;
-esac
-fi
-{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $ac_cv_path_CSC_5" >&5
-printf "%s\n" "$ac_cv_path_CSC_5" >&6; }
-if test x"${chem_cv_path_CSC_5_found}" = x"yes"; then
-   CSC_5="${ac_cv_path_CSC_5}"
-else
-   CSC_5=""
-   # Do not cache the negative result. That way someone can install
-   # the program and have it be discovered, even though they did not
-   # clear a cache entry.
-   unset ac_cv_path_CSC_5
-fi
-}
- if test "${chem_cv_path_CSC_5_found}" != no; then
-  CSC_5_TRUE=
-  CSC_5_FALSE='#'
-else
-  CSC_5_TRUE='#'
-  CSC_5_FALSE=
-fi
-
-
-CSC_5_OPTIMIZATION_LEVEL=${CSC_5_OPTIMIZATION_LEVEL=2}
 
 
 # Copyright © 2025 Barry Schwartz
@@ -8553,10 +8045,6 @@ if test -z "${MAINTAINER_MODE_TRUE}" && test -z "${MAINTAINER_MODE_FALSE}"; then
   as_fn_error $? "conditional \"MAINTAINER_MODE\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
-if test -z "${INSTALL_CHICKEN_5_EGG_SOURCE_TRUE}" && test -z "${INSTALL_CHICKEN_5_EGG_SOURCE_FALSE}"; then
-  as_fn_error $? "conditional \"INSTALL_CHICKEN_5_EGG_SOURCE\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
 if test -z "${INSTALL_R6RS_SOURCE_TRUE}" && test -z "${INSTALL_R6RS_SOURCE_FALSE}"; then
   as_fn_error $? "conditional \"INSTALL_R6RS_SOURCE\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
@@ -8571,14 +8059,6 @@ Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${ENABLE_CHECK_R7RS_CHIBI_TRUE}" && test -z "${ENABLE_CHECK_R7RS_CHIBI_FALSE}"; then
   as_fn_error $? "conditional \"ENABLE_CHECK_R7RS_CHIBI\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
-if test -z "${ENABLE_CHECK_R7RS_CSI_5_TRUE}" && test -z "${ENABLE_CHECK_R7RS_CSI_5_FALSE}"; then
-  as_fn_error $? "conditional \"ENABLE_CHECK_R7RS_CSI_5\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
-if test -z "${ENABLE_CHECK_R7RS_CSC_5_TRUE}" && test -z "${ENABLE_CHECK_R7RS_CSC_5_FALSE}"; then
-  as_fn_error $? "conditional \"ENABLE_CHECK_R7RS_CSC_5\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${ENABLE_CHECK_R7RS_GAUCHE_TRUE}" && test -z "${ENABLE_CHECK_R7RS_GAUCHE_FALSE}"; then
@@ -8615,22 +8095,6 @@ Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${CHEZ_SCHEME_TRUE}" && test -z "${CHEZ_SCHEME_FALSE}"; then
   as_fn_error $? "conditional \"CHEZ_SCHEME\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
-if test -z "${CHICKEN_INSTALL_5_TRUE}" && test -z "${CHICKEN_INSTALL_5_FALSE}"; then
-  as_fn_error $? "conditional \"CHICKEN_INSTALL_5\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
-if test -z "${CHICKEN_UNINSTALL_5_TRUE}" && test -z "${CHICKEN_UNINSTALL_5_FALSE}"; then
-  as_fn_error $? "conditional \"CHICKEN_UNINSTALL_5\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
-if test -z "${CSI_5_TRUE}" && test -z "${CSI_5_FALSE}"; then
-  as_fn_error $? "conditional \"CSI_5\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
-if test -z "${CSC_5_TRUE}" && test -z "${CSC_5_FALSE}"; then
-  as_fn_error $? "conditional \"CSC_5\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${CHIBI_SCHEME_TRUE}" && test -z "${CHIBI_SCHEME_FALSE}"; then
@@ -9987,28 +9451,6 @@ if test "${chem_cv_path_CHIBI_SCHEME_found}" != no; then
   { printf "%s\n" "$as_me:${as_lineno-$LINENO}: Chibi Scheme: ${CHIBI_SCHEME}" >&5
 printf "%s\n" "$as_me: Chibi Scheme: ${CHIBI_SCHEME}" >&6;}
 fi
-if test "${chem_cv_path_CSI_5_found}" != no; then
-  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: CHICKEN 5 interpreter: ${CSI_5}" >&5
-printf "%s\n" "$as_me: CHICKEN 5 interpreter: ${CSI_5}" >&6;}
-fi
-if test "${chem_cv_path_CSC_5_found}" != no; then
-  test "${chem_cv_path_CSI_5_found}" != no || { printf "%s\n" "$as_me:${as_lineno-$LINENO}: " >&5
-printf "%s\n" "$as_me: " >&6;}
-  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: CHICKEN 5 compiler: ${CSC_5}" >&5
-printf "%s\n" "$as_me: CHICKEN 5 compiler: ${CSC_5}" >&6;}
-fi
-if test "${chem_cv_path_CHICKEN_INSTALL_5_found}" != no; then
-  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: `if test "${enable_color}" = no; then echo ⬤; else echo 🔵; fi` ‘make chicken-install-5 INSTALL_AS=sudo’" >&5
-printf "%s\n" "$as_me: `if test "${enable_color}" = no; then echo ⬤; else echo 🔵; fi` ‘make chicken-install-5 INSTALL_AS=sudo’" >&6;}
-  { printf "%s\n" "$as_me:${as_lineno-$LINENO}:      to install the ‘pipchix’ egg." >&5
-printf "%s\n" "$as_me:      to install the ‘pipchix’ egg." >&6;}
-  if test "${chem_cv_path_CHICKEN_UNINSTALL_5_found}" != no; then
-    { printf "%s\n" "$as_me:${as_lineno-$LINENO}: `if test "${enable_color}" = no; then echo ⬤; else echo 🔵; fi` ‘make chicken-uninstall-5 INSTALL_AS=sudo’" >&5
-printf "%s\n" "$as_me: `if test "${enable_color}" = no; then echo ⬤; else echo 🔵; fi` ‘make chicken-uninstall-5 INSTALL_AS=sudo’" >&6;}
-    { printf "%s\n" "$as_me:${as_lineno-$LINENO}:      to uninstall the ‘pipchix’ egg." >&5
-printf "%s\n" "$as_me:      to uninstall the ‘pipchix’ egg." >&6;}
-  fi
-fi
 if test "${chem_cv_path_GAUCHE_found}" != no; then
   { printf "%s\n" "$as_me:${as_lineno-$LINENO}: Gauche Scheme: ${GAUCHE}" >&5
 printf "%s\n" "$as_me: Gauche Scheme: ${GAUCHE}" >&6;}
@@ -10032,24 +9474,6 @@ fi
 { printf "%s\n" "$as_me:${as_lineno-$LINENO}: " >&5
 printf "%s\n" "$as_me: " >&6;}
 
-
-{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: `if test "${enable_color}" = no; then echo ⬤; else echo 🔵; fi` ‘make dist-chicken-egg-5’ to make a compressed tar" >&5
-printf "%s\n" "$as_me: `if test "${enable_color}" = no; then echo ⬤; else echo 🔵; fi` ‘make dist-chicken-egg-5’ to make a compressed tar" >&6;}
-{ printf "%s\n" "$as_me:${as_lineno-$LINENO}:      of the CHICKEN 5 egg sources." >&5
-printf "%s\n" "$as_me:      of the CHICKEN 5 egg sources." >&6;}
-{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: " >&5
-printf "%s\n" "$as_me: " >&6;}
-
-if test "${install_chicken_5_egg_source}" != no; then
-  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: ‘make install’ will put CHICKEN 5 egg sources in" >&5
-printf "%s\n" "$as_me: ‘make install’ will put CHICKEN 5 egg sources in" >&6;}
-  { printf "%s\n" "$as_me:${as_lineno-$LINENO}:    ${chickeneggs5pipchixdir}" >&5
-printf "%s\n" "$as_me:    ${chickeneggs5pipchixdir}" >&6;}
-  { printf "%s\n" "$as_me:${as_lineno-$LINENO}:    where \$(chickeneggsdir) is ${chickeneggsdir}" >&5
-printf "%s\n" "$as_me:    where \$(chickeneggsdir) is ${chickeneggsdir}" >&6;}
-  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: " >&5
-printf "%s\n" "$as_me: " >&6;}
-fi
 
 if test "${install_r6rs_source}" != no; then
   { printf "%s\n" "$as_me:${as_lineno-$LINENO}: ‘make install’ will put R⁶RS sources in" >&5

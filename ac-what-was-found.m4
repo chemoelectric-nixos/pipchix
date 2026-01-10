@@ -28,21 +28,6 @@ fi
 if test "${chem_cv_path_CHIBI_SCHEME_found}" != no; then
   AC_MSG_NOTICE([Chibi Scheme: ${CHIBI_SCHEME}])
 fi
-if test "${chem_cv_path_CSI_5_found}" != no; then
-  AC_MSG_NOTICE([CHICKEN 5 interpreter: ${CSI_5}])
-fi
-if test "${chem_cv_path_CSC_5_found}" != no; then
-  test "${chem_cv_path_CSI_5_found}" != no || AC_MSG_NOTICE([])
-  AC_MSG_NOTICE([CHICKEN 5 compiler: ${CSC_5}])
-fi
-if test "${chem_cv_path_CHICKEN_INSTALL_5_found}" != no; then
-  AC_MSG_NOTICE([large_circle ‘make chicken-install-5 INSTALL_AS=sudo’])
-  AC_MSG_NOTICE([     to install the ‘pipchix’ egg.])
-  if test "${chem_cv_path_CHICKEN_UNINSTALL_5_found}" != no; then
-    AC_MSG_NOTICE([large_circle ‘make chicken-uninstall-5 INSTALL_AS=sudo’])
-    AC_MSG_NOTICE([     to uninstall the ‘pipchix’ egg.])
-  fi
-fi
 if test "${chem_cv_path_GAUCHE_found}" != no; then
   AC_MSG_NOTICE([Gauche Scheme: ${GAUCHE}])
 fi

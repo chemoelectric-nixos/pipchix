@@ -27,8 +27,6 @@ m4_include(tests-template.at)
 
 m4_define([run_r6rs_chez],["${abs_builddir}"/run-r6rs-chez.sh])
 m4_define([run_r7rs_chibi],["${abs_builddir}"/run-r7rs-chibi.sh])
-m4_define([run_r7rs_csc_5],["${abs_builddir}"/run-r7rs-csc-5.sh])
-m4_define([run_r7rs_csi_5],["${abs_builddir}"/run-r7rs-csi-5.sh])
 m4_define([run_r7rs_gauche],["${abs_builddir}"/run-r7rs-gauche.sh])
 m4_define([run_r6rs_guile],["${abs_builddir}"/run-r6rs-guile.sh])
 m4_define([run_r7rs_guile],["${abs_builddir}"/run-r7rs-guile.sh])
@@ -56,20 +54,6 @@ m4_define([u8_bytevec],[u8_bytevec_r7rs])
 tests_template([chibi       ],[Chibi Scheme (R⁷RS)],
   [r7rs chibi],
   [${enable_check_r7rs_chibi}],[run_r7rs_chibi])
-
-m4_define([implementation],[csc-5])
-m4_define([rnrs_version],[7])
-m4_define([u8_bytevec],[u8_bytevec_r7rs])
-tests_template([csc-5       ],[CHICKEN 5 compiler (R⁷RS)],
-  [r7rs chicken chicken-5 csc csc-5 compiler],
-  [${enable_check_r7rs_csc_5}],[run_r7rs_csc_5])
-
-m4_define([implementation],[csi-5])
-m4_define([rnrs_version],[7])
-m4_define([u8_bytevec],[u8_bytevec_r7rs])
-tests_template([csi-5       ],[CHICKEN 5 interpreter (R⁷RS)],
-  [r7rs chicken chicken-5 csi csi-5 interpreter],
-  [${enable_check_r7rs_csi_5}],[run_r7rs_csi_5])
 
 m4_define([implementation],[gauche])
 m4_define([rnrs_version],[7])

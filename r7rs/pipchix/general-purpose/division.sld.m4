@@ -37,11 +37,8 @@ m4_include(pipchix/pipchix-includes.m4)
 
   (import (scheme base))
   (cond-expand
-    (loko)
-    (chicken-5
-     (import (srfi 141)))
-    (else
-     (import (scheme division))))
+    ((or loko guile))
+    (else (import (scheme division))))
 
   (begin
 

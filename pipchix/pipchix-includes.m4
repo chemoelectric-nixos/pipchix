@@ -156,22 +156,6 @@ m4_divert(-1)
 ;;; m4_define(«define_ellipsis_test_r7rs»,«
 ;;; m4_pushdef(«NAME»,m4_ifelse($1,«»,«if-...»,«$1»))
 (cond-expand
-
-  (chicken-5
-   (define-syntax NAME
-     (er-macro-transformer
-      (lambda (form rename compare)
-        (unless (= (length form) 4)
-          (error "malformed NAME" form))
-        (let ((args (cdr form))
-              (ellipsis (rename '...)))
-          (let ((ellipsis=?
-                 (lambda (x) (and (symbol? x)
-                                  (compare x ellipsis)))))
-            (if (ellipsis=? (car args))
-              (cadr args)
-              (caddr args))))))))
-
   (loko
    (define-syntax NAME
      (lambda (stx)
@@ -181,7 +165,6 @@ m4_divert(-1)
                                  (syntax (... ...)))
             (syntax if-true)
             (syntax if-false)))))))
-
   (else
    (define-syntax NAME
      (syntax-rules ::: ( ... )
