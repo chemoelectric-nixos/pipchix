@@ -112,6 +112,12 @@ simple_eager_macro(char-upper-case?)
 simple_eager_macro(char-lower-case?)
 simple_eager_macro(not)
 
+;; The following have names designed to comply with the rules of R⁶RS.
+(define-syntax op+:e (eager-syntax +))
+(define-syntax op-:e (eager-syntax -))
+(define-syntax op*:e (eager-syntax *))
+(define-syntax op/:e (eager-syntax /))
+
 ;; SRFI-1 predicates.
 simple_eager_macro(proper-list?)
 simple_eager_macro(circular-list?)

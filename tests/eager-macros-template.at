@@ -229,7 +229,7 @@ check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([nix_true])],[])
 
 m4_define([sexpr],
-  [(scheme->nix (any:e (lambda (x) (not (and x @%:@t)))
+  [(scheme->nix (any:e (lambda (x) (not:e (and x @%:@t)))
                        (generate-temporaries:e '\''(1 2 3 4 5 6 7))))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([nix_false])],[])
@@ -354,9 +354,9 @@ check_unquoted([run_scheme 'sexpr'],[0],
 
 m4_define([sexpr],
   [(scheme->nix
-    (unfold:e (lambda (x) (> x 10))
-              (lambda (x) (* x x))
-              (lambda (x) (+ x 1))
+    (unfold:e (lambda (x) (>:e x 10))
+              (lambda (x) (op*:e x x))
+              (lambda (x) (op+:e x 1))
               1))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([@<:@·(1)·(4)·(9)·(16)·(25)·(36)·(49)·(64)·(81)·(100)·@:>@·])],[])
@@ -364,8 +364,8 @@ check_unquoted([run_scheme 'sexpr'],[0],
 m4_define([sexpr],
   [(scheme->nix
     (unfold-right:e zero?
-                    (lambda (x) (* x x))
-                    (lambda (x) (- x 1))
+                    (lambda (x) (op*:e x x))
+                    (lambda (x) (op-:e x 1))
                     10))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([@<:@·(1)·(4)·(9)·(16)·(25)·(36)·(49)·(64)·(81)·(100)·@:>@·])],[])
@@ -570,6 +570,9 @@ m4_define([sexpr],
               (vector-ref:e v 4))))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([[[·(10)·(20)·(30)·(40)·(50)·]·]])],[])
+
+m4_define([sexpr],[(scheme->nix (op/:e 4 4))])
+check_unquoted([run_scheme 'sexpr'],[0],[interpunct_nl([(1)·])],[])
 
 AT_CLEANUP
 

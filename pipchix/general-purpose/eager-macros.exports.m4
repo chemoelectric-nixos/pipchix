@@ -59,6 +59,10 @@ char-whitespace?:e
 char-upper-case?:e
 char-lower-case?:e
 not:e
+op+:e
+op-:e
+op*:e
+op/:e
 
 proper-list?:e
 circular-list?:e
