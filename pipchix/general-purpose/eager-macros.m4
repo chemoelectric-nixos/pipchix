@@ -166,6 +166,14 @@ simple_eager_macro(length+)        ;; Returns a list’s length or #f.
 simple_eager_macro(count)          ;; Counts elements passing a test.
 simple_eager_macro(every)          ;; Tests for everything true.
 simple_eager_macro(any)            ;; Tests for anything true.
+simple_eager_macro(member)
+simple_eager_macro(memq)
+simple_eager_macro(memv)
+simple_eager_macro(find)
+simple_eager_macro(find-tail)
+simple_eager_macro(list-index)
+simple_eager_macro(take-while)
+simple_eager_macro(drop-while)
 
 simple_eager_macro(car)
 simple_eager_macro(cdr)

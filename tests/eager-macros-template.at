@@ -430,6 +430,46 @@ check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([(I[]5)·])],[])
 ])
 
+m4_define([sexpr],
+  [(scheme->nix (member:e "c" (list:e "a" "b" "c" "d" "e") string=?))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·("c")·("d")·("e")·]·]])],[])
+
+m4_define([sexpr],
+  [(scheme->nix (memq:e `c (list:e `a `b `c `d `e)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·("c")·("d")·("e")·]·]])],[])
+
+m4_define([sexpr],
+  [(scheme->nix (memv:e 3 (list:e 1 2 3 4 5)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·(3)·(4)·(5)·]·]])],[])
+
+m4_define([sexpr],
+  [(scheme->nix (find:e (cut > <> 3) (list:e 1 2 3 4 5)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(4)·])],[])
+
+m4_define([sexpr],
+  [(scheme->nix (find-tail:e (cut = <> 3) (list:e 1 2 3 4 5)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·(3)·(4)·(5)·]·]])],[])
+
+m4_define([sexpr],
+  [(scheme->nix (list-index:e (cut > <> 3) (list:e 1 2 3 4 5)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(3)·])],[])
+
+m4_define([sexpr],
+  [(scheme->nix (take-while:e (cut < <> 3) (list:e 1 2 3 4 5)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·(1)·(2)·]·]])],[])
+
+m4_define([sexpr],
+  [(scheme->nix (drop-while:e (cut < <> 3) (list:e 1 2 3 4 5)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·(3)·(4)·(5)·]·]])],[])
+
 AT_CLEANUP
 
 # local variables:

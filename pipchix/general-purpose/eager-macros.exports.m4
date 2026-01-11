@@ -107,6 +107,14 @@ length+:e
 count:e
 every:e
 any:e
+member:e
+memq:e
+memv:e
+find:e
+find-tail:e
+list-index:e
+take-while:e
+drop-while:e
 
 car:e
 cdr:e
