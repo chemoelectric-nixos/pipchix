@@ -1,6 +1,8 @@
 eager-syntax
 eager-match-rules
 
+let:e
+
 identity:e
 constant:e
 gensym:e

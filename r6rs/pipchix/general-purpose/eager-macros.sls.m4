@@ -30,9 +30,12 @@ m4_include(pipchix/pipchix-includes.m4)
   (export m4_include(pipchix/general-purpose/eager-macros.exports.m4))
 
   (import basic_libraries
-          (for (pipchix general-purpose gensym) expand run)
-          (for (pipchix general-purpose eager-syntax) expand run)
-          (for (pipchix general-purpose match) expand run))
+          (for (pipchix general-purpose gensym)
+            expand run)
+          (for (pipchix general-purpose eager-syntax)
+            expand run)
+          (for (pipchix general-purpose match)
+            expand run))
 
   m4_include(pipchix/general-purpose/eager-macros.m4)
 

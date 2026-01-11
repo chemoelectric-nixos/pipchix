@@ -25,6 +25,18 @@
 
 ;;; m4_define(«simple_eager_macro»,«(define-syntax $1:e (eager-syntax $1))»)
 
+(define-syntax let:e
+  ;; Like ‘let’, but for eager macro definition.
+  (syntax-rules ()
+    ((¶ ((formal actual) ...) body ...)
+     (let-syntax
+         ((macro (eager-syntax
+                  (lambda (formal ...)
+                    (if #f #f) body ...))))
+       (call-with-values
+           (lambda () (values actual ...))
+         (lambda (formal ...) (macro formal ...)))))))
+
 (define-syntax identity:e
   ;; Expands to all its arguments.
   (eager-syntax (lambda args (apply values args))))

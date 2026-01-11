@@ -26,6 +26,17 @@ AT_SETUP([setup_message(eager-macros)])
 
 AT_KEYWORDS([default_keywords eager-macros])
 
+m4_define([sexpr],
+  [(scheme->nix
+    (let:e ((a 3)
+            (b 4)
+            (c 5))
+      (reverse:e
+       (vector->list:e
+        (vector:e a b c)))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·(5)·(4)·(3)·]·]])],[])
+
 m4_define([sexpr],[(scheme->nix (call-with-values (lambda () (identity:e 5 1 2 3 4 7)) list))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([@<:@·(5)·(1)·(2)·(3)·(4)·(7)·@:>@·])],[])
