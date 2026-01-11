@@ -171,3 +171,9 @@ lset-union:e
 lset-intersection:e
 lset-difference:e
 lset-xor:e
+
+vector:e
+list->vector:e
+vector->list:e
+vector-map:e
+vector-ref:e

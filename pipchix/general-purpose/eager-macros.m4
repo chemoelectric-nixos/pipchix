@@ -231,6 +231,12 @@ simple_eager_macro(lset-intersection)
 simple_eager_macro(lset-difference)
 simple_eager_macro(lset-xor)
 
+simple_eager_macro(vector)
+simple_eager_macro(list->vector)
+simple_eager_macro(vector->list)
+simple_eager_macro(vector-map)
+simple_eager_macro(vector-ref)
+
 m4_divert(-1)
 ;;; local variables:
 ;;; mode: scheme

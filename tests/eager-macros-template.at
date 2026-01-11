@@ -553,6 +553,24 @@ m4_define([sexpr],
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([[[·("u")·("o")·("i")·("b")·("c")·("d")·]·]])],[])
 
+m4_define([sexpr],
+  [(scheme->nix (vector->list:e (vector-map:e (cut * <> 10)
+        (list->vector:e (vector->list:e (vector:e 1 2 3 4 5))))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·(10)·(20)·(30)·(40)·(50)·]·]])],[])
+
+m4_define([sexpr],
+  [(scheme->nix
+    (let ()
+      (define v (vector:e 10 20 30 40 50))
+      (list:e (vector-ref:e v 0)
+              (vector-ref:e v 1)
+              (vector-ref:e v 2)
+              (vector-ref:e v 3)
+              (vector-ref:e v 4))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·(10)·(20)·(30)·(40)·(50)·]·]])],[])
+
 AT_CLEANUP
 
 # local variables:
