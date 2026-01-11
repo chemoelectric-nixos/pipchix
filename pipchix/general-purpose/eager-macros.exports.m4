@@ -157,3 +157,9 @@ seventh:e
 eighth:e
 ninth:e
 tenth:e
+
+assoc:e
+assq:e
+assv:e
+alist-cons:e
+alist-delete:e

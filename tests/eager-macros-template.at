@@ -470,6 +470,54 @@ m4_define([sexpr],
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([[[·(3)·(4)·(5)·]·]])],[])
 
+m4_define([sexpr],
+  [(scheme->nix (assoc:e "c" (list:e (list:e "a" 1)
+                                     (list:e "b" 2)
+                                     (list:e "c" 3)
+                                     (list:e "d" 4)
+                                     (list:e "e" 5)) string=?))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·("c")·(3)·]·]])],[])
+
+m4_define([sexpr],
+  [(scheme->nix (assq:e `c (list:e (list:e `a 1)
+                                   (list:e `b 2)
+                                   (list:e `c 3)
+                                   (list:e `d 4)
+                                   (list:e `e 5))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·("c")·(3)·]·]])],[])
+
+m4_define([sexpr],
+  [(scheme->nix (assv:e 30 (list:e (list:e 10 1)
+                                   (list:e 20 2)
+                                   (list:e 30 3)
+                                   (list:e 40 4)
+                                   (list:e 50 5))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·(30)·(3)·]·]])],[])
+
+m4_define([sexpr],
+  [(scheme->nix (alist-cons:e 5 (list:e 2)
+                           (list:e (list:e 10 1)
+                                   (list:e 20 2)
+                                   (list:e 30 3)
+                                   (list:e 40 4)
+                                   (list:e 50 5))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·[·(5)·(2)·]·[·(10)·(1)·]·[·(20)·(2)·]·[·(30)·(3)·]·[·(40)·(4)·]·[·(50)·(5)·]·]·]])],[])
+
+m4_define([sexpr],
+  [(scheme->nix (alist-delete:e 20
+                 (alist-cons:e 5 (list:e 2)
+                           (list:e (list:e 10 1)
+                                   (list:e 20 2)
+                                   (list:e 30 3)
+                                   (list:e 40 4)
+                                   (list:e 50 5))) <))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·[·(5)·(2)·]·[·(10)·(1)·]·[·(20)·(2)·]·]·]])],[])
+
 AT_CLEANUP
 
 # local variables:

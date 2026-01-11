@@ -217,6 +217,12 @@ simple_eager_macro(eighth)
 simple_eager_macro(ninth)
 simple_eager_macro(tenth)
 
+simple_eager_macro(assoc)
+simple_eager_macro(assq)
+simple_eager_macro(assv)
+simple_eager_macro(alist-cons)
+simple_eager_macro(alist-delete)
+
 m4_divert(-1)
 ;;; local variables:
 ;;; mode: scheme
