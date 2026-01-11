@@ -223,6 +223,14 @@ simple_eager_macro(assv)
 simple_eager_macro(alist-cons)
 simple_eager_macro(alist-delete)
 
+simple_eager_macro(lset<=)
+simple_eager_macro(lset=)
+simple_eager_macro(lset-adjoin)
+simple_eager_macro(lset-union)
+simple_eager_macro(lset-intersection)
+simple_eager_macro(lset-difference)
+simple_eager_macro(lset-xor)
+
 m4_divert(-1)
 ;;; local variables:
 ;;; mode: scheme

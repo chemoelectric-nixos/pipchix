@@ -163,3 +163,11 @@ assq:e
 assv:e
 alist-cons:e
 alist-delete:e
+
+lset<=:e
+lset=:e
+lset-adjoin:e
+lset-union:e
+lset-intersection:e
+lset-difference:e
+lset-xor:e

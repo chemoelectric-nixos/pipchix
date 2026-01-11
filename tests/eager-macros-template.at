@@ -518,6 +518,41 @@ m4_define([sexpr],
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([[[·[·(5)·(2)·]·[·(10)·(1)·]·[·(20)·(2)·]·]·]])],[])
 
+m4_define([sexpr],
+  [(scheme->nix (lset<=:e eq? `(a) `(a b a) `(a b c c)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([nix_true])],[])
+
+m4_define([sexpr],
+  [(scheme->nix (lset=:e eq? `(b e a) `(a e b) `(e e b a)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([nix_true])],[])
+
+m4_define([sexpr],
+  [(scheme->nix (lset-adjoin:e eq? `(a b c d c e) `a `e `i `o `u))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·("u")·("o")·("i")·("a")·("b")·("c")·("d")·("c")·("e")·]·]])],[])
+
+m4_define([sexpr],
+  [(scheme->nix (lset-union:e eq? `(a b c d e) `(a e i o u)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·("u")·("o")·("i")·("a")·("b")·("c")·("d")·("e")·]·]])],[])
+
+m4_define([sexpr],
+  [(scheme->nix (lset-intersection:e eq? `(a b c d e) `(a e i o u)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·("a")·("e")·]·]])],[])
+
+m4_define([sexpr],
+  [(scheme->nix (lset-difference:e eq? `(a b c d e) `(a e i o u)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·("b")·("c")·("d")·]·]])],[])
+
+m4_define([sexpr],
+  [(scheme->nix (lset-xor:e eq? `(a b c d e) `(a e i o u)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·("u")·("o")·("i")·("b")·("c")·("d")·]·]])],[])
+
 AT_CLEANUP
 
 # local variables:
