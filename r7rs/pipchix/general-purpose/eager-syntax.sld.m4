@@ -30,6 +30,7 @@ m4_include(pipchix/pipchix-includes.m4)
 
   (import basic_libraries)
   (import (pipchix general-purpose gensym))
+  (import (pipchix general-purpose match))
 
   (cond-expand
     (chibi (import (only (chibi) er-macro-transformer)))

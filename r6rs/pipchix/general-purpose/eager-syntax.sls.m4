@@ -30,7 +30,8 @@ m4_include(pipchix/pipchix-includes.m4)
   (export m4_include(pipchix/general-purpose/eager-syntax.exports.m4))
 
   (import basic_libraries
-          (for (pipchix general-purpose gensym) run expand))
+          (for (pipchix general-purpose gensym) expand run)
+          (for (pipchix general-purpose match) expand run))
 
   ;; m4_define(«general_macros»,«syntax-case»)
   m4_include(pipchix/general-purpose/eager-syntax.m4)

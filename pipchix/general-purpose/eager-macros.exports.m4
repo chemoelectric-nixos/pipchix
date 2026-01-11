@@ -1,4 +1,5 @@
 eager-syntax
+eager-match-rules
 
 identity:e
 constant:e

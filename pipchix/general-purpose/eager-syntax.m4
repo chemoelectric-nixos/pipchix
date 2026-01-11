@@ -79,6 +79,13 @@
 
 ;;; »)
 
+(define-syntax eager-match-rules
+  (syntax-rules ()
+    ((¶ rule ...)
+     (lambda vals
+       (match (apply list vals)
+         rule ...)))))
+
 m4_divert(-1)
 ;;; local variables:
 ;;; mode: scheme

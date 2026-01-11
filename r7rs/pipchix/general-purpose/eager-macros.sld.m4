@@ -31,6 +31,7 @@ m4_include(pipchix/pipchix-includes.m4)
   (import basic_libraries)
   (import (pipchix general-purpose gensym))
   (import (pipchix general-purpose eager-syntax))
+  (import (pipchix general-purpose match))
 
   (begin
 

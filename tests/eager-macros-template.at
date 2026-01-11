@@ -574,6 +574,36 @@ check_unquoted([run_scheme 'sexpr'],[0],
 m4_define([sexpr],[(scheme->nix (op/:e 4 4))])
 check_unquoted([run_scheme 'sexpr'],[0],[interpunct_nl([(1)·])],[])
 
+m4_define([sexpr],
+  [(scheme->nix
+    (let ()
+      (define-syntax macro
+        (eager-syntax
+           (eager-match-rules
+             ((a (? (cut < <> 2) b) c)
+              (list:e a b c))
+             ((a b c)
+              (reverse:e (list:e a b c))))))
+      (macro 3 4 5)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·(5)·(4)·(3)·]·]])],[])
+
+m4_define([sexpr],
+  [(scheme->nix
+    (let ()
+      (define-syntax macro
+        (eager-syntax
+           (eager-match-rules
+             ((a b c) (=> fail)
+              (if (< b 2)
+                (list:e a b c)
+                (fail)))
+             ((a b c)
+              (reverse:e (list:e a b c))))))
+      (macro 3 4 5)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·(5)·(4)·(3)·]·]])],[])
+
 AT_CLEANUP
 
 # local variables:
