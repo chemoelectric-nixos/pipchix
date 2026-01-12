@@ -93,6 +93,7 @@
       (lambda (form rename compare)
         (let ((arg* (cdr form)))
           (compare (first arg*) (second arg*))))))
+
    )
 
   (else
@@ -159,11 +160,15 @@
           (let (unsyntax lets-list)
             (unsyntax tmp*))))))))
 
-(define (bound-identifier-equiv? s1 s2)
-  (bound-identifier=? (syntax s1) (syntax s2)))
+(define-syntax bound-identifier-equiv?
+  (syntax-rules ()
+    ((¶ s1 s2)
+     (bound-identifier=? (syntax s1) (syntax s2)))))
 
-(define (free-identifier-equiv? s1 s2)
-  (free-identifier=? (syntax s1) (syntax s2)))
+(define-syntax free-identifier-equiv?
+  (syntax-rules ()
+    ((¶ s1 s2)
+     (free-identifier=? (syntax s1) (syntax s2)))))
 
 ;;; »)
 
