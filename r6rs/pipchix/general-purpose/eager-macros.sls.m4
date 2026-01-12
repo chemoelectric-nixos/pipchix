@@ -34,6 +34,8 @@ m4_include(pipchix/pipchix-includes.m4)
             expand run)
           (for (pipchix general-purpose eager-syntax)
             expand run)
+          (for (pipchix general-purpose cut)
+            expand run)
           (for (pipchix general-purpose match)
             expand run))
 

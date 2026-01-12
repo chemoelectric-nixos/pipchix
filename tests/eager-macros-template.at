@@ -615,6 +615,20 @@ m4_define([sexpr],
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([[[·(5)·(4)·(3)·]·]])],[])
 
+m4_define([sexpr], dnl  A demonstration of where the quasiquote goes.
+  [(scheme->nix
+    (let ()
+      (define-syntax macro
+        (eager-syntax
+          `(eager-match-rules
+             ((x y z)
+              (let ,(zip '\''(c b a) '\''(x y z))
+                (vector->list
+                 (vector a b c)))))))
+      (macro 111 222 333)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·(333)·(222)·(111)·]·]])],[])
+
 AT_CLEANUP
 
 # local variables:
