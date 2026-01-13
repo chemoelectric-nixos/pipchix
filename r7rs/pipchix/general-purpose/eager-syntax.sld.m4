@@ -27,6 +27,9 @@ m4_include(pipchix/pipchix-includes.m4)
 (define-library (pipchix general-purpose eager-syntax)
 
   (export m4_include(pipchix/general-purpose/eager-syntax.exports.m4))
+  (cond-expand
+    (gauche (export :info-alist))
+    (else))
 
   (import basic_libraries)
   (import (pipchix general-purpose gensym))
