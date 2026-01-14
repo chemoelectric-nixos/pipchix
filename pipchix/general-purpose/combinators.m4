@@ -229,6 +229,22 @@
   (lambda (k . arg*)
     (k (apply proc arg*))))
 
+(define-syntax define-cps-syntax
+  ;;
+  ;; Define a continuation-passing style macro. Start from an ordinary
+  ;; macro or procedure f:
+  ;;
+  ;;     (define-cps-syntax cps-macro f) ==>
+  ;;
+  ;;           (cps-macro k . arg*) --> (k (f . arg*))
+  ;;
+  (syntax-rules ()
+    ((¶ name f)
+     (define-syntax name
+       (syntax-rules ()
+         ((µ k . t*)
+          (k (f . t*))) )))))
+
 ;;;-------------------------------------------------------------------
 
 m4_divert(-1)
