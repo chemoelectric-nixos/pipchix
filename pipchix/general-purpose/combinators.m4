@@ -250,8 +250,8 @@
   ;; Create a continuation-passing style macro. Start from an ordinary
   ;; macro or procedure f:
   ;;
-  ;;     (let-syntax ((cps-macro (make-cps-syntax f)
-  ;;       (cps-macro k . arg*))))      -->     (k (f . arg*))
+  ;;     (let-syntax ((cps-macro (make-cps-syntax f)))
+  ;;       (cps-macro k . arg*))      -->     (k (f . arg*))
   ;;
   (syntax-rules ()
     ((¶ f)
