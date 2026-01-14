@@ -294,6 +294,16 @@ m4_define([sexpr],
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([(362880)·])],[])
 
+m4_define([sexpr],
+  [(scheme->nix
+    (let ()
+     ;; factorial defined by ‘make-cps-syntax’.
+     (define (fact n) (if (zero? n) 1 (* n (fact (- n 1)))))
+     (let-syntax ((cps-syntax-fact (make-cps-syntax fact)))
+       (call/cc (lambda (cc) (cps-syntax-fact cc 9))))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(362880)·])],[])
+
 AT_CLEANUP
 
 # local variables:

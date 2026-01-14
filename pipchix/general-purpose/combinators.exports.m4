@@ -10,3 +10,4 @@ join* wind-pre* wind-post* wind*
 
 make-cps
 define-cps-syntax
+make-cps-syntax
