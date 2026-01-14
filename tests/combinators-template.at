@@ -245,6 +245,45 @@ m4_define([sexpr],
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([("foobarbaz")·])],[])
 
+m4_define([sexpr],
+  [(scheme->nix
+    (let ()
+     ;; factorial defined by the ‘make-cps’ procedure.
+     (define (fact n) (if (zero? n) 1 (* n (fact (- n 1)))))
+     (define fact:k (make-cps fact))
+     (call/cc (cut fact:k <> 9))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(362880)·])],[])
+
+m4_define([sexpr],
+  [(scheme->nix
+    (call/cc
+     (lambda (cc)
+       ;; factorial defined from more basic CPS procedures.
+       (define-syntax λ
+         (syntax-rules ()
+           ((λ args body ...)
+            (lambda args body ...))))
+       (define decr:k (make-cps (cut - <> 1)))
+       (define *:k (make-cps *))
+       (define zero?:k (make-cps zero?))
+       (define (fact:k k n)
+         (zero?:k
+          (λ (=zero?)
+            (if =zero?
+              (k 1)
+              (decr:k
+               (λ (n-1)
+                 (fact:k
+                  (λ (factorial)
+                    (*:k k n factorial))
+                  n-1))
+               n)))
+          n))
+       (fact:k cc 9))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(362880)·])],[])
+
 AT_CLEANUP
 
 # local variables:

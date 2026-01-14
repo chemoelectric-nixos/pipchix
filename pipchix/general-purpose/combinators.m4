@@ -220,6 +220,17 @@
 
 ;;;-------------------------------------------------------------------
 
+(define (make-cps proc)
+  ;;
+  ;; Return a continuation-passing style variant of a procedure:
+  ;;
+  ;;     ((make-cps proc) k . arg*) --> (k (proc . arg*))
+  ;;
+  (lambda (k . arg*)
+    (k (apply proc arg*))))
+
+;;;-------------------------------------------------------------------
+
 m4_divert(-1)
 ;;; local variables:
 ;;; mode: scheme

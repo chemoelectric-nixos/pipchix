@@ -136,6 +136,62 @@
           (m #t #f)))))
    ))
 
+(define-syntax dequote
+  (er-macro-transformer
+   (lambda (form rename compare)
+     (let* ((_quote_ (rename 'quote))
+            (_quasiquote_ (rename 'quasiquote))
+            (_unquote_ (rename 'unquote))
+            (_unquote-splicing_ (rename 'unquote-splicing))
+            (quote=? (cut compare <> _quote_))
+            (quasiquote=? (cut compare <> _quasiquote_))
+            (unquote=? (cut compare <> _unquote_))
+            (unquote-splicing=? (cut compare <> _unquote-splicing_)))
+       (unless (= (length form) 2)
+         SCHEME_ERROR("expected one argument", form))
+       (let ((expr (second form)))
+         (cond
+           ((not-pair? expr)
+            expr)
+           ((quote=? (first expr))
+            (unless (equal? (length+ expr) 2)
+              SCHEME_ERROR("quote expects one argument", expr))
+            (second expr))
+           ((not (quasiquote=? (first expr)))
+            expr)
+           (else
+            (unless (equal? (length+ expr) 2)
+              SCHEME_ERROR("quasiquote expects one argument", expr))
+            (let recurs ((expr (second expr))
+                         (depth 0))
+              (match expr
+
+                (((? unquote=? _) x)
+                 (if (zero? depth)
+                   x
+                   (recurs expr (- depth 1))))
+
+                ((((? unquote-splicing=? _) x) . x*)
+                 (if (zero? depth)
+                   (begin
+                     (unless (proper-list? x)
+                       SCHEME_ERROR("expected a proper list", x))
+                     (append x (recurs x* 0)))
+                   (recurs expr (- depth 1))))
+
+                (((? quasiquote=? _) _)
+                 (recurs expr (+ depth 1)))
+
+                ((? vector? x)
+                 (list->vector (recurs (vector->list x) depth)))
+
+                ((? not-pair? _)
+                 expr)
+
+                (_
+                 (cons (recurs (car expr) depth)
+                       (recurs (cdr expr) depth))) )))))))))
+
 ;;; »)
 
 ;;; m4_ifelse(general_macros,«syntax-case»,«
@@ -170,6 +226,83 @@
     ((¶ s1 s2)
      (free-identifier=? (syntax s1) (syntax s2)))))
 
+(define-syntax dequote
+  (lambda (stx)
+    (letrec
+        ((syntax->proper-list
+          (lambda (x)
+            (syntax-case x ()
+              (()      '())
+              ((h . t) (cons (syntax h)
+                             (syntax->proper-list (syntax t))))
+              (x       (list (syntax x))))))
+         (syntax-vector->syntax-list
+          (lambda (x)
+            (syntax-case x ()
+              (#(a ...) (syntax (a ...))))))
+         (proper-list->syntax-vector
+          (lambda (x)
+            (syntax-case x ()
+              ((a ...) (syntax #(a ...)))))))
+      (let ((quote=?
+             (cut free-identifier=? <> (syntax quote)))
+            (quasiquote=?
+             (cut free-identifier=? <> (syntax quasiquote)))
+            (unquote=?
+             (cut free-identifier=? <> (syntax unquote)))
+            (unquote-splicing=?
+             (cut free-identifier=? <> (syntax unquote-splicing)))
+            (syntax-vector?
+             (lambda (v) (vector? (syntax->datum v))))
+            (form (syntax->proper-list stx)))            
+        (unless (= (length form) 2)
+          SCHEME_ERROR("expected one argument", form))
+        (let ((expr (second form)))
+          (cond
+            ((not-pair? expr)
+             expr)
+            ((quote=? (first expr))
+             (unless (equal? (length+ expr) 2)
+               SCHEME_ERROR("quote expects one argument", expr))
+             (second expr))
+            ((not (quasiquote=? (first expr)))
+             expr)
+            (else
+             (unless (equal? (length+ expr) 2)
+               SCHEME_ERROR("quasiquote expects one argument", expr))
+             (let recurs ((expr (second expr))
+                          (depth 0))
+               (match expr
+
+                 (((? unquote=? _) x)
+                  (if (zero? depth)
+                    x
+                    (recurs expr (- depth 1))))
+
+                 ((((? unquote-splicing=? _) x) . x*)
+                  (if (zero? depth)
+                    (begin
+                      (unless (proper-list? x)
+                        SCHEME_ERROR("expected a proper list", x))
+                      (append x (recurs x* 0)))
+                    (recurs expr (- depth 1))))
+
+                 (((? quasiquote=? _) _)
+                  (recurs expr (+ depth 1)))
+
+                 ((? syntax-vector? x)
+                  (proper-list->syntax-vector
+                   (recurs (syntax->proper-list
+                            (syntax-vector->syntax-list x))
+                           depth)))
+
+                 ((? not-pair? _)
+                  expr)
+
+                 (_
+                  (cons (recurs (car expr) depth)
+                        (recurs (cdr expr) depth))) )))))))))
+
 ;;; »)
 
 (define-syntax eager-match-rules
@@ -178,11 +311,6 @@
      (lambda vals
        (match (apply list vals)
          rule ...)))))
-
-(define-syntax dequote
-  (syntax-rules (quote quasiquote)
-    ((¶ 'x) x)
-    ((¶ x)  x)))
 
 m4_divert(-1)
 ;;; local variables:
