@@ -74,7 +74,7 @@
 
 (define ~> thrush+) ;; A synonym known to Racket programmers.
 
-(define (thrush* val . val*)
+(define (thrush* . val*)
   ;;
   ;; Another Racket combinator. One can write
   ;;
@@ -88,7 +88,7 @@
   ;;
   (lambda proc*
     (call-with-values
-        (lambda () (apply values (cons val val*)))
+        (lambda () (apply values val*))
       (apply thrush proc*))))
 
 (define ~>* thrush*) ;; A synonym known to Racket programmers.
@@ -122,13 +122,13 @@
 
 (define and~> thrush+-and) ;; A synonym known to Racket programmers.
 
-(define (thrush*-and val . val*)
+(define (thrush*-and . val*)
   ;;
   ;; Short-circuiting thrush*
   ;;
   (lambda proc*
     (call-with-values
-        (lambda () (apply values (cons val val*)))
+        (lambda () (apply values val*))
       (apply thrush-and proc*))))
 
 (define and~>* thrush*-and) ;; A synonym known to Racket programmers.
@@ -246,10 +246,25 @@
   ;; (λcps~> f g h ...) links a chain of continuation-passing style
   ;; procedures.
   ;;
+  ;; λcps~> is proof that continuation-passing style and the thrush
+  ;; combinator are equivalent to each other.
+  ;;
   (let ((f* (map uncps (cons proc proc*))))
     (cps (apply thrush f*))))
 
 (define lambda-cps~> λcps~>) ;; a synonym.
+
+(define (cps~>* k . val*)
+  ;;
+  ;; A continuation-passing style equivalent of the thrush*
+  ;; combinator:
+  ;;
+  ;;    ((cps~>* k val1 val2 ...) proc1 proc2 ...)
+  ;;
+  (let ((local~>* (apply thrush* val*)))
+    (lambda proc*
+      (let ((f* (map uncps proc*)))
+        (k (apply local~>* f*))))))
 
 ;;; m4_dnl  Using m4 here instead of Scheme’s own macro mechanism is
 ;;; m4_dnl  to avoid difficulties of Racket (that are presented by

@@ -301,7 +301,7 @@ m4_define([sexpr],
   [(scheme->nix
     (call/cc
      (lambda (cc)
-       ;; factorial defined with cps~>
+       ;; factorial defined with λcps~>
        (define (fact:k k n)
          (define n=0?:k (cps (lambda () (zero? n))))
          (define n-1:k (cps (lambda () (- n 1))))
@@ -314,6 +314,48 @@ m4_define([sexpr],
                        fact:k
                        times_n:k)
                k)))))
+       (fact:k cc 9))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(362880)·])],[])
+
+m4_define([sexpr],
+  [(scheme->nix
+    (call/cc
+     (lambda (cc)
+       ;; factorial defined with lambda-cps~> (including one
+       ;; that is not really needed).
+       (define (fact:k k n)
+         (define n=0?:k (cps (lambda () (zero? n))))
+         (define n-1:k (cps (lambda () (- n 1))))
+         (define times_n:k (cps (lambda (x) (* n x))))
+         ((lambda-cps~> n=0?:k)
+          (lambda (z?)
+            (if z?
+              (k 1)
+              ((lambda-cps~> n-1:k
+                             fact:k
+                             times_n:k)
+               k)))))
+       (fact:k cc 9))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(362880)·])],[])
+
+m4_define([sexpr],
+  [(scheme->nix
+    (call/cc
+     (lambda (cc)
+       ;; factorial defined with cps~>*
+       (define (fact:k k n)
+         (define n=0?:k (cps (lambda () (zero? n))))
+         (define n-1:k (cps (lambda () (- n 1))))
+         (define times_n:k (cps (lambda (x) (* n x))))
+         (n=0?:k
+          (lambda (z?)
+            (if z?
+              (k 1)
+              ((cps~>* k) n-1:k
+                          fact:k
+                          times_n:k)))))
        (fact:k cc 9))))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([(362880)·])],[])
