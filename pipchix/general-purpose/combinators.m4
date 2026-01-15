@@ -273,12 +273,14 @@
 ;;; m4_define(«cps_syntax_rules»,«
 (syntax-rules ()
   ((µ k . t*)
-   (k ($1 . t*))))»)
+   (k ($1 . t*))))
+;;; »)
 ;;; m4_define(«uncps_syntax_rules»,«
 (syntax-rules ()
   ((µ . t*)
    (let-syntax ((identity (syntax-rules () ((ι τ) τ))))
-     ($1 identity . t*))))»)
+     ($1 identity . t*))))
+;;; »)
 
 (define-syntax define-cps-syntax
   ;;
@@ -292,7 +294,8 @@
   (syntax-rules ()
     ((¶ name f)
      (define-syntax name
-       cps_syntax_rules(f)))))
+       cps_syntax_rules(f)
+       ))))
 
 (define-syntax define-uncps-syntax
   ;;
@@ -306,7 +309,8 @@
   (syntax-rules ()
     ((¶ name f)
      (define-syntax name
-       uncps_syntax_rules(f)))))
+       uncps_syntax_rules(f)
+       ))))
 
 (define-syntax cps-syntax
   ;;
@@ -318,7 +322,8 @@
   ;;
   (syntax-rules ()
     ((¶ f)
-     cps_syntax_rules(f))))
+     cps_syntax_rules(f)
+     )))
 
 (define-syntax uncps-syntax
   ;;
@@ -329,7 +334,8 @@
   ;;
   (syntax-rules ()
     ((¶ f)
-     uncps_syntax_rules(f))))
+     uncps_syntax_rules(f)
+     )))
 
 ;;;-------------------------------------------------------------------
 
