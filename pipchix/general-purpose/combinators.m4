@@ -135,6 +135,33 @@
 
 ;;;-------------------------------------------------------------------
 
+(define-syntax thrush-syntax
+  ;;
+  ;; A syntactic equivalent of the ‘thrush’ combinator:
+  ;;
+  ;;   (let-syntax ((macro (thrush-syntax f1 f2 f3 ...)))
+  ;;     (macro val1 val2 val3 ...))
+  ;;
+  (syntax-rules ()
+    ((¶ f ...)
+     (syntax-rules ()
+       ((µ . val*)
+        (thrush-syntax-aux (f ...) val*))))))
+
+(define-syntax thrush-syntax-aux
+  (syntax-rules ()
+    ((¶ () val*)
+     (values . val*))
+    ((¶ (f1 f2 ...) val*)
+     (thrush-syntax-aux (f2 ...) ((f1 . val*))))))
+
+(define-syntax stx~> ;; A synonym for thrush-syntax
+  (syntax-rules ()
+    ((¶ f ...)
+     (thrush-syntax f ...))))
+
+;;;-------------------------------------------------------------------
+
 (define (join proc . proc*)
   ;;
   ;; Join one-to-one procedures in parallel to make an n-to-n
