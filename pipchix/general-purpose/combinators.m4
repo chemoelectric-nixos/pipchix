@@ -220,14 +220,50 @@
 
 ;;;-------------------------------------------------------------------
 
-(define (make-cps proc)
+(define (cps proc)
   ;;
   ;; Return a continuation-passing style variant of a procedure:
   ;;
-  ;;     ((make-cps proc) k . arg*) --> (k (proc . arg*))
+  ;;     ((cps proc) k . arg*) --> (k (proc . arg*))
   ;;
   (lambda (k . arg*)
     (k (apply proc arg*))))
+
+(define uncps
+  ;;
+  ;; Return an ordinary variant of a continuation-passing style
+  ;; procedure:
+  ;;
+  ;;     ((uncps proc) . arg*) --> (proc identity . arg*)
+  ;;
+  (let ((identity (lambda x* (apply values x*))))
+    (lambda (proc)
+      (lambda arg*
+        (apply proc (cons identity arg*))))))
+
+(define (λcps~> proc . proc*)
+  ;;
+  ;; (λcps~> f g h ...) links a chain of continuation-passing style
+  ;; procedures.
+  ;;
+  (let ((f* (map uncps (cons proc proc*))))
+    (cps (apply thrush f*))))
+
+(define lambda-cps~> λcps~>) ;; a synonym.
+
+;;; m4_dnl  Using m4 here instead of Scheme’s own macro mechanism is
+;;; m4_dnl  to avoid difficulties of Racket (that are presented by
+;;; m4_dnl  none of the other Schemes we are using).
+;;;
+;;; m4_define(«cps_syntax_rules»,«
+(syntax-rules ()
+  ((µ k . t*)
+   (k ($1 . t*))))»)
+;;; m4_define(«uncps_syntax_rules»,«
+(syntax-rules ()
+  ((µ . t*)
+   (let-syntax ((identity (syntax-rules () ((ι τ) τ))))
+     ($1 identity . t*))))»)
 
 (define-syntax define-cps-syntax
   ;;
@@ -241,23 +277,44 @@
   (syntax-rules ()
     ((¶ name f)
      (define-syntax name
-       (syntax-rules ()
-         ((µ k . t*)
-          (k (f . t*))) )))))
+       cps_syntax_rules(f)))))
 
-(define-syntax make-cps-syntax
+(define-syntax define-uncps-syntax
+  ;;
+  ;; Define an ordinary macro from a continuation-passing style macro
+  ;; or procedure f.
+  ;;
+  ;;     (define-uncps-syntax uncps-macro f) ==>
+  ;;
+  ;;           (uncps-macro . arg*) --> (f identity . arg*))
+  ;;
+  (syntax-rules ()
+    ((¶ name f)
+     (define-syntax name
+       uncps_syntax_rules(f)))))
+
+(define-syntax cps-syntax
   ;;
   ;; Create a continuation-passing style macro. Start from an ordinary
   ;; macro or procedure f:
   ;;
-  ;;     (let-syntax ((cps-macro (make-cps-syntax f)))
+  ;;     (let-syntax ((cps-macro (cps-syntax f)))
   ;;       (cps-macro k . arg*))      -->     (k (f . arg*))
   ;;
   (syntax-rules ()
     ((¶ f)
-     (syntax-rules ()
-       ((µ k . t*)
-        (k (f . t*))) ))))
+     cps_syntax_rules(f))))
+
+(define-syntax uncps-syntax
+  ;;
+  ;; Create an ordinary macro from a continuation-passing style macro.
+  ;;
+  ;;     (let-syntax ((uncps-syntax-fact (uncps-syntax cps-macro)))
+  ;;       (uncps-macro . args*))
+  ;;
+  (syntax-rules ()
+    ((¶ f)
+     uncps_syntax_rules(f))))
 
 ;;;-------------------------------------------------------------------
 

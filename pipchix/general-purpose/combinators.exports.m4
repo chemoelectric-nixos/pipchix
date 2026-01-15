@@ -8,6 +8,7 @@ thrush*-and and~>*
 join wind-pre wind-post wind
 join* wind-pre* wind-post* wind*
 
-make-cps
-define-cps-syntax
-make-cps-syntax
+cps uncps
+λcps~> lambda-cps~>
+define-cps-syntax define-uncps-syntax
+cps-syntax uncps-syntax

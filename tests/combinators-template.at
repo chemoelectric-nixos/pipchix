@@ -248,10 +248,23 @@ check_unquoted([run_scheme 'sexpr'],[0],
 m4_define([sexpr],
   [(scheme->nix
     (let ()
-     ;; factorial defined by the ‘make-cps’ procedure.
+     ;; factorial defined by the ‘cps’ procedure.
      (define (fact n) (if (zero? n) 1 (* n (fact (- n 1)))))
-     (define fact:k (make-cps fact))
+     (define fact:k (cps fact))
      (call/cc (cut fact:k <> 9))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(362880)·])],[])
+
+m4_define([sexpr],
+  [(scheme->nix
+    (let ()
+     ;; factorial defined by the ‘cps’ procedure and then
+     ;; redefined by the ‘uncps’ procedure.
+     (define (fact n) (if (zero? n) 1 (* n (fact (- n 1)))))
+     (define fact:k (cps fact))
+     (define fact:u (uncps fact:k))
+     (fact:u 9)))
+     ])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([(362880)·])],[])
 
@@ -264,9 +277,9 @@ m4_define([sexpr],
          (syntax-rules ()
            ((λ args body ...)
             (lambda args body ...))))
-       (define decr:k (make-cps (cut - <> 1)))
-       (define *:k (make-cps *))
-       (define zero?:k (make-cps zero?))
+       (define decr:k (cps (cut - <> 1)))
+       (define *:k (cps *))
+       (define zero?:k (cps zero?))
        (define (fact:k k n)
          (zero?:k
           (λ (=zero?)
@@ -286,6 +299,27 @@ check_unquoted([run_scheme 'sexpr'],[0],
 
 m4_define([sexpr],
   [(scheme->nix
+    (call/cc
+     (lambda (cc)
+       ;; factorial defined with cps~>
+       (define (fact:k k n)
+         (define n=0?:k (cps (lambda () (zero? n))))
+         (define n-1:k (cps (lambda () (- n 1))))
+         (define times_n:k (cps (lambda (x) (* n x))))
+         (n=0?:k
+          (lambda (z?)
+            (if z?
+              (k 1)
+              ((λcps~> n-1:k
+                       fact:k
+                       times_n:k)
+               k)))))
+       (fact:k cc 9))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(362880)·])],[])
+
+m4_define([sexpr],
+  [(scheme->nix
     (let ()
      ;; factorial defined by ‘define-cps-syntax’.
      (define (fact n) (if (zero? n) 1 (* n (fact (- n 1)))))
@@ -297,10 +331,33 @@ check_unquoted([run_scheme 'sexpr'],[0],
 m4_define([sexpr],
   [(scheme->nix
     (let ()
-     ;; factorial defined by ‘make-cps-syntax’.
+     ;; factorial defined by ‘define-cps-syntax’ followed
+     ;; by ‘define-uncps-syntax’.
      (define (fact n) (if (zero? n) 1 (* n (fact (- n 1)))))
-     (let-syntax ((cps-syntax-fact (make-cps-syntax fact)))
+     (define-cps-syntax cps-syntax-fact fact)
+     (define-uncps-syntax uncps-syntax-fact cps-syntax-fact)
+     (uncps-syntax-fact 9)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(362880)·])],[])
+
+m4_define([sexpr],
+  [(scheme->nix
+    (let ()
+     ;; factorial defined by ‘cps-syntax’.
+     (define (fact n) (if (zero? n) 1 (* n (fact (- n 1)))))
+     (let-syntax ((cps-syntax-fact (cps-syntax fact)))
        (call/cc (lambda (cc) (cps-syntax-fact cc 9))))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(362880)·])],[])
+
+m4_define([sexpr],
+  [(scheme->nix
+    (let ()
+     ;; factorial defined by ‘cps-syntax’ followed by ‘uncps-syntax’.
+     (define (fact n) (if (zero? n) 1 (* n (fact (- n 1)))))
+     (let-syntax ((cps-syntax-fact (cps-syntax fact)))
+       (let-syntax ((uncps-syntax-fact (uncps-syntax cps-syntax-fact)))
+         (uncps-syntax-fact 9)))))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([(362880)·])],[])
 
