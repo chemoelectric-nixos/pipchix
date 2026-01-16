@@ -143,22 +143,22 @@
   ;;     (macro val1 val2 val3 ...))
   ;;
   (syntax-rules ()
-    ((¶ f ...)
+    ((¶ . f*)
      (syntax-rules ()
        ((µ . val*)
-        (thrush-syntax-aux (f ...) val*))))))
+        (thrush-syntax-aux f* val*))))))
 
 (define-syntax thrush-syntax-aux
   (syntax-rules ()
-    ((¶ () val*)
-     (values . val*))
-    ((¶ (f1 f2 ...) val*)
-     (thrush-syntax-aux (f2 ...) ((f1 . val*))))))
+    ((¶ (f) val*)
+     (f . val*))
+    ((¶ (f . f*) val*)
+     (thrush-syntax-aux f* ((f . val*))))))
 
 (define-syntax stx~> ;; A synonym for thrush-syntax
   (syntax-rules ()
-    ((¶ f ...)
-     (thrush-syntax f ...))))
+    ((¶ . f*)
+     (thrush-syntax . f*))))
 
 ;;;-------------------------------------------------------------------
 
