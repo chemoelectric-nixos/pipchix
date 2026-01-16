@@ -155,10 +155,31 @@
     ((¶ (f . f*) val*)
      (thrush-syntax-aux f* ((f . val*))))))
 
-(define-syntax stx~> ;; A synonym for thrush-syntax
+(define-syntax λ§~> ;; A synonym for thrush-syntax
   (syntax-rules ()
     ((¶ . f*)
      (thrush-syntax . f*))))
+
+(define-syntax lambda-§~> ;; A synonym for thrush-syntax
+  (syntax-rules ()
+    ((¶ . f*)
+     (thrush-syntax . f*))))
+
+(define-syntax thrush+-syntax
+  ;;
+  ;; A syntactic equivalent of the ‘thrush+’ combinator:
+  ;;
+  ;;   (thrush-syntax val f1 f2 f3 ...)
+  ;;
+  (syntax-rules ()
+    ((¶ val . f*)
+     (let-syntax ((macro (thrush-syntax . f*)))
+       (macro val)))))
+
+(define-syntax §~> ;; A synonym for thrush+-syntax
+  (syntax-rules ()
+    ((¶ val . f*)
+     (thrush+-syntax val . f*))))
 
 ;;;-------------------------------------------------------------------
 
