@@ -7,6 +7,7 @@ thrush*-and and~>*
 
 thrush-syntax λ§~> lambda-§~>
 thrush+-syntax §~>
+thrush*-syntax §~>*
 
 join wind-pre wind-post wind
 join* wind-pre* wind-post* wind*

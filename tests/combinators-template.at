@@ -90,6 +90,23 @@ check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([(-84)·])],[])
 
 m4_define([sexpr],
+  [(scheme->nix
+    (let-syntax ((macro (thrush*-syntax `(1 2 3 4 5 6))))
+        (macro reverse
+               list->vector
+               vector->list
+               (cut map number->string <>))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·("6")·("5")·("4")·("3")·("2")·("1")·]·]])],[])
+
+m4_define([sexpr],
+  [(scheme->nix
+    (let-syntax ((macro (§~>* 1 2 3 4 5 6)))
+      (macro + - (cut * <> 4))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(-84)·])],[])
+
+m4_define([sexpr],
   [(scheme->nix (thrush+ '\''foo symbol->string string-length))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([(3)·])],[])

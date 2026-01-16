@@ -181,6 +181,24 @@
     ((¶ val . f*)
      (thrush+-syntax val . f*))))
 
+(define-syntax thrush*-syntax
+  ;;
+  ;; A syntactic equivalent of the ‘thrush*’ combinator:
+  ;;
+  ;;   (let-syntax ((macro (thrush-syntax val1 val2 val3 ...)))
+  ;;     (macro f1 f2 f3 ...))
+  ;;
+  (syntax-rules ()
+    ((¶ . val*)
+     (syntax-rules ()
+       ((µ f . f*)
+        (thrush-syntax-aux (f . f*) val*))))))
+
+(define-syntax §~>* ;; A synonym for thrush*-syntax
+  (syntax-rules ()
+    ((¶ . val*)
+     (thrush*-syntax . val*))))
+
 ;;;-------------------------------------------------------------------
 
 (define (join proc . proc*)
