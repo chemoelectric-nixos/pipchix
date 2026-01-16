@@ -111,9 +111,6 @@ offer_disable_of_check([r6rs],[loko],
 offer_disable_of_check([r7rs],[loko],
   [disable R⁷RS tests with Loko Scheme])
 
-offer_disable_of_check([r6rs],[racket],
-  [disable tests with Racket])
-
 offer_disable_of_check([r6rs],[sagittarius],
   [disable R⁶RS tests with Sagittarius])
 
@@ -126,7 +123,6 @@ m4_include([ac-chibi-scheme.m4])
 m4_include([ac-gauche-scheme.m4])
 m4_include([ac-guile-scheme.m4])
 m4_include([ac-loko-scheme.m4])
-m4_include([ac-racket.m4])
 m4_include([ac-sagittarius-scheme.m4])
 
 # You can use ‘@GNU@’ to make GNU Make constructs unbothersome to
@@ -156,8 +152,6 @@ AC_CONFIG_FILES([tests/run-r6rs-loko.sh],
                 [chmod +x tests/run-r6rs-loko.sh])
 AC_CONFIG_FILES([tests/run-r7rs-loko.sh],
                 [chmod +x tests/run-r7rs-loko.sh])
-AC_CONFIG_FILES([tests/run-r6rs-racket.sh],
-                [chmod +x tests/run-r6rs-racket.sh])
 AC_CONFIG_FILES([tests/run-r6rs-sagittarius.sh],
                 [chmod +x tests/run-r6rs-sagittarius.sh])
 AC_CONFIG_FILES([tests/run-r7rs-sagittarius.sh],

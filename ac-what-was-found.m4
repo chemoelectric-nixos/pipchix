@@ -37,9 +37,6 @@ fi
 if test "${chem_cv_path_LOKO_found}" != no; then
   AC_MSG_NOTICE([Loko Scheme: ${LOKO}])
 fi
-if test "${chem_cv_path_PLT_R6RS_found}" != no; then
-  AC_MSG_NOTICE([Racket (R⁶RS): ${PLT_R6RS}])
-fi
 if test "${chem_cv_path_SAGITTARIUS_found}" != no; then
   AC_MSG_NOTICE([Sagittarius Scheme: ${SAGITTARIUS}])
 fi

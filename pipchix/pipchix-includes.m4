@@ -50,15 +50,9 @@ m4_divert(-1)
 ;;; m4_define(«FAST_SYNTAX_ERROR»,«(syntax-error $1 $2 $3 $4 $5 $6 $7 $8 $9)»)
 ;;; »)
 
-;;;
-;;; See
-;;; https://racket.discourse.group/t/error-cond-unbound-identifier-also-no-app-syntax-transformer-is-bound/3081/3
-;;; for why I add (meta -1) below. It is for Racket and has been
-;;; needed in a few cases.
-;;;
 ;;; m4_ifelse(RNRS_NUMBER,«6»,«
 ;;; m4_define(«basic_libraries»,«
-(for (except (rnrs (6)) fold-right member assoc map remove) run expand (meta -1))
+(for (except (rnrs (6)) fold-right member assoc map remove) run expand)
 (for (pipchix general-purpose list) run expand)»)»)
 
 ;;; m4_ifelse(RNRS_NUMBER,«7»,«

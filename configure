@@ -651,9 +651,6 @@ GNU
 SAGITTARIUS_FALSE
 SAGITTARIUS_TRUE
 SAGITTARIUS
-PLT_R6RS_FALSE
-PLT_R6RS_TRUE
-PLT_R6RS
 LOKO_FALSE
 LOKO_TRUE
 LOKO
@@ -677,9 +674,6 @@ enable_check_r7rs_sagittarius
 ENABLE_CHECK_R6RS_SAGITTARIUS_FALSE
 ENABLE_CHECK_R6RS_SAGITTARIUS_TRUE
 enable_check_r6rs_sagittarius
-ENABLE_CHECK_R6RS_RACKET_FALSE
-ENABLE_CHECK_R6RS_RACKET_TRUE
-enable_check_r6rs_racket
 ENABLE_CHECK_R7RS_LOKO_FALSE
 ENABLE_CHECK_R7RS_LOKO_TRUE
 enable_check_r7rs_loko
@@ -832,7 +826,6 @@ enable_check_r6rs_guile
 enable_check_r7rs_guile
 enable_check_r6rs_loko
 enable_check_r7rs_loko
-enable_check_r6rs_racket
 enable_check_r6rs_sagittarius
 enable_check_r7rs_sagittarius
 '
@@ -851,7 +844,6 @@ CHIBI_SCHEME
 GAUCHE
 GUILE
 LOKO
-PLT_R6RS
 SAGITTARIUS
 GNU_MAKE
 TEST_LOCALE'
@@ -1522,9 +1514,6 @@ Optional Features:
   --disable-check-r7rs-loko
                           disable R⁷RS tests with Loko Scheme (enabled by
                           default if the Scheme implementation is found)
-  --disable-check-r6rs-racket
-                          disable tests with Racket (enabled by default if the
-                          Scheme implementation is found)
   --disable-check-r6rs-sagittarius
                           disable R⁶RS tests with Sagittarius (enabled by
                           default if the Scheme implementation is found)
@@ -1548,7 +1537,6 @@ Some influential environment variables:
   GAUCHE      Gauche Scheme
   GUILE       Guile Scheme version 3
   LOKO        Loko Scheme
-  PLT_R6RS    Racket (R⁶RS)
   SAGITTARIUS Sagittarius Scheme
   GNU_MAKE    GNU Make command
   TEST_LOCALE locale to use when running tests (default: C.utf8)
@@ -6660,25 +6648,6 @@ else
 fi
 
 
-# Check whether --enable-check-r6rs-racket was given.
-if test ${enable_check_r6rs_racket+y}
-then :
-  enableval=$enable_check_r6rs_racket; eval enable_check_r6rs_racket="${enableval}"
-else case e in #(
-  e) eval enable_check_r6rs_racket=yes ;;
-esac
-fi
-
-
- if test "${enable_check_r6rs_racket}" != no; then
-  ENABLE_CHECK_R6RS_RACKET_TRUE=
-  ENABLE_CHECK_R6RS_RACKET_FALSE='#'
-else
-  ENABLE_CHECK_R6RS_RACKET_TRUE='#'
-  ENABLE_CHECK_R6RS_RACKET_FALSE=
-fi
-
-
 # Check whether --enable-check-r6rs-sagittarius was given.
 if test ${enable_check_r6rs_sagittarius+y}
 then :
@@ -7438,117 +7407,6 @@ fi
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #
-# Racket configuration.
-#
-
-{ :;
-
-# Override the cache if the precious variable PLT_R6RS is set.
-test -n "${PLT_R6RS}" && unset ac_cv_path_PLT_R6RS
-chem_cv_path_PLT_R6RS_found=yes
-{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for plt-r6rs plt-r6rscs plt-r6rsbc" >&5
-printf %s "checking for plt-r6rs plt-r6rscs plt-r6rsbc... " >&6; }
-if test ${ac_cv_path_PLT_R6RS+y}
-then :
-  printf %s "(cached) " >&6
-else case e in #(
-  e) if test -z "$PLT_R6RS"; then
-  ac_path_PLT_R6RS_found=false
-  # Loop through the user's path and test for each of PROGNAME-LIST
-  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-for as_dir in $PATH
-do
-  IFS=$as_save_IFS
-  case $as_dir in #(((
-    '') as_dir=./ ;;
-    */) ;;
-    *) as_dir=$as_dir/ ;;
-  esac
-    for ac_prog in plt-r6rs plt-r6rscs plt-r6rsbc
-   do
-    for ac_exec_ext in '' $ac_executable_extensions; do
-      ac_path_PLT_R6RS="$as_dir$ac_prog$ac_exec_ext"
-      as_fn_executable_p "$ac_path_PLT_R6RS" || continue
-
-      if test -n "${PLT_R6RS}"; then
-         # Bypass the test if the precious variable PLT_R6RS is set.
-         ac_cv_path_PLT_R6RS="${PLT_R6RS}"
-         ac_path_PLT_R6RS_found=:
-      else
-         # Run the test.
-
-    if LC_ALL=C LANG=C ${ac_path_PLT_R6RS} --help 2>&1 | \
-      LC_ALL=C LANG=C ${FGREP} '++path <dir>' \
-               2> /dev/null > /dev/null; then
-        ac_cv_path_PLT_R6RS="${ac_path_PLT_R6RS}"
-        ac_path_PLT_R6RS_found=:
-    fi
-
-      fi
-      $ac_path_PLT_R6RS_found && break 3
-    done
-  done
-  done
-IFS=$as_save_IFS
-  if test -z "$ac_cv_path_PLT_R6RS"; then
-    :
-  fi
-else
-  ac_cv_path_PLT_R6RS=$PLT_R6RS
-fi
-
-      if test -z "${ac_cv_path_PLT_R6RS}"; then
-         ac_cv_path_PLT_R6RS="not found"
-         chem_cv_path_PLT_R6RS_found=no
-      fi
-    ;;
-esac
-fi
-{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $ac_cv_path_PLT_R6RS" >&5
-printf "%s\n" "$ac_cv_path_PLT_R6RS" >&6; }
-if test x"${chem_cv_path_PLT_R6RS_found}" = x"yes"; then
-   PLT_R6RS="${ac_cv_path_PLT_R6RS}"
-else
-   PLT_R6RS=""
-   # Do not cache the negative result. That way someone can install
-   # the program and have it be discovered, even though they did not
-   # clear a cache entry.
-   unset ac_cv_path_PLT_R6RS
-fi
-}
- if test "${chem_cv_path_PLT_R6RS_found}" != no; then
-  PLT_R6RS_TRUE=
-  PLT_R6RS_FALSE='#'
-else
-  PLT_R6RS_TRUE='#'
-  PLT_R6RS_FALSE=
-fi
-
-
-# Copyright © 2025 Barry Schwartz
-#
-# This file is part of Pipchix.
-#
-# Permission is hereby granted, free of charge, to any person obtaining
-# a copy of Pipchix and associated documentation files (the
-# "Software"), to deal in the Software without restriction, including
-# without limitation the rights to use, copy, modify, merge, publish,
-# distribute, sublicense, and/or sell copies of the Software, and to
-# permit persons to whom the Software is furnished to do so, subject to
-# the following conditions:
-#
-# The above copyright notice and this permission notice shall be
-# included in all copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-# LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-# OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-# WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-#
 # Sagittarius Scheme configuration.
 #
 
@@ -7836,8 +7694,6 @@ ac_config_files="$ac_config_files tests/run-r6rs-loko.sh"
 
 ac_config_files="$ac_config_files tests/run-r7rs-loko.sh"
 
-ac_config_files="$ac_config_files tests/run-r6rs-racket.sh"
-
 ac_config_files="$ac_config_files tests/run-r6rs-sagittarius.sh"
 
 ac_config_files="$ac_config_files tests/run-r7rs-sagittarius.sh"
@@ -8077,10 +7933,6 @@ if test -z "${ENABLE_CHECK_R7RS_LOKO_TRUE}" && test -z "${ENABLE_CHECK_R7RS_LOKO
   as_fn_error $? "conditional \"ENABLE_CHECK_R7RS_LOKO\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
-if test -z "${ENABLE_CHECK_R6RS_RACKET_TRUE}" && test -z "${ENABLE_CHECK_R6RS_RACKET_FALSE}"; then
-  as_fn_error $? "conditional \"ENABLE_CHECK_R6RS_RACKET\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
 if test -z "${ENABLE_CHECK_R6RS_SAGITTARIUS_TRUE}" && test -z "${ENABLE_CHECK_R6RS_SAGITTARIUS_FALSE}"; then
   as_fn_error $? "conditional \"ENABLE_CHECK_R6RS_SAGITTARIUS\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
@@ -8107,10 +7959,6 @@ Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${LOKO_TRUE}" && test -z "${LOKO_FALSE}"; then
   as_fn_error $? "conditional \"LOKO\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
-if test -z "${PLT_R6RS_TRUE}" && test -z "${PLT_R6RS_FALSE}"; then
-  as_fn_error $? "conditional \"PLT_R6RS\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${SAGITTARIUS_TRUE}" && test -z "${SAGITTARIUS_FALSE}"; then
@@ -8722,7 +8570,6 @@ do
     "tests/run-r7rs-guile.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r7rs-guile.sh" ;;
     "tests/run-r6rs-loko.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r6rs-loko.sh" ;;
     "tests/run-r7rs-loko.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r7rs-loko.sh" ;;
-    "tests/run-r6rs-racket.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r6rs-racket.sh" ;;
     "tests/run-r6rs-sagittarius.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r6rs-sagittarius.sh" ;;
     "tests/run-r7rs-sagittarius.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r7rs-sagittarius.sh" ;;
     "tinyscheme-1.42/init.scm") CONFIG_LINKS="$CONFIG_LINKS tinyscheme-1.42/init.scm:tinyscheme-1.42/init.scm" ;;
@@ -9364,7 +9211,6 @@ EOF
     "tests/run-r7rs-guile.sh":F) chmod +x tests/run-r7rs-guile.sh ;;
     "tests/run-r6rs-loko.sh":F) chmod +x tests/run-r6rs-loko.sh ;;
     "tests/run-r7rs-loko.sh":F) chmod +x tests/run-r7rs-loko.sh ;;
-    "tests/run-r6rs-racket.sh":F) chmod +x tests/run-r6rs-racket.sh ;;
     "tests/run-r6rs-sagittarius.sh":F) chmod +x tests/run-r6rs-sagittarius.sh ;;
     "tests/run-r7rs-sagittarius.sh":F) chmod +x tests/run-r7rs-sagittarius.sh ;;
     "tempname":C)
@@ -9454,10 +9300,6 @@ fi
 if test "${chem_cv_path_LOKO_found}" != no; then
   { printf "%s\n" "$as_me:${as_lineno-$LINENO}: Loko Scheme: ${LOKO}" >&5
 printf "%s\n" "$as_me: Loko Scheme: ${LOKO}" >&6;}
-fi
-if test "${chem_cv_path_PLT_R6RS_found}" != no; then
-  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: Racket (R⁶RS): ${PLT_R6RS}" >&5
-printf "%s\n" "$as_me: Racket (R⁶RS): ${PLT_R6RS}" >&6;}
 fi
 if test "${chem_cv_path_SAGITTARIUS_found}" != no; then
   { printf "%s\n" "$as_me:${as_lineno-$LINENO}: Sagittarius Scheme: ${SAGITTARIUS}" >&5
