@@ -100,8 +100,8 @@
   ;;
   (let ((short-circuit? (lambda (vals)
                           (and (pair? vals)
-                               (eq? (car vals) #f)
-                               (null? (cdr vals))))))
+                               (null? (cdr vals))
+                               (not (car vals))))))
     (thrush-maker
      (lambda (loop proc vals)
        (and (not (short-circuit? vals))
@@ -169,7 +169,7 @@
   ;;
   ;; A syntactic equivalent of the ‘thrush+’ combinator:
   ;;
-  ;;   (thrush-syntax val f1 f2 f3 ...)
+  ;;   (thrush+-syntax val f1 f2 f3 ...)
   ;;
   (syntax-rules ()
     ((¶ val . f*)
@@ -185,7 +185,7 @@
   ;;
   ;; A syntactic equivalent of the ‘thrush*’ combinator:
   ;;
-  ;;   (let-syntax ((macro (thrush-syntax val1 val2 val3 ...)))
+  ;;   (let-syntax ((macro (thrush*-syntax val1 val2 val3 ...)))
   ;;     (macro f1 f2 f3 ...))
   ;;
   (syntax-rules ()
