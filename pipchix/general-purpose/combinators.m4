@@ -472,6 +472,18 @@
 
 ;;;-------------------------------------------------------------------
 
+(define-syntax if-syntax
+  (syntax-rules ()
+    ((¶ kt kf)
+     (lambda (x) (if x kt kf)))))
+
+(define-syntax if§
+  (syntax-rules ()
+    ((¶ kt kf)
+     (if-syntax kt kf))))
+
+;;;-------------------------------------------------------------------
+
 m4_divert(-1)
 ;;; local variables:
 ;;; mode: scheme

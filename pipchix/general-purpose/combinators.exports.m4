@@ -22,3 +22,5 @@ cps-syntax cps§
 uncps-syntax uncps§
 lambda-cps-syntax~> λcps§~> lambda-cps§~>
 cps-syntax~>* cps§~>*
+
+if-syntax if§
