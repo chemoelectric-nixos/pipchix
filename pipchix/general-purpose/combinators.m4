@@ -453,6 +453,11 @@
     ((¶ k . f*)
      (λcps§~> k . f*))))
 
+(define-syntax lambda-cps-syntax~> ;; A synonym for λcps§~>
+  (syntax-rules ()
+    ((¶ k . f*)
+     (λcps§~> k . f*))))
+
 ;;;-------------------------------------------------------------------
 
 m4_divert(-1)
