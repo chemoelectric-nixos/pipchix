@@ -532,7 +532,6 @@ m4_define([sexpr],
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([(362880)·])],[])
 
-
 AT_CLEANUP
 
 # local variables:

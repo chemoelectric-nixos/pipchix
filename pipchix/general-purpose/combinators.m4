@@ -334,22 +334,6 @@
 
 ;;;-------------------------------------------------------------------
 
-;;; m4_dnl  Using m4 here instead of Scheme’s own macro mechanism is
-;;; m4_dnl  to avoid difficulties of Racket (that are presented by
-;;; m4_dnl  none of the other Schemes we are using).
-;;;
-;;; m4_define(«cps_syntax_rules»,«
-(syntax-rules ()
-  ((µ k . t*)
-   (k ($1 . t*))))
-;;; »)
-;;; m4_define(«uncps_syntax_rules»,«
-(syntax-rules ()
-  ((µ . t*)
-   (let-syntax ((identity (syntax-rules () ((ι τ) τ))))
-     ($1 identity . t*))))
-;;; »)
-
 (define-syntax define-cps-syntax
   ;;
   ;; Define a continuation-passing style macro. Start from an ordinary
@@ -362,8 +346,7 @@
   (syntax-rules ()
     ((¶ name f)
      (define-syntax name
-       cps_syntax_rules(f)
-       ))))
+       (cps-syntax f)))))
 
 (define-syntax define-cps§ ;; A synonym for define-cps-syntax
   (syntax-rules ()
@@ -382,8 +365,7 @@
   (syntax-rules ()
     ((¶ name f)
      (define-syntax name
-       uncps_syntax_rules(f)
-       ))))
+       (uncps-syntax f)))))
 
 (define-syntax define-uncps§ ;; A synonym for define-uncps-syntax
   (syntax-rules ()
@@ -400,8 +382,9 @@
   ;;
   (syntax-rules ()
     ((¶ f)
-     cps_syntax_rules(f)
-     )))
+     (syntax-rules ()
+       ((µ k . t*)
+        (k (f . t*)))))))
 
 (define-syntax cps§ ;; A synonym for cps-syntax
   (syntax-rules ()
@@ -417,8 +400,10 @@
   ;;
   (syntax-rules ()
     ((¶ f)
-     uncps_syntax_rules(f)
-     )))
+     (syntax-rules ()
+       ((µ . t*)
+        (let-syntax ((identity (syntax-rules () ((ι τ) τ))))
+          (f identity . t*)))))))
 
 (define-syntax uncps§ ;; A synonym for uncps-syntax
   (syntax-rules ()
