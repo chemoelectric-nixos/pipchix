@@ -425,7 +425,7 @@
     ((¶ f)
      (uncps-syntax f))))
 
-(define-syntax λcps§~>
+(define-syntax lambda-cps-syntax~>
   ;;
   ;; A syntactic analog of λcps~>
   ;;
@@ -433,9 +433,9 @@
     ((¶ . f*)
      (syntax-rules ()
        ((µ k . val*)
-        (λcps§~>-aux f* k val*))))))
+        (lambda-cps-syntax~>-aux f* k val*))))))
 
-(define-syntax λcps§~>-aux
+(define-syntax lambda-cps-syntax~>-aux
   ;;
   ;; This implementation ignores the usual presentation of
   ;; continuation-passing style. Instead we use equivalence of CPS to
@@ -456,17 +456,33 @@
     ((¶ () k val*)
      (k . val*))
     ((¶ (f . f*) k val*)
-     (λcps§~>-aux f* k ((f (lambda (v) v) . val*))))))
+     (lambda-cps-syntax~>-aux
+      f* k ((f (lambda (v) v) . val*))))))
 
-(define-syntax lambda-cps§~> ;; A synonym for λcps§~>
+(define-syntax lambda-cps§~> ;; A synonym for lambda-cps-syntax~>
   (syntax-rules ()
     ((¶ k . f*)
-     (λcps§~> k . f*))))
+     (lambda-cps-syntax~> k . f*))))
 
-(define-syntax lambda-cps-syntax~> ;; A synonym for λcps§~>
+(define-syntax λcps§~> ;; A synonym for lambda-cps-syntax~>
   (syntax-rules ()
     ((¶ k . f*)
-     (λcps§~> k . f*))))
+     (lambda-cps-syntax~> k . f*))))
+
+(define-syntax cps-syntax~>*
+  ;;
+  ;; A syntactic analog of cps~>*
+  ;;
+  (syntax-rules ()
+    ((¶ k . val*)
+     (syntax-rules ()
+       ((µ f . f*)
+        (lambda-cps-syntax~>-aux (f . f*) k val*))))))
+
+(define-syntax cps§~>* ;; A synonym for cps-syntax~>*
+  (syntax-rules ()
+    ((¶ k . val*)
+     (cps-syntax~>* k . val*))))
 
 ;;;-------------------------------------------------------------------
 

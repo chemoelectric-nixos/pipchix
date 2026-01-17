@@ -21,3 +21,4 @@ define-uncps-syntax define-uncps§
 cps-syntax cps§
 uncps-syntax uncps§
 lambda-cps-syntax~> λcps§~> lambda-cps§~>
+cps-syntax~>* cps§~>*
