@@ -424,8 +424,8 @@
   ;;
   ;; This implementation ignores the usual presentation of
   ;; continuation-passing style. Instead we use equivalence of CPS to
-  ;; the thrush combinator. The result, you may notice, is the usual
-  ;; presentation, full of nested lambdas.
+  ;; the thrush combinator. The result, you may notice, is essentially
+  ;; the same as the usual presentation, full of nested lambdas.
   ;;
   ;; This is not by design. It is one of those things that works out
   ;; when you ignore the complicated stuff our intellectual betters
