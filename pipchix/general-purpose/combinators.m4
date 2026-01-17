@@ -444,11 +444,12 @@
   ;;
   ;; This is not by design. It is one of those things that works out
   ;; when you ignore the complicated stuff our intellectual betters
-  ;; present to us and instead seek a much simpler explanation. Both
-  ;; the thrush and continuation-passing style are merely lining up
-  ;; procedures and passing the output value one as the input to the
-  ;; next. The lambdas, you can see here, are consequence of treating
-  ;; the identity procedure as a kind of ‘standard continuation’ that
+  ;; present to us and instead seek a much simpler explanation. I was
+  ;; surprised and very pleased to see it. Both the thrush and
+  ;; continuation-passing style are merely lining up procedures and
+  ;; passing the output value one as the input to the next. The
+  ;; lambdas, you can see here, are consequence of treating the
+  ;; identity procedure as a kind of ‘standard continuation’ that
   ;; couples procedures.
   ;;
   (syntax-rules ()
