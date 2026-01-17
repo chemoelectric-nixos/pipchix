@@ -15,5 +15,9 @@ join* wind-pre* wind-post* wind*
 cps uncps
 λcps~> lambda-cps~>
 cps~>*
-define-cps-syntax define-uncps-syntax
-cps-syntax uncps-syntax
+
+define-cps-syntax define-cps§
+define-uncps-syntax define-uncps§
+cps-syntax cps§
+uncps-syntax uncps§
+λcps§~> lambda-cps§~>

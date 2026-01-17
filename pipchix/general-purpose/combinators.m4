@@ -332,6 +332,8 @@
       (let ((f* (map uncps proc*)))
         (k (apply local~>* f*))))))
 
+;;;-------------------------------------------------------------------
+
 ;;; m4_dnl  Using m4 here instead of Scheme’s own macro mechanism is
 ;;; m4_dnl  to avoid difficulties of Racket (that are presented by
 ;;; m4_dnl  none of the other Schemes we are using).
@@ -363,6 +365,11 @@
        cps_syntax_rules(f)
        ))))
 
+(define-syntax define-cps§ ;; A synonym for define-cps-syntax
+  (syntax-rules ()
+    ((¶ name f)
+     (define-cps-syntax name f))))
+
 (define-syntax define-uncps-syntax
   ;;
   ;; Define an ordinary macro from a continuation-passing style macro
@@ -378,6 +385,11 @@
        uncps_syntax_rules(f)
        ))))
 
+(define-syntax define-uncps§ ;; A synonym for define-uncps-syntax
+  (syntax-rules ()
+    ((¶ name f)
+     (define-uncps-syntax name f))))
+
 (define-syntax cps-syntax
   ;;
   ;; Create a continuation-passing style macro. Start from an ordinary
@@ -391,6 +403,11 @@
      cps_syntax_rules(f)
      )))
 
+(define-syntax cps§ ;; A synonym for cps-syntax
+  (syntax-rules ()
+    ((¶ f)
+     (cps-syntax f))))
+
 (define-syntax uncps-syntax
   ;;
   ;; Create an ordinary macro from a continuation-passing style macro.
@@ -402,6 +419,33 @@
     ((¶ f)
      uncps_syntax_rules(f)
      )))
+
+(define-syntax uncps§ ;; A synonym for uncps-syntax
+  (syntax-rules ()
+    ((¶ f)
+     (uncps-syntax f))))
+
+(define-syntax λcps§~>
+  ;;
+  ;; A syntactic analog of λcps~>
+  ;;
+  (syntax-rules ()
+    ((¶ . f*)
+     (syntax-rules ()
+       ((µ k . val*)
+        (λcps§~>-aux f* k val*))))))
+
+(define-syntax λcps§~>-aux
+  (syntax-rules ()
+    ((¶ () k val*)
+     (k . val*))
+    ((¶ (f . f*) k val*)
+     (λcps§~>-aux f* k ((f (lambda (v) v) . val*))))))
+
+(define-syntax lambda-cps§~> ;; A synonym for λcps§~>
+  (syntax-rules ()
+    ((¶ k . f*)
+     (λcps§~> k . f*))))
 
 ;;;-------------------------------------------------------------------
 
