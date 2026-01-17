@@ -438,8 +438,8 @@
 (define-syntax λcps§~>-aux
   ;;
   ;; This implementation ignores the usual presentations of
-  ;; continuation-passing style. Instead it uses the equivalence of
-  ;; CPS to the thrush combinator.
+  ;; continuation-passing style. Instead we take advantage of the
+  ;; total equivalence of CPS to the thrush combinator.
   ;;
   (syntax-rules ()
     ((¶ () k val*)
