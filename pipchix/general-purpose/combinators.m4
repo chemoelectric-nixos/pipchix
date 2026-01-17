@@ -30,16 +30,16 @@
   ;; Creates ‘point-free’ combinators known to Racket programmers.
   ;;
   (lambda (proc . proc*)
-    (lambda vals
+    (lambda val*
       (let ((p proc*))
         (define loop
-          (lambda vals
+          (lambda val*
             (if (pair? p)
               (let ((proc (car p)))
                 (set! p (cdr p))
-                (custom loop proc vals))
-              (apply values vals))))
-        (custom loop proc vals)))))
+                (custom loop proc val*))
+              (apply values val*))))
+        (custom loop proc val*)))))
 
 (define thrush
   ;;
@@ -52,9 +52,9 @@
   ;; general-purpose cut).
   ;;
   (thrush-maker
-   (lambda (loop proc vals)
+   (lambda (loop proc val*)
      (call-with-values
-         (lambda () (apply proc vals))
+         (lambda () (apply proc val*))
        loop))))
 
 (define λ~> thrush)      ;; A synonym known to Racket programmers.
@@ -98,15 +98,15 @@
   ;; Short-circuiting thrush. Stops and returns #f as soon as any
   ;; procedure returns the single value #f.
   ;;
-  (let ((short-circuit? (lambda (vals)
-                          (and (pair? vals)
-                               (null? (cdr vals))
-                               (not (car vals))))))
+  (let ((short-circuit? (lambda (val*)
+                          (and (pair? val*)
+                               (null? (cdr val*))
+                               (not (car val*))))))
     (thrush-maker
-     (lambda (loop proc vals)
-       (and (not (short-circuit? vals))
+     (lambda (loop proc val*)
+       (and (not (short-circuit? val*))
             (call-with-values
-                (lambda () (apply proc vals))
+                (lambda () (apply proc val*))
               loop))))))
 
 (define λand~> thrush-and)       ;; Racket’s synonym.
