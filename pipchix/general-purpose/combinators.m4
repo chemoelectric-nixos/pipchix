@@ -429,14 +429,22 @@
   ;; lambdas.
   ;;
   ;; This is not by design. It is one of those things that works out
-  ;; when you ignore the complicated stuff our intellectual betters
-  ;; present to us and instead seek a much simpler explanation. I was
-  ;; surprised and very pleased to see it. Both the thrush and
-  ;; continuation-passing style are merely lining up procedures and
-  ;; passing the output value one as the input to the next. The
-  ;; lambdas, you can see here, are consequence of treating the
-  ;; identity procedure as a kind of ‘standard continuation’ that
+  ;; when we ignore the complicated stuff ‘our intellectual betters’
+  ;; present to us, and instead seek for ourselves a much simpler
+  ;; explanation. I was surprised and very pleased to see it. Both the
+  ;; thrush and continuation-passing style are merely lining up
+  ;; procedures and passing the output value one as the input to the
+  ;; next. The lambdas, you can see here, are consequence of treating
+  ;; the identity procedure as a kind of ‘standard continuation’ that
   ;; couples procedures.
+  ;;
+  ;; A corollary is that ‘concatenative’ languages such as Forth also
+  ;; are equivalent to continuation-passing style. Indeed, this shows
+  ;; that direct-threaded Forth code requires no call stack. It is
+  ;; obvious that tail calls can be optimized, and tail-call
+  ;; optimization is easily done. The operand stack is an implicit
+  ;; variable passed from ‘word’ to ‘word’. If ever necessary,
+  ;; continuations can be passed on this stack and used as ‘gotos’.
   ;;
   (syntax-rules ()
     ((¶ () k val*)
