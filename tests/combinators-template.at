@@ -588,6 +588,56 @@ m4_define([sexpr],
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([(362880)·])],[])
 
+m4_define([sexpr],
+  [(scheme->nix
+    (call/cc
+     (lambda (cc)
+       (define (fact k n)
+         (let§ ((n=0? (cps§ (lambda () (zero? n)))))
+           (n=0?
+            (if§ (k 1)
+                 (let§ ((macro1 (cps§~>* k))
+                        (n-1 (cps§ (lambda () (- n 1))))
+                        (times_n (cps§ (lambda (x) (* n x)))))
+                   (macro1 n-1 fact times_n))))))
+       (fact cc 9))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(362880)·])],[])
+
+
+m4_define([sexpr],
+  [(scheme->nix
+    (call/cc
+     (lambda (cc)
+       (define (fact k n)
+         (letrec§ ((n=0? (cps§ (lambda () (zero? n)))))
+           (n=0?
+            (if§ (k 1)
+                 (letrec§ ((macro1 (cps§~>* k))
+                           (n-1 (cps§ (lambda () (- n 1))))
+                           (times_n (cps§ (lambda (x) (* n x)))))
+                   (macro1 n-1 fact times_n))))))
+       (fact cc 9))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(362880)·])],[])
+
+m4_define([sexpr],
+  [(scheme->nix
+    (call/cc
+     (lambda (cc)
+       (define (fact k n)
+         (letrec§ ((n=0? (cps§ (lambda () (zero? n)))))
+           (n=0?
+            (if§ (k 1)
+                 (let ()
+                   (define§ macro1 (cps§~>* k))
+                   (define§ n-1 (cps§ (lambda () (- n 1))))
+                   (define§ times_n (cps§ (lambda (x) (* n x))))
+                   (macro1 n-1 fact times_n))))))
+       (fact cc 9))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(362880)·])],[])
+
 AT_CLEANUP
 
 # local variables:
