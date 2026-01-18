@@ -539,6 +539,16 @@
     ((¶ keyword transformer-spec)
      (define-syntax keyword transformer-spec))))
 
+(define-syntax §rules ;; A synonym for syntax-rules
+  (syntax-rules-original ()
+    ((¶ (literal ...) rule ...)
+     (syntax-rules-original (literal ...) rule ...))
+;;; m4_ifelse(RNRS_NUMBER,«7»,«
+    ((¶ ellipsis (literal ...) rule ...)
+     (syntax-rules-original ellipsis (literal ...) rule ...))
+;;; »)
+    ))
+
 ;;;-------------------------------------------------------------------
 
 m4_divert(-1)

@@ -638,6 +638,15 @@ m4_define([sexpr],
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([(362880)·])],[])
 
+m4_define([sexpr],
+  [(scheme->nix
+    (let ()
+      (define this 1234)
+      (define§ dequote (§rules () ((¶ '\''x) x)))
+      (dequote '\''this)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(1234)·])],[])
+
 AT_CLEANUP
 
 # local variables:

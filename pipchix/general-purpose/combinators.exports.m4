@@ -25,4 +25,4 @@ cps-syntax~>* cps§~>*
 
 if-syntax if§
 
-let§ letrec§ define§
+let§ letrec§ define§ §rules
