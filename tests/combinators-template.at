@@ -520,14 +520,15 @@ m4_define([sexpr],
        ;; factorial defined with cps§~>*
        (define (fact:k k n)
          (let-syntax ((n=0?:k (cps§ (lambda () (zero? n)))))
-           (let-syntax ((n-1:k (cps§ (lambda () (- n 1)))))
-             (let-syntax ((times_n:k (cps§ (lambda (x) (* n x)))))
-               (n=0?:k
-                (lambda (z?)
-                  (if z?
-                    (k 1)
-                    (let-syntax ((macro1 (cps§~>* k)))
-                      (macro1 n-1:k fact:k times_n:k)))))))))
+           (n=0?:k
+            (lambda (z?)
+              (if z?
+                (k 1)
+                (let-syntax
+                     ((macro1 (cps§~>* k))
+                      (n-1:k (cps§ (lambda () (- n 1))))
+                      (times_n:k (cps§ (lambda (x) (* n x)))))
+                  (macro1 n-1:k fact:k times_n:k)))))))
        (fact:k cc 9))))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([(362880)·])],[])
@@ -539,12 +540,13 @@ m4_define([sexpr],
        ;; factorial defined with cps§~>* and if§
        (define (fact:k k n)
          (let-syntax ((n=0?:k (cps§ (lambda () (zero? n)))))
-           (let-syntax ((n-1:k (cps§ (lambda () (- n 1)))))
-             (let-syntax ((times_n:k (cps§ (lambda (x) (* n x)))))
-               (n=0?:k
-                (if§ (k 1)
-                     (let-syntax ((macro1 (cps§~>* k)))
-                       (macro1 n-1:k fact:k times_n:k))))))))
+           (n=0?:k
+            (if§ (k 1)
+                 (let-syntax
+                      ((macro1 (cps§~>* k))
+                       (n-1:k (cps§ (lambda () (- n 1))))
+                       (times_n:k (cps§ (lambda (x) (* n x)))))
+                   (macro1 n-1:k fact:k times_n:k))))))
        (fact:k cc 9))))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([(362880)·])],[])
@@ -559,10 +561,11 @@ m4_define([sexpr],
            (n=0?
             (if-syntax
               (k 1)
-              (let-syntax ((macro1 (cps-syntax~>* k)))
-                (let-syntax ((n-1 (cps-syntax (lambda () (- n 1)))))
-                  (let-syntax ((times_n (cps-syntax (lambda (x) (* n x)))))
-                    (macro1 n-1 fact times_n))))))))
+              (let-syntax
+                   ((macro1 (cps-syntax~>* k))
+                    (n-1 (cps-syntax (lambda () (- n 1))))
+                    (times_n (cps-syntax (lambda (x) (* n x)))))
+                (macro1 n-1 fact times_n))))))
        (fact cc 9))))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([(362880)·])],[])
