@@ -467,8 +467,19 @@
   ;; that direct-threaded Forth code requires no call stack. It is
   ;; obvious that tail calls can be optimized, and tail-call
   ;; optimization is easily done. The operand stack is an implicit
-  ;; variable passed from ‘word’ to ‘word’. If ever necessary,
+  ;; variable passed from ‘word’ to ‘word’. Where necessary,
   ;; continuations can be passed on this stack and used as ‘gotos’.
+  ;;
+  ;; Imagine, for instance, a ‘word’ comprising several calls to other
+  ;; ‘words’ in sequence. The final call is optimized to a jump. But
+  ;; what of the others? Normally they would be compiled to ‘call’
+  ;; instructions. But what if, instead, a return address is pushed to
+  ;; the operand stack and a jump instruction is compiled? Then the
+  ;; return address is a continuation, and the code is now in
+  ;; continuation-passing style.
+  ;;
+  ;; This is all that continuation-passing style is. There is no great
+  ;; mystery or special ugliness to it.
   ;;
   (syntax-rules ()
     ((¶ () k val*)
