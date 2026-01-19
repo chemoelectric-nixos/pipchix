@@ -179,12 +179,12 @@
     ((¶ (f . f*) val*)
      (thrush-syntax-aux f* ((f . val*))))))
 
-(define-syntax λS~> ;; A synonym for thrush-syntax
+(define-syntax λŜ~> ;; A synonym for thrush-syntax
   (syntax-rules ()
     ((¶ . f*)
      (thrush-syntax . f*))))
 
-(define-syntax lambda-S~> ;; A synonym for thrush-syntax
+(define-syntax lambda-Ŝ~> ;; A synonym for thrush-syntax
   (syntax-rules ()
     ((¶ . f*)
      (thrush-syntax . f*))))
@@ -200,7 +200,7 @@
      (let-syntax ((macro (thrush-syntax . f*)))
        (macro val)))))
 
-(define-syntax S~> ;; A synonym for thrush+-syntax
+(define-syntax Ŝ~> ;; A synonym for thrush+-syntax
   (syntax-rules ()
     ((¶ val . f*)
      (thrush+-syntax val . f*))))
@@ -218,7 +218,7 @@
        ((µ f . f*)
         (thrush-syntax-aux (f . f*) val*))))))
 
-(define-syntax S~>* ;; A synonym for thrush*-syntax
+(define-syntax Ŝ~>* ;; A synonym for thrush*-syntax
   (syntax-rules ()
     ((¶ . val*)
      (thrush*-syntax . val*))))
@@ -372,7 +372,7 @@
      (define-syntax name
        (cps-syntax f)))))
 
-(define-syntax define-cpsS ;; A synonym for define-cps-syntax
+(define-syntax define-cpsŜ ;; A synonym for define-cps-syntax
   (syntax-rules ()
     ((¶ name f)
      (define-cps-syntax name f))))
@@ -391,7 +391,7 @@
      (define-syntax name
        (uncps-syntax f)))))
 
-(define-syntax define-uncpsS ;; A synonym for define-uncps-syntax
+(define-syntax define-uncpsŜ ;; A synonym for define-uncps-syntax
   (syntax-rules ()
     ((¶ name f)
      (define-uncps-syntax name f))))
@@ -410,7 +410,7 @@
        ((µ k . t*)
         (k (f . t*)))))))
 
-(define-syntax cpsS ;; A synonym for cps-syntax
+(define-syntax cpsŜ ;; A synonym for cps-syntax
   (syntax-rules ()
     ((¶ f)
      (cps-syntax f))))
@@ -429,7 +429,7 @@
         (let-syntax ((identity (syntax-rules () ((ι τ) τ))))
           (f identity . t*)))))))
 
-(define-syntax uncpsS ;; A synonym for uncps-syntax
+(define-syntax uncpsŜ ;; A synonym for uncps-syntax
   (syntax-rules ()
     ((¶ f)
      (uncps-syntax f))))
@@ -450,37 +450,43 @@
   ;; continuation-passing style. Instead we use equivalence of CPS to
   ;; the thrush combinator. The result, you may notice, is essentially
   ;; the same as the usual presentation that is full of nested
-  ;; lambdas.
+  ;; lambdas. One merely need merge the identity procedures more fully
+  ;; with the procedures they wrap (or use identity macros, if
+  ;; possible).
   ;;
-  ;; This is not by design. It is one of those things that works out
-  ;; when we ignore the complicated stuff ‘our intellectual betters’
-  ;; present to us, and instead seek for ourselves a much simpler
-  ;; explanation. I was surprised and very pleased to see it. Both the
-  ;; thrush and continuation-passing style are merely lining up
-  ;; procedures and passing the output value one as the input to the
-  ;; next. The lambdas, you can see here, are consequence of treating
-  ;; the identity procedure as a kind of ‘standard continuation’ that
-  ;; couples procedures.
+  ;; This result was not by design. It is one of those things that
+  ;; works out when we ignore the complicated stuff too often
+  ;; presented to us, and instead seek for ourselves a much simpler
+  ;; explanation. I was surprised and very pleased to see such
+  ;; simplicity, though it should have been obvious if facts had been
+  ;; presented properly. Both the thrush and continuation-passing
+  ;; style are merely lining up procedures and passing the output
+  ;; value of one as the input to the next. The big nests of lambdas,
+  ;; you can see here, arise naturally as consequence of treating an
+  ;; identity procedure (or macro) as a kind of ‘standard
+  ;; continuation’ that couples procedures.
   ;;
   ;; A corollary is that ‘concatenative’ languages such as Forth also
-  ;; are equivalent to continuation-passing style. Indeed, this shows
-  ;; that direct-threaded Forth code requires no call stack. It is
-  ;; obvious that tail calls can be optimized, and tail-call
-  ;; optimization is easily done. The operand stack is an implicit
-  ;; variable passed from ‘word’ to ‘word’. Where necessary,
-  ;; continuations can be passed on this stack and used as ‘gotos’.
+  ;; are equivalent to continuation-passing style. Indeed, the
+  ;; foregoing discussion shows that direct-threaded Forth code
+  ;; requires no call stack. It is obvious that tail calls can be
+  ;; optimized, and such tail-call optimization is easily done. But
+  ;; also, where necessary, continuations can be passed on an operand
+  ;; stack and used as ‘gotos’.
   ;;
   ;; Imagine, for instance, a ‘word’ comprising several calls to other
   ;; ‘words’ in sequence. The final call is optimized to a jump. But
   ;; what of the others? Normally they would be compiled to ‘call’
   ;; instructions. But what if, instead, a return address is pushed to
-  ;; the operand stack and a jump instruction is compiled? Then the
-  ;; return address is a continuation, and the code is now in
+  ;; an operand stack and a ‘jump’ instruction is compiled? Then the
+  ;; pushed return address is a continuation, and the code is now in
   ;; continuation-passing style.
   ;;
-  ;; If we viewed the call stack as being a second operand stack
-  ;; specially for continuations, then the Forth code was in
-  ;; continuation-passing style all along.
+  ;; But suppose we view the ordinary Forth call stack as being a
+  ;; second operand stack, specially for continuations. Then the Forth
+  ;; code was in continuation-passing style all along! Except now we
+  ;; start to think of doing more interesting things with the call
+  ;; stack than we might have thought of before.
   ;;
   ;; This is all that continuation-passing style is. There is no great
   ;; mystery or ugliness to it. Continuation-passing in Scheme is
@@ -493,9 +499,11 @@
   ;; changes nothing. Then we regroup. We move each of the identity
   ;; procedures to the back of the calling procedure. We have just
   ;; turned continuation-passing style into the thrush combinator.
+  ;; Indeed, I think this is a theoretical definition of the thrush
+  ;; combinator.
   ;;
   ;; Therefore, where it is more convenient, we can implement
-  ;; continuation-passing as the thrush combinator.
+  ;; continuation-passing as the thrush combinator, and vice versa.
   ;;
   ;; And so on.
   ;;
@@ -506,12 +514,12 @@
      (lambda-cps-syntax~>-aux
       f* k ((f (lambda (v) v) . val*))))))
 
-(define-syntax lambda-cpsS~> ;; A synonym for lambda-cps-syntax~>
+(define-syntax lambda-cpsŜ~> ;; A synonym for lambda-cps-syntax~>
   (syntax-rules ()
     ((¶ k . f*)
      (lambda-cps-syntax~> k . f*))))
 
-(define-syntax λcpsS~> ;; A synonym for lambda-cps-syntax~>
+(define-syntax λcpsŜ~> ;; A synonym for lambda-cps-syntax~>
   (syntax-rules ()
     ((¶ k . f*)
      (lambda-cps-syntax~> k . f*))))
@@ -526,7 +534,7 @@
        ((µ f . f*)
         (lambda-cps-syntax~>-aux (f . f*) k val*))))))
 
-(define-syntax cpsS~>* ;; A synonym for cps-syntax~>*
+(define-syntax cpsŜ~>* ;; A synonym for cps-syntax~>*
   (syntax-rules ()
     ((¶ k . val*)
      (cps-syntax~>* k . val*))))
@@ -554,24 +562,24 @@
 ;;; replacements for the more wordy originals.
 ;;;
 
-(define-syntax letS ;; A synonym for let-syntax
+(define-syntax letŜ ;; A synonym for let-syntax
   (syntax-rules ()
     ((¶ ((keyword transformer-spec) ...) body1 body2 ...)
      (let-syntax ((keyword transformer-spec) ...)
        body1 body2 ...))))
 
-(define-syntax letrecS ;; A synonym for letrec-syntax
+(define-syntax letrecŜ ;; A synonym for letrec-syntax
   (syntax-rules ()
     ((¶ ((keyword transformer-spec) ...) body1 body2 ...)
      (letrec-syntax ((keyword transformer-spec) ...)
        body1 body2 ...))))
 
-(define-syntax defineS ;; A synonym for define-syntax
+(define-syntax defineŜ ;; A synonym for define-syntax
   (syntax-rules ()
     ((¶ keyword transformer-spec)
      (define-syntax keyword transformer-spec))))
 
-(define-syntax Srules ;; A synonym for syntax-rules
+(define-syntax Ŝrules ;; A synonym for syntax-rules
   (syntax-rules-original ()
     ((¶ (literal ...) rule ...)
      (syntax-rules-original (literal ...) rule ...))
