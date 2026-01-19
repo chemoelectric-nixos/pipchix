@@ -179,12 +179,12 @@
     ((¶ (f . f*) val*)
      (thrush-syntax-aux f* ((f . val*))))))
 
-(define-syntax λ§~> ;; A synonym for thrush-syntax
+(define-syntax λS~> ;; A synonym for thrush-syntax
   (syntax-rules ()
     ((¶ . f*)
      (thrush-syntax . f*))))
 
-(define-syntax lambda-§~> ;; A synonym for thrush-syntax
+(define-syntax lambda-S~> ;; A synonym for thrush-syntax
   (syntax-rules ()
     ((¶ . f*)
      (thrush-syntax . f*))))
@@ -200,7 +200,7 @@
      (let-syntax ((macro (thrush-syntax . f*)))
        (macro val)))))
 
-(define-syntax §~> ;; A synonym for thrush+-syntax
+(define-syntax S~> ;; A synonym for thrush+-syntax
   (syntax-rules ()
     ((¶ val . f*)
      (thrush+-syntax val . f*))))
@@ -218,7 +218,7 @@
        ((µ f . f*)
         (thrush-syntax-aux (f . f*) val*))))))
 
-(define-syntax §~>* ;; A synonym for thrush*-syntax
+(define-syntax S~>* ;; A synonym for thrush*-syntax
   (syntax-rules ()
     ((¶ . val*)
      (thrush*-syntax . val*))))
@@ -372,7 +372,7 @@
      (define-syntax name
        (cps-syntax f)))))
 
-(define-syntax define-cps§ ;; A synonym for define-cps-syntax
+(define-syntax define-cpsS ;; A synonym for define-cps-syntax
   (syntax-rules ()
     ((¶ name f)
      (define-cps-syntax name f))))
@@ -391,7 +391,7 @@
      (define-syntax name
        (uncps-syntax f)))))
 
-(define-syntax define-uncps§ ;; A synonym for define-uncps-syntax
+(define-syntax define-uncpsS ;; A synonym for define-uncps-syntax
   (syntax-rules ()
     ((¶ name f)
      (define-uncps-syntax name f))))
@@ -410,7 +410,7 @@
        ((µ k . t*)
         (k (f . t*)))))))
 
-(define-syntax cps§ ;; A synonym for cps-syntax
+(define-syntax cpsS ;; A synonym for cps-syntax
   (syntax-rules ()
     ((¶ f)
      (cps-syntax f))))
@@ -429,7 +429,7 @@
         (let-syntax ((identity (syntax-rules () ((ι τ) τ))))
           (f identity . t*)))))))
 
-(define-syntax uncps§ ;; A synonym for uncps-syntax
+(define-syntax uncpsS ;; A synonym for uncps-syntax
   (syntax-rules ()
     ((¶ f)
      (uncps-syntax f))))
@@ -483,7 +483,21 @@
   ;; continuation-passing style all along.
   ;;
   ;; This is all that continuation-passing style is. There is no great
-  ;; mystery or special ugliness to it.
+  ;; mystery or ugliness to it. Continuation-passing in Scheme is
+  ;; explicit passing of return addresses as if they were ordinary
+  ;; procedures. This works because Scheme requires tail calls be
+  ;; proper.
+  ;;
+  ;; Now suppose we put an identity procedure at the front of each
+  ;; continuation. Except perhaps for execution speed, etc., this
+  ;; changes nothing. Then we regroup. We move each of the identity
+  ;; procedures to the back of the calling procedure. We have just
+  ;; turned continuation-passing style into the thrush combinator.
+  ;;
+  ;; Therefore, where it is more convenient, we can implement
+  ;; continuation-passing as the thrush combinator.
+  ;;
+  ;; And so on.
   ;;
   (syntax-rules ()
     ((¶ () k val*)
@@ -492,12 +506,12 @@
      (lambda-cps-syntax~>-aux
       f* k ((f (lambda (v) v) . val*))))))
 
-(define-syntax lambda-cps§~> ;; A synonym for lambda-cps-syntax~>
+(define-syntax lambda-cpsS~> ;; A synonym for lambda-cps-syntax~>
   (syntax-rules ()
     ((¶ k . f*)
      (lambda-cps-syntax~> k . f*))))
 
-(define-syntax λcps§~> ;; A synonym for lambda-cps-syntax~>
+(define-syntax λcpsS~> ;; A synonym for lambda-cps-syntax~>
   (syntax-rules ()
     ((¶ k . f*)
      (lambda-cps-syntax~> k . f*))))
@@ -512,7 +526,7 @@
        ((µ f . f*)
         (lambda-cps-syntax~>-aux (f . f*) k val*))))))
 
-(define-syntax cps§~>* ;; A synonym for cps-syntax~>*
+(define-syntax cpsS~>* ;; A synonym for cps-syntax~>*
   (syntax-rules ()
     ((¶ k . val*)
      (cps-syntax~>* k . val*))))
@@ -522,39 +536,42 @@
 ;;; Branching for continuation-passing style.
 ;;;
 
-(define-syntax if-syntax
+(define-syntax lambda-if
   (syntax-rules ()
     ((¶ kt kf)
      (lambda (x) (if x kt kf)))))
 
-(define-syntax if§
+(define-syntax λif
   (syntax-rules ()
     ((¶ kt kf)
-     (if-syntax kt kf))))
+     (lambda-if kt kf))))
 
 ;;;-------------------------------------------------------------------
 ;;;
-;;; Alternative names for let-syntax, letrec-syntax, etc.
+;;; Alternative names for let-syntax, letrec-syntax, etc. These
+;;; bindings exist so code written in combinator style can have a
+;;; consistent look to it. They are not recommended as general
+;;; replacements for the more wordy originals.
 ;;;
 
-(define-syntax let§ ;; A synonym for let-syntax
+(define-syntax letS ;; A synonym for let-syntax
   (syntax-rules ()
     ((¶ ((keyword transformer-spec) ...) body1 body2 ...)
      (let-syntax ((keyword transformer-spec) ...)
        body1 body2 ...))))
 
-(define-syntax letrec§ ;; A synonym for letrec-syntax
+(define-syntax letrecS ;; A synonym for letrec-syntax
   (syntax-rules ()
     ((¶ ((keyword transformer-spec) ...) body1 body2 ...)
      (letrec-syntax ((keyword transformer-spec) ...)
        body1 body2 ...))))
 
-(define-syntax define§ ;; A synonym for define-syntax
+(define-syntax defineS ;; A synonym for define-syntax
   (syntax-rules ()
     ((¶ keyword transformer-spec)
      (define-syntax keyword transformer-spec))))
 
-(define-syntax §rules ;; A synonym for syntax-rules
+(define-syntax Srules ;; A synonym for syntax-rules
   (syntax-rules-original ()
     ((¶ (literal ...) rule ...)
      (syntax-rules-original (literal ...) rule ...))
