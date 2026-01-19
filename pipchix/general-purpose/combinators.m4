@@ -507,7 +507,7 @@
      (k . val*))
     ((¶ (f . f*) k val*)
      (lambda-cps-syntax~>-aux
-      f* k ((f (lambda (v) v) . val*))))))
+      f* k ((f (lambda v* (apply values v*)) . val*))))))
 
 (define-syntax λcpsσ~> ;; A synonym for lambda-cps-syntax~>
   (syntax-rules ()
