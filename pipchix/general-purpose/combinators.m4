@@ -478,6 +478,10 @@
   ;; return address is a continuation, and the code is now in
   ;; continuation-passing style.
   ;;
+  ;; If we viewed the call stack as being a second operand stack
+  ;; specially for continuations, then the code was in
+  ;; continuation-passing style all along.
+  ;;
   ;; This is all that continuation-passing style is. There is no great
   ;; mystery or special ugliness to it.
   ;;
