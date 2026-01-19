@@ -5,9 +5,9 @@ thrush-and λand~> lambda-and~>
 thrush+-and and~>
 thrush*-and and~>*
 
-thrush-syntax λΣ~> lambda-Σ~>
-thrush+-syntax Σ~>
-thrush*-syntax Σ~>*
+thrush-syntax λσ~>
+thrush+-syntax σ~>
+thrush*-syntax σ~>*
 
 join wind-pre wind-post wind
 join* wind-pre* wind-post* wind*
@@ -16,13 +16,13 @@ cps uncps
 λcps~> lambda-cps~>
 cps~>*
 
-define-cps-syntax define-cpsΣ
-define-uncps-syntax define-uncpsΣ
-cps-syntax cpsΣ
-uncps-syntax uncpsΣ
-lambda-cps-syntax~> λcpsΣ~> lambda-cpsΣ~>
-cps-syntax~>* cpsΣ~>*
+define-cps-syntax define-cpsσ
+define-uncps-syntax define-uncpsσ
+cps-syntax cpsσ
+uncps-syntax uncpsσ
+lambda-cps-syntax~> λcpsσ~>
+cps-syntax~>* cpsσ~>*
 
 lambda-if λif
 
-letΣ letrecΣ defineΣ Σrules
+letσ letrecσ defineσ σrules

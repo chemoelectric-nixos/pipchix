@@ -68,7 +68,7 @@ check_unquoted([run_scheme 'sexpr'],[0],
 m4_define([sexpr],
   [(scheme->nix
     (let-syntax
-        ((macro (λΣ~> reverse
+        ((macro (λσ~> reverse
                       list->vector
                       vector->list
                       (cut map number->string <>))))
@@ -79,13 +79,13 @@ check_unquoted([run_scheme 'sexpr'],[0],
 m4_define([sexpr],
   [(scheme->nix
     (let-syntax
-        ((macro (lambda-Σ~> + - (cut * <> 4))))
+        ((macro (λσ~> + - (cut * <> 4))))
       (macro 1 2 3 4 5 6)))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([(-84)·])],[])
 
 m4_define([sexpr],
-  [(scheme->nix (Σ~> 7 (cut * <> 3) - (cut * <> 4)))])
+  [(scheme->nix (σ~> 7 (cut * <> 3) - (cut * <> 4)))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([(-84)·])],[])
 
@@ -101,7 +101,7 @@ check_unquoted([run_scheme 'sexpr'],[0],
 
 m4_define([sexpr],
   [(scheme->nix
-    (let-syntax ((macro (Σ~>* 1 2 3 4 5 6)))
+    (let-syntax ((macro (σ~>* 1 2 3 4 5 6)))
       (macro + - (cut * <> 4))))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([(-84)·])],[])
@@ -448,15 +448,15 @@ m4_define([sexpr],
   [(scheme->nix
     (call/cc
      (lambda (cc)
-       ;; factorial defined with λcpsΣ~>
+       ;; factorial defined with λcpsσ~>
        (define (fact:k k n)
          (let-syntax
-             ((n=0? (cpsΣ (lambda () (zero? n)))))
+             ((n=0? (cpsσ (lambda () (zero? n)))))
            (let-syntax
-               ((n-1 (cpsΣ (lambda () (- n 1)))))
+               ((n-1 (cpsσ (lambda () (- n 1)))))
              (let-syntax
-                 ((times_n (cpsΣ (lambda (x) (* n x)))))
-               (let-syntax ((macro1 (λcpsΣ~> n-1 fact:k times_n)))
+                 ((times_n (cpsσ (lambda (x) (* n x)))))
+               (let-syntax ((macro1 (λcpsσ~> n-1 fact:k times_n)))
                  (n=0?
                   (lambda (z?)
                     (if z?
@@ -470,16 +470,16 @@ m4_define([sexpr],
   [(scheme->nix
     (call/cc
      (lambda (cc)
-       ;; factorial defined with lambda-cpsΣ~>
+       ;; factorial defined with λcpsσ~>
        (define (fact:k k n)
          (let-syntax
-             ((n=0? (cpsΣ (lambda () (zero? n)))))
+             ((n=0? (cpsσ (lambda () (zero? n)))))
            (let-syntax
-               ((n-1 (cpsΣ (lambda () (- n 1)))))
+               ((n-1 (cpsσ (lambda () (- n 1)))))
              (let-syntax
-                 ((times_n (cpsΣ (lambda (x) (* n x)))))
+                 ((times_n (cpsσ (lambda (x) (* n x)))))
                (let-syntax
-                   ((macro1 (lambda-cpsΣ~> n-1 fact:k times_n)))
+                   ((macro1 (λcpsσ~> n-1 fact:k times_n)))
                  (n=0?
                   (lambda (z?)
                     (if z?
@@ -496,11 +496,11 @@ m4_define([sexpr],
        ;; factorial defined with lambda-cps-syntax~>
        (define (fact:k k n)
          (let-syntax
-             ((n=0? (cpsΣ (lambda () (zero? n)))))
+             ((n=0? (cpsσ (lambda () (zero? n)))))
            (let-syntax
-               ((n-1 (cpsΣ (lambda () (- n 1)))))
+               ((n-1 (cpsσ (lambda () (- n 1)))))
              (let-syntax
-                 ((times_n (cpsΣ (lambda (x) (* n x)))))
+                 ((times_n (cpsσ (lambda (x) (* n x)))))
                (let-syntax
                    ((macro1
                      (lambda-cps-syntax~> n-1 fact:k times_n)))
@@ -517,17 +517,17 @@ m4_define([sexpr],
   [(scheme->nix
     (call/cc
      (lambda (cc)
-       ;; factorial defined with cpsΣ~>*
+       ;; factorial defined with cpsσ~>*
        (define (fact:k k n)
-         (let-syntax ((n=0?:k (cpsΣ (lambda () (zero? n)))))
+         (let-syntax ((n=0?:k (cpsσ (lambda () (zero? n)))))
            (n=0?:k
             (lambda (z?)
               (if z?
                 (k 1)
                 (let-syntax
-                     ((macro1 (cpsΣ~>* k))
-                      (n-1:k (cpsΣ (lambda () (- n 1))))
-                      (times_n:k (cpsΣ (lambda (x) (* n x)))))
+                     ((macro1 (cpsσ~>* k))
+                      (n-1:k (cpsσ (lambda () (- n 1))))
+                      (times_n:k (cpsσ (lambda (x) (* n x)))))
                   (macro1 n-1:k fact:k times_n:k)))))))
        (fact:k cc 9))))])
 check_unquoted([run_scheme 'sexpr'],[0],
@@ -537,15 +537,15 @@ m4_define([sexpr],
   [(scheme->nix
     (call/cc
      (lambda (cc)
-       ;; factorial defined with cpsΣ~>* and λif
+       ;; factorial defined with cpsσ~>* and λif
        (define (fact:k k n)
-         (let-syntax ((n=0?:k (cpsΣ (lambda () (zero? n)))))
+         (let-syntax ((n=0?:k (cpsσ (lambda () (zero? n)))))
            (n=0?:k
             (λif (k 1)
                  (let-syntax
-                      ((macro1 (cpsΣ~>* k))
-                       (n-1:k (cpsΣ (lambda () (- n 1))))
-                       (times_n:k (cpsΣ (lambda (x) (* n x)))))
+                      ((macro1 (cpsσ~>* k))
+                       (n-1:k (cpsσ (lambda () (- n 1))))
+                       (times_n:k (cpsσ (lambda (x) (* n x)))))
                    (macro1 n-1:k fact:k times_n:k))))))
        (fact:k cc 9))))])
 check_unquoted([run_scheme 'sexpr'],[0],
@@ -593,12 +593,12 @@ m4_define([sexpr],
     (call/cc
      (lambda (cc)
        (define (fact k n)
-         (letΣ ((n=0? (cpsΣ (lambda () (zero? n)))))
+         (letσ ((n=0? (cpsσ (lambda () (zero? n)))))
            (n=0?
             (λif (k 1)
-                 (letΣ ((macro1 (cpsΣ~>* k))
-                        (n-1 (cpsΣ (lambda () (- n 1))))
-                        (times_n (cpsΣ (lambda (x) (* n x)))))
+                 (letσ ((macro1 (cpsσ~>* k))
+                        (n-1 (cpsσ (lambda () (- n 1))))
+                        (times_n (cpsσ (lambda (x) (* n x)))))
                    (macro1 n-1 fact times_n))))))
        (fact cc 9))))])
 check_unquoted([run_scheme 'sexpr'],[0],
@@ -610,12 +610,12 @@ m4_define([sexpr],
     (call/cc
      (lambda (cc)
        (define (fact k n)
-         (letrecΣ ((n=0? (cpsΣ (lambda () (zero? n)))))
+         (letrecσ ((n=0? (cpsσ (lambda () (zero? n)))))
            (n=0?
             (λif (k 1)
-                 (letrecΣ ((macro1 (cpsΣ~>* k))
-                           (n-1 (cpsΣ (lambda () (- n 1))))
-                           (times_n (cpsΣ (lambda (x) (* n x)))))
+                 (letrecσ ((macro1 (cpsσ~>* k))
+                           (n-1 (cpsσ (lambda () (- n 1))))
+                           (times_n (cpsσ (lambda (x) (* n x)))))
                    (macro1 n-1 fact times_n))))))
        (fact cc 9))))])
 check_unquoted([run_scheme 'sexpr'],[0],
@@ -626,13 +626,13 @@ m4_define([sexpr],
     (call/cc
      (lambda (cc)
        (define (fact k n)
-         (letrecΣ ((n=0? (cpsΣ (lambda () (zero? n)))))
+         (letrecσ ((n=0? (cpsσ (lambda () (zero? n)))))
            (n=0?
             (λif (k 1)
                  (let ()
-                   (defineΣ macro1 (cpsΣ~>* k))
-                   (defineΣ n-1 (cpsΣ (lambda () (- n 1))))
-                   (defineΣ times_n (cpsΣ (lambda (x) (* n x))))
+                   (defineσ macro1 (cpsσ~>* k))
+                   (defineσ n-1 (cpsσ (lambda () (- n 1))))
+                   (defineσ times_n (cpsσ (lambda (x) (* n x))))
                    (macro1 n-1 fact times_n))))))
        (fact cc 9))))])
 check_unquoted([run_scheme 'sexpr'],[0],
@@ -642,7 +642,7 @@ m4_define([sexpr],
   [(scheme->nix
     (let ()
       (define this 1234)
-      (defineΣ dequote (Σrules () ((¶ '\''x) x)))
+      (defineσ dequote (σrules () ((¶ '\''x) x)))
       (dequote '\''this)))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([(1234)·])],[])

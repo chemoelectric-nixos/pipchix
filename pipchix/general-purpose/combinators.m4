@@ -179,12 +179,7 @@
     ((¶ (f . f*) val*)
      (thrush-syntax-aux f* ((f . val*))))))
 
-(define-syntax λΣ~> ;; A synonym for thrush-syntax
-  (syntax-rules ()
-    ((¶ . f*)
-     (thrush-syntax . f*))))
-
-(define-syntax lambda-Σ~> ;; A synonym for thrush-syntax
+(define-syntax λσ~> ;; A synonym for thrush-syntax
   (syntax-rules ()
     ((¶ . f*)
      (thrush-syntax . f*))))
@@ -200,7 +195,7 @@
      (let-syntax ((macro (thrush-syntax . f*)))
        (macro val)))))
 
-(define-syntax Σ~> ;; A synonym for thrush+-syntax
+(define-syntax σ~> ;; A synonym for thrush+-syntax
   (syntax-rules ()
     ((¶ val . f*)
      (thrush+-syntax val . f*))))
@@ -218,7 +213,7 @@
        ((µ f . f*)
         (thrush-syntax-aux (f . f*) val*))))))
 
-(define-syntax Σ~>* ;; A synonym for thrush*-syntax
+(define-syntax σ~>* ;; A synonym for thrush*-syntax
   (syntax-rules ()
     ((¶ . val*)
      (thrush*-syntax . val*))))
@@ -372,7 +367,7 @@
      (define-syntax name
        (cps-syntax f)))))
 
-(define-syntax define-cpsΣ ;; A synonym for define-cps-syntax
+(define-syntax define-cpsσ ;; A synonym for define-cps-syntax
   (syntax-rules ()
     ((¶ name f)
      (define-cps-syntax name f))))
@@ -391,7 +386,7 @@
      (define-syntax name
        (uncps-syntax f)))))
 
-(define-syntax define-uncpsΣ ;; A synonym for define-uncps-syntax
+(define-syntax define-uncpsσ ;; A synonym for define-uncps-syntax
   (syntax-rules ()
     ((¶ name f)
      (define-uncps-syntax name f))))
@@ -410,7 +405,7 @@
        ((µ k . t*)
         (k (f . t*)))))))
 
-(define-syntax cpsΣ ;; A synonym for cps-syntax
+(define-syntax cpsσ ;; A synonym for cps-syntax
   (syntax-rules ()
     ((¶ f)
      (cps-syntax f))))
@@ -429,7 +424,7 @@
         (let-syntax ((identity (syntax-rules () ((ι τ) τ))))
           (f identity . t*)))))))
 
-(define-syntax uncpsΣ ;; A synonym for uncps-syntax
+(define-syntax uncpsσ ;; A synonym for uncps-syntax
   (syntax-rules ()
     ((¶ f)
      (uncps-syntax f))))
@@ -514,12 +509,7 @@
      (lambda-cps-syntax~>-aux
       f* k ((f (lambda (v) v) . val*))))))
 
-(define-syntax lambda-cpsΣ~> ;; A synonym for lambda-cps-syntax~>
-  (syntax-rules ()
-    ((¶ k . f*)
-     (lambda-cps-syntax~> k . f*))))
-
-(define-syntax λcpsΣ~> ;; A synonym for lambda-cps-syntax~>
+(define-syntax λcpsσ~> ;; A synonym for lambda-cps-syntax~>
   (syntax-rules ()
     ((¶ k . f*)
      (lambda-cps-syntax~> k . f*))))
@@ -534,7 +524,7 @@
        ((µ f . f*)
         (lambda-cps-syntax~>-aux (f . f*) k val*))))))
 
-(define-syntax cpsΣ~>* ;; A synonym for cps-syntax~>*
+(define-syntax cpsσ~>* ;; A synonym for cps-syntax~>*
   (syntax-rules ()
     ((¶ k . val*)
      (cps-syntax~>* k . val*))))
@@ -562,24 +552,24 @@
 ;;; replacements for the more wordy originals.
 ;;;
 
-(define-syntax letΣ ;; A synonym for let-syntax
+(define-syntax letσ ;; A synonym for let-syntax
   (syntax-rules ()
     ((¶ ((keyword transformer-spec) ...) body1 body2 ...)
      (let-syntax ((keyword transformer-spec) ...)
        body1 body2 ...))))
 
-(define-syntax letrecΣ ;; A synonym for letrec-syntax
+(define-syntax letrecσ ;; A synonym for letrec-syntax
   (syntax-rules ()
     ((¶ ((keyword transformer-spec) ...) body1 body2 ...)
      (letrec-syntax ((keyword transformer-spec) ...)
        body1 body2 ...))))
 
-(define-syntax defineΣ ;; A synonym for define-syntax
+(define-syntax defineσ ;; A synonym for define-syntax
   (syntax-rules ()
     ((¶ keyword transformer-spec)
      (define-syntax keyword transformer-spec))))
 
-(define-syntax Σrules ;; A synonym for syntax-rules
+(define-syntax σrules ;; A synonym for syntax-rules
   (syntax-rules-original ()
     ((¶ (literal ...) rule ...)
      (syntax-rules-original (literal ...) rule ...))
