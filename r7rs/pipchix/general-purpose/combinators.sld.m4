@@ -29,7 +29,8 @@ m4_include(pipchix/pipchix-includes.m4)
   (export m4_include(pipchix/general-purpose/combinators.exports.m4))
 
   (import basic_libraries)
-  (import (rename (scheme base) (syntax-rules syntax-rules-original)))
+  (import (rename (only (scheme base) syntax-rules)
+                  (syntax-rules syntax-rules-original)))
 
   (begin
     
