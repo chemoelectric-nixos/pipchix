@@ -577,6 +577,41 @@
     ((¶ (a ...))
      (expand-cps-syntax~>* (a ...)))))
 
+(define-syntax cps-bind*
+  (syntax-rules (=>)
+    ((¶ ((computation => name ...) ...) body ...)
+     (cps-bind*-aux ((computation => name ...) ...)
+                    ()
+                    ((if #f #f) body ...)))))
+
+(define-syntax cps-bind*-aux
+  (syntax-rules (=> cps-syntax~>*)
+
+    ((¶ () (binding ...) (body ...))
+     (let*-values (binding ...) body ...))
+
+    ((¶ ((((cps-syntax~>* a ...) b ...) => name ...) c ...)
+        (binding ...) (body ...))
+     (let ((tmp (expand-cps-syntax~>*
+                 ((cps-syntax~>* a ...) b ...))))
+       (cps-bind*-aux (c ...)
+                      (binding ... ((name ...) (tmp)))
+                      (body ...))))
+
+    ((¶ ((((cpsσ~>* a ...) b ...) => name ...) c ...)
+        (binding ...) (body ...))
+     (cps-bind*-aux
+      ((((cps-syntax~>* a ...) b ...) => name ...) c ...)
+      (binding ...) (body ...)))
+
+    ((¶ ((other => name ...) c ...)
+        (binding ...) (body ...))
+     (cps-bind*-aux (c ...)
+                    (binding ... ((name ...) (other)))
+                    (body ...)))
+
+    ))
+
 ;;;-------------------------------------------------------------------
 
 ;;; m4_ifelse(general_macros,«er-macro-transformer»,«

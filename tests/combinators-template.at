@@ -705,6 +705,16 @@ m4_define([sexpr],
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([("3-times-2")·])],[])
 
+m4_define([sexpr],
+  [(scheme->nix
+    (call/cc
+     (lambda (k)
+       (cps-bind*
+             ((((cps-syntax~>* k 1 2) (cps-syntax +)) => k x))
+         (k x)))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(3)·])],[])
+
 AT_CLEANUP
 
 # local variables:
