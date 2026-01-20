@@ -27,14 +27,37 @@ m4_include(pipchix/pipchix-includes.m4)
 (define-library (pipchix general-purpose combinators)
 
   (export m4_include(pipchix/general-purpose/combinators.exports.m4))
+  (cond-expand
+    (gauche (export :info-alist))
+    (else))
 
   (import basic_libraries)
   (import (rename (only (scheme base) syntax-rules)
                   (syntax-rules syntax-rules-original)))
 
+  (cond-expand
+    (chibi (import (only (chibi) er-macro-transformer)))
+    (gauche (import (only (r7rs aux)
+                          :info-alist
+                          er-macro-transformer)))
+    (sagittarius (import (only (sagittarius)
+                               er-macro-transformer)))
+    ((or loko guile) (import (rnrs syntax-case (6))))
+    (else))
+
   (begin
     
-    m4_include(pipchix/general-purpose/combinators.m4)
+    (cond-expand
+      ((or loko guile)
+       ;; m4_pushdef(«general_macros»,«syntax-case»)
+       m4_include(pipchix/general-purpose/combinators.m4)
+       ;; m4_popdef(«general_macros»)
+       )
+      (else
+       ;; m4_pushdef(«general_macros»,«er-macro-transformer»)
+       m4_include(pipchix/general-purpose/combinators.m4)
+       ;; m4_popdef(«general_macros»)
+       ))
 
     ))
 

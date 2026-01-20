@@ -647,6 +647,29 @@ m4_define([sexpr],
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([(1234)·])],[])
 
+m4_define([sexpr],
+  [(scheme->nix
+    (call/cc
+     (lambda (k)
+       (expand-cps-syntax~>*
+        ((cpsσ~>* k 1 2)
+         (cpsσ +)
+         (cps-syntax number->string))))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([("3")·])],[])
+
+m4_define([sexpr],
+  [(scheme->nix
+    (call/cc
+     (lambda (k)
+       (expand-cpsσ~>*
+        ((cpsσ~>* k 1 2)
+         (cpsσ +)
+         (cps-syntax number->string)
+         (cps (cut string-append <> "-times-2")))))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([("3-times-2")·])],[])
+
 AT_CLEANUP
 
 # local variables:

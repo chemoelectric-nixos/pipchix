@@ -33,6 +33,7 @@ m4_include(pipchix/pipchix-includes.m4)
           (rename (only (rnrs (6)) syntax-rules)
                         (syntax-rules syntax-rules-original)))
 
+  ;; m4_define(«general_macros»,«syntax-case»)
   m4_include(pipchix/general-purpose/combinators.m4)
 
   )

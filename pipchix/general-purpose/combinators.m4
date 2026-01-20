@@ -530,6 +530,123 @@
      (cps-syntax~>* k . val*))))
 
 ;;;-------------------------------------------------------------------
+
+(define-syntax expand-cps-syntax~>*
+  (syntax-rules (cps-syntax~>* cpsσ~>*)
+    ((¶ ((cps-syntax~>* a ...) b ...))
+     (let-syntax ((tmp (cps-syntax~>* a ...)))
+       (expand-cps-syntax~>*-aux (tmp) (b ...))))
+    ((¶ ((cpsσ~>* a ...) b ...))
+     (let-syntax ((tmp (cpsσ~>* a ...)))
+       (expand-cps-syntax~>*-aux (tmp) (b ...))))
+    ((¶ (other b ...))
+     (expand-cps-syntax~>*-aux (other) (b ...)))
+    ))
+
+(define-syntax expand-cps-syntax~>*-aux
+  (syntax-rules (cps-syntax cpsσ lambda-cps-syntax~> λcpsσ~>)
+    ((¶ (a ...) ())
+     (a ...))
+    ((¶ (a ...) ((cps-syntax b) c ...))
+     (let-syntax ((tmp (cps-syntax b)))
+       (expand-cps-syntax~>*-aux (a ... tmp) (c ...))))
+    ((¶ (a ...) ((cpsσ b) c ...))
+     (let-syntax ((tmp (cpsσ b)))
+       (expand-cps-syntax~>*-aux (a ... tmp) (c ...))))
+    ((¶ (a ...) ((lambda-cps-syntax~> b ...) c ...))
+     (let-syntax ((tmp (expand-lambda-cps-syntax~>
+                         (lambda-cps-syntax~> b ...))))
+       (expand-cps-syntax~>*-aux (a ... tmp) (c ...))))
+    ((¶ (a ...) ((λcpsσ~> b ...) c ...))
+     (let-syntax ((tmp (expand-λcpsσ~> (λcpsσ~> b ...))))
+       (expand-cps-syntax~>*-aux (a ... tmp) (c ...))))
+    ((¶ (a ...) (other b ...))
+     (expand-cps-syntax~>*-aux (a ... other) (b ...)))
+    ))
+
+(define-syntax expand-cpsσ~>*
+  (syntax-rules ()
+    ((¶ (a ...))
+     (expand-cps-syntax~>* (a ...)))))
+
+(define-syntax expand-lambda-cps-syntax~>
+  (syntax-rules (lambda-cps-syntax~> λcpsσ~>)
+    ((¶ (lambda-cps-syntax~> a ...))
+     (expand-lambda-cps-syntax~>-aux
+      (lambda-cps-syntax~>) (a ...)))
+    ((¶ (λcpsσ~> a ...))
+     (expand-lambda-cps-syntax~>-aux
+      (λcpsσ~>) (a ...)))
+    ))
+
+(define-syntax expand-lambda-cps-syntax~>-aux
+  (syntax-rules (cps-syntax cpsσ lambda-cps-syntax~> λcpsσ~>)
+    ((¶ (a ...) ())
+     (a ...))
+    ((¶ (a ...) ((cps-syntax b) c ...))
+     (let-syntax ((tmp (cps-syntax b)))
+       (expand-lambda-cps-syntax~>-aux (a ... tmp) (c ...))))
+    ((¶ (a ...) ((cpsσ b) c ...))
+     (let-syntax ((tmp (cpsσ b)))
+       (expand-lambda-cps-syntax~>-aux (a ... tmp) (c ...))))
+    ((¶ (a ...) ((lambda-cps-syntax~> b ...) c ...))
+     (let-syntax ((tmp (lambda-cps-syntax~> b ...)))
+       (expand-lambda-cps-syntax~>-aux (a ... tmp) (c ...))))
+    ((¶ (a ...) ((λcpsσ~> b ...) c ...))
+     (let-syntax ((tmp (λcpsσ~> b ...)))
+       (expand-lambda-cps-syntax~>-aux (a ... tmp) (c ...))))
+    ((¶ (a ...) (other b ...))
+     (expand-lambda-cps-syntax~>-aux (a ... other) (b ...)))
+    ))
+
+(define-syntax expand-λcpsσ~>
+  (syntax-rules ()
+    ((¶ a ...)
+     (expand-lambda-cps-syntax~> a ...))))
+
+;;;-------------------------------------------------------------------
+
+;;; m4_ifelse(general_macros,«er-macro-transformer»,«
+
+(define-syntax if-free-identifier=
+  (er-macro-transformer
+   (lambda (form rename compare)
+     (let ((arg* (cdr form)))
+       (let ((id1 (first arg*))
+             (id2 (second arg*)))
+         (if (compare id1 id2)
+           (third arg*)
+           (fourth arg*)))))))
+
+(define-syntax if-bound-identifier=
+  (er-macro-transformer
+   (lambda (form rename compare)
+     (let ((arg* (cdr form)))
+       (let ((id1 (first arg*))
+             (id2 (second arg*)))
+         (if (eq? id1 id2)
+           (third arg*)
+           (fourth arg*)))))))
+
+;;; »)
+
+;;; m4_ifelse(general_macros,«syntax-case»,«
+
+(define-syntax if-free-identifier=
+  (lambda (stx)
+    (syntax-case stx ()
+      ((¶ id1 id2 kt kf)
+       (if (free-identifier=? id1 id2) kt kf)))))
+
+(define-syntax if-bound-identifier=
+  (lambda (stx)
+    (syntax-case stx ()
+      ((¶ id1 id2 kt kf)
+       (if (bound-identifier=? id1 id2) kt kf)))))
+
+;;; »)
+
+;;;-------------------------------------------------------------------
 ;;;
 ;;; Branching for continuation-passing style.
 ;;;
