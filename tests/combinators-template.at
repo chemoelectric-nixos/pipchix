@@ -670,6 +670,41 @@ m4_define([sexpr],
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([("3-times-2")·])],[])
 
+m4_define([sexpr],
+  [(scheme->nix
+    (call/cc
+     (lambda (k)
+       (expand-cpsσ~>*
+        ((cpsσ~>* k 1 2)
+         (lambda (k1 a b)
+           ((cps~>* k1 a b) (cps +) (cps number->string)))
+         (cpsσ (cut string-append <> "-times-2")))))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([("3-times-2")·])],[])
+
+m4_define([sexpr],
+  [(scheme->nix
+    (call/cc
+     (lambda (k)
+       (expand-cps-syntax~>*
+        ((cps-syntax~>* k 1 2)
+         (lambda-cps~> (cps +) (cps number->string))
+         (cps-syntax (cut string-append <> "-times-2")))))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([("3-times-2")·])],[])
+
+m4_define([sexpr],
+  [(scheme->nix
+    (call/cc
+     (lambda (k)
+       (expand-cps-syntax~>*
+        ((cps-syntax~>* k 1 2)
+         (lambda-cps-syntax~> (cps-syntax +)
+                              (cps-syntax number->string))
+         (cps-syntax (cut string-append <> "-times-2")))))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([("3-times-2")·])],[])
+
 AT_CLEANUP
 
 # local variables:

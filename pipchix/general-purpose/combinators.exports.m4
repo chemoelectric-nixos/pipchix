@@ -24,7 +24,6 @@ lambda-cps-syntax~> λcpsσ~>
 cps-syntax~>* cpsσ~>*
 
 expand-cps-syntax~>* expand-cpsσ~>*
-expand-lambda-cps-syntax~> expand-λcpsσ~>
 
 if-free-identifier=
 if-bound-identifier=
