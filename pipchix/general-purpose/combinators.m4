@@ -585,7 +585,7 @@
                     ((if #f #f) body ...)))))
 
 (define-syntax cps-bind*-aux
-  (syntax-rules (=> cps-syntax~>*)
+  (syntax-rules (=> cps-syntax~>* cpsσ~>*)
 
     ((¶ () (binding ...) (body ...))
      (let*-values (binding ...) body ...))
