@@ -646,6 +646,14 @@
 
 ;;; m4_ifelse(general_macros,«er-macro-transformer»,«
 
+(define-syntax if-identifier
+  (er-macro-transformer
+   (lambda (form rename compare)
+     (let ((arg* (cdr form)))
+       (if (symbol? (first arg*))
+         (second arg*)
+         (third arg*))))))
+
 (define-syntax if-free-identifier=
   (er-macro-transformer
    (lambda (form rename compare)
@@ -669,6 +677,14 @@
 ;;; »)
 
 ;;; m4_ifelse(general_macros,«syntax-case»,«
+
+(define-syntax if-identifier
+  (lambda (stx)
+    (syntax-case stx ()
+      ((¶ obj kt kf)
+       (if (identifier? (syntax obj))
+         (syntax kt)
+         (syntax kf))))))
 
 (define-syntax if-free-identifier=
   (lambda (stx)

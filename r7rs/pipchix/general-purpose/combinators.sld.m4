@@ -36,7 +36,8 @@ m4_include(pipchix/pipchix-includes.m4)
                   (syntax-rules syntax-rules-original)))
 
   (cond-expand
-    (chibi (import (only (chibi) er-macro-transformer)))
+    (chibi (import (only (chibi)
+                         er-macro-transformer)))
     (gauche (import (only (r7rs aux)
                           :info-alist
                           er-macro-transformer)))

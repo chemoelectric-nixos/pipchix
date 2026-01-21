@@ -27,6 +27,7 @@ expand-thrush*-syntax expandσ~>*
 expand-cps-syntax~>* expand-cpsσ~>*
 bind*
 
+if-identifier
 if-free-identifier=
 if-bound-identifier=
 
