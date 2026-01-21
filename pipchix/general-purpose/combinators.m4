@@ -531,6 +531,27 @@
 
 ;;;-------------------------------------------------------------------
 
+(define-syntax expand-thrush*-syntax
+  (syntax-rules (thrush*-syntax σ~>*)
+
+    ((¶ ((thrush*-syntax a ...) b ...))
+     (let-syntax ((tmp (thrush*-syntax a ...)))
+       (tmp b ...)))
+
+    ((¶ ((σ~>* a ...) b ...))
+     (let-syntax ((tmp (σ~>* a ...)))
+       (tmp b ...)))
+
+    ((¶ (other b ...))
+     (other b ...))
+
+    ))
+
+(define-syntax expandσ~>*
+  (syntax-rules ()
+    ((¶ (a ...))
+     (expand-thrush*-syntax (a ...)))))
+
 (define-syntax expand-cps-syntax~>*
   (syntax-rules (cps-syntax~>* cpsσ~>*)
 
@@ -577,38 +598,39 @@
     ((¶ (a ...))
      (expand-cps-syntax~>* (a ...)))))
 
-(define-syntax cps-bind*
-  (syntax-rules (=>)
-    ((¶ ((computation => name ...) ...) body ...)
-     (cps-bind*-aux ((computation => name ...) ...)
-                    ()
-                    ((if #f #f) body ...)))))
+(define-syntax bind*
+  (syntax-rules (=> thrush*-syntax σ~>* cps-syntax~>* cpsσ~>*)
 
-(define-syntax cps-bind*-aux
-  (syntax-rules (=> cps-syntax~>* cpsσ~>*)
+    ((¶ () body ...)
+     (begin (if #f #f) body ...))
 
-    ((¶ () (binding ...) (body ...))
-     (let*-values (binding ...) body ...))
+    ((¶ ((((thrush*-syntax a ...) b ...) => name ...)
+         binding ...)
+        body ...)
+     (let-values (((name ...) (expand-thrush*-syntax
+                               ((thrush*-syntax a ...) b ...))))
+       (bind* (binding ...) body ...)))
 
-    ((¶ ((((cps-syntax~>* a ...) b ...) => name ...) c ...)
-        (binding ...) (body ...))
-     (let ((tmp (expand-cps-syntax~>*
-                 ((cps-syntax~>* a ...) b ...))))
-       (cps-bind*-aux (c ...)
-                      (binding ... ((name ...) (tmp)))
-                      (body ...))))
+    ((¶ ((((σ~>* a ...) b ...) => name ...) binding ...)
+        body ...)
+     (let-values (((name ...) (expandσ~>* ((σ~>* a ...) b ...))))
+       (bind* (binding ...) body ...)))
 
-    ((¶ ((((cpsσ~>* a ...) b ...) => name ...) c ...)
-        (binding ...) (body ...))
-     (cps-bind*-aux
-      ((((cps-syntax~>* a ...) b ...) => name ...) c ...)
-      (binding ...) (body ...)))
+    ((¶ ((((cps-syntax~>* a ...) b ...) => name ...) binding ...)
+        body ...)
+     (let-values (((name ...) (expand-cps-syntax~>*
+                               ((cps-syntax~>* a ...) b ...))))
+       (bind* (binding ...) body ...)))
 
-    ((¶ ((other => name ...) c ...)
-        (binding ...) (body ...))
-     (cps-bind*-aux (c ...)
-                    (binding ... ((name ...) (other)))
-                    (body ...)))
+    ((¶ ((((cpsσ~>* a ...) b ...) => name ...) binding ...)
+        body ...)
+     (let-values (((name ...) (expand-cpsσ~>*
+                               ((cpsσ~>* a ...) b ...))))
+       (bind* (binding ...) body ...)))
+
+    ((¶ ((other => name ...) binding ...) body ...)
+     (let-values (((name ...) (other)))
+       (bind* (binding ...) body ...)))
 
     ))
 

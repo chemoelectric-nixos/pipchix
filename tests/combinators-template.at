@@ -709,11 +709,19 @@ m4_define([sexpr],
   [(scheme->nix
     (call/cc
      (lambda (k)
-       (cps-bind*
-             ((((cps-syntax~>* k 1 2) (cps-syntax +)) => k x))
+       (bind* ((((cps-syntax~>* k 1 2) (cps-syntax +)) => k x))
          (k x)))))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([(3)·])],[])
+
+m4_define([sexpr],
+  [(scheme->nix
+    (bind* ((((thrush*-syntax 1 2 3) + -) => x)
+            (((σ~>* 2 x) * (cut * <> 2)) => y)
+            (((σ~>* y) number->string) => z))
+      z))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([("-24")·])],[])
 
 AT_CLEANUP
 

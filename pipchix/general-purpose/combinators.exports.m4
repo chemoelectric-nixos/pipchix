@@ -23,8 +23,9 @@ uncps-syntax uncpsσ
 lambda-cps-syntax~> λcpsσ~>
 cps-syntax~>* cpsσ~>*
 
+expand-thrush*-syntax expandσ~>*
 expand-cps-syntax~>* expand-cpsσ~>*
-cps-bind*
+bind*
 
 if-free-identifier=
 if-bound-identifier=
