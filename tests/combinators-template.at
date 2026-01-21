@@ -707,10 +707,8 @@ check_unquoted([run_scheme 'sexpr'],[0],
 
 m4_define([sexpr],
   [(scheme->nix
-    (call/cc
-     (lambda (k)
-       (bind* ((((cps-syntax~>* k 1 2) (cps-syntax +)) => k x))
-         (k x)))))])
+    (bind* ((((cps-syntax~>* 1 2) (cps-syntax +)) => x))
+      x))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([(3)·])],[])
 
@@ -719,6 +717,30 @@ m4_define([sexpr],
     (bind* ((((thrush*-syntax 1 2 3) + -) => x)
             (((σ~>* 2 x) * (cut * <> 2)) => y)
             (((σ~>* y) number->string) => z))
+      z))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([("-24")·])],[])
+
+m4_define([sexpr],
+  [(scheme->nix
+    (bind* ((((cpsσ~>* 1 2 3)
+              (cpsσ +) (cpsσ -)
+              (cpsσ (cut * <> 4))
+              (cpsσ number->string)) => z))
+      z))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([("-24")·])],[])
+
+m4_define([sexpr],
+  [(scheme->nix
+    (bind* ((((cpsσ~>* 1 2 3)
+              (cpsσ +)
+              (cpsσ -))              => x)
+            (((cpsσ~>* 2 x)
+              (cpsσ *)
+              (cpsσ (cut * <> 2)))   => y)
+            (((cpsσ~>* y)
+              (cpsσ number->string)) => z))
       z))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([("-24")·])],[])

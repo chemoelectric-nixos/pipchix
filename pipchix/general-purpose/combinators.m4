@@ -552,44 +552,45 @@
     ((¶ (a ...))
      (expand-thrush*-syntax (a ...)))))
 
+(define-syntax :expand-cps (syntax-rules ()))
+
 (define-syntax expand-cps-syntax~>*
-  (syntax-rules (cps-syntax~>* cpsσ~>*)
-
-    ((¶ ((cps-syntax~>* a ...) b ...))
-     (let-syntax ((tmp (cps-syntax~>* a ...)))
-       (expand-cps-syntax~>*-aux (tmp) (b ...))))
-
-    ((¶ ((cpsσ~>* a ...) b ...))
-     (let-syntax ((tmp (cpsσ~>* a ...)))
-       (expand-cps-syntax~>*-aux (tmp) (b ...))))
-
-    ((¶ (other b ...))
-     (expand-cps-syntax~>*-aux (other) (b ...)))
-
-    ))
-
-(define-syntax expand-cps-syntax~>*-aux
   (syntax-rules (cps-syntax cpsσ lambda-cps-syntax~> λcpsσ~>)
 
-    ((¶ (a ...) ())
-     (a ...))
+    ((¶ ((cps-syntax~>* k a ...) b ...))
+     (let-syntax ((tmp (cps-syntax~>* k a ...)))
+       (expand-cps-syntax~>* :expand-cps (tmp) (b ...))))
 
-    ((¶ (a ...) ((cps-syntax b) c ...))
-     (let-syntax ((tmp (cps-syntax b)))
-       (expand-cps-syntax~>*-aux (a ... tmp) (c ...))))
+    ((¶ ((cpsσ~>* k a ...) b ...))
+     (let-syntax ((tmp (cpsσ~>* k a ...)))
+       (expand-cps-syntax~>* :expand-cps (tmp) (b ...))))
 
-    ((¶ (a ...) ((cpsσ b) c ...))
-     (let-syntax ((tmp (cpsσ b)))
-       (expand-cps-syntax~>*-aux (a ... tmp) (c ...))))
+    ((¶ (other b ...))
+     (expand-cps-syntax~>* :expand-cps (other) (b ...)))
 
-    ((¶ (a ...) ((lambda-cps-syntax~> b ...) c ...))
-     (expand-cps-syntax~>*-aux (a ...) (b ... c ...)))
+    ((¶ :expand-cps (op a ...) ())
+     (op a ...))
 
-    ((¶ (a ...) ((λcpsσ~> b ...) c ...))
-     (expand-cps-syntax~>*-aux (a ...) (b ... c ...)))
+    ((¶ :expand-cps (op a ...) ((cps-syntax obj) b ...))
+     (let-syntax ((tmp (cps-syntax obj)))
+       (expand-cps-syntax~>*
+        :expand-cps (op a ... tmp) (b ...))))
 
-    ((¶ (a ...) (other b ...))
-     (expand-cps-syntax~>*-aux (a ... other) (b ...)))
+    ((¶ :expand-cps (op a ...) ((cpsσ obj) b ...))
+     (let-syntax ((tmp (cpsσ obj)))
+       (expand-cps-syntax~>*
+        :expand-cps (op a ... tmp) (b ...))))
+
+    ((¶ :expand-cps (op a ...) ((lambda-cps-syntax~> b ...) c ...))
+     (expand-cps-syntax~>*
+      :expand-cps (op a ...) (b ... c ...)))
+
+    ((¶ :expand-cps (op a ...) ((λcpsσ~> b ...) c ...))
+     (expand-cps-syntax~>*
+      :expand-cps (op a ...) (b ... c ...)))
+
+    ((¶ :expand-cps (op a ...) (other b ...))
+     (expand-cps-syntax~>* :expand-cps (op a ... other) (b ...)))
 
     ))
 
@@ -618,14 +619,21 @@
 
     ((¶ ((((cps-syntax~>* a ...) b ...) => name ...) binding ...)
         body ...)
-     (let-values (((name ...) (expand-cps-syntax~>*
-                               ((cps-syntax~>* a ...) b ...))))
+     (let-values
+         (((name ...)
+           (call/cc
+            (lambda (k1)
+              (expand-cps-syntax~>*
+               ((cps-syntax~>* k1 a ...) b ...))))))
        (bind* (binding ...) body ...)))
 
     ((¶ ((((cpsσ~>* a ...) b ...) => name ...) binding ...)
         body ...)
-     (let-values (((name ...) (expand-cpsσ~>*
-                               ((cpsσ~>* a ...) b ...))))
+     (let-values
+         (((name ...)
+           (call/cc
+            (lambda (k1)
+              (expand-cpsσ~>* ((cpsσ~>* k1 a ...) b ...))))))
        (bind* (binding ...) body ...)))
 
     ((¶ ((other => name ...) binding ...) body ...)
