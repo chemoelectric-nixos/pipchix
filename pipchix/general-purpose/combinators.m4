@@ -433,6 +433,8 @@
   ;;
   ;; A syntactic analog of λcps~>
   ;;
+  ;; The f* may be both macros and procedures.
+  ;;
   (syntax-rules ()
     ((¶ . f*)
      (syntax-rules ()
