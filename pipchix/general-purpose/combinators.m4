@@ -851,6 +851,52 @@
                    kt
                    kf)))))))))))
 
+(define the-default-initialization-object
+  '#("the\xA0;default\xA0;initialization\xA0;object"))
+
+(define (default-initialization)
+  the-default-initialization-object)
+
+(define (has-default-initialization? obj)
+  (eq? obj the-default-initialization-object))
+
+(define-syntax if-default-initialization-or-equiv-object
+  ;;
+  ;; True if obj1 and obj2 are equivalent bound identifiers.
+  ;;
+  ;; True if obj1 is a value and obj2 is set to the
+  ;; ‘default-initialization’ object. Then obj2 is bound to the value
+  ;; of obj.
+  ;;
+  ;; True if obj1 is a value obj2 is bound and ‘equiv?’ to the value
+  ;; of obj1.
+  ;;
+  ;; Otherwise false.
+  ;;
+  (syntax-rules ()
+    ((¶ getter! setter! equiv? obj1 obj2 kt kf)
+     (if-bound-identifier=
+      obj1 obj2
+      kt
+      (let ((o1 obj1)
+            (o2 (getter! obj2)))
+        (cond ((has-default-initialization? o2)
+               (setter! obj2 o1)
+               kt)
+              ((equiv? o1 o2)
+               kt)
+              (else
+               kf)))))))
+
+(define-syntax if-default-initialization-or-equiv-variable
+  (syntax-rules ()
+    ((¶ equiv? obj var kt kf)
+     (let-syntax ((identity
+                   (syntax-rules ()
+                     ((¶ x) x))))
+       (if-default-initialization-or-equiv-object
+        identity set! equiv? obj var kt kf)))))
+
 ;;;-------------------------------------------------------------------
 
 m4_divert(-1)

@@ -37,3 +37,7 @@ if-bound-identifier=
 if-...
 if-identifier-in-list
 if-unbound-or-equiv-variable
+default-initialization
+has-default-initialization?
+if-default-initialization-or-equiv-object
+if-default-initialization-or-equiv-variable
