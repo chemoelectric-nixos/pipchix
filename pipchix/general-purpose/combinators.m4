@@ -914,6 +914,11 @@
                kf)))))))
 
 (define-syntax if-default-initialization-or-equiv-variable
+  ;;
+  ;; if-default-initialization-or-equiv-object for the case where the
+  ;; object is a variable, such as created by ‘define’ or ‘let’, or by
+  ;; ‘lambda’ as one of its arguments.
+  ;;
   (syntax-rules ()
     ((¶ equiv? obj var kt kf)
      (let-syntax ((identity
