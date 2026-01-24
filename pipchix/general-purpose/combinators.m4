@@ -554,8 +554,6 @@
     ((¶ (a ...))
      (expand-thrush*-syntax (a ...)))))
 
-(define-syntax :expand-cps (syntax-rules ()))
-
 (define-syntax expand-cps-syntax~>*
   (syntax-rules (lambda-cps-syntax~> λcpsσ~>)
 
