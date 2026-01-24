@@ -557,43 +557,46 @@
 (define-syntax :expand-cps (syntax-rules ()))
 
 (define-syntax expand-cps-syntax~>*
-  (syntax-rules (cps-syntax cpsσ lambda-cps-syntax~> λcpsσ~>)
+  (syntax-rules (lambda-cps-syntax~> λcpsσ~>)
 
     ((¶ ((cps-syntax~>* k a ...) b ...))
      (let-syntax ((tmp (cps-syntax~>* k a ...)))
-       (expand-cps-syntax~>* :expand-cps (tmp) (b ...))))
+       (expand-cps-syntax~>*-aux (tmp) (b ...))))
 
     ((¶ ((cpsσ~>* k a ...) b ...))
      (let-syntax ((tmp (cpsσ~>* k a ...)))
-       (expand-cps-syntax~>* :expand-cps (tmp) (b ...))))
+       (expand-cps-syntax~>*-aux (tmp) (b ...))))
 
     ((¶ (other b ...))
-     (expand-cps-syntax~>* :expand-cps (other) (b ...)))
+     (expand-cps-syntax~>*-aux (other) (b ...)))
+    ))
 
-    ((¶ :expand-cps (op a ...) ())
+(define-syntax expand-cps-syntax~>*-aux
+  (syntax-rules (cps-syntax cpsσ lambda-cps-syntax~> λcpsσ~>)
+
+    ((¶ (op a ...) ())
      (op a ...))
 
-    ((¶ :expand-cps (op a ...) ((cps-syntax obj) b ...))
+    ((¶ (op a ...) ((cps-syntax obj) b ...))
      (let-syntax ((tmp (cps-syntax obj)))
-       (expand-cps-syntax~>*
-        :expand-cps (op a ... tmp) (b ...))))
+       (expand-cps-syntax~>*-aux
+        (op a ... tmp) (b ...))))
 
-    ((¶ :expand-cps (op a ...) ((cpsσ obj) b ...))
+    ((¶ (op a ...) ((cpsσ obj) b ...))
      (let-syntax ((tmp (cpsσ obj)))
-       (expand-cps-syntax~>*
-        :expand-cps (op a ... tmp) (b ...))))
+       (expand-cps-syntax~>*-aux
+        (op a ... tmp) (b ...))))
 
-    ((¶ :expand-cps (op a ...) ((lambda-cps-syntax~> b ...) c ...))
-     (expand-cps-syntax~>*
-      :expand-cps (op a ...) (b ... c ...)))
+    ((¶ (op a ...) ((lambda-cps-syntax~> b ...) c ...))
+     (expand-cps-syntax~>*-aux
+      (op a ...) (b ... c ...)))
 
-    ((¶ :expand-cps (op a ...) ((λcpsσ~> b ...) c ...))
-     (expand-cps-syntax~>*
-      :expand-cps (op a ...) (b ... c ...)))
+    ((¶ (op a ...) ((λcpsσ~> b ...) c ...))
+     (expand-cps-syntax~>*-aux
+      (op a ...) (b ... c ...)))
 
-    ((¶ :expand-cps (op a ...) (other b ...))
-     (expand-cps-syntax~>* :expand-cps (op a ... other) (b ...)))
-
+    ((¶ (op a ...) (other b ...))
+     (expand-cps-syntax~>*-aux (op a ... other) (b ...)))
     ))
 
 (define-syntax expand-cpsσ~>*
@@ -732,6 +735,32 @@
            (syntax kf)))))))
 
 ;;; »)
+
+(define-syntax if-identifier-in-list
+  ;;
+  ;; For example:
+  ;;
+  ;;    (define-syntax if-literal
+  ;;      (syntax-rules ()
+  ;;        ((¶ ident literal*
+  ;;            continuation-if-true
+  ;;            continuation-if-false)
+  ;;         (if-identifier-in-list if-bound-identifier=
+  ;;                                ident literal*
+  ;;                                continuation-if-true
+  ;;                                continuation-if-false)
+  ;;
+  (syntax-rules ()
+    ((¶ if-ident= id% list kt% kf%)
+     (let ()
+       (define-syntax loop
+         (syntax-rules ()
+           ((µ f id () kt kf)
+            f)
+           ((µ f id (item . item*) kt kf)
+            (loop (if-ident= id item kt f)
+                  id item* kt kf))))
+       (loop kf% id% list kt% kf%)))))
 
 ;;;-------------------------------------------------------------------
 ;;;

@@ -31,6 +31,7 @@ if-identifier
 if-free-identifier=
 if-bound-identifier=
 if-...
+if-identifier-in-list
 
 lambda-if λif
 
