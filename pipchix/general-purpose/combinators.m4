@@ -852,6 +852,7 @@
                    kf)))))))))))
 
 (define the-default-initialization-object
+  ;; U+00A0 is the NO-BREAK SPACE.
   '#("the\xA0;default\xA0;initialization\xA0;object"))
 
 (define (default-initialization)
