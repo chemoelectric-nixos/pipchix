@@ -43,3 +43,4 @@ has-default-initialization?
 if-default-initialization-or-equiv-object
 if-default-initialization-or-equiv-variable
 extract-identifiers-from-proper-list
+make-identifiers-environment

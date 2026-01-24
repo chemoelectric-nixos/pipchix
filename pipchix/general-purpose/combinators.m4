@@ -961,6 +961,40 @@
         if-id=1 (literal ...)
         if-id=2 (item ...) (itemN . result*)))))))
 
+(define-syntax make-identifiers-environment
+  ;;
+  ;;     (make-identifiers-environment
+  ;;      (old ...) (new ...) (body ...))
+  ;;
+  ;; creates an environment in which ‘new’ variables to the left of
+  ;; any ‘old’ variables are initialized to (default-initialization).
+  ;;
+  (syntax-rules ()
+
+    ((¶ () () (body ...))
+     (let () (if #f #f) body ...))
+
+    ((¶ () (new1 ...) (body ...))
+     (let ((dflt (default-initialization)))
+       (let ((new1 dflt) ...)
+         (if #f #f) body ...)))
+
+    ((¶ (old1 ... oldN) (new1 ... newN) (body ...))
+     (make-identifiers-environment-aux
+      (old1 ... oldN) (new1 ... newN) (body ...)))))
+
+(define-syntax make-identifiers-environment-aux
+  (syntax-rules ()
+
+    ((¶ () (new1 ...) (body ...))
+     (let ((dflt (default-initialization)))
+       (let ((new1 dflt) ...)
+         (if #f #f) body ...)))
+
+    ((¶ (old1 ... oldN) (new1 ... newN) (body ...))
+     (make-identifiers-environment-aux
+      (old1 ...) (new1 ...) (body ...)))))
+
 ;;;-------------------------------------------------------------------
 
 m4_divert(-1)
