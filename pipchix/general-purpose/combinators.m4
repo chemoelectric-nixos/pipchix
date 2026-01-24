@@ -802,7 +802,7 @@
   ;;                                continuation-if-false)
   ;;
   (syntax-rules ()
-    ((¶ if-ident= id% list kt% kf%)
+    ((¶ if-ident= id% lst kt% kf%)
      (let ()
        (define-syntax loop
          (syntax-rules ()
@@ -811,7 +811,7 @@
            ((µ f id (item . item*) kt kf)
             (loop (if-ident= id item kt f)
                   id item* kt kf))))
-       (loop kf% id% list kt% kf%)))))
+       (loop kf% id% lst kt% kf%)))))
 
 (define-syntax delete-duplicate-identifiers
   ;;
@@ -821,7 +821,7 @@
   ;;      if-bound-identifier=
   ;;      (a a a a b c d e c b d e))    -->    (a b c d e)
   ;;
-  ;; The leftmost items are those retained, in order.
+  ;; The rightmost items are those retained, in order.
   ;;
   (syntax-rules ()
     ((¶ if-ident= lst)
