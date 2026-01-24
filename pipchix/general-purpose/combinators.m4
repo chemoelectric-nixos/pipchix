@@ -813,6 +813,32 @@
                   id item* kt kf))))
        (loop kf% id% list kt% kf%)))))
 
+(define-syntax delete-duplicate-identifiers
+  ;;
+  ;; Deletes duplicate identifiers from a syntactic list. For example:
+  ;;
+  ;;     (delete-duplicate-identifiers
+  ;;      if-bound-identifier=
+  ;;      (a a a a b c d e c b d e))    -->    (a b c d e)
+  ;;
+  ;; The leftmost items are those retained, in order.
+  ;;
+  (syntax-rules ()
+    ((¶ if-ident= lst)
+     (delete-duplicate-identifiers-aux if-ident= lst ()))))
+
+(define-syntax delete-duplicate-identifiers-aux
+  (syntax-rules ()
+    ((µ if-ident= () result*)
+     result*)
+    ((µ if-ident= (item1 ... itemN) result*)
+     (if-identifier-in-list
+      if-ident= itemN (item1 ...)
+      (delete-duplicate-identifiers-aux
+       if-ident= (item1 ...) result*)
+      (delete-duplicate-identifiers-aux
+       if-ident= (item1 ...) (itemN . result*))))))
+
 (define-syntax if-unbound-or-equiv-variable
   ;;
   ;; True if obj and var are equivalent bound identifiers.

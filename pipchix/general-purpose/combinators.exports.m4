@@ -36,6 +36,7 @@ if-free-identifier=
 if-bound-identifier=
 if-...
 if-identifier-in-list
+delete-duplicate-identifiers
 if-unbound-or-equiv-variable
 default-initialization
 has-default-initialization?
