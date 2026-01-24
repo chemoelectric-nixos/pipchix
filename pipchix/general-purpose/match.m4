@@ -365,13 +365,6 @@
 ;;; ») ;;; R⁶RS
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; force compile-time syntax errors with useful messages
-
-(define-syntax match-syntax-error
-  (syntax-rules ()
-    ((_) FAST_SYNTAX_ERROR("invalid match-syntax-error usage"))))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;> \section{Syntax}
 
@@ -402,9 +395,9 @@
 (define-syntax match-without-binding
   (syntax-rules ()
     ((match-without-binding)
-     (match-syntax-error "missing match expression"))
+     FAST_SYNTAX_ERROR("missing match expression"))
     ((match-without-binding atom)
-     (match-syntax-error "no match clauses"))
+     FAST_SYNTAX_ERROR("no match clauses"))
     ((match-without-binding (app ...) (pat . body) ...)
      (let ((v (app ...)))
        (match-next v ((app ...) (match-set!-ineffectively (app ...))) (pat . body) ...)))
@@ -419,9 +412,9 @@
 (define-syntax match
   (syntax-rules ()
     ((match)
-     (match-syntax-error "missing match expression"))
+     FAST_SYNTAX_ERROR("missing match expression"))
     ((match atom)
-     (match-syntax-error "no match clauses"))
+     FAST_SYNTAX_ERROR("no match clauses"))
     ((match (app ...) (pat . body) ...)
      (let ((v (app ...)))
        (match-next v ((app ...) (set! (app ...))) (pat . body) ...)))
@@ -523,7 +516,7 @@
     ((match-two v (p *** q) g+s sk fk i)
      (match-extract-vars p (match-gen-search v p q g+s sk fk i) i ()))
     ((match-two v (p *** . q) g+s sk fk i)
-     (match-syntax-error "invalid use of ***" (p *** . q)))
+     FAST_SYNTAX_ERROR("invalid use of ***",(p *** . q)))
     ((match-two v (p **1) g+s sk fk i)
      (if (pair? v)
          (match-one v (p ___) g+s sk fk i)
@@ -821,13 +814,12 @@
     ((_ (x . y) sk)
      (match-check-ellipsis
       x
-      (match-syntax-error
-       "multiple ellipsis patterns not allowed at same level")
+      FAST_SYNTAX_ERROR("multiple ellipsis patterns not allowed at same level")
       (match-verify-no-ellipsis y sk)))
     ((_ () sk)
      sk)
     ((_ x sk)
-     (match-syntax-error "dotted tail not allowed after ellipsis" x))))
+     FAST_SYNTAX_ERROR("dotted tail not allowed after ellipsis",x))))
 
 ;; To implement the tree search, we use two recursive procedures.  TRY
 ;; attempts to match Y once, and on success it calls the normal SK on

@@ -648,6 +648,59 @@
     ))
 
 ;;;-------------------------------------------------------------------
+;;;
+;;; Branching for continuation-passing style.
+;;;
+
+(define-syntax lambda-if
+  (syntax-rules ()
+    ((¶ kt kf)
+     (lambda (x) (if x kt kf)))))
+
+(define-syntax λif
+  (syntax-rules ()
+    ((¶ kt kf)
+     (lambda-if kt kf))))
+
+;;;-------------------------------------------------------------------
+;;;
+;;; Alternative names for let-syntax, letrec-syntax, etc. These
+;;; bindings exist so code written in combinator style can have a
+;;; consistent look to it. They are not recommended as general
+;;; replacements for the more wordy originals.
+;;;
+
+(define-syntax letσ ;; A synonym for let-syntax
+  (syntax-rules ()
+    ((¶ ((keyword transformer-spec) ...) body1 body2 ...)
+     (let-syntax ((keyword transformer-spec) ...)
+       body1 body2 ...))))
+
+(define-syntax letrecσ ;; A synonym for letrec-syntax
+  (syntax-rules ()
+    ((¶ ((keyword transformer-spec) ...) body1 body2 ...)
+     (letrec-syntax ((keyword transformer-spec) ...)
+       body1 body2 ...))))
+
+(define-syntax defineσ ;; A synonym for define-syntax
+  (syntax-rules ()
+    ((¶ keyword transformer-spec)
+     (define-syntax keyword transformer-spec))))
+
+(define-syntax σrules ;; A synonym for syntax-rules
+  (syntax-rules-original ()
+                         ((¶ (literal ...) rule ...)
+                          (syntax-rules-original (literal ...) rule ...))
+;;; m4_ifelse(RNRS_NUMBER,«7»,«
+                         ((¶ ellipsis (literal ...) rule ...)
+                          (syntax-rules-original ellipsis (literal ...) rule ...))
+;;; »)
+                         ))
+
+;;;-------------------------------------------------------------------
+;;;
+;;; Composing matchers.
+;;;
 
 ;;; m4_ifelse(general_macros,«er-macro-transformer»,«
 
@@ -762,55 +815,41 @@
                   id item* kt kf))))
        (loop kf% id% list kt% kf%)))))
 
-;;;-------------------------------------------------------------------
-;;;
-;;; Branching for continuation-passing style.
-;;;
-
-(define-syntax lambda-if
+(define-syntax if-unbound-or-equiv-variable
+  ;;
+  ;; True if obj and var are equivalent bound identifiers.
+  ;;
+  ;; True if obj is a value and var is unbound. Then var is bound to
+  ;; the value of obj.
+  ;;
+  ;; True if obj is a value var is bound and ‘equiv?’ to the value of
+  ;; obj.
+  ;;
+  ;; Otherwise false.
+  ;;
+  ;; (In some Scheme implementations, unbound variables do not
+  ;; necessarily work as one would hope. Sagittarius is an example.
+  ;; Compilation may fail with an ‘unbound identifier’ error, even
+  ;; though the code works in other Scheme implementations. Chibi may
+  ;; issue an ‘undefined variable’ warning.)
+  ;;
   (syntax-rules ()
-    ((¶ kt kf)
-     (lambda (x) (if x kt kf)))))
-
-(define-syntax λif
-  (syntax-rules ()
-    ((¶ kt kf)
-     (lambda-if kt kf))))
-
-;;;-------------------------------------------------------------------
-;;;
-;;; Alternative names for let-syntax, letrec-syntax, etc. These
-;;; bindings exist so code written in combinator style can have a
-;;; consistent look to it. They are not recommended as general
-;;; replacements for the more wordy originals.
-;;;
-
-(define-syntax letσ ;; A synonym for let-syntax
-  (syntax-rules ()
-    ((¶ ((keyword transformer-spec) ...) body1 body2 ...)
-     (let-syntax ((keyword transformer-spec) ...)
-       body1 body2 ...))))
-
-(define-syntax letrecσ ;; A synonym for letrec-syntax
-  (syntax-rules ()
-    ((¶ ((keyword transformer-spec) ...) body1 body2 ...)
-     (letrec-syntax ((keyword transformer-spec) ...)
-       body1 body2 ...))))
-
-(define-syntax defineσ ;; A synonym for define-syntax
-  (syntax-rules ()
-    ((¶ keyword transformer-spec)
-     (define-syntax keyword transformer-spec))))
-
-(define-syntax σrules ;; A synonym for syntax-rules
-  (syntax-rules-original ()
-    ((¶ (literal ...) rule ...)
-     (syntax-rules-original (literal ...) rule ...))
-;;; m4_ifelse(RNRS_NUMBER,«7»,«
-    ((¶ ellipsis (literal ...) rule ...)
-     (syntax-rules-original ellipsis (literal ...) rule ...))
-;;; »)
-    ))
+    ((¶ equiv? obj var kt kf)
+     (if-bound-identifier=
+      obj var
+      kt
+      (let ((o obj))
+        (call/cc
+         (lambda (cc)
+           (with-exception-handler
+               (lambda (exc)
+                 (let ((var o))
+                   (cc kt)))
+             (lambda ()
+               (let ((v var))
+                 (if (equiv? o v)
+                   kt
+                   kf)))))))))))
 
 ;;;-------------------------------------------------------------------
 

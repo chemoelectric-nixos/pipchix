@@ -27,12 +27,13 @@ expand-thrush*-syntax expandσ~>*
 expand-cps-syntax~>* expand-cpsσ~>*
 bind*
 
+lambda-if λif
+
+letσ letrecσ defineσ σrules
+
 if-identifier
 if-free-identifier=
 if-bound-identifier=
 if-...
 if-identifier-in-list
-
-lambda-if λif
-
-letσ letrecσ defineσ σrules
+if-unbound-or-equiv-variable
