@@ -927,6 +927,40 @@
        (if-default-initialization-or-equiv-object
         identity set! equiv? obj var kt kf)))))
 
+(define-syntax extract-identifiers-from-proper-list
+  ;;
+  ;; Extract identifiers from list (item ...) that are not already
+  ;; collected in (previous ...) and which are not literals in
+  ;; (literal ...). Respective equivalence matchers are used.
+  ;;
+  (syntax-rules ()
+    ((¶ if-id=1 (literal ...)
+        if-id=2 (previous ...) (item ...))
+     (extract-identifiers-from-proper-list-aux
+      if-id=1 (literal ...)
+      if-id=2 (item ...) (previous ...)))))
+
+(define-syntax extract-identifiers-from-proper-list-aux
+  (syntax-rules ()
+    ((¶ if-id=1 (literal ...)
+        if-id=2 () result*)
+     result*)
+    ((¶ if-id=1 (literal ...)
+        if-id=2 (item ... itemN) result*)
+     (if-identifier-in-list
+      if-id=1 itemN (literal ...)
+      (extract-identifiers-from-proper-list-aux
+       if-id=1 (literal ...)
+       if-id=2  (item ...) result*)
+      (if-identifier-in-list
+       if-id=2 itemN result*
+       (extract-identifiers-from-proper-list-aux
+        if-id=1 (literal ...)
+        if-id=2 (item ...) result*)
+       (extract-identifiers-from-proper-list-aux
+        if-id=1 (literal ...)
+        if-id=2 (item ...) (itemN . result*)))))))
+
 ;;;-------------------------------------------------------------------
 
 m4_divert(-1)
