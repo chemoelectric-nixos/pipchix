@@ -29,6 +29,8 @@ bind*
 
 lambda-if λif
 
+cps-alternatives
+
 letσ letrecσ defineσ σrules
 
 if-identifier

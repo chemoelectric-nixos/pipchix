@@ -661,6 +661,50 @@
      (lambda-if kt kf))))
 
 ;;;-------------------------------------------------------------------
+
+(define-syntax cps-alternatives
+  ;;
+  ;; An analog of Icon’s ‘|’ and ‘every’ operators.
+  ;;
+  ;; For example,
+  ;;
+  ;;     (define write-args
+  ;;       (lambda args
+  ;;         (write args)
+  ;;         (newline)))
+  ;;
+  ;;     (cps-alternatives
+  ;;      (lambda arg* (if #f #f))
+  ;;      (1 2 3 4 5)
+  ;;      (λcps~> (cps +) (cps write-args))
+  ;;      (λcps~> (cps -) (cps write-args))
+  ;;      (λcps~> (cps *) (cps write-args))
+  ;;      (λcps~> (cps /) (cps write-args)))
+  ;;
+  ;; with output
+  ;;
+  ;;     (15)
+  ;;     (-13)
+  ;;     (120)
+  ;;     (1/120)
+  ;;
+  (syntax-rules ()
+    ((¶ k arg* f1 ...)
+     (call-with-values
+         (lambda ()
+           (let ()
+             (define-syntax call-f
+               (syntax-rules ()
+                 ((µ f . a*)
+                  (call/cc
+                   (lambda (k^)
+                     (f k^ . a*))))))
+             (if #f #f)
+             (call-f f1 . arg*)
+             ...))
+       k))))
+
+;;;-------------------------------------------------------------------
 ;;;
 ;;; Alternative names for let-syntax, letrec-syntax, etc. These
 ;;; bindings exist so code written in combinator style can have a
