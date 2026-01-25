@@ -662,7 +662,7 @@
 
 ;;;-------------------------------------------------------------------
 
-(define-syntax cps-alternatives
+(define-syntax alternatives
   ;;
   ;; An analog of Icon’s ‘|’ and ‘every’ operators.
   ;;
@@ -673,8 +673,7 @@
   ;;         (write args)
   ;;         (newline)))
   ;;
-  ;;     (cps-alternatives
-  ;;      (lambda arg* (if #f #f))
+  ;;     (alternatives
   ;;      (1 2 3 4 5)
   ;;      (λcps~> (cps +) (cps write-args))
   ;;      (λcps~> (cps -) (cps write-args))
@@ -689,20 +688,19 @@
   ;;     (1/120)
   ;;
   (syntax-rules ()
-    ((¶ k arg* f1 ...)
-     (call-with-values
-         (lambda ()
-           (let ()
-             (define-syntax call-f
-               (syntax-rules ()
-                 ((µ f . a*)
-                  (call/cc
-                   (lambda (k^)
-                     (f k^ . a*))))))
-             (if #f #f)
-             (call-f f1 . arg*)
-             ...))
-       k))))
+    ((¶ arg* f1 ...)
+     (let ()
+       (define-syntax call-f
+         (syntax-rules ()
+           ((µ f . a*)
+            (call/cc
+             (lambda (k^)
+               (f k^ . a*))))))
+       (if #f #f)
+       (call-f f1 . arg*)
+       ...))))
+
+(define-cps-syntax cps-alternatives alternatives)
 
 ;;;-------------------------------------------------------------------
 ;;;

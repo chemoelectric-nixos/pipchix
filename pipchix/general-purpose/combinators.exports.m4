@@ -29,7 +29,7 @@ bind*
 
 lambda-if λif
 
-cps-alternatives
+alternatives cps-alternatives
 
 letσ letrecσ defineσ σrules
 
