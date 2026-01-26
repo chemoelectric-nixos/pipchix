@@ -1010,9 +1010,14 @@
        (extract-identifiers-from-proper-list-aux
         k* if-id=1 (literal ...)
         if-id=2 (item ...) result*)
-       (extract-identifiers-from-proper-list-aux
-        k* if-id=1 (literal ...)
-        if-id=2 (item ...) (itemN . result*)))))))
+       (if-identifier
+        itemN
+        (extract-identifiers-from-proper-list-aux
+         k* if-id=1 (literal ...)
+         if-id=2 (item ...) (itemN . result*))
+        (extract-identifiers-from-proper-list-aux
+         k* if-id=1 (literal ...)
+         if-id=2 (item ...) result*)))))))
 
 (define-syntax make-identifiers-environment
   ;;
