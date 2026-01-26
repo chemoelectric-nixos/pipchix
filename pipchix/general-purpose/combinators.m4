@@ -1080,9 +1080,9 @@
   ;;
   ;; Try to match a proper list. Example:
   ;;
-  ;;    (match-proper-list (list 1 2 3) (a b c)
+  ;;    (match-proper-list (list 1 2 3) (a 2 c)
   ;;      (begin (display "yes: ")
-  ;;             (display (list a b c))
+  ;;             (display (list a 2 c))
   ;;             (newline))
   ;;      (display "no\n"))
   ;;
