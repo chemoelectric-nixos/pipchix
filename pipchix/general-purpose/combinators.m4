@@ -1125,8 +1125,11 @@
           (let ((identity (lambda x* (apply values x*)))
                 (p lst))
             (let ((elem (car p)))
-              (if-default-initialization-or-equiv-variable
-               equal? elem var1 identity (cc kf))
+              (if-identifier
+               var1
+               (if-default-initialization-or-equiv-variable
+                equal? elem var1 identity (cc kf))
+               (unless (equal? elem var1) (cc kf)))
               (set! p (cdr p)))
             ...
             (cc kt)))))))))
