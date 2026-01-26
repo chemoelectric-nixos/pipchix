@@ -399,6 +399,10 @@
   ;;     (let-syntax ((cps-macro (cps-syntax f)))
   ;;       (cps-macro k . arg*))      -->     (k (f . arg*))
   ;;
+  ;; This is likely not to work if f is a macro, however, if the macro
+  ;; is not already expanded and the call to cps-syntax is within the
+  ;; macro definition.
+  ;;
   (syntax-rules ()
     ((¶ f)
      (syntax-rules ()
@@ -975,32 +979,39 @@
   ;; collected in (previous ...) and which are not literals in
   ;; (literal ...). Respective equivalence matchers are used.
   ;;
+  ;; The macro is written in continuation-passing-macro style.
+  ;;
   (syntax-rules ()
-    ((¶ if-id=1 (literal ...)
+    ((¶ k* if-id=2 (previous ...) (item ...))
+     (extract-identifiers-from-proper-list-aux
+      k* if-free-identifier= ()
+      if-id=2 (item ...) (previous ...)))
+
+    ((¶ k* if-id=1 (literal ...)
         if-id=2 (previous ...) (item ...))
      (extract-identifiers-from-proper-list-aux
-      if-id=1 (literal ...)
+      k* if-id=1 (literal ...)
       if-id=2 (item ...) (previous ...)))))
 
 (define-syntax extract-identifiers-from-proper-list-aux
   (syntax-rules ()
-    ((¶ if-id=1 (literal ...)
+    ((¶ (k ...) if-id=1 (literal ...)
         if-id=2 () result*)
-     result*)
-    ((¶ if-id=1 (literal ...)
+     (k ... result*))
+    ((¶ k* if-id=1 (literal ...)
         if-id=2 (item ... itemN) result*)
      (if-identifier-in-list
       if-id=1 itemN (literal ...)
       (extract-identifiers-from-proper-list-aux
-       if-id=1 (literal ...)
+       k* if-id=1 (literal ...)
        if-id=2  (item ...) result*)
       (if-identifier-in-list
        if-id=2 itemN result*
        (extract-identifiers-from-proper-list-aux
-        if-id=1 (literal ...)
+        k* if-id=1 (literal ...)
         if-id=2 (item ...) result*)
        (extract-identifiers-from-proper-list-aux
-        if-id=1 (literal ...)
+        k* if-id=1 (literal ...)
         if-id=2 (item ...) (itemN . result*)))))))
 
 (define-syntax make-identifiers-environment

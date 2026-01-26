@@ -23,7 +23,8 @@
 
 .DELETE_ON_ERROR:
 
-SUBDIRS = tinyscheme-1.42 . tests
+#SUBDIRS = tinyscheme-1.42 . tests
+SUBDIRS = . tests
 
 ACLOCAL_AMFLAGS = -I m4 --install
 
@@ -183,58 +184,58 @@ config.status: tests/run-r7rs-sagittarius.sh.in
 
 #---------------------------------------------------------------------
 
-TINYSCHEME_DIR = tinyscheme-1.42
-TINYSCHEME_EXE = $(TINYSCHEME_DIR)/tinyscheme-exe$(EXEEXT)
-
-@GNU@ define tinyscheme-1
-@GNU@ ( \
-@GNU@   cd $(abs_top_builddir)/$(TINYSCHEME_DIR) && \
-@GNU@   ./tinyscheme-exe$(EXEEXT) -1 $(1) \
-@GNU@ )
-@GNU@ endef
-
-$(TINYSCHEME_EXE):
-	$(call v,MAKE) \
-	  $(MAKE) $(AM_MAKEFLAGS) \
-	    -C $(TINYSCHEME_DIR) tinyscheme-exe$(EXEEXT)
-
-#
-# A pretty-printer (nicely-print obj) for TinySCHEME (or any other
-# standard Scheme). It uses ’write’ for anything except a list. Lists
-# it prints with newlines and indentation.
-#
-DEFINE_NICELY_PRINT = ' \
-  \
-  (define (indent-to depth) \
-    (let loop ((i depth)) \
-      (unless (zero? i) \
-        (display " ") \
-        (loop (- i 1))))) \
-  \
-  (define (nicely-print obj) \
-    (%%nicely-print obj 0 \#f) \
-    (newline)) \
-  (define (%%nicely-print obj depth newline?) \
-    (let ((indentation " ")) \
-      (cond \
-	((pair? obj) \
-	  (when newline? \
-	    (newline) \
-	    (indent-to depth)) \
-	  (display "(") \
-	  (let loop ((lst obj) \
-		     (separator "")) \
-	    (cond \
-	      ((pair? lst) \
-		(unless (pair? (car lst)) \
-		  (display separator)) \
-		(%%nicely-print (car lst) (+ depth 1) \
-				(not (equal? separator ""))) \
-		(loop (cdr lst) indentation)) \
-	      (else \
-		(display ")"))))) \
-	 (else \
-	   (write obj)))))'
+# TINYSCHEME_DIR = tinyscheme-1.42
+# TINYSCHEME_EXE = $(TINYSCHEME_DIR)/tinyscheme-exe$(EXEEXT)
+# 
+# @GNU@ define tinyscheme-1
+# @GNU@ ( \
+# @GNU@   cd $(abs_top_builddir)/$(TINYSCHEME_DIR) && \
+# @GNU@   ./tinyscheme-exe$(EXEEXT) -1 $(1) \
+# @GNU@ )
+# @GNU@ endef
+# 
+# $(TINYSCHEME_EXE):
+# 	$(call v,MAKE) \
+# 	  $(MAKE) $(AM_MAKEFLAGS) \
+# 	    -C $(TINYSCHEME_DIR) tinyscheme-exe$(EXEEXT)
+# 
+# #
+# # A pretty-printer (nicely-print obj) for TinySCHEME (or any other
+# # standard Scheme). It uses ’write’ for anything except a list. Lists
+# # it prints with newlines and indentation.
+# #
+# DEFINE_NICELY_PRINT = ' \
+#   \
+#   (define (indent-to depth) \
+#     (let loop ((i depth)) \
+#       (unless (zero? i) \
+#         (display " ") \
+#         (loop (- i 1))))) \
+#   \
+#   (define (nicely-print obj) \
+#     (%%nicely-print obj 0 \#f) \
+#     (newline)) \
+#   (define (%%nicely-print obj depth newline?) \
+#     (let ((indentation " ")) \
+#       (cond \
+# 	((pair? obj) \
+# 	  (when newline? \
+# 	    (newline) \
+# 	    (indent-to depth)) \
+# 	  (display "(") \
+# 	  (let loop ((lst obj) \
+# 		     (separator "")) \
+# 	    (cond \
+# 	      ((pair? lst) \
+# 		(unless (pair? (car lst)) \
+# 		  (display separator)) \
+# 		(%%nicely-print (car lst) (+ depth 1) \
+# 				(not (equal? separator ""))) \
+# 		(loop (cdr lst) indentation)) \
+# 	      (else \
+# 		(display ")"))))) \
+# 	 (else \
+# 	   (write obj)))))'
 
 #---------------------------------------------------------------------
 #

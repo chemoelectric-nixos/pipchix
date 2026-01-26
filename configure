@@ -666,8 +666,6 @@ CHIBI_SCHEME
 CHEZ_SCHEME_FALSE
 CHEZ_SCHEME_TRUE
 CHEZ_SCHEME
-CFLAGS_FOR_PIC
-CFLAGS_FOR_STATIC
 ENABLE_CHECK_R7RS_SAGITTARIUS_FALSE
 ENABLE_CHECK_R7RS_SAGITTARIUS_TRUE
 enable_check_r7rs_sagittarius
@@ -6686,149 +6684,7 @@ else
 fi
 
 
-# Copyright © 2025 Barry Schwartz
-#
-# This file is part of Pipchix.
-#
-# Permission is hereby granted, free of charge, to any person obtaining
-# a copy of Pipchix and associated documentation files (the
-# "Software"), to deal in the Software without restriction, including
-# without limitation the rights to use, copy, modify, merge, publish,
-# distribute, sublicense, and/or sell copies of the Software, and to
-# permit persons to whom the Software is furnished to do so, subject to
-# the following conditions:
-#
-# The above copyright notice and this permission notice shall be
-# included in all copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-# LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-# OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-# WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-#
-# C compiler flags for TinySCHEME.
-#
-
-{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking whether the C compiler accepts -std=gnu99" >&5
-printf %s "checking whether the C compiler accepts -std=gnu99... " >&6; }
-if test ${ax_cv_check_cflags___std_gnu99+y}
-then :
-  printf %s "(cached) " >&6
-else case e in #(
-  e)
-  ax_check_save_flags=$CFLAGS
-  if test x"$GCC" = xyes ; then
-    add_gnu_werror="-Werror"
-  fi
-  CFLAGS="$CFLAGS  -std=gnu99 $add_gnu_werror"
-  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
-/* end confdefs.h.  */
-int main(){return 0;}
-_ACEOF
-if ac_fn_c_try_compile "$LINENO"
-then :
-  ax_cv_check_cflags___std_gnu99=yes
-else case e in #(
-  e) ax_cv_check_cflags___std_gnu99=no ;;
-esac
-fi
-rm -f core conftest.err conftest.$ac_objext conftest.beam conftest.$ac_ext
-  CFLAGS=$ax_check_save_flags ;;
-esac
-fi
-{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $ax_cv_check_cflags___std_gnu99" >&5
-printf "%s\n" "$ax_cv_check_cflags___std_gnu99" >&6; }
-if test "x$ax_cv_check_cflags___std_gnu99" = xyes
-then :
-  CFLAGS="${CFLAGS}${CFLAGS+ }-std=gnu99"
-else case e in #(
-  e) : ;;
-esac
-fi
-
-
-{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking whether the C compiler accepts -static" >&5
-printf %s "checking whether the C compiler accepts -static... " >&6; }
-if test ${ax_cv_check_cflags___static+y}
-then :
-  printf %s "(cached) " >&6
-else case e in #(
-  e)
-  ax_check_save_flags=$CFLAGS
-  if test x"$GCC" = xyes ; then
-    add_gnu_werror="-Werror"
-  fi
-  CFLAGS="$CFLAGS  -static $add_gnu_werror"
-  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
-/* end confdefs.h.  */
-int main(){return 0;}
-_ACEOF
-if ac_fn_c_try_compile "$LINENO"
-then :
-  ax_cv_check_cflags___static=yes
-else case e in #(
-  e) ax_cv_check_cflags___static=no ;;
-esac
-fi
-rm -f core conftest.err conftest.$ac_objext conftest.beam conftest.$ac_ext
-  CFLAGS=$ax_check_save_flags ;;
-esac
-fi
-{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $ax_cv_check_cflags___static" >&5
-printf "%s\n" "$ax_cv_check_cflags___static" >&6; }
-if test "x$ax_cv_check_cflags___static" = xyes
-then :
-  CFLAGS_FOR_STATIC="-static"
-else case e in #(
-  e) CFLAGS_FOR_STATIC="" ;;
-esac
-fi
-
-
-
-{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking whether the C compiler accepts -fPIC" >&5
-printf %s "checking whether the C compiler accepts -fPIC... " >&6; }
-if test ${ax_cv_check_cflags___fPIC+y}
-then :
-  printf %s "(cached) " >&6
-else case e in #(
-  e)
-  ax_check_save_flags=$CFLAGS
-  if test x"$GCC" = xyes ; then
-    add_gnu_werror="-Werror"
-  fi
-  CFLAGS="$CFLAGS  -fPIC $add_gnu_werror"
-  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
-/* end confdefs.h.  */
-int main(){return 0;}
-_ACEOF
-if ac_fn_c_try_compile "$LINENO"
-then :
-  ax_cv_check_cflags___fPIC=yes
-else case e in #(
-  e) ax_cv_check_cflags___fPIC=no ;;
-esac
-fi
-rm -f core conftest.err conftest.$ac_objext conftest.beam conftest.$ac_ext
-  CFLAGS=$ax_check_save_flags ;;
-esac
-fi
-{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $ax_cv_check_cflags___fPIC" >&5
-printf "%s\n" "$ax_cv_check_cflags___fPIC" >&6; }
-if test "x$ax_cv_check_cflags___fPIC" = xyes
-then :
-  CFLAGS_FOR_PIC="-fPIC"
-else case e in #(
-  e) CFLAGS_FOR_PIC="" ;;
-esac
-fi
-
-
-
+# m4_include([ac-tinyscheme.m4])
 # Copyright © 2025 Barry Schwartz
 #
 # This file is part of Pipchix.
@@ -7631,29 +7487,8 @@ printf "%s\n" "$as_me: WARNING: Please consider installing and using GNU Make:
    ac_config_files="$ac_config_files GNUmakefile:Makefile.in"
 
 }
-{ :;
-
-   # If no GNU Make is found, recommend it.
-   if test -z "${ax_cv_gnu_make_command}" \
-         -a x"${chem_config_makefiles_consider_gnu_make_printed}" != xyes; then
-      { printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: Please consider installing and using GNU Make:
-           http://www.gnu.org/software/make/" >&5
-printf "%s\n" "$as_me: WARNING: Please consider installing and using GNU Make:
-           http://www.gnu.org/software/make/" >&2;}
-      chem_config_makefiles_consider_gnu_make_printed=yes
-   fi
-
-   # Create `Makefile' or its substitute. If GNU Make is present,
-   # create `Makefile' (or its substitute) as a wrapper around
-   # `GNUmakefile' (or its substitute). Otherwise create the former in
-   # the usual way.
-   ac_config_files="$ac_config_files tinyscheme-1.42/Makefile"
-
-
-   # Create `GNUmakefile' or its substitute.
-   ac_config_files="$ac_config_files tinyscheme-1.42/GNUmakefile:tinyscheme-1.42/Makefile.in"
-
-}
+# CHEM_CONFIG_MAKEFILES([tinyscheme-1.42/Makefile],
+#                       [tinyscheme-1.42/GNUmakefile])
 { :;
 
    # If no GNU Make is found, recommend it.
@@ -7699,14 +7534,15 @@ ac_config_files="$ac_config_files tests/run-r6rs-sagittarius.sh"
 ac_config_files="$ac_config_files tests/run-r7rs-sagittarius.sh"
 
 
-ac_config_links="$ac_config_links tinyscheme-1.42/init.scm:tinyscheme-1.42/init.scm"
-ac_config_links="$ac_config_links tinyscheme-1.42/dynload.c:tinyscheme-1.42/dynload.c"
-ac_config_links="$ac_config_links tinyscheme-1.42/dynload.h:tinyscheme-1.42/dynload.h"
-ac_config_links="$ac_config_links tinyscheme-1.42/scheme.c:tinyscheme-1.42/scheme.c"
-ac_config_links="$ac_config_links tinyscheme-1.42/scheme.h:tinyscheme-1.42/scheme.h"
-ac_config_links="$ac_config_links tinyscheme-1.42/scheme-private.h:tinyscheme-1.42/scheme-private.h"
-ac_config_links="$ac_config_links tinyscheme-1.42/opdefines.h:tinyscheme-1.42/opdefines.h"
-
+# m4_foreach([f],
+#   [[tinyscheme-1.42/init.scm],
+#    [tinyscheme-1.42/dynload.c],
+#    [tinyscheme-1.42/dynload.h],
+#    [tinyscheme-1.42/scheme.c],
+#    [tinyscheme-1.42/scheme.h],
+#    [tinyscheme-1.42/scheme-private.h],
+#    [tinyscheme-1.42/opdefines.h]],
+#   [AC_CONFIG_LINKS(f:f)])
 
 ac_config_commands="$ac_config_commands tempname"
 
@@ -8381,7 +8217,6 @@ esac
 cat >>$CONFIG_STATUS <<_ACEOF || ac_write_fail=1
 # Files that config.status was made for.
 config_files="$ac_config_files"
-config_links="$ac_config_links"
 config_commands="$ac_config_commands"
 
 _ACEOF
@@ -8406,9 +8241,6 @@ Usage: $0 [OPTION]... [TAG]...
 
 Configuration files:
 $config_files
-
-Configuration links:
-$config_links
 
 Configuration commands:
 $config_commands
@@ -8539,9 +8371,6 @@ AMDEP_TRUE="$AMDEP_TRUE" MAKE="${MAKE-make}"
       chem_config_makefiles_make_command="${ax_cv_gnu_make_command}"
 
 
-      chem_config_makefiles_make_command="${ax_cv_gnu_make_command}"
-
-
   UNIQUE_ID="$(echo "${UNIQUE_ID}" | sed 's/\$/\\\$/g;s/\"/\\\"/g')"
   SHELL="${SHELL}"
 
@@ -8558,8 +8387,6 @@ do
     "depfiles") CONFIG_COMMANDS="$CONFIG_COMMANDS depfiles" ;;
     "Makefile") CONFIG_FILES="$CONFIG_FILES Makefile" ;;
     "GNUmakefile") CONFIG_FILES="$CONFIG_FILES GNUmakefile:Makefile.in" ;;
-    "tinyscheme-1.42/Makefile") CONFIG_FILES="$CONFIG_FILES tinyscheme-1.42/Makefile" ;;
-    "tinyscheme-1.42/GNUmakefile") CONFIG_FILES="$CONFIG_FILES tinyscheme-1.42/GNUmakefile:tinyscheme-1.42/Makefile.in" ;;
     "tests/Makefile") CONFIG_FILES="$CONFIG_FILES tests/Makefile" ;;
     "tests/GNUmakefile") CONFIG_FILES="$CONFIG_FILES tests/GNUmakefile:tests/Makefile.in" ;;
     "tests/atlocal") CONFIG_FILES="$CONFIG_FILES tests/atlocal" ;;
@@ -8572,13 +8399,6 @@ do
     "tests/run-r7rs-loko.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r7rs-loko.sh" ;;
     "tests/run-r6rs-sagittarius.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r6rs-sagittarius.sh" ;;
     "tests/run-r7rs-sagittarius.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r7rs-sagittarius.sh" ;;
-    "tinyscheme-1.42/init.scm") CONFIG_LINKS="$CONFIG_LINKS tinyscheme-1.42/init.scm:tinyscheme-1.42/init.scm" ;;
-    "tinyscheme-1.42/dynload.c") CONFIG_LINKS="$CONFIG_LINKS tinyscheme-1.42/dynload.c:tinyscheme-1.42/dynload.c" ;;
-    "tinyscheme-1.42/dynload.h") CONFIG_LINKS="$CONFIG_LINKS tinyscheme-1.42/dynload.h:tinyscheme-1.42/dynload.h" ;;
-    "tinyscheme-1.42/scheme.c") CONFIG_LINKS="$CONFIG_LINKS tinyscheme-1.42/scheme.c:tinyscheme-1.42/scheme.c" ;;
-    "tinyscheme-1.42/scheme.h") CONFIG_LINKS="$CONFIG_LINKS tinyscheme-1.42/scheme.h:tinyscheme-1.42/scheme.h" ;;
-    "tinyscheme-1.42/scheme-private.h") CONFIG_LINKS="$CONFIG_LINKS tinyscheme-1.42/scheme-private.h:tinyscheme-1.42/scheme-private.h" ;;
-    "tinyscheme-1.42/opdefines.h") CONFIG_LINKS="$CONFIG_LINKS tinyscheme-1.42/opdefines.h:tinyscheme-1.42/opdefines.h" ;;
     "tempname") CONFIG_COMMANDS="$CONFIG_COMMANDS tempname" ;;
 
   *) as_fn_error $? "invalid argument: '$ac_config_target'" "$LINENO" 5;;
@@ -8592,7 +8412,6 @@ done
 # bizarre bug on SunOS 4.1.3.
 if $ac_need_defaults; then
   test ${CONFIG_FILES+y} || CONFIG_FILES=$config_files
-  test ${CONFIG_LINKS+y} || CONFIG_LINKS=$config_links
   test ${CONFIG_COMMANDS+y} || CONFIG_COMMANDS=$config_commands
 fi
 
@@ -8782,7 +8601,7 @@ cat >>$CONFIG_STATUS <<\_ACEOF || ac_write_fail=1
 fi # test -n "$CONFIG_FILES"
 
 
-eval set X "  :F $CONFIG_FILES    :L $CONFIG_LINKS  :C $CONFIG_COMMANDS"
+eval set X "  :F $CONFIG_FILES      :C $CONFIG_COMMANDS"
 shift
 for ac_tag
 do
@@ -9002,38 +8821,7 @@ which seems to be undefined.  Please make sure it is defined" >&2;}
   || as_fn_error $? "could not create $ac_file" "$LINENO" 5
  ;;
 
-  :L)
-  #
-  # CONFIG_LINK
-  #
 
-  if test "$ac_source" = "$ac_file" && test "$srcdir" = '.'; then
-    :
-  else
-    # Prefer the file from the source tree if names are identical.
-    if test "$ac_source" = "$ac_file" || test ! -r "$ac_source"; then
-      ac_source=$srcdir/$ac_source
-    fi
-
-    { printf "%s\n" "$as_me:${as_lineno-$LINENO}: linking $ac_source to $ac_file" >&5
-printf "%s\n" "$as_me: linking $ac_source to $ac_file" >&6;}
-
-    if test ! -r "$ac_source"; then
-      as_fn_error $? "$ac_source: file not found" "$LINENO" 5
-    fi
-    rm -f "$ac_file"
-
-    # Try a relative symlink, then a hard link, then a copy.
-    case $ac_source in
-    [\\/$]* | ?:[\\/]* ) ac_rel_source=$ac_source ;;
-	*) ac_rel_source=$ac_top_build_prefix$ac_source ;;
-    esac
-    ln -s "$ac_rel_source" "$ac_file" 2>/dev/null ||
-      ln "$ac_source" "$ac_file" 2>/dev/null ||
-      cp -p "$ac_source" "$ac_file" ||
-      as_fn_error $? "cannot link or copy $ac_source to $ac_file" "$LINENO" 5
-  fi
- ;;
   :C)  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: executing $ac_file commands" >&5
 printf "%s\n" "$as_me: executing $ac_file commands" >&6;}
  ;;
@@ -9166,20 +8954,6 @@ See 'config.log' for more details" "$LINENO" 5; }
       # If GNU make is present, encourage other makes to call it instead.
       if test -n "${chem_config_makefiles_make_command}"; then
          cat > Makefile <<EOF
-# Attempt to have common non-GNU Make programs run GNU Make.
-
-.DEFAULT:
-	${chem_config_makefiles_make_command} \$@
-
-%:
-	${chem_config_makefiles_make_command}
-EOF
-      fi
-    ;;
-    "tinyscheme-1.42/Makefile":F)
-      # If GNU make is present, encourage other makes to call it instead.
-      if test -n "${chem_config_makefiles_make_command}"; then
-         cat > tinyscheme-1.42/Makefile <<EOF
 # Attempt to have common non-GNU Make programs run GNU Make.
 
 .DEFAULT:

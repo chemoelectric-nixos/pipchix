@@ -117,7 +117,7 @@ offer_disable_of_check([r6rs],[sagittarius],
 offer_disable_of_check([r7rs],[sagittarius],
   [disable R⁷RS tests with Sagittarius])
 
-m4_include([ac-tinyscheme.m4])
+# m4_include([ac-tinyscheme.m4])
 m4_include([ac-chez-scheme.m4])
 m4_include([ac-chibi-scheme.m4])
 m4_include([ac-gauche-scheme.m4])
@@ -132,8 +132,8 @@ AC_SUBST([GNU],[])
 
 CHEM_REQUIRE_GNU_MAKE_IN_PATH
 CHEM_CONFIG_MAKEFILES
-CHEM_CONFIG_MAKEFILES([tinyscheme-1.42/Makefile],
-                      [tinyscheme-1.42/GNUmakefile])
+# CHEM_CONFIG_MAKEFILES([tinyscheme-1.42/Makefile],
+#                       [tinyscheme-1.42/GNUmakefile])
 CHEM_CONFIG_MAKEFILES([tests/Makefile],
                       [tests/GNUmakefile])
 
@@ -157,15 +157,15 @@ AC_CONFIG_FILES([tests/run-r6rs-sagittarius.sh],
 AC_CONFIG_FILES([tests/run-r7rs-sagittarius.sh],
                 [chmod +x tests/run-r7rs-sagittarius.sh])
 
-m4_foreach([f],
-  [[tinyscheme-1.42/init.scm],
-   [tinyscheme-1.42/dynload.c],
-   [tinyscheme-1.42/dynload.h],
-   [tinyscheme-1.42/scheme.c],
-   [tinyscheme-1.42/scheme.h],
-   [tinyscheme-1.42/scheme-private.h],
-   [tinyscheme-1.42/opdefines.h]],
-  [AC_CONFIG_LINKS(f:f)])
+# m4_foreach([f],
+#   [[tinyscheme-1.42/init.scm],
+#    [tinyscheme-1.42/dynload.c],
+#    [tinyscheme-1.42/dynload.h],
+#    [tinyscheme-1.42/scheme.c],
+#    [tinyscheme-1.42/scheme.h],
+#    [tinyscheme-1.42/scheme-private.h],
+#    [tinyscheme-1.42/opdefines.h]],
+#   [AC_CONFIG_LINKS(f:f)])
 
 AC_CONFIG_COMMANDS([tempname],
 [

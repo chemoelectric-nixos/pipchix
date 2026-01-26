@@ -1351,7 +1351,6 @@ AS_IF([test "$am_cv_xargs_n_works" = yes], [am__xargs_n='xargs -n'], [dnl
 AC_SUBST(am__xargs_n)
 ])
 
-m4_include([m4/ax_check_compile_flag.m4])
 m4_include([m4/ax_check_gnu_make.m4])
 m4_include([m4/chem_config_makefiles.m4])
 m4_include([m4/chem_path_progs_cached_and_precious.m4])
