@@ -1126,6 +1126,18 @@
             ...
             (cc kt)))))))))
 
+(define-syntax match-literal
+  ;;
+  ;; Try to match a literal. For example:
+  ;;
+  ;;    (match-literal => =>
+  ;;            (display "=>\n")
+  ;;            (display "not =>\n"))
+  ;;
+  (syntax-rules ()
+    ((¶ obj literal kt kf)
+     (if-bound-identifier= obj literal kt kf))))
+
 ;;;-------------------------------------------------------------------
 
 m4_divert(-1)
