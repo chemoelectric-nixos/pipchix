@@ -1048,6 +1048,84 @@
      (make-identifiers-environment-aux
       (old1 ...) (new1 ...) (body ...)))))
 
+(define-syntax cps-syntax-proper-list-length
+  ;;
+  ;; Calculates the length of a syntactic proper list. This macro is
+  ;; in continuation-passing-macro style.
+  ;;
+  (syntax-rules ()
+    ((¶ k* (obj1 ...))
+     (cps-syntax-proper-list-length-aux k* (obj1 ...) (+)))))
+
+(define-syntax cps-syntax-proper-list-length-aux
+  (syntax-rules ()
+    ((¶ (k ...) () n)
+     (k ... n))
+    ((¶ k* (obj1 obj2 ...) (plus ...))
+     (cps-syntax-proper-list-length-aux k* (obj2 ...)
+                                        (plus ... 1)))))
+
+(define-syntax syntax-proper-list-length
+  (syntax-rules ()
+    ((¶ (elem1 ...))
+     (let-syntax ((identity (syntax-rules () ((µ x) x))))
+       (cps-syntax-proper-list-length (identity) (elem1 ...))))))
+
+(define-syntax match-proper-list
+  ;;
+  ;; Try to match a proper list. Example:
+  ;;
+  ;;    (match-proper-list (list 1 2 3) (a b c)
+  ;;      (begin (display "yes: ")
+  ;;             (display (list a b c))
+  ;;             (newline))
+  ;;      (display "no\n"))
+  ;;
+  ;; To import nonlocal variables:
+  ;;
+  ;;    (define-values (b c) (list 2 3))
+  ;;    (match-proper-list (list 1 2 3) (a b c) (:nonlocal b c)
+  ;;      (begin (display "yes: ")
+  ;;             (display (list a b c))
+  ;;             (newline))
+  ;;      (display "no\n"))
+  ;;
+  (syntax-rules (:nonlocal)
+    ((¶ obj (var1 ...) kt kf)
+     (match-proper-list obj (var1 ...) (:nonlocal) kt kf))
+    ((¶ obj (var1 ...) (:nonlocal previous ...) kt kf)
+     (cond
+       ((not (proper-list? obj))
+        kf)
+       ((not (= (length obj)
+                (syntax-proper-list-length (var1 ...))))
+        kf)
+       (else
+        ;; Evaluate the list here. Otherwise, variable names in it may
+        ;; be misinterpreted as identifiers, rather than as values.
+        (let ((lst obj))
+          (extract-identifiers-from-proper-list
+           (match-proper-list-aux (previous ...) lst (var1 ...)
+                                  kt kf)
+           if-bound-identifier= (previous ...) (var1 ...))))))))
+
+(define-syntax match-proper-list-aux
+  (syntax-rules ()
+    ((¶ (previous ...) lst (var1 ...) kt kf (new ...))
+     (make-identifiers-environment
+      (previous ...)
+      (new ...)
+      ((call/cc
+        (lambda (cc)
+          (let ((identity (lambda x* (apply values x*)))
+                (p lst))
+            (let ((elem (car p)))
+              (if-default-initialization-or-equiv-variable
+               equal? elem var1 identity (cc kf))
+              (set! p (cdr p)))
+            ...
+            (cc kt)))))))))
+
 ;;;-------------------------------------------------------------------
 
 m4_divert(-1)
