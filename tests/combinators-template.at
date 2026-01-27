@@ -779,6 +779,30 @@ m4_define([sexpr],
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([[[·(15)·(-13)·(120)·(1/120)·]·]])],[])
 
+m4_define([sexpr],
+  [(scheme->nix
+    (let ((lst '\''()))
+      (define-syntax success-branch
+        (syntax-rules ()
+          ((¶ a b)
+           (begin
+             (set! lst (append lst '\''(success)))
+             (set! lst (append lst '\''(a)))
+             (set! lst (append lst '\''(b)))))))
+      (define-syntax failure-branch
+        (syntax-rules ()
+          ((¶ a b)
+           (begin
+             (set! lst (append lst '\''(failure)))
+             (set! lst (append lst '\''(b)))))))
+      (split-syntax (a b c => d e f)
+                    (match-literal =>)
+                    success-branch
+                    failure-branch)
+      lst))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·("success")·[·("a")·("b")·("c")·]·[·("=>")·("d")·("e")·("f")·]·]·]])],[])
+
 AT_CLEANUP
 
 # local variables:

@@ -49,3 +49,4 @@ make-identifiers-environment
 syntax-proper-list-length cps-syntax-proper-list-length
 match-proper-list
 match-literal
+split-syntax

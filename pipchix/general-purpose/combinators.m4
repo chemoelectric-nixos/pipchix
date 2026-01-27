@@ -1146,6 +1146,57 @@
     ((¶ obj literal kt kf)
      (if-bound-identifier= obj literal kt kf))))
 
+(define-syntax split-syntax
+  ;;
+  ;; Split syntax according to a predicate. For example:
+  ;;
+  ;;    (define-syntax success-branch
+  ;;      (syntax-rules ()
+  ;;        ((¶ a b)
+  ;;         (begin
+  ;;           (display "success: ")
+  ;;           (display 'a)
+  ;;           (display " ")
+  ;;           (display 'b)
+  ;;           (newline)))))
+  ;;
+  ;;    (define-syntax failure-branch
+  ;;      (syntax-rules ()
+  ;;        ((¶ a)
+  ;;         (begin
+  ;;           (display "failure: ")
+  ;;           (display 'a)
+  ;;           (display " ")
+  ;;           (newline)))))
+  ;;
+  ;;    (split-syntax (a b c => 4 5 6)
+  ;;                  (match-literal =>)
+  ;;                  success-branch
+  ;;                  failure-branch)
+  ;;
+  ;; Running the foregoing prints
+  ;;
+  ;;    success: (a b c) (=> 4 5 6)
+  ;;
+  (syntax-rules ()
+    ((¶ (item ...) (predicate arg2 ...) succeed fail)
+     (split-syntax-aux (predicate arg2 ...) () (item ...)
+                       succeed fail))))
+
+(define-syntax split-syntax-aux
+  (syntax-rules ()
+
+    ((¶ (pred arg2 ...) (left1 ...) () succeed fail)
+     (fail (left1 ...)))
+
+    ((¶ (pred arg2 ...) (left1 ...) (right1 right2 ...)
+        succeed fail)
+     (pred right1 arg2 ... 
+           (succeed (left1 ...) (right1 right2 ...))
+           (split-syntax-aux (pred arg2 ...)
+                             (left1 ... right1) (right2 ...)
+                             succeed fail)))))
+
 ;;;-------------------------------------------------------------------
 
 m4_divert(-1)
