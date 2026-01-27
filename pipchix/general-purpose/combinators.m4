@@ -1152,7 +1152,7 @@
   ;;
   ;;    (define-syntax success-branch
   ;;      (syntax-rules ()
-  ;;        ((¶ a b)
+  ;;        ((¶ (k ...) a b)
   ;;         (begin
   ;;           (display "success: ")
   ;;           (display 'a)
@@ -1162,7 +1162,7 @@
   ;;
   ;;    (define-syntax failure-branch
   ;;      (syntax-rules ()
-  ;;        ((¶ a)
+  ;;        ((¶ (k ...) a)
   ;;         (begin
   ;;           (display "failure: ")
   ;;           (display 'a)
@@ -1181,21 +1181,35 @@
   (syntax-rules ()
     ((¶ (item ...) (predicate arg2 ...) succeed fail)
      (split-syntax-aux (predicate arg2 ...) () (item ...)
-                       succeed fail))))
+                       (succeed ()) (fail ())))
+    ((¶ #(item ...) (predicate arg2 ...) succeed fail)
+     (split-syntax-aux (predicate arg2 ...) () (item ...)
+                       (split-syntax-s1 succeed)
+                       (split-syntax-f1 fail)))))
+
+(define-syntax split-syntax-s1
+  (syntax-rules ()
+    ((¶ k (a ...) (b ...))
+     (k #(a ...) #(b ...)))))
+
+(define-syntax split-syntax-f1
+  (syntax-rules ()
+    ((¶ k (a ...))
+    (k #(a ...)))))
 
 (define-syntax split-syntax-aux
   (syntax-rules ()
 
-    ((¶ (pred arg2 ...) (left1 ...) () succeed fail)
-     (fail (left1 ...)))
+    ((¶ (pred arg2 ...) (left1 ...) () (succeed ks*) (fail kf*))
+     (fail kf* (left1 ...)))
 
     ((¶ (pred arg2 ...) (left1 ...) (right1 right2 ...)
-        succeed fail)
+        (succeed ks*) (fail kf*))
      (pred right1 arg2 ... 
-           (succeed (left1 ...) (right1 right2 ...))
+           (succeed ks* (left1 ...) (right1 right2 ...))
            (split-syntax-aux (pred arg2 ...)
                              (left1 ... right1) (right2 ...)
-                             succeed fail)))))
+                             (succeed ks*) (fail kf*))))))
 
 ;;;-------------------------------------------------------------------
 
