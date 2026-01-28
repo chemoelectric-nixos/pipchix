@@ -864,33 +864,6 @@
                   id item* kt kf))))
        (loop kf% id% lst kt% kf%)))))
 
-(define-syntax cps-delete-duplicate-identifiers
-  ;;
-  ;; Deletes duplicate identifiers from a syntactic list. For example:
-  ;;
-  ;;     (cps-delete-duplicate-identifiers
-  ;;      (syntax-identity)
-  ;;      if-bound-identifier=
-  ;;      (a a a a b c d e c b d e))    -->    (a b c d e)
-  ;;
-  ;; The rightmost items are those retained, in order.
-  ;;
-  (syntax-rules ()
-    ((¶ k* if-ident= lst)
-     (cps-delete-duplicate-identifiers-aux k* if-ident= lst ()))))
-
-(define-syntax cps-delete-duplicate-identifiers-aux
-  (syntax-rules ()
-    ((µ (k ...) if-ident= () result*)
-     (k ... result*))
-    ((µ k* if-ident= (item1 ... itemN) result*)
-     (if-identifier-in-list
-      if-ident= itemN (item1 ...)
-      (cps-delete-duplicate-identifiers-aux
-       k* if-ident= (item1 ...) result*)
-      (cps-delete-duplicate-identifiers-aux
-       k* if-ident= (item1 ...) (itemN . result*))))))
-
 (define-syntax if-unbound-or-equiv-variable
   ;;
   ;; True if obj and var are equivalent bound identifiers.
@@ -979,6 +952,35 @@
        (if-default-initialization-or-equiv-object
         identity set! equiv? obj var kt kf)))))
 
+(define-syntax delete-duplicate-identifiers
+  ;;
+  ;; Deletes duplicate identifiers from a syntactic list. For example:
+  ;;
+  ;;     (delete-duplicate-identifiers
+  ;;      (syntax-identity)
+  ;;      if-bound-identifier=
+  ;;      (a a a a b c d e c b d e))    -->    (a b c d e)
+  ;;
+  ;; The rightmost items are those retained, in order.
+  ;;
+  ;; The macro is written in continuation-passing-macro style.
+  ;;
+  (syntax-rules ()
+    ((¶ k* if-ident= lst)
+     (delete-duplicate-identifiers-aux k* if-ident= lst ()))))
+
+(define-syntax delete-duplicate-identifiers-aux
+  (syntax-rules ()
+    ((µ (k ...) if-ident= () result*)
+     (k ... result*))
+    ((µ k* if-ident= (item1 ... itemN) result*)
+     (if-identifier-in-list
+      if-ident= itemN (item1 ...)
+      (delete-duplicate-identifiers-aux
+       k* if-ident= (item1 ...) result*)
+      (delete-duplicate-identifiers-aux
+       k* if-ident= (item1 ...) (itemN . result*))))))
+
 (define-syntax extract-identifiers-from-proper-list
   ;;
   ;; Extract identifiers from list (item ...) that are not already
@@ -1059,28 +1061,22 @@
      (make-identifiers-environment-aux
       (old1 ...) (new1 ...) (body ...)))))
 
-(define-syntax cps-syntax-proper-list-length
+(define-syntax syntax-proper-list-length
   ;;
   ;; Calculates the length of a syntactic proper list. This macro is
   ;; in continuation-passing-macro style.
   ;;
   (syntax-rules ()
     ((¶ k* (obj1 ...))
-     (cps-syntax-proper-list-length-aux k* (obj1 ...) (+)))))
+     (syntax-proper-list-length-aux k* (obj1 ...) (+)))))
 
-(define-syntax cps-syntax-proper-list-length-aux
+(define-syntax syntax-proper-list-length-aux
   (syntax-rules ()
     ((¶ (k ...) () n)
      (k ... n))
     ((¶ k* (obj1 obj2 ...) (plus ...))
-     (cps-syntax-proper-list-length-aux k* (obj2 ...)
-                                        (plus ... 1)))))
-
-(define-syntax syntax-proper-list-length
-  (syntax-rules ()
-    ((¶ (elem1 ...))
-     (let-syntax ((identity (syntax-rules () ((µ x) x))))
-       (cps-syntax-proper-list-length (identity) (elem1 ...))))))
+     (syntax-proper-list-length-aux k* (obj2 ...)
+                                    (plus ... 1)))))
 
 (define-syntax match-proper-list
   ;;
@@ -1109,7 +1105,8 @@
        ((not (proper-list? obj))
         kf)
        ((not (= (length obj)
-                (syntax-proper-list-length (var1 ...))))
+                (syntax-proper-list-length (syntax-identity)
+                                           (var1 ...))))
         kf)
        (else
         ;; Evaluate the list here. Otherwise, variable names in it may

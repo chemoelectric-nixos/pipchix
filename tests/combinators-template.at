@@ -829,7 +829,7 @@ check_unquoted([run_scheme 'sexpr'],[0],
 
 m4_define([sexpr],
   [(scheme->nix
-    (cps-delete-duplicate-identifiers
+    (delete-duplicate-identifiers
      (quote)
      if-bound-identifier=
      (a a a a b c d e c b d e)))])

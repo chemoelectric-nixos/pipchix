@@ -39,15 +39,15 @@ if-bound-identifier=
 if-...
 syntax-identity
 if-identifier-in-list
-cps-delete-duplicate-identifiers
 if-unbound-or-equiv-variable
 default-initialization
 has-default-initialization?
 if-default-initialization-or-equiv-object
 if-default-initialization-or-equiv-variable
+delete-duplicate-identifiers
 extract-identifiers-from-proper-list
 make-identifiers-environment
-syntax-proper-list-length cps-syntax-proper-list-length
+syntax-proper-list-length
 match-proper-list
 match-literal
 split-syntax
