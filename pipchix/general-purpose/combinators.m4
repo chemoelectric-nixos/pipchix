@@ -393,8 +393,8 @@
 
 (define-syntax cps-syntax
   ;;
-  ;; Create a continuation-passing style macro. Start from an ordinary
-  ;; macro or procedure f:
+  ;; Create a macro that is in functional continuation-passing style.
+  ;; Start from an ordinary macro or procedure f:
   ;;
   ;;     (let-syntax ((cps-macro (cps-syntax f)))
   ;;       (cps-macro k . arg*))      -->     (k (f . arg*))
@@ -416,7 +416,8 @@
 
 (define-syntax uncps-syntax
   ;;
-  ;; Create an ordinary macro from a continuation-passing style macro.
+  ;; Create an ordinary macro from a macro that is in functional
+  ;; continuation-passing style.
   ;;
   ;;     (let-syntax ((uncps-syntax-fact (uncps-syntax cps-macro)))
   ;;       (uncps-macro . args*))
