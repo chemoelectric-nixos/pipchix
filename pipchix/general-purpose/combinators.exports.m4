@@ -37,8 +37,9 @@ if-identifier
 if-free-identifier=
 if-bound-identifier=
 if-...
+syntax-identity
 if-identifier-in-list
-delete-duplicate-identifiers
+cps-delete-duplicate-identifiers
 if-unbound-or-equiv-variable
 default-initialization
 has-default-initialization?

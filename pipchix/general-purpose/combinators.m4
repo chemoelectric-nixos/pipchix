@@ -834,6 +834,10 @@
 
 ;;; »)
 
+(define-syntax syntax-identity
+  (syntax-rules ()
+    ((ι τ) τ)))
+
 (define-syntax if-identifier-in-list
   ;;
   ;; For example:
@@ -860,31 +864,32 @@
                   id item* kt kf))))
        (loop kf% id% lst kt% kf%)))))
 
-(define-syntax delete-duplicate-identifiers
+(define-syntax cps-delete-duplicate-identifiers
   ;;
   ;; Deletes duplicate identifiers from a syntactic list. For example:
   ;;
-  ;;     (delete-duplicate-identifiers
+  ;;     (cps-delete-duplicate-identifiers
+  ;;      (syntax-identity)
   ;;      if-bound-identifier=
   ;;      (a a a a b c d e c b d e))    -->    (a b c d e)
   ;;
   ;; The rightmost items are those retained, in order.
   ;;
   (syntax-rules ()
-    ((¶ if-ident= lst)
-     (delete-duplicate-identifiers-aux if-ident= lst ()))))
+    ((¶ k* if-ident= lst)
+     (cps-delete-duplicate-identifiers-aux k* if-ident= lst ()))))
 
-(define-syntax delete-duplicate-identifiers-aux
+(define-syntax cps-delete-duplicate-identifiers-aux
   (syntax-rules ()
-    ((µ if-ident= () result*)
-     result*)
-    ((µ if-ident= (item1 ... itemN) result*)
+    ((µ (k ...) if-ident= () result*)
+     (k ... result*))
+    ((µ k* if-ident= (item1 ... itemN) result*)
      (if-identifier-in-list
       if-ident= itemN (item1 ...)
-      (delete-duplicate-identifiers-aux
-       if-ident= (item1 ...) result*)
-      (delete-duplicate-identifiers-aux
-       if-ident= (item1 ...) (itemN . result*))))))
+      (cps-delete-duplicate-identifiers-aux
+       k* if-ident= (item1 ...) result*)
+      (cps-delete-duplicate-identifiers-aux
+       k* if-ident= (item1 ...) (itemN . result*))))))
 
 (define-syntax if-unbound-or-equiv-variable
   ;;

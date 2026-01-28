@@ -827,6 +827,15 @@ m4_define([sexpr],
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([[[·("success")·("a")·("b")·("c")·("=>")·("d")·("e")·("f")·]·]])],[])
 
+m4_define([sexpr],
+  [(scheme->nix
+    (cps-delete-duplicate-identifiers
+     (quote)
+     if-bound-identifier=
+     (a a a a b c d e c b d e)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·("a")·("b")·("c")·("d")·("e")·]·]])],[])
+
 AT_CLEANUP
 
 # local variables:
