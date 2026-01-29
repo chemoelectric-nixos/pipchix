@@ -838,6 +838,18 @@
   (syntax-rules ()
     ((ι τ) τ)))
 
+(define-syntax syntax-values1
+  (syntax-rules ()
+    ((ι τ1) (τ1))))
+
+(define-syntax syntax-values2
+  (syntax-rules ()
+    ((ι τ1 τ2) (τ1 τ2))))
+
+(define-syntax syntax-values3
+  (syntax-rules ()
+    ((ι τ1 τ2 τ3) (τ1 τ2 τ3))))
+
 (define-syntax if-identifier-in-list
   ;;
   ;; For example:
@@ -1184,22 +1196,12 @@
   (syntax-rules ()
     ((¶ (item ...) (predicate arg2 ...) succeed fail)
      (split-syntax-aux (predicate arg2 ...) () (item ...)
-                       (split-syntax-s1 succeed)
-                       (split-syntax-f1 fail)))
+                       (syntax-values3 succeed)
+                       (syntax-values2 fail)))
     ((¶ #(item ...) (predicate arg2 ...) succeed fail)
      (split-syntax-aux (predicate arg2 ...) () (item ...)
                        (split-syntax-s2 succeed)
                        (split-syntax-f2 fail)))))
-
-(define-syntax split-syntax-s1
-  (syntax-rules ()
-    ((¶ k (a ...) (b ...))
-     (k (a ...) (b ...)))))
-
-(define-syntax split-syntax-f1
-  (syntax-rules ()
-    ((¶ k (a ...))
-    (k (a ...)))))
 
 (define-syntax split-syntax-s2
   (syntax-rules ()
@@ -1224,6 +1226,16 @@
            (split-syntax-aux (pred arg2 ...)
                              (left1 ... right1) (right2 ...)
                              (succeed ks*) (fail kf*))))))
+
+(define-syntax split-syntax-at-last-pair
+  ;;
+  ;; Split syntax at the last pair of a possibly dotted list.
+  ;;
+  (syntax-rules ()
+    ((¶ (item1 ... itemN . tail) succeed fail)
+     (succeed (item1 ...) (itemN . tail)))
+    ((¶ anything-else succeed fail)
+     (fail anything-else))))
 
 ;;;-------------------------------------------------------------------
 

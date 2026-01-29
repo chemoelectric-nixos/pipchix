@@ -38,6 +38,7 @@ if-free-identifier=
 if-bound-identifier=
 if-...
 syntax-identity
+syntax-values1 syntax-values2 syntax-values3
 if-identifier-in-list
 if-unbound-or-equiv-variable
 default-initialization
@@ -51,3 +52,4 @@ syntax-proper-list-length
 match-proper-list
 match-literal
 split-syntax
+split-syntax-at-last-pair
