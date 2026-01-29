@@ -1155,7 +1155,7 @@
   ;;
   ;;    (define-syntax success-branch
   ;;      (syntax-rules ()
-  ;;        ((¶ (k ...) a b)
+  ;;        ((¶ a b)
   ;;         (begin
   ;;           (display "success: ")
   ;;           (display 'a)
@@ -1165,7 +1165,7 @@
   ;;
   ;;    (define-syntax failure-branch
   ;;      (syntax-rules ()
-  ;;        ((¶ (k ...) a)
+  ;;        ((¶ a)
   ;;         (begin
   ;;           (display "failure: ")
   ;;           (display 'a)
@@ -1184,18 +1184,29 @@
   (syntax-rules ()
     ((¶ (item ...) (predicate arg2 ...) succeed fail)
      (split-syntax-aux (predicate arg2 ...) () (item ...)
-                       (succeed ()) (fail ())))
+                       (split-syntax-s1 succeed)
+                       (split-syntax-f1 fail)))
     ((¶ #(item ...) (predicate arg2 ...) succeed fail)
      (split-syntax-aux (predicate arg2 ...) () (item ...)
-                       (split-syntax-s1 succeed)
-                       (split-syntax-f1 fail)))))
+                       (split-syntax-s2 succeed)
+                       (split-syntax-f2 fail)))))
 
 (define-syntax split-syntax-s1
   (syntax-rules ()
     ((¶ k (a ...) (b ...))
-     (k #(a ...) #(b ...)))))
+     (k (a ...) (b ...)))))
 
 (define-syntax split-syntax-f1
+  (syntax-rules ()
+    ((¶ k (a ...))
+    (k (a ...)))))
+
+(define-syntax split-syntax-s2
+  (syntax-rules ()
+    ((¶ k (a ...) (b ...))
+     (k #(a ...) #(b ...)))))
+
+(define-syntax split-syntax-f2
   (syntax-rules ()
     ((¶ k (a ...))
     (k #(a ...)))))

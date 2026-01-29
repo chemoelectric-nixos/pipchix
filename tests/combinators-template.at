@@ -784,14 +784,14 @@ m4_define([sexpr],
     (let ((lst '\''()))
       (define-syntax success-branch
         (syntax-rules ()
-          ((¶ k* a b)
+          ((¶ a b)
            (begin
              (set! lst (append lst '\''(success)))
              (set! lst (append lst '\''(a)))
              (set! lst (append lst '\''(b)))))))
       (define-syntax failure-branch
         (syntax-rules ()
-          ((¶ k* a b)
+          ((¶ a b)
            (begin
              (set! lst (append lst '\''(failure)))
              (set! lst (append lst '\''(b)))))))
