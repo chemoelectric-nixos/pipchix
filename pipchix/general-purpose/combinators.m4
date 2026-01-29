@@ -23,7 +23,7 @@
 ;;; WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ;;;
 ;;;
-;;; Adaptations from SRFI-147 are copyrighted and licensed as follows:
+;;; Adaptations from SRFI-148 are copyrighted and licensed as follows:
 ;;;
 ;;; Copyright (C) Marc Nieper-Wißkirchen (2016).  All Rights Reserved. 
 ;;;
@@ -758,6 +758,8 @@
          (third arg*))))))
 
 (define-syntax if-free-identifier=
+  ;; Based on code in the example implementation of SRFI-148 by Marc
+  ;; Nieper-Wißkirchen.
   (er-macro-transformer
    (lambda (form rename compare)
      (let ((arg* (cdr form)))
@@ -768,6 +770,8 @@
            (fourth arg*)))))))
 
 (define-syntax if-bound-identifier=
+  ;; Based on code in the example implementation of SRFI-148 by Marc
+  ;; Nieper-Wißkirchen.
   (er-macro-transformer
    (lambda (form rename compare)
      (let ((arg* (cdr form)))
@@ -778,6 +782,8 @@
            (fourth arg*)))))))
 
 (define-syntax if-...
+  ;; Based on code in the example implementation of SRFI-148 by Marc
+  ;; Nieper-Wißkirchen.
   (er-macro-transformer
    (lambda (form rename compare)
      (let ((arg* (cdr form)))
