@@ -1214,17 +1214,14 @@
                    succeed fail))
 
     ((¶ (item1 ... itemN . tail) (predicate arg2 ...) succeed fail)
-     (split-syntax () (item1 ...) (predicate arg2 ...)
-                   (split-syntax-s3 #(succeed (itemN . tail)))
-                   (split-syntax-f3 #(succeed
-                                      fail (itemN . tail)
-                                      (predicate arg2 ...)))))
+     (split-syntax () (item1 ... itemN . tail) (predicate arg2 ...)
+                   succeed fail))
 
     ;; The rules that follow are for partially split stages.
 
-    ((¶ #(left1 ...) #(item ...) (predicate arg2 ...) succeed fail)
+    ((¶ #(left1 ...) #(item ...) (pred arg2 ...) succeed fail)
      ;; Partially split vector.
-     (split-syntax (left1 ...) (item ...) (predicate arg2 ...)
+     (split-syntax (left1 ...) (item ...) (pred arg2 ...)
                    (split-syntax-s2 succeed)
                    (split-syntax-f2 fail)))
 
@@ -1239,7 +1236,16 @@
            (succeed ks (left1 ...) (right1 right2 ...))
            (split-syntax (left1 ... right1) (right2 ...)
                          (pred arg2 ...)
-                         (succeed ks) (fail kf))))))
+                         (succeed ks) (fail kf))))
+
+    ((¶ (left1 ...) (item1 ... itemN . tail) (pred arg2 ...)
+        succeed fail)
+     ;; Partially split dotted list.
+     (split-syntax (left1 ...) (item1 ... ) (pred arg2 ...)
+                   (split-syntax-s3 #(succeed (itemN . tail)))
+                   (split-syntax-f3 #(succeed
+                                      fail (itemN . tail)
+                   (pred arg2 ...)))))))
 
 (define-syntax split-syntax-s2
   (syntax-rules ()
