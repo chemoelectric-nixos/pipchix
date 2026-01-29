@@ -1205,19 +1205,34 @@
   ;;
   (syntax-rules ()
     ((¶ (item ...) (predicate arg2 ...) succeed fail)
-     (split-syntax-aux (predicate arg2 ...) () (item ...)
-                       (syntax-values3 succeed)
-                       (syntax-values2 fail)))
+     (split-syntax () (item ...) (predicate arg2 ...)
+                   (syntax-values3 succeed)
+                   (syntax-values2 fail)))
     ((¶ #(item ...) (predicate arg2 ...) succeed fail)
-     (split-syntax-aux (predicate arg2 ...) () (item ...)
-                       (split-syntax-s2 succeed)
-                       (split-syntax-f2 fail)))
+     (split-syntax () (item ...) (predicate arg2 ...)
+                   (split-syntax-s2 succeed)
+                   (split-syntax-f2 fail)))
     ((¶ (item1 ... itemN . tail) (predicate arg2 ...) succeed fail)
-     (split-syntax-aux (predicate arg2 ...) () (item1 ...)
-                       (split-syntax-s3 #(succeed (itemN . tail)))
-                       (split-syntax-f3
-                        #(succeed fail (itemN . tail)
-                                  (predicate arg2 ...)))))))
+     (split-syntax () (item1 ...) (predicate arg2 ...)
+                   (split-syntax-s3 #(succeed (itemN . tail)))
+                   (split-syntax-f3 #(succeed
+                                      fail (itemN . tail)
+                                      (predicate arg2 ...)))))
+
+    ;; The rules that follow are for partially split stages.
+
+    ((¶ (left1 ...) () (pred arg2 ...) (succeed ks) (fail kf))
+     ;; The split attempt has failed.
+     (fail kf (left1 ...)))
+
+    ((¶ (left1 ...) (right1 right2 ...) (pred arg2 ...)
+        (succeed ks) (fail kf))
+     ;; Try the next entry.
+     (pred right1 arg2 ... 
+           (succeed ks (left1 ...) (right1 right2 ...))
+           (split-syntax (left1 ... right1) (right2 ...)
+                         (pred arg2 ...)
+                         (succeed ks) (fail kf))))))
 
 (define-syntax split-syntax-s2
   (syntax-rules ()
@@ -1240,20 +1255,6 @@
      (pred itemN arg2 ...
            (ks (a ...) (itemN . tail))
            (kf (a ... itemN . tail))))))
-
-(define-syntax split-syntax-aux
-  (syntax-rules ()
-
-    ((¶ (pred arg2 ...) (left1 ...) () (succeed ks) (fail kf))
-     (fail kf (left1 ...)))
-
-    ((¶ (pred arg2 ...) (left1 ...) (right1 right2 ...)
-        (succeed ks) (fail kf))
-     (pred right1 arg2 ... 
-           (succeed ks (left1 ...) (right1 right2 ...))
-           (split-syntax-aux (pred arg2 ...)
-                             (left1 ... right1) (right2 ...)
-                             (succeed ks) (fail kf))))))
 
 ;;;-------------------------------------------------------------------
 
