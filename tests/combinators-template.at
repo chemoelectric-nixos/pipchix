@@ -862,6 +862,29 @@ m4_define([sexpr],
         (syntax-rules ()
           ((¶ a b)
            (begin
+             (set! lst (append lst '\''(success)))))))
+      (define-syntax failure-branch
+        (syntax-rules ()
+          ((¶ a)
+           (begin
+             (set! lst (append lst '\''(failure)))
+             (set! lst (append lst (list (car '\''a))))
+             (set! lst (append lst (list (cdr '\''a))))))))
+      (split-syntax (a . b)
+                    (match-literal =>)
+                    success-branch
+                    failure-branch)
+      lst))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·("failure")·("a")·("b")·]·]])],[])
+
+m4_define([sexpr],
+  [(scheme->nix
+    (let ((lst '\''()))
+      (define-syntax success-branch
+        (syntax-rules ()
+          ((¶ a b)
+           (begin
              (set! lst (append lst '\''(success)))
              (set! lst (append lst (vector->list '\''a)))
              (set! lst (append lst (vector->list '\''b)))))))
