@@ -1208,10 +1208,11 @@
      (split-syntax () (item ...) (predicate arg2 ...)
                    (syntax-values3 succeed)
                    (syntax-values2 fail)))
+
     ((¶ #(item ...) (predicate arg2 ...) succeed fail)
-     (split-syntax () (item ...) (predicate arg2 ...)
-                   (split-syntax-s2 succeed)
-                   (split-syntax-f2 fail)))
+     (split-syntax #() #(item ...) (predicate arg2 ...)
+                   succeed fail))
+
     ((¶ (item1 ... itemN . tail) (predicate arg2 ...) succeed fail)
      (split-syntax () (item1 ...) (predicate arg2 ...)
                    (split-syntax-s3 #(succeed (itemN . tail)))
@@ -1220,6 +1221,12 @@
                                       (predicate arg2 ...)))))
 
     ;; The rules that follow are for partially split stages.
+
+    ((¶ #(left1 ...) #(item ...) (predicate arg2 ...) succeed fail)
+     ;; Partially split vector.
+     (split-syntax (left1 ...) (item ...) (predicate arg2 ...)
+                   (split-syntax-s2 succeed)
+                   (split-syntax-f2 fail)))
 
     ((¶ (left1 ...) () (pred arg2 ...) (succeed ks) (fail kf))
      ;; The split attempt has failed.
