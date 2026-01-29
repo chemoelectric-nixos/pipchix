@@ -1161,6 +1161,16 @@
     ((¶ obj literal kt kf)
      (if-bound-identifier= obj literal kt kf))))
 
+(define-syntax split-syntax-at-last-pair
+  ;;
+  ;; Split syntax at the last pair of a possibly dotted list.
+  ;;
+  (syntax-rules ()
+    ((¶ (item1 ... itemN . tail) succeed fail)
+     (succeed (item1 ...) (itemN . tail)))
+    ((¶ anything-else succeed fail)
+     (fail anything-else))))
+
 (define-syntax split-syntax
   ;;
   ;; Split syntax according to a predicate. For example:
@@ -1244,16 +1254,6 @@
            (split-syntax-aux (pred arg2 ...)
                              (left1 ... right1) (right2 ...)
                              (succeed ks) (fail kf))))))
-
-(define-syntax split-syntax-at-last-pair
-  ;;
-  ;; Split syntax at the last pair of a possibly dotted list.
-  ;;
-  (syntax-rules ()
-    ((¶ (item1 ... itemN . tail) succeed fail)
-     (succeed (item1 ...) (itemN . tail)))
-    ((¶ anything-else succeed fail)
-     (fail anything-else))))
 
 ;;;-------------------------------------------------------------------
 
