@@ -1194,6 +1194,45 @@
     ((¶ (item ...) kt kf) kt)
     ((¶ xxxxxxxxxx kt kf) kf)))
 
+(define-syntax match-vector-syntax
+  ;;
+  ;; Try to match a syntactic vector. For example:
+  ;;
+  ;;    (define-syntax success1
+  ;;      (syntax-rules ()
+  ;;        ((¶ a b)
+  ;;         (begin
+  ;;           (display 'a)
+  ;;           (display " ")
+  ;;           (display 'b)
+  ;;           (newline)))))
+  ;;
+  ;;    (define-syntax failure1
+  ;;      (syntax-rules ()
+  ;;        ((¶ a)
+  ;;         (begin
+  ;;           (display 'a)
+  ;;           (newline)))))
+  ;;
+  ;;    (split-syntax
+  ;;     (1 2 #(3 => 4) 5 6)
+  ;;     (match-vector-syntax)
+  ;;     success1
+  ;;     failure1)
+  ;;
+  ;; This will print:
+  ;;
+  ;;    (1 2) (#(3 => 4) 5 6)
+  ;;
+  (syntax-rules ()
+    ((¶ obj kt kf)
+     (match-vector-syntax-aux obj kt kf))))
+
+(define-syntax match-vector-syntax-aux
+  (syntax-rules ()
+    ((¶ #(item ...) kt kf) kt)
+    ((¶ xxxxxxxxxxx kt kf) kf)))
+
 (define-syntax match-literal-syntax
   ;;
   ;; Try to match a literal. For example:
