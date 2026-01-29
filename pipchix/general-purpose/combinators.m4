@@ -1245,7 +1245,7 @@
                    (split-syntax-s3 #(succeed (itemN . tail)))
                    (split-syntax-f3 #(succeed
                                       fail (itemN . tail)
-                   (pred arg2 ...)))))))
+                                      (pred arg2 ...)))))))
 
 (define-syntax split-syntax-s2
   (syntax-rules ()
