@@ -796,7 +796,7 @@ m4_define([sexpr],
              (set! lst (append lst '\''(failure)))
              (set! lst (append lst '\''(a)))))))
       (split-syntax (a b c => d e f)
-                    (match-literal =>)
+                    (match-literal-syntax =>)
                     success-branch
                     failure-branch)
       lst))])
@@ -823,7 +823,7 @@ m4_define([sexpr],
              (set! lst (append lst '\''(failure)))
              (set! lst (append lst '\''(a)))))))
       (split-syntax (a b c => d e . f)
-                    (match-literal =>)
+                    (match-literal-syntax =>)
                     success-branch
                     failure-branch)
       lst))])
@@ -848,7 +848,7 @@ m4_define([sexpr],
              (set! lst (append lst '\''(failure)))
              (set! lst (append lst '\''(a)))))))
       (split-syntax (a b c d e => . f)
-                    (match-literal =>)
+                    (match-literal-syntax =>)
                     success-branch
                     failure-branch)
       lst))])
@@ -871,7 +871,7 @@ m4_define([sexpr],
              (set! lst (append lst (list (car '\''a))))
              (set! lst (append lst (list (cdr '\''a))))))))
       (split-syntax (a . b)
-                    (match-literal =>)
+                    (match-literal-syntax =>)
                     success-branch
                     failure-branch)
       lst))])
@@ -895,7 +895,7 @@ m4_define([sexpr],
              (set! lst (append lst '\''(failure)))
              (set! lst (append lst (vector->list '\''b)))))))
       (split-syntax @%:@(a b c => d e f)
-                    (match-literal =>)
+                    (match-literal-syntax =>)
                     success-branch
                     failure-branch)
       lst))])

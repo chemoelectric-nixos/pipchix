@@ -1098,7 +1098,7 @@
 
 (define-syntax match-proper-list
   ;;
-  ;; Try to match a proper list. Example:
+  ;; Try to match a proper list runtime object. Example:
   ;;
   ;;    (match-proper-list (list 1 2 3) (a 2 c)
   ;;      (begin (display "yes: ")
@@ -1155,11 +1155,50 @@
             ...
             (cc kt)))))))))
 
-(define-syntax match-literal
+(define-syntax match-proper-list-syntax
+  ;;
+  ;; Try to match a syntactic proper list. For example:
+  ;;
+  ;;    (define-syntax success1
+  ;;      (syntax-rules ()
+  ;;        ((¶ a b)
+  ;;         (begin
+  ;;           (display 'a)
+  ;;           (display " ")
+  ;;           (display 'b)
+  ;;           (newline)))))
+  ;;
+  ;;    (define-syntax failure1
+  ;;      (syntax-rules ()
+  ;;        ((¶ a)
+  ;;         (begin
+  ;;           (display 'a)
+  ;;           (newline)))))
+  ;;
+  ;;    (split-syntax
+  ;;     (1 2 (3 => 4) 5 6)
+  ;;     (match-proper-list-syntax)
+  ;;     success1
+  ;;     failure1)
+  ;;
+  ;; This will print:
+  ;;
+  ;;    (1 2) ((3 => 4) 5 6)
+  ;;
+  (syntax-rules ()
+    ((¶ obj kt kf)
+     (match-proper-list-syntax-aux obj kt kf))))
+
+(define-syntax match-proper-list-syntax-aux
+  (syntax-rules ()
+    ((¶ (item ...) kt kf) kt)
+    ((¶ xxxxxxxxxx kt kf) kf)))
+
+(define-syntax match-literal-syntax
   ;;
   ;; Try to match a literal. For example:
   ;;
-  ;;    (match-literal => =>
+  ;;    (match-literal-syntax => =>
   ;;            (display "=>\n")
   ;;            (display "not =>\n"))
   ;;
@@ -1201,7 +1240,7 @@
   ;;           (newline)))))
   ;;
   ;;    (split-syntax (a b c => 4 5 6)
-  ;;                  (match-literal =>)
+  ;;                  (match-literal-syntax =>)
   ;;                  success-branch
   ;;                  failure-branch)
   ;;

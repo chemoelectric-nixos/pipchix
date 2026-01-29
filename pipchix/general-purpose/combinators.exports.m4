@@ -50,6 +50,7 @@ extract-identifiers-from-proper-list
 make-identifiers-environment
 syntax-proper-list-length
 match-proper-list
-match-literal
+match-proper-list-syntax
+match-literal-syntax
 split-syntax-at-last-pair
 split-syntax
