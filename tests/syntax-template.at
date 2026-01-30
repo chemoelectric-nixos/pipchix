@@ -158,6 +158,135 @@ m4_define([sexpr],
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([[[·("a")·("b")·("c")·("d")·("e")·]·]])],[])
 
+m4_define([success1_and_failure1],[
+(define-syntax success1
+  (syntax-rules ()
+    ((¶ a b)
+     (list `success `a `b))))
+(define-syntax failure1
+  (syntax-rules ()
+    ((¶ a)
+     (list `failure `a))))
+])
+
+m4_define([success2_and_failure2],[
+(define (convert obj)
+  (if (vector? obj)
+    (vector->list obj)
+    obj))
+(define-syntax success2
+  (syntax-rules ()
+    ((¶ a b)
+     (list `success (map convert `a) (map convert `b)))))
+(define-syntax failure2
+  (syntax-rules ()
+    ((¶ a)
+     (list `failure (map convert `a)))))
+])
+
+m4_define([success3_and_failure3],[
+(define (list->proper-list obj)
+  (cond ((and (not (null? obj)) (not-pair? obj)) obj)
+        ((null? obj) obj)
+        ((null? (cdr obj)) obj)
+        ((pair? (cdr obj))
+         (cons (car obj) (list->proper-list (cdr obj))))
+        (else (list (car obj) (cdr obj)))))
+(define-syntax success3
+  (syntax-rules ()
+    ((¶ a b)
+     (list `success (map list->proper-list `a)
+                    (map list->proper-list `b)))))
+(define-syntax failure3
+  (syntax-rules ()
+    ((¶ a)
+     (list `failure (map list->proper-list `a)))))
+])
+
+m4_define([sexpr],
+  [(scheme->nix
+    (let ()
+      success1_and_failure1
+      (split-syntax
+       (1 2 3 => 4)
+       (match-literal-syntax =>)
+       success1
+       failure1)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·("success")·[·(1)·(2)·(3)·]·[·("=>")·(4)·]·]·]])],[])
+
+m4_define([sexpr],
+  [(scheme->nix
+    (let ()
+      success1_and_failure1
+      (split-syntax
+       (1 2 (3 => 4 5) 6 7)
+       (match-proper-list-syntax)
+       success1
+       failure1)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·("success")·[·(1)·(2)·]·[·[·(3)·("=>")·(4)·(5)·]·(6)·(7)·]·]·]])],[])
+
+m4_define([sexpr],
+  [(scheme->nix
+    (let ()
+      success2_and_failure2
+      (split-syntax
+       (1 2 @%:@(3 => 4 5) 6 7)
+       (match-vector-syntax)
+       success2
+       failure2)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·("success")·[·(1)·(2)·]·[·[·(3)·("=>")·(4)·(5)·]·(6)·(7)·]·]·]])],[])
+
+m4_define([sexpr],
+  [(scheme->nix
+    (let ()
+      success3_and_failure3
+      (split-syntax
+       (1 2 (3 => 4 . 5) 6 7)
+       (match-list-syntax)
+       success3
+       failure3)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·("success")·[·(1)·(2)·]·[·[·(3)·("=>")·(4)·(5)·]·(6)·(7)·]·]·]])],[])
+
+m4_define([sexpr],
+  [(scheme->nix
+    (let ()
+      success3_and_failure3
+      (split-syntax
+       (1 2 (3 => 4 . 5) () 6 7)
+       (match-null-list-syntax)
+       success3
+       failure3)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·("success")·[·(1)·(2)·[·(3)·("=>")·(4)·(5)·]·]·[·[·]·(6)·(7)·]·]·]])],[])
+
+m4_define([sexpr],
+  [(scheme->nix
+    (let ()
+      success1_and_failure1
+      (split-syntax
+       ((1) (2) 3/4 (4) (5))
+       (match-number-syntax)
+       success1
+       failure1)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·("success")·[·[·(1)·]·[·(2)·]·]·[·(3/4)·[·(4)·]·[·(5)·]·]·]·]])],[])
+
+m4_define([sexpr],
+  [(scheme->nix
+    (let ()
+      success1_and_failure1
+      (split-syntax
+       ((1) (2) 3/4 3 (4) (5))
+       (match-integer-syntax)
+       success1
+       failure1)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·("success")·[·[·(1)·]·[·(2)·]·(3/4)·]·[·(3)·[·(4)·]·[·(5)·]·]·]·]])],[])
+
 AT_CLEANUP
 
 # local variables:

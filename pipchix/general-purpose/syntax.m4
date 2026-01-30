@@ -647,10 +647,16 @@
 ;;; »)
 
 define_scheme_type_syntax(match-number-syntax,number?)
+define_scheme_type_syntax(match-complex-syntax,complex?)
+define_scheme_type_syntax(match-real-syntax,real?)
+define_scheme_type_syntax(match-rational-syntax,rational?)
 define_scheme_type_syntax(match-integer-syntax,integer?)
 define_scheme_type_syntax(match-exact-integer-syntax,exact-integer?)
 define_scheme_type_syntax(match-exact-syntax,exact?)
 define_scheme_type_syntax(match-inexact-syntax,inexact?)
+define_scheme_type_syntax(match-finite-syntax,finite?)
+define_scheme_type_syntax(match-infinite-syntax,infinite?)
+define_scheme_type_syntax(match-nan-syntax,nan?)
 
 (define-syntax split-syntax-at-last-pair
   ;;

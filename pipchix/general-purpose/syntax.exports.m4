@@ -21,9 +21,15 @@ match-null-list-syntax
 match-vector-syntax
 match-literal-syntax
 match-number-syntax
+match-complex-syntax
+match-real-syntax
+match-rational-syntax
 match-integer-syntax
 match-exact-integer-syntax
 match-exact-syntax
 match-inexact-syntax
+match-finite-syntax
+match-infinite-syntax
+match-nan-syntax
 split-syntax-at-last-pair
 split-syntax
