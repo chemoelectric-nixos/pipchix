@@ -1298,6 +1298,37 @@
     ((¶ #(item ...) kt kf) kt)
     ((¶ xxxxxxxxxxx kt kf) kf)))
 
+;;; m4_ifelse(general_macros,«er-macro-transformer»,«
+(define-syntax match-number-syntax
+  (er-macro-transformer
+   (lambda (form rename compare)
+     (let* ((arg* (cdr form))
+            (x (first arg*)))
+       ;; FIXME: How many of the following checks are actually
+       ;; necessary? And are any others needed?
+       (if (and (not (null? x))
+                (not (pair? x))
+                (not (symbol? x))
+                (number? x))
+         (second arg*)
+         (third arg*))))))
+;;; »)
+
+;;; m4_ifelse(general_macros,«syntax-case»,«
+(define-syntax match-number-syntax
+  (lambda (stx)
+    (syntax-case stx ()
+      ((¶ (item ... itemN . tail) kt kf)
+       (syntax kf))
+      ((¶ (item ...) kt kf)
+       (syntax kf))
+      ((¶ obj kt kf)
+       (if (and (not (identifier? (syntax obj)))
+                (number? (syntax->datum (syntax obj))))
+         (syntax kt)
+         (syntax kf))))))
+;;; »)
+
 (define-syntax match-literal-syntax
   ;;
   ;; Try to match a literal. For example:
