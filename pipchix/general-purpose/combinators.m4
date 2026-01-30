@@ -1186,11 +1186,6 @@
   ;;    (1 2) ((3 => 4) 5 6)
   ;;
   (syntax-rules ()
-    ((¶ obj kt kf)
-     (match-proper-list-syntax-aux obj kt kf))))
-
-(define-syntax match-proper-list-syntax-aux
-  (syntax-rules ()
     ((¶ (item ...) kt kf) kt)
     ((¶ xxxxxxxxxx kt kf) kf)))
 
@@ -1231,11 +1226,6 @@
   ;; ordinarily is called ‘not a list’.)
   ;;
   (syntax-rules ()
-    ((¶ obj kt kf)
-     (match-list-syntax-aux obj kt kf))))
-
-(define-syntax match-list-syntax-aux
-  (syntax-rules ()
     ((¶ (item1 ... itemN . tail) kt kf) kt)
     ((¶ (item1 ...)              kt kf) kt)
     ((¶ xxxxxxxxxxxxxxxxxxxxxxxx kt kf) kf)))
@@ -1271,11 +1261,6 @@
   ;;    (1 2 (3 => 4 . 5)) (() 6 7)
   ;;
   (syntax-rules ()
-    ((¶ obj kt kf)
-     (match-null-list-syntax-aux obj kt kf))))
-
-(define-syntax match-null-list-syntax-aux
-  (syntax-rules ()
     ((¶ () kt kf) kt)
     ((¶ xx kt kf) kf)))
 
@@ -1309,11 +1294,6 @@
   ;;
   ;;    (1 2) (#(3 => 4) 5 6)
   ;;
-  (syntax-rules ()
-    ((¶ obj kt kf)
-     (match-vector-syntax-aux obj kt kf))))
-
-(define-syntax match-vector-syntax-aux
   (syntax-rules ()
     ((¶ #(item ...) kt kf) kt)
     ((¶ xxxxxxxxxxx kt kf) kf)))
