@@ -1194,6 +1194,91 @@
     ((¶ (item ...) kt kf) kt)
     ((¶ xxxxxxxxxx kt kf) kf)))
 
+(define-syntax match-list-syntax
+  ;;
+  ;; Try to match a syntactic proper or dotted list. For example:
+  ;;
+  ;;    (define-syntax success1
+  ;;      (syntax-rules ()
+  ;;        ((¶ a b)
+  ;;         (begin
+  ;;           (display 'a)
+  ;;           (display " ")
+  ;;           (display 'b)
+  ;;           (newline)))))
+  ;;
+  ;;    (define-syntax failure1
+  ;;      (syntax-rules ()
+  ;;        ((¶ a)
+  ;;         (begin
+  ;;           (display 'a)
+  ;;           (newline)))))
+  ;;
+  ;;    (split-syntax
+  ;;     (1 2 (3 => 4 . 5) 6)
+  ;;     (match-list-syntax)
+  ;;     success1
+  ;;     failure1)
+  ;;
+  ;; This will print:
+  ;;
+  ;;    (1 2) ((3 => 4 . 5) 6)
+  ;;
+  ;; Note that dotted list SYNTAX includes the non-empty proper lists.
+  ;; Unfortunately, there is a great difference between dotted SYNTAX
+  ;; and the ‘proper’ versus ‘dotted’ distinction defined by SRFI-1.
+  ;; (Indeed, in SRFI-1 ‘dotted list’ includes everything that
+  ;; ordinarily is called ‘not a list’.)
+  ;;
+  (syntax-rules ()
+    ((¶ obj kt kf)
+     (match-list-syntax-aux obj kt kf))))
+
+(define-syntax match-list-syntax-aux
+  (syntax-rules ()
+    ((¶ (item1 ... itemN . tail) kt kf) kt)
+    ((¶ (item1 ...)              kt kf) kt)
+    ((¶ xxxxxxxxxxxxxxxxxxxxxxxx kt kf) kf)))
+
+(define-syntax match-null-list-syntax
+  ;;
+  ;; Try to match a syntactic null list.
+  ;;
+  ;;    (define-syntax success1
+  ;;      (syntax-rules ()
+  ;;        ((¶ a b)
+  ;;         (begin
+  ;;           (display 'a)
+  ;;           (display " ")
+  ;;           (display 'b)
+  ;;           (newline)))))
+  ;;
+  ;;    (define-syntax failure1
+  ;;      (syntax-rules ()
+  ;;        ((¶ a)
+  ;;         (begin
+  ;;           (display 'a)
+  ;;           (newline)))))
+  ;;
+  ;;    (split-syntax
+  ;;     (1 2 (3 => 4 . 5) () 6 7)
+  ;;     (match-null-list-syntax)
+  ;;     success1
+  ;;     failure1)
+  ;;
+  ;; This will print:
+  ;;
+  ;;    (1 2 (3 => 4 . 5)) (() 6 7)
+  ;;
+  (syntax-rules ()
+    ((¶ obj kt kf)
+     (match-null-list-syntax-aux obj kt kf))))
+
+(define-syntax match-null-list-syntax-aux
+  (syntax-rules ()
+    ((¶ () kt kf) kt)
+    ((¶ xx kt kf) kf)))
+
 (define-syntax match-vector-syntax
   ;;
   ;; Try to match a syntactic vector. For example:

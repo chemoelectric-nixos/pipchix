@@ -51,6 +51,8 @@ make-identifiers-environment
 syntax-proper-list-length
 match-proper-list
 match-proper-list-syntax
+match-list-syntax
+match-null-list-syntax
 match-vector-syntax
 match-literal-syntax
 split-syntax-at-last-pair
