@@ -766,6 +766,20 @@ define_scheme_type_syntax(match-nan-syntax,nan?)
            (ks (a ...) (itemN . tail))
            (kf (a ... itemN . tail))))))
 
+(define-syntax match-not-syntax
+  ;;
+  ;; Reverse the sense of a syntax matcher. Example:
+  ;;
+  ;;     (split-syntax
+  ;;      (+nan.0 +nan.0 +nan.0 (1) (2) 1 3.0 3 (4) (5))
+  ;;      (match-not-syntax (match-nan-syntax))
+  ;;      success1
+  ;;      failure1)
+  ;;
+  (syntax-rules ()
+    ((¶ obj (match-stx arg ...) kt kf)
+     (match-stx obj arg ... kf kt))))
+
 ;;;-------------------------------------------------------------------
 
 m4_divert(-1)

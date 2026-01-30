@@ -33,3 +33,4 @@ match-infinite-syntax
 match-nan-syntax
 split-syntax-at-last-pair
 split-syntax
+match-not-syntax
