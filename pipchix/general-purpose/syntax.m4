@@ -600,37 +600,6 @@
     ((¶ #(item ...) kt kf) kt)
     ((¶ xxxxxxxxxxx kt kf) kf)))
 
-;;; m4_ifelse(general_macros,«er-macro-transformer»,«
-(define-syntax match-number-syntax
-  (er-macro-transformer
-   (lambda (form rename compare)
-     (let* ((arg* (cdr form))
-            (x (first arg*)))
-       ;; FIXME: How many of the following checks are actually
-       ;; necessary? And are any others needed?
-       (if (and (not (null? x))
-                (not (pair? x))
-                (not (symbol? x))
-                (number? x))
-         (second arg*)
-         (third arg*))))))
-;;; »)
-
-;;; m4_ifelse(general_macros,«syntax-case»,«
-(define-syntax match-number-syntax
-  (lambda (stx)
-    (syntax-case stx ()
-      ((¶ (item ... itemN . tail) kt kf)
-       (syntax kf))
-      ((¶ (item ...) kt kf)
-       (syntax kf))
-      ((¶ obj kt kf)
-       (if (and (not (identifier? (syntax obj)))
-                (number? (syntax->datum (syntax obj))))
-         (syntax kt)
-         (syntax kf))))))
-;;; »)
-
 (define-syntax match-literal-syntax
   ;;
   ;; Try to match a literal. For example:
@@ -642,6 +611,46 @@
   (syntax-rules ()
     ((¶ obj literal kt kf)
      (if-bound-identifier= obj literal kt kf))))
+
+;;; m4_ifelse(general_macros,«er-macro-transformer»,«
+;;;m4_define(«define_scheme_type_syntax»,«
+(define-syntax $1
+  (er-macro-transformer
+   (lambda (form rename compare)
+     (let* ((arg* (cdr form))
+            (x (first arg*)))
+       ;; FIXME: How many of the following checks are actually
+       ;; necessary? And are any others needed?
+       (if (and (not (null? x))
+                (not (pair? x))
+                (not (symbol? x))
+                ($2 x))
+         (second arg*)
+         (third arg*))))))
+;;; »)
+;;; »)
+;;; m4_ifelse(general_macros,«syntax-case»,«
+;;;m4_define(«define_scheme_type_syntax»,«
+(define-syntax $1
+  (lambda (stx)
+    (syntax-case stx ()
+      ((¶ (item ... itemN . tail) kt kf)
+       (syntax kf))
+      ((¶ (item ...) kt kf)
+       (syntax kf))
+      ((¶ obj kt kf)
+       (if (and (not (identifier? (syntax obj)))
+                ($2 (syntax->datum (syntax obj))))
+         (syntax kt)
+         (syntax kf))))))
+;;; »)
+;;; »)
+
+define_scheme_type_syntax(match-number-syntax,number?)
+define_scheme_type_syntax(match-integer-syntax,integer?)
+define_scheme_type_syntax(match-exact-integer-syntax,exact-integer?)
+define_scheme_type_syntax(match-exact-syntax,exact?)
+define_scheme_type_syntax(match-inexact-syntax,inexact?)
 
 (define-syntax split-syntax-at-last-pair
   ;;

@@ -19,7 +19,11 @@ match-proper-list-syntax
 match-list-syntax
 match-null-list-syntax
 match-vector-syntax
-match-number-syntax
 match-literal-syntax
+match-number-syntax
+match-integer-syntax
+match-exact-integer-syntax
+match-exact-syntax
+match-inexact-syntax
 split-syntax-at-last-pair
 split-syntax

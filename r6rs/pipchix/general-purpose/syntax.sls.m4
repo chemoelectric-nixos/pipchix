@@ -31,6 +31,16 @@ m4_include(pipchix/pipchix-includes.m4)
 
   (import basic_libraries)
 
+  (define-syntax exact-integer?
+    ;; R⁶RS does not have R⁷RS’s ‘exact-integer?’ procedure. So we
+    ;; define an equivalent here. Defined as syntax rather than as a
+    ;; procedure because we need it in the ‘expand’ phase. We could
+    ;; also have defined it as a procedure, but in another library,
+    ;; and then imported it ‘for expand’.
+    (syntax-rules ()
+      ((¶ obj)
+       (and (integer? obj) (exact? obj)))))
+
   ;; m4_define(«general_macros»,«syntax-case»)
   m4_include(pipchix/general-purpose/syntax.m4)
 
