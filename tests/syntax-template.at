@@ -287,6 +287,78 @@ m4_define([sexpr],
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([[[·("success")·[·[·(1)·]·[·(2)·]·(3/4)·]·[·(3)·[·(4)·]·[·(5)·]·]·]·]])],[])
 
+m4_define([sexpr],
+  [(scheme->nix
+    (let ()
+      success1_and_failure1
+      (split-syntax
+       ((1) (2) 3.0 3/4 (4) (5))
+       (match-inexact-syntax)
+       success1
+       failure1)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·("success")·[·[·(1)·]·[·(2)·]·]·[·(3.0)·(3/4)·[·(4)·]·[·(5)·]·]·]·]])],[])
+
+m4_define([sexpr],
+  [(scheme->nix
+    (let ()
+      success1_and_failure1
+      (split-syntax
+       ((1) (2) 3.0 3/4 (4) (5))
+       (match-exact-syntax)
+       success1
+       failure1)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·("success")·[·[·(1)·]·[·(2)·]·(3.0)·]·[·(3/4)·[·(4)·]·[·(5)·]·]·]·]])],[])
+
+m4_define([sexpr],
+  [(scheme->nix
+    (let ()
+      success1_and_failure1
+      (split-syntax
+       ((1) (2) 3.0 3/4 3 (4) (5))
+       (match-exact-integer-syntax)
+       success1
+       failure1)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·("success")·[·[·(1)·]·[·(2)·]·(3.0)·(3/4)·]·[·(3)·[·(4)·]·[·(5)·]·]·]·]])],[])
+
+m4_define([sexpr],
+  [(scheme->nix
+    (let ()
+      success1_and_failure1
+      (split-syntax
+       ((1) (2) 3.0 3/4 3 (4) (5))
+       (match-complex-syntax)
+       success1
+       failure1)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·("success")·[·[·(1)·]·[·(2)·]·]·[·(3.0)·(3/4)·(3)·[·(4)·]·[·(5)·]·]·]·]])],[])
+
+m4_define([sexpr],
+  [(scheme->nix
+    (let ()
+      success1_and_failure1
+      (split-syntax
+       ((1) (2) 3.0 3/4 3 (4) (5))
+       (match-real-syntax)
+       success1
+       failure1)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·("success")·[·[·(1)·]·[·(2)·]·]·[·(3.0)·(3/4)·(3)·[·(4)·]·[·(5)·]·]·]·]])],[])
+
+m4_define([sexpr],
+  [(scheme->nix
+    (let ()
+      success1_and_failure1
+      (split-syntax
+       ((1) (2) 3.0 3/4 3 (4) (5))
+       (match-rational-syntax)
+       success1
+       failure1)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·("success")·[·[·(1)·]·[·(2)·]·]·[·(3.0)·(3/4)·(3)·[·(4)·]·[·(5)·]·]·]·]])],[])
+
 AT_CLEANUP
 
 # local variables:
