@@ -777,8 +777,8 @@ define_scheme_type_syntax(match-nan-syntax,nan?)
   ;;      failure1)
   ;;
   (syntax-rules ()
-    ((¶ obj (match-stx arg ...) kt kf)
-     (match-stx obj arg ... kf kt))))
+    ((¶ obj (match-stx arg ...) success failure)
+     (match-stx obj arg ... failure success))))
 
 ;;;-------------------------------------------------------------------
 
