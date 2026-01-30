@@ -1,0 +1,25 @@
+if-identifier
+if-free-identifier=
+if-bound-identifier=
+if-...
+syntax-identity
+syntax-values1 syntax-values2 syntax-values3
+if-identifier-in-list
+if-unbound-or-equiv-variable
+default-initialization
+has-default-initialization?
+if-default-initialization-or-equiv-object
+if-default-initialization-or-equiv-variable
+delete-duplicate-identifiers
+extract-identifiers-from-proper-list
+make-identifiers-environment
+syntax-proper-list-length
+match-proper-list
+match-proper-list-syntax
+match-list-syntax
+match-null-list-syntax
+match-vector-syntax
+match-number-syntax
+match-literal-syntax
+split-syntax-at-last-pair
+split-syntax
