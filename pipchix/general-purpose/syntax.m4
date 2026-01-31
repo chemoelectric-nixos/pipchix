@@ -710,6 +710,34 @@ define_scheme_type_syntax(match-boolean-syntax,boolean?)
     ((¶ xxxxxxxxxxx (match1 arg1 ...) success failure)
      failure)))
 
+(define-syntax match-quote-syntax
+  (syntax-rules (quote)
+    ((¶ (quote b) success failure)
+     success)
+    ((¶ xxxxx success failure)
+     failure)))
+
+(define-syntax match-quasiquote-syntax
+  (syntax-rules (quasiquote)
+    ((¶ (quasiquote b) success failure)
+     success)
+    ((¶ xxxxxxxxxxxxxx success failure)
+     failure)))
+
+(define-syntax match-unquote-syntax
+  (syntax-rules (unquote)
+    ((¶ (unquote b) success failure)
+     success)
+    ((¶ xxxxxxxxxxx success failure)
+     failure)))
+
+(define-syntax match-unquote-splicing-syntax
+  (syntax-rules (unquote-splicing)
+    ((¶ (unquote-splicing b) success failure)
+     success)
+    ((¶ xxxxxxxxxxxxxxxxxxxx success failure)
+     failure)))
+
 (define-syntax split-syntax-at-last-pair
   ;;
   ;; Split syntax at the last pair of a possibly dotted list.

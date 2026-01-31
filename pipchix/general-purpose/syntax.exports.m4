@@ -57,6 +57,11 @@ match-true-syntax
 match-car-syntax
 match-cdr-syntax
 
+match-quote-syntax
+match-quasiquote-syntax
+match-unquote-syntax
+match-unquote-splicing-syntax
+
 split-syntax-at-last-pair
 split-syntax
 
