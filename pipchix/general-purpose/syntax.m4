@@ -905,9 +905,9 @@ define_scheme_type_syntax(msyx-boolean,boolean?)
     ((¶ (new . new*) old* (var ...) (body ...))
      (if-identifier-in-list
       if-bound-identifier= new old*
-      (make-identifiers-environment-aux new* old* (new var ...)
-                                        (body ...))
       (make-identifiers-environment-aux new* old* (var ...)
+                                        (body ...))
+      (make-identifiers-environment-aux new* old* (new var ...)
                                         (body ...))))))
 
 ;;;-------------------------------------------------------------------
