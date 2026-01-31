@@ -876,36 +876,39 @@ define_scheme_type_syntax(msyx-boolean,boolean?)
 (define-syntax make-identifiers-environment
   ;;
   ;;     (make-identifiers-environment
-  ;;      (old ...) (new ...) (body ...))
+  ;;      (new ...) (old ...) (body ...))
   ;;
-  ;; creates an environment in which ‘new’ variables to the left of
-  ;; any ‘old’ variables are initialized to (default-initialization).
+  ;; creates an environment in which ‘new’ variables not in ‘old’
+  ;; variables are initialized to (default-initialization).
   ;;
   (syntax-rules ()
 
     ((¶ () () (body ...))
      (let () (if #f #f) body ...))
 
-    ((¶ () (new1 ...) (body ...))
+    ((¶ (new1 ...) () (body ...))
      (let ((dflt (default-initialization)))
        (let ((new1 dflt) ...)
          (if #f #f) body ...)))
-
-    ((¶ (old1 ... oldN) (new1 ... newN) (body ...))
-     (make-identifiers-environment-aux
-      (old1 ... oldN) (new1 ... newN) (body ...)))))
+    
+    ((¶ new* old* (body ...))
+     (make-identifiers-environment-aux new* old* () (body ...)))))
 
 (define-syntax make-identifiers-environment-aux
   (syntax-rules ()
 
-    ((¶ () (new1 ...) (body ...))
+    ((¶ () old* (var ...) (body ...))
      (let ((dflt (default-initialization)))
-       (let ((new1 dflt) ...)
+       (let ((var dflt) ...)
          (if #f #f) body ...)))
 
-    ((¶ (old1 ... oldN) (new1 ... newN) (body ...))
-     (make-identifiers-environment-aux
-      (old1 ...) (new1 ...) (body ...)))))
+    ((¶ (new . new*) old* (var ...) (body ...))
+     (if-identifier-in-list
+      if-bound-identifier= new old*
+      (make-identifiers-environment-aux new* old* (new var ...)
+                                        (body ...))
+      (make-identifiers-environment-aux new* old* (var ...)
+                                        (body ...))))))
 
 ;;;-------------------------------------------------------------------
 ;;;
@@ -955,8 +958,8 @@ define_scheme_type_syntax(msyx-boolean,boolean?)
   (syntax-rules ()
     ((¶ (previous ...) lst (var1 ...) kt kf (new ...))
      (make-identifiers-environment
-      (previous ...)
       (new ...)
+      (previous ...)
       ((call/cc
         (lambda (cc)
           (let ((identity (lambda x* (apply values x*)))
