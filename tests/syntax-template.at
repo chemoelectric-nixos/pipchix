@@ -43,7 +43,7 @@ m4_define([sexpr],
              (set! lst (append lst '\''(failure)))
              (set! lst (append lst '\''(a)))))))
       (split-syntax (a b c => d e f)
-                    (match-literal-syntax =>)
+                    (msyx-literal =>)
                     success-branch
                     failure-branch)
       lst))])
@@ -70,7 +70,7 @@ m4_define([sexpr],
              (set! lst (append lst '\''(failure)))
              (set! lst (append lst '\''(a)))))))
       (split-syntax (a b c => d e . f)
-                    (match-literal-syntax =>)
+                    (msyx-literal =>)
                     success-branch
                     failure-branch)
       lst))])
@@ -95,7 +95,7 @@ m4_define([sexpr],
              (set! lst (append lst '\''(failure)))
              (set! lst (append lst '\''(a)))))))
       (split-syntax (a b c d e => . f)
-                    (match-literal-syntax =>)
+                    (msyx-literal =>)
                     success-branch
                     failure-branch)
       lst))])
@@ -118,7 +118,7 @@ m4_define([sexpr],
              (set! lst (append lst (list (car '\''a))))
              (set! lst (append lst (list (cdr '\''a))))))))
       (split-syntax (a . b)
-                    (match-literal-syntax =>)
+                    (msyx-literal =>)
                     success-branch
                     failure-branch)
       lst))])
@@ -142,7 +142,7 @@ m4_define([sexpr],
              (set! lst (append lst '\''(failure)))
              (set! lst (append lst (vector->list '\''b)))))))
       (split-syntax @%:@(a b c => d e f)
-                    (match-literal-syntax =>)
+                    (msyx-literal =>)
                     success-branch
                     failure-branch)
       lst))])
@@ -223,7 +223,7 @@ m4_define([sexpr],
       success1_and_failure1
       (split-syntax
        (1 2 3 => 4)
-       (match-literal-syntax =>)
+       (msyx-literal =>)
        success1
        failure1)))])
 check_unquoted([run_scheme 'sexpr'],[0],
@@ -235,7 +235,7 @@ m4_define([sexpr],
       success1_and_failure1
       (split-syntax
        (1 2 (3 => 4 5) 6 7)
-       (match-proper-list-syntax)
+       (msyx-proper-list)
        success1
        failure1)))])
 check_unquoted([run_scheme 'sexpr'],[0],
@@ -247,7 +247,7 @@ m4_define([sexpr],
       success2_and_failure2
       (split-syntax
        (1 2 @%:@(3 => 4 5) 6 7)
-       (match-vector-syntax)
+       (msyx-vector)
        success2
        failure2)))])
 check_unquoted([run_scheme 'sexpr'],[0],
@@ -259,7 +259,7 @@ m4_define([sexpr],
       success3_and_failure3
       (split-syntax
        (1 2 (3 => 4 . 5) 6 7)
-       (match-list-syntax)
+       (msyx-list)
        success3
        failure3)))])
 check_unquoted([run_scheme 'sexpr'],[0],
@@ -271,7 +271,7 @@ m4_define([sexpr],
       success3_and_failure3
       (split-syntax
        (1 2 (3 => 4 . 5) () 6 7)
-       (match-null-list-syntax)
+       (msyx-null-list)
        success3
        failure3)))])
 check_unquoted([run_scheme 'sexpr'],[0],
@@ -283,7 +283,7 @@ m4_define([sexpr],
       success1_and_failure1
       (split-syntax
        ((1) (2) 3/4 (4) (5))
-       (match-number-syntax)
+       (msyx-number)
        success1
        failure1)))])
 check_unquoted([run_scheme 'sexpr'],[0],
@@ -295,7 +295,7 @@ m4_define([sexpr],
       success1_and_failure1
       (split-syntax
        ((1) (2) 3/4 3 (4) (5))
-       (match-integer-syntax)
+       (msyx-integer)
        success1
        failure1)))])
 check_unquoted([run_scheme 'sexpr'],[0],
@@ -307,7 +307,7 @@ m4_define([sexpr],
       success1_and_failure1
       (split-syntax
        ((1) (2) 3.0 3/4 (4) (5))
-       (match-inexact-syntax)
+       (msyx-inexact)
        success1
        failure1)))])
 check_unquoted([run_scheme 'sexpr'],[0],
@@ -319,7 +319,7 @@ m4_define([sexpr],
       success1_and_failure1
       (split-syntax
        ((1) (2) 3.0 3/4 (4) (5))
-       (match-exact-syntax)
+       (msyx-exact)
        success1
        failure1)))])
 check_unquoted([run_scheme 'sexpr'],[0],
@@ -331,7 +331,7 @@ m4_define([sexpr],
       success1_and_failure1
       (split-syntax
        ((1) (2) 3.0 3/4 3 (4) (5))
-       (match-exact-integer-syntax)
+       (msyx-exact-integer)
        success1
        failure1)))])
 check_unquoted([run_scheme 'sexpr'],[0],
@@ -343,7 +343,7 @@ m4_define([sexpr],
       success1_and_failure1
       (split-syntax
        ((1) (2) 3.0 3/4 3 (4) (5))
-       (match-complex-syntax)
+       (msyx-complex)
        success1
        failure1)))])
 check_unquoted([run_scheme 'sexpr'],[0],
@@ -355,7 +355,7 @@ m4_define([sexpr],
       success1_and_failure1
       (split-syntax
        ((1) (2) 3.0 3/4 3 (4) (5))
-       (match-real-syntax)
+       (msyx-real)
        success1
        failure1)))])
 check_unquoted([run_scheme 'sexpr'],[0],
@@ -367,7 +367,7 @@ m4_define([sexpr],
       success1_and_failure1
       (split-syntax
        ((1) (2) 3.0 3/4 3 (4) (5))
-       (match-rational-syntax)
+       (msyx-rational)
        success1
        failure1)))])
 check_unquoted([run_scheme 'sexpr'],[0],
@@ -378,7 +378,7 @@ m4_define([sexpr],
     (let ()
       success4_and_failure4
       (split-syntax ((1) (2) (3) (4) 1 "string" @%:@\x2A01 2.1 3 4)
-                    (match-string-syntax)
+                    (msyx-string)
                     success4
                     failure4)))])
 check_unquoted([run_scheme 'sexpr'],[0],
@@ -389,7 +389,7 @@ m4_define([sexpr],
     (let ()
       success4_and_failure4
       (split-syntax ((1) (2) (3) (4) 1 "string" @%:@\x2A01 2.1 3 4)
-                    (match-char-syntax)
+                    (msyx-char)
                     success4
                     failure4)))])
 check_unquoted([run_scheme 'sexpr'],[0],
@@ -400,14 +400,14 @@ m4_define([sexpr],
     (let ()
       success4_and_failure4
       (split-syntax ((1) (2) (3) (4) 1 "string" @%:@\x2A01 2.1 3 4)
-                    (match-and-syntax
-                     (match-not-syntax
-                      (match-list-syntax))
-                     (match-not-syntax
-                      (match-or-syntax
-                       (match-integer-syntax)
-                       (match-string-syntax)
-                       (match-char-syntax))))
+                    (msyx-and
+                     (msyx-not
+                      (msyx-list))
+                     (msyx-not
+                      (msyx-or
+                       (msyx-integer)
+                       (msyx-string)
+                       (msyx-char))))
                     success4
                     failure4)))])
 check_unquoted([run_scheme 'sexpr'],[0],

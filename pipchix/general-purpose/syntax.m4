@@ -457,7 +457,7 @@
             ...
             (cc kt)))))))))
 
-(define-syntax match-proper-list-syntax
+(define-syntax msyx-proper-list
   ;;
   ;; Try to match a syntactic proper list. For example:
   ;;
@@ -479,7 +479,7 @@
   ;;
   ;;    (split-syntax
   ;;     (1 2 (3 => 4) 5 6)
-  ;;     (match-proper-list-syntax)
+  ;;     (msyx-proper-list)
   ;;     success1
   ;;     failure1)
   ;;
@@ -491,7 +491,7 @@
     ((¶ (item ...) kt kf) kt)
     ((¶ xxxxxxxxxx kt kf) kf)))
 
-(define-syntax match-list-syntax
+(define-syntax msyx-list
   ;;
   ;; Try to match a syntactic proper or dotted list. For example:
   ;;
@@ -513,7 +513,7 @@
   ;;
   ;;    (split-syntax
   ;;     (1 2 (3 => 4 . 5) 6)
-  ;;     (match-list-syntax)
+  ;;     (msyx-list)
   ;;     success1
   ;;     failure1)
   ;;
@@ -532,7 +532,7 @@
     ((¶ (item1 ...)              kt kf) kt)
     ((¶ xxxxxxxxxxxxxxxxxxxxxxxx kt kf) kf)))
 
-(define-syntax match-null-list-syntax
+(define-syntax msyx-null-list
   ;;
   ;; Try to match a syntactic null list.
   ;;
@@ -554,7 +554,7 @@
   ;;
   ;;    (split-syntax
   ;;     (1 2 (3 => 4 . 5) () 6 7)
-  ;;     (match-null-list-syntax)
+  ;;     (msyx-null-list)
   ;;     success1
   ;;     failure1)
   ;;
@@ -566,7 +566,7 @@
     ((¶ () kt kf) kt)
     ((¶ xx kt kf) kf)))
 
-(define-syntax match-vector-syntax
+(define-syntax msyx-vector
   ;;
   ;; Try to match a syntactic vector. For example:
   ;;
@@ -588,7 +588,7 @@
   ;;
   ;;    (split-syntax
   ;;     (1 2 #(3 => 4) 5 6)
-  ;;     (match-vector-syntax)
+  ;;     (msyx-vector)
   ;;     success1
   ;;     failure1)
   ;;
@@ -600,11 +600,11 @@
     ((¶ #(item ...) kt kf) kt)
     ((¶ xxxxxxxxxxx kt kf) kf)))
 
-(define-syntax match-literal-syntax
+(define-syntax msyx-literal
   ;;
   ;; Try to match a literal. For example:
   ;;
-  ;;    (match-literal-syntax => =>
+  ;;    (msyx-literal => =>
   ;;            (display "=>\n")
   ;;            (display "not =>\n"))
   ;;
@@ -658,80 +658,80 @@
 ;;; »)
 ;;; »)
 
-define_scheme_type_syntax(match-number-syntax,number?)
-define_scheme_type_syntax(match-complex-syntax,complex?)
-define_scheme_type_syntax(match-real-syntax,real?)
-define_scheme_type_syntax(match-rational-syntax,rational?)
-define_scheme_type_syntax(match-integer-syntax,integer?)
-define_scheme_type_syntax(match-exact-integer-syntax,exact-integer?)
-define_scheme_type_syntax(match-exact-syntax,exact?)
-define_scheme_type_syntax(match-inexact-syntax,inexact?)
-define_scheme_type_syntax(match-finite-syntax,finite?)
-define_scheme_type_syntax(match-infinite-syntax,infinite?)
-define_scheme_type_syntax(match-nan-syntax,nan?)
-define_scheme_type_syntax(match-zero-syntax,zero?)
-define_scheme_type_syntax(match-positive-syntax,positive?)
-define_scheme_type_syntax(match-negative-syntax,negative?)
-define_scheme_type_syntax(match-odd-syntax,odd?)
-define_scheme_type_syntax(match-even-syntax,even?)
+define_scheme_type_syntax(msyx-number,number?)
+define_scheme_type_syntax(msyx-complex,complex?)
+define_scheme_type_syntax(msyx-real,real?)
+define_scheme_type_syntax(msyx-rational,rational?)
+define_scheme_type_syntax(msyx-integer,integer?)
+define_scheme_type_syntax(msyx-exact-integer,exact-integer?)
+define_scheme_type_syntax(msyx-exact,exact?)
+define_scheme_type_syntax(msyx-inexact,inexact?)
+define_scheme_type_syntax(msyx-finite,finite?)
+define_scheme_type_syntax(msyx-infinite,infinite?)
+define_scheme_type_syntax(msyx-nan,nan?)
+define_scheme_type_syntax(msyx-zero,zero?)
+define_scheme_type_syntax(msyx-positive,positive?)
+define_scheme_type_syntax(msyx-negative,negative?)
+define_scheme_type_syntax(msyx-odd,odd?)
+define_scheme_type_syntax(msyx-even,even?)
 
-define_scheme_type_syntax(match-string-syntax,string?)
+define_scheme_type_syntax(msyx-string,string?)
 
-define_scheme_type_syntax(match-char-syntax,char?)
-define_scheme_type_syntax(match-char-alphabetic-syntax,char-alphabetic?)
-define_scheme_type_syntax(match-char-numeric-syntax,char-numeric?)
-define_scheme_type_syntax(match-char-whitespace-syntax,char-whitespace?)
-define_scheme_type_syntax(match-char-upper-case-syntax,char-upper-case?)
-define_scheme_type_syntax(match-char-lower-case-syntax,char-lower-case?)
+define_scheme_type_syntax(msyx-char,char?)
+define_scheme_type_syntax(msyx-char-alphabetic,char-alphabetic?)
+define_scheme_type_syntax(msyx-char-numeric,char-numeric?)
+define_scheme_type_syntax(msyx-char-whitespace,char-whitespace?)
+define_scheme_type_syntax(msyx-char-upper-case,char-upper-case?)
+define_scheme_type_syntax(msyx-char-lower-case,char-lower-case?)
 
-define_scheme_type_syntax(match-boolean-syntax,boolean?)
+define_scheme_type_syntax(msyx-boolean,boolean?)
 
-(define-syntax match-false-syntax
+(define-syntax msyx-false
   (syntax-rules ()
     ((¶ #f success failure) success)
     ((¶ xx success failure) failure)))
 
-(define-syntax match-true-syntax
+(define-syntax msyx-true
   (syntax-rules ()
     ((¶ #t success failure) success)
     ((¶ xx success failure) failure)))
 
-(define-syntax match-car-syntax
+(define-syntax msyx-car
   (syntax-rules ()
     ((¶ (Car . Cdr) (match1 arg1 ...) success failure)
      (match1 Car arg1 ... success failure))
     ((¶ xxxxxxxxxxx (match1 arg1 ...) success failure)
      failure)))
 
-(define-syntax match-cdr-syntax
+(define-syntax msyx-cdr
   (syntax-rules ()
     ((¶ (Car . Cdr) (match1 arg1 ...) success failure)
      (match1 Cdr arg1 ... success failure))
     ((¶ xxxxxxxxxxx (match1 arg1 ...) success failure)
      failure)))
 
-(define-syntax match-quote-syntax
+(define-syntax msyx-quote
   (syntax-rules (quote)
     ((¶ (quote b) success failure)
      success)
     ((¶ xxxxx success failure)
      failure)))
 
-(define-syntax match-quasiquote-syntax
+(define-syntax msyx-quasiquote
   (syntax-rules (quasiquote)
     ((¶ (quasiquote b) success failure)
      success)
     ((¶ xxxxxxxxxxxxxx success failure)
      failure)))
 
-(define-syntax match-unquote-syntax
+(define-syntax msyx-unquote
   (syntax-rules (unquote)
     ((¶ (unquote b) success failure)
      success)
     ((¶ xxxxxxxxxxx success failure)
      failure)))
 
-(define-syntax match-unquote-splicing-syntax
+(define-syntax msyx-unquote-splicing
   (syntax-rules (unquote-splicing)
     ((¶ (unquote-splicing b) success failure)
      success)
@@ -772,7 +772,7 @@ define_scheme_type_syntax(match-boolean-syntax,boolean?)
   ;;           (newline)))))
   ;;
   ;;    (split-syntax (a b c => 4 5 6)
-  ;;                  (match-literal-syntax =>)
+  ;;                  (msyx-literal =>)
   ;;                  success-branch
   ;;                  failure-branch)
   ;;
@@ -846,29 +846,30 @@ define_scheme_type_syntax(match-boolean-syntax,boolean?)
            (ks (a ...) (itemN . tail))
            (kf (a ... itemN . tail))))))
 
-(define-syntax match-not-syntax
+(define-syntax msyx-not
   ;;
   ;; Reverse the sense of a syntax matcher. Example:
   ;;
   ;;     (split-syntax
   ;;      (+nan.0 +nan.0 +nan.0 (1) (2) 1 3.0 3 (4) (5))
-  ;;      (match-not-syntax (match-nan-syntax))
+  ;;      (msyx-not (msyx-nan))
   ;;      success1
   ;;      failure1)
   ;;
   (syntax-rules ()
-    ((¶ obj (match-stx arg ...) success failure)
-     (match-stx obj arg ... failure success))))
+    ((¶ obj (match1 arg1 ...) success failure)
+     (match1 obj arg1 ... failure success))))
 
-(define-syntax match-or-syntax
+(define-syntax msyx-or
   ;;
   ;; Disjunction of syntax matchers. Example:
   ;;
   ;;     (split-syntax ((1) (2) (3) (4) 1 2.1 3 4)
-  ;;                   (match-or-syntax (match-literal-syntax =>)
-  ;;                                    (match-nan-syntax)
-  ;;                                    (match-real-syntax)
-  ;;                                    (match-infinite-syntax))
+  ;;                   (msyx-or
+  ;;                    (msyx-literal =>)
+  ;;                    (msyx-nan)
+  ;;                    (msyx-real)
+  ;;                    (msyx-infinite))
   ;;                   success1
   ;;                   failure1)
   ;;
@@ -882,18 +883,18 @@ define_scheme_type_syntax(match-boolean-syntax,boolean?)
     ((¶ obj (match1 a1 ...) (match2 a2 ...) ... success failure)
      (match1 obj a1 ...
              success
-             (match-or-syntax obj (match2 a2 ...) ...
-                              success failure)))))
+             (msyx-or obj (match2 a2 ...) ... success failure)))))
 
-(define-syntax match-and-syntax
+(define-syntax msyx-and
   ;;
   ;; Conjunction of syntax matchers. Example:
   ;;
   ;;    (split-syntax ((1) (2) (3) (4) 1 2.1 3 4)
-  ;;                  (match-and-syntax (match-finite-syntax)
-  ;;                                    (match-rational-syntax)
-  ;;                                    (match-not-syntax
-  ;;                                     (match-integer-syntax)))
+  ;;                  (msyx-and
+  ;;                   (msyx-finite)
+  ;;                   (msyx-rational)
+  ;;                   (msyx-not
+  ;;                   (msyx-integer)))
   ;;                  success1
   ;;                  failure1)
   ;;
@@ -906,21 +907,20 @@ define_scheme_type_syntax(match-boolean-syntax,boolean?)
      success)
     ((¶ obj (match1 a1 ...) (match2 a2 ...) ... success failure)
      (match1 obj a1 ...
-             (match-and-syntax obj (match2 a2 ...) ...
-                               success failure)
+             (msyx-and obj (match2 a2 ...) ... success failure)
              failure))))
 
-(define-syntax match-xor-syntax
+(define-syntax msyx-xor
   ;;
   ;; Succeed if one, but only one, of a set of matchers succeeds. For
   ;; example:
   ;;
   ;;    (split-syntax ((1) (2) (3) (4) 1 "string" #\x2A01 2.1 3 4)
-  ;;                  (match-xor-syntax
-  ;;                   (match-real-syntax)
-  ;;                   (match-char-syntax)
-  ;;                   (match-string-syntax)
-  ;;                   (match-integer-syntax))
+  ;;                  (msyx-xor
+  ;;                   (msyx-real)
+  ;;                   (msyx-char)
+  ;;                   (msyx-string)
+  ;;                   (msyx-integer))
   ;;                  success1
   ;;                  failure1)
   ;;
@@ -930,10 +930,10 @@ define_scheme_type_syntax(match-boolean-syntax,boolean?)
   ;;
   (syntax-rules ()
     ((¶ obj (match1 a1 ...) (match2 a2 ...) ... success failure)
-     (match-xor-syntax-aux obj "f" (match1 a1 ...) (match2 a2 ...) ...
-                           success failure))))
+     (msyx-xor-aux obj "f" (match1 a1 ...) (match2 a2 ...) ...
+                   success failure))))
 
-(define-syntax match-xor-syntax-aux
+(define-syntax msyx-xor-aux
   (syntax-rules ()
     ((¶ obj "t" success failure)
      success)
@@ -942,14 +942,14 @@ define_scheme_type_syntax(match-boolean-syntax,boolean?)
     ((¶ obj "t" (match1 a1 ...) (match2 a2 ...) ... success failure)
      (match1 obj a1 ...
              failure
-             (match-xor-syntax-aux obj "t" (match2 a2 ...) ...
-                                   success failure)))
+             (msyx-xor-aux obj "t" (match2 a2 ...) ...
+                           success failure)))
     ((¶ obj "f" (match1 a1 ...) (match2 a2 ...) ... success failure)
      (match1 obj a1 ...
-             (match-xor-syntax-aux obj "t" (match2 a2 ...) ...
-                                   success failure)
-             (match-xor-syntax-aux obj "f" (match2 a2 ...) ...
-                                   success failure)))))
+             (msyx-xor-aux obj "t" (match2 a2 ...) ...
+                           success failure)
+             (msyx-xor-aux obj "f" (match2 a2 ...) ...
+                           success failure)))))
 
 ;;;-------------------------------------------------------------------
 

@@ -18,54 +18,54 @@ make-identifiers-environment
 syntax-proper-list-length
 match-proper-list
 
-match-proper-list-syntax
-match-list-syntax
-match-null-list-syntax
-match-vector-syntax
-match-literal-syntax
+msyx-proper-list
+msyx-list
+msyx-null-list
+msyx-vector
+msyx-literal
 
-match-number-syntax
-match-complex-syntax
-match-real-syntax
-match-rational-syntax
-match-integer-syntax
-match-exact-integer-syntax
-match-exact-syntax
-match-inexact-syntax
-match-finite-syntax
-match-infinite-syntax
-match-nan-syntax
-match-zero-syntax
-match-positive-syntax
-match-negative-syntax
-match-odd-syntax
-match-even-syntax
+msyx-number
+msyx-complex
+msyx-real
+msyx-rational
+msyx-integer
+msyx-exact-integer
+msyx-exact
+msyx-inexact
+msyx-finite
+msyx-infinite
+msyx-nan
+msyx-zero
+msyx-positive
+msyx-negative
+msyx-odd
+msyx-even
 
-match-string-syntax
+msyx-string
 
-match-char-syntax
-match-char-alphabetic-syntax
-match-char-numeric-syntax
-match-char-whitespace-syntax
-match-char-upper-case-syntax
-match-char-lower-case-syntax
+msyx-char
+msyx-char-alphabetic
+msyx-char-numeric
+msyx-char-whitespace
+msyx-char-upper-case
+msyx-char-lower-case
 
-match-boolean-syntax
-match-false-syntax
-match-true-syntax
+msyx-boolean
+msyx-false
+msyx-true
 
-match-car-syntax
-match-cdr-syntax
+msyx-car
+msyx-cdr
 
-match-quote-syntax
-match-quasiquote-syntax
-match-unquote-syntax
-match-unquote-splicing-syntax
+msyx-quote
+msyx-quasiquote
+msyx-unquote
+msyx-unquote-splicing
 
 split-syntax-at-last-pair
 split-syntax
 
-match-not-syntax
-match-or-syntax
-match-and-syntax
-match-xor-syntax
+msyx-not
+msyx-or
+msyx-and
+msyx-xor
