@@ -2,8 +2,10 @@ if-identifier
 if-free-identifier=
 if-bound-identifier=
 if-...
+
 syntax-identity
 syntax-values1 syntax-values2 syntax-values3
+
 if-identifier-in-list
 if-unbound-or-equiv-variable
 default-initialization
@@ -15,11 +17,13 @@ extract-identifiers-from-proper-list
 make-identifiers-environment
 syntax-proper-list-length
 match-proper-list
+
 match-proper-list-syntax
 match-list-syntax
 match-null-list-syntax
 match-vector-syntax
 match-literal-syntax
+
 match-number-syntax
 match-complex-syntax
 match-real-syntax
@@ -31,8 +35,18 @@ match-inexact-syntax
 match-finite-syntax
 match-infinite-syntax
 match-nan-syntax
+match-zero-syntax
+match-positive-syntax
+match-negative-syntax
+match-odd-syntax
+match-even-syntax
+
+match-string-syntax
+match-char-syntax
+
 split-syntax-at-last-pair
 split-syntax
+
 match-not-syntax
 match-or-syntax
 match-and-syntax

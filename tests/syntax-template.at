@@ -203,6 +203,20 @@ m4_define([success3_and_failure3],[
      (list `failure (map list->proper-list `a)))))
 ])
 
+m4_define([success4_and_failure4],[
+(define (convert obj)
+  (if (char? obj) (string obj) obj))
+(define-syntax success4
+  (syntax-rules ()
+    ((¶ a b)
+     (list `success (map convert `a)
+                    (map convert `b)))))
+(define-syntax failure4
+  (syntax-rules ()
+    ((¶ a)
+     (list `failure (map convert `a)))))
+])
+
 m4_define([sexpr],
   [(scheme->nix
     (let ()
@@ -358,6 +372,46 @@ m4_define([sexpr],
        failure1)))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([[[·("success")·[·[·(1)·]·[·(2)·]·]·[·(3.0)·(3/4)·(3)·[·(4)·]·[·(5)·]·]·]·]])],[])
+
+m4_define([sexpr],
+  [(scheme->nix
+    (let ()
+      success4_and_failure4
+      (split-syntax ((1) (2) (3) (4) 1 "string" @%:@\x2A01 2.1 3 4)
+                    (match-string-syntax)
+                    success4
+                    failure4)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·("success")·[·[·(1)·]·[·(2)·]·[·(3)·]·[·(4)·]·(1)·]·[·("string")·("⨁")·(2.1)·(3)·(4)·]·]·]])],[])
+
+m4_define([sexpr],
+  [(scheme->nix
+    (let ()
+      success4_and_failure4
+      (split-syntax ((1) (2) (3) (4) 1 "string" @%:@\x2A01 2.1 3 4)
+                    (match-char-syntax)
+                    success4
+                    failure4)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·("success")·[·[·(1)·]·[·(2)·]·[·(3)·]·[·(4)·]·(1)·("string")·]·[·("⨁")·(2.1)·(3)·(4)·]·]·]])],[])
+
+m4_define([sexpr],
+  [(scheme->nix
+    (let ()
+      success4_and_failure4
+      (split-syntax ((1) (2) (3) (4) 1 "string" @%:@\x2A01 2.1 3 4)
+                    (match-and-syntax
+                     (match-not-syntax
+                      (match-list-syntax))
+                     (match-not-syntax
+                      (match-or-syntax
+                       (match-integer-syntax)
+                       (match-string-syntax)
+                       (match-char-syntax))))
+                    success4
+                    failure4)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·("success")·[·[·(1)·]·[·(2)·]·[·(3)·]·[·(4)·]·(1)·("string")·("⨁")·]·[·(2.1)·(3)·(4)·]·]·]])],[])
 
 AT_CLEANUP
 

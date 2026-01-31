@@ -657,6 +657,14 @@ define_scheme_type_syntax(match-inexact-syntax,inexact?)
 define_scheme_type_syntax(match-finite-syntax,finite?)
 define_scheme_type_syntax(match-infinite-syntax,infinite?)
 define_scheme_type_syntax(match-nan-syntax,nan?)
+define_scheme_type_syntax(match-zero-syntax,zero?)
+define_scheme_type_syntax(match-positive-syntax,positive?)
+define_scheme_type_syntax(match-negative-syntax,negative?)
+define_scheme_type_syntax(match-odd-syntax,odd?)
+define_scheme_type_syntax(match-even-syntax,even?)
+
+define_scheme_type_syntax(match-string-syntax,string?)
+define_scheme_type_syntax(match-char-syntax,char?)
 
 (define-syntax split-syntax-at-last-pair
   ;;
