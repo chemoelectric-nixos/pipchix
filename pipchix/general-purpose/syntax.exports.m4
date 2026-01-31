@@ -42,7 +42,17 @@ match-odd-syntax
 match-even-syntax
 
 match-string-syntax
+
 match-char-syntax
+match-char-alphabetic-syntax
+match-char-numeric-syntax
+match-char-whitespace-syntax
+match-char-upper-case-syntax
+match-char-lower-case-syntax
+
+match-boolean-syntax
+match-false-syntax
+match-true-syntax
 
 split-syntax-at-last-pair
 split-syntax

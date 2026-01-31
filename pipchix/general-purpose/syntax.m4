@@ -676,7 +676,25 @@ define_scheme_type_syntax(match-odd-syntax,odd?)
 define_scheme_type_syntax(match-even-syntax,even?)
 
 define_scheme_type_syntax(match-string-syntax,string?)
+
 define_scheme_type_syntax(match-char-syntax,char?)
+define_scheme_type_syntax(match-char-alphabetic-syntax,char-alphabetic?)
+define_scheme_type_syntax(match-char-numeric-syntax,char-numeric?)
+define_scheme_type_syntax(match-char-whitespace-syntax,char-whitespace?)
+define_scheme_type_syntax(match-char-upper-case-syntax,char-upper-case?)
+define_scheme_type_syntax(match-char-lower-case-syntax,char-lower-case?)
+
+define_scheme_type_syntax(match-boolean-syntax,boolean?)
+
+(define-syntax match-false-syntax
+  (syntax-rules ()
+    ((¶ #f success failure) success)
+    ((¶ xx success failure) failure)))
+
+(define-syntax match-true-syntax
+  (syntax-rules ()
+    ((¶ #t success failure) success)
+    ((¶ xx success failure) failure)))
 
 (define-syntax split-syntax-at-last-pair
   ;;
