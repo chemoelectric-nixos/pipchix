@@ -49,58 +49,6 @@
 ;;;
 ;;;-------------------------------------------------------------------
 
-(define the-default-initialization-object
-  ;; U+00A0 is the NO-BREAK SPACE.
-  '#("the\xA0;default\xA0;initialization\xA0;object"))
-
-(define (default-initialization)
-  the-default-initialization-object)
-
-(define (has-default-initialization? obj)
-  (eq? obj the-default-initialization-object))
-
-(define-syntax if-default-initialization-or-equiv-object
-  ;;
-  ;; True if obj1 and obj2 are equivalent bound identifiers.
-  ;;
-  ;; True if obj1 is a value and obj2 is set to the
-  ;; ‘default-initialization’ object. Then obj2 is bound to the value
-  ;; of obj.
-  ;;
-  ;; True if obj1 is a value obj2 is bound and ‘equiv?’ to the value
-  ;; of obj1.
-  ;;
-  ;; Otherwise false.
-  ;;
-  (syntax-rules ()
-    ((¶ obj1 obj2 getter! setter! equiv? kt kf)
-     (if-bound-identifier=
-      obj1 obj2
-      kt
-      (let ((o1 obj1)
-            (o2 (getter! obj2)))
-        (cond ((has-default-initialization? o2)
-               (setter! obj2 o1)
-               kt)
-              ((equiv? o1 o2)
-               kt)
-              (else
-               kf)))))))
-
-(define-syntax if-default-initialization-or-equiv-variable
-  ;;
-  ;; if-default-initialization-or-equiv-object for the case where the
-  ;; object is a variable, such as created by ‘define’ or ‘let’, or by
-  ;; ‘lambda’ as one of its arguments.
-  ;;
-  (syntax-rules ()
-    ((¶ obj var equiv? kt kf)
-     (let-syntax ((identity
-                   (syntax-rules ()
-                     ((¶ x) x))))
-       (if-default-initialization-or-equiv-object
-        obj var identity set! equiv? kt kf)))))
-
 (define-syntax delete-duplicate-identifiers
   ;;
   ;; Deletes duplicate identifiers from a syntactic list. For example:
@@ -129,86 +77,6 @@
        k* if-ident= (item1 ...) result*)
       (delete-duplicate-identifiers-aux
        k* if-ident= (item1 ...) (itemN . result*))))))
-
-(define-syntax extract-identifiers-from-proper-list
-  ;;
-  ;; Extract identifiers from list (item ...) that are not already
-  ;; collected in (previous ...) and which are not literals in
-  ;; (literal ...). Respective equivalence matchers are used.
-  ;;
-  ;; The macro is written in continuation-passing-macro style.
-  ;;
-  (syntax-rules ()
-    ((¶ k* if-id=2 (previous ...) (item ...))
-     (extract-identifiers-from-proper-list-aux
-      k* if-free-identifier= ()
-      if-id=2 (item ...) (previous ...)))
-
-    ((¶ k* if-id=1 (literal ...)
-        if-id=2 (previous ...) (item ...))
-     (extract-identifiers-from-proper-list-aux
-      k* if-id=1 (literal ...)
-      if-id=2 (item ...) (previous ...)))))
-
-(define-syntax extract-identifiers-from-proper-list-aux
-  (syntax-rules ()
-    ((¶ (k ...) if-id=1 (literal ...)
-        if-id=2 () result*)
-     (k ... result*))
-    ((¶ k* if-id=1 (literal ...)
-        if-id=2 (item ... itemN) result*)
-     (if-identifier-in-list
-      if-id=1 itemN (literal ...)
-      (extract-identifiers-from-proper-list-aux
-       k* if-id=1 (literal ...)
-       if-id=2  (item ...) result*)
-      (if-identifier-in-list
-       if-id=2 itemN result*
-       (extract-identifiers-from-proper-list-aux
-        k* if-id=1 (literal ...)
-        if-id=2 (item ...) result*)
-       (if-identifier
-        itemN
-        (extract-identifiers-from-proper-list-aux
-         k* if-id=1 (literal ...)
-         if-id=2 (item ...) (itemN . result*))
-        (extract-identifiers-from-proper-list-aux
-         k* if-id=1 (literal ...)
-         if-id=2 (item ...) result*)))))))
-
-(define-syntax make-identifiers-environment
-  ;;
-  ;;     (make-identifiers-environment
-  ;;      (old ...) (new ...) (body ...))
-  ;;
-  ;; creates an environment in which ‘new’ variables to the left of
-  ;; any ‘old’ variables are initialized to (default-initialization).
-  ;;
-  (syntax-rules ()
-
-    ((¶ () () (body ...))
-     (let () (if #f #f) body ...))
-
-    ((¶ () (new1 ...) (body ...))
-     (let ((dflt (default-initialization)))
-       (let ((new1 dflt) ...)
-         (if #f #f) body ...)))
-
-    ((¶ (old1 ... oldN) (new1 ... newN) (body ...))
-     (make-identifiers-environment-aux
-      (old1 ... oldN) (new1 ... newN) (body ...)))))
-
-(define-syntax make-identifiers-environment-aux
-  (syntax-rules ()
-
-    ((¶ () (new1 ...) (body ...))
-     (let ((dflt (default-initialization)))
-       (let ((new1 dflt) ...)
-         (if #f #f) body ...)))
-
-    ((¶ (old1 ... oldN) (new1 ... newN) (body ...))
-     (make-identifiers-environment-aux
-      (old1 ...) (new1 ...) (body ...)))))
 
 (define-syntax syx-proper-list-length
   ;;
@@ -901,6 +769,143 @@ define_scheme_type_syntax(msyx-boolean,boolean?)
      (pred itemN arg2 ...
            (ks (a ...) (itemN . tail))
            (kf (a ... itemN . tail))))))
+
+;;;-------------------------------------------------------------------
+;;;
+;;; Support for matchers for runtime objects.
+;;;
+
+(define the-default-initialization-object
+  ;; U+00A0 is the NO-BREAK SPACE.
+  '#("the\xA0;default\xA0;initialization\xA0;object"))
+
+(define (default-initialization)
+  the-default-initialization-object)
+
+(define (has-default-initialization? obj)
+  (eq? obj the-default-initialization-object))
+
+(define-syntax if-default-initialization-or-equiv-object
+  ;;
+  ;; True if obj1 and obj2 are equivalent bound identifiers.
+  ;;
+  ;; True if obj1 is a value and obj2 is set to the
+  ;; ‘default-initialization’ object. Then obj2 is bound to the value
+  ;; of obj.
+  ;;
+  ;; True if obj1 is a value obj2 is bound and ‘equiv?’ to the value
+  ;; of obj1.
+  ;;
+  ;; Otherwise false.
+  ;;
+  (syntax-rules ()
+    ((¶ obj1 obj2 getter! setter! equiv? kt kf)
+     (if-bound-identifier=
+      obj1 obj2
+      kt
+      (let ((o1 obj1)
+            (o2 (getter! obj2)))
+        (cond ((has-default-initialization? o2)
+               (setter! obj2 o1)
+               kt)
+              ((equiv? o1 o2)
+               kt)
+              (else
+               kf)))))))
+
+(define-syntax if-default-initialization-or-equiv-variable
+  ;;
+  ;; if-default-initialization-or-equiv-object for the case where the
+  ;; object is a variable, such as created by ‘define’ or ‘let’, or by
+  ;; ‘lambda’ as one of its arguments.
+  ;;
+  (syntax-rules ()
+    ((¶ obj var equiv? kt kf)
+     (let-syntax ((identity
+                   (syntax-rules ()
+                     ((¶ x) x))))
+       (if-default-initialization-or-equiv-object
+        obj var identity set! equiv? kt kf)))))
+
+(define-syntax extract-identifiers-from-proper-list
+  ;;
+  ;; Extract identifiers from list (item ...) that are not already
+  ;; collected in (previous ...) and which are not literals in
+  ;; (literal ...). Respective equivalence matchers are used.
+  ;;
+  ;; The macro is written in continuation-passing-macro style.
+  ;;
+  (syntax-rules ()
+    ((¶ k* if-id=2 (previous ...) (item ...))
+     (extract-identifiers-from-proper-list-aux
+      k* if-free-identifier= ()
+      if-id=2 (item ...) (previous ...)))
+
+    ((¶ k* if-id=1 (literal ...)
+        if-id=2 (previous ...) (item ...))
+     (extract-identifiers-from-proper-list-aux
+      k* if-id=1 (literal ...)
+      if-id=2 (item ...) (previous ...)))))
+
+(define-syntax extract-identifiers-from-proper-list-aux
+  (syntax-rules ()
+    ((¶ (k ...) if-id=1 (literal ...)
+        if-id=2 () result*)
+     (k ... result*))
+    ((¶ k* if-id=1 (literal ...)
+        if-id=2 (item ... itemN) result*)
+     (if-identifier-in-list
+      if-id=1 itemN (literal ...)
+      (extract-identifiers-from-proper-list-aux
+       k* if-id=1 (literal ...)
+       if-id=2  (item ...) result*)
+      (if-identifier-in-list
+       if-id=2 itemN result*
+       (extract-identifiers-from-proper-list-aux
+        k* if-id=1 (literal ...)
+        if-id=2 (item ...) result*)
+       (if-identifier
+        itemN
+        (extract-identifiers-from-proper-list-aux
+         k* if-id=1 (literal ...)
+         if-id=2 (item ...) (itemN . result*))
+        (extract-identifiers-from-proper-list-aux
+         k* if-id=1 (literal ...)
+         if-id=2 (item ...) result*)))))))
+
+(define-syntax make-identifiers-environment
+  ;;
+  ;;     (make-identifiers-environment
+  ;;      (old ...) (new ...) (body ...))
+  ;;
+  ;; creates an environment in which ‘new’ variables to the left of
+  ;; any ‘old’ variables are initialized to (default-initialization).
+  ;;
+  (syntax-rules ()
+
+    ((¶ () () (body ...))
+     (let () (if #f #f) body ...))
+
+    ((¶ () (new1 ...) (body ...))
+     (let ((dflt (default-initialization)))
+       (let ((new1 dflt) ...)
+         (if #f #f) body ...)))
+
+    ((¶ (old1 ... oldN) (new1 ... newN) (body ...))
+     (make-identifiers-environment-aux
+      (old1 ... oldN) (new1 ... newN) (body ...)))))
+
+(define-syntax make-identifiers-environment-aux
+  (syntax-rules ()
+
+    ((¶ () (new1 ...) (body ...))
+     (let ((dflt (default-initialization)))
+       (let ((new1 dflt) ...)
+         (if #f #f) body ...)))
+
+    ((¶ (old1 ... oldN) (new1 ... newN) (body ...))
+     (make-identifiers-environment-aux
+      (old1 ...) (new1 ...) (body ...)))))
 
 ;;;-------------------------------------------------------------------
 ;;;

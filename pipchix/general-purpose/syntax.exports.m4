@@ -1,10 +1,4 @@
-default-initialization
-has-default-initialization?
-if-default-initialization-or-equiv-object
-if-default-initialization-or-equiv-variable
 delete-duplicate-identifiers
-extract-identifiers-from-proper-list
-make-identifiers-environment
 
 syx-proper-list-length
 
@@ -81,6 +75,18 @@ msyx-xor
 
 syx-split-at-last-pair
 syx-split
+
+;;;-------------------------------------------------------------------
+;;;
+;;; Support for matchers for runtime objects.
+;;;
+
+default-initialization
+has-default-initialization?
+if-default-initialization-or-equiv-object
+if-default-initialization-or-equiv-variable
+extract-identifiers-from-proper-list
+make-identifiers-environment
 
 ;;;-------------------------------------------------------------------
 ;;;
