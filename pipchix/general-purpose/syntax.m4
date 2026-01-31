@@ -780,6 +780,56 @@ define_scheme_type_syntax(match-nan-syntax,nan?)
     ((¶ obj (match-stx arg ...) success failure)
      (match-stx obj arg ... failure success))))
 
+(define-syntax match-or-syntax
+  ;;
+  ;; Disjunction of syntax matchers. Example:
+  ;;
+  ;;     (split-syntax ((1) (2) (3) (4) 1 2.1 3 4)
+  ;;                   (match-or-syntax (match-literal-syntax =>)
+  ;;                                    (match-nan-syntax)
+  ;;                                    (match-real-syntax)
+  ;;                                    (match-infinite-syntax))
+  ;;                   success1
+  ;;                   failure1)
+  ;;
+  ;; Which gives the split:
+  ;;
+  ;;     ((1) (2) (3) (4)) (1 2.1 3 4)
+  ;;
+  (syntax-rules ()
+    ((¶ obj success failure)
+     failure)
+    ((¶ obj (match1 a1 ...) (match2 a2 ...) ... success failure)
+     (match1 obj a1 ...
+             success
+             (match-or-syntax obj (match2 a2 ...) ...
+                              success failure)))))
+
+(define-syntax match-and-syntax
+  ;;
+  ;; Conjunction of syntax matchers. Example:
+  ;;
+  ;;    (split-syntax ((1) (2) (3) (4) 1 2.1 3 4)
+  ;;                  (match-and-syntax (match-finite-syntax)
+  ;;                                    (match-rational-syntax)
+  ;;                                    (match-not-syntax
+  ;;                                     (match-integer-syntax)))
+  ;;                  success1
+  ;;                  failure1)
+  ;;
+  ;; Which gives the split:
+  ;;
+  ;;    ((1) (2) (3) (4) 1) (2.1 3 4)
+  ;;
+  (syntax-rules ()
+    ((¶ obj success failure)
+     success)
+    ((¶ obj (match1 a1 ...) (match2 a2 ...) ... success failure)
+     (match1 obj a1 ...
+             (match-and-syntax obj (match2 a2 ...) ...
+                               success failure)
+             failure))))
+
 ;;;-------------------------------------------------------------------
 
 m4_divert(-1)
