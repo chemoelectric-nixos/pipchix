@@ -2,6 +2,8 @@ delete-duplicate-identifiers
 
 syx-proper-list-length
 
+syx-assoc
+
 syx-identity
 syx-values1 syx-values2 syx-values3
 

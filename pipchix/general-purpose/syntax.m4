@@ -92,8 +92,40 @@
     ((¶ (k ...) () n)
      (k ... n))
     ((¶ k* (obj1 obj2 ...) (plus ...))
-     (syx-proper-list-length-aux k* (obj2 ...)
-                                 (plus ... 1)))))
+     (syx-proper-list-length-aux k* (obj2 ...) (plus ... 1)))))
+
+(define-syntax syx-assoc
+  ;;
+  ;; Syntactic association list lookup.
+  ;;
+  ;;    (display
+  ;;     (syx-assoc
+  ;;      (list "result")
+  ;;      'foo
+  ;;      (('foobar . 1)
+  ;;       ('bar . 2)
+  ;;       ('foo . 3)
+  ;;       ('barfoo . 4))
+  ;;    (newline)
+  ;;
+  ;; will print
+  ;;
+  ;;    (result 3)
+  ;;
+  (syntax-rules ()
+
+    ((¶ (k ...) key ())
+     FAST_SYNTAX_ERROR("sys-assoc must have a matching entry"))
+
+    ((¶ (k ...) key ((key1 val1 ...) assoc2 ...))
+     (if (eq? key key1)
+       (k ... (val1 ...))
+       (syx-assoc (k ...) key (assoc2 ...))))
+
+    ((¶ (k ...) key ((key1 . value1) assoc2 ...))
+     (if (eq? key key1)
+       (k ... value1)
+       (syx-assoc (k ...) key (assoc2 ...))))))
 
 (define-syntax syx-identity
   (syntax-rules ()
@@ -919,23 +951,25 @@ define_scheme_type_syntax(msyx-boolean,boolean?)
   ;;
   ;; Match a value to a variable or constant:
   ;;
-  ;;    (match-value val var-or-const (:equal? equ?) success failure)
+  ;;    (match-value val var-or-const (('equal? equ?))
+  ;;                 success failure)
   ;;    (match-value val var-or-const success failure)
   ;;
-  ;; The default for (:equal? equ?) is ‘equal?’
+  ;; The default for ('equal? equ?) is ‘equal?’
   ;;
-  (syntax-rules (:equal?)
+  (syntax-rules ()
 
     ((¶ value var-or-const success failure)
-     (match-value value var-or-const (:equal? equal?)
-                  success failure))
+     (match-value value var-or-const () success failure))
 
-    ((¶ value var-or-const (:equal equ?) success failure)
-     (if-identifier
-      var-or-const
-      (if-default-initialization-or-equiv-variable
-       value var-or-const equ? success failure)
-      (if (equ? value var-or-const) success failure)))))
+    ((¶ value var-or-const ((key . val) ...) success failure)
+     (let ((equ? (syx-assoc (syx-identity) 'equal?
+                            ((key . val) ... ('equal? . equal?)))))
+       (if-identifier
+        var-or-const
+        (if-default-initialization-or-equiv-variable
+         value var-or-const equ? success failure)
+        (if (equ? value var-or-const) success failure))))))
 
 (define-syntax match-proper-list
   ;;
@@ -947,34 +981,18 @@ define_scheme_type_syntax(msyx-boolean,boolean?)
   ;;             (newline))
   ;;      (display "no\n"))
   ;;
-  ;; To import nonlocal variables:
+  ;; To import nonlocals:
   ;;
   ;;    (define-values (b c) (list 2 3))
-  ;;    (match-proper-list (list 1 2 3) (a b c) (:nonlocal b c)
+  ;;    (match-proper-list (list 1 2 3) (a b c) (('nonlocal b c))
   ;;      (begin (display "yes: ")
   ;;             (display (list a b c))
   ;;             (newline))
   ;;      (display "no\n"))
   ;;
-  (syntax-rules (:equal? :nonlocal)
+  (syntax-rules ()
 
-    ((¶ obj (var1 ...) kt kf)
-     (match-proper-list obj (var1 ...) (:equal? equal?)
-                        (:nonlocal) kt kf))
-
-    ((¶ obj (var1 ...) (:nonlocal previous ...) kt kf)
-     (match-proper-list obj (var1 ...) (:nonlocal previous ...)
-                        (:equal? equal?) kt kf))
-
-    ((¶ obj (var1 ...) (:equal? equ?) kt kf)
-     (match-proper-list obj (var1 ...) (:nonlocal)
-                        (:equal? equ?) kt kf))
-
-    ((¶ obj (var1 ...) (:nonlocal previous ...) (:equal? equ?) kt kf)
-     (match-proper-list obj (var1 ...) (:equal? equ?)
-                        (:nonlocal previous ...) kt kf))
-
-    ((¶ obj (var1 ...) (:equal? equ?) (:nonlocal previous ...) kt kf)
+    ((¶ obj (var1 ...) (assoc ...) kt kf)
      (cond
        ((not (proper-list? obj))
         kf)
@@ -984,13 +1002,25 @@ define_scheme_type_syntax(msyx-boolean,boolean?)
        (else
         ;; Evaluate the list here. Otherwise, variable names in it may
         ;; be misinterpreted as identifiers, rather than as values.
-        (let ((lst obj))
-          (extract-identifiers-from-proper-list
-           (match-proper-list-aux (previous ...) lst (var1 ...) equ?
-                                  kt kf)
-           if-bound-identifier= (previous ...) (var1 ...))))))))
+        (let ((equ? (syx-assoc (syx-identity) 'equal?
+                               (assoc ... ('equal? . equal?)))))
+          (syx-assoc (match-proper-list-aux10 obj (var1 ...) equ?
+                                              kt kf)
+                     'nonlocal (assoc ... ('nonlocal)))))))
 
-(define-syntax match-proper-list-aux
+    ((¶ obj (var1 ...) kt kf)
+     (match-proper-list obj (var1 ...) () kt kf))))
+
+(define-syntax match-proper-list-aux10
+  (syntax-rules ()
+    ((¶ obj (var1 ...) equ? kt kf (previous ...))
+     (let ((lst obj))
+       (extract-identifiers-from-proper-list
+        (match-proper-list-aux20 (previous ...) lst (var1 ...) equ?
+                                 kt kf)
+        if-bound-identifier= (previous ...) (var1 ...))))))
+
+(define-syntax match-proper-list-aux20
   (syntax-rules ()
     ((¶ (previous ...) lst (var1 ...) equ? kt kf (new ...))
      (make-identifiers-environment
@@ -1001,17 +1031,18 @@ define_scheme_type_syntax(msyx-boolean,boolean?)
           (let ((identity (lambda x* (apply values x*)))
                 (p lst))
             (let ((elem (car p)))
-              (match-value elem var1 (:equal? equ?) identity (cc kf))
+              (match-value elem var1 (('equal? . equ?))
+                           identity (cc kf))
               (set! p (cdr p)))
             ...
             (cc kt)))))))))
 
 ;;;-------------------------------------------------------------------
-
 m4_divert(-1)
 ;;; local variables:
 ;;; mode: scheme
 ;;; geiser-scheme-implementation: chibi
 ;;; coding: utf-8
+;;; eval: (put 'if 'scheme-indent-function 1)
 ;;; end:
 m4_divert«»m4_dnl
