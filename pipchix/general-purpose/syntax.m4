@@ -838,6 +838,47 @@ define_scheme_type_syntax(match-char-syntax,char?)
                                success failure)
              failure))))
 
+(define-syntax match-xor-syntax
+  ;;
+  ;; Succeed if one, but only one, of a set of matchers succeeds. For
+  ;; example:
+  ;;
+  ;;    (split-syntax ((1) (2) (3) (4) 1 "string" #\x2A01 2.1 3 4)
+  ;;                  (match-xor-syntax
+  ;;                   (match-real-syntax)
+  ;;                   (match-char-syntax)
+  ;;                   (match-string-syntax)
+  ;;                   (match-integer-syntax))
+  ;;                  success1
+  ;;                  failure1)
+  ;;
+  ;; This gives the split:
+  ;;
+  ;;    ((1) (2) (3) (4) 1) (string ⨁ 2.1 3 4)
+  ;;
+  (syntax-rules ()
+    ((¶ obj (match1 a1 ...) (match2 a2 ...) ... success failure)
+     (match-xor-syntax-aux obj "f" (match1 a1 ...) (match2 a2 ...) ...
+                           success failure))))
+
+(define-syntax match-xor-syntax-aux
+  (syntax-rules ()
+    ((¶ obj "t" success failure)
+     success)
+    ((¶ obj "f" success failure)
+     failure)
+    ((¶ obj "t" (match1 a1 ...) (match2 a2 ...) ... success failure)
+     (match1 obj a1 ...
+             failure
+             (match-xor-syntax-aux obj "t" (match2 a2 ...) ...
+                                   success failure)))
+    ((¶ obj "f" (match1 a1 ...) (match2 a2 ...) ... success failure)
+     (match1 obj a1 ...
+             (match-xor-syntax-aux obj "t" (match2 a2 ...) ...
+                                   success failure)
+             (match-xor-syntax-aux obj "f" (match2 a2 ...) ...
+                                   success failure)))))
+
 ;;;-------------------------------------------------------------------
 
 m4_divert(-1)

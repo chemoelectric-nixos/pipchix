@@ -50,3 +50,4 @@ split-syntax
 match-not-syntax
 match-or-syntax
 match-and-syntax
+match-xor-syntax
