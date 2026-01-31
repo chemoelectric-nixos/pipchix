@@ -915,6 +915,27 @@ define_scheme_type_syntax(msyx-boolean,boolean?)
 ;;; Matchers for runtime objects.
 ;;;
 
+(define-syntax match-value
+  ;;
+  ;; Match a value to a variable or constant:
+  ;;
+  ;;    (match-value val var-or-const equ? success failure)
+  ;;    (match-value val var-or-const success failure)
+  ;;
+  ;; The default for equ? is ‘equal?’
+  ;;
+  (syntax-rules ()
+
+    ((¶ value var-or-const success failure)
+     (match-value value var-or-const equal? success failure))
+
+    ((¶ value var-or-const equ? success failure)
+     (if-identifier
+      var-or-const
+      (if-default-initialization-or-equiv-variable
+       value var-or-const equ? success failure)
+      (if (equ? value var-or-const) success failure)))))
+
 (define-syntax match-proper-list
   ;;
   ;; Try to match a proper list runtime object. Example:
@@ -965,11 +986,7 @@ define_scheme_type_syntax(msyx-boolean,boolean?)
           (let ((identity (lambda x* (apply values x*)))
                 (p lst))
             (let ((elem (car p)))
-              (if-identifier
-               var1
-               (if-default-initialization-or-equiv-variable
-                elem var1 equal? identity (cc kf))
-               (unless (equal? elem var1) (cc kf)))
+              (match-value elem var1 identity (cc kf))
               (set! p (cdr p)))
             ...
             (cc kt)))))))))

@@ -93,6 +93,7 @@ make-identifiers-environment
 ;;; Matchers for runtime objects.
 ;;;
 
+match-value
 match-proper-list
 
 ;;;-------------------------------------------------------------------
