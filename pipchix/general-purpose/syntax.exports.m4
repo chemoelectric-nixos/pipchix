@@ -1,13 +1,3 @@
-if-identifier
-if-free-identifier=
-if-bound-identifier=
-if-...
-
-syntax-identity
-syntax-values1 syntax-values2 syntax-values3
-
-if-identifier-in-list
-if-unbound-or-equiv-variable
 default-initialization
 has-default-initialization?
 if-default-initialization-or-equiv-object
@@ -15,8 +5,25 @@ if-default-initialization-or-equiv-variable
 delete-duplicate-identifiers
 extract-identifiers-from-proper-list
 make-identifiers-environment
-syntax-proper-list-length
-match-proper-list
+
+syx-proper-list-length
+
+syx-identity
+syx-values1 syx-values2 syx-values3
+
+;;;-------------------------------------------------------------------
+;;;
+;;; Matchers for syntactic objects.
+;;;
+
+if-identifier
+if-free-identifier=
+if-bound-identifier=
+if-...
+
+if-identifier-in-list
+
+;;;; if-unbound-or-equiv-variable
 
 msyx-proper-list
 msyx-list
@@ -62,10 +69,24 @@ msyx-quasiquote
 msyx-unquote
 msyx-unquote-splicing
 
-split-syntax-at-last-pair
-split-syntax
-
 msyx-not
 msyx-or
 msyx-and
 msyx-xor
+
+;;;-------------------------------------------------------------------
+;;;
+;;; Scanners for syntactic objects.
+;;;
+
+syx-split-at-last-pair
+syx-split
+
+;;;-------------------------------------------------------------------
+;;;
+;;; Matchers for runtime objects.
+;;;
+
+match-proper-list
+
+;;;-------------------------------------------------------------------

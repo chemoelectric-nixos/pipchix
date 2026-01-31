@@ -42,7 +42,7 @@ m4_define([sexpr],
            (begin
              (set! lst (append lst '\''(failure)))
              (set! lst (append lst '\''(a)))))))
-      (split-syntax (a b c => d e f)
+      (syx-split (a b c => d e f)
                     (msyx-literal =>)
                     success-branch
                     failure-branch)
@@ -69,7 +69,7 @@ m4_define([sexpr],
            (begin
              (set! lst (append lst '\''(failure)))
              (set! lst (append lst '\''(a)))))))
-      (split-syntax (a b c => d e . f)
+      (syx-split (a b c => d e . f)
                     (msyx-literal =>)
                     success-branch
                     failure-branch)
@@ -94,7 +94,7 @@ m4_define([sexpr],
            (begin
              (set! lst (append lst '\''(failure)))
              (set! lst (append lst '\''(a)))))))
-      (split-syntax (a b c d e => . f)
+      (syx-split (a b c d e => . f)
                     (msyx-literal =>)
                     success-branch
                     failure-branch)
@@ -117,7 +117,7 @@ m4_define([sexpr],
              (set! lst (append lst '\''(failure)))
              (set! lst (append lst (list (car '\''a))))
              (set! lst (append lst (list (cdr '\''a))))))))
-      (split-syntax (a . b)
+      (syx-split (a . b)
                     (msyx-literal =>)
                     success-branch
                     failure-branch)
@@ -141,7 +141,7 @@ m4_define([sexpr],
            (begin
              (set! lst (append lst '\''(failure)))
              (set! lst (append lst (vector->list '\''b)))))))
-      (split-syntax @%:@(a b c => d e f)
+      (syx-split @%:@(a b c => d e f)
                     (msyx-literal =>)
                     success-branch
                     failure-branch)
@@ -221,7 +221,7 @@ m4_define([sexpr],
   [(scheme->nix
     (let ()
       success1_and_failure1
-      (split-syntax
+      (syx-split
        (1 2 3 => 4)
        (msyx-literal =>)
        success1
@@ -233,7 +233,7 @@ m4_define([sexpr],
   [(scheme->nix
     (let ()
       success1_and_failure1
-      (split-syntax
+      (syx-split
        (1 2 (3 => 4 5) 6 7)
        (msyx-proper-list)
        success1
@@ -245,7 +245,7 @@ m4_define([sexpr],
   [(scheme->nix
     (let ()
       success2_and_failure2
-      (split-syntax
+      (syx-split
        (1 2 @%:@(3 => 4 5) 6 7)
        (msyx-vector)
        success2
@@ -257,7 +257,7 @@ m4_define([sexpr],
   [(scheme->nix
     (let ()
       success3_and_failure3
-      (split-syntax
+      (syx-split
        (1 2 (3 => 4 . 5) 6 7)
        (msyx-list)
        success3
@@ -269,7 +269,7 @@ m4_define([sexpr],
   [(scheme->nix
     (let ()
       success3_and_failure3
-      (split-syntax
+      (syx-split
        (1 2 (3 => 4 . 5) () 6 7)
        (msyx-null-list)
        success3
@@ -281,7 +281,7 @@ m4_define([sexpr],
   [(scheme->nix
     (let ()
       success1_and_failure1
-      (split-syntax
+      (syx-split
        ((1) (2) 3/4 (4) (5))
        (msyx-number)
        success1
@@ -293,7 +293,7 @@ m4_define([sexpr],
   [(scheme->nix
     (let ()
       success1_and_failure1
-      (split-syntax
+      (syx-split
        ((1) (2) 3/4 3 (4) (5))
        (msyx-integer)
        success1
@@ -305,7 +305,7 @@ m4_define([sexpr],
   [(scheme->nix
     (let ()
       success1_and_failure1
-      (split-syntax
+      (syx-split
        ((1) (2) 3.0 3/4 (4) (5))
        (msyx-inexact)
        success1
@@ -317,7 +317,7 @@ m4_define([sexpr],
   [(scheme->nix
     (let ()
       success1_and_failure1
-      (split-syntax
+      (syx-split
        ((1) (2) 3.0 3/4 (4) (5))
        (msyx-exact)
        success1
@@ -329,7 +329,7 @@ m4_define([sexpr],
   [(scheme->nix
     (let ()
       success1_and_failure1
-      (split-syntax
+      (syx-split
        ((1) (2) 3.0 3/4 3 (4) (5))
        (msyx-exact-integer)
        success1
@@ -341,7 +341,7 @@ m4_define([sexpr],
   [(scheme->nix
     (let ()
       success1_and_failure1
-      (split-syntax
+      (syx-split
        ((1) (2) 3.0 3/4 3 (4) (5))
        (msyx-complex)
        success1
@@ -353,7 +353,7 @@ m4_define([sexpr],
   [(scheme->nix
     (let ()
       success1_and_failure1
-      (split-syntax
+      (syx-split
        ((1) (2) 3.0 3/4 3 (4) (5))
        (msyx-real)
        success1
@@ -365,7 +365,7 @@ m4_define([sexpr],
   [(scheme->nix
     (let ()
       success1_and_failure1
-      (split-syntax
+      (syx-split
        ((1) (2) 3.0 3/4 3 (4) (5))
        (msyx-rational)
        success1
@@ -377,7 +377,7 @@ m4_define([sexpr],
   [(scheme->nix
     (let ()
       success4_and_failure4
-      (split-syntax ((1) (2) (3) (4) 1 "string" @%:@\x2A01 2.25 3 4)
+      (syx-split ((1) (2) (3) (4) 1 "string" @%:@\x2A01 2.25 3 4)
                     (msyx-string)
                     success4
                     failure4)))])
@@ -388,7 +388,7 @@ m4_define([sexpr],
   [(scheme->nix
     (let ()
       success4_and_failure4
-      (split-syntax ((1) (2) (3) (4) 1 "string" @%:@\x2A01 2.25 3 4)
+      (syx-split ((1) (2) (3) (4) 1 "string" @%:@\x2A01 2.25 3 4)
                     (msyx-char)
                     success4
                     failure4)))])
@@ -399,7 +399,7 @@ m4_define([sexpr],
   [(scheme->nix
     (let ()
       success4_and_failure4
-      (split-syntax ((1) (2) (3) (4) 1 "string" @%:@\x2A01 2.25 3 4)
+      (syx-split ((1) (2) (3) (4) 1 "string" @%:@\x2A01 2.25 3 4)
                     (msyx-and
                      (msyx-not
                       (msyx-list))
