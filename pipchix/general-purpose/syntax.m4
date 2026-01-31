@@ -617,16 +617,22 @@
 (define-syntax $1
   (er-macro-transformer
    (lambda (form rename compare)
-     (let* ((arg* (cdr form))
-            (x (first arg*)))
-       ;; FIXME: How many of the following checks are actually
-       ;; necessary? And are any others needed?
-       (if (and (not (null? x))
-                (not (pair? x))
-                (not (symbol? x))
-                ($2 x))
-         (second arg*)
-         (third arg*))))))
+     (let ((arg* (cdr form)))
+       (call/cc
+        (lambda (cc)
+          (with-exception-handler
+              (lambda (exc)
+                (cc (third arg*))) ;; Failure.
+            (lambda ()
+              (let ((x (first arg*)))
+                ;; FIXME: How many of the following checks are actually
+                ;; necessary? And are any others needed?
+                (if (and (not (null? x))
+                         (not (pair? x))
+                         (not (symbol? x))
+                         ($2 x))
+                  (second arg*)
+                  (third arg*)))))))))))
 ;;; »)
 ;;; »)
 ;;; m4_ifelse(general_macros,«syntax-case»,«
@@ -639,10 +645,16 @@
       ((¶ (item ...) kt kf)
        (syntax kf))
       ((¶ obj kt kf)
-       (if (and (not (identifier? (syntax obj)))
-                ($2 (syntax->datum (syntax obj))))
-         (syntax kt)
-         (syntax kf))))))
+       (call/cc
+        (lambda (cc)
+          (with-exception-handler
+              (lambda (exc)
+                (cc (syntax kf)))
+            (lambda ()
+              (if (and (not (identifier? (syntax obj)))
+                       ($2 (syntax->datum (syntax obj))))
+                (syntax kt)
+                (syntax kf))))))))))
 ;;; »)
 ;;; »)
 
