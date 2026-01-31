@@ -919,17 +919,18 @@ define_scheme_type_syntax(msyx-boolean,boolean?)
   ;;
   ;; Match a value to a variable or constant:
   ;;
-  ;;    (match-value val var-or-const equ? success failure)
+  ;;    (match-value val var-or-const (:equal? equ?) success failure)
   ;;    (match-value val var-or-const success failure)
   ;;
-  ;; The default for equ? is ‘equal?’
+  ;; The default for (:equal? equ?) is ‘equal?’
   ;;
-  (syntax-rules ()
+  (syntax-rules (:equal?)
 
     ((¶ value var-or-const success failure)
-     (match-value value var-or-const equal? success failure))
+     (match-value value var-or-const (:equal? equal?)
+                  success failure))
 
-    ((¶ value var-or-const equ? success failure)
+    ((¶ value var-or-const (:equal equ?) success failure)
      (if-identifier
       var-or-const
       (if-default-initialization-or-equiv-variable
@@ -955,29 +956,43 @@ define_scheme_type_syntax(msyx-boolean,boolean?)
   ;;             (newline))
   ;;      (display "no\n"))
   ;;
-  (syntax-rules (:nonlocal)
+  (syntax-rules (:equal? :nonlocal)
+
     ((¶ obj (var1 ...) kt kf)
-     (match-proper-list obj (var1 ...) (:nonlocal) kt kf))
+     (match-proper-list obj (var1 ...) (:equal? equal?)
+                        (:nonlocal) kt kf))
+
     ((¶ obj (var1 ...) (:nonlocal previous ...) kt kf)
+     (match-proper-list obj (var1 ...) (:nonlocal previous ...)
+                        (:equal? equal?) kt kf))
+
+    ((¶ obj (var1 ...) (:equal? equ?) kt kf)
+     (match-proper-list obj (var1 ...) (:nonlocal)
+                        (:equal? equ?) kt kf))
+
+    ((¶ obj (var1 ...) (:nonlocal previous ...) (:equal? equ?) kt kf)
+     (match-proper-list obj (var1 ...) (:equal? equ?)
+                        (:nonlocal previous ...) kt kf))
+
+    ((¶ obj (var1 ...) (:equal? equ?) (:nonlocal previous ...) kt kf)
      (cond
        ((not (proper-list? obj))
         kf)
        ((not (= (length obj)
-                (syx-proper-list-length (syx-identity)
-                                        (var1 ...))))
+                (syx-proper-list-length (syx-identity) (var1 ...))))
         kf)
        (else
         ;; Evaluate the list here. Otherwise, variable names in it may
         ;; be misinterpreted as identifiers, rather than as values.
         (let ((lst obj))
           (extract-identifiers-from-proper-list
-           (match-proper-list-aux (previous ...) lst (var1 ...)
+           (match-proper-list-aux (previous ...) lst (var1 ...) equ?
                                   kt kf)
            if-bound-identifier= (previous ...) (var1 ...))))))))
 
 (define-syntax match-proper-list-aux
   (syntax-rules ()
-    ((¶ (previous ...) lst (var1 ...) kt kf (new ...))
+    ((¶ (previous ...) lst (var1 ...) equ? kt kf (new ...))
      (make-identifiers-environment
       (new ...)
       (previous ...)
@@ -986,7 +1001,7 @@ define_scheme_type_syntax(msyx-boolean,boolean?)
           (let ((identity (lambda x* (apply values x*)))
                 (p lst))
             (let ((elem (car p)))
-              (match-value elem var1 identity (cc kf))
+              (match-value elem var1 (:equal? equ?) identity (cc kf))
               (set! p (cdr p)))
             ...
             (cc kt)))))))))
