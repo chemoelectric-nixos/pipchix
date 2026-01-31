@@ -54,6 +54,9 @@ match-boolean-syntax
 match-false-syntax
 match-true-syntax
 
+match-car-syntax
+match-cdr-syntax
+
 split-syntax-at-last-pair
 split-syntax
 

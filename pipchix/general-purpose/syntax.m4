@@ -696,6 +696,20 @@ define_scheme_type_syntax(match-boolean-syntax,boolean?)
     ((¶ #t success failure) success)
     ((¶ xx success failure) failure)))
 
+(define-syntax match-car-syntax
+  (syntax-rules ()
+    ((¶ (Car . Cdr) (match1 arg1 ...) success failure)
+     (match1 Car arg1 ... success failure))
+    ((¶ xxxxxxxxxxx (match1 arg1 ...) success failure)
+     failure)))
+
+(define-syntax match-cdr-syntax
+  (syntax-rules ()
+    ((¶ (Car . Cdr) (match1 arg1 ...) success failure)
+     (match1 Cdr arg1 ... success failure))
+    ((¶ xxxxxxxxxxx (match1 arg1 ...) success failure)
+     failure)))
+
 (define-syntax split-syntax-at-last-pair
   ;;
   ;; Split syntax at the last pair of a possibly dotted list.
