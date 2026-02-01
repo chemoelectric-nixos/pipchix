@@ -59,6 +59,7 @@ msyx-true
 
 msyx-car
 msyx-cdr
+msyx-assoc
 
 msyx-quote
 msyx-quasiquote

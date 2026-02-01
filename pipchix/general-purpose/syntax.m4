@@ -113,19 +113,11 @@
   ;;    (result 3)
   ;;
   (syntax-rules ()
-
-    ((¶ (k ...) key ())
-     FAST_SYNTAX_ERROR("sys-assoc must have a matching entry"))
-
-    ((¶ (k ...) key ((key1 val1 ...) assoc2 ...))
-     (if (eq? key key1)
-       (k ... (val1 ...))
-       (syx-assoc (k ...) key (assoc2 ...))))
-
-    ((¶ (k ...) key ((key1 . value1) assoc2 ...))
-     (if (eq? key key1)
-       (k ... value1)
-       (syx-assoc (k ...) key (assoc2 ...))))))
+    ((¶ (k ...) key assoc*)
+     (msyx-assoc
+      key assoc*
+      (k ...)
+      FAST_SYNTAX_ERROR("sys-assoc must have a matching entry")))))
 
 (define-syntax syx-identity
   (syntax-rules ()
@@ -555,6 +547,44 @@ define_scheme_type_syntax(msyx-boolean,boolean?)
      (match1 Cdr arg1 ... success failure))
     ((¶ xxxxxxxxxxx (match1 arg1 ...) success failure)
      failure)))
+
+(define-syntax msyx-assoc
+  ;;
+  ;; Syntactic association list lookup.
+  ;;
+  ;;    (display
+  ;;     (msyx-assoc
+  ;;      'foo
+  ;;      (('foobar . 1)
+  ;;       ('bar . 2)
+  ;;       ('foo . 3)
+  ;;       ('barfoo . 4))
+  ;;      (list "success")
+  ;;      (list "failure")
+  ;;    (newline)
+  ;;
+  ;; will print
+  ;;
+  ;;    (result 3)
+  ;;
+  ;; A mismatch will print
+  ;;
+  ;;    (failure)
+  ;;
+  (syntax-rules ()
+
+    ((¶ key () (kt ...) (kf ...))
+     (kf ...))
+
+    ((¶ key ((key1 val1 ...) assoc2 ...) (kt ...) (kf ...))
+     (if (eq? key key1)
+       (kt ... (val1 ...))
+       (msyx-assoc key (assoc2 ...) (kt ...) (kf ...))))
+
+    ((¶ key ((key1 . value1) assoc2 ...) (kt ...) (kf ...))
+     (if (eq? key key1)
+       (kt ... value1)
+       (msyx-assoc key (assoc2 ...) (kt ...) (kf ...))))))
 
 (define-syntax msyx-quote
   (syntax-rules (quote)
