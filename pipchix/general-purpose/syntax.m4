@@ -565,7 +565,7 @@ define_scheme_type_syntax(msyx-boolean,boolean?)
   ;;
   ;; will print
   ;;
-  ;;    (result 3)
+  ;;    (success 3)
   ;;
   ;; A mismatch will print
   ;;
