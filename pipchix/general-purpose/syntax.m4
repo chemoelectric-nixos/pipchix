@@ -117,7 +117,8 @@
      (msyx-assoc
       key assoc*
       (k ...)
-      FAST_SYNTAX_ERROR("sys-assoc must have a matching entry")))))
+      FAST_SYNTAX_ERROR("sys-assoc must have a matching entry",
+                        key)))))
 
 (define-syntax syx-identity
   (syntax-rules ()
