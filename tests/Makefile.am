@@ -75,6 +75,7 @@ EXTRA_DIST += e-macros-template.at
 EXTRA_DIST += eager-macros-template.at
 EXTRA_DIST += combinators-template.at
 EXTRA_DIST += syntax-template.at
+EXTRA_DIST += backtracking-template.at
 EXTRA_DIST += continuation-capture-template.at
 EXTRA_DIST += escaped-utf8-template.at
 EXTRA_DIST += expressions-template.at
@@ -140,6 +141,7 @@ TESTSUITE_DEPS += $(srcdir)/eager-macros-template.at
 TESTSUITE_DEPS += $(srcdir)/ec-template.at
 TESTSUITE_DEPS += $(srcdir)/combinators-template.at
 TESTSUITE_DEPS += $(srcdir)/syntax-template.at
+TESTSUITE_DEPS += $(srcdir)/backtracking-template.at
 TESTSUITE_DEPS += $(srcdir)/continuation-capture-template.at
 
 TESTSUITE_DEPS += $(srcdir)/shell-print-template.at
