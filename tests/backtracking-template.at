@@ -28,54 +28,22 @@ AT_KEYWORDS([default_keywords backtracking])
 
 m4_define([sexpr],
   [(scheme->nix
-    (let ()
-      (define-backtracking step fail)
-      (call-with-values
-          (lambda ()
-            (step
-             (lambda ()
-               (fail))))
-        list)))])
+    (let ((x 1234))
+      (attempt
+        (set! x 5678))
+      x))])
 check_unquoted([run_scheme 'sexpr'],[0],
-  [interpunct_nl([[[·]·]])],[])
+  [interpunct_nl([(5678)·])],[])
 
 m4_define([sexpr],
   [(scheme->nix
-    (let ()
-      (define-backtracking _STEP_ _FAIL_)
-      (call-with-values
-          (lambda ()
-            (_STEP_
-             (lambda ()
-               (_FAIL_ 1 2 3))))
-        list)))])
+    (let ((x 1234))
+      (attempt
+        (fail)
+        (set! x 5678))
+      x))])
 check_unquoted([run_scheme 'sexpr'],[0],
-  [interpunct_nl([[[·(1)·(2)·(3)·]·]])],[])
-
-m4_define([sexpr],
-  [(scheme->nix
-    (let ()
-      (define-backtracking step fail)
-      (call-with-values
-          (lambda ()
-            (step
-             (lambda () (values))))
-        list)))])
-check_unquoted([run_scheme 'sexpr'],[0],
-  [interpunct_nl([[[·]·]])],[])
-
-
-m4_define([sexpr],
-  [(scheme->nix
-    (let ()
-      (define-backtracking step fail)
-      (call-with-values
-          (lambda ()
-            (step
-             (lambda () (values 1 2 3))))
-        list)))])
-check_unquoted([run_scheme 'sexpr'],[0],
-  [interpunct_nl([[[·(1)·(2)·(3)·]·]])],[])
+  [interpunct_nl([(1234)·])],[])
 
 AT_CLEANUP
 

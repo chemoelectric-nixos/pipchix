@@ -1,1 +1,4 @@
-define-backtracking
+failure-object
+failure-object?
+fail
+attempt

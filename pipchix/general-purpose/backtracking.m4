@@ -24,61 +24,36 @@
 ;;;
 ;;;-------------------------------------------------------------------
 
-(define-syntax define-backtracking
+(define *failure* '#("the\xA0failure\xA0object"))
+
+(define (failure-object)
+  ;; Return a failure object.
+  *failure*)
+
+(define (failure-object? obj)
+  ;; Test if an object is a failure object.
+  (eq? obj *failure*))
+
+(define (fail)
+  ;; Raise a failure exception.
+  (raise-continuable *failure*))
+
+(define-syntax attempt
+  ;;
+  ;; Try to find one solution to a problem.
+  ;;
   (syntax-rules ()
-    ((¶ step fail)
-     (begin
-
-       ;; Create a return stack.
-       (define continuations '())
-
-       (define step
-         (case-lambda
-
-           ((before thunk after)
-            (dynamic-wind
-
-              ;; Run user-defined code.
-              before
-
-              (lambda ()
-                (call/cc
-                 (lambda (cc)
-                   ;; Put a return address on the stack.
-                   (set! continuations (cons cc continuations))
-                   ;; Run user-defined code.
-                   (thunk))))
-
-              (lambda ()
-                ;; Remove the obsolete return address.
-                (set! continuations (cdr continuations))
-                ;; Run user-defined code.
-                (after))))
-
-           ((thunk)
-            ;; A step in which ‘before’ and ‘after’ are no-operations.
-            (let ((nop (lambda () (if #f #f))))
-              (step nop thunk nop)))))
-
-       (define fail
-         (let ((error-message "the backtracking stack is empty"))
-           (case-lambda
-             (()
-              (unless (pair? continuations)
-                SCHEME_ERROR(error-message, (list fail)))
-              ;; Return to the return address, without arguments.
-              ;; (This is merely a fast path that avoids
-              ;; call-with-values.)
-              ((car continuations)))
-             (args
-              (unless (pair? continuations)
-                SCHEME_ERROR(error-message, (cons fail args)))
-              ;; Return to the return address, with the given
-              ;; arguments.
-              (call-with-values
-                  (lambda () (apply values args))
-                (car continuations))))))
-       ))))
+    ((¶ body ...)
+     (call/cc
+      (lambda (cc)
+        (with-exception-handler
+            (lambda (exc)
+              (if (failure-object? exc)
+                (cc)
+                (raise-continuable exc)))
+          (lambda ()
+            (if #f #f)
+            body ...)))))))
 
 ;;;-------------------------------------------------------------------
 m4_divert(-1)
