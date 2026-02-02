@@ -24,7 +24,7 @@
 ;;;
 ;;;-------------------------------------------------------------------
 
-(define *failure* '#("the\xA0failure\xA0object"))
+(define *failure* '#("the\xA0;failure\xA0;object"))
 
 (define (failure-object)
   ;; Return a failure object.
@@ -54,6 +54,54 @@
           (lambda ()
             (if #f #f)
             body ...)))))))
+
+(define-syntax general-reversible-set!
+  (syntax-rules ()
+    ((¶ getter! setter! ((obj value) ...) body ...)
+     (let-values
+         ((previous-values (values (getter! obj) ...)))
+       (with-exception-handler
+           (lambda (exc)
+             (when (failure-object? exc)
+               (let ((p previous-values))
+                 (begin
+                   (setter! obj (car p))
+                   (set! p (cdr p)))
+                 ...))
+             (raise-continuable exc))
+         (lambda ()
+           (if #f #f)
+           (setter! obj value) ...
+           body ...))))))
+
+(define-syntax reversible-set!
+  (syntax-rules ()
+    ((¶ ((obj value) ...) body ...)
+     (let-syntax ((ref (syntax-rules () ((µ t) t))))
+       (general-reversible-set! ref set!
+                                ((obj value) ...) body ...)))))
+
+(define-syntax reversible-vector-set!
+  (syntax-rules ()
+    ((¶ (((obj i) value) ...) body ...)
+     (let-syntax
+         ((getter (syntax-rules ()
+                    ((µ (t j)) (vector-ref t j))))
+          (setter! (syntax-rules ()
+                     ((µ (t j) v) (vector-set! t j v)))))
+       (general-reversible-set! getter setter!
+                                (((obj i) value) ...) body ...)))))
+
+(define-syntax reversible-list-set!
+  (syntax-rules ()
+    ((¶ (((obj i) value) ...) body ...)
+     (let-syntax
+         ((getter (syntax-rules ()
+                    ((µ (t j)) (list-ref t j))))
+          (setter! (syntax-rules ()
+                     ((µ (t j) v) (list-set! t j v)))))
+       (general-reversible-set! getter setter!
+                                (((obj i) value) ...) body ...)))))
 
 ;;;-------------------------------------------------------------------
 m4_divert(-1)
