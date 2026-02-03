@@ -51,6 +51,28 @@
              (raise-continuable exc)))
        thunk))))
 
+(define (attempt-or . thunk*)
+  ;;
+  ;; Try to find a first solution among several. Fail if there are no
+  ;; solutions.
+  ;;
+  (let ((success #f))
+    (let loop ((p thunk*))
+      (cond (success (if #f #f))
+            ((not-pair? p) (fail))
+            (else
+             (call/cc
+              (lambda (cc)
+                (with-exception-handler
+                    (lambda (exc)
+                      (if (failure-object? exc)
+                        (cc)
+                        (raise-continuable exc)))
+                  (lambda ()
+                    ((car p))
+                    (set! success #t)))))
+             (loop (cdr p)))))))
+
 (define (attempt-every . thunk*)
   ;;
   ;; Try to find every solution among several.

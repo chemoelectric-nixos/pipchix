@@ -3,6 +3,7 @@ failure-object?
 fail
 
 attempt
+attempt-or
 attempt-every
 
 general-reversible-set!
