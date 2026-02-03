@@ -51,6 +51,15 @@
              (raise-continuable exc)))
        thunk))))
 
+(define (attempt-every . thunk*)
+  ;;
+  ;; Try to find every solution among several.
+  ;;
+  (let loop ((p thunk*))
+    (when (pair? p)
+      (attempt (car p))
+      (loop (cdr p)))))
+
 (define-syntax general-reversible-set!
   (syntax-rules ()
     ((¶ getter! setter! ((obj value) ...) body ...)
