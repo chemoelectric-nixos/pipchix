@@ -80,6 +80,34 @@
   ;;
   (list->attempt-or thunk*))
 
+(define (list->attempt-and thunk*)
+  ;;
+  ;; Try to find all solutions among several. Fail the first time a
+  ;; solution fails.
+  ;;
+  (let ((failure #f))
+    (let loop ((p thunk*))
+      (cond (failure (fail))
+            ((pair? p)
+             (call/cc
+              (lambda (cc)
+                (with-exception-handler
+                    (lambda (exc)
+                      (if (failure-object? exc)
+                        (begin
+                          (set! failure #t)
+                          (cc))
+                        (raise-continuable exc)))
+                  (car p))))
+             (loop (cdr p)))))))
+
+(define (attempt-and . thunk*)
+  ;;
+  ;; Try to find all solutions among several. Fail the first time a
+  ;; solution fails.
+  ;;
+  (list->attempt-and thunk*))
+
 (define (list->attempt-every thunk*)
   ;;
   ;; Try to find every solution among several.
