@@ -51,7 +51,7 @@
              (raise-continuable exc)))
        thunk))))
 
-(define (attempt-or . thunk*)
+(define (list->attempt-or thunk*)
   ;;
   ;; Try to find a first solution among several. Fail if there are no
   ;; solutions.
@@ -73,7 +73,14 @@
                     (set! success #t)))))
              (loop (cdr p)))))))
 
-(define (attempt-every . thunk*)
+(define (attempt-or . thunk*)
+  ;;
+  ;; Try to find a first solution among several. Fail if there are no
+  ;; solutions.
+  ;;
+  (list->attempt-or thunk*))
+
+(define (list->attempt-every thunk*)
   ;;
   ;; Try to find every solution among several.
   ;;
@@ -81,6 +88,12 @@
     (when (pair? p)
       (attempt (car p))
       (loop (cdr p)))))
+
+(define (attempt-every . thunk*)
+  ;;
+  ;; Try to find every solution among several.
+  ;;
+  (list->attempt-every thunk*))
 
 (define-syntax general-reversible-set!
   (syntax-rules ()

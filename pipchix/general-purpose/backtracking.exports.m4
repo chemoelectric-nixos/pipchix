@@ -3,8 +3,8 @@ failure-object?
 fail
 
 attempt
-attempt-or
-attempt-every
+list->attempt-or attempt-or
+list->attempt-every attempt-every
 
 general-reversible-set!
 reversible-set!
