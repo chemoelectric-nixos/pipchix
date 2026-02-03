@@ -30,7 +30,8 @@ m4_define([sexpr],
   [(scheme->nix
     (let ((x 1234))
       (attempt
-        (set! x 5678))
+       (lambda ()
+         (set! x 5678)))
       x))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([(5678)·])],[])
@@ -39,8 +40,9 @@ m4_define([sexpr],
   [(scheme->nix
     (let ((x 1234))
       (attempt
-        (fail)
-        (set! x 5678))
+       (lambda ()
+         (fail)
+         (set! x 5678)))
       x))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([(1234)·])],[])
@@ -49,8 +51,9 @@ m4_define([sexpr],
   [(scheme->nix
     (let ((x 1234))
       (attempt
-        (reversible-set! ((x 5678))
-          x))))])
+       (lambda ()
+         (reversible-set! ((x 5678))
+           x)))))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([(5678)·])],[])
 
@@ -58,7 +61,8 @@ m4_define([sexpr],
   [(scheme->nix
     (let ((x 1234))
       (attempt
-        (reversible-set! ((x 5678))))
+       (lambda ()
+         (reversible-set! ((x 5678)))))
       x))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([(5678)·])],[])
@@ -68,11 +72,12 @@ m4_define([sexpr],
     (let ((x 1234)
           (y "1234"))
       (attempt
-        (reversible-set! ((x 5678)
-                          (y "5678"))
-          (unless (and (= x 5678) (equal? y "5678"))
-            (raise "BIG ERROR"))
-          (fail)))
+       (lambda ()
+         (reversible-set! ((x 5678)
+                           (y "5678"))
+           (unless (and (= x 5678) (equal? y "5678"))
+             (raise "BIG ERROR"))
+           (fail))))
       (list x y)))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([[[·(1234)·("1234")·]·]])],[])
@@ -82,12 +87,13 @@ m4_define([sexpr],
     (let ((x (vector 1234))
           (y (vector "1234")))
       (attempt
-        (reversible-vector-set! (((x 0) 5678)
-                                 ((y 0) "5678"))
-          (unless (and (= (vector-ref x 0) 5678)
-                       (equal? (vector-ref y 0) "5678"))
-            (raise "BIG ERROR"))
-          (fail)))
+       (lambda ()
+         (reversible-vector-set! (((x 0) 5678)
+                                  ((y 0) "5678"))
+           (unless (and (= (vector-ref x 0) 5678)
+                        (equal? (vector-ref y 0) "5678"))
+             (raise "BIG ERROR"))
+           (fail))))
       (list (vector-ref x 0) (vector-ref y 0))))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([[[·(1234)·("1234")·]·]])],[])
@@ -97,12 +103,13 @@ m4_define([sexpr],
     (let ((x (list 1234))
           (y (list "1234")))
       (attempt
-        (reversible-list-set! (((x 0) 5678)
-                               ((y 0) "5678"))
-          (unless (and (= (list-ref x 0) 5678)
-                       (equal? (list-ref y 0) "5678"))
-            (raise "BIG ERROR"))
-          (fail)))
+       (lambda ()
+         (reversible-list-set! (((x 0) 5678)
+                                ((y 0) "5678"))
+           (unless (and (= (list-ref x 0) 5678)
+                        (equal? (list-ref y 0) "5678"))
+             (raise "BIG ERROR"))
+           (fail))))
       (list x y)))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([[[·[·(1234)·]·[·("1234")·]·]·]])],[])

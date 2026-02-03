@@ -38,22 +38,18 @@
   ;; Raise a failure exception.
   (raise-continuable *failure*))
 
-(define-syntax attempt
+(define (attempt thunk)
   ;;
   ;; Try to find one solution to a problem.
   ;;
-  (syntax-rules ()
-    ((¶ body ...)
-     (call/cc
-      (lambda (cc)
-        (with-exception-handler
-            (lambda (exc)
-              (if (failure-object? exc)
-                (cc)
-                (raise-continuable exc)))
-          (lambda ()
-            (if #f #f)
-            body ...)))))))
+  (call/cc
+   (lambda (cc)
+     (with-exception-handler
+         (lambda (exc)
+           (if (failure-object? exc)
+             (cc)
+             (raise-continuable exc)))
+       thunk))))
 
 (define-syntax general-reversible-set!
   (syntax-rules ()
