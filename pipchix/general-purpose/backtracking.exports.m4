@@ -5,6 +5,7 @@ fail
 attempt
 list->attempt-or attempt-or
 list->attempt-and attempt-and
+list->attempt-while attempt-while
 list->attempt-every attempt-every
 
 general-reversible-set!

@@ -80,26 +80,32 @@
   ;;
   (list->attempt-or thunk*))
 
-(define (list->attempt-and thunk*)
+(define-syntax list->attempt-and/while
+  (syntax-rules ()
+    ((¶ action-on-failure)
+     (lambda (thunk*)
+       (let ((failure #f))
+         (let loop ((p thunk*))
+           (cond (failure action-on-failure)
+                 ((pair? p)
+                  (call/cc
+                   (lambda (cc)
+                     (with-exception-handler
+                         (lambda (exc)
+                           (if (failure-object? exc)
+                             (begin
+                               (set! failure #t)
+                               (cc))
+                             (raise-continuable exc)))
+                       (car p))))
+                  (loop (cdr p))))))))))
+
+(define list->attempt-and
   ;;
   ;; Try to find all solutions among several. Fail the first time a
   ;; solution fails.
   ;;
-  (let ((failure #f))
-    (let loop ((p thunk*))
-      (cond (failure (fail))
-            ((pair? p)
-             (call/cc
-              (lambda (cc)
-                (with-exception-handler
-                    (lambda (exc)
-                      (if (failure-object? exc)
-                        (begin
-                          (set! failure #t)
-                          (cc))
-                        (raise-continuable exc)))
-                  (car p))))
-             (loop (cdr p)))))))
+  (list->attempt-and/while (fail)))
 
 (define (attempt-and . thunk*)
   ;;
@@ -107,6 +113,20 @@
   ;; solution fails.
   ;;
   (list->attempt-and thunk*))
+
+(define list->attempt-while
+  ;;
+  ;; Try to find all solutions among several. Stop trying, the first
+  ;; time a solution fails. No matter what happens, succeed overall.
+  ;;
+  (list->attempt-and/while (if #f #f)))
+
+(define (attempt-while . thunk*)
+  ;;
+  ;; Try to find all solutions among several. Stop trying, the first
+  ;; time a solution fails. No matter what happens, succeed overall.
+  ;;
+  (list->attempt-while thunk*))
 
 (define (list->attempt-every thunk*)
   ;;
