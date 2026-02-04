@@ -16,13 +16,6 @@ last-ec
 fold-ec
 fold3-ec
 
-:generator-proc
-dispatch-union
-:-dispatch-ref
-:-dispatch-set!
-make-initial-:-dispatch
-
-:
 :list
 :string
 :vector
@@ -37,3 +30,13 @@ make-initial-:-dispatch
 :parallel
 :while
 :until
+
+;;;
+;;; We do not support dispatching. It does not work in R⁶RS.
+;;;
+;;; :generator-proc
+;;; dispatch-union
+;;; :-dispatch-ref
+;;; :-dispatch-set!
+;;; make-initial-:-dispatch
+;;; :
