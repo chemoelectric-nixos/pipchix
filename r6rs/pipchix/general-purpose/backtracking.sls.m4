@@ -34,7 +34,8 @@ m4_include(pipchix/pipchix-includes.m4)
 
   (export m4_include(pipchix/general-purpose/backtracking.exports.m4))
 
-  (import basic_libraries)
+  (import basic_libraries
+          (pipchix general-purpose ec))
 
   m4_include(pipchix/general-purpose/backtracking.m4)
 

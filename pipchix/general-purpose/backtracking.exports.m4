@@ -8,6 +8,8 @@ list->attempt-and attempt-and
 list->attempt-while attempt-while
 list->attempt-every attempt-every
 
+attempt-or-ec
+
 general-reversible-set!
 reversible-set!
 reversible-vector-set!
