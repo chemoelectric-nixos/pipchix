@@ -114,6 +114,51 @@ m4_define([sexpr],
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([[[·[·(1234)·]·[·("1234")·]·]·]])],[])
 
+dnl  A simple n-queens using list->attempt-every for looping (but not
+dnl  for ‘real’ backtracking).
+m4_define([sexpr],
+  [(scheme->nix
+    (let ()
+      (define (make-queen x y) (cons x y))
+      (define (queen-x q) (car q))
+      (define (queen-y q) (cdr q))
+      (define (n-queens n)
+        (define (queens-attack? q1 q2)
+          (let ((x2-x1 (- (queen-x q2) (queen-x q1))))
+            (if (zero? x2-x1)
+              @%:@t
+              (let ((y2-y1 (- (queen-y q2) (queen-y q1))))
+                (if (= (abs x2-x1) (abs y2-y1))
+                  @%:@t
+                  @%:@f)))))
+        (define (latest-queen-attacks? q*)
+          (let ((latest-queen (car q*)))
+            (let loop ((q* (cdr q*)))
+              (if (pair? q*)
+                (if (queens-attack? latest-queen (car q*))
+                  @%:@t
+                  (loop (cdr q*)))
+                @%:@f))))
+        (define solutions (list-ec (:range x 1 (+ n 1))
+                                   (list (make-queen x 1))))
+        (do ((y 2 (+ y 1)))
+            ((= y (+ n 1)))
+          (let ((solut (list-ec (:list q* solutions)
+                                (:range x 1 (+ n 1))
+                                (cons (make-queen x y) q*))))
+            (set! solutions '\''())
+            (list->attempt-every
+             (list-ec
+               (:list q* solut)
+               (lambda ()
+                 (when (latest-queen-attacks? q*)
+                   (fail))
+                 (set! solutions (cons q* solutions)))))))
+        solutions)
+        (length (n-queens 8))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(92)·])],[])
+
 AT_CLEANUP
 
 # local variables:
