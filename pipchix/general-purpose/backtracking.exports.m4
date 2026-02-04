@@ -9,6 +9,7 @@ list->attempt-while attempt-while
 list->attempt-every attempt-every
 
 attempt-or-ec
+attempt-and-ec
 
 general-reversible-set!
 reversible-set!

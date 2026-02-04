@@ -164,6 +164,24 @@
        (if #f #f)
        (fail)))))
 
+(define-syntax attempt-and-ec
+  (syntax-rules ()
+    ((¶ qualifier1 ... command)
+     (if (call/cc
+          (lambda (exit)
+            (do-ec
+              qualifier1 ...
+              (with-exception-handler
+                  (lambda (exc)
+                    (if (failure-object? exc)
+                      (exit #f)
+                      (raise-continuable exc)))
+                (lambda ()
+                  command)))
+            #t))
+       (if #f #f)
+       (fail)))))
+
 (define-syntax general-reversible-set!
   (syntax-rules ()
     ((¶ getter! setter! ((obj value) ...) body ...)
