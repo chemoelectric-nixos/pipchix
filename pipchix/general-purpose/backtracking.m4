@@ -144,6 +144,9 @@
   (list->attempt-every thunk*))
 
 (define-syntax attempt-or-ec
+  ;;
+  ;; On success, returns the values returned by ‘command’.
+  ;;
   (syntax-rules ()
     ((¶ qualifier1 ... command)
      (call/cc
@@ -164,22 +167,28 @@
         (fail))))))
 
 (define-syntax attempt-and-ec
+  ;;
+  ;; On success, returns the values returned by the last call to
+  ;; ‘command’.
+  ;;
   (syntax-rules ()
     ((¶ qualifier1 ... command)
-     (if (call/cc
-          (lambda (exit)
-            (do-ec
-              qualifier1 ...
-              (with-exception-handler
-                  (lambda (exc)
-                    (if (failure-object? exc)
-                      (exit #f)
-                      (raise-continuable exc)))
-                (lambda ()
-                  command)))
-            #t))
-       (if #f #f)
-       (fail)))))
+     (let-values ((val* (values)))
+       (if (call/cc
+            (lambda (leave)
+              (do-ec
+                qualifier1 ...
+                (with-exception-handler
+                    (lambda (exc)
+                      (if (failure-object? exc)
+                        (leave #f)
+                        (raise-continuable exc)))
+                  (lambda ()
+                    (let-values ((v* command))
+                      (set! val* v*)))))
+              (leave #t)))
+         (apply values val*)
+         (fail))))))
 
 (define-syntax general-reversible-set!
   (syntax-rules ()
