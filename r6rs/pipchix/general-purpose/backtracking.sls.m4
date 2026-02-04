@@ -35,8 +35,12 @@ m4_include(pipchix/pipchix-includes.m4)
   (export m4_include(pipchix/general-purpose/backtracking.exports.m4))
 
   (import basic_libraries
+          (rnrs mutable-pairs (6))
           (pipchix general-purpose ec))
 
+  (define (list-set! lst i x)
+    (set-car! (list-tail lst i) x))
+  
   m4_include(pipchix/general-purpose/backtracking.m4)
 
   )
