@@ -146,23 +146,22 @@
 (define-syntax attempt-or-ec
   (syntax-rules ()
     ((¶ qualifier1 ... command)
-     (if (call/cc
-          (lambda (exit)
-            (do-ec
-              qualifier1 ...
-              (call/cc
-               (lambda (next)
-                 (with-exception-handler
-                     (lambda (exc)
-                       (if (failure-object? exc)
-                         (next)
-                         (raise-continuable exc)))
-                   (lambda ()
-                     command
-                     (exit #t))))))
-            #f))
-       (if #f #f)
-       (fail)))))
+     (call/cc
+      (lambda (leave)
+        (do-ec
+          qualifier1 ...
+          (call/cc
+           (lambda (next)
+             (with-exception-handler
+                 (lambda (exc)
+                   (if (failure-object? exc)
+                     (next)
+                     (raise-continuable exc)))
+               (lambda ()
+                 (call-with-values
+                     (lambda () command)
+                   leave))))))
+        (fail))))))
 
 (define-syntax attempt-and-ec
   (syntax-rules ()
