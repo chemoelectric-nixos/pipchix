@@ -153,7 +153,8 @@
     ((¶ ((obj value) ...) body ...)
      (let-syntax ((ref (syntax-rules () ((µ t) t))))
        (general-reversible-set! ref set!
-                                ((obj value) ...) body ...)))))
+                                ((obj value) ...)
+                                body ...)))))
 
 (define-syntax reversible-vector-set!
   (syntax-rules ()
@@ -164,7 +165,8 @@
           (setter! (syntax-rules ()
                      ((µ (t j) v) (vector-set! t j v)))))
        (general-reversible-set! getter setter!
-                                (((obj i) value) ...) body ...)))))
+                                (((obj i) value) ...)
+                                body ...)))))
 
 (define-syntax reversible-list-set!
   (syntax-rules ()
@@ -175,7 +177,8 @@
           (setter! (syntax-rules ()
                      ((µ (t j) v) (list-set! t j v)))))
        (general-reversible-set! getter setter!
-                                (((obj i) value) ...) body ...)))))
+                                (((obj i) value) ...)
+                                body ...)))))
 
 ;;;-------------------------------------------------------------------
 m4_divert(-1)
