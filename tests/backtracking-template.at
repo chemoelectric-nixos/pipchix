@@ -196,6 +196,52 @@ m4_define([sexpr],
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([(92)·])],[])
 
+dnl  A program that finds one solution to the n-queens by brute force
+dnl  search through permutations of letters representing columns. Both
+dnl  attempt-and-ec and attempt-or-ec are used.
+m4_define([sexpr],
+  [(scheme->nix
+    (let ()
+      (define (permutations lst)
+        (if (null-list? lst)
+          (quote (()))
+          (append-ec
+            (:list p (permutations (cdr lst)))
+            (let ((end (+ (length p) 1)))
+              (list-ec
+                (:range n 0 end)
+                (let insert ((π p)
+                             (ν n))
+                  (if (zero? ν)
+                    `(,(car lst) ,@π)
+                    `(,(car π) ,@(insert (cdr π) (- ν 1))))))))))
+      (define (permutation-solves-n-queens? lst)
+        (let ((n (length lst))
+              (result @%:@f))
+          (attempt-every-ec
+            (begin
+            (attempt-and-ec
+              (:range y1 0 n)
+              (:range y2 (+ y1 1) n)
+              (let ((xdiff (- (char->integer (list-ref lst y2))
+                              (char->integer (list-ref lst y1))))
+                    (ydiff (- y2 y1)))
+                (if (= (abs xdiff) (abs ydiff))
+                  (fail))))
+            (set! result @%:@t)))
+          result))
+      (define (find-n-queens-solution start)
+        (attempt-or-ec
+        (:list p (permutations start))
+        (if (permutation-solves-n-queens? p)
+          p
+          (fail))))
+      (map string
+       (find-n-queens-solution
+        '\''(@%:@\a @%:@\b @%:@\c @%:@\d @%:@\e @%:@\f @%:@\g @%:@\h)))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·("e")·("b")·("f")·("a")·("g")·("d")·("h")·("c")·]·]])],[])
+
 AT_CLEANUP
 
 # local variables:
