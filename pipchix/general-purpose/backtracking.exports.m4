@@ -3,11 +3,6 @@ failure-object?
 fail
 
 attempt
-list->attempt-or attempt-or
-list->attempt-and attempt-and
-list->attempt-while attempt-while
-list->attempt-every attempt-every
-
 attempt-or-ec
 attempt-and-ec
 attempt-while-ec

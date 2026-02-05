@@ -114,7 +114,7 @@ m4_define([sexpr],
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([[[·[·(1234)·]·[·("1234")·]·]·]])],[])
 
-dnl  A simple n-queens using list->attempt-every for looping (but not
+dnl  A simple n-queens using attempt-every-ec for looping (but not
 dnl  for ‘real’ backtracking).
 m4_define([sexpr],
   [(scheme->nix
@@ -147,13 +147,12 @@ m4_define([sexpr],
                                 (:range x 1 (+ n 1))
                                 (cons (make-queen x y) q*))))
             (set! solutions '\''())
-            (list->attempt-every
-             (list-ec
-               (:list q* solut)
-               (lambda ()
-                 (when (latest-queen-attacks? q*)
-                   (fail))
-                 (set! solutions (cons q* solutions)))))))
+            (attempt-every-ec
+              (:list q* solut)
+              (begin
+                (when (latest-queen-attacks? q*)
+                  (fail))
+                (set! solutions (cons q* solutions))))))
         solutions)
         (length (n-queens 8))))])
 check_unquoted([run_scheme 'sexpr'],[0],
