@@ -190,6 +190,29 @@
          (apply values val*)
          (fail))))))
 
+(define-syntax attempt-while-ec
+  ;;
+  ;; Returns the values returned by the last successful call to
+  ;; ‘command’.
+  ;;
+  (syntax-rules ()
+    ((¶ qualifier1 ... command)
+     (let-values ((val* (values)))
+       (call/cc
+        (lambda (leave)
+          (do-ec
+            qualifier1 ...
+            (with-exception-handler
+                (lambda (exc)
+                  (if (failure-object? exc)
+                    (leave #f)
+                    (raise-continuable exc)))
+              (lambda ()
+                (let-values ((v* command))
+                  (set! val* v*)))))
+          (leave #t)))
+       (apply values val*)))))
+
 (define-syntax general-reversible-set!
   (syntax-rules ()
     ((¶ getter! setter! ((obj value) ...) body ...)

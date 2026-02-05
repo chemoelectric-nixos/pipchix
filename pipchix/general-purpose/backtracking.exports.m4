@@ -10,6 +10,7 @@ list->attempt-every attempt-every
 
 attempt-or-ec
 attempt-and-ec
+attempt-while-ec
 
 general-reversible-set!
 reversible-set!
