@@ -205,12 +205,11 @@
             (with-exception-handler
                 (lambda (exc)
                   (if (failure-object? exc)
-                    (leave #f)
+                    (leave)
                     (raise-continuable exc)))
               (lambda ()
                 (let-values ((v* command))
-                  (set! val* v*)))))
-          (leave #t)))
+                  (set! val* v*)))))))
        (apply values val*)))))
 
 (define-syntax general-reversible-set!
