@@ -38,19 +38,6 @@
   ;; Raise a failure exception.
   (raise-continuable *failure*))
 
-(define (attempt thunk)
-  ;;
-  ;; Try to find one solution to a problem.
-  ;;
-  (call/cc
-   (lambda (cc)
-     (with-exception-handler
-         (lambda (exc)
-           (if (failure-object? exc)
-             (cc)
-             (raise-continuable exc)))
-       thunk))))
-
 (define-syntax attempt-or-ec
   ;;
   ;; On success, returns the values returned by ‘command’.

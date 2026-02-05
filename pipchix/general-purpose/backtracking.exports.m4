@@ -2,7 +2,6 @@ failure-object
 failure-object?
 fail
 
-attempt
 attempt-or-ec
 attempt-and-ec
 attempt-while-ec
