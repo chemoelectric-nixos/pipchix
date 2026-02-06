@@ -24,6 +24,20 @@
 ;;;
 ;;;-------------------------------------------------------------------
 
+;;; This stack IS NOT THREAD-SAFE.
+(define *failure-stack* '())
+
+(define (push-failure! failure)
+  (set! *failure-stack* (cons failure *failure-stack*)))
+
+(define (drop-failure!)
+  (set! *failure-stack* (cdr *failure-stack*)))
+
+(define (attempt-dynamic-wind thunk)
+  (dynamic-wind (lambda () (if #f #f))
+                thunk
+                (lambda () (drop-failure!))))
+
 (define *failure* '#("the\xA0;failure\xA0;object"))
 
 (define (failure-object)
@@ -35,8 +49,9 @@
   (eq? obj *failure*))
 
 (define (fail)
-  ;; Raise a failure exception.
-  (raise-continuable *failure*))
+  (if (pair? *failure-stack*)
+    ((car *failure-stack*))
+    *failure*))
 
 (define-syntax attempt-or-ec
   ;;
@@ -50,15 +65,15 @@
           qualifier1 ...
           (call/cc
            (lambda (next)
-             (with-exception-handler
-                 (lambda (exc)
-                   (if (failure-object? exc)
-                     (next)
-                     (raise-continuable exc)))
+             (attempt-dynamic-wind
                (lambda ()
-                 (call-with-values
-                     (lambda () command)
-                   leave))))))
+                 (call/cc
+                  (lambda (failure)
+                    (push-failure! failure)
+                    (call-with-values
+                        (lambda () command)
+                      leave)
+                    (next))))))))
         (fail))))))
 
 (define-syntax attempt-and-ec
@@ -73,14 +88,17 @@
             (lambda (leave)
               (do-ec
                 qualifier1 ...
-                (with-exception-handler
-                    (lambda (exc)
-                      (if (failure-object? exc)
-                        (leave #f)
-                        (raise-continuable exc)))
-                  (lambda ()
-                    (let-values ((v* command))
-                      (set! val* v*)))))
+                (call/cc
+                 (lambda (next)
+                   (attempt-dynamic-wind
+                    (lambda ()
+                      (call/cc
+                       (lambda (failure)
+                         (push-failure! failure)
+                         (let-values ((v* command))
+                           (set! val* v*)
+                           (next))))
+                      (leave #f))))))
               (leave #t)))
          (apply values val*)
          (fail))))))
@@ -97,14 +115,17 @@
         (lambda (leave)
           (do-ec
             qualifier1 ...
-            (with-exception-handler
-                (lambda (exc)
-                  (if (failure-object? exc)
-                    (leave)
-                    (raise-continuable exc)))
-              (lambda ()
-                (let-values ((v* command))
-                  (set! val* v*)))))))
+            (call/cc
+             (lambda (next)
+               (attempt-dynamic-wind
+                (lambda ()
+                  (call/cc
+                   (lambda (failure)
+                     (push-failure! failure)
+                     (let-values ((v* command))
+                       (set! val* v*)
+                       (next))))
+                  (leave))))))))
        (apply values val*)))))
 
 (define-syntax attempt-every-ec
@@ -119,34 +140,48 @@
          qualifier1 ...
          (call/cc
           (lambda (next)
-            (with-exception-handler
-                (lambda (exc)
-                  (if (failure-object? exc)
-                    (next)
-                    (raise-continuable exc)))
-              (lambda ()
-                (let-values ((v* command))
-                  (set! val* v*)))))))
+            (attempt-dynamic-wind
+             (lambda ()
+               (call/cc
+                (lambda (failure)
+                  (push-failure! failure)
+                  (let-values ((v* command))
+                    (set! val* v*)
+                    (next)))))))))
        (apply values val*)))))
 
 (define-syntax general-reversible-set!
   (syntax-rules ()
+    ((¶ getter! setter! () body ...)
+     (begin (if #f #f) body ...))
     ((¶ getter! setter! ((obj value) ...) body ...)
-     (let-values
-         ((previous-values (values (getter! obj) ...)))
-       (with-exception-handler
-           (lambda (exc)
-             (when (failure-object? exc)
-               (let ((p previous-values))
-                 (begin
-                   (setter! obj (car p))
-                   (set! p (cdr p)))
-                 ...))
-             (raise-continuable exc))
-         (lambda ()
-           (if #f #f)
-           (setter! obj value) ...
-           body ...))))))
+     (let*-values
+         ((previous-values (values (getter! obj) ...))
+          ((successful? val* results)
+           (call/cc
+            (lambda (leave)
+              (attempt-dynamic-wind
+               (lambda ()
+                 (call/cc
+                  (lambda (failure)
+                    (push-failure! failure)
+                    (setter! obj value) ...
+                    (let-values ((val* (begin (if #f #f) body ...)))
+                      (leave #t val* (list (getter! obj) ...)))))
+                 (let ((p previous-values))
+                   (begin
+                     (setter! obj (car p))
+                     (set! p (cdr p)))
+                   ...
+                   (leave #f #f previous-values))))))))
+       (let ((p results))
+         (begin
+           (setter! obj (car p))
+           (set! p (cdr p)))
+         ...)
+       (if successful?
+         (apply values val*)
+         (fail))))))
 
 (define-syntax reversible-set!
   (syntax-rules ()

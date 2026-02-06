@@ -51,9 +51,9 @@ m4_define([sexpr],
   [(scheme->nix
     (let ((x 1234))
       (attempt-every-ec
-       (begin
-         (reversible-set! ((x 5678))
-           x)))))])
+        (begin
+          (reversible-set! ((x 5678))
+            x)))))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([(5678)·])],[])
 
@@ -61,9 +61,9 @@ m4_define([sexpr],
   [(scheme->nix
     (let ((x 1234))
       (attempt-every-ec
-       (begin
-         (reversible-set! ((x 5678)))))
-      x))])
+        (begin
+          (reversible-set! ((x 5678)))))
+       x))])
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([(5678)·])],[])
 
@@ -174,23 +174,22 @@ m4_define([sexpr],
         (define rows (make-vector (+ n 1) 0))
         (define up (make-vector (+ n n) 0))
         (define down (make-vector (+ n n) 0))
-        (attempt-every-ec
-          (let recurs ((c 1))
-            (attempt-every-ec
-              (:range r 1 (+ n 1))
-              (and (zero? (vector-ref rows r))
-                   (zero? (vector-ref up (+ n r (- c))))
-                   (zero? (vector-ref down (+ r c -1))))
-              (reversible-vector-set! (((rows r) 1)
-                                       ((up (+ n r (- c))) 1)
-                                       ((down (+ r c -1)) 1))
-                (vector-set! solution c r)
-                (if (= c n)
-                  (begin
-                    (record-solution)
-                    (recurs 1))
-                  (recurs (+ c 1)))))
-            (fail) ))
+        (let recurs ((c 1))
+          (attempt-every-ec
+            (:range r 1 (+ n 1))
+            (and (zero? (vector-ref rows r))
+                 (zero? (vector-ref up (+ n r (- c))))
+                 (zero? (vector-ref down (+ r c -1))))
+            (reversible-vector-set! (((rows r) 1)
+                                     ((up (+ n r (- c))) 1)
+                                     ((down (+ r c -1)) 1))
+              (vector-set! solution c r)
+              (if (= c n)
+                (begin
+                  (record-solution)
+                  (recurs 1))
+                (recurs (+ c 1)))))
+            (fail) )
         recorded-solutions)
       (length (n-queens 8))))])
 check_unquoted([run_scheme 'sexpr'],[0],
