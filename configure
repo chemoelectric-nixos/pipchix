@@ -654,9 +654,6 @@ SAGITTARIUS
 LOKO_FALSE
 LOKO_TRUE
 LOKO
-GUILE_FALSE
-GUILE_TRUE
-GUILE
 GAUCHE_FALSE
 GAUCHE_TRUE
 GAUCHE
@@ -678,12 +675,6 @@ enable_check_r7rs_loko
 ENABLE_CHECK_R6RS_LOKO_FALSE
 ENABLE_CHECK_R6RS_LOKO_TRUE
 enable_check_r6rs_loko
-ENABLE_CHECK_R7RS_GUILE_FALSE
-ENABLE_CHECK_R7RS_GUILE_TRUE
-enable_check_r7rs_guile
-ENABLE_CHECK_R6RS_GUILE_FALSE
-ENABLE_CHECK_R6RS_GUILE_TRUE
-enable_check_r6rs_guile
 ENABLE_CHECK_R7RS_GAUCHE_FALSE
 ENABLE_CHECK_R7RS_GAUCHE_TRUE
 enable_check_r7rs_gauche
@@ -820,8 +811,6 @@ enable_install_r7rs_source
 enable_check_r6rs_chez
 enable_check_r7rs_chibi
 enable_check_r7rs_gauche
-enable_check_r6rs_guile
-enable_check_r7rs_guile
 enable_check_r6rs_loko
 enable_check_r7rs_loko
 enable_check_r6rs_sagittarius
@@ -840,7 +829,6 @@ UNIQUE_ID
 CHEZ_SCHEME
 CHIBI_SCHEME
 GAUCHE
-GUILE
 LOKO
 SAGITTARIUS
 GNU_MAKE
@@ -1500,12 +1488,6 @@ Optional Features:
   --disable-check-r7rs-gauche
                           disable tests with Gauche Scheme (enabled by default
                           if the Scheme implementation is found)
-  --disable-check-r6rs-guile
-                          disable R⁶RS tests with Guile (enabled by default
-                          if the Scheme implementation is found)
-  --disable-check-r7rs-guile
-                          disable R⁷RS tests with Guile (enabled by default
-                          if the Scheme implementation is found)
   --disable-check-r6rs-loko
                           disable R⁶RS tests with Loko Scheme (enabled by
                           default if the Scheme implementation is found)
@@ -1533,7 +1515,6 @@ Some influential environment variables:
   CHIBI_SCHEME
               Chibi Scheme
   GAUCHE      Gauche Scheme
-  GUILE       Guile Scheme version 3
   LOKO        Loko Scheme
   SAGITTARIUS Sagittarius Scheme
   GNU_MAKE    GNU Make command
@@ -6570,44 +6551,6 @@ else
 fi
 
 
-# Check whether --enable-check-r6rs-guile was given.
-if test ${enable_check_r6rs_guile+y}
-then :
-  enableval=$enable_check_r6rs_guile; eval enable_check_r6rs_guile="${enableval}"
-else case e in #(
-  e) eval enable_check_r6rs_guile=yes ;;
-esac
-fi
-
-
- if test "${enable_check_r6rs_guile}" != no; then
-  ENABLE_CHECK_R6RS_GUILE_TRUE=
-  ENABLE_CHECK_R6RS_GUILE_FALSE='#'
-else
-  ENABLE_CHECK_R6RS_GUILE_TRUE='#'
-  ENABLE_CHECK_R6RS_GUILE_FALSE=
-fi
-
-
-# Check whether --enable-check-r7rs-guile was given.
-if test ${enable_check_r7rs_guile+y}
-then :
-  enableval=$enable_check_r7rs_guile; eval enable_check_r7rs_guile="${enableval}"
-else case e in #(
-  e) eval enable_check_r7rs_guile=yes ;;
-esac
-fi
-
-
- if test "${enable_check_r7rs_guile}" != no; then
-  ENABLE_CHECK_R7RS_GUILE_TRUE=
-  ENABLE_CHECK_R7RS_GUILE_FALSE='#'
-else
-  ENABLE_CHECK_R7RS_GUILE_TRUE='#'
-  ENABLE_CHECK_R7RS_GUILE_FALSE=
-fi
-
-
 # Check whether --enable-check-r6rs-loko was given.
 if test ${enable_check_r6rs_loko+y}
 then :
@@ -7041,117 +6984,6 @@ fi
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #
-# Guile Scheme configuration.
-#
-
-{ :;
-
-# Override the cache if the precious variable GUILE is set.
-test -n "${GUILE}" && unset ac_cv_path_GUILE
-chem_cv_path_GUILE_found=yes
-{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for guile guile-3 guile-3.0" >&5
-printf %s "checking for guile guile-3 guile-3.0... " >&6; }
-if test ${ac_cv_path_GUILE+y}
-then :
-  printf %s "(cached) " >&6
-else case e in #(
-  e) if test -z "$GUILE"; then
-  ac_path_GUILE_found=false
-  # Loop through the user's path and test for each of PROGNAME-LIST
-  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-for as_dir in $PATH
-do
-  IFS=$as_save_IFS
-  case $as_dir in #(((
-    '') as_dir=./ ;;
-    */) ;;
-    *) as_dir=$as_dir/ ;;
-  esac
-    for ac_prog in guile guile-3 guile-3.0
-   do
-    for ac_exec_ext in '' $ac_executable_extensions; do
-      ac_path_GUILE="$as_dir$ac_prog$ac_exec_ext"
-      as_fn_executable_p "$ac_path_GUILE" || continue
-
-      if test -n "${GUILE}"; then
-         # Bypass the test if the precious variable GUILE is set.
-         ac_cv_path_GUILE="${GUILE}"
-         ac_path_GUILE_found=:
-      else
-         # Run the test.
-
-    if LC_ALL=C LANG=C ${ac_path_GUILE} --version 2>&1 | \
-      LC_ALL=C LANG=C ${FGREP} '(GNU Guile) 3' \
-               2> /dev/null > /dev/null; then
-        ac_cv_path_GUILE="${ac_path_GUILE}"
-        ac_path_GUILE_found=:
-    fi
-
-      fi
-      $ac_path_GUILE_found && break 3
-    done
-  done
-  done
-IFS=$as_save_IFS
-  if test -z "$ac_cv_path_GUILE"; then
-    :
-  fi
-else
-  ac_cv_path_GUILE=$GUILE
-fi
-
-      if test -z "${ac_cv_path_GUILE}"; then
-         ac_cv_path_GUILE="not found"
-         chem_cv_path_GUILE_found=no
-      fi
-    ;;
-esac
-fi
-{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $ac_cv_path_GUILE" >&5
-printf "%s\n" "$ac_cv_path_GUILE" >&6; }
-if test x"${chem_cv_path_GUILE_found}" = x"yes"; then
-   GUILE="${ac_cv_path_GUILE}"
-else
-   GUILE=""
-   # Do not cache the negative result. That way someone can install
-   # the program and have it be discovered, even though they did not
-   # clear a cache entry.
-   unset ac_cv_path_GUILE
-fi
-}
- if test "${chem_cv_path_GUILE_found}" != no; then
-  GUILE_TRUE=
-  GUILE_FALSE='#'
-else
-  GUILE_TRUE='#'
-  GUILE_FALSE=
-fi
-
-
-# Copyright © 2025 Barry Schwartz
-#
-# This file is part of Pipchix.
-#
-# Permission is hereby granted, free of charge, to any person obtaining
-# a copy of Pipchix and associated documentation files (the
-# "Software"), to deal in the Software without restriction, including
-# without limitation the rights to use, copy, modify, merge, publish,
-# distribute, sublicense, and/or sell copies of the Software, and to
-# permit persons to whom the Software is furnished to do so, subject to
-# the following conditions:
-#
-# The above copyright notice and this permission notice shall be
-# included in all copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-# LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-# OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-# WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-#
 # Loko Scheme configuration.
 #
 
@@ -7521,10 +7353,6 @@ ac_config_files="$ac_config_files tests/run-r7rs-chibi.sh"
 
 ac_config_files="$ac_config_files tests/run-r7rs-gauche.sh"
 
-ac_config_files="$ac_config_files tests/run-r6rs-guile.sh"
-
-ac_config_files="$ac_config_files tests/run-r7rs-guile.sh"
-
 ac_config_files="$ac_config_files tests/run-r6rs-loko.sh"
 
 ac_config_files="$ac_config_files tests/run-r7rs-loko.sh"
@@ -7753,14 +7581,6 @@ if test -z "${ENABLE_CHECK_R7RS_GAUCHE_TRUE}" && test -z "${ENABLE_CHECK_R7RS_GA
   as_fn_error $? "conditional \"ENABLE_CHECK_R7RS_GAUCHE\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
-if test -z "${ENABLE_CHECK_R6RS_GUILE_TRUE}" && test -z "${ENABLE_CHECK_R6RS_GUILE_FALSE}"; then
-  as_fn_error $? "conditional \"ENABLE_CHECK_R6RS_GUILE\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
-if test -z "${ENABLE_CHECK_R7RS_GUILE_TRUE}" && test -z "${ENABLE_CHECK_R7RS_GUILE_FALSE}"; then
-  as_fn_error $? "conditional \"ENABLE_CHECK_R7RS_GUILE\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
 if test -z "${ENABLE_CHECK_R6RS_LOKO_TRUE}" && test -z "${ENABLE_CHECK_R6RS_LOKO_FALSE}"; then
   as_fn_error $? "conditional \"ENABLE_CHECK_R6RS_LOKO\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
@@ -7787,10 +7607,6 @@ Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${GAUCHE_TRUE}" && test -z "${GAUCHE_FALSE}"; then
   as_fn_error $? "conditional \"GAUCHE\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
-if test -z "${GUILE_TRUE}" && test -z "${GUILE_FALSE}"; then
-  as_fn_error $? "conditional \"GUILE\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${LOKO_TRUE}" && test -z "${LOKO_FALSE}"; then
@@ -8393,8 +8209,6 @@ do
     "tests/run-r6rs-chez.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r6rs-chez.sh" ;;
     "tests/run-r7rs-chibi.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r7rs-chibi.sh" ;;
     "tests/run-r7rs-gauche.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r7rs-gauche.sh" ;;
-    "tests/run-r6rs-guile.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r6rs-guile.sh" ;;
-    "tests/run-r7rs-guile.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r7rs-guile.sh" ;;
     "tests/run-r6rs-loko.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r6rs-loko.sh" ;;
     "tests/run-r7rs-loko.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r7rs-loko.sh" ;;
     "tests/run-r6rs-sagittarius.sh") CONFIG_FILES="$CONFIG_FILES tests/run-r6rs-sagittarius.sh" ;;
@@ -8981,8 +8795,6 @@ EOF
     "tests/run-r6rs-chez.sh":F) chmod +x tests/run-r6rs-chez.sh ;;
     "tests/run-r7rs-chibi.sh":F) chmod +x tests/run-r7rs-chibi.sh ;;
     "tests/run-r7rs-gauche.sh":F) chmod +x tests/run-r7rs-gauche.sh ;;
-    "tests/run-r6rs-guile.sh":F) chmod +x tests/run-r6rs-guile.sh ;;
-    "tests/run-r7rs-guile.sh":F) chmod +x tests/run-r7rs-guile.sh ;;
     "tests/run-r6rs-loko.sh":F) chmod +x tests/run-r6rs-loko.sh ;;
     "tests/run-r7rs-loko.sh":F) chmod +x tests/run-r7rs-loko.sh ;;
     "tests/run-r6rs-sagittarius.sh":F) chmod +x tests/run-r6rs-sagittarius.sh ;;
@@ -9066,10 +8878,6 @@ fi
 if test "${chem_cv_path_GAUCHE_found}" != no; then
   { printf "%s\n" "$as_me:${as_lineno-$LINENO}: Gauche Scheme: ${GAUCHE}" >&5
 printf "%s\n" "$as_me: Gauche Scheme: ${GAUCHE}" >&6;}
-fi
-if test "${chem_cv_path_GUILE_found}" != no; then
-  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: Guile version 3: ${GUILE}" >&5
-printf "%s\n" "$as_me: Guile version 3: ${GUILE}" >&6;}
 fi
 if test "${chem_cv_path_LOKO_found}" != no; then
   { printf "%s\n" "$as_me:${as_lineno-$LINENO}: Loko Scheme: ${LOKO}" >&5

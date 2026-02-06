@@ -127,7 +127,6 @@ am__aclocal_m4_deps = $(top_srcdir)/m4/ax_check_gnu_make.m4 \
 	$(top_srcdir)/ac-chez-scheme.m4 \
 	$(top_srcdir)/ac-chibi-scheme.m4 \
 	$(top_srcdir)/ac-gauche-scheme.m4 \
-	$(top_srcdir)/ac-guile-scheme.m4 \
 	$(top_srcdir)/ac-loko-scheme.m4 \
 	$(top_srcdir)/ac-sagittarius-scheme.m4 \
 	$(top_srcdir)/ac-what-was-found.m4 $(top_srcdir)/configure.ac
@@ -136,9 +135,8 @@ am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 DIST_COMMON = $(srcdir)/Makefile.am $(am__DIST_COMMON)
 mkinstalldirs = $(install_sh) -d
 CONFIG_CLEAN_FILES = atlocal run-r6rs-chez.sh run-r7rs-chibi.sh \
-	run-r7rs-gauche.sh run-r6rs-guile.sh run-r7rs-guile.sh \
-	run-r6rs-loko.sh run-r7rs-loko.sh run-r6rs-sagittarius.sh \
-	run-r7rs-sagittarius.sh
+	run-r7rs-gauche.sh run-r6rs-loko.sh run-r7rs-loko.sh \
+	run-r6rs-sagittarius.sh run-r7rs-sagittarius.sh
 CONFIG_CLEAN_VPATH_FILES =
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
@@ -161,11 +159,10 @@ am__can_run_installinfo = \
   esac
 am__tagged_files = $(HEADERS) $(SOURCES) $(TAGS_FILES) $(LISP)
 am__DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/atlocal.in \
-	$(srcdir)/run-r6rs-chez.sh.in $(srcdir)/run-r6rs-guile.sh.in \
-	$(srcdir)/run-r6rs-loko.sh.in \
+	$(srcdir)/run-r6rs-chez.sh.in $(srcdir)/run-r6rs-loko.sh.in \
 	$(srcdir)/run-r6rs-sagittarius.sh.in \
 	$(srcdir)/run-r7rs-chibi.sh.in $(srcdir)/run-r7rs-gauche.sh.in \
-	$(srcdir)/run-r7rs-guile.sh.in $(srcdir)/run-r7rs-loko.sh.in \
+	$(srcdir)/run-r7rs-loko.sh.in \
 	$(srcdir)/run-r7rs-sagittarius.sh.in
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 ACLOCAL = @ACLOCAL@
@@ -198,7 +195,6 @@ GNU = @GNU@
 GNU_M4 = @GNU_M4@
 GNU_MAKE = @GNU_MAKE@
 GREP = @GREP@
-GUILE = @GUILE@
 INSTALL = @INSTALL@
 INSTALL_DATA = @INSTALL_DATA@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
@@ -254,12 +250,10 @@ datarootdir = @datarootdir@
 docdir = @docdir@
 dvidir = @dvidir@
 enable_check_r6rs_chez = @enable_check_r6rs_chez@
-enable_check_r6rs_guile = @enable_check_r6rs_guile@
 enable_check_r6rs_loko = @enable_check_r6rs_loko@
 enable_check_r6rs_sagittarius = @enable_check_r6rs_sagittarius@
 enable_check_r7rs_chibi = @enable_check_r7rs_chibi@
 enable_check_r7rs_gauche = @enable_check_r7rs_gauche@
-enable_check_r7rs_guile = @enable_check_r7rs_guile@
 enable_check_r7rs_loko = @enable_check_r7rs_loko@
 enable_check_r7rs_sagittarius = @enable_check_r7rs_sagittarius@
 enable_color = @enable_color@
@@ -389,10 +383,6 @@ run-r6rs-chez.sh: $(top_builddir)/config.status $(srcdir)/run-r6rs-chez.sh.in
 run-r7rs-chibi.sh: $(top_builddir)/config.status $(srcdir)/run-r7rs-chibi.sh.in
 	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@
 run-r7rs-gauche.sh: $(top_builddir)/config.status $(srcdir)/run-r7rs-gauche.sh.in
-	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@
-run-r6rs-guile.sh: $(top_builddir)/config.status $(srcdir)/run-r6rs-guile.sh.in
-	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@
-run-r7rs-guile.sh: $(top_builddir)/config.status $(srcdir)/run-r7rs-guile.sh.in
 	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@
 run-r6rs-loko.sh: $(top_builddir)/config.status $(srcdir)/run-r6rs-loko.sh.in
 	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@
