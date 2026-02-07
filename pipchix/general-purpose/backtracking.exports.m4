@@ -25,4 +25,5 @@ attempt-even
 general-reversible-set!
 reversible-set!
 reversible-vector-set!
+reversible-bytevector-u8-set!
 reversible-list-set!

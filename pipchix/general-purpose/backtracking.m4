@@ -335,6 +335,18 @@
                                 (((obj i) value) ...)
                                 body ...)))))
 
+(define-syntax reversible-bytevector-u8-set!
+  (syntax-rules ()
+    ((¶ (((obj i) value) ...) body ...)
+     (let-syntax
+         ((getter (syntax-rules ()
+                    ((µ (t j)) (bytevector-u8-ref t j))))
+          (setter! (syntax-rules ()
+                     ((µ (t j) v) (bytevector-u8-set! t j v)))))
+       (general-reversible-set! getter setter!
+                                (((obj i) value) ...)
+                                body ...)))))
+
 (define-syntax reversible-list-set!
   (syntax-rules ()
     ((¶ (((obj i) value) ...) body ...)
