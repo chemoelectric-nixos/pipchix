@@ -13,6 +13,10 @@ attempt-and-ec
 attempt-while-ec
 attempt-every-ec
 
+attempt
+attempt-null
+attempt-pair
+
 general-reversible-set!
 reversible-set!
 reversible-vector-set!

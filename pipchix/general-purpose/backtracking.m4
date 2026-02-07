@@ -264,6 +264,18 @@
                     (next)))))))))
        (apply values val*)))))
 
+(define-syntax attempt
+  ;;
+  ;; Try a predicate or fail. On success, return the result of the
+  ;; predicate.
+  ;;
+  (syntax-rules ()
+    ((¶ predicate obj ...)
+     (or (predicate obj ...) (fail)))))
+
+(define attempt-null (cut attempt null? <>))
+(define attempt-pair (cut attempt pair? <>))
+
 (define-syntax general-reversible-set!
   (syntax-rules ()
     ((¶ getter! setter! () body ...)
