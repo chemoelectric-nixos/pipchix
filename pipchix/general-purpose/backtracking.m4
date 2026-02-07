@@ -276,6 +276,12 @@
 (define attempt-null (cut attempt null? <>))
 (define attempt-pair (cut attempt pair? <>))
 
+(define attempt-zero (cut attempt zero? <>))
+(define attempt-positive (cut attempt positive? <>))
+(define attempt-negative (cut attempt negative? <>))
+(define attempt-odd (cut attempt odd? <>))
+(define attempt-even (cut attempt even? <>))
+
 (define-syntax general-reversible-set!
   (syntax-rules ()
     ((¶ getter! setter! () body ...)

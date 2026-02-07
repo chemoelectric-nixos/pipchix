@@ -16,6 +16,11 @@ attempt-every-ec
 attempt
 attempt-null
 attempt-pair
+attempt-zero
+attempt-positive
+attempt-negative
+attempt-odd
+attempt-even
 
 general-reversible-set!
 reversible-set!

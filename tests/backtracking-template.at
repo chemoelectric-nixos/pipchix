@@ -465,6 +465,34 @@ m4_define([sexpr],
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([[[·("e")·("b")·("f")·("a")·("g")·("d")·("h")·("c")·]·]])],[])
 
+dnl  An implementation of permutations that uses attempt-zero,
+dnl  attempt-null, attempt-pair, attempt-or.
+m4_define([sexpr],
+  [(scheme->nix
+    (let ()
+(define (permutations lst)
+  (letrec ((incr (cut + <> 1))
+           (decr (cut - <> 1))
+           (insert
+            (lambda (κ π ν)
+              (attempt-or
+                (begin (attempt-zero ν) `(,(car κ) ,@π))
+                `(,(car π) ,@(insert κ (cdr π) (decr ν))))))
+           (recurs
+            (lambda (κ)
+              (attempt-or
+                (begin (attempt-null κ) `(()))
+                (begin
+                  (attempt-pair κ)
+                  (append-ec (:list π (recurs (cdr κ)))
+                             (let ((Ω (incr (length π))))
+                               (list-ec (:range ν 0 Ω)
+                                        (insert κ π ν)))))))))
+    (recurs lst)))
+  (permutations `("a" "b" "c"))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·[·("a")·("b")·("c")·]·[·("b")·("a")·("c")·]·[·("b")·("c")·("a")·]·[·("a")·("c")·("b")·]·[·("c")·("a")·("b")·]·[·("c")·("b")·("a")·]·]·]])],[])
+
 AT_CLEANUP
 
 # local variables:
