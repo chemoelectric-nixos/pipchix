@@ -312,6 +312,65 @@ m4_define([sexpr],
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([(92)·])],[])
 
+dnl  Stephen B. Wampler’s solution to the n-queens problem, translated
+dnl  from Icon to Scheme. A variant that uses attempt-every.
+m4_define([sexpr],
+  [(scheme->nix
+    (let ()
+(define (n-queens n)
+  (define recorded-solutions `())
+  (define solution (make-vector (+ n 1)))
+  (define (record-solution)
+    (set! recorded-solutions
+      `(,(list-ec (:range c 1 (+ n 1))
+                  `(,c . ,(vector-ref solution c)))
+        ,@recorded-solutions)))
+  (define rows (make-vector (+ n 1) 0))
+  (define up (make-vector (+ n n) 0))
+  (define down (make-vector (+ n n) 0))
+  (define (step recurs c r)
+    (attempt-and
+      (or (<= r n) (fail))
+      (or (zero? (vector-ref rows r)) (fail))
+      (or (zero? (vector-ref up (+ n r (- c)))) (fail))
+      (or (zero? (vector-ref down (+ r c -1))) (fail))
+      (reversible-vector-set! (((rows r) 1)
+                               ((up (+ n r (- c))) 1)
+                               ((down (+ r c -1)) 1))
+        (vector-set! solution c r)
+        (if (= c n)
+          (begin
+            (record-solution)
+            (recurs step 1))
+          (recurs step (+ c 1))))))
+  (let recurs ((step step)
+               (c 1))
+    (attempt-every
+      (step recurs c 1)
+      (step recurs c 2)
+      (step recurs c 3)
+      (step recurs c 4)
+      (step recurs c 5)
+      (step recurs c 6)
+      (step recurs c 7)
+      (step recurs c 8)
+      (step recurs c 9)
+      (step recurs c 10)
+      (step recurs c 11)
+      (step recurs c 12)
+      (step recurs c 13)
+      (step recurs c 14)
+      (step recurs c 15)
+      (step recurs c 16)
+      (step recurs c 17)
+      (step recurs c 18)
+      (step recurs c 19))
+    (fail) )
+  recorded-solutions)
+      (length (n-queens 8))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(92)·])],[])
+
 dnl  A program that finds one solution to the n-queens by brute force
 dnl  search through permutations of letters representing columns. Both
 dnl  attempt-and-ec and attempt-or-ec are used.
