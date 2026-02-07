@@ -53,7 +53,27 @@
     ((car *failure-stack*))
     *failure*))
 
-(define attempt-or
+(define-syntax attempt-not
+  ;;
+  ;; Reverse success and failure with each other. Returns nothing
+  ;; useful.
+  ;;
+  (syntax-rules ()
+    ((¶ form)
+     (if (call/cc
+              (lambda (leave)
+                (attempt-dynamic-wind
+                 (lambda ()
+                   (call/cc
+                    (lambda (failure)
+                      (push-failure! failure)
+                      form
+                      (leave #t)))
+                   (leave #f)))))
+       (fail)
+       (if #f #f)))))
+
+(define-syntax attempt-or
   ;;
   ;; On success, returns the values returned by the successful form.
   ;;

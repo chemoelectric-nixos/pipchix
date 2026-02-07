@@ -233,6 +233,47 @@ m4_define([sexpr],
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([(92)·])],[])
 
+dnl  Stephen B. Wampler’s solution to the n-queens problem, translated
+dnl  from Icon to Scheme. A contrived variant that uses attempt-or and
+dnl  attempt-not.
+m4_define([sexpr],
+  [(scheme->nix
+    (let ()
+(define (n-queens n)
+  (define recorded-solutions `())
+  (define solution (make-vector (+ n 1)))
+  (define (record-solution)
+    (set! recorded-solutions
+      `(,(list-ec (:range c 1 (+ n 1))
+                  `(,c . ,(vector-ref solution c)))
+        ,@recorded-solutions)))
+  (define rows (make-vector (+ n 1) 0))
+  (define up (make-vector (+ n n) 0))
+  (define down (make-vector (+ n n) 0))
+  (let recurs ((c 1))
+    (attempt-every-ec
+      (:range r 1 (+ n 1))
+      (attempt-not
+       (attempt-or
+         (attempt-not (attempt-not (and (zero? (vector-ref rows r)) (fail))))
+         (attempt-not (attempt-not (and (zero? (vector-ref up (+ n r (- c)))) (fail))))
+         (attempt-not (attempt-not (and (zero? (vector-ref down (+ r c -1))) (fail))))
+         (attempt-not
+          (reversible-vector-set! (((rows r) 1)
+                                   ((up (+ n r (- c))) 1)
+                                   ((down (+ r c -1)) 1))
+            (vector-set! solution c r)
+            (if (= c n)
+              (begin
+                (record-solution)
+                (recurs 1))
+              (recurs (+ c 1))))))))
+    (fail) )
+  recorded-solutions)
+      (length (n-queens 8))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(92)·])],[])
+
 dnl  A program that finds one solution to the n-queens by brute force
 dnl  search through permutations of letters representing columns. Both
 dnl  attempt-and-ec and attempt-or-ec are used.

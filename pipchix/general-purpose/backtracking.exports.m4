@@ -2,6 +2,7 @@ failure-object
 failure-object?
 fail
 
+attempt-not
 attempt-or
 attempt-and
 attempt-while
