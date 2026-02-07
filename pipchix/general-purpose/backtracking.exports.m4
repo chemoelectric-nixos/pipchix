@@ -22,6 +22,13 @@ attempt-negative
 attempt-odd
 attempt-even
 
+attempt-char-ascii
+attempt-char-alphabetic
+attempt-char-numeric
+attempt-char-whitespace
+attempt-char-upper-case
+attempt-char-lower-case
+
 general-reversible-set!
 reversible-set!
 reversible-vector-set!

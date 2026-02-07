@@ -282,6 +282,13 @@
 (define attempt-odd (cut attempt odd? <>))
 (define attempt-even (cut attempt even? <>))
 
+(define (attempt-char-ascii obj) (attempt (cut char<=? <> #\x7F) obj))
+(define attempt-char-alphabetic (cut attempt char-alphabetic? <>))
+(define attempt-char-numeric (cut attempt char-numeric? <>))
+(define attempt-char-whitespace (cut attempt char-whitespace? <>))
+(define attempt-char-upper-case (cut attempt char-upper-case? <>))
+(define attempt-char-lower-case (cut attempt char-lower-case? <>))
+
 (define-syntax general-reversible-set!
   (syntax-rules ()
     ((¶ getter! setter! () body ...)
