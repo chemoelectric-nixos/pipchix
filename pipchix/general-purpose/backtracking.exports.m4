@@ -3,6 +3,7 @@ failure-object?
 fail
 
 attempt-or
+attempt-and
 
 attempt-or-ec
 attempt-and-ec

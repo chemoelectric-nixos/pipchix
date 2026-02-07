@@ -76,6 +76,32 @@
           ...)
         (fail))))))
 
+(define-syntax attempt-and
+  ;;
+  ;; On success, returns the values returned by the last form.
+  ;;
+  (syntax-rules ()
+    ((¶ form1 ...)
+     (let-values ((val* (values)))
+       (if (call/cc
+            (lambda (leave)
+              (begin
+                (call/cc
+                 (lambda (next)
+                   (attempt-dynamic-wind
+                    (lambda ()
+                      (call/cc
+                       (lambda (failure)
+                         (push-failure! failure)
+                         (let-values ((v* form1))
+                           (set! val* v*)
+                           (next))))
+                      (leave #f)))))
+                ...)
+              (leave #t)))
+         (apply values val*)
+         (fail))))))
+
 (define-syntax attempt-or-ec
   ;;
   ;; On success, returns the values returned by ‘command’.
