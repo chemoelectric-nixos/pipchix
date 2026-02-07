@@ -126,6 +126,27 @@
             ...)))
        (apply values val*)))))
 
+(define-syntax attempt-every
+  ;;
+  ;; Returns the values returned by the last successful form.
+  ;;
+  (syntax-rules ()
+    ((¶ form1 ...)
+     (let-values ((val* (values)))
+       (begin
+         (call/cc
+          (lambda (next)
+            (attempt-dynamic-wind
+             (lambda ()
+               (call/cc
+                (lambda (failure)
+                  (push-failure! failure)
+                  (let-values ((v* form1))
+                    (set! val* v*)
+                    (next))))))))
+         ...)
+       (apply values val*)))))
+
 (define-syntax attempt-or-ec
   ;;
   ;; On success, returns the values returned by ‘command’.
