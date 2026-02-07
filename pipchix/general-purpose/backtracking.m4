@@ -53,6 +53,29 @@
     ((car *failure-stack*))
     *failure*))
 
+(define attempt-or
+  ;;
+  ;; On success, returns the values returned by the successful form.
+  ;;
+  (syntax-rules ()
+    ((¶ form1 ...)
+     (call/cc
+      (lambda (leave)
+        (begin
+          (call/cc
+           (lambda (next)
+             (attempt-dynamic-wind
+              (lambda ()
+                (call/cc
+                 (lambda (failure)
+                   (push-failure! failure)
+                   (call-with-values
+                       (lambda () form1)
+                     leave)
+                   (next)))))))
+          ...)
+        (fail))))))
+
 (define-syntax attempt-or-ec
   ;;
   ;; On success, returns the values returned by ‘command’.
