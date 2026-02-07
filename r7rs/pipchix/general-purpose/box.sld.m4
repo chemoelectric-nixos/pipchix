@@ -30,8 +30,6 @@
   (import (scheme base))
 
   (cond-expand
-    ((or chicken guile)
-     (import (srfi 111))) ;; = (scheme box)
     ((or chibi gauche sagittarius)
      (import (scheme box)))
     (else))
@@ -39,7 +37,7 @@
   (begin
 
     (cond-expand
-      ((or chibi chicken gauche guile sagittarius)
+      ((or chibi gauche sagittarius)
        #f)
       (else
        ;;

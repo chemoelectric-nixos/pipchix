@@ -37,13 +37,13 @@ m4_include(pipchix/pipchix-includes.m4)
 
   (import (scheme base))
   (cond-expand
-    ((or loko guile))
+    (loko)
     (else (import (scheme division))))
 
   (begin
 
     (cond-expand
-      ((or loko guile)
+      (loko
        ;;m4_pushdef(«r7rs_small_is_provided»,«yes»)
        m4_include(pipchix/general-purpose/division.m4)
        ;;m4_popdef(«r7rs_small_is_provided»)

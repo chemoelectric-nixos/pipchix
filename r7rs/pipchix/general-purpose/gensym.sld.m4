@@ -38,13 +38,13 @@ m4_include(pipchix/pipchix-includes.m4)
            (import (pipchix general-purpose continuation-capture)))
     (gauche (import (only (r7rs aux) :info-alist gensym)))
     (sagittarius (import (only (sagittarius) gensym)))
-    ((or loko guile) (import (rnrs syntax-case (6))))
+    (loko (import (rnrs syntax-case (6))))
     (else))
 
   (begin
 
     (cond-expand
-      ((or loko guile)
+      (loko
        (define gensym
          (case-lambda
            (() (car (generate-temporaries '(1))))
@@ -126,7 +126,7 @@ m4_include(pipchix/pipchix-includes.m4)
       (else))
 
     (cond-expand
-      ((or loko guile))
+      (loko)
       (else
        (define (generate-temporaries lst)
          (map (lambda (x) (gensym)) lst))))

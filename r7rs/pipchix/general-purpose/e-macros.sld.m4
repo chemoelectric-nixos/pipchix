@@ -39,13 +39,13 @@ m4_include(pipchix/pipchix-includes.m4)
     (gauche (import (only (r7rs aux) er-macro-transformer))
             (import (only (r7rs aux) :info-alist)))
     (sagittarius (import (only (sagittarius) er-macro-transformer)))
-    ((or loko guile) (import (rnrs syntax-case (6))))
+    (loko (import (rnrs syntax-case (6))))
     (else))
 
   (begin
 
     (cond-expand
-      ((or loko guile)
+      (loko
        ;; m4_pushdef(«general_macros»,«syntax-case»)
        ;; m4_pushdef(«syntax_rules»,«unknown»)
        m4_include(pipchix/general-purpose/e-macros.m4)

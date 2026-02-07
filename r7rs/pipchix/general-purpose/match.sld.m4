@@ -60,13 +60,13 @@ m4_include(pipchix/pipchix-includes.m4)
                          (rename (only (sagittarius clos)
                                        (slot-ref orig-slot-ref)
                                        (slot-set! orig-slot-set!)))))
-    ((or loko guile) (import (rnrs syntax-case (6))))
+    (loko (import (rnrs syntax-case (6))))
     (else))
 
   (begin
 
     (cond-expand
-      ((or loko guile)
+      (loko
        ;; m4_pushdef(«general_macros»,«syntax-case»)
        m4_include(pipchix/general-purpose/match.m4)
        ;; m4_popdef(«general_macros»)

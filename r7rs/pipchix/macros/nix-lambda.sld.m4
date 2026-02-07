@@ -31,7 +31,7 @@ m4_include(pipchix/pipchix-includes.m4)
   (import basic_libraries)
   (import (pipchix abstract-syntax-tree))
   (cond-expand
-    ((or loko guile)
+    (loko
      (import (rnrs syntax-case (6))))
     (else))
   
