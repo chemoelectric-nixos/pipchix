@@ -4,6 +4,7 @@ fail
 
 attempt-or
 attempt-and
+attempt-while
 
 attempt-or-ec
 attempt-and-ec
