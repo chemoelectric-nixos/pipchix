@@ -367,6 +367,30 @@
                                 body ...)))))
 
 ;;;-------------------------------------------------------------------
+;;;
+;;; String scanning.
+;;;
+
+(define icon->scheme-indexing
+  (case-lambda
+    ((n i)
+     (cond ((zero? i) n)
+           ((negative? i)
+            (if (< i (- n))
+              (fail)
+              (+ n i)))
+           (else
+            (if (< (+ n 1) i)
+              (fail)
+              (- i 1)))))
+    ((n i j)
+     (let ((i (icon->scheme-indexing n i))
+           (j (icon->scheme-indexing n j)))
+       (if (< j i)
+         (values j i)
+         (values i j))))))
+
+;;;-------------------------------------------------------------------
 m4_divert(-1)
 ;;; local variables:
 ;;; mode: scheme

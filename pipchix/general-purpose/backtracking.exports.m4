@@ -34,3 +34,5 @@ reversible-set!
 reversible-vector-set!
 reversible-bytevector-u8-set!
 reversible-list-set!
+
+icon->scheme-indexing
