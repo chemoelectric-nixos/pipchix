@@ -555,6 +555,37 @@ m4_define([sexpr],
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([[[·[·("a")·("b")·("c")·]·[·("b")·("a")·("c")·]·[·("b")·("c")·("a")·]·[·("a")·("c")·("b")·]·[·("c")·("a")·("b")·]·[·("c")·("b")·("a")·]·]·]])],[])
 
+dnl  Another implementation of permutations, using attempt-every-ec.
+m4_define([sexpr],
+  [(scheme->nix
+    (let ()
+(define-syntax λ
+  (syntax-rules ()
+    ((¶ args body ...)
+     (lambda args body ...))))
+(define insert
+  (λ (µ κ ν)
+    (attempt-or
+      (begin (attempt-zero ν) `(,µ ,@κ))
+      (let-values (((α β) (split-at κ ν)))
+        `(,@α ,µ ,@β)))))
+(define permutations
+  (λ (lst)
+    (letrec ((ρ (λ (κ)
+                  (let ((Ω (length κ)))
+                    (attempt-or
+                      (begin (attempt-zero Ω) `(()))
+                      (let ((τ `()))
+                        (attempt-every-ec
+                          (:list π (ρ (cdr κ)))
+                          (:range ν 0 Ω)
+                          (set! τ (cons (insert (car κ) π ν) τ)))
+                        τ))))))
+      (ρ lst))))
+  (permutations (iota 3 1))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·[·(2)·(3)·(1)·]·[·(2)·(1)·(3)·]·[·(1)·(2)·(3)·]·[·(3)·(2)·(1)·]·[·(3)·(1)·(2)·]·[·(1)·(3)·(2)·]·]·]])],[])
+
 AT_CLEANUP
 
 # local variables:
