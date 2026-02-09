@@ -368,6 +368,54 @@
 
 ;;;-------------------------------------------------------------------
 ;;;
+;;; Co-expressions.
+;;;
+
+(define *suspend*
+  (make-parameter (lambda v* (apply values v*))))
+
+(define (suspend . v*)
+  (call-with-values
+      (lambda () (apply values v*))
+    (*suspend*)))
+
+(define (make-co-expression thunk)
+  (define (next-run k . x*)
+    (let ((kontinuation k))
+      (define (the-suspend-proc . v*)
+        (call-with-values
+            (lambda ()
+              (call/cc
+               (lambda (where-to-resume)
+                 (set! next-run where-to-resume)
+                 (let ((new-kont (call-with-values
+                                     (lambda () (apply values v*))
+                                   kontinuation)))
+                   (apply values (cons new-kont x*))))))
+          (lambda (next-kontinuation . x*)
+            (set! kontinuation next-kontinuation)
+            (apply values x*))))
+      (parameterize ((*suspend* the-suspend-proc))
+        (let ((failure% #f))
+          (let ((new-thunk
+                 (dynamic-wind
+                   (lambda ()
+                     (when failure%
+                       (push-failure! failure%)))
+                   (lambda ()
+                     (call/cc
+                      (lambda (failure)
+                        (set! failure% failure)
+                        (push-failure! failure)
+                        (call-with-values thunk suspend))))
+                   (lambda ()
+                     (drop-failure!)))))
+            (fail))))))
+  (lambda x*
+    (call/cc (lambda (k) (apply next-run (cons k x*))))))
+
+;;;-------------------------------------------------------------------
+;;;
 ;;; String scanning.
 ;;;
 

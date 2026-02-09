@@ -35,4 +35,7 @@ reversible-vector-set!
 reversible-bytevector-u8-set!
 reversible-list-set!
 
+suspend
+make-co-expression
+
 icon->scheme-indexing
