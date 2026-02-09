@@ -24,14 +24,15 @@
 ;;;
 ;;;-------------------------------------------------------------------
 
-;;; This stack IS NOT THREAD-SAFE.
-(define *failure-stack* '())
+(define *failure-stack* (make-parameter (box '())))
 
 (define (push-failure! failure)
-  (set! *failure-stack* (cons failure *failure-stack*)))
+  (let ((bx (*failure-stack*)))
+    (set-box! bx (cons failure (unbox bx)))))
 
 (define (drop-failure!)
-  (set! *failure-stack* (cdr *failure-stack*)))
+  (let ((bx (*failure-stack*)))
+    (set-box! bx (cdr (unbox bx)))))
 
 (define (attempt-dynamic-wind thunk)
   (dynamic-wind (lambda () (if #f #f))
@@ -49,9 +50,11 @@
   (eq? obj *failure*))
 
 (define (fail)
-  (if (pair? *failure-stack*)
-    ((car *failure-stack*))
-    *failure*))
+  (let* ((bx (*failure-stack*))
+         (stk (unbox bx)))
+    (if (pair? stk)
+      ((car stk))
+      *failure*)))
 
 (define-syntax attempt-not
   ;;
@@ -445,5 +448,6 @@ m4_divert(-1)
 ;;; geiser-scheme-implementation: chibi
 ;;; coding: utf-8
 ;;; eval: (put 'if 'scheme-indent-function 1)
+;;; eval: (put 'set-box! 'scheme-indent-function 1)
 ;;; end:
 m4_divert«»m4_dnl

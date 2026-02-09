@@ -37,6 +37,7 @@ m4_include(pipchix/pipchix-includes.m4)
   (import basic_libraries
           (rnrs mutable-pairs (6))
           (pipchix general-purpose srfi-39)
+          (pipchix general-purpose box)
           (pipchix general-purpose ec)
           (pipchix general-purpose cut))
 
