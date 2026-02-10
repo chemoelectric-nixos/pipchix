@@ -43,7 +43,7 @@ m4_include(pipchix/pipchix-includes.m4)
 
   (define (list-set! lst i x)
     (set-car! (list-tail lst i) x))
-  
+
   m4_include(pipchix/general-purpose/backtracking.m4)
 
   )

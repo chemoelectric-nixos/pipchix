@@ -39,6 +39,25 @@
                 thunk
                 (lambda () (drop-failure!))))
 
+#|
+(define-syntax push-failure!
+  (syntax-rules (*failure-stack*)
+    ((¶ failure)
+     (let ((bx (*failure-stack*)))
+       (set-box! bx (cons failure (unbox bx)))))))
+
+(define-syntax drop-failure!
+  (syntax-rules (*failure-stack*)
+    ((¶)
+     (let ((bx (*failure-stack*)))
+       (set-box! bx (cdr (unbox bx)))))))
+
+(define (attempt-dynamic-wind thunk)
+  (dynamic-wind (lambda () (if #f #f))
+                thunk
+                (lambda () (drop-failure!))))
+|#
+
 (define *failure* '#("the\xA0;failure\xA0;object"))
 
 (define (failure-object)
@@ -55,6 +74,17 @@
     (if (pair? stk)
       ((car stk))
       *failure*)))
+
+#|
+(define-syntax fail
+  (syntax-rules (*failure-stack*)
+    ((¶)
+     (let* ((bx (*failure-stack*))
+            (stk (unbox bx)))
+       (if (pair? stk)
+         ((car stk))
+         *failure*)))))
+|#
 
 (define-syntax attempt-not
   ;;
@@ -375,47 +405,47 @@
 ;;;
 
 (define *suspend*
-  (make-parameter (lambda v* (apply values v*))))
+  (make-parameter
+   (lambda v* (apply values v*))))
 
 (define (suspend . v*)
-  (call-with-values
-      (lambda () (apply values v*))
-    (*suspend*)))
+  (apply (*suspend*) v*))
 
 (define (make-co-expression thunk)
-  (define (next-run k . x*)
-    (let ((kontinuation k))
-      (define (the-suspend-proc . v*)
-        (call-with-values
-            (lambda ()
-              (call/cc
-               (lambda (where-to-resume)
-                 (set! next-run where-to-resume)
-                 (let ((new-kont (call-with-values
-                                     (lambda () (apply values v*))
-                                   kontinuation)))
-                   (apply values (cons new-kont x*))))))
-          (lambda (next-kontinuation . x*)
+  (let ((saved-failures (box '<undefined>))
+        (failures (box '())))
+    (define (next-run k . x*)
+      (let ((kontinuation k))
+        (define (the-suspend-proc . v*)
+          (let-values
+              (((next-kontinuation . x*)
+                (call/cc
+                 (lambda (where-to-resume)
+                   (set! next-run where-to-resume)
+                   (let ((new-kont (apply kontinuation v*)))
+                     (apply values (cons new-kont x*)))))))
             (set! kontinuation next-kontinuation)
-            (apply values x*))))
-      (parameterize ((*suspend* the-suspend-proc))
-        (let ((failure% #f))
-          (let ((new-thunk
-                 (dynamic-wind
-                   (lambda ()
-                     (when failure%
-                       (push-failure! failure%)))
-                   (lambda ()
-                     (call/cc
-                      (lambda (failure)
-                        (set! failure% failure)
-                        (push-failure! failure)
-                        (call-with-values thunk suspend))))
-                   (lambda ()
-                     (drop-failure!)))))
-            (fail))))))
-  (lambda x*
-    (call/cc (lambda (k) (apply next-run (cons k x*))))))
+            (apply values x*)))
+        (parameterize ((*suspend* the-suspend-proc))
+          (let-values
+              ((val*
+                (dynamic-wind
+                  (lambda ()
+                    (let ((bx (*failure-stack*)))
+                      (set-box! saved-failures (unbox bx))
+                      (set-box! bx (unbox failures))))
+                  (lambda ()
+                    (call/cc
+                     (lambda (on-failure)
+                       (push-failure! on-failure)
+                       (call-with-values thunk suspend))))
+                  (lambda ()
+                    (let ((bx (*failure-stack*)))
+                      (set-box! bx
+                        (unbox saved-failures)))))))
+            (apply suspend val*)))))
+    (lambda x*
+      (call/cc (lambda (k) (apply next-run (cons k x*)))))))
 
 ;;;-------------------------------------------------------------------
 ;;;
