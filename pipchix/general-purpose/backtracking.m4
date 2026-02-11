@@ -385,41 +385,37 @@
 
 (define (make-co-expression thunk)
   (let ((failures (box '())))
-    (define (next-run k . x*)
+    (define (resumption k . x*)
       (let ((kontinuation k))
         (define (the-suspend-proc . v*)
-          (let-values
-              (((next-kontinuation . x*)
-                (call/cc
-                 (lambda (where-to-resume)
-                   (set! next-run where-to-resume)
-                   (let ((new-kont (apply kontinuation v*)))
-                     (apply values (cons new-kont x*)))))))
-            (set! kontinuation next-kontinuation)
-            (apply values x*)))
+          (call/cc
+           (lambda (cc)
+             (set! resumption cc)
+             (set! kontinuation (apply kontinuation v*))
+             (apply values x*))))
         (call/cc
          (lambda (leave)
            (attempt-dynamic-wind
-              (lambda ()
-                (parameterize ((*suspend* the-suspend-proc)
-                               (*failure-stack* failures))
-                  (call/cc
-                   (lambda (failure)
-                     (push-failure! failure)
-                     (thunk)))
-                  ;;
-                  ;; Clear the failures stack.
-                  ;;
-                  (set-box! failures '())
-                  ;;
-                  ;; Fail forever.
-                  ;;
-                  (call/cc
-                   (lambda (cc)
-                     (set! next-run cc)))
-                  (leave (failure-object)))))))))
-    (lambda x*
-      (call/cc (lambda (k) (apply next-run (cons k x*)))))))
+            (lambda ()
+              (parameterize ((*suspend* the-suspend-proc)
+                             (*failure-stack* failures))
+                (call/cc
+                 (lambda (failure)
+                   (push-failure! failure)
+                   (thunk)))
+                ;;
+                ;; Clear the failures stack.
+                ;;
+                (set-box! failures '())
+                ;;
+                ;; Fail forever.
+                ;;
+                (call/cc
+                 (lambda (cc)
+                   (set! resumption cc)))
+                (leave (failure-object)))))))))
+    (lambda ξ*
+      (call/cc (lambda (k) (apply resumption (cons k ξ*)))))))
 
 ;;;-------------------------------------------------------------------
 ;;;
