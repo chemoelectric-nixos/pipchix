@@ -385,37 +385,44 @@
 
 (define (make-co-expression thunk)
   (let ((failures (box '())))
-    (define (resumption k . x*)
-      (let ((kontinuation k))
-        (define (the-suspend-proc . v*)
-          (call/cc
-           (lambda (cc)
-             (set! resumption cc)
-             (set! kontinuation (apply kontinuation v*))
-             (apply values x*))))
-        (call/cc
-         (lambda (leave)
-           (attempt-dynamic-wind
-            (lambda ()
-              (parameterize ((*suspend* the-suspend-proc)
-                             (*failure-stack* failures))
-                (call/cc
-                 (lambda (failure)
-                   (push-failure! failure)
-                   (thunk)))
-                ;;
-                ;; Clear the failures stack.
-                ;;
-                (set-box! failures '())
-                ;;
-                ;; Fail forever.
-                ;;
+    (letrec
+        ((resume-coexpr
+          (lambda (ε . ξ*)
+
+            ;; ε is the point in the program where the co-expression
+            ;; was called.
+            (let ((caller-of-coexpr ε))
+
+              (define (suspension-procedure . v*)
                 (call/cc
                  (lambda (cc)
-                   (set! resumption cc)))
-                (leave (failure-object)))))))))
-    (lambda ξ*
-      (call/cc (lambda (k) (apply resumption (cons k ξ*)))))))
+                   ;; Resume at the point following the ‘suspend’.
+                   (set! resume-coexpr cc)
+                   ;; Perform the suspension.
+                   (set! caller-of-coexpr (apply caller-of-coexpr v*))
+                   ;; The ξ* are the values that were passed to this
+                   ;; call of the co-expression.
+                   (apply values ξ*))))
+
+              (call/cc
+               (lambda (leave)
+                 (attempt-dynamic-wind
+                  (lambda ()
+                    (parameterize ((*suspend* suspension-procedure))
+                      (call/cc
+                       (lambda (failure)
+                         (push-failure! failure)
+                         (thunk)))
+                      ;; Clear the failures stack.
+                      (set-box! failures '())
+                      ;; Fail forever.
+                      (call/cc (lambda (cc) (set! resume-coexpr cc)))
+                      (leave (failure-object)))))))))))
+
+      (lambda ξ*
+        (parameterize ((*failure-stack* failures))
+          (call/cc (lambda (ε)
+                     (apply resume-coexpr (cons ε ξ*)))))))))
 
 ;;;-------------------------------------------------------------------
 ;;;
