@@ -31,32 +31,15 @@
     (set-box! bx (cons failure (unbox bx)))))
 
 (define (drop-failure!)
-  (let ((bx (*failure-stack*)))
-    (set-box! bx (cdr (unbox bx)))))
+  (let* ((bx (*failure-stack*))
+         (stk (unbox bx)))
+    (when (pair? stk)
+      (set-box! bx (cdr stk)))))
 
 (define (attempt-dynamic-wind thunk)
   (dynamic-wind (lambda () (if #f #f))
                 thunk
                 (lambda () (drop-failure!))))
-
-#|
-(define-syntax push-failure!
-  (syntax-rules (*failure-stack*)
-    ((¶ failure)
-     (let ((bx (*failure-stack*)))
-       (set-box! bx (cons failure (unbox bx)))))))
-
-(define-syntax drop-failure!
-  (syntax-rules (*failure-stack*)
-    ((¶)
-     (let ((bx (*failure-stack*)))
-       (set-box! bx (cdr (unbox bx)))))))
-
-(define (attempt-dynamic-wind thunk)
-  (dynamic-wind (lambda () (if #f #f))
-                thunk
-                (lambda () (drop-failure!))))
-|#
 
 (define *failure* '#("the\xA0;failure\xA0;object"))
 
@@ -74,17 +57,6 @@
     (if (pair? stk)
       ((car stk))
       *failure*)))
-
-#|
-(define-syntax fail
-  (syntax-rules (*failure-stack*)
-    ((¶)
-     (let* ((bx (*failure-stack*))
-            (stk (unbox bx)))
-       (if (pair? stk)
-         ((car stk))
-         *failure*)))))
-|#
 
 (define-syntax attempt-not
   ;;
@@ -412,8 +384,7 @@
   (apply (*suspend*) v*))
 
 (define (make-co-expression thunk)
-  (let ((saved-failures (box '<undefined>))
-        (failures (box '())))
+  (let ((failures (box '())))
     (define (next-run k . x*)
       (let ((kontinuation k))
         (define (the-suspend-proc . v*)
@@ -426,24 +397,27 @@
                      (apply values (cons new-kont x*)))))))
             (set! kontinuation next-kontinuation)
             (apply values x*)))
-        (parameterize ((*suspend* the-suspend-proc))
-          (let-values
-              ((val*
-                (dynamic-wind
-                  (lambda ()
-                    (let ((bx (*failure-stack*)))
-                      (set-box! saved-failures (unbox bx))
-                      (set-box! bx (unbox failures))))
-                  (lambda ()
-                    (call/cc
-                     (lambda (on-failure)
-                       (push-failure! on-failure)
-                       (call-with-values thunk suspend))))
-                  (lambda ()
-                    (let ((bx (*failure-stack*)))
-                      (set-box! bx
-                        (unbox saved-failures)))))))
-            (apply suspend val*)))))
+        (call/cc
+         (lambda (leave)
+           (attempt-dynamic-wind
+              (lambda ()
+                (parameterize ((*suspend* the-suspend-proc)
+                               (*failure-stack* failures))
+                  (call/cc
+                   (lambda (failure)
+                     (push-failure! failure)
+                     (thunk)))
+                  ;;
+                  ;; Clear the failures stack.
+                  ;;
+                  (set-box! failures '())
+                  ;;
+                  ;; Fail forever.
+                  ;;
+                  (call/cc
+                   (lambda (cc)
+                     (set! next-run cc)))
+                  (leave (failure-object)))))))))
     (lambda x*
       (call/cc (lambda (k) (apply next-run (cons k x*)))))))
 
