@@ -57,7 +57,7 @@ m4_include(eager-macros-template.at)
 m4_include(ec-template.at)
 m4_include(combinators-template.at)
 m4_include(syntax-template.at)
-m4_include(backtracking-template.at)
+m4_include(goal-directed-template.at)
 m4_include(continuation-capture-template.at)
 
 m4_include(nix-embedded-node-template.at)

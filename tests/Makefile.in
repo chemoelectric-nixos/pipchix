@@ -299,7 +299,7 @@ EXTRA_DIST = testsuite.at $(srcdir)/package.m4 $(TESTSUITE) atlocal.in \
 	base64-utf8-template.at list-template.at match-template.at \
 	division-template.at e-macros-template.at \
 	eager-macros-template.at combinators-template.at \
-	syntax-template.at backtracking-template.at \
+	syntax-template.at goal-directed-template.at \
 	continuation-capture-template.at escaped-utf8-template.at \
 	expressions-template.at macros-template.at \
 	nix-attributebinding-node-template.at \
@@ -324,7 +324,7 @@ TESTSUITE_DEPS = $(srcdir)/atlocal.in $(srcdir)/package.m4 \
 	$(srcdir)/e-macros-template.at \
 	$(srcdir)/eager-macros-template.at $(srcdir)/ec-template.at \
 	$(srcdir)/combinators-template.at $(srcdir)/syntax-template.at \
-	$(srcdir)/backtracking-template.at \
+	$(srcdir)/goal-directed-template.at \
 	$(srcdir)/continuation-capture-template.at \
 	$(srcdir)/shell-print-template.at \
 	$(srcdir)/base64-utf8-template.at \

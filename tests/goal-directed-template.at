@@ -22,9 +22,10 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
-AT_SETUP([setup_message(backtracking)])
+AT_SETUP([setup_message(goal-directed)])
 
-AT_KEYWORDS([default_keywords backtracking])
+AT_KEYWORDS([default_keywords goal-directed icon snobol snobol4
+             backtracking])
 
 m4_define([sexpr],
   [(scheme->nix

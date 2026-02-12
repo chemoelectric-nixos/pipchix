@@ -1,4 +1,3 @@
-#!r6rs
 ;;;
 ;;; Copyright © 2026 Barry Schwartz
 ;;;
@@ -30,26 +29,23 @@ m4_include(pipchix/pipchix-includes.m4)
 ;;; roughly in the fashion of the Icon language.
 ;;;
 
-(library (pipchix general-purpose backtracking)
+(define-library (pipchix general-purpose goal-directed)
 
-  (export m4_include(pipchix/general-purpose/backtracking.exports.m4))
+  (export m4_include(pipchix/general-purpose/goal-directed.exports.m4))
 
   (import basic_libraries
-          (rnrs mutable-pairs (6))
-          (pipchix general-purpose srfi-39)
           (pipchix general-purpose box)
           (pipchix general-purpose ec)
           (pipchix general-purpose cut))
 
-  (define (list-set! lst i x)
-    (set-car! (list-tail lst i) x))
+  (begin
 
-  m4_include(pipchix/general-purpose/backtracking.m4)
+    m4_include(pipchix/general-purpose/goal-directed.m4)
 
-  )
+    ))
 
 ;;; local variables:
 ;;; mode: scheme
-;;; geiser-scheme-implementation: chez
+;;; geiser-scheme-implementation: chibi
 ;;; coding: utf-8
 ;;; end:

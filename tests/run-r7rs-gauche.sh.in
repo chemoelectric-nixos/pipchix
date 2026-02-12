@@ -20,7 +20,7 @@ cat > "${prog_scm}" <<EOF
 (import (pipchix general-purpose ec))
 (import (pipchix general-purpose combinators))
 (import (pipchix general-purpose syntax))
-(import (pipchix general-purpose backtracking))
+(import (pipchix general-purpose goal-directed))
 (import (pipchix general-purpose continuation-capture))
 (import (pipchix abstract-syntax-tree))
 (import (pipchix nix-embed))
