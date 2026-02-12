@@ -24,6 +24,9 @@
 ;;;
 ;;;-------------------------------------------------------------------
 
+;;; Make this a parameter if for no other reason than that way it has
+;;; to be evaluated to obtain the actual box. In some implementations
+;;; this also makes it a thread-local entity.
 (define *failure-stack* (make-parameter (box '())))
 
 (define (push-failure! failure)
@@ -384,7 +387,8 @@
   (apply (*suspend*) v*))
 
 (define (make-co-expression thunk)
-  (let ((failures (box '())))
+  (let ((failures '())
+        (saved-failures '<undefined>))
     (letrec
         ((resume-coexpr
           (lambda (ε . ξ*)
@@ -413,16 +417,32 @@
                        (lambda (failure)
                          (push-failure! failure)
                          (thunk)))
-                      ;; Clear the failures stack.
-                      (set-box! failures '())
-                      ;; Fail forever.
-                      (call/cc (lambda (cc) (set! resume-coexpr cc)))
+                      (set! failures #f)
                       (leave (failure-object)))))))))))
 
       (lambda ξ*
-        (parameterize ((*failure-stack* failures))
-          (call/cc (lambda (ε)
-                     (apply resume-coexpr (cons ε ξ*)))))))))
+        (if failures
+          (call-with-values
+              (lambda ()
+                (dynamic-wind ;; Stack-switching for backtracks.
+                  (lambda ()
+                    (let ((bx (*failure-stack*)))
+                      (set! saved-failures (unbox bx))
+                      (set-box! bx failures)))
+                  (lambda ()
+                    (call/cc (lambda (ε)
+                               (apply resume-coexpr (cons ε ξ*)))))
+                  (lambda ()
+                    (let ((bx (*failure-stack*)))
+                      (set! failures (unbox bx))
+                      (set-box! bx saved-failures)))))
+            (lambda arg*
+              (if (and (pair? arg*)
+                       (null? (cdr arg*))
+                       (failure-object? (car arg*)))
+                (fail)
+                (apply values arg*))))
+          (apply values ξ*))))))
 
 ;;;-------------------------------------------------------------------
 ;;;
