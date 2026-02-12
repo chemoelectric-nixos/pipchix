@@ -102,6 +102,13 @@ m4_define([sexpr],
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([[[·(0)·(1)·(1)·(1)·(1)·(1)·(1)·(2)·(2)·(3)·(3)·(4)·(4)·(4)·(5)·(6)·(8)·(9)·]·]])],[])
 
+m4_define([sexpr],
+  [(scheme->nix
+    (stream-match (list->stream `(1 2 3 4))
+      ((_ b c d) (list b c d))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·(2)·(3)·(4)·]·]])],[])
+
 AT_CLEANUP
 
 # local variables:

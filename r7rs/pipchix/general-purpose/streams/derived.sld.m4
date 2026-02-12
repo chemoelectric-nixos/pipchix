@@ -35,6 +35,7 @@ m4_include(pipchix/pipchix-includes.m4)
   (import (rename (scheme base) (error r7rs-error)))
   (import (scheme write)) ;; For debugging.
   (import (pipchix general-purpose list))
+  (import (pipchix general-purpose gensym))
   (import (pipchix general-purpose streams primitive))
   (cond-expand
     (chibi (import (only (chibi)
