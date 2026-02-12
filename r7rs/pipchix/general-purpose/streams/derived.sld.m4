@@ -30,13 +30,25 @@ m4_include(pipchix/pipchix-includes.m4)
   ;; SRFI-41 Streams.
   ;;
 
+  ;;
+  ;; For R⁷RS it is better to use thee syntax-rules implementation of
+  ;; stream-match, because it is practically the same as the original
+  ;; syntax-case implementation. However, one might also wish to test
+  ;; and debug the er-macro-transformer implementation. It has not had
+  ;; a lot of testing.
+  ;;
+  ;; m4_define(«using_syntax_rules»,«yes»)
+  ;;
+
   (export m4_include(pipchix/general-purpose/streams/derived.exports.m4))
 
   (import (rename (scheme base) (error r7rs-error)))
   (import (scheme write)) ;; For debugging.
   (import (pipchix general-purpose list))
-  (import (pipchix general-purpose gensym))
   (import (pipchix general-purpose streams primitive))
+
+  ;; m4_ifelse(using_syntax_rules,«no»,«
+  (import (pipchix general-purpose gensym))
   (cond-expand
     (chibi (import (only (chibi)
                          er-macro-transformer)))
@@ -47,6 +59,7 @@ m4_include(pipchix/pipchix-includes.m4)
                                er-macro-transformer)))
     (loko (import (rnrs syntax-case (6))))
     (else))
+  ;; »)
 
   (begin
 
@@ -55,6 +68,13 @@ m4_include(pipchix/pipchix-includes.m4)
 
     (define exists any)
 
+    ;; m4_ifelse(using_syntax_rules,«yes»,«
+    ;; m4_pushdef(«general_macros»,«syntax-rules»)
+    m4_include(pipchix/general-purpose/streams/derived.m4)
+    ;; m4_popdef(«general_macros»)
+    ;; »)
+
+    ;; m4_ifelse(using_syntax_rules,«no»,«
     (cond-expand
       (loko
        ;; m4_pushdef(«general_macros»,«syntax-case»)
@@ -66,6 +86,7 @@ m4_include(pipchix/pipchix-includes.m4)
        m4_include(pipchix/general-purpose/streams/derived.m4)
        ;; m4_popdef(«general_macros»)
        ))
+    ;; »)
 
     ))
 
