@@ -234,8 +234,79 @@
       ((stream-match-pattern strm var (binding ...) body) 
        (syntax (let ((var strm) binding ...) body))))))
 ;;; »)
+
+;;; m4_ifelse(general_macros,«syntax-rules»,«
+(define-syntax stream-match-pattern
+  (syntax-rules (_)
+    ((stream-match-pattern strm () (binding ...) body)
+     (and (stream-null? strm) (let (binding ...) body)))
+    ((stream-match-pattern strm (_ . rest) (binding ...) body)
+     (and (stream-pair? strm)
+          (let ((strm (stream-cdr strm)))
+            (stream-match-pattern strm rest (binding ...) body))))
+    ((stream-match-pattern strm (var . rest) (binding ...) body)
+     (and (stream-pair? strm)
+          (let ((temp (stream-car strm)) (strm (stream-cdr strm))) 
+            (stream-match-pattern strm rest ((var temp) binding ...) body))))
+    ((stream-match-pattern strm _ (binding ...) body)
+     (let (binding ...) body))
+    ((stream-match-pattern strm var (binding ...) body) 
+     (let ((var strm) binding ...) body))))
+;;; »)
+
 ;;; m4_ifelse(general_macros,«er-macro-transformer»,«
-'FIXME
+(define-syntax stream-match-pattern
+  (let ()
+    (define match-pattern
+      (lambda (form rename compare)
+
+        (define (wildcard? x) (compare x (rename '_)))
+        (define _LET_ (rename 'let))
+        (define _AND_ (rename 'and))
+        (define _STREAM-CAR_ (rename 'stream-car))
+        (define _STREAM-CDR_ (rename 'stream-cdr))
+        (define _STREAM-NULL?_ (rename 'stream-null?))
+        (define _STREAM-PAIR?_ (rename 'stream-pair?))
+
+        (let ((who (car form))
+              (arg* (cdr form)))
+          (let ((strm (first arg*))
+                (pattern (second arg*))
+                (binding* (third arg*))
+                (body (fourth arg*)))
+            (unless (proper-list? binding*)
+              (error 'stream-match "expected a list" binding*))
+            (cond
+
+              ((null? pattern)
+               `(,_AND_
+                 (,_STREAM-NULL?_ ,strm)
+                 (,_LET_ ,binding* ,body)))
+
+              ((and (pair? pattern)
+                    (wildcard? (car pattern)))
+               `(,_AND_
+                 (,_STREAM-PAIR?_ ,strm)
+                 (,_LET_ ((strm (,_STREAM-CDR_ ,strm)))
+                         (,who strm ,(cdr pattern) ,binding* ,body))))
+
+              ((pair? pattern)
+               `(,_AND_
+                 (,_STREAM-PAIR?_ ,strm)
+                 (,_LET_ ((temp (,_STREAM-CAR_ ,strm))
+                          (strm (,_STREAM-CDR_ ,strm)))
+                         (,who strm ,(cdr pattern)
+                               ((,(car pattern) temp) . ,binding*) ,body))))
+
+              ((wildcard? pattern)
+               `(,_LET_ ,binding* ,body))
+
+              (else
+               `(,_LET_ ((,pattern ,strm) . ,binding*) ,body))
+
+              )))))
+
+    (er-macro-transformer match-pattern)))
 ;;; »)
 
 (define-syntax stream-of

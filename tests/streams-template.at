@@ -49,6 +49,59 @@ m4_define([sexpr],
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([[[·(1)·(1)·(3)·(4)·(5)·(9)·]·]])],[])
 
+m4_define([sexpr],
+  [(scheme->nix
+    (let ()
+      (define (len strm)
+        (stream-match strm
+          (() 0)
+          ((head . tail) (+ 1 (len tail)))))
+      (list
+       (len (list->stream `()))
+       (len (list->stream `(1)))
+       (len (list->stream `(3 1 4 1 5 9))))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·(0)·(1)·(6)·]·]])],[])
+
+m4_define([sexpr],
+  [(scheme->nix
+    (let ()
+      (define-stream (qsort lt? strm)
+        (if (stream-null? strm)
+          stream-null
+          (let ((x (stream-car strm))
+                (xs (stream-cdr strm)))
+            (stream-append
+              (qsort lt?
+                (stream-filter
+                  (lambda (u) (lt? u x))
+                  xs))
+              (stream x)
+              (qsort lt?
+                (stream-filter
+                  (lambda (u) (not (lt? u x)))
+                  xs))))))
+      (define-stream (stream-merge lt? . strms)
+        (define-stream (merge xx yy)
+          (stream-match xx (() yy) ((x . xs)
+            (stream-match yy (() xx) ((y . ys)
+              (if (lt? y x)
+                  (stream-cons y (merge xx ys))
+                  (stream-cons x (merge xs yy))))))))
+        (stream-let loop ((strms strms))
+          (cond ((null? strms) stream-null)
+                ((null? (cdr strms)) (car strms))
+                (else (merge (car strms)
+                             (apply stream-merge lt?
+                               (cdr strms)))))))
+      (stream->list
+       (stream-merge < (qsort < (list->stream `(3 1 4 1 5 9)))
+                       (qsort < (list->stream `(1 6 1 8 0 3)))
+                       (qsort < (list->stream `(2 4 1 4 2 1)))
+       ))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·(0)·(1)·(1)·(1)·(1)·(1)·(1)·(2)·(2)·(3)·(3)·(4)·(4)·(4)·(5)·(6)·(8)·(9)·]·]])],[])
+
 AT_CLEANUP
 
 # local variables:
