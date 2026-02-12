@@ -19,6 +19,7 @@ cat > "${prog_scm}" <<EOF
         (pipchix general-purpose combinators)
         (pipchix general-purpose syntax)
         (pipchix general-purpose goal-directed)
+        (pipchix general-purpose streams)
         (pipchix general-purpose continuation-capture)
         (pipchix abstract-syntax-tree)
         (pipchix nix-embed)
