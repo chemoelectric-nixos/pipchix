@@ -41,6 +41,32 @@ m4_define([sexpr],
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([[[·(2)·(3)·(5)·(7)·(11)·(13)·(17)·(19)·(23)·(29)·(31)·(37)·(41)·(43)·(47)·(53)·(59)·(61)·(67)·(71)·(73)·(79)·(83)·(89)·(97)·]·]])],[])
 
+m4_define([sexpr],
+  [(scheme->nix
+    (list-ec (:stream i (list->stream (iota 10 1))) i))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·(1)·(2)·(3)·(4)·(5)·(6)·(7)·(8)·(9)·(10)·]·]])],[])
+
+m4_define([sexpr],
+  [(scheme->nix
+    (list-ec (:range i 1 11) i))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·(1)·(2)·(3)·(4)·(5)·(6)·(7)·(8)·(9)·(10)·]·]])],[])
+
+dnl dnl dnl dnl dnl dnl dnl dnl dnl dnl dnl dnl dnl dnl dnl dnl dnl dnl
+dnl
+dnl  FIXME: THIS FAILS IN CHIBI SCHEME
+dnl
+m4_if(implementation,[chibi],[],[
+m4_define([sexpr],
+  [(scheme->nix
+    (stream->list
+     (stream-ec (:range i 1 11) i)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·(1)·(2)·(3)·(4)·(5)·(6)·(7)·(8)·(9)·(10)·]·]])],[])
+])
+dnl dnl dnl dnl dnl dnl dnl dnl dnl dnl dnl dnl dnl dnl dnl dnl dnl dnl
+
 AT_CLEANUP
 
 # local variables:

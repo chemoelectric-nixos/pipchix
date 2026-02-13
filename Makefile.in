@@ -497,6 +497,7 @@ R6RS_SCHEME = r6rs/pipchix/general-purpose/srfi-39.sls \
 	r6rs/pipchix/general-purpose/eager-syntax.sls \
 	r6rs/pipchix/general-purpose/eager-macros.sls \
 	r6rs/pipchix/general-purpose/ec.sls \
+	r6rs/pipchix/general-purpose/ec/streams.sls \
 	r6rs/pipchix/general-purpose/combinators.sls \
 	r6rs/pipchix/general-purpose/syntax.sls \
 	r6rs/pipchix/general-purpose/goal-directed.sls \
@@ -526,6 +527,7 @@ R7RS_SCHEME = r7rs/pipchix/general-purpose/box.sld \
 	r7rs/pipchix/general-purpose/eager-syntax.sld \
 	r7rs/pipchix/general-purpose/eager-macros.sld \
 	r7rs/pipchix/general-purpose/ec.sld \
+	r7rs/pipchix/general-purpose/ec/streams.sld \
 	r7rs/pipchix/general-purpose/combinators.sld \
 	r7rs/pipchix/general-purpose/syntax.sld \
 	r7rs/pipchix/general-purpose/goal-directed.sld \
