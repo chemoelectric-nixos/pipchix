@@ -14,7 +14,7 @@
 
 @SET_MAKE@
 
-# Copyright © 2025 Barry Schwartz
+# Copyright © 2025, 2026 Barry Schwartz
 #
 # This file is part of Pipchix.
 #
@@ -498,6 +498,7 @@ R6RS_SCHEME = r6rs/pipchix/general-purpose/srfi-39.sls \
 	r6rs/pipchix/general-purpose/eager-macros.sls \
 	r6rs/pipchix/general-purpose/ec.sls \
 	r6rs/pipchix/general-purpose/ec/stream.sls \
+	r6rs/pipchix/general-purpose/ec/goal-directed.sls \
 	r6rs/pipchix/general-purpose/combinators.sls \
 	r6rs/pipchix/general-purpose/syntax.sls \
 	r6rs/pipchix/general-purpose/goal-directed.sls \
@@ -528,6 +529,7 @@ R7RS_SCHEME = r7rs/pipchix/general-purpose/box.sld \
 	r7rs/pipchix/general-purpose/eager-macros.sld \
 	r7rs/pipchix/general-purpose/ec.sld \
 	r7rs/pipchix/general-purpose/ec/stream.sld \
+	r7rs/pipchix/general-purpose/ec/goal-directed.sld \
 	r7rs/pipchix/general-purpose/combinators.sld \
 	r7rs/pipchix/general-purpose/syntax.sld \
 	r7rs/pipchix/general-purpose/goal-directed.sld \

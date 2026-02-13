@@ -1,4 +1,4 @@
-# Copyright © 2025 Barry Schwartz
+# Copyright © 2025, 2026 Barry Schwartz
 #
 # This file is part of Pipchix.
 #
@@ -81,6 +81,7 @@ R6RS_SCHEME += r6rs/pipchix/general-purpose/eager-syntax.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/eager-macros.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/ec.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/ec/stream.sls
+R6RS_SCHEME += r6rs/pipchix/general-purpose/ec/goal-directed.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/combinators.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/syntax.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/goal-directed.sls
@@ -124,6 +125,7 @@ R7RS_SCHEME += r7rs/pipchix/general-purpose/eager-syntax.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/eager-macros.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/ec.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/ec/stream.sld
+R7RS_SCHEME += r7rs/pipchix/general-purpose/ec/goal-directed.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/combinators.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/syntax.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/goal-directed.sld

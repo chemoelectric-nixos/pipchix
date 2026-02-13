@@ -25,9 +25,9 @@
 ;;;
 m4_include(pipchix/pipchix-includes.m4)
 
-  ;;
-  ;; SRFI-42: Eager Comprehensions of SRFI-41 Streams
-  ;;
+;;
+;; SRFI-42: Eager Comprehensions of SRFI-41 Streams
+;;
 
 (library (pipchix general-purpose ec stream)
 

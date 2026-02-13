@@ -20,6 +20,7 @@ cat > "${prog_scm}" <<EOF
         (pipchix general-purpose goal-directed)
         (pipchix general-purpose ec)
         (pipchix general-purpose ec stream)
+        (pipchix general-purpose ec goal-directed)
         (pipchix general-purpose stream)
         (pipchix general-purpose continuation-capture)
         (pipchix abstract-syntax-tree)
