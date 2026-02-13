@@ -43,46 +43,50 @@ m4_include(pipchix/pipchix-includes.m4)
   (export m4_include(pipchix/general-purpose/streams/derived.exports.m4))
 
   (import basic_libraries)
-  (import (pipchix general-purpose list))
-  (import (pipchix general-purpose streams primitive))
-
-  ;; m4_ifelse(using_syntax_rules,«no»,«
-  (import (pipchix general-purpose gensym))
   (cond-expand
-    (chibi (import (only (chibi)
-                         er-macro-transformer)))
-    (gauche (import (only (r7rs aux)
-                          :info-alist
-                          er-macro-transformer)))
-    (sagittarius (import (only (sagittarius)
-                               er-macro-transformer)))
-    (loko (import (rnrs syntax-case (6))))
-    (else))
-  ;; »)
+    ((or chibi gauche sagittarius)
+     (import (scheme stream)))
+    (else
+     (import (pipchix general-purpose streams primitive))
+
+     ;; m4_ifelse(using_syntax_rules,«no»,«
+     (import (pipchix general-purpose gensym))
+     (cond-expand
+       (loko (import (rnrs syntax-case (6))))
+       (else))
+     ;; »)
+     ))
 
   (begin
 
-    (define exists any)
-
-    ;; m4_ifelse(using_syntax_rules,«yes»,«
-    ;; m4_pushdef(«general_macros»,«syntax-rules»)
-    m4_include(pipchix/general-purpose/streams/derived.m4)
-    ;; m4_popdef(«general_macros»)
-    ;; »)
-
-    ;; m4_ifelse(using_syntax_rules,«no»,«
     (cond-expand
-      (loko
-       ;; m4_pushdef(«general_macros»,«syntax-case»)
-       m4_include(pipchix/general-purpose/streams/derived.m4)
-       ;; m4_popdef(«general_macros»)
-       )
+      ((or chibi gauche sagittarius))
+
       (else
-       ;; m4_pushdef(«general_macros»,«er-macro-transformer»)
+
+       (define exists any)
+
+       ;; m4_ifelse(using_syntax_rules,«yes»,«
+       ;; m4_pushdef(«general_macros»,«syntax-rules»)
        m4_include(pipchix/general-purpose/streams/derived.m4)
        ;; m4_popdef(«general_macros»)
+       ;; »)
+
+       ;; m4_ifelse(using_syntax_rules,«no»,«
+       (cond-expand
+         (loko
+          ;; m4_pushdef(«general_macros»,«syntax-case»)
+          m4_include(pipchix/general-purpose/streams/derived.m4)
+          ;; m4_popdef(«general_macros»)
+          )
+         (else
+          ;; m4_pushdef(«general_macros»,«er-macro-transformer»)
+          m4_include(pipchix/general-purpose/streams/derived.m4)
+          ;; m4_popdef(«general_macros»)
+          ))
+       ;; »)
+
        ))
-    ;; »)
 
     ))
 

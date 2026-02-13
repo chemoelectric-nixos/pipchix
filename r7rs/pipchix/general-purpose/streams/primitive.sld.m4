@@ -33,11 +33,17 @@ m4_include(pipchix/pipchix-includes.m4)
   (export m4_include(pipchix/general-purpose/streams/primitive.exports.m4))
 
   (import basic_libraries)
-  (import (pipchix general-purpose list))
+  (cond-expand
+    ((or chibi gauche sagittarius)
+     (import (scheme stream)))
+    (else))
 
   (begin
 
-    m4_include(pipchix/general-purpose/streams/primitive.m4)
+    (cond-expand
+      ((or chibi gauche sagittarius))
+      (else
+       m4_include(pipchix/general-purpose/streams/primitive.m4)))
 
     ))
 

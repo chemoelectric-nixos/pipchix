@@ -25,7 +25,6 @@ stream-length
 stream-let
 stream-map
 stream-match
-_
 stream-of
 stream-range
 stream-ref
