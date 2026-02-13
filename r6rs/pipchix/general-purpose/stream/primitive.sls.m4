@@ -25,15 +25,18 @@
 ;;;
 m4_include(pipchix/pipchix-includes.m4)
 
-(library (pipchix general-purpose ec streams)
+(library (pipchix general-purpose stream primitive)
 
-  (export m4_include(pipchix/general-purpose/ec/streams.exports.m4))
+  ;;
+  ;; SRFI-41 Streams.
+  ;;
+
+  (export m4_include(pipchix/general-purpose/stream/primitive.exports.m4))
 
   (import basic_libraries
-          (pipchix general-purpose ec)
-          (pipchix general-purpose streams))
+          (rnrs mutable-pairs (6)))
 
-  m4_include(pipchix/general-purpose/ec/streams.m4)
+  m4_include(pipchix/general-purpose/stream/primitive.m4)
 
   )
 

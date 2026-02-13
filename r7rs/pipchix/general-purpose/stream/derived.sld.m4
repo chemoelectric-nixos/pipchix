@@ -24,7 +24,7 @@
 ;;;
 m4_include(pipchix/pipchix-includes.m4)
 
-(define-library (pipchix general-purpose streams derived)
+(define-library (pipchix general-purpose stream derived)
 
   ;;
   ;; SRFI-41 Streams.
@@ -40,14 +40,14 @@ m4_include(pipchix/pipchix-includes.m4)
   ;; m4_define(«using_syntax_rules»,«yes»)
   ;;
 
-  (export m4_include(pipchix/general-purpose/streams/derived.exports.m4))
+  (export m4_include(pipchix/general-purpose/stream/derived.exports.m4))
 
   (import basic_libraries)
   (cond-expand
     ((or chibi gauche sagittarius)
      (import (scheme stream)))
     (else
-     (import (pipchix general-purpose streams primitive))
+     (import (pipchix general-purpose stream primitive))
 
      ;; m4_ifelse(using_syntax_rules,«no»,«
      (import (pipchix general-purpose gensym))
@@ -68,7 +68,7 @@ m4_include(pipchix/pipchix-includes.m4)
 
        ;; m4_ifelse(using_syntax_rules,«yes»,«
        ;; m4_pushdef(«general_macros»,«syntax-rules»)
-       m4_include(pipchix/general-purpose/streams/derived.m4)
+       m4_include(pipchix/general-purpose/stream/derived.m4)
        ;; m4_popdef(«general_macros»)
        ;; »)
 
@@ -76,12 +76,12 @@ m4_include(pipchix/pipchix-includes.m4)
        (cond-expand
          (loko
           ;; m4_pushdef(«general_macros»,«syntax-case»)
-          m4_include(pipchix/general-purpose/streams/derived.m4)
+          m4_include(pipchix/general-purpose/stream/derived.m4)
           ;; m4_popdef(«general_macros»)
           )
          (else
           ;; m4_pushdef(«general_macros»,«er-macro-transformer»)
-          m4_include(pipchix/general-purpose/streams/derived.m4)
+          m4_include(pipchix/general-purpose/stream/derived.m4)
           ;; m4_popdef(«general_macros»)
           ))
        ;; »)

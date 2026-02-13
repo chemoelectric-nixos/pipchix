@@ -25,18 +25,19 @@
 ;;;
 m4_include(pipchix/pipchix-includes.m4)
 
-(library (pipchix general-purpose streams primitive)
-
   ;;
-  ;; SRFI-41 Streams.
+  ;; SRFI-42: Eager Comprehensions of SRFI-41 Streams
   ;;
 
-  (export m4_include(pipchix/general-purpose/streams/primitive.exports.m4))
+(library (pipchix general-purpose ec stream)
+
+  (export m4_include(pipchix/general-purpose/ec/stream.exports.m4))
 
   (import basic_libraries
-          (rnrs mutable-pairs (6)))
+          (pipchix general-purpose ec)
+          (pipchix general-purpose stream))
 
-  m4_include(pipchix/general-purpose/streams/primitive.m4)
+  m4_include(pipchix/general-purpose/ec/stream.m4)
 
   )
 

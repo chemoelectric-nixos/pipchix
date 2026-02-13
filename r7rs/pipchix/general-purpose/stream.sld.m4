@@ -24,16 +24,16 @@
 ;;;
 m4_include(pipchix/pipchix-includes.m4)
 
-(define-library (pipchix general-purpose streams)
+(define-library (pipchix general-purpose stream)
 
   ;;
   ;; SRFI-41 Streams.
   ;;
 
-  (export m4_include(pipchix/general-purpose/streams.exports.m4))
+  (export m4_include(pipchix/general-purpose/stream.exports.m4))
 
-  (import (pipchix general-purpose streams primitive)
-          (pipchix general-purpose streams derived)))
+  (import (pipchix general-purpose stream primitive)
+          (pipchix general-purpose stream derived)))
 
 ;;; local variables:
 ;;; mode: scheme

@@ -497,13 +497,13 @@ R6RS_SCHEME = r6rs/pipchix/general-purpose/srfi-39.sls \
 	r6rs/pipchix/general-purpose/eager-syntax.sls \
 	r6rs/pipchix/general-purpose/eager-macros.sls \
 	r6rs/pipchix/general-purpose/ec.sls \
-	r6rs/pipchix/general-purpose/ec/streams.sls \
+	r6rs/pipchix/general-purpose/ec/stream.sls \
 	r6rs/pipchix/general-purpose/combinators.sls \
 	r6rs/pipchix/general-purpose/syntax.sls \
 	r6rs/pipchix/general-purpose/goal-directed.sls \
-	r6rs/pipchix/general-purpose/streams.sls \
-	r6rs/pipchix/general-purpose/streams/primitive.sls \
-	r6rs/pipchix/general-purpose/streams/derived.sls \
+	r6rs/pipchix/general-purpose/stream.sls \
+	r6rs/pipchix/general-purpose/stream/primitive.sls \
+	r6rs/pipchix/general-purpose/stream/derived.sls \
 	r6rs/pipchix/generate-identifier.sls \
 	r6rs/pipchix/essentials.sls r6rs/pipchix/expressions.sls \
 	r6rs/pipchix/macros.sls r6rs/pipchix/nix-embed.sls \
@@ -527,13 +527,13 @@ R7RS_SCHEME = r7rs/pipchix/general-purpose/box.sld \
 	r7rs/pipchix/general-purpose/eager-syntax.sld \
 	r7rs/pipchix/general-purpose/eager-macros.sld \
 	r7rs/pipchix/general-purpose/ec.sld \
-	r7rs/pipchix/general-purpose/ec/streams.sld \
+	r7rs/pipchix/general-purpose/ec/stream.sld \
 	r7rs/pipchix/general-purpose/combinators.sld \
 	r7rs/pipchix/general-purpose/syntax.sld \
 	r7rs/pipchix/general-purpose/goal-directed.sld \
-	r7rs/pipchix/general-purpose/streams.sld \
-	r7rs/pipchix/general-purpose/streams/primitive.sld \
-	r7rs/pipchix/general-purpose/streams/derived.sld \
+	r7rs/pipchix/general-purpose/stream.sld \
+	r7rs/pipchix/general-purpose/stream/primitive.sld \
+	r7rs/pipchix/general-purpose/stream/derived.sld \
 	r7rs/pipchix/generate-identifier.sld \
 	r7rs/pipchix/essentials.sld r7rs/pipchix/expressions.sld \
 	r7rs/pipchix/macros.sld r7rs/pipchix/nix-embed.sld \

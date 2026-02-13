@@ -24,13 +24,13 @@
 ;;;
 m4_include(pipchix/pipchix-includes.m4)
 
-(define-library (pipchix general-purpose streams primitive)
+(define-library (pipchix general-purpose stream primitive)
 
   ;;
   ;; SRFI-41 Streams.
   ;;
 
-  (export m4_include(pipchix/general-purpose/streams/primitive.exports.m4))
+  (export m4_include(pipchix/general-purpose/stream/primitive.exports.m4))
 
   (import basic_libraries)
   (cond-expand
@@ -43,7 +43,7 @@ m4_include(pipchix/pipchix-includes.m4)
     (cond-expand
       ((or chibi gauche sagittarius))
       (else
-       m4_include(pipchix/general-purpose/streams/primitive.m4)))
+       m4_include(pipchix/general-purpose/stream/primitive.m4)))
 
     ))
 

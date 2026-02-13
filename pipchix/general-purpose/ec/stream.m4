@@ -25,6 +25,7 @@
 ;;; DEALINGS IN THE SOFTWARE.
 
 (define-syntax stream-define
+  ;; Translate SRFI-40 stream-define to SRFI-41 define-stream.
   (syntax-rules ()
     ((¶ (name . formal) body0 body1 ...)
      (define-stream (name . formal) body0 body1 ...))))

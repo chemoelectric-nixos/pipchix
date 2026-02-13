@@ -22,9 +22,9 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
-AT_SETUP([setup_message(streams)])
+AT_SETUP([setup_message(lazy stream library (SRFI-41))])
 
-AT_KEYWORDS([default_keywords streams srfi-41 srfi41])
+AT_KEYWORDS([default_keywords stream streams srfi-41 srfi41])
 
 m4_define([sexpr],
   [(scheme->nix

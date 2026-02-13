@@ -24,21 +24,21 @@
 ;;;
 m4_include(pipchix/pipchix-includes.m4)
 
-(define-library (pipchix general-purpose ec streams)
+(define-library (pipchix general-purpose ec stream)
 
   ;;
-  ;; SRFI-42: Eager Comprehensions: Streams
+  ;; SRFI-42: Eager Comprehensions of SRFI-41 Streams
   ;;
 
-  (export m4_include(pipchix/general-purpose/ec/streams.exports.m4))
+  (export m4_include(pipchix/general-purpose/ec/stream.exports.m4))
 
   (import basic_libraries)
   (import (pipchix general-purpose ec))
-  (import (pipchix general-purpose streams))
+  (import (pipchix general-purpose stream))
 
   (begin
 
-    m4_include(pipchix/general-purpose/ec/streams.m4)
+    m4_include(pipchix/general-purpose/ec/stream.m4)
 
     ))
 
