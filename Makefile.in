@@ -488,6 +488,7 @@ R6RS_SCHEME = r6rs/pipchix/general-purpose/srfi-39.sls \
 	r6rs/pipchix/general-purpose/list.sls \
 	r6rs/pipchix/general-purpose/division.sls \
 	r6rs/pipchix/general-purpose/match.sls \
+	r6rs/pipchix/general-purpose/error-reporting.sls \
 	r6rs/pipchix/general-purpose/base64.sls \
 	r6rs/pipchix/general-purpose/gensym.sls \
 	r6rs/pipchix/general-purpose/define-record-factory.sls \
@@ -516,6 +517,7 @@ R7RS_SCHEME = r7rs/pipchix/general-purpose/box.sld \
 	r7rs/pipchix/general-purpose/list.sld \
 	r7rs/pipchix/general-purpose/division.sld \
 	r7rs/pipchix/general-purpose/match.sld \
+	r7rs/pipchix/general-purpose/error-reporting.sld \
 	r7rs/pipchix/general-purpose/base64.sld \
 	r7rs/pipchix/general-purpose/gensym.sld \
 	r7rs/pipchix/general-purpose/define-record-factory.sld \

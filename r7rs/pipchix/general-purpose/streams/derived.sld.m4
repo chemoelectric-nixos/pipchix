@@ -42,8 +42,7 @@ m4_include(pipchix/pipchix-includes.m4)
 
   (export m4_include(pipchix/general-purpose/streams/derived.exports.m4))
 
-  (import (rename (scheme base) (error r7rs-error)))
-  (import (scheme write)) ;; For debugging.
+  (import basic_libraries)
   (import (pipchix general-purpose list))
   (import (pipchix general-purpose streams primitive))
 
@@ -62,9 +61,6 @@ m4_include(pipchix/pipchix-includes.m4)
   ;; »)
 
   (begin
-
-    (define (error who message . args)
-      (apply r7rs-error (cons* message who args)))
 
     (define exists any)
 

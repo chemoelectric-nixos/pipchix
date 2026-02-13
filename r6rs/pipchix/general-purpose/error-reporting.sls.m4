@@ -1,3 +1,4 @@
+#!r6rs
 ;;;
 ;;; Copyright © 2026 Barry Schwartz
 ;;;
@@ -24,25 +25,45 @@
 ;;;
 m4_include(pipchix/pipchix-includes.m4)
 
-(define-library (pipchix general-purpose streams primitive)
+(library (pipchix general-purpose error-reporting)
 
   ;;
-  ;; SRFI-41 Streams.
+  ;; Unified R⁶RS and R⁷RS error reporting.
   ;;
 
-  (export m4_include(pipchix/general-purpose/streams/primitive.exports.m4))
+  (export m4_include(pipchix/general-purpose/error-reporting.exports.m4))
 
-  (import basic_libraries)
-  (import (pipchix general-purpose list))
+  (import (for (rename (except (rnrs (6))
+                               fold-right member assoc map remove)
+                       (error r6rs-error)) expand run)
+          (for (pipchix general-purpose list) expand run))
 
-  (begin
+    (define (error . arg*)
+      (cond ((and (pair? arg*)
+                  (pair? (cdr arg*))
+                  (or (eq? (first arg*) #f)
+                      (symbol? (first arg*))
+                      (string? (first arg*)))
+                  (string? (second arg*)))
+             ;; R⁶RS syntax. If (first arg*) is a string the syntax
+             ;; may actually, however, be R⁷RS misinterpreted. It is
+             ;; better to use a symbol for ‘who’.
+             (apply r6rs-error arg*))
 
-    m4_include(pipchix/general-purpose/streams/primitive.m4)
+            ;; Assume R⁷RS syntax.
+            (else (apply r6rs-error #f arg*))))
 
-    ))
+    (define-syntax syntax-error
+      (syntax-rules ()
+        ((¶ message arg ...)
+         (error #f (string-append "[syntax\xA0;error:\x2009;"
+                                  message "]")
+                arg ...))))
+
+    )
 
 ;;; local variables:
 ;;; mode: scheme
-;;; geiser-scheme-implementation: chibi
+;;; geiser-scheme-implementation: chez
 ;;; coding: utf-8
 ;;; end:
