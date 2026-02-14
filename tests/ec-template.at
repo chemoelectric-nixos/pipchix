@@ -135,6 +135,28 @@ m4_define([sexpr],
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([[[·(101)·(102)·(103)·(104)·(201)·(202)·(203)·(204)·(301)·(302)·(303)·(304)·(401)·(402)·(403)·(404)·]·]])],[])
 
+dnl  Recursive co-expression. Permutation defined in terms of itself.
+m4_define([sexpr],
+  [(scheme->nix
+    (let ()
+      (define (insert µ κ ν)
+        ;; Insert element µ into list κ at position ν.
+        (call-with-values (lambda () (split-at κ ν))
+          (lambda (α β) `(,@α ,µ ,@β))))
+      (define (make-permutations-coexp lst)
+        (if (null-list? lst)
+          (co-expression-ec (:let p '\''()) p)
+          (let-values (((hd tl) (car+cdr lst)))
+            (co-expression-ec
+             (:co-expression part (make-permutations-coexp tl))
+             (:let end (+ (length part) 1))
+             (:range i 0 end)
+             (insert hd part i)))))
+      (define p! (make-permutations-coexp '\''(1 2 3)))
+      (list-ec (:co-expression κ p!) κ)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·[·(1)·(2)·(3)·]·[·(2)·(1)·(3)·]·[·(2)·(3)·(1)·]·[·(1)·(3)·(2)·]·[·(3)·(1)·(2)·]·[·(3)·(2)·(1)·]·]·]])],[])
+
 AT_CLEANUP
 
 # local variables:
