@@ -24,25 +24,50 @@
 ;;;
 ;;;-------------------------------------------------------------------
 
-;;; Make this a parameter if for no other reason than that way it has
-;;; to be evaluated to obtain the actual box. In some implementations
-;;; this also makes it a thread-local entity.
-(define *failure-stack* (make-parameter (box '())))
+;;; WARNING: This variable is not thread-safe.
+(define failure-stack (make-vector 1 '()))
 
-(define (push-failure! failure)
-  (let ((bx (*failure-stack*)))
-    (set-box! bx (cons failure (unbox bx)))))
+(define-syntax failure-set!
+  (syntax-rules ()
+    ((¶ stk)
+     (vector-set! failure-stack 0 stk))))
 
-(define (drop-failure!)
-  (let* ((bx (*failure-stack*))
-         (stk (unbox bx)))
-    (when (pair? stk)
-      (set-box! bx (cdr stk)))))
+(define-syntax failure-ref
+  (syntax-rules ()
+    ((¶) (vector-ref failure-stack 0))))
+
+(define-syntax push-failure!
+  (syntax-rules ()
+    ((¶ failure)
+     (let ((stk (failure-ref)))
+       (failure-set! (cons failure stk))))))
+
+(define-syntax drop-failure!
+  (syntax-rules ()
+    ((¶)
+     (let ((stk (failure-ref)))
+       (when (pair? stk)
+         (failure-set! (cdr stk)))))))
 
 (define (attempt-dynamic-wind thunk)
   (dynamic-wind (lambda () (if #f #f))
                 thunk
                 (lambda () (drop-failure!))))
+
+;;; FIXME:
+;;; FIXME: This implementation cannot handle call loops.
+;;; FIXME:
+(define (in-new-failure-context thunk)
+  (let ((failures '())
+        (saved-failures '<undefined>))
+    (dynamic-wind ;; Stack-switching for backtracks.
+      (lambda ()
+        (set! saved-failures (failure-ref))
+        (failure-set! failures))
+      thunk
+      (lambda ()
+        (set! failures (failure-ref))
+        (failure-set! saved-failures)))))
 
 (define *failure* '#("the\xA0;failure\xA0;object"))
 
@@ -55,25 +80,10 @@
   (eq? obj *failure*))
 
 (define (fail)
-  (let* ((bx (*failure-stack*))
-         (stk (unbox bx)))
+  (let ((stk (failure-ref)))
     (if (pair? stk)
       ((car stk))
       *failure*)))
-
-(define (in-new-failure-context thunk)
-  (let ((failures '())
-        (saved-failures '<undefined>))
-    (dynamic-wind ;; Stack-switching for backtracks.
-      (lambda ()
-        (let ((bx (*failure-stack*)))
-          (set! saved-failures (unbox bx))
-          (set-box! bx failures)))
-      thunk
-      (lambda ()
-        (let ((bx (*failure-stack*)))
-          (set! failures (unbox bx))
-          (set-box! bx saved-failures))))))
 
 (define-syntax attempt-not
   ;;
