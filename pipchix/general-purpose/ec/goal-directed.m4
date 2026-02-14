@@ -38,13 +38,13 @@
           (arg) ))))
 
 (define-syntax co-expression-ec
-  (syntax-rules (index)
+  (syntax-rules (nested)
     ((¶ (nested q1 ...) q etc1 etc ...)
-     (¶ (nested q1 ... q) etc1 etc ...) )
+     (co-expression-ec (nested q1 ... q) etc1 etc ...) )
     ((¶ q1 q2             etc1 etc ...)
-     (¶ (nested q1 q2)    etc1 etc ...) )
+     (co-expression-ec (nested q1 q2)    etc1 etc ...) )
     ((¶ expression)
-     (¶ (nested) expression) )
+     (co-expression-ec (nested) expression) )
 
     ((¶ qualifier expression)
      (make-co-expression
