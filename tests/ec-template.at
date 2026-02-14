@@ -124,6 +124,17 @@ m4_define([sexpr],
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([[[·(101)·(102)·(103)·(104)·(201)·(202)·(203)·(204)·(301)·(302)·(303)·(304)·(401)·(402)·(403)·(404)·]·]])],[])
 
+m4_define([sexpr],
+  [(scheme->nix
+    (let ()
+      (list-ec (:co-expression x (co-expression-ec (:range i 1 5)
+                                                   (:let i*100 (* i 100))
+                                                   (:range j 1 5)
+                                                   (+ i*100 j)))
+               x)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·(101)·(102)·(103)·(104)·(201)·(202)·(203)·(204)·(301)·(302)·(303)·(304)·(401)·(402)·(403)·(404)·]·]])],[])
+
 AT_CLEANUP
 
 # local variables:

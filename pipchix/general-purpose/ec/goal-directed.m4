@@ -26,8 +26,7 @@
 (define-syntax :goal-directed
   (syntax-rules (index)
     ((¶ cc var (index i) arg)
-     (:parallel cc (:goal-directed var arg)
-                (:integers i)) )
+     (:parallel cc (:goal-directed var arg) (:integers i)) )
     ((¶ cc var arg)
      (:do cc
           (let ())
@@ -36,6 +35,23 @@
           (let ((var t)))
           #t
           (arg) ))))
+
+(define-syntax :co-expression
+  ;;
+  ;; Unlike :goal-directed, this lets you evaluate arg just once. Thus
+  ;; you can inline the co-expression creation.
+  ;;
+  (syntax-rules (index)
+    ((¶ cc var (index i) arg)
+     (:parallel cc (:co-expression var arg) (:integers i)) )
+    ((¶ cc var arg)
+     (:do cc
+          (let ((c! arg)))
+          ((t (c!)))
+          (not (failure-object? t))
+          (let ((var t)))
+          #t
+          ((c!)) ))))
 
 (define-syntax co-expression-ec
   (syntax-rules (nested)
