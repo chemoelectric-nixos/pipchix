@@ -61,6 +61,20 @@
       ((car stk))
       *failure*)))
 
+(define (in-new-failure-context thunk)
+  (let ((failures '())
+        (saved-failures '<undefined>))
+    (dynamic-wind ;; Stack-switching for backtracks.
+      (lambda ()
+        (let ((bx (*failure-stack*)))
+          (set! saved-failures (unbox bx))
+          (set-box! bx failures)))
+      thunk
+      (lambda ()
+        (let ((bx (*failure-stack*)))
+          (set! failures (unbox bx))
+          (set-box! bx saved-failures))))))
+
 (define-syntax attempt-not
   ;;
   ;; Reverse success and failure with each other. Returns nothing
@@ -387,8 +401,7 @@
   (apply (*suspend*) v*))
 
 (define (make-co-expression thunk)
-  (let ((failures '())
-        (saved-failures '<undefined>))
+  (let ((just-apply-values #f))
     (letrec
         ((resume-coexpr
           (lambda (ε . ξ*)
@@ -417,32 +430,24 @@
                        (lambda (failure)
                          (push-failure! failure)
                          (thunk)))
-                      (set! failures #f)
+                      (set! just-apply-values #t)
                       (leave (failure-object)))))))))))
 
       (lambda ξ*
-        (if failures
+        (if just-apply-values
+          (apply values ξ*)
           (call-with-values
               (lambda ()
-                (dynamic-wind ;; Stack-switching for backtracks.
-                  (lambda ()
-                    (let ((bx (*failure-stack*)))
-                      (set! saved-failures (unbox bx))
-                      (set-box! bx failures)))
-                  (lambda ()
-                    (call/cc (lambda (ε)
-                               (apply resume-coexpr (cons ε ξ*)))))
-                  (lambda ()
-                    (let ((bx (*failure-stack*)))
-                      (set! failures (unbox bx))
-                      (set-box! bx saved-failures)))))
+                (in-new-failure-context
+                 (lambda ()
+                   (call/cc (lambda (ε)
+                              (apply resume-coexpr (cons ε ξ*)))))))
             (lambda arg*
               (if (and (pair? arg*)
                        (null? (cdr arg*))
                        (failure-object? (car arg*)))
                 (fail)
-                (apply values arg*))))
-          (apply values ξ*))))))
+                (apply values arg*)))) )))))
 
 ;;;-------------------------------------------------------------------
 ;;;

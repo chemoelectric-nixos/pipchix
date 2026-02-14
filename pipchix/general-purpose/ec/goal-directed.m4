@@ -37,6 +37,25 @@
           #t
           (arg) ))))
 
+(define-syntax co-expression-ec
+  (syntax-rules (index)
+    ((¶ (nested q1 ...) q etc1 etc ...)
+     (¶ (nested q1 ... q) etc1 etc ...) )
+    ((¶ q1 q2             etc1 etc ...)
+     (¶ (nested q1 q2)    etc1 etc ...) )
+    ((¶ expression)
+     (¶ (nested) expression) )
+
+    ((¶ qualifier expression)
+     (make-co-expression
+      (lambda ()
+        (define (ec)
+          (do-ec
+            qualifier
+            (suspend expression))
+          (fail))
+        (in-new-failure-context ec))))))
+
 m4_divert(-1)
 ;;; local variables:
 ;;; mode: scheme

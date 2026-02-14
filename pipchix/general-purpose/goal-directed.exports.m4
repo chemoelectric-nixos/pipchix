@@ -1,6 +1,7 @@
 failure-object
 failure-object?
 fail
+in-new-failure-context
 
 attempt-not
 attempt-or
