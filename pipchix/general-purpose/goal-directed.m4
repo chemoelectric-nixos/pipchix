@@ -483,6 +483,10 @@
 ;;;
 
 (define icon->scheme-indexing
+  ;;
+  ;; Convert Icon-style indices to Scheme indices. (Conversion of
+  ;; Scheme indices to Icon-style indices can be done by adding 1.)
+  ;;
   (case-lambda
     ((n i)
      (cond ((zero? i) n)
@@ -500,6 +504,62 @@
        (if (< j i)
          (values j i)
          (values i j))))))
+
+(define *string-subject*
+  ;;
+  ;; Analogous to the &subject keyword of Icon.
+  ;;
+  (make-parameter
+   "" (lambda (s)
+        (unless (string? s)
+          (error '*string-subject* "expected a string" s))
+        s)))
+
+(define *string-position*
+  ;;
+  ;; Analogous to the &pos keyword of Icon.
+  ;;
+  (make-parameter
+   1 (lambda (i)
+       (unless (integer? i)
+         (error '*string-position* "expected an integer" i))
+       i)))
+
+(define-syntax string-scan
+  (syntax-rules ()
+    ((¶ str body ...)
+     (parameterize ((*string-subject* str)
+                    (*string-position* 1))
+       (if #f #f)
+       body ...))))
+
+(define (string-compare predicate)
+  ;;
+  ;; ‘string-match’ generalized to predicates other than string=?
+  ;;
+  (define compare
+    (case-lambda
+      ((s1) (compare s1 (*string-subject*) (*string-position*) 0))
+      ((s1 s2) (compare s1 s2 1 0))
+      ((s1 s2 i1) (compare s1 s2 i1 0))
+      ((s1 s2 i1 i2)
+       (let ((m (string-length s1))
+             (n (string-length s2)))
+         (let-values (((i1 i2) (icon->scheme-indexing n i1 i2)))
+           (let ((n12 (- i2 i1)))
+             (if (< n12 m)
+               (fail)
+               (let ((i1+m (+ i1 m)))
+                 (if (predicate s1 (substring s2 i1 i1+m))
+                   (+ i1+m 1)
+                   (fail))))))))))
+  compare)
+
+(define string-match
+  ;;
+  ;; Analogous to Icon’s ‘match’ function.
+  ;;
+  (string-compare string=?))
 
 ;;;-------------------------------------------------------------------
 m4_divert(-1)

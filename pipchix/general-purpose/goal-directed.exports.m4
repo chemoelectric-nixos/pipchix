@@ -44,3 +44,10 @@ suspend
 make-co-expression
 
 icon->scheme-indexing
+
+*string-subject*
+*string-position*
+string-scan
+string-compare
+string-match
+
