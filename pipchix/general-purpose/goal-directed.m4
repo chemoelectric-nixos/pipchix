@@ -25,16 +25,28 @@
 ;;;-------------------------------------------------------------------
 
 ;;; WARNING: This variable is not thread-safe.
-(define failure-stack (make-vector 1 '()))
+(define failures (vector '()))
+
+;;; WARNING: This variable is not thread-safe.
+(define failure-stack%% (vector failures))
+
+(define-syntax change-failure-stack!
+  (syntax-rules ()
+    ((¶ pointer)
+     (vector-set! failure-stack%% 0 pointer))))
+
+(define-syntax failure-stack
+  (syntax-rules ()
+    ((¶) (vector-ref failure-stack%% 0))))
 
 (define-syntax failure-set!
   (syntax-rules ()
     ((¶ stk)
-     (vector-set! failure-stack 0 stk))))
+     (vector-set! (failure-stack) 0 stk))))
 
 (define-syntax failure-ref
   (syntax-rules ()
-    ((¶) (vector-ref failure-stack 0))))
+    ((¶) (vector-ref (failure-stack) 0))))
 
 (define-syntax push-failure!
   (syntax-rules ()
@@ -54,20 +66,17 @@
                 thunk
                 (lambda () (drop-failure!))))
 
-;;; FIXME:
-;;; FIXME: This implementation cannot handle call loops.
-;;; FIXME:
 (define (in-new-failure-context thunk)
-  (let ((failures '())
-        (saved-failures '<undefined>))
+  (let ((new-failure-stack (vector '()))
+        (saved-failure-stack '<undefined>))
     (dynamic-wind ;; Stack-switching for backtracks.
       (lambda ()
-        (set! saved-failures (failure-ref))
-        (failure-set! failures))
+        (set! saved-failure-stack (failure-stack))
+        (change-failure-stack! new-failure-stack))
       thunk
       (lambda ()
-        (set! failures (failure-ref))
-        (failure-set! saved-failures)))))
+        (change-failure-stack! saved-failure-stack)
+        (set! saved-failure-stack '<undefined>)))))
 
 (define *failure* '#("the\xA0;failure\xA0;object"))
 
