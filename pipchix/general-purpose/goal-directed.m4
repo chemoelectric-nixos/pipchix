@@ -533,10 +533,22 @@
        (if #f #f)
        body ...))))
 
-(define (string-compare predicate)
+(define string-match
   ;;
-  ;; ‘string-match’ generalized to predicates other than string=?
+  ;; Analogous to Icon’s ‘match’ function. Examples:
   ;;
+  ;;     (string-match "string" "string match")
+  ;;     ((string-match string-ci=?) "string" "STRING MATCH") 
+  ;;
+  (case-lambda
+    ((arg) (if (procedure? arg)
+             (string-match-%aux% arg)
+             ((string-match-%aux% string=?) arg)))
+    ((s1 s2) ((string-match-%aux% string=?) s1 s2))
+    ((s1 s2 i1) ((string-match-%aux% string=?) s1 s2 i1))
+    ((s1 s2 i1 i2) ((string-match-%aux% string=?) s1 s2 i1 i2))))
+
+(define (string-match-%aux% predicate)
   (define compare
     (case-lambda
       ((s1) (compare s1 (*string-subject*) (*string-position*) 0))
@@ -554,12 +566,6 @@
                    (+ i1+m 1)
                    (fail))))))))))
   compare)
-
-(define string-match
-  ;;
-  ;; Analogous to Icon’s ‘match’ function.
-  ;;
-  (string-compare string=?))
 
 ;;;-------------------------------------------------------------------
 m4_divert(-1)
