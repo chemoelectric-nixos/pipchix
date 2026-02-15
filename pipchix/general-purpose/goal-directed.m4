@@ -318,6 +318,9 @@
 (define attempt-pair (cut attempt pair? <>))
 
 (define attempt-zero (cut attempt zero? <>))
+(define attempt-nonzero
+  (let ((pred? (lambda (x) (not (zero? x)))))
+    (cut attempt pred? <>)))
 (define attempt-positive (cut attempt positive? <>))
 (define attempt-negative (cut attempt negative? <>))
 (define attempt-odd (cut attempt odd? <>))

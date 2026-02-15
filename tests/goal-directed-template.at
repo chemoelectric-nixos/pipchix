@@ -587,6 +587,14 @@ m4_define([sexpr],
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([[[·[·(2)·(3)·(1)·]·[·(2)·(1)·(3)·]·[·(1)·(2)·(3)·]·[·(3)·(2)·(1)·]·[·(3)·(1)·(2)·]·[·(1)·(3)·(2)·]·]·]])],[])
 
+m4_define([sexpr],
+  [(scheme->nix
+    (attempt-or
+      (begin (attempt-nonzero 0) 5)
+      (begin (attempt-nonzero 1) 6)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(6)·])],[])
+
 AT_CLEANUP
 
 # local variables:

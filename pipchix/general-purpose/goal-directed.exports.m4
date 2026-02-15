@@ -17,7 +17,9 @@ attempt-every-ec
 attempt
 attempt-null
 attempt-pair
+
 attempt-zero
+attempt-nonzero
 attempt-positive
 attempt-negative
 attempt-odd
