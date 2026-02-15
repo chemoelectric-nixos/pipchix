@@ -21,7 +21,9 @@ attempt-pair
 attempt-zero
 attempt-nonzero
 attempt-positive
+attempt-nonpositive
 attempt-negative
+attempt-nonnegative
 attempt-odd
 attempt-even
 

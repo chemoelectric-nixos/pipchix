@@ -319,10 +319,16 @@
 
 (define attempt-zero (cut attempt zero? <>))
 (define attempt-nonzero
-  (let ((pred? (lambda (x) (not (zero? x)))))
-    (cut attempt pred? <>)))
+  (let ((nonzero? (lambda (x) (not (zero? x)))))
+    (cut attempt nonzero? <>)))
 (define attempt-positive (cut attempt positive? <>))
+(define attempt-nonpositive
+  (let ((nonpositive? (lambda (x) (not (positive? x)))))
+    (cut attempt nonpositive? <>)))
 (define attempt-negative (cut attempt negative? <>))
+(define attempt-nonnegative
+  (let ((nonnegative? (lambda (x) (not (negative? x)))))
+    (cut attempt nonnegative? <>)))
 (define attempt-odd (cut attempt odd? <>))
 (define attempt-even (cut attempt even? <>))
 

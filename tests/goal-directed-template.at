@@ -595,6 +595,38 @@ m4_define([sexpr],
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([(6)·])],[])
 
+m4_define([sexpr],
+  [(scheme->nix
+    (attempt-or
+      (begin (attempt-nonpositive 0) 5)
+      (begin (attempt-nonpositive 1) 6)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(5)·])],[])
+
+m4_define([sexpr],
+  [(scheme->nix
+    (attempt-or
+      (begin (attempt-nonpositive -1) 5)
+      (begin (attempt-nonpositive 1) 6)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(5)·])],[])
+
+m4_define([sexpr],
+  [(scheme->nix
+    (attempt-or
+      (begin (attempt-nonnegative 0) 5)
+      (begin (attempt-nonnegative -1) 6)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(5)·])],[])
+
+m4_define([sexpr],
+  [(scheme->nix
+    (attempt-or
+      (begin (attempt-nonnegative 1) 5)
+      (begin (attempt-nonnegative -1) 6)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(5)·])],[])
+
 AT_CLEANUP
 
 # local variables:
