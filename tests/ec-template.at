@@ -157,6 +157,59 @@ m4_define([sexpr],
 check_unquoted([run_scheme 'sexpr'],[0],
   [interpunct_nl([[[·[·(1)·(2)·(3)·]·[·(2)·(1)·(3)·]·[·(2)·(3)·(1)·]·[·(1)·(3)·(2)·]·[·(3)·(1)·(2)·]·[·(3)·(2)·(1)·]·]·]])],[])
 
+dnl  n-queens by permutations, a lot of co-expressions, a lot of
+dnl  SRFI-42.
+m4_define([sexpr],
+  [(scheme->nix
+    (let ()
+      (define (insert µ κ ν)
+        ;; Insert element µ into list κ at position ν.
+        (call-with-values (lambda () (split-at κ ν))
+          (lambda (α β) `(,@α ,µ ,@β))))
+      (define (make-permutations-coexp lst)
+        (if (null-list? lst)
+          (co-expression-ec (:let p '\''()) p)
+          (let-values (((hd tl) (car+cdr lst)))
+            (co-expression-ec
+             (:co-expression part (make-permutations-coexp tl))
+             (:let end (+ (length part) 1))
+             (:range i 0 end)
+             (insert hd part i)))))
+      (define (make-nqueens-coexp n)
+        (define up (make-bytevector (+ n n)))
+        (define down (make-bytevector (+ n n)))
+        (define (clear! bv)
+          (do-ec (:let end (+ n n))
+                 (:range i 1 end)
+                 (bytevector-u8-set! bv i 0)))
+        (define (check permut)
+          (clear! up)
+          (clear! down)
+          (attempt-or
+            (attempt-and-ec
+              (:list c (index r-1) permut)
+              (:let r (+ r-1 1))
+              (:let i-up (+ n r (- c)))
+              (:let i-down (+ r-1 c))
+              (attempt-and
+                (attempt-zero (bytevector-u8-ref up i-up))
+                (attempt-zero (bytevector-u8-ref down i-down))
+                (bytevector-u8-set! up i-up 1)
+                (bytevector-u8-set! down i-down 1)
+                0))
+            1))
+        (make-co-expression
+         (lambda ()
+           (attempt-every-ec
+             (:co-expression permut (make-permutations-coexp (iota n 1)))
+             (attempt-and
+               (attempt-zero (check permut))
+               (suspend permut))))))
+      (define q! (make-nqueens-coexp 8))
+      (length (list-ec (:co-expression q q!) q))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(92)·])],[])
+
 AT_CLEANUP
 
 # local variables:
