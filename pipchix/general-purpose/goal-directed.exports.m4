@@ -45,8 +45,8 @@ make-co-expression
 
 icon->scheme-indexing
 
-&subject
-&pos
+&string-subject
+&string-position
 string-scan
 string-match
 

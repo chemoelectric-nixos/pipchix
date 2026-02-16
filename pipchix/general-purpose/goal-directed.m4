@@ -508,7 +508,7 @@
 (define *string-subject* (make-parameter (box "")))
 (define *string-position* (make-parameter (box 1)))
 
-(define &subject ;; Analogous to the Icon keyword.
+(define &string-subject ;; Analogous to the Icon &subject keyword.
   (case-lambda
     (() (unbox (*string-subject*)))
     ((str)
@@ -517,7 +517,7 @@
      (set-box! (*string-subject*) str)
      (set-box! (*string-position*) 1))))
 
-(define &pos ;; Analogous to the Icon keyword.
+(define &string-position ;; Analogous to the Icon &pos keyword.
   (case-lambda
     (() (unbox (*string-position*)))
     ((i)
@@ -551,7 +551,7 @@
 (define (string-match-%aux% predicate)
   (define compare
     (case-lambda
-      ((s1) (compare s1 (&subject) (&pos) 0))
+      ((s1) (compare s1 (&string-subject) (&string-position) 0))
       ((s1 s2) (compare s1 s2 1 0))
       ((s1 s2 i1) (compare s1 s2 i1 0))
       ((s1 s2 i1 i2)
