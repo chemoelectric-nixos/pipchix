@@ -380,6 +380,14 @@
                                 ((obj value) ...)
                                 body ...)))))
 
+(define-syntax reversible-box-set!
+  (syntax-rules ()
+    ((¶ ((obj value) ...) body ...)
+     (let-syntax ((ref (syntax-rules () ((µ t) t))))
+       (general-reversible-set! unbox set-box!
+                                ((obj value) ...)
+                                body ...)))))
+
 (define-syntax reversible-vector-set!
   (syntax-rules ()
     ((¶ (((obj i) value) ...) body ...)
@@ -567,6 +575,21 @@
                    (fail))))))))))
   compare)
 
+(define (string-tab i receiver)
+  ;;
+  ;; Analogous to Icon’s ‘tab’ function. Example:
+  ;;
+  ;;     (string-tab (0) (lambda (s) (display s)(newline)))
+  ;;
+  (let* ((s (&string-subject))
+         (n (string-length s))
+         (j (&string-position)))
+    (attempt-and
+     (let-values (((i% j%) (icon->scheme-indexing n j i)))
+       (let ((substr (substring s i% j%)))
+         (reversible-box-set! (((*string-position*) i))
+           (receiver substr)))))))
+
 ;;;-------------------------------------------------------------------
 m4_divert(-1)
 ;;; local variables:
@@ -575,5 +598,6 @@ m4_divert(-1)
 ;;; coding: utf-8
 ;;; eval: (put 'if 'scheme-indent-function 1)
 ;;; eval: (put 'set-box! 'scheme-indent-function 1)
+;;; eval: (put 'reversible-box-set! 'scheme-indent-function 1)
 ;;; end:
 m4_divert«»m4_dnl

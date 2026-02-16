@@ -36,6 +36,7 @@ attempt-char-lower-case
 
 general-reversible-set!
 reversible-set!
+reversible-box-set!
 reversible-vector-set!
 reversible-bytevector-u8-set!
 reversible-list-set!
@@ -49,4 +50,4 @@ icon->scheme-indexing
 &string-position
 string-scan
 string-match
-
+string-tab

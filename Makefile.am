@@ -152,6 +152,21 @@ if INSTALL_R7RS_SOURCE
 nodist_r7rspipchix_DATA += $(R7RS_SCHEME)
 endif
 
+# FIXME: Set it up so updates to the dependencies here cause rebuilds.
+#
+#pipchix/general-purpose/ec/goal-directed.exports.m4: \
+#	pipchix/general-purpose/ec.exports.m4 \
+#	pipchix/general-purpose/goal-directed.exports.m4
+#
+#pipchix/general-purpose/ec/stream.exports.m4: \
+#	pipchix/general-purpose/ec.exports.m4 \
+#	pipchix/general-purpose/stream.exports.m4
+#
+#pipchix/macros.exports.m4: \
+#	pipchix/macros/nix-set.exports.m4 \
+#	pipchix/macros/nix-letrec.exports.m4 \
+#	pipchix/macros/nix-lambda.exports.m4
+
 $(builddir)/r6rs/pipchix/%.sls: $(srcdir)/r6rs/pipchix/%.sls.m4 \
 	                        $(srcdir)/pipchix/%.m4 \
 	                        $(srcdir)/pipchix/%.exports.m4 \

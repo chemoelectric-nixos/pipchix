@@ -85,6 +85,22 @@ check_unquoted([run_scheme 'sexpr'],[0],
 
 m4_define([sexpr],
   [(scheme->nix
+    (let ((x (box 1234))
+          (y (box "1234")))
+      (attempt-every-ec
+       (begin
+         (reversible-box-set! ((x 5678)
+                               (y "5678"))
+           (unless (and (= (unbox x) 5678)
+                        (equal? (unbox y) "5678"))
+             (raise "BIG ERROR"))
+           (fail))))
+      (list (unbox x) (unbox y))))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([[[·(1234)·("1234")·]·]])],[])
+
+m4_define([sexpr],
+  [(scheme->nix
     (let ((x (vector 1234))
           (y (vector "1234")))
       (attempt-every-ec
