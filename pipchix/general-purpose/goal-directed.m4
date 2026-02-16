@@ -505,31 +505,31 @@
          (values j i)
          (values i j))))))
 
-(define *string-subject*
-  ;;
-  ;; Analogous to the &subject keyword of Icon.
-  ;;
-  (make-parameter
-   "" (lambda (s)
-        (unless (string? s)
-          (error '*string-subject* "expected a string" s))
-        s)))
+(define *string-subject* (make-parameter (box "")))
+(define *string-position* (make-parameter (box 1)))
 
-(define *string-position*
-  ;;
-  ;; Analogous to the &pos keyword of Icon.
-  ;;
-  (make-parameter
-   1 (lambda (i)
-       (unless (integer? i)
-         (error '*string-position* "expected an integer" i))
-       i)))
+(define &subject ;; Analogous to the Icon keyword.
+  (case-lambda
+    (() (unbox (*string-subject*)))
+    ((str)
+     (unless (string? str)
+       (error "expected a string" str))
+     (set-box! (*string-subject*) str)
+     (set-box! (*string-position*) 1))))
+
+(define &pos ;; Analogous to the Icon keyword.
+  (case-lambda
+    (() (unbox (*string-position*)))
+    ((i)
+     (unless (integer? i)
+       (error "expected an integer" i))
+     (set-box! (*string-position*) i))))
 
 (define-syntax string-scan
   (syntax-rules ()
     ((¶ str body ...)
-     (parameterize ((*string-subject* str)
-                    (*string-position* 1))
+     (parameterize ((*string-subject* (box str))
+                    (*string-position* (box 1)))
        (if #f #f)
        body ...))))
 
@@ -551,7 +551,7 @@
 (define (string-match-%aux% predicate)
   (define compare
     (case-lambda
-      ((s1) (compare s1 (*string-subject*) (*string-position*) 0))
+      ((s1) (compare s1 (&subject) (&pos) 0))
       ((s1 s2) (compare s1 s2 1 0))
       ((s1 s2 i1) (compare s1 s2 i1 0))
       ((s1 s2 i1 i2)
