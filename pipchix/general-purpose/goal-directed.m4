@@ -102,15 +102,15 @@
   (syntax-rules ()
     ((¶ form)
      (if (call/cc
-              (lambda (leave)
-                (attempt-dynamic-wind
-                 (lambda ()
-                   (call/cc
-                    (lambda (failure)
-                      (push-failure! failure)
-                      form
-                      (leave #t)))
-                   (leave #f)))))
+          (lambda (leave)
+            (attempt-dynamic-wind
+             (lambda ()
+               (call/cc
+                (lambda (failure)
+                  (push-failure! failure)
+                  form
+                  (leave #t)))
+               (leave #f)))))
        (fail)
        (if #f #f)))))
 
@@ -221,14 +221,14 @@
           (call/cc
            (lambda (next)
              (attempt-dynamic-wind
-               (lambda ()
-                 (call/cc
-                  (lambda (failure)
-                    (push-failure! failure)
-                    (call-with-values
-                        (lambda () command)
-                      leave)
-                    (next))))))))
+              (lambda ()
+                (call/cc
+                 (lambda (failure)
+                   (push-failure! failure)
+                   (call-with-values
+                       (lambda () command)
+                     leave)
+                   (next))))))))
         (fail))))))
 
 (define-syntax attempt-and-ec
@@ -541,6 +541,58 @@
        (if #f #f)
        body ...))))
 
+(define (make-char-predicate obj)
+  (lambda (c)
+    (match obj
+      ((? procedure? ob) (ob c))
+      ((? char? ob)      (char=? ob c))
+      ((? string? ob)    (any?-ec (:string ch ob) (char=? ch c)))
+      ;; m4_ifelse(support_scheme_charset,«yes»,«
+      ((? char-set? ob)  (char-set-contains? ob c))
+      ;; »)
+      (_ (error "unexpected argument type" obj)))))
+
+(define string-any
+  ;;
+  ;; Analogous to Icon’s ‘any’ function. Examples:
+  ;;
+  ;;     (string-any #\s "string any")
+  ;;     (string-any (cut string-ci=? #\s <>) "STRING ANY")
+  ;;     (string-any char-alphabetic? "string any")
+  ;;     (string-any "sSŝŜśŚ" "string any")
+  ;;
+  ;;     (string-any #\s)
+  ;;     (string-any (cut string-ci=? #\s <>))
+  ;;     (string-any char-alphabetic?)
+  ;;     (string-any "sSŝŜśŚ")
+  ;;
+  ;; Also, with some R⁷RS Scheme implementations, you can use a
+  ;; (scheme charset) character set.
+  ;;
+  (case-lambda
+    ((c) ((string-any-%aux% make-char-predicate) c))
+    ((c s) ((string-any-%aux% make-char-predicate) c s))
+    ((c s i1) ((string-any-%aux% make-char-predicate) c s i1))
+    ((c s i1 i2) ((string-any-%aux% make-char-predicate) c s i1 i2))))
+
+(define (string-any-%aux% make-predicate)
+  (define compare
+    (case-lambda
+      ((c) (compare c (&string-subject) (&string-position) 0))
+      ((c s) (compare c s 1 0))
+      ((c s i1) (compare c s i1 0))
+      ((c s i1 i2)
+       (let ((n (string-length s)))
+         (let-values (((i1 i2) (icon->scheme-indexing n i1 i2)))
+           (let ((n12 (- i2 i1)))
+             (if (< n12 1)
+               (fail)
+               (let ((pred? (make-predicate c)))
+                 (if (pred? (string-ref s 0))
+                   (+ i1 2)
+                   (fail))))))))))
+  compare)
+
 (define string-match
   ;;
   ;; Analogous to Icon’s ‘match’ function. Examples:
@@ -585,10 +637,10 @@
          (n (string-length s))
          (j (&string-position)))
     (attempt-and
-     (let-values (((i% j%) (icon->scheme-indexing n j i)))
-       (let ((substr (substring s i% j%)))
-         (reversible-box-set! (((*string-position*) i))
-           (receiver substr)))))))
+      (let-values (((i% j%) (icon->scheme-indexing n j i)))
+        (let ((substr (substring s i% j%)))
+          (reversible-box-set! (((*string-position*) i))
+            (receiver substr)))))))
 
 (define (string-move i receiver)
   ;;

@@ -49,6 +49,7 @@ icon->scheme-indexing
 &string-subject
 &string-position
 string-scan
+string-any
 string-match
 string-tab
 string-move
