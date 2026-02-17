@@ -51,3 +51,4 @@ icon->scheme-indexing
 string-scan
 string-match
 string-tab
+string-move

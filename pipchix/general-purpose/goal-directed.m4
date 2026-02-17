@@ -590,6 +590,14 @@
          (reversible-box-set! (((*string-position*) i))
            (receiver substr)))))))
 
+(define (string-move i receiver)
+  ;;
+  ;; Analogous to Icon’s ‘move’ function. Example:
+  ;;
+  ;;     (string-move (3) (lambda (s) (display s)(newline)))
+  ;;
+  (string-tab (+ (&string-position) i) receiver))
+
 ;;;-------------------------------------------------------------------
 m4_divert(-1)
 ;;; local variables:
