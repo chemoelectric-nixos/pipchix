@@ -567,7 +567,7 @@
   ;;     (string-any "sSŝŜśŚ")
   ;;
   ;; Also, with some R⁷RS Scheme implementations, you can use a
-  ;; (scheme charset) character set.
+  ;; (scheme charset) = (srfi 14) character set.
   ;;
   (case-lambda
     ((c) ((string-any-%aux% make-char-predicate) c))
@@ -588,9 +588,54 @@
              (if (< n12 1)
                (fail)
                (let ((pred? (make-predicate c)))
-                 (if (pred? (string-ref s 0))
+                 (if (pred? (string-ref s i1))
                    (+ i1 2)
                    (fail))))))))))
+  compare)
+
+(define string-many
+  ;;
+  ;; Analogous to Icon’s ‘many’ function. Examples:
+  ;;
+  ;;     (string-many #\s "string many")
+  ;;     (string-many (cut string-ci=? #\s <>) "STRING MANY")
+  ;;     (string-many char-alphabetic? "string many")
+  ;;     (string-many "rst" "string many")
+  ;;
+  ;;     (string-many #\s)
+  ;;     (string-many (cut string-ci=? #\s <>))
+  ;;     (string-many char-alphabetic?)
+  ;;     (string-many "rst")
+  ;;
+  ;; Also, with some R⁷RS Scheme implementations, you can use a
+  ;; (scheme charset) = (srfi 14) character set.
+  ;;
+  (case-lambda
+    ((c) ((string-many-%aux% make-char-predicate) c))
+    ((c s) ((string-many-%aux% make-char-predicate) c s))
+    ((c s i1) ((string-many-%aux% make-char-predicate) c s i1))
+    ((c s i1 i2) ((string-many-%aux% make-char-predicate)
+                  c s i1 i2))))
+
+(define (string-many-%aux% make-predicate)
+  (define compare
+    (case-lambda
+      ((c) (compare c (&string-subject) (&string-position) 0))
+      ((c s) (compare c s 1 0))
+      ((c s i1) (compare c s i1 0))
+      ((c s i1 i2)
+       (let ((n (string-length s)))
+         (let-values (((i1 i2) (icon->scheme-indexing n i1 i2)))
+           (let ((n12 (- i2 i1)))
+             (if (< n12 1)
+               (fail)
+               (let ((pred? (make-predicate c)))
+                 (if (not (pred? (string-ref s i1)))
+                   (fail)
+                   (let loop ((i (+ i1 1)))
+                     (cond ((= i i2) (+ i2 1))
+                           ((pred? (string-ref s i)) (loop (+ i 1)))
+                           (else (+ i 1)))))))))))))
   compare)
 
 (define string-match

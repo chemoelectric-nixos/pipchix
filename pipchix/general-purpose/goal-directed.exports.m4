@@ -50,6 +50,7 @@ icon->scheme-indexing
 &string-position
 string-scan
 string-any
+string-many
 string-match
 string-tab
 string-move
