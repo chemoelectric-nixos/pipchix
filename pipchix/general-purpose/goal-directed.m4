@@ -672,28 +672,80 @@
                    (fail))))))))))
   compare)
 
-(define (string-tab i receiver)
+(define string-find
+  ;;
+  ;; Analogous to Icon’s ‘find’ function. Returns a co-expression.
+  ;; Examples:
+  ;;
+  ;;     (string-find "string" "string find")
+  ;;     ((string-find string-ci=?) "string" "STRING FIND")
+  ;;
+  ;; There is no effort to be fast. Favored instead is generality of
+  ;; the matching predicate.
+  ;;
+  (case-lambda
+    ((arg) (if (procedure? arg)
+             (string-find-%aux% arg)
+             ((string-find-%aux% string=?) arg)))
+    ((s1 s2) ((string-find-%aux% string=?) s1 s2))
+    ((s1 s2 i1) ((string-find-%aux% string=?) s1 s2 i1))
+    ((s1 s2 i1 i2) ((string-find-%aux% string=?) s1 s2 i1 i2))))
+
+(define (string-find-%aux% predicate)
+  (define compare
+    (case-lambda
+      ((s1) (compare s1 (&string-subject) (&string-position) 0))
+      ((s1 s2) (compare s1 s2 1 0))
+      ((s1 s2 i1) (compare s1 s2 i1 0))
+      ((s1 s2 i1 i2)
+       (let ((m (string-length s1))
+             (n (string-length s2)))
+         (let-values (((i1 i2) (icon->scheme-indexing n i1 i2)))
+           (let ((len (- i2 i1 m)))
+             (if (not (positive? len))
+               (fail)
+               (make-co-expression
+                (lambda ()
+                  (do-ec
+                    (:let end (+ i1 len))
+                    (:range i i1 end)
+                    (when (predicate s1 (substring s2 i (+ i m)))
+                      (suspend (+ i 1))))
+                  (fail))))))))))
+  compare)
+
+(define string-tab
   ;;
   ;; Analogous to Icon’s ‘tab’ function. Example:
   ;;
   ;;     (string-tab (0) (lambda (s) (display s)(newline)))
   ;;
-  (let* ((s (&string-subject))
-         (n (string-length s))
-         (j (&string-position)))
-    (attempt-and
-      (let-values (((i% j%) (icon->scheme-indexing n j i)))
-        (let ((substr (substring s i% j%)))
-          (reversible-box-set! (((*string-position*) i))
-            (receiver substr)))))))
+  (case-lambda
+    ((i receiver)
+     (let* ((s (&string-subject))
+            (n (string-length s))
+            (j (&string-position)))
+       (attempt-and
+         (let-values (((i% j%) (icon->scheme-indexing n j i)))
+           (let ((substr (substring s i% j%)))
+             (reversible-box-set! (((*string-position*) i))
+               (receiver substr)))))))
+    ((i)
+     ;; Call without a receiver.
+     (set-box! (*string-position*) i))))
 
-(define (string-move i receiver)
+(define string-move
   ;;
   ;; Analogous to Icon’s ‘move’ function. Example:
   ;;
   ;;     (string-move (3) (lambda (s) (display s)(newline)))
   ;;
-  (string-tab (+ (&string-position) i) receiver))
+  (case-lambda
+    ((i receiver)
+     (string-tab (+ (&string-position) i) receiver))
+    ((i)
+     ;; Call without a receiver.
+     (string-tab (+ (&string-position) i)))))
 
 ;;;-------------------------------------------------------------------
 m4_divert(-1)

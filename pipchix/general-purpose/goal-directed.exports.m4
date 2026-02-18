@@ -52,5 +52,6 @@ string-scan
 string-any
 string-many
 string-match
+string-find
 string-tab
 string-move
