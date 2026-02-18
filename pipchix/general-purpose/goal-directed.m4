@@ -490,6 +490,28 @@
 ;;; String scanning.
 ;;;
 
+(define-syntax senders-receivers
+  ;;
+  ;; Example:
+  ;;
+  ;;    (string-scan
+  ;;     "this is a string it is"
+  ;;     (attempt-every-ec
+  ;;       (:co-expression i (string-find "is"))
+  ;;       (senders-receivers
+  ;;        (ignore string-tab i)
+  ;;        (string-move 2)
+  ;;        (lambda (s)
+  ;;          (display s)
+  ;;          (newline)))))
+  ;;
+  (syntax-rules (ignore)
+    ((¶) (if #f #f))
+    ((¶ (ignore subform ...) form2 ...)
+     (subform ... (lambda _ (senders-receivers form2 ...))))
+    ((¶ (subform ...) form2 ...)
+     (subform ... (senders-receivers form2 ...)))))
+
 (define icon->scheme-indexing
   ;;
   ;; Convert Icon-style indices to Scheme indices. (Conversion of
@@ -701,51 +723,41 @@
        (let ((m (string-length s1))
              (n (string-length s2)))
          (let-values (((i1 i2) (icon->scheme-indexing n i1 i2)))
-           (let ((len (- i2 i1 m)))
-             (if (not (positive? len))
+           (let ((search-length (- i2 i1 m)))
+             (if (negative? search-length)
                (fail)
                (make-co-expression
                 (lambda ()
                   (do-ec
-                    (:let end (+ i1 len))
+                    (:let end (+ i1 search-length 1))
                     (:range i i1 end)
                     (when (predicate s1 (substring s2 i (+ i m)))
                       (suspend (+ i 1))))
                   (fail))))))))))
   compare)
 
-(define string-tab
+(define (string-tab i receiver)
   ;;
   ;; Analogous to Icon’s ‘tab’ function. Example:
   ;;
-  ;;     (string-tab (0) (lambda (s) (display s)(newline)))
+  ;;     (string-tab 0 display)
   ;;
-  (case-lambda
-    ((i receiver)
-     (let* ((s (&string-subject))
-            (n (string-length s))
-            (j (&string-position)))
-       (attempt-and
-         (let-values (((i% j%) (icon->scheme-indexing n j i)))
-           (let ((substr (substring s i% j%)))
-             (reversible-box-set! (((*string-position*) i))
-               (receiver substr)))))))
-    ((i)
-     ;; Call without a receiver.
-     (set-box! (*string-position*) i))))
+  (let* ((s (&string-subject))
+         (n (string-length s))
+         (j (&string-position)))
+    (attempt-and
+      (let-values (((i% j%) (icon->scheme-indexing n j i)))
+        (let ((substr (substring s i% j%)))
+          (reversible-box-set! (((*string-position*) i))
+            (receiver substr)))))))
 
-(define string-move
+(define (string-move i receiver)
   ;;
   ;; Analogous to Icon’s ‘move’ function. Example:
   ;;
-  ;;     (string-move (3) (lambda (s) (display s)(newline)))
+  ;;     (string-move 3 display)
   ;;
-  (case-lambda
-    ((i receiver)
-     (string-tab (+ (&string-position) i) receiver))
-    ((i)
-     ;; Call without a receiver.
-     (string-tab (+ (&string-position) i)))))
+  (string-tab (+ (&string-position) i) receiver))
 
 ;;;-------------------------------------------------------------------
 m4_divert(-1)
