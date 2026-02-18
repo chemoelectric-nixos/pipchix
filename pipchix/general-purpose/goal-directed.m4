@@ -500,17 +500,31 @@
   ;;       (:co-expression i (string-find "is"))
   ;;       (senders-receivers
   ;;        (ignore (string-tab i))
-  ;;        (string-move 2)
+  ;;        (use (string-move 5) write)
+  ;;        (send (string-move 2))
   ;;        (lambda (s)
   ;;          (display s)
   ;;          (newline)))))
   ;;
-  (syntax-rules (ignore)
-    ((¶) (if #f #f))
+  (syntax-rules ()
+    ((¶ form ...)
+     (senders-receivers-aux
+      form ... (lambda arg* (apply values arg*))))))
+
+(define-syntax senders-receivers-aux
+  (syntax-rules (ignore send use)
+    ((¶ form)
+     form)
     ((¶ (ignore (subform ...)) form2 ...)
-     (subform ... (lambda _ (senders-receivers form2 ...))))
-    ((¶ (subform ...) form2 ...)
-     (subform ... (senders-receivers form2 ...)))))
+     (subform ... (lambda _ (senders-receivers-aux form2 ...))))
+    ((¶ (send (subform ...)) form2 ...)
+     (subform ... (senders-receivers-aux form2 ...)))
+    ((¶ (use (subform ...) user) form2 ...)
+     (subform ... (lambda arg*
+                    (apply user arg*)
+                    (senders-receivers-aux form2 ...))))
+    ((¶ form1 form2 ...)
+     (senders-receivers-aux (ignore form1) form2 ...))))
 
 (define icon->scheme-indexing
   ;;
