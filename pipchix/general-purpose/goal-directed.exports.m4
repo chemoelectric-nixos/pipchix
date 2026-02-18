@@ -53,5 +53,6 @@ string-any
 string-many
 string-match
 string-find
+string-upto
 string-tab
 string-move

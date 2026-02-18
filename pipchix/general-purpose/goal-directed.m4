@@ -736,6 +736,39 @@
                   (fail))))))))))
   compare)
 
+(define string-upto
+  ;;
+  ;; Analogous to Icon’s ‘upto’ function. Returns a co-expression.
+  ;;
+  ;; See string-any and string-many for examples of how to specify the
+  ;; character match.
+  ;;
+  (case-lambda
+    ((c) ((string-upto-%aux% make-char-predicate) c))
+    ((c s) ((string-upto-%aux% make-char-predicate) c s))
+    ((c s i1) ((string-upto-%aux% make-char-predicate) c s i1))
+    ((c s i1 i2) ((string-upto-%aux% make-char-predicate) c s i1 i2))))
+
+(define (string-upto-%aux% make-predicate)
+  (define compare
+    (case-lambda
+      ((c) (compare c (&string-subject) (&string-position) 0))
+      ((c s) (compare c s 1 0))
+      ((c s i1) (compare c s i1 0))
+      ((c s i1 i2)
+       (let ((pred? (make-predicate c))
+             (n (string-length s)))
+         (let-values (((i1 i2) (icon->scheme-indexing n i1 i2)))
+           (make-co-expression
+            (lambda ()
+              (let loop ((i i1))
+                (cond
+                  ((= i i2) (fail))
+                  ((pred? (string-ref s i)) (fail))
+                  (else (suspend (+ i 1))
+                        (loop (+ i 1))))))))))))
+  compare)
+
 (define (string-tab i receiver)
   ;;
   ;; Analogous to Icon’s ‘tab’ function. Example:
