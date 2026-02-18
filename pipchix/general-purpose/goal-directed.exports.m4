@@ -47,6 +47,11 @@ make-co-expression
 senders-receivers
 icon->scheme-indexing
 icon-substring
+icon-string-copy
+;;; m4_ifelse(rnrs_number,«7»,«
+icon-string-copy!
+icon-string-fill!
+;;; »)
 icon-string-ref
 &string-subject
 &string-position

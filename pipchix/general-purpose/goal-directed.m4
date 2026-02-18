@@ -540,6 +540,45 @@
     (let-values (((i1 i2) (icon->scheme-indexing n i1 i2)))
       (substring s i1 i2))))
 
+(define icon-string-copy
+  (case-lambda
+    ((s) (string-copy s))
+    ((s i1) (icon-substring s i1 0))
+    ((s i1 i2) (icon-substring s i1 i2))))
+
+;;; m4_ifelse(rnrs_number,«7»,«
+(define icon-string-copy!
+  (case-lambda
+    ((to at from)
+     (let* ((m (string-length to))
+            (j1 (icon->scheme-indexing m at)))
+       (string-copy! to j1 from)))
+    ((to at from start)
+     (let* ((m (string-length to))
+            (j1 (icon->scheme-indexing m at))
+            (n (string-length from))
+            (i1 (icon->scheme-indexing n start)))
+       (string-copy! to j1 from i1)))
+    ((to at from start end)
+     (let* ((m (string-length to))
+            (j1 (icon->scheme-indexing m at))
+            (n (string-length from)))
+       (let-values (((i1 i2) (icon->scheme-indexing n start end)))
+         (string-copy! to j1 from i1 i2)))) ))
+
+(define icon-string-fill!
+  (case-lambda
+    ((string fill) (string-fill! string fill))
+    ((string fill start)
+     (let* ((n (string-length string))
+            (i1 (icon->scheme-indexing n start)))
+       (string-fill! string fill i1)))
+    ((string fill start end)
+     (let* ((n (string-length string)))
+       (let-values (((i1 i2) (icon->scheme-indexing n start end)))
+         (string-fill! string fill i1 i2)))) ))
+;;; »)
+
 (define (icon-string-ref s i)
   (let* ((n (string-length s))
          (i (icon->scheme-indexing n i)))

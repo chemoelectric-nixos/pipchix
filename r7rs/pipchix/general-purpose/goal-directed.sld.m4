@@ -31,6 +31,8 @@ m4_include(pipchix/pipchix-includes.m4)
 
 (define-library (pipchix general-purpose goal-directed)
 
+  ;; m4_define(«rnrs_number»,«7»)
+
   (export m4_include(pipchix/general-purpose/goal-directed.exports.m4))
 
   (import basic_libraries
