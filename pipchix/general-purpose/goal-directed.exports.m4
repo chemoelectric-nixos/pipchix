@@ -46,6 +46,8 @@ make-co-expression
 
 senders-receivers
 icon->scheme-indexing
+icon-substring
+icon-string-ref
 &string-subject
 &string-position
 string-scan

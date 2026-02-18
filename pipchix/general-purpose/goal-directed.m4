@@ -535,6 +535,16 @@
          (values j i)
          (values i j))))))
 
+(define (icon-substring s i1 i2)
+  (let ((n (string-length s)))
+    (let-values (((i1 i2) (icon->scheme-indexing n i1 i2)))
+      (substring s i1 i2))))
+
+(define (icon-string-ref s i)
+  (let* ((n (string-length s))
+         (i (icon->scheme-indexing n i)))
+    (string-ref s i)))
+
 (define *string-subject* (make-parameter (box "")))
 (define *string-position* (make-parameter (box 1)))
 
