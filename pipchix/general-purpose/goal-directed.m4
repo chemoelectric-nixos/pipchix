@@ -499,7 +499,7 @@
   ;;     (attempt-every-ec
   ;;       (:co-expression i (string-find "is"))
   ;;       (senders-receivers
-  ;;        (ignore string-tab i)
+  ;;        (ignore (string-tab i))
   ;;        (string-move 2)
   ;;        (lambda (s)
   ;;          (display s)
@@ -507,7 +507,7 @@
   ;;
   (syntax-rules (ignore)
     ((¶) (if #f #f))
-    ((¶ (ignore subform ...) form2 ...)
+    ((¶ (ignore (subform ...)) form2 ...)
      (subform ... (lambda _ (senders-receivers form2 ...))))
     ((¶ (subform ...) form2 ...)
      (subform ... (senders-receivers form2 ...)))))
