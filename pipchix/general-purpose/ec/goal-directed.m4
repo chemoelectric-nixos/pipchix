@@ -28,6 +28,7 @@
     ((¶ cc var (index i) arg)
      (:parallel cc (:goal-directed var arg) (:integers i)) )
     ((¶ cc var arg)
+     ;; Loop until the failure stack is empty.
      (:do cc
           (let ())
           ((t arg))
@@ -45,6 +46,7 @@
     ((¶ cc var (index i) arg)
      (:parallel cc (:co-expression var arg) (:integers i)) )
     ((¶ cc var arg)
+     ;; Loop until the failure stack is empty.
      (:do cc
           (let ((c! arg)))
           ((t (c!)))
