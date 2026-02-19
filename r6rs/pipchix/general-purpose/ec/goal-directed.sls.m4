@@ -34,8 +34,8 @@ m4_include(pipchix/pipchix-includes.m4)
   (export m4_include(pipchix/general-purpose/ec/goal-directed.exports.m4))
 
   (import basic_libraries
-          (pipchix general-purpose ec)
-          (pipchix general-purpose goal-directed))
+          (for (pipchix general-purpose ec) expand run)
+          (for (pipchix general-purpose goal-directed) expand run))
 
   m4_include(pipchix/general-purpose/ec/goal-directed.m4)
 

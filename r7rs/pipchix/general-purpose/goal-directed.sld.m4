@@ -31,8 +31,6 @@ m4_include(pipchix/pipchix-includes.m4)
 
 (define-library (pipchix general-purpose goal-directed)
 
-  ;; m4_define(«rnrs_number»,«7»)
-
   (export m4_include(pipchix/general-purpose/goal-directed.exports.m4))
 
   (import basic_libraries
@@ -56,6 +54,37 @@ m4_include(pipchix/pipchix-includes.m4)
       (else
        m4_include(pipchix/general-purpose/goal-directed.m4)
        ))
+
+    (define icon-string-copy!
+      (case-lambda
+        ((to at from)
+         (let* ((m (string-length to))
+                (j1 (icon->scheme-indexing m at)))
+           (string-copy! to j1 from)))
+        ((to at from start)
+         (let* ((m (string-length to))
+                (j1 (icon->scheme-indexing m at))
+                (n (string-length from))
+                (i1 (icon->scheme-indexing n start)))
+           (string-copy! to j1 from i1)))
+        ((to at from start end)
+         (let* ((m (string-length to))
+                (j1 (icon->scheme-indexing m at))
+                (n (string-length from)))
+           (let-values (((i1 i2) (icon->scheme-indexing n start end)))
+             (string-copy! to j1 from i1 i2)))) ))
+
+    (define icon-string-fill!
+      (case-lambda
+        ((string fill) (string-fill! string fill))
+        ((string fill start)
+         (let* ((n (string-length string))
+                (i1 (icon->scheme-indexing n start)))
+           (string-fill! string fill i1)))
+        ((string fill start end)
+         (let* ((n (string-length string)))
+           (let-values (((i1 i2) (icon->scheme-indexing n start end)))
+             (string-fill! string fill i1 i2)))) ))
 
     ))
 

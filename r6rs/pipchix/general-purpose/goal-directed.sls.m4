@@ -36,16 +36,44 @@ m4_include(pipchix/pipchix-includes.m4)
 
   (import basic_libraries
           (rnrs mutable-pairs (6))
+          (rnrs mutable-strings (6))
           (pipchix general-purpose srfi-39)
+          (pipchix general-purpose ec)
           (pipchix general-purpose match)
           (pipchix general-purpose box)
-          (pipchix general-purpose ec)
           (pipchix general-purpose cut))
 
   (define (list-set! lst i x)
     (set-car! (list-tail lst i) x))
 
   m4_include(pipchix/general-purpose/goal-directed.m4)
+
+  (define icon-string-copy!
+    (case-lambda
+      ((to at from) (icon-string-copy! to at from 1 0))
+      ((to at from start) (icon-string-copy! to at from start 0))
+      ((to at from start end)
+       (let* ((m (string-length to))
+              (j1 (icon->scheme-indexing m at))
+              (n (string-length from)))
+         (let-values (((i1 i2) (icon->scheme-indexing n start end)))
+           ;; For simple portability, the substring to be copied is
+           ;; first copied into a buffer. An optimized implementation
+           ;; could avoid the buffer.
+           (let* ((buffer (substring from i1 i2))
+                  (m (- i2 i1)))
+             (do-ec (:range i 0 m)
+                    (string-set! to (+ at i)
+                                 (string-ref from i)))))))))
+
+  (define icon-string-fill!
+    (case-lambda
+      ((string fill) (icon-string-fill! string fill 1 0))
+      ((string fill start) (icon-string-fill! string fill start 0))
+      ((string fill start end)
+       (let* ((n (string-length string)))
+         (let-values (((i1 i2) (icon->scheme-indexing n start end)))
+           (do-ec (:range i i1 i2) (string-set! string i fill)))))))
 
   )
 
