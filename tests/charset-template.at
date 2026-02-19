@@ -1,0 +1,104 @@
+# Copyright © 2026 Barry Schwartz
+#
+# This file is part of Pipchix.
+#
+# Permission is hereby granted, free of charge, to any person obtaining
+# a copy of Pipchix and associated documentation files (the
+# "Software"), to deal in the Software without restriction, including
+# without limitation the rights to use, copy, modify, merge, publish,
+# distribute, sublicense, and/or sell copies of the Software, and to
+# permit persons to whom the Software is furnished to do so, subject to
+# the following conditions:
+# 
+# The above copyright notice and this permission notice shall be
+# included in all copies or substantial portions of the Software.
+# 
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+# LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+# OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+# WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+#
+
+AT_SETUP([setup_message(charset)])
+
+AT_KEYWORDS([default_keywords charset])
+
+m4_define([sexpr],[(scheme->nix (char-set? 5))])
+check_unquoted([run_scheme 'sexpr'],[0],[nix_false],[])
+
+m4_define([sexpr],
+  [(scheme->nix (char-set? (char-set @%:@\a @%:@\e @%:@\i @%:@\o @%:@\u)))])
+check_unquoted([run_scheme 'sexpr'],[0],[nix_true],[])
+
+m4_define([sexpr],[(scheme->nix (char-set=))])
+check_unquoted([run_scheme 'sexpr'],[0],[nix_true],[])
+
+m4_define([sexpr],[(scheme->nix (char-set= (char-set)))])
+check_unquoted([run_scheme 'sexpr'],[0],[nix_true],[])
+
+m4_define([sexpr],
+  [(scheme->nix (char-set= (string->char-set "ioeauaiii")
+                           (char-set @%:@\a @%:@\e @%:@\i @%:@\o @%:@\u)))])
+check_unquoted([run_scheme 'sexpr'],[0],[nix_true],[])
+
+m4_define([sexpr],
+  [(scheme->nix (char-set= (->char-set "ioeauaiii")
+                           (char-set @%:@\a @%:@\e @%:@\i @%:@\o @%:@\u)))])
+check_unquoted([run_scheme 'sexpr'],[0],[nix_true],[])
+
+m4_define([sexpr],
+  [(scheme->nix (char-set= (string->char-set "ioeauaiii")
+                           (char-set @%:@\e @%:@\i @%:@\o @%:@\u)))])
+check_unquoted([run_scheme 'sexpr'],[0],[nix_false],[])
+
+m4_define([sexpr],
+  [(scheme->nix (char-set= (->char-set "ioeauaiii")
+                           (char-set @%:@\e @%:@\i @%:@\o @%:@\u)))])
+check_unquoted([run_scheme 'sexpr'],[0],[nix_false],[])
+
+m4_define([sexpr],[(scheme->nix (char-set<=))])
+check_unquoted([run_scheme 'sexpr'],[0],[nix_true],[])
+
+m4_define([sexpr],[(scheme->nix (char-set<= (char-set)))])
+check_unquoted([run_scheme 'sexpr'],[0],[nix_true],[])
+
+m4_define([sexpr],
+  [(scheme->nix (char-set<= (char-set @%:@\a @%:@\e @%:@\i @%:@\o @%:@\u)
+                            (string->char-set "ioeauaiii")))])
+check_unquoted([run_scheme 'sexpr'],[0],[nix_true],[])
+
+m4_define([sexpr],
+  [(scheme->nix (char-set<= (char-set @%:@\e @%:@\i @%:@\o @%:@\u)
+                            (string->char-set "ioeauaiii")))])
+check_unquoted([run_scheme 'sexpr'],[0],[nix_true],[])
+
+m4_define([sexpr],
+  [(scheme->nix
+    (let ((sets (list
+char-set:lower-case  char-set:upper-case  char-set:title-case
+char-set:letter      char-set:digit       char-set:letter+digit
+char-set:graphic     char-set:printing    char-set:whitespace
+char-set:iso-control char-set:punctuation char-set:symbol
+char-set:hex-digit   char-set:blank       char-set:ascii
+char-set:empty       char-set:full)))
+      (every?-ec (:list p sets)
+                 (let ((h (char-set-hash p 100)))
+                   (and (<= 0 h) (< h 100))))))])
+check_unquoted([run_scheme 'sexpr'],[0],[nix_true],[])
+
+m4_define([sexpr],
+  [(scheme->nix
+    (char-set-fold (lambda (c i) (+ i 1)) 0
+                     (char-set @%:@\e @%:@\i @%:@\o @%:@\u @%:@\e @%:@\e)))])
+check_unquoted([run_scheme 'sexpr'],[0],
+  [interpunct_nl([(4)·])],[])
+
+AT_CLEANUP
+
+# local variables:
+# mode: autoconf
+# coding: utf-8
+# end:

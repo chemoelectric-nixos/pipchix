@@ -76,6 +76,7 @@ EXTRA_DIST += eager-macros-template.at
 EXTRA_DIST += combinators-template.at
 EXTRA_DIST += syntax-template.at
 EXTRA_DIST += goal-directed-template.at
+EXTRA_DIST += charset-template.at
 EXTRA_DIST += stream-template.at
 EXTRA_DIST += continuation-capture-template.at
 EXTRA_DIST += escaped-utf8-template.at
@@ -143,6 +144,7 @@ TESTSUITE_DEPS += $(srcdir)/ec-template.at
 TESTSUITE_DEPS += $(srcdir)/combinators-template.at
 TESTSUITE_DEPS += $(srcdir)/syntax-template.at
 TESTSUITE_DEPS += $(srcdir)/goal-directed-template.at
+TESTSUITE_DEPS += $(srcdir)/charset-template.at
 TESTSUITE_DEPS += $(srcdir)/stream-template.at
 TESTSUITE_DEPS += $(srcdir)/continuation-capture-template.at
 

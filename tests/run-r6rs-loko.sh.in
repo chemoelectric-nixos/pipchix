@@ -9,6 +9,7 @@ cat > "${prog_scm}" <<EOF
 #!r6rs
 (import (except (rnrs (6)) fold-right member assoc map remove)
         (rnrs mutable-strings (6))
+        (pipchix general-purpose charset)
         (pipchix general-purpose box)
         (pipchix general-purpose cut)
         (pipchix general-purpose list)

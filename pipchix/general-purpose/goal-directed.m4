@@ -591,9 +591,7 @@
       ((? procedure? ob) (ob c))
       ((? char? ob)      (char=? ob c))
       ((? string? ob)    (any?-ec (:string ch ob) (char=? ch c)))
-      ;; m4_ifelse(support_scheme_charset,«yes»,«
       ((? char-set? ob)  (char-set-contains? ob c))
-      ;; »)
       (_ (error "unexpected argument type" obj)))))
 
 (define string-any
@@ -604,14 +602,13 @@
   ;;     (string-any (cut string-ci=? #\s <>) "STRING ANY")
   ;;     (string-any char-alphabetic? "string any")
   ;;     (string-any "sSŝŜśŚ" "string any")
+  ;;     (string-any char-set:letter "string any")
   ;;
   ;;     (string-any #\s)
   ;;     (string-any (cut string-ci=? #\s <>))
   ;;     (string-any char-alphabetic?)
   ;;     (string-any "sSŝŜśŚ")
-  ;;
-  ;; Also, with some R⁷RS Scheme implementations, you can use a
-  ;; (scheme charset) = (srfi 14) character set.
+  ;;     (string-any char-set:letter)
   ;;
   (case-lambda
     ((c) ((string-any-%aux% make-char-predicate) c))
@@ -645,14 +642,13 @@
   ;;     (string-many (cut string-ci=? #\s <>) "STRING MANY")
   ;;     (string-many char-alphabetic? "string many")
   ;;     (string-many "rst" "string many")
+  ;;     (string-many char-set:letter "string many")
   ;;
   ;;     (string-many #\s)
   ;;     (string-many (cut string-ci=? #\s <>))
   ;;     (string-many char-alphabetic?)
   ;;     (string-many "rst")
-  ;;
-  ;; Also, with some R⁷RS Scheme implementations, you can use a
-  ;; (scheme charset) = (srfi 14) character set.
+  ;;     (string-many char-set:letter)
   ;;
   (case-lambda
     ((c) ((string-many-%aux% make-char-predicate) c))

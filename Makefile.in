@@ -488,6 +488,7 @@ R6RS_SCHEME = r6rs/pipchix/general-purpose/srfi-39.sls \
 	r6rs/pipchix/general-purpose/list.sls \
 	r6rs/pipchix/general-purpose/division.sls \
 	r6rs/pipchix/general-purpose/match.sls \
+	r6rs/pipchix/general-purpose/charset.sls \
 	r6rs/pipchix/general-purpose/error-reporting.sls \
 	r6rs/pipchix/general-purpose/base64.sls \
 	r6rs/pipchix/general-purpose/gensym.sls \
@@ -505,6 +506,8 @@ R6RS_SCHEME = r6rs/pipchix/general-purpose/srfi-39.sls \
 	r6rs/pipchix/general-purpose/stream.sls \
 	r6rs/pipchix/general-purpose/stream/primitive.sls \
 	r6rs/pipchix/general-purpose/stream/derived.sls \
+	r6rs/pipchix/general-purpose/inversion-list.sls \
+	r6rs/pipchix/general-purpose/charset.sls \
 	r6rs/pipchix/generate-identifier.sls \
 	r6rs/pipchix/essentials.sls r6rs/pipchix/expressions.sls \
 	r6rs/pipchix/macros.sls r6rs/pipchix/nix-embed.sls \
@@ -519,6 +522,7 @@ R7RS_SCHEME = r7rs/pipchix/general-purpose/box.sld \
 	r7rs/pipchix/general-purpose/list.sld \
 	r7rs/pipchix/general-purpose/division.sld \
 	r7rs/pipchix/general-purpose/match.sld \
+	r7rs/pipchix/general-purpose/charset.sld \
 	r7rs/pipchix/general-purpose/error-reporting.sld \
 	r7rs/pipchix/general-purpose/base64.sld \
 	r7rs/pipchix/general-purpose/gensym.sld \
@@ -536,6 +540,7 @@ R7RS_SCHEME = r7rs/pipchix/general-purpose/box.sld \
 	r7rs/pipchix/general-purpose/stream.sld \
 	r7rs/pipchix/general-purpose/stream/primitive.sld \
 	r7rs/pipchix/general-purpose/stream/derived.sld \
+	r7rs/pipchix/general-purpose/inversion-list.sld \
 	r7rs/pipchix/generate-identifier.sld \
 	r7rs/pipchix/essentials.sld r7rs/pipchix/expressions.sld \
 	r7rs/pipchix/macros.sld r7rs/pipchix/nix-embed.sld \
@@ -1123,20 +1128,27 @@ uninstall-am: uninstall-nodist_r6rspipchixDATA \
 @GNU@ $(call v,COPY) cp -f $(1) $(2)
 @GNU@ endef
 
-# FIXME: Set it up so updates to the dependencies here cause rebuilds.
-#
-#pipchix/general-purpose/ec/goal-directed.exports.m4: \
-#	pipchix/general-purpose/ec.exports.m4 \
-#	pipchix/general-purpose/goal-directed.exports.m4
-#
-#pipchix/general-purpose/ec/stream.exports.m4: \
-#	pipchix/general-purpose/ec.exports.m4 \
-#	pipchix/general-purpose/stream.exports.m4
-#
-#pipchix/macros.exports.m4: \
-#	pipchix/macros/nix-set.exports.m4 \
-#	pipchix/macros/nix-letrec.exports.m4 \
-#	pipchix/macros/nix-lambda.exports.m4
+$(builddir)/r6rs/pipchix/general-purpose/ec/goal-directed.sls \
+  $(builddir)/r7rs/pipchix/general-purpose/ec/goal-directed.sld: \
+	$(srcdir)/pipchix/general-purpose/ec.exports.m4 \
+	$(srcdir)/pipchix/general-purpose/goal-directed.exports.m4
+
+$(builddir)/r6rs/pipchix/general-purpose/ec/stream.sls \
+  $(builddir)/r7rs/pipchix/general-purpose/ec/stream.sld: \
+	$(srcdir)/pipchix/general-purpose/ec.exports.m4 \
+	$(srcdir)/pipchix/general-purpose/stream.exports.m4
+
+$(builddir)/r6rs/pipchix/macros.sls \
+  $(builddir)/r7rs/pipchix/macros.sld: \
+	$(srcdir)/pipchix/macros/nix-set.exports.m4 \
+	$(srcdir)/pipchix/macros/nix-letrec.exports.m4 \
+	$(srcdir)/pipchix/macros/nix-lambda.exports.m4
+
+$(builddir)/r6rs/pipchix/general-purpose/charset.sls \
+  $(builddir)/r7rs/pipchix/general-purpose/charset.sld: \
+	$(srcdir)/pipchix/general-purpose/charset/srfi-14.scm \
+	$(srcdir)/pipchix/general-purpose/charset/srfi-14-base-char-sets.scm \
+	$(srcdir)/pipchix/general-purpose/charset/srfi-14-char-sets.scm
 
 $(builddir)/r6rs/pipchix/%.sls: $(srcdir)/r6rs/pipchix/%.sls.m4 \
 	                        $(srcdir)/pipchix/%.m4 \

@@ -34,26 +34,15 @@ m4_include(pipchix/pipchix-includes.m4)
   (export m4_include(pipchix/general-purpose/goal-directed.exports.m4))
 
   (import basic_libraries
+          (pipchix general-purpose charset)
           (pipchix general-purpose match)
           (pipchix general-purpose box)
           (pipchix general-purpose ec)
           (pipchix general-purpose cut))
-  (cond-expand
-    ((or chibi gauche sagittarius)
-     (import (scheme charset)))
-    (else))
 
   (begin
 
-    (cond-expand
-      ((or chibi gauche sagittarius)
-       ;; m4_pushdef(«support_scheme_charset»,«yes»)
-       m4_include(pipchix/general-purpose/goal-directed.m4)
-       ;; m4_popdef(«support_scheme_charset»)
-       )
-      (else
-       m4_include(pipchix/general-purpose/goal-directed.m4)
-       ))
+    m4_include(pipchix/general-purpose/goal-directed.m4)
 
     (define icon-string-copy!
       (case-lambda

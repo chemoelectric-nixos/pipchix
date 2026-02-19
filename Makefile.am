@@ -71,6 +71,7 @@ R6RS_SCHEME += r6rs/pipchix/general-purpose/continuation-capture.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/list.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/division.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/match.sls
+R6RS_SCHEME += r6rs/pipchix/general-purpose/charset.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/error-reporting.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/base64.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/gensym.sls
@@ -88,6 +89,8 @@ R6RS_SCHEME += r6rs/pipchix/general-purpose/goal-directed.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/stream.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/stream/primitive.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/stream/derived.sls
+R6RS_SCHEME += r6rs/pipchix/general-purpose/inversion-list.sls
+R6RS_SCHEME += r6rs/pipchix/general-purpose/charset.sls
 R6RS_SCHEME += r6rs/pipchix/generate-identifier.sls
 R6RS_SCHEME += r6rs/pipchix/essentials.sls
 R6RS_SCHEME += r6rs/pipchix/expressions.sls
@@ -115,6 +118,7 @@ R7RS_SCHEME += r7rs/pipchix/general-purpose/continuation-capture.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/list.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/division.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/match.sld
+R7RS_SCHEME += r7rs/pipchix/general-purpose/charset.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/error-reporting.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/base64.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/gensym.sld
@@ -132,6 +136,7 @@ R7RS_SCHEME += r7rs/pipchix/general-purpose/goal-directed.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/stream.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/stream/primitive.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/stream/derived.sld
+R7RS_SCHEME += r7rs/pipchix/general-purpose/inversion-list.sld
 R7RS_SCHEME += r7rs/pipchix/generate-identifier.sld
 R7RS_SCHEME += r7rs/pipchix/essentials.sld
 R7RS_SCHEME += r7rs/pipchix/expressions.sld
@@ -152,20 +157,27 @@ if INSTALL_R7RS_SOURCE
 nodist_r7rspipchix_DATA += $(R7RS_SCHEME)
 endif
 
-# FIXME: Set it up so updates to the dependencies here cause rebuilds.
-#
-#pipchix/general-purpose/ec/goal-directed.exports.m4: \
-#	pipchix/general-purpose/ec.exports.m4 \
-#	pipchix/general-purpose/goal-directed.exports.m4
-#
-#pipchix/general-purpose/ec/stream.exports.m4: \
-#	pipchix/general-purpose/ec.exports.m4 \
-#	pipchix/general-purpose/stream.exports.m4
-#
-#pipchix/macros.exports.m4: \
-#	pipchix/macros/nix-set.exports.m4 \
-#	pipchix/macros/nix-letrec.exports.m4 \
-#	pipchix/macros/nix-lambda.exports.m4
+$(builddir)/r6rs/pipchix/general-purpose/ec/goal-directed.sls \
+  $(builddir)/r7rs/pipchix/general-purpose/ec/goal-directed.sld: \
+	$(srcdir)/pipchix/general-purpose/ec.exports.m4 \
+	$(srcdir)/pipchix/general-purpose/goal-directed.exports.m4
+
+$(builddir)/r6rs/pipchix/general-purpose/ec/stream.sls \
+  $(builddir)/r7rs/pipchix/general-purpose/ec/stream.sld: \
+	$(srcdir)/pipchix/general-purpose/ec.exports.m4 \
+	$(srcdir)/pipchix/general-purpose/stream.exports.m4
+
+$(builddir)/r6rs/pipchix/macros.sls \
+  $(builddir)/r7rs/pipchix/macros.sld: \
+	$(srcdir)/pipchix/macros/nix-set.exports.m4 \
+	$(srcdir)/pipchix/macros/nix-letrec.exports.m4 \
+	$(srcdir)/pipchix/macros/nix-lambda.exports.m4
+
+$(builddir)/r6rs/pipchix/general-purpose/charset.sls \
+  $(builddir)/r7rs/pipchix/general-purpose/charset.sld: \
+	$(srcdir)/pipchix/general-purpose/charset/srfi-14.scm \
+	$(srcdir)/pipchix/general-purpose/charset/srfi-14-base-char-sets.scm \
+	$(srcdir)/pipchix/general-purpose/charset/srfi-14-char-sets.scm
 
 $(builddir)/r6rs/pipchix/%.sls: $(srcdir)/r6rs/pipchix/%.sls.m4 \
 	                        $(srcdir)/pipchix/%.m4 \
