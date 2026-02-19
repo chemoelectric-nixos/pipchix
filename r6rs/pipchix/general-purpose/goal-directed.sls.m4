@@ -38,6 +38,7 @@ m4_include(pipchix/pipchix-includes.m4)
           (rnrs mutable-pairs (6))
           (rnrs mutable-strings (6))
           (pipchix general-purpose srfi-39)
+          (pipchix general-purpose charset)
           (pipchix general-purpose ec)
           (pipchix general-purpose match)
           (pipchix general-purpose box)
@@ -61,10 +62,10 @@ m4_include(pipchix/pipchix-includes.m4)
            ;; first copied into a buffer. An optimized implementation
            ;; could avoid the buffer.
            (let* ((buffer (substring from i1 i2))
-                  (m (- i2 i1)))
-             (do-ec (:range i 0 m)
-                    (string-set! to (+ at i)
-                                 (string-ref from i)))))))))
+                  (i2-i1 (- i2 i1)))
+             (do-ec (:range i 0 i2-i1)
+                    (string-set! to (+ j1 i)
+                                 (string-ref buffer i)))))))))
 
   (define icon-string-fill!
     (case-lambda
