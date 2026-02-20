@@ -22,7 +22,7 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
-AT_SETUP([setup_message(charset)])
+AT_SETUP([setup_message(character sets (SRFI-14))])
 
 AT_KEYWORDS([default_keywords charset])
 

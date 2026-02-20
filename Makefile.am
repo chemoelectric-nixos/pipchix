@@ -71,7 +71,7 @@ R6RS_SCHEME += r6rs/pipchix/general-purpose/continuation-capture.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/list.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/division.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/match.sls
-R6RS_SCHEME += r6rs/pipchix/general-purpose/charset.sls
+R6RS_SCHEME += r6rs/pipchix/general-purpose/comparator.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/error-reporting.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/base64.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/gensym.sls
@@ -118,7 +118,7 @@ R7RS_SCHEME += r7rs/pipchix/general-purpose/continuation-capture.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/list.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/division.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/match.sld
-R7RS_SCHEME += r7rs/pipchix/general-purpose/charset.sld
+R7RS_SCHEME += r7rs/pipchix/general-purpose/comparator.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/error-reporting.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/base64.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/gensym.sld
@@ -137,6 +137,7 @@ R7RS_SCHEME += r7rs/pipchix/general-purpose/stream.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/stream/primitive.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/stream/derived.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/inversion-list.sld
+R7RS_SCHEME += r7rs/pipchix/general-purpose/charset.sld
 R7RS_SCHEME += r7rs/pipchix/generate-identifier.sld
 R7RS_SCHEME += r7rs/pipchix/essentials.sld
 R7RS_SCHEME += r7rs/pipchix/expressions.sld
@@ -172,6 +173,11 @@ $(builddir)/r6rs/pipchix/macros.sls \
 	$(srcdir)/pipchix/macros/nix-set.exports.m4 \
 	$(srcdir)/pipchix/macros/nix-letrec.exports.m4 \
 	$(srcdir)/pipchix/macros/nix-lambda.exports.m4
+
+$(builddir)/r6rs/pipchix/general-purpose/comparator.sls \
+  $(builddir)/r7rs/pipchix/general-purpose/comparator.sld: \
+	$(srcdir)/pipchix/general-purpose/comparator/128.body1.scm \
+	$(srcdir)/pipchix/general-purpose/comparator/128.body2.scm
 
 $(builddir)/r6rs/pipchix/general-purpose/charset.sls \
   $(builddir)/r7rs/pipchix/general-purpose/charset.sld: \

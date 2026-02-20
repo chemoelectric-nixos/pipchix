@@ -488,7 +488,7 @@ R6RS_SCHEME = r6rs/pipchix/general-purpose/srfi-39.sls \
 	r6rs/pipchix/general-purpose/list.sls \
 	r6rs/pipchix/general-purpose/division.sls \
 	r6rs/pipchix/general-purpose/match.sls \
-	r6rs/pipchix/general-purpose/charset.sls \
+	r6rs/pipchix/general-purpose/comparator.sls \
 	r6rs/pipchix/general-purpose/error-reporting.sls \
 	r6rs/pipchix/general-purpose/base64.sls \
 	r6rs/pipchix/general-purpose/gensym.sls \
@@ -522,7 +522,7 @@ R7RS_SCHEME = r7rs/pipchix/general-purpose/box.sld \
 	r7rs/pipchix/general-purpose/list.sld \
 	r7rs/pipchix/general-purpose/division.sld \
 	r7rs/pipchix/general-purpose/match.sld \
-	r7rs/pipchix/general-purpose/charset.sld \
+	r7rs/pipchix/general-purpose/comparator.sld \
 	r7rs/pipchix/general-purpose/error-reporting.sld \
 	r7rs/pipchix/general-purpose/base64.sld \
 	r7rs/pipchix/general-purpose/gensym.sld \
@@ -541,6 +541,7 @@ R7RS_SCHEME = r7rs/pipchix/general-purpose/box.sld \
 	r7rs/pipchix/general-purpose/stream/primitive.sld \
 	r7rs/pipchix/general-purpose/stream/derived.sld \
 	r7rs/pipchix/general-purpose/inversion-list.sld \
+	r7rs/pipchix/general-purpose/charset.sld \
 	r7rs/pipchix/generate-identifier.sld \
 	r7rs/pipchix/essentials.sld r7rs/pipchix/expressions.sld \
 	r7rs/pipchix/macros.sld r7rs/pipchix/nix-embed.sld \
@@ -1143,6 +1144,11 @@ $(builddir)/r6rs/pipchix/macros.sls \
 	$(srcdir)/pipchix/macros/nix-set.exports.m4 \
 	$(srcdir)/pipchix/macros/nix-letrec.exports.m4 \
 	$(srcdir)/pipchix/macros/nix-lambda.exports.m4
+
+$(builddir)/r6rs/pipchix/general-purpose/comparator.sls \
+  $(builddir)/r7rs/pipchix/general-purpose/comparator.sld: \
+	$(srcdir)/pipchix/general-purpose/comparator/128.body1.scm \
+	$(srcdir)/pipchix/general-purpose/comparator/128.body2.scm
 
 $(builddir)/r6rs/pipchix/general-purpose/charset.sls \
   $(builddir)/r7rs/pipchix/general-purpose/charset.sld: \
