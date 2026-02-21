@@ -13,6 +13,8 @@ cat > "${prog_scm}" <<EOF
 (import (scheme write))
 (import (pipchix general-purpose charset))
 (import (pipchix general-purpose comparator))
+(import (pipchix general-purpose mapping))
+(import (pipchix general-purpose mapping hash))
 (import (pipchix general-purpose box))
 (import (pipchix general-purpose cut))
 (import (pipchix general-purpose list))

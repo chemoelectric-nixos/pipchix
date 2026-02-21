@@ -72,6 +72,8 @@ R6RS_SCHEME += r6rs/pipchix/general-purpose/list.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/division.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/match.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/comparator.sls
+R6RS_SCHEME += r6rs/pipchix/general-purpose/mapping.sls
+R6RS_SCHEME += r6rs/pipchix/general-purpose/mapping/hash.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/error-reporting.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/base64.sls
 R6RS_SCHEME += r6rs/pipchix/general-purpose/gensym.sls
@@ -119,6 +121,8 @@ R7RS_SCHEME += r7rs/pipchix/general-purpose/list.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/division.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/match.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/comparator.sld
+R7RS_SCHEME += r7rs/pipchix/general-purpose/mapping.sld
+R7RS_SCHEME += r7rs/pipchix/general-purpose/mapping/hash.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/error-reporting.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/base64.sld
 R7RS_SCHEME += r7rs/pipchix/general-purpose/gensym.sld
@@ -179,11 +183,18 @@ $(builddir)/r6rs/pipchix/general-purpose/comparator.sls \
 	$(srcdir)/pipchix/general-purpose/comparator/128.body1.scm \
 	$(srcdir)/pipchix/general-purpose/comparator/128.body2.scm
 
+EXTRA_DIST += pipchix/general-purpose/comparator/128.body1.scm
+EXTRA_DIST += pipchix/general-purpose/comparator/128.body2.scm
+
 $(builddir)/r6rs/pipchix/general-purpose/charset.sls \
   $(builddir)/r7rs/pipchix/general-purpose/charset.sld: \
 	$(srcdir)/pipchix/general-purpose/charset/srfi-14.scm \
 	$(srcdir)/pipchix/general-purpose/charset/srfi-14-base-char-sets.scm \
 	$(srcdir)/pipchix/general-purpose/charset/srfi-14-char-sets.scm
+
+EXTRA_DIST += pipchix/general-purpose/charset/srfi-14.scm
+EXTRA_DIST += pipchix/general-purpose/charset/srfi-14-base-char-sets.scm
+EXTRA_DIST += pipchix/general-purpose/charset/srfi-14-char-sets.scm
 
 $(builddir)/r6rs/pipchix/%.sls: $(srcdir)/r6rs/pipchix/%.sls.m4 \
 	                        $(srcdir)/pipchix/%.m4 \

@@ -79,6 +79,7 @@ EXTRA_DIST += goal-directed-template.at
 EXTRA_DIST += charset-template.at
 EXTRA_DIST += stream-template.at
 EXTRA_DIST += comparator-template.at
+EXTRA_DIST += mapping-template.at
 EXTRA_DIST += continuation-capture-template.at
 EXTRA_DIST += escaped-utf8-template.at
 EXTRA_DIST += expressions-template.at
@@ -148,6 +149,7 @@ TESTSUITE_DEPS += $(srcdir)/goal-directed-template.at
 TESTSUITE_DEPS += $(srcdir)/charset-template.at
 TESTSUITE_DEPS += $(srcdir)/stream-template.at
 TESTSUITE_DEPS += $(srcdir)/comparator-template.at
+TESTSUITE_DEPS += $(srcdir)/mapping-template.at
 TESTSUITE_DEPS += $(srcdir)/continuation-capture-template.at
 
 TESTSUITE_DEPS += $(srcdir)/shell-print-template.at

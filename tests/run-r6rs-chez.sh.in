@@ -11,6 +11,8 @@ cat > "${prog_scm}" <<EOF
         (rnrs mutable-strings (6))
         (pipchix general-purpose charset)
         (pipchix general-purpose comparator)
+        (pipchix general-purpose mapping)
+        (pipchix general-purpose mapping hash)
         (pipchix general-purpose box)
         (pipchix general-purpose cut)
         (pipchix general-purpose list)

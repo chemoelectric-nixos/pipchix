@@ -301,9 +301,9 @@ EXTRA_DIST = testsuite.at $(srcdir)/package.m4 $(TESTSUITE) atlocal.in \
 	eager-macros-template.at combinators-template.at \
 	syntax-template.at goal-directed-template.at \
 	charset-template.at stream-template.at comparator-template.at \
-	continuation-capture-template.at escaped-utf8-template.at \
-	expressions-template.at macros-template.at \
-	nix-attributebinding-node-template.at \
+	mapping-template.at continuation-capture-template.at \
+	escaped-utf8-template.at expressions-template.at \
+	macros-template.at nix-attributebinding-node-template.at \
 	nix-attributepath-node-template.at \
 	nix-attributeset-node-template.at nix-lambda-node-template.at \
 	nix-letrec-node-template.at nix-data-node-template.at \
@@ -327,7 +327,7 @@ TESTSUITE_DEPS = $(srcdir)/atlocal.in $(srcdir)/package.m4 \
 	$(srcdir)/combinators-template.at $(srcdir)/syntax-template.at \
 	$(srcdir)/goal-directed-template.at \
 	$(srcdir)/charset-template.at $(srcdir)/stream-template.at \
-	$(srcdir)/comparator-template.at \
+	$(srcdir)/comparator-template.at $(srcdir)/mapping-template.at \
 	$(srcdir)/continuation-capture-template.at \
 	$(srcdir)/shell-print-template.at \
 	$(srcdir)/base64-utf8-template.at \

@@ -472,7 +472,12 @@ EXTRA_DIST = silent-rules.mk COPYING README.adoc INSTALL AUTHORS \
 	$(R6RS_SCHEME:r6rs/pipchix/%.sls=pipchix/%.exports.m4) \
 	$(R7RS_SCHEME:%=%.m4) \
 	$(R7RS_SCHEME:r7rs/pipchix/%.sld=pipchix/%.m4) \
-	$(R7RS_SCHEME:r7rs/pipchix/%.sld=pipchix/%.exports.m4)
+	$(R7RS_SCHEME:r7rs/pipchix/%.sld=pipchix/%.exports.m4) \
+	pipchix/general-purpose/comparator/128.body1.scm \
+	pipchix/general-purpose/comparator/128.body2.scm \
+	pipchix/general-purpose/charset/srfi-14.scm \
+	pipchix/general-purpose/charset/srfi-14-base-char-sets.scm \
+	pipchix/general-purpose/charset/srfi-14-char-sets.scm
 EXTRA_SCRIPTS = 
 BUILT_SOURCES = $(am__append_3) $(am__append_4) $(am__append_5) \
 	$(am__append_6) $(am__append_7) $(am__append_8) \
@@ -489,6 +494,8 @@ R6RS_SCHEME = r6rs/pipchix/general-purpose/srfi-39.sls \
 	r6rs/pipchix/general-purpose/division.sls \
 	r6rs/pipchix/general-purpose/match.sls \
 	r6rs/pipchix/general-purpose/comparator.sls \
+	r6rs/pipchix/general-purpose/mapping.sls \
+	r6rs/pipchix/general-purpose/mapping/hash.sls \
 	r6rs/pipchix/general-purpose/error-reporting.sls \
 	r6rs/pipchix/general-purpose/base64.sls \
 	r6rs/pipchix/general-purpose/gensym.sls \
@@ -523,6 +530,8 @@ R7RS_SCHEME = r7rs/pipchix/general-purpose/box.sld \
 	r7rs/pipchix/general-purpose/division.sld \
 	r7rs/pipchix/general-purpose/match.sld \
 	r7rs/pipchix/general-purpose/comparator.sld \
+	r7rs/pipchix/general-purpose/mapping.sld \
+	r7rs/pipchix/general-purpose/mapping/hash.sld \
 	r7rs/pipchix/general-purpose/error-reporting.sld \
 	r7rs/pipchix/general-purpose/base64.sld \
 	r7rs/pipchix/general-purpose/gensym.sld \
